@@ -218,7 +218,7 @@ public class XyUrl {
     //患教文章发送历史记录
     public final static String GET_ARTICLE_HISTORY_LIST = "/doctor/users/eduHistory";
     //患教文章群发
-    public final static String SEND_ARTICLE_MSG = "/doctor/users/articlesend";
+    public final static String SEND_ARTICLE_MSG = "/doctor/users/articlesend";//00000
     //患者体质监测列表
     public final static String GET_TCM_LIST = "/port/Physical/physical_list";
     //住院申请审批以及详情页
