@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_follow_up_add_new_template"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/follow_up_visit_add_with_template"
+            android:textColor="@color/black_text"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_follow_up_add_new_template"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:drawableRight="@drawable/img_tcm_right_arrow"
+            android:drawablePadding="10dp"
+            android:gravity="right|center"
+            android:textColor="@color/gray_text"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+    <View style="@style/line" />
+
+    <TextView
+        android:id="@+id/tv_follow_up_add_new_hand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/img_tcm_right_arrow"
+        android:padding="10dp"
+        android:text="@string/follow_up_visit_add_with_template_hand"
+        android:textColor="@color/black_text"
+        android:textSize="14sp" />
+
+    <View style="@style/line" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_follow_up_sure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@drawable/shape_bg_main_90"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/rc_ac_file_download_request_permission_sure"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+</LinearLayout>

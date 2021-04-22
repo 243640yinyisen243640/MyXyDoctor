@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_16"
+    android:layout_marginRight="@dimen/dp_16"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!--选择时间-->
+    <LinearLayout
+        style="@style/hh_fi_wr"
+        android:orientation="horizontal">
+
+        <com.wei.android.lib.colorview.view.ColorLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_10"
+            app:borderColorNormal="#E6E8ED"
+            app:borderWidthNormal="@dimen/dp_1"
+            app:cornerRadiusNormal="@dimen/dp_4">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:scaleType="centerCrop"
+                android:src="@drawable/patient_count_main_time" />
+
+            <TextView
+                android:id="@+id/tv_start_time"
+                style="@style/text_black_14_w_w"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:hint="选择开始时间"
+                android:textColorHint="@color/gray_text" />
+
+
+        </com.wei.android.lib.colorview.view.ColorLinearLayout>
+
+        <com.wei.android.lib.colorview.view.ColorLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_10"
+            app:borderColorNormal="#E6E8ED"
+            app:borderWidthNormal="@dimen/dp_1"
+            app:cornerRadiusNormal="@dimen/dp_4">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:scaleType="centerCrop"
+                android:src="@drawable/patient_count_main_time" />
+
+            <TextView
+                android:id="@+id/tv_end_time"
+                style="@style/text_black_14_w_w"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:hint="选择结束时间"
+                android:textColorHint="@color/gray_text" />
+
+
+        </com.wei.android.lib.colorview.view.ColorLinearLayout>
+    </LinearLayout>
+
+    <!--筛选-->
+
+    <RelativeLayout
+        style="@style/hh_fi_wr"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginBottom="@dimen/dp_10">
+
+        <com.wei.android.lib.colorview.view.ColorRelativeLayout
+            android:id="@+id/rl_show_bottom_select"
+            style="@style/text_gray_12_f_w"
+            android:layout_width="105dp"
+            app:borderColorNormal="#E6E8ED"
+            app:borderWidthNormal="1dp"
+            app:cornerRadiusNormal="@dimen/dp_4">
+
+            <TextView
+                android:id="@+id/tv_bottom_select"
+                style="@style/text_gray_14_w_w"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/dp_6"
+                android:text="偏高"
+                android:textColor="@color/main_red" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_14"
+                android:layout_height="@dimen/dp_12"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_6"
+                android:scaleType="centerCrop"
+                android:src="@drawable/patient_count_tv_arrow_down_normal" />
+
+
+        </com.wei.android.lib.colorview.view.ColorRelativeLayout>
+
+
+        <!--自定义显示 其它情况隐藏-->
+        <LinearLayout
+            android:id="@+id/ll_input"
+            style="@style/hh_wr_wr"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/tv_filt"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <com.wei.android.lib.colorview.view.ColorEditText
+                android:id="@+id/et_min"
+                style="@style/et_base_style_no_bg"
+                android:layout_width="wrap_content"
+                android:hint="请输入"
+                android:inputType="numberDecimal"
+                android:paddingLeft="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_6"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingBottom="@dimen/dp_6"
+                android:textColorHint="@color/gray_text"
+                app:borderColorNormal="#E6E8ED"
+                app:borderWidthNormal="@dimen/dp_1"
+                app:cornerRadiusNormal="@dimen/dp_4">
+
+            </com.wei.android.lib.colorview.view.ColorEditText>
+
+            <TextView
+                style="@style/text_gray_14_w_w"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_marginRight="@dimen/dp_5"
+                android:text="--" />
+
+            <com.wei.android.lib.colorview.view.ColorEditText
+                android:id="@+id/et_max"
+                style="@style/et_base_style_no_bg"
+                android:layout_width="wrap_content"
+                android:hint="请输入"
+                android:inputType="numberDecimal"
+                android:paddingLeft="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_6"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingBottom="@dimen/dp_6"
+                android:textColorHint="@color/gray_text"
+                app:borderColorNormal="#E6E8ED"
+                app:borderWidthNormal="@dimen/dp_1"
+                app:cornerRadiusNormal="@dimen/dp_4">
+
+            </com.wei.android.lib.colorview.view.ColorEditText>
+
+        </LinearLayout>
+
+
+        <com.wei.android.lib.colorview.view.ColorTextView
+            android:id="@+id/tv_filt"
+            style="@style/text_gray_14_w_w"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingTop="@dimen/dp_6"
+            android:paddingRight="@dimen/dp_12"
+            android:paddingBottom="@dimen/dp_6"
+            android:text="筛选"
+            android:textColor="@color/main_red"
+            android:visibility="gone"
+            app:backgroundColorNormal="@color/white"
+            app:borderColorNormal="@color/main_red"
+            app:borderWidthNormal="1dp"
+            app:cornerRadiusNormal="4dp" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

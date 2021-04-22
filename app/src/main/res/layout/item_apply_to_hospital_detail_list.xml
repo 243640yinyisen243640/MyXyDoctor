@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/hh_fi_wr"
+        android:padding="@dimen/dp_12">
+
+        <TextView
+            android:id="@+id/tv_left"
+            style="@style/text_black_16_f_w"
+            android:layout_weight="0.8"
+            android:text="患者姓名" />
+
+        <TextView
+            android:id="@+id/tv_right"
+            style="@style/text_gray_16_w_w"
+            android:text="张三" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/line"
+        android:layout_marginLeft="@dimen/dp_10"></View>
+
+
+</LinearLayout>

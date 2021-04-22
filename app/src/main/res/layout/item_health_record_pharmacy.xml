@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <RelativeLayout style="@style/hh_fi_wr">
+
+        <LinearLayout
+            style="@style/hh_wr_wr"
+            android:layout_width="280dp"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingTop="@dimen/dp_6"
+            android:paddingRight="@dimen/dp_12"
+            android:paddingBottom="@dimen/dp_6">
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/text_gray_14_f_w"
+                android:ellipsize="end"
+                android:lineSpacingMultiplier="1.2"
+                android:text="标题标题标题标题标题标题标题标题标题标题标题标题" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                style="@style/text_gray_14_f_w"
+                android:layout_marginTop="@dimen/dp_2"
+                android:text="时间" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/hh_wr_wr"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_12">
+
+            <TextView
+                android:id="@+id/tv_count"
+                style="@style/text_black_14_w_w"
+                android:text="36"
+                android:textColor="@color/main_red" />
+
+            <TextView
+                style="@style/text_black_14_w_w"
+                android:paddingLeft="@dimen/dp_2"
+                android:text="次(日)" />
+
+            <TextView
+                android:id="@+id/tv_dosage"
+                style="@style/text_black_14_w_w"
+                android:paddingLeft="@dimen/dp_18"
+                android:text="44"
+                android:textColor="@color/main_red" />
+
+            <TextView
+                style="@style/text_black_14_w_w"
+                android:paddingLeft="@dimen/dp_2"
+                android:text="(次)" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <View
+        style="@style/line"
+        android:layout_marginLeft="@dimen/dp_10"></View>
+
+</LinearLayout>

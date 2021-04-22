@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:tools="http://schemas.android.com/tools"
+    style="@style/scrollView">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/hh_fi_fi"
+        android:background="@color/background">
+
+        <!--底层-->
+        <LinearLayout
+            style="@style/hh_fi_wr"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <!--背景-->
+            <View
+                style="@style/line"
+                android:layout_height="100dp"
+                android:background="@color/main_red" />
+
+            <!--八个记录-->
+            <!--智能分析报告-->
+            <!--智能决策处方-->
+            <LinearLayout
+                style="@style/hh_fi_wr"
+                android:layout_marginTop="@dimen/dp_40"
+                android:background="@color/background"
+                android:orientation="vertical">
+
+                <com.lyd.baselib.widget.view.MyGridView
+                    android:id="@+id/gv_health_record"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:numColumns="4"
+                    android:paddingTop="@dimen/dp_10"
+                    android:verticalSpacing="@dimen/dp_10"
+                    android:visibility="visible"
+                    tools:listitem="@layout/item_gv_health_record" />
+
+                <com.lyd.baselib.widget.view.MyListView
+                    android:id="@+id/lv_patient_info_top_three"
+                    style="@style/listView"
+                    android:layout_marginBottom="@dimen/dp_15">
+
+                </com.lyd.baselib.widget.view.MyListView>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <!--基本信息 上层-->
+        <include layout="@layout/include_patient_info_head_basic_info">
+
+        </include>
+
+    </FrameLayout>
+
+</ScrollView>
+
+

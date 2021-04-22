@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/hh_fi_wr"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_10">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+                android:id="@+id/img_head"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/doctor_list_head_img"
+                app:qmui_border_width="0dp"
+                app:qmui_is_circle="true" />
+
+
+            <com.wei.android.lib.colorview.view.ColorTextView
+                android:id="@+id/tv_un_read_num"
+                style="@style/text_white_12_w_w"
+                android:layout_gravity="right"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:gravity="center"
+                android:minWidth="@dimen/dp_16"
+                android:minHeight="@dimen/dp_16"
+                android:text="..."
+                android:textSize="10sp"
+                android:visibility="gone"
+                app:backgroundColorNormal="@color/main_red"
+                app:cornerRadiusNormal="90dp" />
+
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            style="@style/hh_fi_wr"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_weight="0.8"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_doc_name"
+                style="@style/text_black_14_w_w"
+                android:text="李医生" />
+
+
+            <LinearLayout
+                style="@style/hh_fi_wr"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/text_gray_12_w_w"
+                    android:text="最近登录时间："
+                    android:textColor="#666666" />
+
+                <TextView
+                    android:id="@+id/tv_login_time"
+                    style="@style/text_gray_12_w_w"
+                    android:text="2018-12-12 15:34" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/img_right_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/doctor_list_arrow"
+            android:visibility="gone" />
+
+
+    </LinearLayout>
+
+    <View
+        style="@style/line"
+        android:layout_marginLeft="@dimen/dp_10" />
+
+</LinearLayout>

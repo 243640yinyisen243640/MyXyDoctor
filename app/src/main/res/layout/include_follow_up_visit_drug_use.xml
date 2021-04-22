@@ -1,0 +1,138 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_drug_use"
+    style="@style/hh_fi_wr"
+    android:layout_marginLeft="@dimen/dp_12"
+    android:layout_marginRight="@dimen/dp_12"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10">
+
+    <include layout="@layout/include_follow_up_visit_drug_use_condition">
+
+    </include>
+
+    <!--三种药-->
+    <com.lyd.baselib.widget.view.MyListView
+        android:id="@+id/lv_drug_use"
+        style="@style/listView">
+
+    </com.lyd.baselib.widget.view.MyListView>
+
+    <!--胰岛素-->
+    <!--胰岛素 剂量-->
+    <LinearLayout style="@style/hh_fi_wr">
+
+        <LinearLayout
+            style="@style/hh_wr_wr"
+            android:layout_marginTop="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_12">
+
+            <LinearLayout
+                style="@style/hh_wr_wr"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <TextView
+                    style="@style/text_black_14_w_w"
+                    android:text="胰岛素" />
+
+                <TextView
+                    style="@style/text_black_14_w_w"
+                    android:text="*"
+                    android:textColor="@color/main_red" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout style="@style/hh_wr_wr">
+
+                <com.wei.android.lib.colorview.view.ColorEditText
+                    android:id="@+id/et_insulin"
+                    android:layout_width="66dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:hint=""
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingTop="2dp"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingBottom="2dp"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/sp_14"
+                    app:borderColorNormal="@color/gray_text"
+                    app:borderWidthNormal="1dp" />
+
+                <TextView
+                    style="@style/text_gray_14_w_w"
+                    android:text="次"
+                    android:visibility="gone" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/hh_wr_wr"
+            android:layout_marginTop="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_12">
+
+            <LinearLayout
+                style="@style/hh_wr_wr"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <TextView
+                    style="@style/text_black_14_w_w"
+                    android:text="剂量" />
+
+                <TextView
+                    style="@style/text_black_14_w_w"
+                    android:text="*"
+                    android:textColor="@color/main_red" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout style="@style/hh_wr_wr">
+
+                <com.wei.android.lib.colorview.view.ColorEditText
+                    android:id="@+id/et_insulin_dosage"
+                    android:layout_width="66dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:hint=""
+                    android:inputType="numberDecimal"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingTop="2dp"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingBottom="2dp"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/sp_14"
+                    app:borderColorNormal="@color/gray_text"
+                    app:borderWidthNormal="1dp" />
+
+                <TextView
+                    style="@style/text_gray_14_w_w"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:text="u" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

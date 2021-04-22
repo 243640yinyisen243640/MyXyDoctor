@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lihang.ShadowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_12"
+    android:layout_marginTop="@dimen/dp_12"
+    android:layout_marginRight="@dimen/dp_12"
+    app:hl_cornerRadius="@dimen/dp_8"
+    app:hl_shadowColor="#99FF564F"
+    app:hl_shadowLimit="5dp"
+    app:hl_shadowOffsetX="@dimen/dp_0"
+    app:hl_shadowOffsetY="@dimen/dp_0">
+
+
+    <LinearLayout
+        android:id="@+id/ll_shadow"
+        style="@style/hh_fi_wr"
+        android:paddingLeft="@dimen/dp_12"
+        android:paddingTop="22dp"
+        android:paddingRight="@dimen/dp_12"
+        android:paddingBottom="22dp">
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/img_head"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_10"
+            android:src="@drawable/head_man"
+            app:qmui_border_width="0dp"
+            app:qmui_is_circle="true" />
+
+        <LinearLayout
+            style="@style/hh_fi_wr"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_10">
+
+            <!--姓名性别年龄-->
+            <LinearLayout style="@style/hh_fi_wr">
+
+                <TextView
+                    android:id="@+id/tv_person_name"
+                    style="@style/text_black_14_w_w"
+                    android:layout_gravity="bottom"
+                    android:text="这是姓名" />
+
+                <ImageView
+                    android:id="@+id/img_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="@dimen/dp_8"
+                    android:paddingTop="@dimen/dp_2"
+                    android:paddingRight="@dimen/dp_2"
+                    android:src="@drawable/female" />
+
+                <TextView
+                    android:id="@+id/tv_person_age"
+                    style="@style/text_black_12_w_w"
+                    android:layout_gravity="bottom"
+                    android:text="12" />
+            </LinearLayout>
+
+            <!--身高体重-->
+            <LinearLayout
+                style="@style/hh_fi_wr"
+                android:layout_marginTop="@dimen/dp_10">
+
+                <LinearLayout
+                    style="@style/hh_fi_wr"
+                    android:layout_weight="0.8">
+
+                    <TextView
+                        android:id="@+id/tv_height"
+                        style="@style/text_black_14_w_w"
+                        android:drawableLeft="@drawable/height"
+                        android:drawablePadding="@dimen/dp_5"
+                        android:text="156cm" />
+
+                    <TextView
+                        android:id="@+id/tv_weight"
+                        style="@style/text_black_14_w_w"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:drawableLeft="@drawable/weight_red"
+                        android:drawablePadding="@dimen/dp_5"
+                        android:text="70kg" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="@dimen/dp_10"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/right_arrow"
+                    android:visibility="gone" />
+
+
+            </LinearLayout>
+            <!--检测时间-->
+
+            <TextView
+                android:id="@+id/tv_check_time"
+                style="@style/text_black_14_w_w"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="最新检测时间:2019 07 12" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</com.lihang.ShadowLayout>

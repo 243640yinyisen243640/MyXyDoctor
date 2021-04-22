@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tv_target"
+        style="@style/text_black_14_f_w"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="@dimen/dp_12"
+        android:text="控制目标:  餐前:4.4-7  餐后:4.4-10"
+        android:visibility="gone" />
+
+    <TextView
+        style="@style/text_black_16_f_w"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_12"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingRight="@dimen/dp_12"
+        android:paddingBottom="@dimen/dp_12"
+        android:text="血糖测量时间段" />
+
+    <GridView
+        android:id="@+id/gv_time_quantum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:horizontalSpacing="@dimen/dp_12"
+        android:numColumns="4"
+        android:paddingBottom="@dimen/dp_30"
+        android:verticalSpacing="@dimen/dp_12"
+        android:visibility="visible">
+
+    </GridView>
+
+    <LinearLayout
+        android:id="@+id/ll_select_time"
+        style="@style/hh_fi_wr"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        android:padding="@dimen/dp_12">
+
+        <TextView
+            style="@style/text_black_14_f_w"
+            android:layout_weight="0.8"
+            android:text="检测时间" />
+
+
+        <TextView
+            android:id="@+id/tv_check_time"
+            style="@style/text_black_14_w_w"
+            android:drawableRight="@drawable/right_arrow"
+            android:drawablePadding="@dimen/dp_5"
+            android:hint="请选择" />
+    </LinearLayout>
+
+
+    <TextView
+        style="@style/text_black_16_f_w"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_12"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingRight="@dimen/dp_12"
+        android:paddingBottom="@dimen/dp_12"
+        android:text="血糖值" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/dp_30">
+
+        <ImageView
+            android:id="@+id/img_sugar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sugar_add_none" />
+
+        <LinearLayout
+            style="@style/hh_wr_wr"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_sugar"
+                style="@style/text_white_16_w_w"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:gravity="center"
+                android:hint="请输入血糖值"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColorHint="@color/white" />
+
+            <TextView
+                style="@style/text_white_16_w_w"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="mmol/L" />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+
+</LinearLayout>

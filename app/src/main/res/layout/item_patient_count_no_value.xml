@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/hh_fi_wr"
+        android:paddingLeft="@dimen/dp_12"
+        android:paddingTop="@dimen/dp_6"
+        android:paddingRight="@dimen/dp_12"
+        android:paddingBottom="@dimen/dp_6">
+
+        <ImageView
+            android:id="@+id/img_head"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/patient_count_img_item_normal" />
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/text_black_14_f_w"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:text="张三" />
+
+
+    </LinearLayout>
+
+
+    <View style="@style/line">
+
+
+    </View>
+
+
+</LinearLayout>

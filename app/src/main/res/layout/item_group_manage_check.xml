@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xy.xydoctor.view.CheckableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+
+    <ImageView
+        android:id="@+id/img_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@null"
+        android:duplicateParentState="true"
+        android:padding="@dimen/dp_12"
+        android:src="@drawable/single_background_selector" />
+
+    <RelativeLayout
+        android:id="@+id/rl_item"
+        style="@style/hh_wr_wr"
+        android:layout_toRightOf="@+id/img_check"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingBottom="@dimen/dp_12">
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/text_black_14_w_w"
+            tools:text="选中" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_12"
+            android:scaleType="centerCrop"
+            android:src="@drawable/right_arrow" />
+
+
+    </RelativeLayout>
+
+
+</com.xy.xydoctor.view.CheckableLayout>

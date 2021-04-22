@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <ScrollView style="@style/scrollView">
+
+        <LinearLayout
+            style="@style/hh_fi_wr"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/hh_fi_wr"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/hh_fi_wr"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@drawable/patient_bg_shape">
+
+                    <ImageView
+                        style="@style/hh_wr_wr"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/dp_10"
+                        android:src="@drawable/patient_search" />
+
+
+                    <EditText
+                        android:id="@+id/et_input_tel"
+                        style="@style/et_base_style_no_bg"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.8"
+                        android:hint="请输入手机号"
+                        android:inputType="number"
+                        android:maxLength="11" />
+
+
+                    <ImageView
+                        android:id="@+id/img_del"
+                        style="@style/hh_wr_wr"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/dp_10"
+                        android:src="@drawable/patient_search_del"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/bt_search"
+                style="@style/text_white_16_f_w"
+                android:background="@color/main_red"
+                android:text="搜索" />
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

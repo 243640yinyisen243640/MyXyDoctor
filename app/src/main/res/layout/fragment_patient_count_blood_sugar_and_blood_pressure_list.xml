@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!--头部-->
+    <LinearLayout
+        style="@style/hh_fi_wr"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="vertical">
+
+        <View style="@style/line">
+
+        </View>
+
+
+        <RelativeLayout
+            android:id="@+id/ll_change_three"
+            style="@style/hh_fi_wr"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_12"
+            android:layout_marginBottom="@dimen/dp_10">
+
+            <com.wei.android.lib.colorview.view.ColorRelativeLayout
+                style="@style/text_gray_12_f_w"
+                android:layout_width="150dp"
+                app:borderColorNormal="@color/gray_text"
+                app:borderWidthNormal="1dp"
+                app:cornerRadiusNormal="@dimen/dp_6">
+
+                <TextView
+                    android:id="@+id/tv_change_three"
+                    style="@style/text_gray_14_w_w"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/dp_6"
+                    android:text="今日" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp_14"
+                    android:layout_height="@dimen/dp_12"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/patient_count_tv_arrow_down_normal" />
+
+
+            </com.wei.android.lib.colorview.view.ColorRelativeLayout>
+
+
+            <com.wei.android.lib.colorview.view.ColorTextView
+                android:id="@+id/tv_remind"
+                style="@style/text_gray_14_w_w"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_6"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingBottom="@dimen/dp_6"
+                android:text="提醒"
+                android:textColor="@color/main_red"
+                app:backgroundColorNormal="@color/white"
+                app:borderColorNormal="@color/main_red"
+                app:borderWidthNormal="1dp"
+                app:cornerRadiusNormal="6dp" />
+
+
+        </RelativeLayout>
+
+
+        <View style="@style/line">
+
+        </View>
+
+
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/lv_list"
+        style="@style/listView">
+
+
+    </ListView>
+
+
+    <include layout="@layout/include_default_empty_layout" />
+
+
+</LinearLayout>

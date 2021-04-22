@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_12"
+    android:layout_marginTop="172dp"
+    android:layout_marginRight="@dimen/dp_12"
+    android:background="@color/white"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10">
+
+    <!--随访问卷-->
+
+
+    <LinearLayout
+        style="@style/hh_fi_wr"
+        android:gravity="center">
+
+
+        <TextView
+            style="@style/text_black_16_w_w"
+            android:drawableLeft="@drawable/follow_up_visit_double_line"
+            android:drawableRight="@drawable/follow_up_visit_double_line"
+            android:drawablePadding="@dimen/dp_30"
+            android:text="问卷报告"
+            android:textColor="@color/main_red" />
+
+    </LinearLayout>
+
+</LinearLayout>

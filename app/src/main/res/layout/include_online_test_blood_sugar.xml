@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lihang.ShadowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_12"
+    android:layout_marginTop="@dimen/dp_12"
+    android:layout_marginRight="@dimen/dp_12"
+    app:hl_cornerRadius="@dimen/dp_5"
+    app:hl_shadowColor="#99FF564F"
+    app:hl_shadowOffsetX="@dimen/dp_0"
+    app:hl_shadowOffsetY="@dimen/dp_0">
+
+    <LinearLayout
+        android:id="@+id/ll_online_test_blood_sugar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="22dp">
+
+        <LinearLayout style="@style/hh_fi_wr">
+
+            <TextView
+                style="@style/text_black_14_w_w"
+                android:drawableLeft="@drawable/online_test_blood_sugar_machine"
+                android:drawablePadding="@dimen/dp_5"
+                android:text="血糖" />
+
+            <TextView
+                android:id="@+id/tv_blood_sugar"
+                style="@style/text_black_14_w_w"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:textColor="#2F9DBA"
+                tools:text="15mol/L" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/hh_fi_wr"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/online_test_blood_sugar_two" />
+
+            <ImageView
+                android:id="@+id/img_blood_sugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/online_test_blood_sugar_common" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</com.lihang.ShadowLayout>

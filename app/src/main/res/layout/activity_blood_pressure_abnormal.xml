@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+
+    <ScrollView
+        style="@style/scrollView"
+        android:layout_above="@+id/bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <!--顶部-->
+            <LinearLayout
+                style="@style/hh_fi_wr"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/chat_sugar_abnormal" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_20">
+
+                    <LinearLayout
+                        style="@style/hh_wr_wr"
+                        android:layout_marginLeft="50dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/text_black_16_w_w"
+                            android:layout_gravity="center"
+                            android:text="收缩压" />
+
+                        <LinearLayout
+                            style="@style/hh_wr_wr"
+                            android:layout_marginTop="@dimen/dp_5">
+
+                            <TextView
+                                android:id="@+id/tv_left"
+                                style="@style/text_black_14_w_w"
+                                android:text="180"
+                                android:textColor="@color/main_red" />
+
+                            <TextView
+                                style="@style/text_black_14_w_w"
+                                android:text="mmHg" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        style="@style/hh_wr_wr"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="50dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/text_black_16_w_w"
+                            android:layout_gravity="center"
+                            android:text="舒张压" />
+
+                        <LinearLayout
+                            style="@style/hh_wr_wr"
+                            android:layout_marginTop="@dimen/dp_5">
+
+                            <TextView
+                                android:id="@+id/tv_right"
+                                style="@style/text_black_14_w_w"
+                                android:text="180"
+                                android:textColor="@color/main_red" />
+
+                            <TextView
+                                style="@style/text_black_14_w_w"
+                                android:text="mmHg" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <!--患者近七次血压情况-->
+            <TextView
+                style="@style/text_black_14_f_w"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/white"
+                android:padding="@dimen/dp_12"
+                android:text="患者近七次血压情况" />
+
+            <LinearLayout
+                style="@style/hh_fi_wr"
+                android:layout_marginTop="@dimen/dp_6"
+                android:paddingBottom="@dimen/dp_6">
+
+                <TextView
+                    style="@style/text_black_14_f_w"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="日期" />
+
+                <TextView
+                    style="@style/text_black_14_f_w"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="收缩压" />
+
+                <TextView
+                    style="@style/text_black_14_f_w"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="舒张压" />
+
+            </LinearLayout>
+
+            <!--列表-->
+
+            <com.lyd.baselib.widget.view.MyListView
+                android:id="@+id/lv_blood_pressure_list"
+                style="@style/listView">
+
+            </com.lyd.baselib.widget.view.MyListView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include
+        android:id="@+id/bottom"
+        layout="@layout/include_bottom_send">
+
+    </include>
+
+</RelativeLayout>
+
+
+

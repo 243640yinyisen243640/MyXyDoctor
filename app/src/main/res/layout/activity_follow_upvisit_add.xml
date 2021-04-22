@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <!--布局-->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nest_sc"
+        style="@style/scrollView">
+
+        <LinearLayout
+            style="@style/hh_fi_fi"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/follow_up_visit_status_bg" />
+
+            <!--下边添加内容-->
+            <com.wei.android.lib.colorview.view.ColorLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-52dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                app:backgroundColorNormal="@color/white"
+                app:cornerRadiusTopLeftNormal="@dimen/dp_20"
+                app:cornerRadiusTopRightNormal="@dimen/dp_20">
+
+
+                <TextView
+                    style="@style/text_black_14_w_w"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="请根据患者实际情况勾选适合本次随访的内容" />
+
+                <!--随访次数-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_18"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_18"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        style="@style/text_gray_14_w_w_666"
+                        android:text="随访次数:" />
+
+
+                    <TextView
+                        style="@style/text_black_14_w_w"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="4dp"
+                        android:text="第"
+                        android:textColor="@color/main_red" />
+
+                    <com.wei.android.lib.colorview.view.ColorEditText
+                        android:id="@+id/et_count"
+                        style="@style/text_black_14_w_w"
+                        android:layout_width="44dp"
+                        android:layout_marginRight="4dp"
+                        android:inputType="number"
+                        android:padding="1dp"
+                        android:textColor="@color/main_red"
+                        app:borderColorNormal="#999999"
+                        app:borderDashWidthNormal="@dimen/dp_2"
+                        app:borderWidthNormal="1dp" />
+
+
+                    <TextView
+                        style="@style/text_black_14_w_w"
+                        android:text="次随访"
+                        android:textColor="@color/main_red" />
+                </LinearLayout>
+
+                <!--选择时间-->
+                <LinearLayout
+                    android:id="@+id/ll_select_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_18"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="@dimen/dp_18"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        style="@style/text_gray_14_w_w_666"
+                        android:text="选择随访时间:" />
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        style="@style/text_gray_14_w_w"
+                        android:layout_marginLeft="@dimen/dp_8"
+                        android:drawableRight="@drawable/triangle_red"
+                        android:drawablePadding="@dimen/dp_8"
+                        android:textColor="@color/main_red"
+                        tools:text="2019-08-09" />
+
+
+                </LinearLayout>
+
+                <!--随访方式-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_18"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="@dimen/dp_18"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        style="@style/text_gray_14_w_w_666"
+                        android:text="请选择随访方式:" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_four_way"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_12"
+                        android:orientation="horizontal">
+
+                        <!--门诊-->
+                        <RadioButton
+                            android:id="@+id/rb_one"
+                            style="@style/rb_follow_up_visit_add"
+                            android:checked="true"
+                            android:text="门诊">
+
+                        </RadioButton>
+                        <!--家庭-->
+                        <RadioButton
+                            android:id="@+id/rb_two"
+                            style="@style/rb_follow_up_visit_add"
+                            android:text="家庭">
+
+                        </RadioButton>
+                        <!--电话-->
+                        <RadioButton
+                            android:id="@+id/rb_three"
+                            style="@style/rb_follow_up_visit_add"
+                            android:text="电话">
+
+                        </RadioButton>
+                        <!--远程-->
+                        <RadioButton
+                            android:id="@+id/rb_four"
+                            style="@style/rb_follow_up_visit_add"
+                            android:text="远程">
+
+                        </RadioButton>
+
+                    </RadioGroup>
+
+
+                </LinearLayout>
+
+                <!--提醒时间-->
+                <LinearLayout
+                    style="@style/hh_fi_wr"
+                    android:paddingLeft="@dimen/dp_18"
+                    android:paddingTop="@dimen/dp_6"
+                    android:paddingRight="@dimen/dp_18">
+
+                    <TextView
+                        style="@style/text_gray_14_w_w_666"
+                        android:text="请选择提醒时间" />
+
+                    <TextView
+                        style="@style/text_gray_14_w_w_999"
+                        android:text="(系统默认为随访日期前3天自动提醒）"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <RadioGroup
+                    android:id="@+id/rg_four_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_18"
+                    android:paddingTop="@dimen/dp_4"
+                    android:paddingRight="@dimen/dp_18">
+
+                    <!--提前5天-->
+                    <RadioButton
+                        android:id="@+id/rb_time_one"
+                        style="@style/rb_follow_up_visit_add"
+                        android:text="提前5天">
+
+                    </RadioButton>
+                    <!--家庭-->
+                    <RadioButton
+                        android:id="@+id/rb_time_two"
+                        style="@style/rb_follow_up_visit_add"
+                        android:checked="true"
+                        android:text="提前3天">
+
+                    </RadioButton>
+                    <!--电话-->
+                    <RadioButton
+                        android:id="@+id/rb_time_three"
+                        style="@style/rb_follow_up_visit_add"
+                        android:text="提前2天">
+
+                    </RadioButton>
+                    <!--远程-->
+                    <RadioButton
+                        android:id="@+id/rb_time_four"
+                        style="@style/rb_follow_up_visit_add"
+                        android:text="提前1天">
+
+                    </RadioButton>
+
+                </RadioGroup>
+
+                <!--提醒消息内容-->
+
+
+                <TextView
+                    style="@style/text_gray_14_w_w_666"
+                    android:layout_marginLeft="@dimen/dp_18"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_18"
+                    android:text="请编辑需要对患者提醒的消息内容" />
+
+                <EditText
+                    android:id="@+id/et_content"
+                    style="@style/et_base_style_simple"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:layout_marginRight="26dp"
+                    android:background="@drawable/drawable_et_follow_up_add"
+                    android:gravity="left|top"
+                    android:hint=""
+                    android:inputType="textMultiLine"
+                    android:lineSpacingMultiplier="1.2"
+                    android:maxLines="3"
+                    android:minLines="3"
+                    android:paddingTop="@dimen/dp_5"
+                    android:text="根据随访要求定时到医院">
+
+                </EditText>
+
+                <!--分隔线-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:background="@color/background">
+
+                </View>
+
+                <!--全选-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:padding="@dimen/dp_10">
+
+                    <LinearLayout
+                        android:id="@+id/ll_check_all"
+                        style="@style/hh_wr_wr"
+                        android:layout_alignParentLeft="true">
+
+
+                        <ImageView
+                            android:id="@+id/img_all_check"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/follow_up_visit_add_check"
+                            android:tag="0" />
+
+
+                        <TextView
+                            style="@style/text_black_14_w_w"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:text="全选" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/tv_submit"
+                        style="@style/text_black_14_w_w"
+                        android:layout_alignParentRight="true"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:text="完成" />
+
+                </RelativeLayout>
+
+
+                <!--选中列表-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_follow_up_visit_add"
+                    style="@style/recyclerView">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+            </com.wei.android.lib.colorview.view.ColorLinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>
+
+

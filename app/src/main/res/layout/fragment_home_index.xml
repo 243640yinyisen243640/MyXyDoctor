@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/srl"
+    style="@style/hh_fi_fi">
+
+    <androidx.core.widget.NestedScrollView style="@style/scrollView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:orientation="vertical">
+            <!--用户统计-->
+            <LinearLayout
+                style="@style/hh_fi_wr"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_14">
+
+                <LinearLayout style="@style/hh_fi_wr">
+
+                    <TextView
+                        style="@style/text_black_16_w_w"
+                        android:drawableLeft="@drawable/home_index_user_count"
+                        android:drawablePadding="@dimen/dp_5"
+                        android:gravity="center_vertical"
+                        android:text="用户统计" />
+
+                    <TextView
+                        android:id="@+id/tv_user_total"
+                        style="@style/text_black_14_w_w"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:text="我的患者:130人" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/hh_fi_wr"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tv_user_count_gxy"
+                        style="@style/text_black_14_w_w"
+                        android:layout_marginRight="100dp"
+                        android:drawableLeft="@drawable/home_index_user_count_tv_left"
+                        android:drawablePadding="@dimen/dp_5"
+                        android:text="高血压 199人" />
+
+
+                    <TextView
+                        android:id="@+id/tv_user_count_tnb"
+                        style="@style/text_black_14_w_w"
+                        android:drawableLeft="@drawable/home_index_user_count_tv_left"
+                        android:drawablePadding="@dimen/dp_5"
+                        android:text="糖尿病 199人" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_user_count_gxy_and_tnb"
+                    style="@style/text_black_14_w_w"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:drawableLeft="@drawable/home_index_user_count_tv_left"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:text="高血压 199人" />
+            </LinearLayout>
+
+            <!--血糖达标率-->
+            <LinearLayout
+                style="@style/hh_fi_wr"
+                android:layout_marginTop="@dimen/dp_15"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_14">
+
+                <LinearLayout style="@style/hh_fi_wr">
+
+                    <TextView
+                        style="@style/text_black_16_w_w"
+                        android:layout_gravity="center_vertical"
+                        android:drawableLeft="@drawable/home_index_reach_the_stand_rate"
+                        android:drawablePadding="@dimen/dp_5"
+                        android:gravity="center_vertical"
+                        android:text="血糖达标率" />
+
+                    <LinearLayout
+                        style="@style/hh_fi_wr"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:orientation="horizontal">
+
+                        <com.wei.android.lib.colorview.view.ColorTextView
+                            android:id="@+id/tv_start_time"
+                            style="@style/text_black_12_f_w"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="@dimen/dp_5"
+                            android:text="选择开始时间"
+                            app:backgroundColorNormal="#F8F8F7"
+                            app:cornerRadiusNormal="@dimen/dp_2">
+
+                        </com.wei.android.lib.colorview.view.ColorTextView>
+
+
+                        <TextView
+                            style="@style/text_black_14_w_w"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:text="至" />
+
+                        <com.wei.android.lib.colorview.view.ColorTextView
+                            android:id="@+id/tv_end_time"
+                            style="@style/text_black_12_f_w"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="@dimen/dp_5"
+                            android:text="选择结束时间"
+                            app:backgroundColorNormal="#F8F8F7"
+                            app:cornerRadiusNormal="@dimen/dp_2">
+
+                        </com.wei.android.lib.colorview.view.ColorTextView>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_reach_the_stand_rate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dp_8">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+            </LinearLayout>
+
+
+            <!--当日新增统计-->
+            <LinearLayout
+                android:id="@+id/ll_patient_add_today"
+                style="@style/hh_fi_wr"
+                android:layout_marginTop="@dimen/dp_15"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_14">
+
+
+                <TextView
+                    style="@style/text_black_16_w_w"
+                    android:drawableLeft="@drawable/home_index_add"
+                    android:drawablePadding="5dp"
+                    android:text="当日新增" />
+
+                <TextView
+                    android:id="@+id/tv_today_add_total"
+                    style="@style/text_black_14_f_w"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:drawableRight="@drawable/home_index_right_arrow"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:text="当日新增人总人数:3人" />
+
+
+            </LinearLayout>
+
+
+            <!--患者情况统计-->
+            <LinearLayout
+                style="@style/hh_fi_wr"
+                android:layout_marginTop="@dimen/dp_15"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_14">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/text_black_16_w_w"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/home_index_patient"
+                        android:drawablePadding="5dp"
+                        android:text="患者情况统计" />
+
+
+                    <ImageView
+                        android:id="@+id/img_bar_chart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/home_index_right_arrow" />
+
+
+                </RelativeLayout>
+
+                <!--自己新增图例-->
+                <RelativeLayout
+                    style="@style/hh_fi_wr"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        style="@style/hh_wr_wr"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.wei.android.lib.colorview.view.ColorLinearLayout
+                            android:layout_width="@dimen/dp_25"
+                            android:layout_height="@dimen/dp_12"
+                            app:backgroundColorNormal="@color/main_red">
+
+                        </com.wei.android.lib.colorview.view.ColorLinearLayout>
+
+                        <com.wei.android.lib.colorview.view.ColorTextView
+                            style="@style/text_black_14_w_w"
+                            android:layout_marginLeft="@dimen/dp_4"
+                            android:text="血糖" />
+
+
+                        <com.wei.android.lib.colorview.view.ColorLinearLayout
+                            android:layout_width="@dimen/dp_25"
+                            android:layout_height="@dimen/dp_12"
+                            android:layout_marginLeft="@dimen/dp_20"
+                            app:backgroundColorNormal="@color/home_blue">
+
+                        </com.wei.android.lib.colorview.view.ColorLinearLayout>
+
+                        <com.wei.android.lib.colorview.view.ColorTextView
+                            style="@style/text_black_14_w_w"
+                            android:layout_marginLeft="@dimen/dp_4"
+                            android:text="血压" />
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <!--柱状图-->
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/bar_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_10">
+
+                </com.github.mikephil.charting.charts.BarChart>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>
+

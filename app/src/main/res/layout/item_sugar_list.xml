@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        style="@style/hh_fi_wr"
+        android:padding="@dimen/dp_12">
+
+        <TextView
+            android:id="@+id/tv_left"
+            style="@style/text_black_14_w_w"
+            android:text="时间" />
+
+        <LinearLayout
+            style="@style/hh_wr_wr"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/tv_center"
+                style="@style/text_black_14_w_w"
+                android:text="测量值"
+                android:textColor="@color/main_red" />
+
+            <TextView
+                style="@style/text_black_14_w_w"
+                android:text="mmol/L" />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_right"
+            style="@style/text_black_14_w_w"
+            android:layout_alignParentRight="true"
+            android:text="类型" />
+
+
+    </RelativeLayout>
+
+    <View style="@style/line"></View>
+
+</LinearLayout>

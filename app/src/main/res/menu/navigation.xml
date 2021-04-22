@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/main_bottom_index_selector"
+        android:title="工作台" />
+
+    <item
+        android:id="@+id/navigation_patient"
+        android:icon="@drawable/main_bottom_patient_selector"
+        android:title="患者" />
+
+    <item
+        android:id="@+id/navigation_doctor"
+        android:icon="@drawable/main_bottom_patient_selector"
+        android:title="医生 " />
+
+    <!--    <item-->
+    <!--        android:id="@+id/navigation_home_sign"-->
+    <!--        android:icon="@drawable/main_bottom_home_sign_selector"-->
+    <!--        android:title="家签" />-->
+
+    <item
+        android:id="@+id/navigation_user"
+        android:icon="@drawable/main_bottom_user_selector"
+        android:title="我的" />
+
+</menu>

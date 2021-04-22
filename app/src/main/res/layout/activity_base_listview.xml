@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--列表-->
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_base"
+        style="@style/hh_fi_fi">
+
+        <ListView
+            android:id="@+id/lv_base"
+            style="@style/listView">
+
+        </ListView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <!--页面状态 网络异常 空数据-->
+    <!--一键置顶 等处理-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/ll_base_empty"-->
+    <!--        style="@style/hh_fi_fi"-->
+    <!--        android:background="@color/white"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:visibility="gone" />-->
+
+    <include layout="@layout/include_default_no_data" />
+
+</LinearLayout>

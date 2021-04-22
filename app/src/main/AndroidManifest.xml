@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.xy.xydoctor">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE" />
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-permission android:name="android.permission.GET_TASKS" /><!-- 获取近期运行任务，用于应用是否活跃的判断 -->
+    <uses-permission android:name="android.permission.REORDER_TASKS" /><!-- 获取近期运行任务，用于应用是否活跃的判断 -->
+    <!--华为角标-->
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+    <!--vivo角标-->
+    <uses-permission android:name="com.vivo.notification.permission.BADGE_ICON" />
+
+
+    <application
+        android:name=".App"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:label,android:allowBackup">
+        <activity android:name=".ui.activity.todo.SystemMsgDetailActivity" />
+        <activity android:name=".ui.activity.mydevice.HomeScanActivity" />
+        <activity android:name=".ui.activity.patienteducation.PatientEducationAndMassMsgActivity" />
+        <activity
+            android:name=".mvvm.LoginActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".ui.activity.mydevice.MyDeviceListActivity" />
+        <activity android:name=".ui.activity.user.SugarControlTargetSettingActivity" />
+        <activity android:name=".ui.activity.user.FeedBackActivity" />
+        <activity android:name=".ui.activity.user.SettingActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordBloodOxygenListActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordWeightListActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordLiverListActivity" />
+        <activity android:name=".ui.activity.director_patienteducation.PatientEductionDirectorActivity" />
+        <activity android:name=".ui.activity.director_massmsg.SelectPeopleListDirectorActivity" />
+        <activity android:name=".ui.activity.director_massmsg.MassMsgDirectorActivity" />
+        <activity android:name=".ui.activity.director.DoctorAddAndEditActivity" />
+        <activity android:name=".ui.activity.director.PatientGroupListActivity" />
+        <activity android:name=".ui.activity.director.DoctorListActivity" />
+        <activity android:name=".test.TestActivity" />
+        <activity android:name=".ui.activity.homesign.SignPatientInfoActivity" />
+        <activity android:name=".ui.activity.healthrecord.HepatopathyPabulumDetailActivity" />
+        <activity android:name=".ui.activity.homesign.InHospitalManageActivity" />
+        <activity android:name=".ui.activity.homesign.MyRescissionListActivity" />
+        <activity android:name=".ui.activity.homesign.SignProtocolActivity" />
+        <activity android:name=".ui.activity.homesign.FamilyActivity" />
+        <activity android:name=".ui.activity.homesign.SignatureEditActivity" />
+        <activity android:name=".ui.activity.homesign.SignLocalActivity" />
+        <activity android:name=".ui.activity.homesign.SignRemoteActivity" />
+        <activity android:name=".ui.activity.mydevice.DeviceAddListActivity" />
+        <activity android:name=".ui.activity.homesign.MyQRCodeActivity" />
+        <activity android:name=".ui.activity.patient.PatientCountMainActivity" />
+        <activity android:name=".ui.activity.patient.PatientAddTodayListActivity" />
+        <activity android:name=".ui.activity.followupvisit.FollowUpVisitListActivity" />
+        <activity
+            android:name=".ui.activity.followupvisit.FollowUpVisitBloodPressureSubmitActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".ui.activity.followupvisit.FollowUpVisitHepatopathySubmitActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".ui.activity.followupvisit.FollowUpVisitBloodSugarSubmitActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".ui.activity.tcm.TcmListActivity" />
+        <activity android:name=".ui.activity.followupvisit.FollowUpVisitWaitDoListActivity" />
+        <activity android:name=".ui.activity.healthrecordadd.HeightAndWeightAddActivity" />
+        <activity android:name=".ui.activity.healthrecordadd.BloodOxygenAddActivity" />
+        <activity android:name=".ui.activity.chat.ReplyAddActivity" />
+        <activity android:name=".ui.activity.chat.FastReplyActivity" />
+        <activity android:name=".ui.activity.chat.DoctorAdviceActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordBloodSugarListActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordBloodSugarMainActivity" />
+        <activity android:name=".ui.activity.patienteducation.PatientEducationHistoryListActivity" />
+        <activity android:name=".ui.activity.patienteducation.PatientEducationArticleListActivity" />
+        <activity android:name=".ui.activity.patienteducation.PatientEducationMainActivity" />
+        <activity
+            android:name=".ui.activity.todo.ApplyToHospitalDetailActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".ui.activity.todo.ApplyToHospitalListActivity" />
+        <activity android:name=".ui.activity.todo.NewPatientListActivity" />
+        <activity android:name=".ui.activity.todo.SystemMsgListActivity" />
+        <activity android:name=".ui.activity.todo.ToDoListActivity" />
+        <activity android:name=".ui.activity.healthrecordadd.PharmacyAddActivity" />
+        <activity
+            android:name=".ui.activity.user.SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".ui.activity.user.SetPwdActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity android:name=".ui.activity.groupmanage.GroupMemberListActivity" />
+        <activity android:name=".ui.activity.groupmanage.GroupMemberAddActivity" />
+        <activity android:name=".ui.activity.massmsg.MassMsgHistoryActivity" />
+        <activity android:name=".ui.activity.massmsg.MassMsgAffiliatedPersonActivity" />
+        <activity android:name=".ui.activity.patient.PatientInfoActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordFoodAndDrinkListActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordPharmacyListActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordHeightAndWeightListActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordSaccharifyListActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordBloodPressureListActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordCheckListActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordCheckDetailActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordSportListActivity" />
+        <activity android:name=".ui.activity.mydevice.MyDeviceActivity" />
+        <activity android:name=".ui.activity.mydevice.DeviceAddActivity" />
+        <activity android:name=".ui.activity.massmsg.MassMsgSelectPeopleActivity" />
+        <activity android:name=".ui.activity.massmsg.MassMsgHaveSelectPeopleActivity" />
+        <activity android:name=".ui.activity.smart.smartanalyse.AnalyseMonthListActivity" />
+        <activity android:name=".ui.activity.smart.smartanalyse.BloodSugarReportActivity" />
+        <activity android:name=".ui.activity.smart.smartanalyse.BloodPressureReportActivity" />
+        <activity android:name=".ui.activity.smart.smartmakepolicy.MyTreatPlanListActivity" />
+        <activity android:name=".ui.activity.smart.smartmakepolicy.MyTreatPlanDetailActivity" />
+        <activity android:name=".ui.activity.smart.smartmakepolicy.MedicineChangeListActivity" />
+        <activity android:name=".ui.activity.smart.smartmakepolicy.MedicineDetailActivity" />
+        <activity android:name=".ui.activity.smart.smartmakepolicy.MedicineSelectDetailListActivity" />
+        <activity android:name=".ui.activity.smart.smartmakepolicy.MedicineSelectListActivity" />
+        <activity android:name=".ui.activity.smart.smartmakepolicy.MyTreatPlanDetailFollowUpActivity" />
+        <activity
+            android:name=".base.activity.BaseWebViewActivity"
+            android:process=":web" />
+        <activity android:name=".ui.activity.healthrecordadd.BloodPressureAddActivity" />
+        <activity
+            android:name=".ui.activity.mydevice.InputImeiActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".ui.activity.healthrecordadd.BloodSugarAddActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" /> <!-- 底部按钮随键盘弹起而弹起 Start -->
+        <activity android:name=".ui.activity.patientadd.PatientAddSearchActivity" />
+        <activity android:name=".ui.activity.user.SearchUserActivity" /> <!-- 底部按钮随键盘弹起而弹起 End -->
+        <activity
+            android:name=".ui.activity.patientadd.PatientAddActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".ui.activity.groupmanage.GroupManageActivity" />
+        <activity
+            android:name=".ui.activity.massmsg.MassMsgMainActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".ui.activity.mydevice.ScanActivity"
+            android:stateNotNeeded="true"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".ui.activity.chat.BloodPressureAbnormalActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".ui.activity.chat.SugarAbnormalActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".ui.activity.homesign.MyHomeSignListActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.followupvisit.FollowUpVisitAddActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" /> <!-- 全面屏适配  start -->
+        <!-- 屏幕适配开始 -->
+        <!-- 适配全面屏 -->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" /> <!-- 适配华为刘海屏 -->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" /> <!-- 适配小米刘海屏 -->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" /> <!-- 屏幕适配结束 -->
+        <!-- &lt;!&ndash; 融云配置 start &ndash;&gt; -->
+        <!-- &lt;!&ndash; 会话列表 &ndash;&gt; -->
+        <!-- <activity -->
+        <!-- android:name=".ui.activity.ConversationListActivity" -->
+        <!-- android:exported="true" -->
+        <!-- android:windowSoftInputMode="stateHidden|adjustResize"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <data -->
+        <!-- android:host="com.xy.xydoctor" -->
+        <!-- android:pathPrefix="/conversationlist" -->
+        <!-- android:scheme="rong" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> &lt;!&ndash; 会话页面 &ndash;&gt; -->
+        <!-- <activity -->
+        <!-- android:name=".ui.activity.ConversationActivity" -->
+        <!-- android:exported="true" -->
+        <!-- android:windowSoftInputMode="stateHidden|adjustResize"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <data -->
+        <!-- android:host="com.xy.xydoctor" -->
+        <!-- android:pathPrefix="/conversation/" -->
+        <!-- android:scheme="rong" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> &lt;!&ndash; FileProvider 相关配置 &ndash;&gt; -->
+        <!-- <provider -->
+        <!-- android:name="androidx.core.content.FileProvider" -->
+        <!-- android:authorities="${applicationId}.FileProvider" -->
+        <!-- android:exported="false" -->
+        <!-- android:grantUriPermissions="true"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.FILE_PROVIDER_PATHS" -->
+        <!-- android:resource="@xml/rc_file_path" /> -->
+        <!-- </provider> -->
+        <!-- &lt;!&ndash; 融云配置 end &ndash;&gt; -->
+        <!-- 阿里推送 Start -->
+        <meta-data
+            android:name="com.alibaba.app.appkey"
+            android:value="30439011" /> <!-- 请填写你自己的- appKey -->
+        <meta-data
+            android:name="com.alibaba.app.appsecret"
+            android:value="953788223fae647263d647fcffee03d2" /> <!-- 请填写你自己的appSecret -->
+        <receiver
+            android:name=".utils.alipush.MyMessageReceiver"
+            android:exported="false">
+            <!-- 为保证receiver安全，建议设置不可导出，如需对其他应用开放可通过android：permission进行限制 -->
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.sdk.android.push.RECEIVE" />
+            </intent-filter>
+        </receiver> <!-- 阿里推送 End -->
+        <!-- 阿里推送 厂商开始 -->
+        <!-- 华为 -->
+        <meta-data
+            android:name="com.huawei.hms.client.appid"
+            android:value="appid=100684593" /> <!-- vivo -->
+        <meta-data
+            android:name="com.vivo.push.api_key"
+            android:value="6e9c8303-edf0-404e-8f96-f22a5c52cafa" />
+        <meta-data
+            android:name="com.vivo.push.app_id"
+            android:value="14812" /> <!-- 辅助弹窗 -->
+        <activity
+            android:name=".ui.push.PopupPushActivity"
+            android:exported="true" />
+        <activity android:name=".base.activity.XYSoftBaseActivity" />
+        <!--创建随访 1：模板 2：手动-->
+        <activity
+            android:name=".ui.activity.followupvisit.FollowUpVisitAddNewActivity"
+            android:screenOrientation="portrait" />
+        <!--随访报告2-->
+        <activity
+            android:name=".ui.activity.followupvisit.FollowUpVisitBloodSugarSubmit2Activity"
+            android:screenOrientation="portrait" />
+        <!--血压-->
+        <activity
+            android:name=".ui.activity.followupvisit.FollowUpVisitBloodPressureSubmit2Activity"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

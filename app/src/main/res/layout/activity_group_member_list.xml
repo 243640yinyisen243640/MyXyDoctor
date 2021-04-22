@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+
+    <ListView
+        android:id="@+id/lv_group_member_list"
+        style="@style/listView"
+        android:layout_above="@+id/bt_group_add"
+        android:background="@color/white"
+        android:choiceMode="singleChoice"
+        android:divider="@drawable/group_member_list_lv_divider_shape"
+        android:dividerHeight="1dp">
+
+    </ListView>
+
+
+    <Button
+        android:id="@+id/bt_group_add"
+        style="@style/text_white_16_f_w"
+        android:layout_alignParentBottom="true"
+        android:background="@color/main_red"
+        android:text="新增分组成员" />
+
+</RelativeLayout>

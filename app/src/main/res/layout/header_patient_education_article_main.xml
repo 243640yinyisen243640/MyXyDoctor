@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_patient_education_article"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="@dimen/dp_12">
+
+    <TextView
+        style="@style/text_black_16_w_w"
+        android:layout_alignParentLeft="true"
+        android:text="请选择患教文章" />
+
+    <ImageView
+        android:id="@+id/img_right_arrow_article"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/right_arrow" />
+
+</RelativeLayout>

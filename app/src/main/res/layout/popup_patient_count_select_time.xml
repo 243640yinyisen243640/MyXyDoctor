@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.wei.android.lib.colorview.view.ColorLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10"
+    app:backgroundColorNormal="#707070"
+    app:cornerRadiusNormal="2dp">
+
+    <LinearLayout
+        android:id="@+id/ll_today"
+        style="@style/hh_fi_wr"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_white_14_w_w"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="6dp"
+            android:text="今日" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/online_test_popup_line" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_seven"
+        style="@style/hh_fi_wr"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_white_14_w_w"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="6dp"
+            android:text="7天" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/online_test_popup_line" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_thirty"
+        style="@style/hh_fi_wr"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_white_14_w_w"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="6dp"
+            android:text="30天" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/online_test_popup_line"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+
+</com.wei.android.lib.colorview.view.ColorLinearLayout>

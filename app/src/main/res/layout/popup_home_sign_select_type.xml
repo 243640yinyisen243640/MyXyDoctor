@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.wei.android.lib.colorview.view.ColorFrameLayout
+        android:layout_width="254dp"
+        android:layout_height="96dp"
+        app:backgroundColorNormal="@color/white"
+        app:cornerRadiusNormal="@dimen/dp_5">
+
+        <ImageView
+            android:id="@+id/img_dismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="-10dp"
+            android:layout_marginRight="-10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/home_sign_select_type_cancel" />
+
+        <LinearLayout
+            style="@style/hh_fi_wr"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/text_black_16_w_w"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_18"
+                android:layout_marginBottom="@dimen/dp_18"
+                android:text="请选择签约模式" />
+
+            <View style="@style/line" />
+
+
+            <LinearLayout style="@style/hh_fi_wr">
+
+                <TextView
+                    android:id="@+id/tv_left"
+                    style="@style/text_black_16_f_w"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="面签" />
+
+                <View
+                    style="@style/line"
+                    android:layout_width="1dp"
+                    android:layout_height="96dp" />
+
+                <TextView
+                    android:id="@+id/tv_right"
+                    style="@style/text_black_16_f_w"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="远程签约"
+                    android:textColor="@color/main_red" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </com.wei.android.lib.colorview.view.ColorFrameLayout>
+
+
+</LinearLayout>

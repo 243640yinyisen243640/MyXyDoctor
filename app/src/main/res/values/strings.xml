@@ -1,0 +1,119 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">慧健康医生版</string>
+    <string name="network_error">网络连接不可用，请稍后重试！</string>
+    <string name="notify_no_network">网络连接不可用，请稍后重试！</string>
+    <string name="esky_service_exception">网络连接不可用，请稍后重试！</string>
+    <string name="time_out_please_try_again_later">连接超时,请稍后再试!</string>
+
+    <!--基本开始-->
+    <!--权限开始-->
+    <string name="please_open_gps">当前手机扫描蓝牙需要打开定位功能</string>
+    <!--权限结束-->
+    <!--基本结束-->
+
+    <!--网络开始-->
+    <!--网络结束-->
+
+
+    <string name="login_input_username">请输入用户名</string>
+    <string name="login_input_pwd">请输入密码</string>
+    <string name="login_login">登录</string>
+    <string name="login_forget_pwd">忘记密码?</string>
+    <string name="login_please_input_pwd">请输入密码</string>
+    <string name="login_please_input_username">请输入账户名</string>
+    <string name="user_sign_status">已签约</string>
+    <string name="blood_pressure_left_right">%1$s/%2$s</string>
+    <string name="height_weight">%1$scm/%2$skg</string>
+    <string name="msg_count">消息已分别发送给%1$s位患者</string>
+    <!--箭头 String-->
+    <!--箭头 String-->
+
+    <!--待办事项-->
+    <string name="to_do_list_new_patient">%1$s&#8195;申请添加您为他的专属医生</string>
+    <string name="to_do_list_admitted_to_hospital">患者%1$s向您提交住院申请</string>
+    <string name="to_do_list_follow_up_visit_wait_do">患者%1$s向您提交随访待办</string>
+
+    <string name="to_do_list_follow_up_visit_wait_add_time">提交时间:%1$s</string>
+
+    <string name="to_do_list_admitted_to_hospital_apply_time">申请时间:%1$s</string>
+    <string name="to_do_list_admitted_to_hospital_edit_time">处理时间:%1$s</string>
+    <!--待办事项-->
+    <!--患教文章-->
+    <string name="patient_education_article_more">已选中&#8195;(%1$s)</string>
+    <!--患教文章-->
+
+    <!--血糖记录-->
+    <string name="popu_dismiss">取&#8195;消</string>
+
+    <!--血糖记录-->
+
+
+    <!--控糖报告开始-->
+    <string name="sugar_desc">此份为%1$s年%2$s月份的控糖报告（%3$s型糖尿病），系慧健康以您记录在%4$s-%5$s期间的数据为依据分析生成，仅供参考，不作为诊疗依据。</string>
+    <string name="sugar_control_target">您近期共检测糖化血红蛋白%1$s次，达标%2$s次，未达标%3$s次。</string>
+    <string name="month_sugar_desc">您本月测量了%1$s次血糖，其中%2$s次正常，%3$s次偏高，%4$s次偏低。</string>
+
+    <string name="blood_sugar_desc">本月共测量%1$s次%2$s血糖，其中%3$s次正常，%4$s次偏高，%5$s次偏低。最高为%6$smmol/L，最低为%7$smmol/L。</string>
+
+    <!--控糖报告结束-->
+
+    <string name="my_treat_plan_detail">\t\t\t\t建议您长期坚持生活方式干预，即“健康生活方式六部曲”:限盐减重多运动，戒烟限酒心态平。
+        通过这些生活方式干预，不但能明显降低血压，也可预防心血管疾病</string>
+
+    <!--药品详情开始-->
+    <!--<string name="medicine_use">[&#160;&#160;&#160;用&#160;&#8201;&#160;法&#160;&#160;&#160;]</string>-->
+    <string name="medicine_use">[&#8194;用&#12288;法&#8194;]</string>
+    <string name="medicine_indication">[&#8194;适用症&#8194;]</string>
+    <string name="medicine_contraindication">[&#8194;禁忌症&#8194;]</string>
+    <!--药品详情结束-->
+
+    <!--蓝牙文案-->
+    <string name="ble_connecting">开始连接蓝牙设备</string>
+    <string name="ble_connected_and_wait_data">连接成功,开始等待数据</string>
+
+    <string name="ble_connect_error">获取失败,请重新点击获取</string>
+    <string name="ble_data_upload_success">数据上传成功</string>
+    <!--蓝牙文案-->
+
+    <!-- 升级对话框 -->
+    <string name="update_app">升级</string>
+
+    <!--升级对话框-->
+
+    <!--随访-->
+    <!--随访-->
+
+    <!--签约协议-->
+    <string name="agreement_title_one">【一】协议服务内容</string>
+    <string name="agreement_content_one">
+        \t\t甲、乙双方本着平等、尊重和自愿的原则，签订此协议，甲方作为服务的提供者，向乙方及其家庭成员提供以下服务项目:\n
+        \t\t•1.基本医疗服务; 2.国家基本公共卫生服务项目; 3.个性化健康管理服务; 4.个性化慢病管理服务\n
+        \t\t•签约服务优惠政策。</string>
+    <string name="agreement_title_two">【二】权力和义务</string>
+    <string name="agreement_content_two">
+        \t\t•签约机构主要权利和义务：及时获得签约居民真实信息，提供电话接听服务，指导和协助签约居民开展自我健康管理；提供“面对面”个性化健康指导；开展健康教育讲座；不能解决的疑难疾病提供双向转诊服务。\n
+        \t\t•签约居民主要权利和义务：享受签约约定服务；享受政策规定的优惠措施；积极配合签约医生或团队开展履约工作，并保证沟通顺畅；按照签约医生的意见接受首诊，如实向签约医生反映自身的健康问题并接受健康管理建议。
+        </string>
+    <string name="agreement_title_three">【三】权力和义务</string>
+    <string name="agreement_content_three">
+        \t\t•本协议未尽事宜由甲乙双方协商解决；\n
+        \t\t•本电子协议书一式三份，城市社区:社区卫生服务机构、家庭医生、签约居民各执一份；农村地区：乡镇卫生院、村卫生室、签约居民各执一份，自双方签字之日起生效，有效期为一年。期满后如需解约，乙方需告知甲方，双方签字确认。不提出解约者，视为自动续约。</string>
+    <!--签约协议-->
+    <string name="error_gif">长宽不小于 %1$dpx，且大小不超过 %2$sM。</string>
+
+
+    <string name="start_date">选择开始时间</string>
+    <string name="end_date">选择结束时间</string>
+
+    <string name="total_weight">总量: %1$sg</string>
+    <string name="weight_chart">体重: %1$sKg</string>
+
+
+    <string name="pharmacy_name">药品名称</string>
+
+    <string name="follow_up_visit_add_title">创建随访</string>
+    <string name="follow_up_visit_add_with_template">使用模板创建:</string>
+    <string name="follow_up_visit_add_with_template_hand">手动创建:</string>
+    <string name="create_follow_up_for_trouble">当前问题及改进措施</string>
+
+</resources>

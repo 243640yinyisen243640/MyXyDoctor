@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+
+    <ListView
+        android:id="@+id/lv_group_list"
+        style="@style/hh_fi_fi"
+        android:layout_marginTop="@dimen/dp_10"
+        android:divider="@drawable/listview_divider"
+        android:dividerHeight="1dp"
+        android:scrollbars="none">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/bt_del"
+        style="@style/text_white_16_f_w"
+        android:layout_alignParentBottom="true"
+        android:background="@color/main_red"
+        android:text="删除分组" />
+
+
+</RelativeLayout>

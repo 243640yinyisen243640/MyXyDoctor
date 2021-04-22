@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        style="@style/hh_fi_wr"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout style="@style/hh_fi_wr">
+
+            <TextView
+                style="@style/text_black_14_w_w"
+                android:padding="@dimen/dp_12"
+                android:text="请输入原密码" />
+
+            <EditText
+                android:id="@+id/et_old_pwd"
+                style="@style/et_base_style_no_bg"
+                android:inputType="textPassword" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/line"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"></View>
+
+        <LinearLayout style="@style/hh_fi_wr">
+
+            <TextView
+                style="@style/text_black_14_w_w"
+                android:padding="@dimen/dp_12"
+                android:text="请输入新密码" />
+
+            <EditText
+                android:id="@+id/et_new_pwd"
+                style="@style/et_base_style_no_bg"
+                android:inputType="textPassword" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/line"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"></View>
+
+        <LinearLayout style="@style/hh_fi_wr">
+
+            <TextView
+                style="@style/text_black_14_w_w"
+                android:padding="@dimen/dp_12"
+                android:text="再次输入新密码" />
+
+            <EditText
+                android:id="@+id/et_new_pwd_second"
+                style="@style/et_base_style_no_bg"
+                android:inputType="textPassword" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--    <LinearLayout-->
+    <!--        style="@style/hh_fi_wr"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:background="@color/background"-->
+    <!--        android:orientation="vertical">-->
+
+    <!--    </LinearLayout>-->
+
+    <Button
+        android:id="@+id/bt_reset"
+        style="@style/text_white_16_f_w"
+        android:layout_alignParentBottom="true"
+        android:background="@color/main_red"
+        android:text="保存" />
+
+
+</RelativeLayout>

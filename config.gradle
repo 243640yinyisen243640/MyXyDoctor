@@ -1,0 +1,13 @@
+//ext 扩展属性
+ext.versions = [
+        'minSdk'     : 21,
+
+        'compileSdk' : 29,
+
+        'targetSdk'  : 29,
+
+        'versionCode': 34,
+
+        'versionName': "1.2.8",
+]
+

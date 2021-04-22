@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/white">
+
+
+    <ImageView
+        android:id="@+id/img_top_back"
+        style="@style/hh_wr_wr"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/dp_12"
+        android:src="@drawable/img_base_back_red" />
+
+    <LinearLayout
+        android:id="@+id/ll_up_down"
+        style="@style/hh_wr_wr"
+        android:layout_centerInParent="true"
+        android:paddingLeft="60dp"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="60dp"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tv_top_title"
+            style="@style/text_white_16_w_w"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/main_red"
+            android:textSize="18sp"
+            tools:text="标题" />
+
+        <ImageView
+            android:id="@+id/img_up_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/arrow_down" />
+
+
+    </LinearLayout>
+
+
+    <com.wei.android.lib.colorview.view.ColorTextView
+        android:id="@+id/tv_reset"
+        style="@style/text_white_14_w_w"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_2"
+        android:paddingTop="5dp"
+        android:paddingRight="@dimen/dp_2"
+        android:paddingBottom="5dp"
+        android:text="血糖目标设置"
+        android:visibility="gone"
+        app:backgroundColorNormal="@color/main_red"
+        app:cornerRadiusNormal="4dp">
+
+
+    </com.wei.android.lib.colorview.view.ColorTextView>
+
+
+</RelativeLayout>

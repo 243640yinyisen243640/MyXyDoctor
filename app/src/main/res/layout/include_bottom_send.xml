@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/hh_fi_wr"
+    android:layout_alignParentBottom="true"
+    android:padding="@dimen/dp_16">
+
+    <com.wei.android.lib.colorview.view.ColorEditText
+        android:id="@+id/et_input"
+        style="@style/et_base_style_no_bg"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_weight="0.8"
+        android:padding="@dimen/dp_10"
+        app:backgroundColorNormal="@color/white"
+        app:cornerRadiusNormal="@dimen/dp_4" />
+
+    <TextView
+        android:id="@+id/tv_send"
+        style="@style/text_gray_14_w_w"
+        android:background="@drawable/shape_enter_textview_normal"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_4"
+        android:paddingBottom="@dimen/dp_10"
+        android:text="快捷回复" />
+
+
+</LinearLayout>

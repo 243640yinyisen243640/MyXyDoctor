@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/hh_fi_wr"
+        android:padding="@dimen/dp_15">
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/img_head"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/head_man"
+            app:qmui_border_width="0dp"
+            app:qmui_is_circle="true" />
+
+        <LinearLayout
+            style="@style/hh_fi_wr"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_weight="0.8"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/text_black_14_f_w"
+                android:text="张三" />
+
+            <TextView
+                android:id="@+id/tv_desc"
+                style="@style/text_gray_14_f_w"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="患者张三向您提交随访待办" />
+
+        </LinearLayout>
+
+
+        <com.wei.android.lib.colorview.view.ColorTextView
+            android:id="@+id/tv_state"
+            style="@style/text_white_14_w_w"
+            android:layout_width="55dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_gravity="center"
+            android:layout_marginRight="11dp"
+            android:gravity="center"
+            android:text="待总结"
+            app:backgroundColorNormal="@color/main_red"
+            app:cornerRadiusNormal="@dimen/dp_12" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/line"
+        android:layout_marginLeft="@dimen/dp_10" />
+
+</LinearLayout>

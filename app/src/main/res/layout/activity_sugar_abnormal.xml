@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/hh_fi_fi">
+
+
+    <ScrollView
+        style="@style/scrollView"
+        android:layout_above="@+id/ll_bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:orientation="vertical">
+
+
+            <!--顶部-->
+            <LinearLayout
+                style="@style/hh_fi_wr"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/chat_sugar_abnormal" />
+
+
+                <TextView
+                    android:id="@+id/tv_desc"
+                    style="@style/text_black_16_w_w"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="午餐前血糖值" />
+
+                <RelativeLayout
+                    style="@style/hh_fi_wr"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_10">
+
+                    <LinearLayout
+                        style="@style/hh_wr_wr"
+                        android:layout_centerInParent="true">
+
+                        <TextView
+                            android:id="@+id/tv_text"
+                            style="@style/text_black_14_w_w"
+                            android:text="18.0"
+                            android:textColor="@color/main_red" />
+
+                        <TextView
+                            style="@style/text_black_14_w_w"
+                            android:layout_toRightOf="@+id/tv_text"
+                            android:text="mmol/L" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <!--列表数据-->
+            <include layout="@layout/header_seven_and_thirty">
+
+            </include>
+
+            <com.lyd.baselib.widget.view.MyListView
+                android:id="@+id/lv_sugar_list"
+                style="@style/listView">
+
+            </com.lyd.baselib.widget.view.MyListView>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <include
+        android:id="@+id/ll_bottom"
+        layout="@layout/include_bottom_send">
+
+    </include>
+</RelativeLayout>

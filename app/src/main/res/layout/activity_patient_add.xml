@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView style="@style/scrollView">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            style="@style/hh_fi_wr"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/white"
+            android:orientation="vertical">
+            <!--手机号-->
+            <RelativeLayout
+                style="@style/hh_fi_wr"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    style="@style/text_black_14_w_w"
+                    android:text="手机号" />
+
+                <TextView
+                    android:id="@+id/tv_tel"
+                    style="@style/text_black_14_w_w"
+                    android:layout_alignParentRight="true"
+                    android:text="13213071373" />
+
+            </RelativeLayout>
+
+
+            <View
+                style="@style/line"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+            <!--姓名-->
+
+            <RelativeLayout
+                style="@style/hh_fi_wr"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    style="@style/text_black_14_w_w"
+                    android:text="姓名" />
+
+                <EditText
+                    android:id="@+id/et_name"
+                    style="@style/et_base_style_no_bg"
+                    android:layout_toRightOf="@+id/tv_name"
+                    android:gravity="right"
+                    android:hint="请输入姓名" />
+
+            </RelativeLayout>
+
+
+            <View
+                style="@style/line"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <!--性别-->
+            <RelativeLayout
+                android:id="@+id/rl_sex"
+                style="@style/hh_fi_wr"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    style="@style/text_black_14_w_w"
+                    android:text="性别" />
+
+                <LinearLayout
+                    style="@style/hh_wr_wr"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_sex_male"
+                        style="@style/hh_wr_wr"
+                        android:layout_marginRight="@dimen/dp_25"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_sex_male"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/patient_add_sex_uncheck" />
+
+                        <TextView
+                            android:id="@+id/tv_sex_male"
+                            style="@style/text_gray_14_w_w"
+                            android:text="男" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_sex_female"
+                        style="@style/hh_wr_wr"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_sex_female"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/patient_add_sex_uncheck" />
+
+                        <TextView
+                            android:id="@+id/tv_sex_female"
+                            style="@style/text_gray_14_w_w"
+                            android:text="女" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <View
+                style="@style/line"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+            <!--身高-->
+            <RelativeLayout
+                style="@style/hh_fi_wr"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    android:id="@+id/tv_height"
+                    style="@style/text_black_14_w_w"
+                    android:text="身高" />
+
+
+                <LinearLayout
+                    style="@style/hh_fi_wr"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/tv_height">
+
+                    <EditText
+                        android:id="@+id/et_height"
+                        style="@style/et_base_style_no_bg"
+                        android:layout_weight="0.8"
+                        android:gravity="right"
+                        android:hint="请输入"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:paddingLeft="@dimen/dp_5"
+                        android:paddingRight="@dimen/dp_5" />
+
+                    <TextView
+                        style="@style/text_black_14_w_w"
+                        android:text="cm" />
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+            <View
+                style="@style/line"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+
+            <!--体重-->
+
+            <!--身高-->
+            <RelativeLayout
+                style="@style/hh_fi_wr"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    android:id="@+id/tv_weight"
+                    style="@style/text_black_14_w_w"
+                    android:text="体重" />
+
+
+                <LinearLayout
+                    style="@style/hh_fi_wr"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/tv_weight">
+
+                    <EditText
+                        android:id="@+id/et_weight"
+                        style="@style/et_base_style_no_bg"
+                        android:layout_weight="0.8"
+                        android:gravity="right"
+                        android:hint="请输入"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:paddingLeft="@dimen/dp_5"
+                        android:paddingRight="@dimen/dp_5" />
+
+                    <TextView
+                        style="@style/text_black_14_w_w"
+                        android:text="kg" />
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+            <View
+                style="@style/line"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+
+            <!--身份证号-->
+
+            <RelativeLayout
+                style="@style/hh_fi_wr"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    android:id="@+id/tv_id_number"
+                    style="@style/text_black_14_w_w"
+                    android:text="身份证号" />
+
+
+                <EditText
+                    android:id="@+id/et_id_number"
+                    style="@style/et_base_style_no_bg"
+                    android:layout_toRightOf="@id/tv_id_number"
+                    android:gravity="right"
+                    android:hint="请输入身份证号"
+                    android:maxLength="18"
+                    android:paddingLeft="@dimen/dp_5"
+                    android:paddingRight="@dimen/dp_5" />
+
+
+            </RelativeLayout>
+
+
+            <View
+                style="@style/line"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+            <!--出生日期-->
+
+            <RelativeLayout
+                android:id="@+id/rl_birthday"
+                style="@style/hh_fi_wr"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    style="@style/text_black_14_w_w"
+                    android:text="出生日期" />
+
+                <TextView
+                    android:id="@+id/tv_birthday"
+                    style="@style/text_black_14_w_w"
+                    android:layout_alignParentRight="true"
+                    android:drawableRight="@drawable/right_arrow"
+                    android:drawablePadding="@dimen/dp_8"
+                    android:hint="选择出生日期" />
+
+            </RelativeLayout>
+
+
+            <View
+                style="@style/line"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+            <!--医生分组-->
+            <RelativeLayout
+                android:id="@+id/rl_select_doctor"
+                style="@style/hh_fi_wr"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    style="@style/text_black_14_w_w"
+                    android:text="医生" />
+
+                <TextView
+                    android:id="@+id/tv_select_doctor"
+                    style="@style/text_black_14_w_w"
+                    android:layout_alignParentRight="true"
+                    android:drawableRight="@drawable/right_arrow"
+                    android:drawablePadding="@dimen/dp_8"
+                    android:hint="选择医生" />
+
+            </RelativeLayout>
+
+            <View
+                style="@style/line"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+            <!--分组-->
+            <RelativeLayout
+                android:id="@+id/rl_group"
+                style="@style/hh_fi_wr"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    style="@style/text_black_14_w_w"
+                    android:text="分组" />
+
+                <TextView
+                    android:id="@+id/tv_group"
+                    style="@style/text_black_14_w_w"
+                    android:layout_alignParentRight="true"
+                    android:drawableRight="@drawable/right_arrow"
+                    android:drawablePadding="@dimen/dp_8"
+                    android:hint="请选择分组" />
+
+            </RelativeLayout>
+
+            <View
+                style="@style/line"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+
+            <!--绑定设备-->
+
+            <RelativeLayout
+                android:id="@+id/rl_select_device"
+                style="@style/hh_fi_wr"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    style="@style/text_black_14_w_w"
+                    android:text="绑定设备" />
+
+                <LinearLayout
+                    style="@style/hh_wr_wr"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_select_device"
+                        style="@style/et_base_style_no_bg_wr_wr"
+                        android:layout_marginRight="@dimen/dp_8"
+                        android:hint="请输入设备号" />
+
+
+                    <ImageView
+                        android:id="@+id/img_select_device"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/home_index_top_scan" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <View
+                style="@style/line"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_add"
+            style="@style/text_white_16_f_w"
+            android:background="@color/main_red"
+            android:text="添加" />
+
+
+    </LinearLayout>
+</ScrollView>

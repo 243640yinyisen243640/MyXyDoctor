@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/hh_fi_wr"
+        android:paddingLeft="@dimen/dp_12"
+        android:paddingTop="@dimen/dp_6"
+        android:paddingRight="@dimen/dp_12"
+        android:paddingBottom="@dimen/dp_6">
+
+        <ImageView
+            android:id="@+id/img_head"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/patient_count_img_item_normal" />
+
+
+        <LinearLayout
+            style="@style/hh_fi_wr"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/hh_fi_wr">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    style="@style/text_black_14_f_w"
+                    android:layout_weight="0.8"
+                    android:text="张三" />
+
+
+                <TextView
+                    android:id="@+id/tv_value"
+                    style="@style/text_black_12_w_w"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:text="12"
+                    android:textColor="@color/main_red" />
+
+                <TextView
+                    style="@style/text_gray_14_w_w"
+                    android:text="mmHg" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/hh_fi_wr"
+                android:layout_marginTop="@dimen/dp_5">
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    style="@style/text_gray_12_w_w"
+                    android:text="2019-09-24 12:18:10" />
+
+                <TextView
+                    android:id="@+id/tv_type"
+                    style="@style/text_gray_12_w_w"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="早餐后" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <View style="@style/line">
+
+
+    </View>
+
+
+</LinearLayout>

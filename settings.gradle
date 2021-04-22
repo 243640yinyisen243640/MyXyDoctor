@@ -1,0 +1,7 @@
+include ':app'
+include ':libbase'
+include ':libchart'
+include ':libfloatingview'
+include ':librongim'
+include ':utilcode'
+

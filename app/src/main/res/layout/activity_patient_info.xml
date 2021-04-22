@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        style="@style/hh_fi_wr"
+        android:layout_above="@+id/rl_send_msg"
+        android:orientation="vertical">
+        <!--标题-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/main_red">
+
+            <Button
+                android:id="@+id/btn_back_new"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/selector_btn_back"
+                android:drawableLeft="@drawable/img_base_back"
+                android:drawablePadding="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10" />
+
+            <TextView
+                android:id="@+id/tv_title_new"
+                style="@style/text_white_18_w_w"
+                android:layout_centerInParent="true"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="标题" />
+
+            <TextView
+                android:id="@+id/tv_base_right_new"
+                style="@style/text_white_16_w_w"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/dp_10" />
+
+        </RelativeLayout>
+        <!--健康记录 健康档案-->
+        <LinearLayout
+            style="@style/hh_fi_wr"
+
+            android:orientation="vertical">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tl_tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/main_red"
+                app:tabIndicatorColor="@color/main_red"
+                app:tabIndicatorHeight="0dp"
+                app:tabSelectedTextColor="@color/main_red"
+                app:tabTextAppearance="@style/TabTextSize"
+                app:tabTextColor="@color/gray_text" />
+
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vp_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.viewpager.widget.ViewPager>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/img_online_test_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginBottom="@dimen/dp_40"
+        android:scaleType="centerCrop"
+        android:src="@drawable/online_test_add"
+        android:visibility="gone" />
+
+
+    <!--发送消息-->
+    <RelativeLayout
+        android:id="@+id/rl_send_msg"
+        style="@style/hh_fi_wr"
+        android:layout_alignParentBottom="true"
+        android:background="@color/main_red">
+
+        <TextView
+            style="@style/text_white_16_w_w"
+            android:layout_centerInParent="true"
+            android:background="@color/main_red"
+            android:drawableLeft="@drawable/patient_info_send_msg"
+            android:drawablePadding="@dimen/dp_10"
+            android:padding="@dimen/dp_14"
+            android:text="发送消息" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

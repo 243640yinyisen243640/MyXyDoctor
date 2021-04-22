@@ -1,0 +1,195 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.ke.gson.plugin'
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        applicationId "com.xy.xydoctor"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY  : "53d41c36e56229ffc502ac30",
+                JPUSH_CHANNEL : "developer-default",
+                //四大厂商配置
+                //小米配置
+                XIAOMI_APPKEY : "MI-5111799398860",
+                XIAOMI_APPID  : "MI-2882303761517993860",
+                //vivo配置
+                VIVO_APPKEY   : "6e9c8303-edf0-404e-8f96-f22a5c52cafa",
+                VIVO_APPID    : "14812",
+                //OPPO配置
+                OPPO_APPKEY   : "OP-32ff9fa6e0d549b787780cb2318b7247",
+                OPPO_APPID    : "OP-30178166",
+                OPPO_APPSECRET: "OP-eb2c515fa4854eee9d619cd5d098766d"
+        ]
+        multiDexEnabled true
+        //限定国际化资源文件
+        resConfigs "zh"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        //使用asXxx方法时必须，告知RxHttp你依赖的rxjava版本，可传入rxjava2、rxjava3
+                        rxhttp_rxjava: 'rxjava3'
+                ]
+            }
+        }
+
+        signingConfigs {
+            release {
+                keyAlias KEY_ALIAS
+                keyPassword KEY_PASSWORD
+                storeFile file(KEYSTORE_FILE)
+                storePassword KEYSTORE_PASSWOED
+            }
+        }
+        buildTypes {
+            //环境 以及融云环境
+            def environment_debug = false
+            def environment_release = true
+            //默认构建类型
+            debug {
+                //环境
+                buildConfigField "Boolean", "ENVIRONMENT", "$environment_debug"
+                zipAlignEnabled false
+                shrinkResources false
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.release
+            }
+            release {
+                //环境
+                buildConfigField "Boolean", "ENVIRONMENT", "$environment_release"
+                zipAlignEnabled true
+                shrinkResources true
+                minifyEnabled true
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.release
+            }
+        }
+        compileOptions {
+            targetCompatibility JavaVersion.VERSION_1_8
+            sourceCompatibility JavaVersion.VERSION_1_8
+        }
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+        lintOptions {
+            checkReleaseBuilds false
+            abortOnError false
+        }
+        buildFeatures {
+            dataBinding = true
+            viewBinding = false
+        }
+        sourceSets {
+            main {
+                jniLibs.srcDirs = ['libs']
+            }
+        }
+    }
+
+    dependencies {
+        //依赖文件树
+        implementation fileTree(include: ['*.jar'], dir: 'libs')
+        //依赖
+        implementation project(':libbase')
+        implementation project(':libfloatingview')
+        implementation project(':librongim')
+        implementation project(':libchart')
+        //implementation project(':utilcode')
+
+        //RxHttp开始
+        //RxHttp
+        def rxHttpVersion = "2.5.7"
+        implementation "com.ljx.rxhttp:rxhttp:$rxHttpVersion"
+        annotationProcessor "com.ljx.rxhttp:rxhttp-compiler:$rxHttpVersion"
+        //RxLife
+        implementation 'com.ljx.rxlife3:rxlife-rxjava:3.0.0'
+        //RxHttp结束
+
+        //必备工具类开始
+        //黄油刀
+        annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+        //城市选择器
+        implementation 'liji.library.dev:citypickerview:5.2.4'
+        //展开收起(单独或RecyclerView的Item中使用)
+        implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+
+        //没有提示 start
+        //ShadowLayout
+        implementation 'com.github.lihangleo2:ShadowLayout:3.2.0'
+        //圆角
+        implementation 'com.github.KuangGang:RoundCorners:1.1.0'
+        //卷尺
+        implementation 'com.github.superSp:RulerView:v1.5'
+        //签名
+        implementation 'com.github.F1ReKing:SignatureView:1.1.0'
+        //图片浏览器
+        implementation 'com.github.maning0303:MNImageBrowser:V1.3.7'
+        //MPAndroidChart
+        implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+        //没有提示 end
+
+        //蓝牙
+        implementation 'com.clj.fastble:FastBleLib:2.3.4'
+        //Zxing
+        implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+        implementation 'me.devilsen:czxing:1.0.17'
+        //知乎选择照片
+        implementation 'com.zhihu.android:matisse:0.5.3-beta3'
+        //LuBan
+        implementation 'top.zibin:Luban:1.1.8'
+        //Kotlin
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+        //FlycoTabLayout
+        implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+
+
+//        //极光推送 Start
+//        def jPushVersion = "3.6.6"
+//        //此处以JPush 3.5.6 版本为例。
+//        implementation "cn.jiguang.sdk:jpush:$jPushVersion"
+//        //此处以JCore 2.2.8 版本为例。
+//        implementation 'cn.jiguang.sdk:jcore:2.3.8'
+//        //小米
+//        implementation "cn.jiguang.sdk.plugin:xiaomi:$jPushVersion"
+//        //vivo
+//        implementation "cn.jiguang.sdk.plugin:vivo:$jPushVersion"
+//        //OPPO
+//        implementation "cn.jiguang.sdk.plugin:oppo:$jPushVersion"
+//        //华为
+//        implementation "cn.jiguang.sdk.plugin:huawei:$jPushVersion"
+//        implementation 'com.huawei.hms:push:3.0.3.301'
+//        //极光推送 End
+
+        //阿里推送 Start
+        def aliCloudVersion="3.2.3"
+        //移动推送SDK
+        implementation "com.aliyun.ams:alicloud-android-push:$aliCloudVersion"
+        //辅助通道SDK
+        implementation "com.aliyun.ams:alicloud-android-third-push:$aliCloudVersion"
+        //华为依赖
+        implementation "com.aliyun.ams:alicloud-android-third-push-huawei:$aliCloudVersion"
+        //小米依赖
+        implementation "com.aliyun.ams:alicloud-android-third-push-xiaomi:$aliCloudVersion"
+        //OPPO依赖
+        implementation "com.aliyun.ams:alicloud-android-third-push-oppo:$aliCloudVersion"
+        //vivo依赖
+        implementation "com.aliyun.ams:alicloud-android-third-push-vivo:$aliCloudVersion"
+        //阿里推送 End
+
+        api 'com.squareup.retrofit2:retrofit:2.9.0'
+        api 'pub.devrel:easypermissions:2.0.1'
+        implementation 'com.zhy:base-rvadapter:3.0.3'
+
+    }
+}
+

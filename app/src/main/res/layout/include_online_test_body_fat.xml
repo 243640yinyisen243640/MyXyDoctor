@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lihang.ShadowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_12"
+    android:layout_marginTop="@dimen/dp_12"
+    android:layout_marginRight="@dimen/dp_12"
+    app:hl_cornerRadius="@dimen/dp_5"
+    app:hl_shadowColor="#99FF564F"
+    app:hl_shadowOffsetX="@dimen/dp_0"
+    app:hl_shadowOffsetY="@dimen/dp_0">
+
+    <LinearLayout
+        android:id="@+id/ll_online_test_body_fat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="22dp">
+
+        <LinearLayout style="@style/hh_fi_wr">
+
+            <TextView
+                style="@style/text_black_14_w_w"
+                android:drawableLeft="@drawable/weight_blue"
+                android:drawablePadding="@dimen/dp_5"
+                android:text="体重" />
+
+            <TextView
+                android:id="@+id/tv_online_test_weight"
+                style="@style/text_black_14_w_w"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:textColor="#2F9DBA"
+                tools:text="50Kg" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_10"
+            android:scaleType="centerCrop"
+            android:src="@drawable/body_fat_weight" />
+
+
+        <View style="@style/line"></View>
+
+
+        <LinearLayout style="@style/hh_fi_wr">
+
+            <TextView
+                style="@style/text_black_14_w_w"
+                android:drawableLeft="@drawable/body_fat_people"
+                android:drawablePadding="@dimen/dp_5"
+                android:text="BMI" />
+
+            <TextView
+                android:id="@+id/tv_bmi"
+                style="@style/text_black_14_w_w"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:textColor="#55E29D"
+                tools:text="19.5" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/img_bmi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_10"
+            android:scaleType="centerCrop"
+            android:src="@drawable/body_fat_common" />
+
+
+    </LinearLayout>
+
+</com.lihang.ShadowLayout>

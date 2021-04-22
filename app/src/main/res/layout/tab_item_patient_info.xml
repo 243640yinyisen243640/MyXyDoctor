@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/hh_fi_wr"
+    android:background="@color/main_red">
+
+    <TextView
+        android:id="@+id/tv_patient_info_title"
+        style="@style/text_white_16_w_w"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        tools:text="分组列表" />
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="54dp"
+        android:layout_height="3dp"
+        android:layout_below="@+id/tv_patient_info_title"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white"></View>
+
+
+</RelativeLayout>

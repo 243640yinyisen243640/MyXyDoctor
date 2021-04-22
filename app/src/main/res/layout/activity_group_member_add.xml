@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_list"
+        style="@style/hh_fi_fi"
+        android:layout_above="@+id/bt_group_add">
+
+        <ListView
+            android:id="@+id/lv_list"
+            style="@style/listView">
+
+        </ListView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+    <Button
+        android:id="@+id/bt_group_add"
+        style="@style/text_white_16_f_w"
+        android:layout_alignParentBottom="true"
+        android:background="@color/main_red"
+        android:text="添加" />
+
+
+</RelativeLayout>

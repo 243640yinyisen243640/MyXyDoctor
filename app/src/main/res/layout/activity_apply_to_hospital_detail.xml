@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+
+    <ScrollView
+        android:id="@+id/sc"
+        style="@style/scrollView"
+        android:layout_above="@+id/tv_submit">
+
+
+        <LinearLayout
+            style="@style/hh_fi_wr"
+            android:background="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <com.lyd.baselib.widget.view.MyListView
+                android:id="@+id/lv_top_six"
+                style="@style/listView">
+
+            </com.lyd.baselib.widget.view.MyListView>
+
+            <!--疾病诊断-->
+            <TextView
+                style="@style/text_black_16_f_w"
+                android:layout_weight="0.8"
+                android:padding="@dimen/dp_12"
+                android:text="疾病诊断" />
+
+            <View
+                style="@style/line"
+                android:layout_marginLeft="@dimen/dp_10"></View>
+
+            <TextView
+                android:id="@+id/tv_disease"
+                style="@style/text_gray_16_f_w"
+                android:lineSpacingMultiplier="1.2"
+                android:minLines="3"
+                android:padding="@dimen/dp_12"
+                android:text="这是疾病诊断原因" />
+            <!--住院目的-->
+            <View
+                style="@style/line"
+                android:layout_height="@dimen/dp_10"></View>
+
+            <TextView
+                style="@style/text_black_16_f_w"
+                android:layout_weight="0.8"
+                android:padding="@dimen/dp_12"
+                android:text="住院目的" />
+
+            <View
+                style="@style/line"
+                android:layout_marginLeft="@dimen/dp_10"></View>
+
+            <TextView
+                android:id="@+id/tv_goal"
+                style="@style/text_gray_16_f_w"
+                android:lineSpacingMultiplier="1.2"
+                android:minLines="3"
+                android:padding="@dimen/dp_12"
+                android:text="这是疾病诊断原因" />
+
+            <View
+                style="@style/line"
+                android:layout_height="@dimen/dp_10"></View>
+            <!--上传病例资料-->
+            <TextView
+                style="@style/text_black_16_f_w"
+                android:padding="@dimen/dp_12"
+                android:text="上传病例资料" />
+
+            <View
+                style="@style/line"
+                android:layout_marginLeft="@dimen/dp_10"></View>
+
+            <com.lyd.baselib.widget.view.MyGridView
+                android:id="@+id/gv_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:horizontalSpacing="5dp"
+                android:numColumns="4"
+                android:paddingLeft="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_12"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingBottom="@dimen/dp_12"
+                android:verticalSpacing="5dp"
+                android:visibility="visible">
+
+            </com.lyd.baselib.widget.view.MyGridView>
+
+            <!--授权-->
+            <RelativeLayout
+                style="@style/hh_fi_wr"
+                android:padding="@dimen/dp_12">
+
+                <TextView
+                    style="@style/text_black_16_w_w"
+                    android:layout_centerVertical="true"
+                    android:text="授权" />
+
+
+                <LinearLayout
+                    style="@style/hh_wr_wr"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+
+                    <LinearLayout
+                        android:id="@+id/ll_check_yes"
+                        style="@style/hh_wr_wr">
+
+                        <CheckBox
+                            android:id="@+id/cb_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@drawable/apply_to_hospital_checkbox"
+                            android:checked="true"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false" />
+
+                        <TextView
+                            style="@style/text_gray_16_w_w"
+                            android:layout_marginLeft="@dimen/dp_5"
+                            android:text="同意" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_check_no"
+                        style="@style/hh_wr_wr">
+
+                        <CheckBox
+                            android:id="@+id/cb_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_40"
+                            android:button="@drawable/apply_to_hospital_checkbox"
+                            android:checked="false"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false" />
+
+                        <TextView
+                            style="@style/text_gray_16_w_w"
+                            android:layout_marginLeft="@dimen/dp_5"
+                            android:layout_marginRight="@dimen/dp_20"
+                            android:text="不同意" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                style="@style/line"
+                android:layout_height="@dimen/dp_10"></View>
+
+            <TextView
+                style="@style/text_black_16_f_w"
+                android:padding="@dimen/dp_12"
+                android:text="回复内容" />
+
+            <EditText
+                android:id="@+id/et_reply"
+                style="@style/text_gray_16_f_w"
+                android:background="@null"
+                android:gravity="left"
+                android:hint="请输入要回复的内容"
+                android:lineSpacingMultiplier="1.2"
+                android:minLines="3"
+                android:paddingLeft="@dimen/dp_12"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingBottom="@dimen/dp_12" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_submit"
+        style="@style/text_white_16_f_w"
+        android:layout_alignParentBottom="true"
+        android:background="@color/main_red"
+        android:gravity="center"
+        android:padding="@dimen/dp_14"
+        android:text="提交" />
+
+
+</RelativeLayout>
+

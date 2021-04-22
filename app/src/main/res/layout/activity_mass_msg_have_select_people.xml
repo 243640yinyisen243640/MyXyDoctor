@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ListView
+        android:id="@+id/lv_have_select"
+        style="@style/listView"
+        android:layout_above="@+id/bt_sure">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/bt_sure"
+        style="@style/text_white_16_f_w"
+        android:layout_alignParentBottom="true"
+        android:background="@color/main_red"
+        android:text="确定" />
+
+
+</RelativeLayout>

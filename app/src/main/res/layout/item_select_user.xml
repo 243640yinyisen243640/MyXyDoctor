@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="@dimen/dp_10"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/img_head"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/head_man"
+            app:qmui_border_width="0dp"
+            app:qmui_is_circle="true" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right">
+
+            <ImageView
+                android:id="@+id/img_del"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/group_member_del"
+                android:visibility="gone" />
+        </FrameLayout>
+
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/text_black_14_w_w"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="这是名字字名是这" />
+
+    <TextView
+        android:id="@+id/tv_userid"
+        style="@style/text_black_14_w_w"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="名字"
+        android:visibility="gone" />
+
+</LinearLayout>

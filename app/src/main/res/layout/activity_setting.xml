@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/hh_fi_wr"
+        android:orientation="vertical">
+
+        <!--添加设备-->
+        <TextView
+            android:id="@+id/tv_device_add"
+            style="@style/text_black_16_f_w"
+            android:drawableRight="@drawable/arrow_setting"
+            android:padding="18dp"
+            android:text="添加设备" />
+
+        <View style="@style/line" />
+
+        <!--修改密码-->
+        <TextView
+            android:id="@+id/tv_change_pwd"
+            style="@style/text_black_16_f_w"
+            android:drawableRight="@drawable/arrow_setting"
+            android:padding="18dp"
+            android:text="修改密码" />
+
+        <View style="@style/line" />
+
+        <!--版本更新-->
+
+        <LinearLayout
+            android:id="@+id/ll_update"
+            style="@style/hh_fi_wr"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_black_16_f_w"
+                android:layout_weight="0.8"
+                android:padding="18dp"
+                android:text="版本更新" />
+
+            <TextView
+                android:id="@+id/tv_version_name"
+                style="@style/text_gray_14_w_w"
+                android:drawableRight="@drawable/arrow_setting"
+                android:drawablePadding="@dimen/dp_10"
+                android:padding="18dp"
+                android:text="v1.0" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <TextView
+            android:id="@+id/tv_question_feed_back"
+            style="@style/text_black_16_f_w"
+            android:drawableRight="@drawable/arrow_setting"
+            android:padding="18dp"
+            android:text="问题反馈" />
+
+        <View style="@style/line" />
+        <!--服务协议-->
+        <TextView
+            android:id="@+id/tv_user_agreement"
+            style="@style/text_black_16_f_w"
+            android:drawableRight="@drawable/arrow_setting"
+            android:padding="18dp"
+            android:text="用户服务协议" />
+
+        <View style="@style/line" />
+
+
+    </LinearLayout>
+
+
+    <com.wei.android.lib.colorview.view.ColorButton
+        android:id="@+id/bt_exit"
+        style="@style/text_white_16_f_w"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="38dp"
+        android:layout_marginRight="38dp"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:text="退出当前账号"
+        app:backgroundColorNormal="@color/main_red"
+        app:cornerRadiusNormal="4dp" />
+</RelativeLayout>

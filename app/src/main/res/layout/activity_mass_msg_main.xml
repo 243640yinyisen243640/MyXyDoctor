@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        style="@style/scrollView"
+        android:layout_above="@+id/bt_send">
+
+        <LinearLayout
+            style="@style/hh_fi_fi"
+            android:background="@color/background"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <!--请选择消息接收人-->
+            <include
+                layout="@layout/header_mass_msg_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10" />
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/el_mass_msg_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:el_duration="600"
+                app:el_expanded="false"
+                app:el_parallax="0.5">
+
+                <com.lyd.baselib.widget.view.MyListView
+                    android:id="@+id/lv_group_list"
+                    style="@style/listView">
+
+                </com.lyd.baselib.widget.view.MyListView>
+
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+            <!--已选择的消息接收人-->
+            <include
+                layout="@layout/header_mass_msg_main_second"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10">
+
+            </include>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingBottom="@dimen/dp_10">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <include
+                layout="@layout/header_mass_msg_main_third"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10">
+
+            </include>
+
+            <EditText
+                android:id="@+id/et_msg"
+                style="@style/text_black_14_f_w"
+                android:background="@color/white"
+                android:gravity="left"
+                android:hint="请输入要发送的内容"
+                android:lineSpacingMultiplier="1.2"
+                android:maxLines="10"
+                android:minLines="3"
+                android:paddingLeft="@dimen/dp_12"
+                android:paddingRight="@dimen/dp_12"
+                android:singleLine="false" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/bt_send"
+        style="@style/text_white_16_f_w"
+        android:layout_alignParentBottom="true"
+        android:background="@color/main_red"
+        android:text="发送" />
+
+
+</RelativeLayout>
+
+

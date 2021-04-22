@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_blood_pressure_drug_use"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_12"
+    android:layout_marginRight="@dimen/dp_12"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10">
+    <!--用药情况-->
+    <LinearLayout
+        style="@style/hh_wr_wr"
+        android:layout_marginLeft="@dimen/dp_12">
+
+
+        <com.wei.android.lib.colorview.view.ColorView
+            android:layout_width="2dp"
+            android:layout_height="@dimen/dp_15"
+            android:layout_gravity="center"
+            app:backgroundColorNormal="@color/main_red"
+            app:cornerRadius="1dp">
+
+        </com.wei.android.lib.colorview.view.ColorView>
+
+
+        <TextView
+            style="@style/text_black_14_w_w"
+            android:layout_marginLeft="@dimen/dp_4"
+            android:text="用药情况"
+            android:textColor="@color/main_red" />
+
+
+    </LinearLayout>
+
+
+    <!--三种药-->
+    <com.lyd.baselib.widget.view.MyListView
+        android:id="@+id/lv_drug_use"
+        style="@style/listView">
+
+    </com.lyd.baselib.widget.view.MyListView>
+</LinearLayout>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="@dimen/dp_12"
+    android:background="@drawable/online_test_popup_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_blood_sugar"
+        style="@style/hh_fi_wr"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_white_14_w_w"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="6dp"
+            android:text="记录血糖" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/online_test_popup_line" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_blood_pressure"
+        style="@style/hh_fi_wr"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_white_14_w_w"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="6dp"
+            android:text="记录血压" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/online_test_popup_line" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_blood_oxygen"
+        style="@style/hh_fi_wr"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_white_14_w_w"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="6dp"
+            android:text="记录血氧" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/online_test_popup_line" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_height_weight"
+        style="@style/hh_fi_wr"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_white_14_w_w"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="6dp"
+            android:text="记录身高体重" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/online_test_popup_line" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

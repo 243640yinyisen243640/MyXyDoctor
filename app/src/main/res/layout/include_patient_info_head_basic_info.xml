@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lihang.ShadowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_12"
+    android:layout_marginTop="@dimen/dp_12"
+    android:layout_marginRight="@dimen/dp_12"
+    app:hl_cornerRadius="@dimen/dp_8"
+    app:hl_shadowColor="#99FF564F"
+    app:hl_shadowLimit="5dp"
+    app:hl_shadowOffsetX="@dimen/dp_0"
+    app:hl_shadowOffsetY="@dimen/dp_0">
+
+    <LinearLayout
+        style="@style/hh_fi_wr"
+        android:paddingLeft="@dimen/dp_12"
+        android:paddingTop="22dp"
+        android:paddingRight="@dimen/dp_12"
+        android:paddingBottom="22dp">
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/img_head"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:paddingLeft="@dimen/dp_10"
+            android:src="@drawable/head_man"
+            app:qmui_border_width="0dp"
+            app:qmui_is_circle="true" />
+
+        <LinearLayout
+            style="@style/hh_fi_wr"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_10">
+
+
+            <LinearLayout
+                style="@style/hh_fi_wr"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_person_name"
+                    style="@style/text_black_14_w_w"
+                    android:text="这是姓名" />
+
+                <ImageView
+                    android:id="@+id/img_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp_8"
+                    android:paddingTop="@dimen/dp_2"
+                    android:paddingRight="@dimen/dp_2"
+                    android:src="@drawable/male" />
+
+                <TextView
+                    android:id="@+id/tv_person_age"
+                    style="@style/text_black_12_w_w"
+                    android:text="12" />
+
+
+                <ImageView
+                    android:id="@+id/img_device_scan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp_8"
+                    android:paddingTop="@dimen/dp_4"
+                    android:paddingRight="@dimen/dp_8"
+                    android:paddingBottom="@dimen/dp_4"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/home_index_top_scan" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_type"
+                style="@style/hh_fi_wr"
+                android:layout_marginTop="@dimen/dp_10">
+
+                <com.wei.android.lib.colorview.view.ColorTextView
+                    android:id="@+id/tv_type"
+                    style="@style/text_white_12_w_w"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp_14"
+                    android:paddingRight="@dimen/dp_14"
+                    android:text="未填写"
+                    app:backgroundColorNormal="@color/main_red"
+                    app:cornerRadiusNormal="@dimen/dp_10" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    style="@style/text_black_14_f_w"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="确诊日期:19921212"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_device_unbind"
+                style="@style/hh_fi_wr"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_device_number"
+                    style="@style/text_black_14_w_w"
+                    android:text="设备号：125487964"
+                    android:textSize="13sp" />
+
+
+                <TextView
+                    style="@style/text_black_14_w_w"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:drawableLeft="@drawable/patient_info_device_unbind"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:text="解绑"
+                    android:textColor="@color/main_red"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</com.lihang.ShadowLayout>

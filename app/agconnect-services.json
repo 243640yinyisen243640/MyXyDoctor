@@ -1,0 +1,12 @@
+{
+  "client": {
+    "cp_id": "260086000063543785",
+    "product_id": "9105163812218565129",
+    "client_id": "331691753000142016",
+    "client_secret": "94FADC001444921533CE5A83C69F5387188552F4B66F0FBEF8DB163F5A20D0B7",
+    "app_id": "100684593",
+    "package_name": "com.xy.xydoctor",
+    "api_key": "CV6tIgKSzfqWKjKTztP8gw55WQI9+D0is5hNRY9cUL/tVtI/ZtgMQjYfc1XQmuNnCow3CcqBimrYlwnc1L9EBGwa1CmJ"
+  },
+  "configuration_version": "1.0"
+}
