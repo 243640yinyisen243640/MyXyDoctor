@@ -173,7 +173,7 @@ public class FollowUpVisitAddNewActivity extends XYSoftUIBaseActivity implements
         String userGuid = SPStaticUtils.getString("userGuid");
         String token = SPStaticUtils.getString("token");
         HashMap<String, Object> map = new HashMap<>();
-        map.put("id", userid);
+        map.put("userid", userid);
         map.put("plan_id", id);
         map.put("access_token", token);
 //        map.put("guid", userGuid);
