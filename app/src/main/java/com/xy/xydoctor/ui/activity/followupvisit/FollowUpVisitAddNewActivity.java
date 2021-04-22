@@ -114,6 +114,7 @@ public class FollowUpVisitAddNewActivity extends XYSoftUIBaseActivity implements
                     intent.putExtra("userid", getIntent().getStringExtra("userid"));
                 }
                 startActivity(intent);
+                finish();
                 break;
             case R.id.tv_follow_up_sure:
                 submitData();

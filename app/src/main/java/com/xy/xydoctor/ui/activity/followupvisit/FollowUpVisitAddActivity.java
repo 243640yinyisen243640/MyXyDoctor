@@ -2,6 +2,7 @@ package com.xy.xydoctor.ui.activity.followupvisit;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -498,7 +499,7 @@ public class FollowUpVisitAddActivity extends BaseActivity implements View.OnCli
         }
         data.setTimes(count);
         data.setVisittime(time);
-        data.setUid(getIntent().getStringExtra("userid"));
+        data.setUserid(getIntent().getStringExtra("userid"));
         data.setSubject(selectDatasSecond);
         int id = getIntent().getIntExtra("id", 0);
         data.setVid(id);
@@ -511,6 +512,7 @@ public class FollowUpVisitAddActivity extends BaseActivity implements View.OnCli
             data.setIs_family(1);
         }
         String jsonResult = GsonUtils.toJson(data);
+        Log.i("yys", "jsonResult===" + jsonResult);
         LogUtils.e(jsonResult);
         //调接口
         RxHttp.postJson(XyUrl.FOLLOW_UP_VISIT_CREATE)

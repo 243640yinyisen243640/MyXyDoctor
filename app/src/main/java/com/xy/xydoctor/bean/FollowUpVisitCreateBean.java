@@ -18,7 +18,7 @@ public class FollowUpVisitCreateBean {
     private String times;
     private String visittime;
     private List<String> subject;
-    private String uid;
+    private String userid;
     private String access_token;
     private int type;
     private int status;
@@ -28,6 +28,14 @@ public class FollowUpVisitCreateBean {
     private String remind;
     private String recontent;
     private int is_family;
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
 
     public int getIs_family() {
         return is_family;
@@ -61,13 +69,7 @@ public class FollowUpVisitCreateBean {
         this.recontent = recontent;
     }
 
-    public String getUid() {
-        return uid;
-    }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
 
     public int getType() {
         return type;
