@@ -8,7 +8,7 @@ import com.xy.xydoctor.BuildConfig;
  * 创建日期: 2018/6/12 17:35
  */
 public interface ConstantParam {
-    String SERVER_VERSION = "201409";
+    String SERVER_VERSION = "210409";
     boolean EXTERNAL_RELEASE = BuildConfig.ENVIRONMENT;
 
     /**
