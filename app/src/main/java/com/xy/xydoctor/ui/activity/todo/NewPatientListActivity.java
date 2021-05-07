@@ -1,10 +1,13 @@
 package com.xy.xydoctor.ui.activity.todo;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.Utils;
 import com.lyd.baselib.util.eventbus.BindEventBus;
@@ -42,6 +45,7 @@ import rxhttp.wrapper.param.RxHttp;
 @BindEventBus
 public class NewPatientListActivity extends BaseEventBusActivity implements AdapterClickImp {
     private static final String TAG = "NewPatientListActivity";
+    private static final int REQUEST_CODE_FOR_REFRESH = 10;
     @BindView(R.id.lv_new_patient)
     ListView lvNewPatient;
     @BindView(R.id.srl_new_patient)
@@ -65,6 +69,7 @@ public class NewPatientListActivity extends BaseEventBusActivity implements Adap
         } else {
             url = XyUrl.APPLY_USER;
         }
+        Log.i("yys","listmap=="+map);
         RxHttp.postForm(url)
                 .addAll(map)
                 .asResponse(NewPatientListBean.class)
@@ -138,13 +143,18 @@ public class NewPatientListActivity extends BaseEventBusActivity implements Adap
     public void onAdapterClick(View view, int position) {
         switch (view.getId()) {
             case R.id.tv_yes:
-                toDoOperate(position, "2");
+//                toDoOperate(position, "2");
+                Intent intent = new Intent(getPageContext(), PatientApplyActivity.class);
+                intent.putExtra("name", list.get(position).getName());
+                intent.putExtra("listID", list.get(position).getId());
+                startActivityForResult(intent,REQUEST_CODE_FOR_REFRESH);
                 break;
             case R.id.tv_no:
                 toDoOperate(position, "1");
                 break;
         }
     }
+
 
     private void toDoOperate(int position, String status) {
         int id = list.get(position).getId();
@@ -170,6 +180,22 @@ public class NewPatientListActivity extends BaseEventBusActivity implements Adap
                 });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK){
+            switch (requestCode){
+                case REQUEST_CODE_FOR_REFRESH:
+                    pageIndex = 1;
+                    getNewPatientList();
+                    EventBusUtils.post(new EventMessage(ConstantParam.EventCode.NEW_PATIENT_OPERATE));//刷新列表
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
 
     @Override
     protected void receiveEvent(EventMessage event) {

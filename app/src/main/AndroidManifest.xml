@@ -281,6 +281,10 @@
         <activity
             android:name=".ui.activity.followupvisit.FollowUpVisitBloodPressureSubmit2Activity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.todo.PatientApplyActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

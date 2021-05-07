@@ -3,7 +3,6 @@ package com.xy.xydoctor.window;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -16,9 +15,9 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.adapter.FollowUpListAdapter;
-import com.xy.xydoctor.bean.FollowListBean;
-import com.xy.xydoctor.imp.IAFollowUpChoose;
+import com.xy.xydoctor.adapter.PatientApplyListAdapter;
+import com.xy.xydoctor.bean.PatientApplyBean;
+import com.xy.xydoctor.imp.IAPatientApply;
 
 import java.util.List;
 
@@ -29,22 +28,22 @@ import java.util.List;
  * @author android.yys
  * @date 2020/12/18
  */
-public class FollowUpTemplatePopupWindow extends PopupWindow {
+public class PatientApplyPopupWindow extends PopupWindow {
     private Context context;
-    private IAFollowUpChoose iaFollowUpChoose;
+    private IAPatientApply iaFollowUpChoose;
     private ImageView imgImageView;
     private ListView followMyListView;
     private TextView sureTextView;
-    private List<FollowListBean> list;
-    private FollowUpListAdapter adapter;
+    private List<PatientApplyBean> list;
+    private PatientApplyListAdapter adapter;
 
-    public FollowUpTemplatePopupWindow(Context context, List<FollowListBean> list) {
+    public PatientApplyPopupWindow(Context context, List<PatientApplyBean> list) {
         super(context);
         this.context = context;
         this.list = list;
-        View view = View.inflate(context, R.layout.popup_window_follow_list, null);
-        imgImageView = view.findViewById(R.id.iv_follow_list_close);
-        followMyListView = view.findViewById(R.id.mlv_follow_list);
+        View view = View.inflate(context, R.layout.popup_window_patient_apply, null);
+        imgImageView = view.findViewById(R.id.iv_patient_apply_close);
+        followMyListView = view.findViewById(R.id.mlv_patient_apply_list);
         sureTextView = view.findViewById(R.id.tv_follow_up_submit);
         this.setContentView(view);
 
@@ -73,19 +72,15 @@ public class FollowUpTemplatePopupWindow extends PopupWindow {
 
         sureTextView.setOnClickListener(v -> {
             dismiss();
-            Log.i("yys", "size==" + list.size());
-            if (list.size()!=0){
-                if (!TextUtils.isEmpty(list.get(adapter.getClickPosition()).getId() + "")) {
-                    iaFollowUpChoose.IAFollowUpChoose(list.get(adapter.getClickPosition()).getId(), list.get(adapter.getClickPosition()).getPlanname());
-                }
+            if (!TextUtils.isEmpty(list.get(adapter.getClickPosition()).getId() + "")) {
+                iaFollowUpChoose.IAPatientApply(list.get(adapter.getClickPosition()).getId(), list.get(adapter.getClickPosition()).getPlanname());
             }
-
         });
     }
 
 
     private void initValues() {
-        adapter = new FollowUpListAdapter(context, list);
+        adapter = new PatientApplyListAdapter(context, list);
         followMyListView.setAdapter(adapter);
         followMyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -100,7 +95,7 @@ public class FollowUpTemplatePopupWindow extends PopupWindow {
      *
      * @param followUpChoose
      */
-    public void setOnChooseOkListener(IAFollowUpChoose followUpChoose) {
+    public void setOnChooseOkListener(IAPatientApply followUpChoose) {
         this.iaFollowUpChoose = followUpChoose;
     }
 

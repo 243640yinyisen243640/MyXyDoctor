@@ -112,8 +112,15 @@
     <string name="pharmacy_name">药品名称</string>
 
     <string name="follow_up_visit_add_title">创建随访</string>
+    <string name="patient_apply_title">患者申请</string>
     <string name="follow_up_visit_add_with_template">使用模板创建:</string>
     <string name="follow_up_visit_add_with_template_hand">手动创建:</string>
     <string name="create_follow_up_for_trouble">当前问题及改进措施</string>
+    <string name="patient_apply_name">姓名:</string>
+    <string name="patient_apply_plan">随访计划:</string>
+    <string name="patient_apply_template">选择模板:</string>
+    <string name="patient_apply_no_user">不使用</string>
+    <string name="patient_apply_sugar">启用血糖随访计划</string>
+    <string name="patient_apply_pressure">启用血压随访计划</string>
 
 </resources>
