@@ -40,7 +40,7 @@
                     android:paddingTop="@dimen/dp_2"
                     android:paddingRight="@dimen/dp_10"
                     android:paddingBottom="@dimen/dp_2"
-                    android:text="同意"
+                    android:text="查看"
                     app:backgroundColorNormal="@color/new_patient_yes"
                     app:cornerRadiusNormal="90dp" />
 

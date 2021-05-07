@@ -15,8 +15,7 @@
             android:padding="10dp"
             android:text="@string/patient_apply_name"
             android:textColor="@color/black_text"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_patient_apply_name"
@@ -43,8 +42,7 @@
             android:padding="10dp"
             android:text="@string/patient_apply_plan"
             android:textColor="@color/black_text"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/tv_patient_apply_plan"
@@ -73,8 +71,7 @@
             android:padding="10dp"
             android:text="@string/patient_apply_template"
             android:textColor="@color/black_text"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/tv_patient_apply_template"
