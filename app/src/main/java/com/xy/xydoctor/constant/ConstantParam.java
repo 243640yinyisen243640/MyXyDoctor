@@ -107,6 +107,10 @@ public interface ConstantParam {
         public static final int PATIENT_INFO_DEVICE_BIND = 1025;
 
     }
+    /**
+     * 是否同意了隐私政策
+     */
+    public static String IS_AGREE_PRIVACY_PROTECT = "is_agree_privacy_protect";
 
-
+    public static final String APK_NAME = "xydoctor";
 }

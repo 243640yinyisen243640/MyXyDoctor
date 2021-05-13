@@ -6,8 +6,8 @@ ext.versions = [
 
         'targetSdk'  : 29,
 
-        'versionCode': 34,
+        'versionCode': 35,
 
-        'versionName': "1.2.8",
+        'versionName': "1.2.9",
 ]
 
