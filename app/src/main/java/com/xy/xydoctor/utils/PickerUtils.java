@@ -15,6 +15,7 @@ import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -69,6 +70,10 @@ public class PickerUtils {
      * @param format
      */
     public static void showTime(Context context, final PickerUtils.TimePickerCallBack callBack, boolean[] booleans, SimpleDateFormat format) {
+        Calendar currentDate = Calendar.getInstance();
+        Calendar endDate = Calendar.getInstance();
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(startDate.get(Calendar.YEAR) - 120, 0, 1, 0, 0);
         TimePickerView timePickerView = new TimePickerBuilder(context, (date, v) -> {
             String time = format.format(date);
             callBack.execEvent(time);
@@ -76,6 +81,9 @@ public class PickerUtils {
                 .setType(booleans)
                 .setContentTextSize(21)
                 .isDialog(true)
+                .setDate(currentDate)
+                .setRangDate(startDate
+                ,endDate)
                 .build();
         timePickerView.show();
         Dialog mDialog = timePickerView.getDialog();

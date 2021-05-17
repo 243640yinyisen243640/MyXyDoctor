@@ -1,10 +1,14 @@
 package com.xy.xydoctor.ui.activity.patientadd;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,6 +29,7 @@ import com.lyd.baselib.util.eventbus.EventMessage;
 import com.rxjava.rxlife.RxLife;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.BaseActivity;
+import com.xy.xydoctor.base.utils.XYSoftDensityUtils;
 import com.xy.xydoctor.bean.DoctorListBean;
 import com.xy.xydoctor.bean.GroupListBean;
 import com.xy.xydoctor.bean.NewSearchUserBean;
@@ -36,6 +41,7 @@ import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.ui.activity.MainActivity;
 import com.xy.xydoctor.ui.activity.mydevice.HomeScanActivity;
 import com.xy.xydoctor.utils.PickerUtils;
+import com.xy.xydoctor.utils.XyScreenUtils;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -58,7 +64,11 @@ public class PatientAddActivity extends BaseActivity {
     @BindView(R.id.tv_tel)
     TextView tvTel;
     @BindView(R.id.et_name)
-    EditText etName;
+    TextView etName;
+    @BindView(R.id.tv_name)
+    TextView nameTextView;
+    @BindView(R.id.rl_patient_add_name)
+    RelativeLayout rlName;
     @BindView(R.id.et_height)
     EditText etHeight;
     @BindView(R.id.et_weight)
@@ -157,7 +167,7 @@ public class PatientAddActivity extends BaseActivity {
         tvTel.setText(user.getUsername());
         if (!TextUtils.isEmpty(user.getNickname())) {
             etName.setText(user.getNickname());
-            etName.setSelection(user.getNickname().length());
+            //            etName.setSelection(user.getNickname().length());
         }
         int sex = user.getSex();
         if (1 == sex) {
@@ -230,9 +240,13 @@ public class PatientAddActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.ll_sex_male, R.id.ll_sex_female, R.id.rl_select_device, R.id.img_select_device, R.id.rl_group, R.id.bt_add, R.id.rl_birthday, R.id.rl_select_doctor})
+    @OnClick({R.id.ll_sex_male, R.id.ll_sex_female, R.id.rl_select_device, R.id.img_select_device, R.id.rl_group, R.id.bt_add, R.id.rl_birthday, R.id.rl_select_doctor, R.id.tv_name, R.id.et_name})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.tv_name:
+            case R.id.et_name:
+                showEditDialog(etName.getText().toString().trim());
+                break;
             case R.id.ll_sex_male:
                 llSexMale.setTag(1);
                 llSexFemale.setTag(0);
@@ -308,6 +322,68 @@ public class PatientAddActivity extends BaseActivity {
                 toAddUser();
                 break;
         }
+    }
+
+    /**
+     * 显示编辑框
+     */
+    private void showEditDialog(String msg) {
+
+        Dialog dialog = new Dialog(getPageContext(), R.style.HuaHanSoft_Dialog_Base);
+        View view = View.inflate(getPageContext(), R.layout.activity_user_info_dialog, null);
+        EditText msgEditText = view.findViewById(R.id.tv_dialog_msg);
+        TextView cancelTextView = view.findViewById(R.id.tv_dialog_cancel);
+        TextView sureTextView = view.findViewById(R.id.tv_dialog_sure);
+
+        msgEditText.setText(msg);
+        msgEditText.setSelection(msg.length());
+        //设置14个字长
+        msgEditText.setMaxWidth(14);
+        dialog.setContentView(view);
+        android.view.WindowManager.LayoutParams attributes = dialog.getWindow().getAttributes();
+        attributes.width = XyScreenUtils.screenWidth(getPageContext()) - XYSoftDensityUtils.dip2px(getPageContext(), 1);
+        dialog.getWindow().setAttributes(attributes);
+        msgEditText.setFocusable(true);
+        msgEditText.setFocusableInTouchMode(true);
+        msgEditText.requestFocus();
+        cancelTextView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                dialog.dismiss();
+            }
+        });
+        sureTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                String nick = msgEditText.getText().toString().trim();
+                if (TextUtils.isEmpty(nick)) {
+                    ToastUtils.showShort(R.string.user_personal_input_nickname);
+                    return;
+                }
+                etName.setText(nick);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showInputMethod();
+            }
+        }, 100);
+
+    }
+
+
+    private void showInputMethod() {
+        //自动弹出键盘
+        InputMethodManager inputManager = (InputMethodManager) getPageContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+        //强制隐藏Android输入法窗口
+        // inputManager.hideSoftInputFromWindow(edit.getWindowToken(),0);
     }
 
     private void toAddUser() {
