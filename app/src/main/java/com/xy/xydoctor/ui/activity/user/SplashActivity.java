@@ -106,6 +106,7 @@ public class SplashActivity extends AppCompatActivity {
             protectDialog.setContentView(view);
             WindowManager.LayoutParams attributes = protectDialog.getWindow().getAttributes();
             attributes.width = 4 * XyScreenUtils.screenWidth(getPageContext()) / 5;
+            attributes.height = XyScreenUtils.dip2px(getPageContext(), 430);
             protectDialog.getWindow().setAttributes(attributes);
             protectDialog.setCancelable(false);
 
@@ -169,15 +170,6 @@ public class SplashActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /**
-     * 页面跳转-服务协议
-     */
-    private void jumpToUserAgreement() {
-        //        Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
-        //        intent.putExtra("title", getString(R.string.privacy_appointment));
-        //        intent.putExtra("explainId", "62");
-        //        startActivity(intent);
-    }
 
     private abstract class UnderLineClickSpan extends ClickableSpan {
         @Override
