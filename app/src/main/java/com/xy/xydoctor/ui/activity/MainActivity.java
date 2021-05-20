@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -83,6 +84,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
     private UpdatePopup updatePopup;
     //更新的apk新版本号
     private AppCompatTextView tvUpdateName;
+    private LinearLayout closeLinearLayout;
     //更新的新apk大小
     private AppCompatTextView tvUpdateSize;
     //更新内容
@@ -188,6 +190,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
         tvUpdateUpdate = updatePopup.findViewById(R.id.tv_update_update);
         llUpdateCancel = updatePopup.findViewById(R.id.ll_update_cancel);
         ivUpdateClose = updatePopup.findViewById(R.id.iv_update_close);
+        closeLinearLayout = updatePopup.findViewById(R.id.ll_update_cancel);
         tvUpdateUpdate.setOnClickListener(this);
         ivUpdateClose.setOnClickListener(this);
     }
@@ -321,7 +324,10 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
      * 更新调取接口
      */
     private void toUpdate() {
+        String token = SPStaticUtils.getString("token");
         HashMap map = new HashMap<>();
+        map.put("version_code", AppUtils.getAppVersionCode());
+        map.put("access_token", token);
         RxHttp.postForm(XyUrl.GET_UPDATE)
                 .addAll(map)
                 .asResponse(UpdateBean.class)
@@ -357,6 +363,11 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
      * @param data
      */
     private void toShowUpdateDialog(UpdateBean data) {
+        if ("1".equals(data.getIs_force())) {
+            closeLinearLayout.setVisibility(View.GONE);
+        } else {
+            closeLinearLayout.setVisibility(View.VISIBLE);
+        }
         updateUrl = data.getUpdateurl();
         String versionName = data.getVersionname();
         String apkSize = data.getAppsize();
@@ -365,6 +376,9 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
         tvUpdateSize.setText(apkSize);
         tvUpdateContent.setText(updateContent);
         tvUpdateContent.setVisibility(updateContent == null ? View.GONE : View.VISIBLE);
+        updatePopup.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        updatePopup.setBackPressEnable(false);
+        updatePopup.setAllowDismissWhenTouchOutside(false);
         updatePopup.showPopupWindow();
     }
 

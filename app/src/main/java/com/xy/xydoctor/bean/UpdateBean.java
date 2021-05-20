@@ -14,6 +14,15 @@ public class UpdateBean {
     private String updateurl;
     private String appsize;
     private String upcontent;
+    private String is_force;
+
+    public String getIs_force() {
+        return is_force;
+    }
+
+    public void setIs_force(String is_force) {
+        this.is_force = is_force;
+    }
 
     public String getVersionname() {
         return versionname;

@@ -135,7 +135,8 @@ public class XyUrl {
     //个人档案
     public final static String PERSONAL_RECORD = "/port/Personal/personalshow";
     //更新
-    public final static String GET_UPDATE = "/port/Doctor/getDocVersion";
+//    public final static String GET_UPDATE = "/port/Doctor/getDocVersion";
+    public final static String GET_UPDATE = "/port/appversion/getDocVersion";
     //获取融云token
     public final static String GET_IM_TOKEN = "/doctor/Docinfo/getRongToken";
     //获取血压异常
