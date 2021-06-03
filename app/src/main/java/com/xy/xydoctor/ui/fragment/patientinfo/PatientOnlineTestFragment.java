@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattService;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.TextUtils;
@@ -23,6 +25,7 @@ import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleNotifyCallback;
+import com.clj.fastble.callback.BleReadCallback;
 import com.clj.fastble.callback.BleScanAndConnectCallback;
 import com.clj.fastble.callback.BleWriteCallback;
 import com.clj.fastble.data.BleDevice;
@@ -55,6 +58,7 @@ import com.xy.xydoctor.constant.ConstantParam;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
+import com.xy.xydoctor.utils.DataConvert;
 import com.xy.xydoctor.utils.NumberUtils;
 import com.xy.xydoctor.utils.StringToHexUtils;
 import com.xy.xydoctor.utils.progress.BleDialogUtils;
@@ -64,6 +68,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -178,6 +183,13 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
     private String eCommand2 = "313124";
     //一体机结束
 
+    private UUID uuid_service;
+    private UUID uuid_chara;
+
+    private String bDeviceBName = "My Thermometer";
+    private String bDeviceBCommend = "0XFFB2";
+
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_patient_online_test;
@@ -199,7 +211,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
         BleScanRuleConfig scanRuleConfig =
                 new BleScanRuleConfig.Builder()
                         //只扫描指定广播名的设备，可选
-                        .setDeviceName(true, eDeviceName)
+                        .setDeviceName(true, eDeviceName, bDeviceBName)
                         //连接时的autoConnect参数，可选，默认false
                         .setAutoConnect(false)
                         //扫描超时时间，可选，默认10秒
@@ -433,6 +445,66 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
             public void onConnectSuccess(BleDevice bleDevice, BluetoothGatt gatt, int status) {
                 String name = bleDevice.getName();
                 Log.e(TAG, "连接成功的设备名称==" + name);
+                for (BluetoothGattService service : gatt.getServices()) {
+                    uuid_service = service.getUuid();
+                    Log.i("wu", "uuid_service==" + uuid_service.toString());
+                    List<BluetoothGattCharacteristic> characteristicList = service.getCharacteristics();
+                    for (BluetoothGattCharacteristic characteristic : characteristicList) {
+                        uuid_chara = characteristic.getUuid();
+                        //                        Log.i("wu","uuid_chara=="+uuid_chara.toString());
+                    }
+                }
+                //                Log.i("wu","final uuid_service=="+uuid_service.toString());
+                //                Log.i("wu","final uuid_chara=="+uuid_chara.toString());
+                BleManager.getInstance().notify(
+                        bleDevice,
+                        uuid_service.toString(),
+                        uuid_chara.toString(),
+                        new BleNotifyCallback() {
+                            @Override
+                            public void onNotifySuccess() {
+                                // 打开通知操作成功
+                                Log.i("wu", "打开通知成功");
+                                BleManager.getInstance().read(
+                                        bleDevice,
+                                        uuid_service.toString(),
+                                        uuid_chara.toString(),
+                                        new BleReadCallback() {
+                                            @Override
+                                            public void onReadSuccess(byte[] data) {
+                                                Log.i("wu", "onReadSuccess");
+                                            }
+
+                                            @Override
+                                            public void onReadFailure(BleException exception) {
+                                                Log.i("wu", "onReadFailure");
+                                            }
+                                        }
+                                );
+                            }
+
+                            @Override
+                            public void onNotifyFailure(BleException exception) {
+                                // 打开通知操作失败
+                                Log.i("wu", "onNotifyFailure");
+                            }
+
+                            @Override
+                            public void onCharacteristicChanged(byte[] data) {
+                                // 打开通知后，设备发过来的数据将在这里出现
+                                Log.i("wu", "onCharacteristicChanged" + data);
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Log.e(TAG, "data==" + data);
+                                        dialogDismiss();
+                                        String convertString = ConvertUtils.bytes2HexString(data);
+                                        ToastUtils.showShort(DataConvert.hexStrToUTF8(convertString));
+                                    }
+                                });
+                            }
+                        });
+
                 openBleNotify(bleDevice, name);
                 dialogConnectSuccess();
             }
@@ -449,6 +521,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
         });
     }
 
+
     /**
      * 开启蓝牙通知
      *
@@ -463,10 +536,67 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
         if (bDeviceName.equals(name)) {
             uuidService = bs1;
             uuidNotify = bs2;
+            getNotify(bleDevice, uuidService, uuidNotify, name);
         } else if (eDeviceName.equals(name)) {
             uuidService = es1;
             uuidNotify = es2;
+            BleManager.getInstance().notify(
+                    bleDevice, uuidService, uuidNotify,
+                    new BleNotifyCallback() {
+                        @Override
+                        public void onNotifySuccess() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Log.e(TAG, "开启蓝牙通知:" + "onNotifySuccess");
+                                    startTestStepOne(bleDevice, name);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onNotifyFailure(final BleException exception) {
+
+                        }
+
+                        @Override
+                        public void onCharacteristicChanged(final byte[] data) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Log.e(TAG, "data==" + data);
+                                    StringBuilder stringBuilder = new StringBuilder();
+                                    String convertString = ConvertUtils.bytes2HexString(data);
+                                    stringBuilder.append(convertString);
+                                    String allString = stringBuilder.toString();
+                                    Log.e(TAG, "所有字符串:" + allString);
+                                    if (bDeviceName.equals(name)) {
+                                        //血压
+                                        if (allString.contains("070BBD")) {
+                                            isConnectSuccess = true;
+                                            String bloodPressureString = allString.substring(allString.indexOf("080BB8") + 8, allString.indexOf("080BB8") + 12);
+                                            //16进制 收缩压 舒张压
+                                            //Log.e(TAG, "bloodPressureString==" + bloodPressureString);
+                                            //setBloodPressure(bloodPressureString);
+                                            showdownBle(bleDevice);
+                                        }
+                                    } else if (eDeviceName.equals(name)) {
+                                        //连接成功返回 313124
+                                        if (!"313124".equals(allString)) {
+                                            BodyData bodyData = new BodyData();
+                                            setBodyFat(bodyData, allString);
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    });
         }
+
+    }
+
+
+    private void getNotify(BleDevice bleDevice, String uuidService, String uuidNotify, String name) {
         BleManager.getInstance().notify(
                 bleDevice, uuidService, uuidNotify,
                 new BleNotifyCallback() {
@@ -588,6 +718,10 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
             uuidService = bs1;
             uuidWrite = bs3;
             command = bCommand2;
+        } else if (bDeviceBName.equals(name)) {
+            uuidService = uuid_service.toString();
+            uuidWrite = uuid_chara.toString();
+            command = bDeviceBCommend;
         }
         BleManager.getInstance().write(
                 bleDevice, uuidService, uuidWrite,

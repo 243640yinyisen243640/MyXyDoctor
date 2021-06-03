@@ -363,6 +363,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
      * @param data
      */
     private void toShowUpdateDialog(UpdateBean data) {
+        data.setIs_force("0");
         if ("1".equals(data.getIs_force())) {
             closeLinearLayout.setVisibility(View.GONE);
         } else {
