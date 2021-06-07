@@ -26,10 +26,10 @@ import com.xy.xydoctor.bean.UpdateBean;
 import com.xy.xydoctor.mvvm.LoginActivity;
 import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.ui.activity.mydevice.DeviceAddListActivity;
-import com.xy.xydoctor.utils.DialogUtils;
 import com.xy.xydoctor.utils.UpdateUtils;
 import com.xy.xydoctor.view.NumberProgressBar;
 import com.xy.xydoctor.view.popup.UpdatePopup;
+import com.xy.xydoctor.window.OutLoginPopup;
 
 import java.io.File;
 import java.util.HashMap;
@@ -198,9 +198,10 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
      * 退出弹窗
      */
     private void toExit() {
-        DialogUtils.getInstance().showDialog(getPageContext(), "提示", "确定要退出登录?", true, () -> {
-            toDoExit();
-        });
+        toDoExit();
+//        DialogUtils.getInstance().showDialog(getPageContext(), "提示", "确定要退出登录?", true, () -> {
+//            toDoExit();
+//        });
     }
 
 
@@ -208,23 +209,44 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
      * 执行退出操作
      */
     private void toDoExit() {
-        RongImUtils.logout();
-        //JPushUtils.deleteAlias();
-        CloudPushService pushService = PushServiceFactory.getCloudPushService();
-        pushService.unbindAccount(new CommonCallback() {
+
+        OutLoginPopup outLoginPopup = new OutLoginPopup(this);
+        TextView cancle = outLoginPopup.findViewById(R.id.tv_oper_cancel);
+        TextView sure = outLoginPopup.findViewById(R.id.tv_oper_sure);
+        cancle.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(String s) {
-
-            }
-
-            @Override
-            public void onFailed(String s, String s1) {
-
+            public void onClick(View v) {
+                outLoginPopup.dismiss();
             }
         });
-        SPStaticUtils.clear();
-        ActivityUtils.finishAllActivities();
-        startActivity(new Intent(getPageContext(), LoginActivity.class));
+        sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RongImUtils.logout();
+                //JPushUtils.deleteAlias();
+                CloudPushService pushService = PushServiceFactory.getCloudPushService();
+                pushService.unbindAccount(new CommonCallback() {
+                    @Override
+                    public void onSuccess(String s) {
+
+                    }
+
+                    @Override
+                    public void onFailed(String s, String s1) {
+
+                    }
+                });
+                SPStaticUtils.clear();
+                ActivityUtils.finishAllActivities();
+                startActivity(new Intent(getPageContext(), LoginActivity.class));
+            }
+        });
+        outLoginPopup.setAllowDismissWhenTouchOutside(false);
+        outLoginPopup.showPopupWindow();
+
+
+
+
     }
 
 

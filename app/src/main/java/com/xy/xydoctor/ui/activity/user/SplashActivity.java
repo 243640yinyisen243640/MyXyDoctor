@@ -106,7 +106,7 @@ public class SplashActivity extends AppCompatActivity {
             protectDialog.setContentView(view);
             WindowManager.LayoutParams attributes = protectDialog.getWindow().getAttributes();
             attributes.width = 4 * XyScreenUtils.screenWidth(getPageContext()) / 5;
-            attributes.height = XyScreenUtils.dip2px(getPageContext(), 430);
+            attributes.height = XyScreenUtils.dip2px(getPageContext(), 480);
             protectDialog.getWindow().setAttributes(attributes);
             protectDialog.setCancelable(false);
 

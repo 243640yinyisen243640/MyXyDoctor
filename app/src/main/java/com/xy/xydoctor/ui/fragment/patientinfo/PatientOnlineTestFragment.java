@@ -447,15 +447,15 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
                 Log.e(TAG, "连接成功的设备名称==" + name);
                 for (BluetoothGattService service : gatt.getServices()) {
                     uuid_service = service.getUuid();
-                    Log.i("wu", "uuid_service==" + uuid_service.toString());
+                    Log.i(TAG, "uuid_service==" + uuid_service.toString());
                     List<BluetoothGattCharacteristic> characteristicList = service.getCharacteristics();
                     for (BluetoothGattCharacteristic characteristic : characteristicList) {
                         uuid_chara = characteristic.getUuid();
-                        //                        Log.i("wu","uuid_chara=="+uuid_chara.toString());
+                        //                        Log.i(TAG,"uuid_chara=="+uuid_chara.toString());
                     }
                 }
-                //                Log.i("wu","final uuid_service=="+uuid_service.toString());
-                //                Log.i("wu","final uuid_chara=="+uuid_chara.toString());
+                //                Log.i(TAG,"final uuid_service=="+uuid_service.toString());
+                //                Log.i(TAG,"final uuid_chara=="+uuid_chara.toString());
                 BleManager.getInstance().notify(
                         bleDevice,
                         uuid_service.toString(),
@@ -464,7 +464,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
                             @Override
                             public void onNotifySuccess() {
                                 // 打开通知操作成功
-                                Log.i("wu", "打开通知成功");
+                                Log.i(TAG, "打开通知成功");
                                 BleManager.getInstance().read(
                                         bleDevice,
                                         uuid_service.toString(),
@@ -472,12 +472,12 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
                                         new BleReadCallback() {
                                             @Override
                                             public void onReadSuccess(byte[] data) {
-                                                Log.i("wu", "onReadSuccess");
+                                                Log.i(TAG, "onReadSuccess");
                                             }
 
                                             @Override
                                             public void onReadFailure(BleException exception) {
-                                                Log.i("wu", "onReadFailure");
+                                                Log.i(TAG, "onReadFailure");
                                             }
                                         }
                                 );
@@ -486,13 +486,13 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
                             @Override
                             public void onNotifyFailure(BleException exception) {
                                 // 打开通知操作失败
-                                Log.i("wu", "onNotifyFailure");
+                                Log.i(TAG, "onNotifyFailure");
                             }
 
                             @Override
                             public void onCharacteristicChanged(byte[] data) {
                                 // 打开通知后，设备发过来的数据将在这里出现
-                                Log.i("wu", "onCharacteristicChanged" + data);
+                                Log.i(TAG, "onCharacteristicChanged" + data);
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -504,7 +504,6 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
                                 });
                             }
                         });
-
                 openBleNotify(bleDevice, name);
                 dialogConnectSuccess();
             }

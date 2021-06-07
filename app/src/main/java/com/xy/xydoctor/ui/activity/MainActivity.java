@@ -93,8 +93,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
     private NumberProgressBar pbUpdateProgress;
     //升级按钮
     private AppCompatTextView tvUpdateUpdate;
-    //关闭按钮和线(显示隐藏)
-    private LinearLayout llUpdateCancel;
+
     //关闭按钮(点击取消)
     private AppCompatImageView ivUpdateClose;
     //更新进度
@@ -188,7 +187,6 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
         tvUpdateContent = updatePopup.findViewById(R.id.tv_update_content);
         pbUpdateProgress = updatePopup.findViewById(R.id.pb_update_progress);
         tvUpdateUpdate = updatePopup.findViewById(R.id.tv_update_update);
-        llUpdateCancel = updatePopup.findViewById(R.id.ll_update_cancel);
         ivUpdateClose = updatePopup.findViewById(R.id.iv_update_close);
         closeLinearLayout = updatePopup.findViewById(R.id.ll_update_cancel);
         tvUpdateUpdate.setOnClickListener(this);
@@ -328,6 +326,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
         HashMap map = new HashMap<>();
         map.put("version_code", AppUtils.getAppVersionCode());
         map.put("access_token", token);
+        map.put("version", ConstantParam.SERVER_VERSION);
         RxHttp.postForm(XyUrl.GET_UPDATE)
                 .addAll(map)
                 .asResponse(UpdateBean.class)
@@ -363,7 +362,6 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
      * @param data
      */
     private void toShowUpdateDialog(UpdateBean data) {
-        data.setIs_force("0");
         if ("1".equals(data.getIs_force())) {
             closeLinearLayout.setVisibility(View.GONE);
         } else {
