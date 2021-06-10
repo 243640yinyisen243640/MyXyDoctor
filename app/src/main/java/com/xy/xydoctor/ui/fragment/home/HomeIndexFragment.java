@@ -204,6 +204,7 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
                         //设置红点
                         unReadCount = data.getMsgnum();
                         setRedPoint(unReadCount);
+                        setReachTheStandRate(data.getSugars());
                     }
                 }, new OnError() {
                     @Override

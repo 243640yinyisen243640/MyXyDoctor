@@ -52,7 +52,7 @@ android {
         }
         buildTypes {
             //环境 以及融云环境
-            def environment_debug = false
+            def environment_debug = true
             def environment_release = true
             //默认构建类型
             debug {
@@ -189,6 +189,11 @@ android {
         api 'com.squareup.retrofit2:retrofit:2.9.0'
         api 'pub.devrel:easypermissions:2.0.1'
         implementation 'com.zhy:base-rvadapter:3.0.3'
+
+        api 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
+        api 'com.squareup.retrofit2:retrofit:2.9.0'
+        api 'io.reactivex.rxjava2:rxjava:2.2.10'
+        api 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
     }
 }

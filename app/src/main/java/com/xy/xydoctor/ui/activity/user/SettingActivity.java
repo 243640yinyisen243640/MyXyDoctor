@@ -23,6 +23,7 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.BaseActivity;
 import com.xy.xydoctor.base.activity.BaseWebViewActivity;
 import com.xy.xydoctor.bean.UpdateBean;
+import com.xy.xydoctor.constant.ConstantParam;
 import com.xy.xydoctor.mvvm.LoginActivity;
 import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.ui.activity.mydevice.DeviceAddListActivity;
@@ -140,7 +141,11 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
     }
 
     private void toUpdate() {
+        String token = SPStaticUtils.getString("token");
         HashMap map = new HashMap<>();
+        map.put("version_code", AppUtils.getAppVersionCode());
+        map.put("access_token", token);
+        map.put("version", ConstantParam.SERVER_VERSION);
         RxHttp.postForm(XyUrl.GET_UPDATE)
                 .addAll(map)
                 .asResponse(UpdateBean.class)
@@ -199,9 +204,9 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
      */
     private void toExit() {
         toDoExit();
-//        DialogUtils.getInstance().showDialog(getPageContext(), "提示", "确定要退出登录?", true, () -> {
-//            toDoExit();
-//        });
+        //        DialogUtils.getInstance().showDialog(getPageContext(), "提示", "确定要退出登录?", true, () -> {
+        //            toDoExit();
+        //        });
     }
 
 
@@ -209,7 +214,6 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
      * 执行退出操作
      */
     private void toDoExit() {
-
         OutLoginPopup outLoginPopup = new OutLoginPopup(this);
         TextView cancle = outLoginPopup.findViewById(R.id.tv_oper_cancel);
         TextView sure = outLoginPopup.findViewById(R.id.tv_oper_sure);
@@ -243,10 +247,6 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
         });
         outLoginPopup.setAllowDismissWhenTouchOutside(false);
         outLoginPopup.showPopupWindow();
-
-
-
-
     }
 
 

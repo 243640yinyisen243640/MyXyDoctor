@@ -46,6 +46,7 @@ import com.xy.xydoctor.bean.ImTokenBean;
 import com.xy.xydoctor.bean.IsFamilyBean;
 import com.xy.xydoctor.bean.UpdateBean;
 import com.xy.xydoctor.constant.ConstantParam;
+import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
@@ -67,6 +68,7 @@ import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.MessageContent;
 import io.rong.message.TextMessage;
+import retrofit2.Call;
 import rxhttp.wrapper.param.RxHttp;
 
 /**
@@ -100,6 +102,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
     //更新网址
     private String updateUrl;
     private File updateApk;
+    private static final int GET_UPDATE_DATA = 10012;
 
     @Override
     protected int getLayoutId() {
@@ -121,7 +124,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
         //设置友盟推送别名
         setUPushAlias();
         //更新软件
-        toUpdate();
+        toUpDataNew();
         //判断是否家签
         //getIsFamily();
     }
@@ -318,6 +321,20 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
         RongIM.getInstance().addUnReadMessageCountChangedObserver(this, conversationTypes);
     }
 
+
+    private void toUpDataNew() {
+        String token = SPStaticUtils.getString("token");
+        Call<String> requestCall = DataManager.getUpData(token, (call, response) -> {
+            if (response.code == 200) {
+                UpdateBean updateBean = (UpdateBean) response.object;
+                toDoUpdate(updateBean);
+            }
+        }, (call, t) -> {
+
+        });
+    }
+
+
     /**
      * 更新调取接口
      */
@@ -339,6 +356,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
                 }, new OnError() {
                     @Override
                     public void onError(ErrorInfo error) throws Exception {
+
 
                     }
                 });

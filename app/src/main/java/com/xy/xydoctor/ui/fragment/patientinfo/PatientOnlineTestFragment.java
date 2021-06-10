@@ -445,65 +445,69 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
             public void onConnectSuccess(BleDevice bleDevice, BluetoothGatt gatt, int status) {
                 String name = bleDevice.getName();
                 Log.e(TAG, "连接成功的设备名称==" + name);
-                for (BluetoothGattService service : gatt.getServices()) {
-                    uuid_service = service.getUuid();
-                    Log.i(TAG, "uuid_service==" + uuid_service.toString());
-                    List<BluetoothGattCharacteristic> characteristicList = service.getCharacteristics();
-                    for (BluetoothGattCharacteristic characteristic : characteristicList) {
-                        uuid_chara = characteristic.getUuid();
-                        //                        Log.i(TAG,"uuid_chara=="+uuid_chara.toString());
+                Log.i("yys", "mac===" + bleDevice.getMac());
+                if (bDeviceBName.equals(name)) {
+                    for (BluetoothGattService service : gatt.getServices()) {
+                        uuid_service = service.getUuid();
+                        Log.i(TAG, "uuid_service==" + uuid_service.toString());
+                        List<BluetoothGattCharacteristic> characteristicList = service.getCharacteristics();
+                        for (BluetoothGattCharacteristic characteristic : characteristicList) {
+                            uuid_chara = characteristic.getUuid();
+                            //                        Log.i(TAG,"uuid_chara=="+uuid_chara.toString());
+                        }
                     }
-                }
-                //                Log.i(TAG,"final uuid_service=="+uuid_service.toString());
-                //                Log.i(TAG,"final uuid_chara=="+uuid_chara.toString());
-                BleManager.getInstance().notify(
-                        bleDevice,
-                        uuid_service.toString(),
-                        uuid_chara.toString(),
-                        new BleNotifyCallback() {
-                            @Override
-                            public void onNotifySuccess() {
-                                // 打开通知操作成功
-                                Log.i(TAG, "打开通知成功");
-                                BleManager.getInstance().read(
-                                        bleDevice,
-                                        uuid_service.toString(),
-                                        uuid_chara.toString(),
-                                        new BleReadCallback() {
-                                            @Override
-                                            public void onReadSuccess(byte[] data) {
-                                                Log.i(TAG, "onReadSuccess");
-                                            }
+                    //                Log.i(TAG,"final uuid_service=="+uuid_service.toString());
+                    //                Log.i(TAG,"final uuid_chara=="+uuid_chara.toString());
+                    BleManager.getInstance().notify(
+                            bleDevice,
+                            uuid_service.toString(),
+                            uuid_chara.toString(),
+                            new BleNotifyCallback() {
+                                @Override
+                                public void onNotifySuccess() {
+                                    // 打开通知操作成功
+                                    Log.i(TAG, "打开通知成功");
+                                    BleManager.getInstance().read(
+                                            bleDevice,
+                                            uuid_service.toString(),
+                                            uuid_chara.toString(),
+                                            new BleReadCallback() {
+                                                @Override
+                                                public void onReadSuccess(byte[] data) {
+                                                    Log.i(TAG, "onReadSuccess");
+                                                }
 
-                                            @Override
-                                            public void onReadFailure(BleException exception) {
-                                                Log.i(TAG, "onReadFailure");
+                                                @Override
+                                                public void onReadFailure(BleException exception) {
+                                                    Log.i(TAG, "onReadFailure");
+                                                }
                                             }
+                                    );
+                                }
+
+                                @Override
+                                public void onNotifyFailure(BleException exception) {
+                                    // 打开通知操作失败
+                                    Log.i(TAG, "onNotifyFailure");
+                                }
+
+                                @Override
+                                public void onCharacteristicChanged(byte[] data) {
+                                    // 打开通知后，设备发过来的数据将在这里出现
+                                    Log.i(TAG, "onCharacteristicChanged" + data);
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Log.e(TAG, "data==" + data);
+                                            dialogDismiss();
+                                            String convertString = ConvertUtils.bytes2HexString(data);
+                                            ToastUtils.showShort(DataConvert.hexStrToUTF8(convertString));
                                         }
-                                );
-                            }
+                                    });
+                                }
+                            });
+                }
 
-                            @Override
-                            public void onNotifyFailure(BleException exception) {
-                                // 打开通知操作失败
-                                Log.i(TAG, "onNotifyFailure");
-                            }
-
-                            @Override
-                            public void onCharacteristicChanged(byte[] data) {
-                                // 打开通知后，设备发过来的数据将在这里出现
-                                Log.i(TAG, "onCharacteristicChanged" + data);
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Log.e(TAG, "data==" + data);
-                                        dialogDismiss();
-                                        String convertString = ConvertUtils.bytes2HexString(data);
-                                        ToastUtils.showShort(DataConvert.hexStrToUTF8(convertString));
-                                    }
-                                });
-                            }
-                        });
                 openBleNotify(bleDevice, name);
                 dialogConnectSuccess();
             }
@@ -923,6 +927,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
         llOnlineTestEmpty.setVisibility(View.GONE);
         llBloodSugar.setVisibility(View.GONE);
         llBloodOxygen.setVisibility(View.GONE);
+        Log.i("yys", "setBodyFat====");
         llBodyFat.setVisibility(View.VISIBLE);
         llBloodPressure.setVisibility(View.GONE);
         String weight = "";

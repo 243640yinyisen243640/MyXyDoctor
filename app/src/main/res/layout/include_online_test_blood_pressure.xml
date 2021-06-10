@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical"
-        android:padding="22dp">
+        android:padding="22dp"
+        android:visibility="gone">
 
         <LinearLayout style="@style/hh_fi_wr">
 

@@ -23,36 +23,23 @@
                 android:layout_marginTop="@dimen/dp_40"
                 android:orientation="vertical">
                 <!--空数据-->
-                <include layout="@layout/include_online_test_empty">
+                <include layout="@layout/include_online_test_empty" />
 
-                </include>
                 <!--血糖-->
 
-                <include
-                    layout="@layout/include_online_test_blood_sugar"
-                    android:visibility="gone">
+                <include layout="@layout/include_online_test_blood_sugar" />
 
-                </include>
 
                 <!--血氧-->
-                <include
-                    layout="@layout/include_online_test_blood_oxygen"
-                    android:visibility="gone">
+                <include layout="@layout/include_online_test_blood_oxygen"/>
 
-                </include>
                 <!--体脂-->
-                <include
-                    layout="@layout/include_online_test_body_fat"
-                    android:visibility="gone">
+                <include layout="@layout/include_online_test_body_fat" />
 
-                </include>
 
                 <!--血压-->
-                <include
-                    layout="@layout/include_online_test_blood_pressure"
-                    android:visibility="gone">
+                <include layout="@layout/include_online_test_blood_pressure" />
 
-                </include>
 
             </LinearLayout>
 
@@ -81,9 +68,8 @@
 
 
         <!--基本信息 上层-->
-        <include layout="@layout/include_patient_info_online_test">
+        <include layout="@layout/include_patient_info_online_test" />
 
-        </include>
 
     </FrameLayout>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="500dp"
     android:background="@drawable/shape_privacy_protect_bg_refuse"
     android:orientation="vertical"
     android:padding="15dp">
@@ -19,6 +19,7 @@
     <TextView
         android:id="@+id/tv_dpp_service_agreement"
         style="@style/text_black_14_f_w"
+        android:textSize="14sp"
         android:layout_marginTop="15dp"
         android:text="@string/privacy_protect_hint" />
 

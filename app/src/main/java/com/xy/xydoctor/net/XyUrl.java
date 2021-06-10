@@ -12,10 +12,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
+import okhttp3.Request;
 import okhttp3.RequestBody;
 import rxhttp.wrapper.annotation.DefaultDomain;
 
@@ -272,7 +274,8 @@ public class XyUrl {
     //环境
     private final static boolean EXTERNAL_RELEASE = BuildConfig.ENVIRONMENT;
     //正式地址
-    private final static String DOMAIN = "http://port.xiyuns.cn";
+//    private final static String DOMAIN = "http://port.xiyuns.cn";
+    private final static String DOMAIN = "http://alb.xiyuns.cn";
     //测试地址
     private final static String DOMAIN_TEST = "http://d.xiyuns.cn";
     //设置为默认域名
@@ -373,4 +376,55 @@ public class XyUrl {
         intent.setAction("LoginOut");
         Utils.getApp().sendBroadcast(intent);
     }
+    /**
+     * 基本Okhttp请求
+     *
+     * @param url
+     * @param params
+     * @param callback
+     */
+    public static void okPost(String url, Map<String, Object> params, final OkHttpCallBack<String> callback) {
+        boolean connected = NetworkUtils.isConnected();
+        if (!connected) {
+            ToastUtils.showShort("网络连接不可用，请稍后重试");
+            return;
+        }
+        //Json方式提交
+        JSONObject json = new JSONObject(params);
+        RequestBody body = RequestBody.create(MEDIA_TYPE_JSON, json.toString());
+        //提交
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        OkHttpInstance.getInstance()
+                .newCall(request)
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                        try {
+                            String res = response.body().string();
+                            JSONObject object = new JSONObject(res);
+                            String code = object.getString("code");
+                            if ("200".equals(code)) {
+                                String data = object.getString("data");
+                                callback.onSuccess(data);
+                            } else if ("20001".equals(code)) {
+                                exit();
+                            } else {
+                                String msg = object.getString("msg");
+                                callback.onError(Integer.valueOf(code), msg);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
 }
