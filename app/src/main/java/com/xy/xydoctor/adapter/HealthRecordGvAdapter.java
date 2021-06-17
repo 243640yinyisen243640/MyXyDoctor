@@ -19,6 +19,7 @@ import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordLiverListActivity;
 import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordPharmacyListActivity;
 import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordSaccharifyListActivity;
 import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordSportListActivity;
+import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordTemperatureListActivity;
 import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordWeightListActivity;
 import com.xy.xydoctor.ui.activity.patient.PatientInfoActivity;
 import com.zhy.adapter.abslistview.CommonAdapter;
@@ -28,10 +29,12 @@ import java.util.List;
 
 public class HealthRecordGvAdapter extends CommonAdapter {
     private String userId;
+    private Context context;
 
     public HealthRecordGvAdapter(Context context, int layoutId, List datas, String userId) {
         super(context, layoutId, datas);
         this.userId = userId;
+        this.context = context;
     }
 
     @Override
@@ -84,6 +87,12 @@ public class HealthRecordGvAdapter extends CommonAdapter {
                 imgPic.setImageResource(R.drawable.health_record_reduce_weight);
                 tvText.setText("体重记录");
                 break;
+            case 11:
+                imgPic.setImageResource(R.drawable.temperature_for_record);
+                tvText.setText(context.getString(R.string.record_temperature));
+                break;
+            default:
+                break;
         }
         //跳转
         viewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
@@ -124,6 +133,11 @@ public class HealthRecordGvAdapter extends CommonAdapter {
                         break;
                     case 10:
                         intent = new Intent(Utils.getApp(), HealthRecordWeightListActivity.class);
+                        break;
+                    case 11:
+                        intent = new Intent(Utils.getApp(), HealthRecordTemperatureListActivity.class);
+                        break;
+                    default:
                         break;
                 }
                 intent.putExtra("userid", userId);

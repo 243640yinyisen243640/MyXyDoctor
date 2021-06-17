@@ -137,7 +137,7 @@ public class XyUrl {
     //个人档案
     public final static String PERSONAL_RECORD = "/port/Personal/personalshow";
     //更新
-//    public final static String GET_UPDATE = "/port/Doctor/getDocVersion";
+    //    public final static String GET_UPDATE = "/port/Doctor/getDocVersion";
     public final static String GET_UPDATE = "/port/appversion/getDocVersion";
     //获取融云token
     public final static String GET_IM_TOKEN = "/doctor/Docinfo/getRongToken";
@@ -165,7 +165,8 @@ public class XyUrl {
     //分组成员删除
     public final static String DEL_GROUP_USER = "/doctor/Users/delGroupuser";
     //血压
-    public final static String GET_BLOOD_PRESSURE_LIST = "/port/Record/getbloodpressure";
+    public final static String GET_BLOOD_PRESSURE_LIST = "/port/Record/getbloodpressure"; //血压
+    public final static String GET_TEMPERATURE_LIST = "/port/record/getTemperature";//体温
     //退出
     public final static String LOGIN_OUT = "/docout";
     //每个时间点血糖测量详情
@@ -187,7 +188,8 @@ public class XyUrl {
     //添加血氧
     public final static String ADD_BLOOD_OXYGEN = "/port/Record/addBloodox";
     //添加体重
-    public final static String ADD_BMI = "/port/Record/addbmi";
+    public final static String ADD_BMI = "/port/Record/addbmi";//添加体重
+    public final static String ADD_TEMPERATURE = "/port/record/addTemperatureData";
     //家庭签约家庭成员列表
     public final static String GET_FAMILY_MEMBERS_LIST = "/doctor/Familysign/familyMembersList";
     //签约预约住院详情
@@ -274,7 +276,7 @@ public class XyUrl {
     //环境
     private final static boolean EXTERNAL_RELEASE = BuildConfig.ENVIRONMENT;
     //正式地址
-//    private final static String DOMAIN = "http://port.xiyuns.cn";
+    //    private final static String DOMAIN = "http://port.xiyuns.cn";
     private final static String DOMAIN = "http://alb.xiyuns.cn";
     //测试地址
     private final static String DOMAIN_TEST = "http://d.xiyuns.cn";
@@ -376,6 +378,7 @@ public class XyUrl {
         intent.setAction("LoginOut");
         Utils.getApp().sendBroadcast(intent);
     }
+
     /**
      * 基本Okhttp请求
      *

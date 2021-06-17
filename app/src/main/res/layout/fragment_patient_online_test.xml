@@ -24,14 +24,15 @@
                 android:orientation="vertical">
                 <!--空数据-->
                 <include layout="@layout/include_online_test_empty" />
-
+                <!--温度-->
+                <include layout="@layout/include_online_test_temperature"/>
                 <!--血糖-->
 
                 <include layout="@layout/include_online_test_blood_sugar" />
 
 
                 <!--血氧-->
-                <include layout="@layout/include_online_test_blood_oxygen"/>
+                <include layout="@layout/include_online_test_blood_oxygen" />
 
                 <!--体脂-->
                 <include layout="@layout/include_online_test_body_fat" />
@@ -39,6 +40,7 @@
 
                 <!--血压-->
                 <include layout="@layout/include_online_test_blood_pressure" />
+
 
 
             </LinearLayout>

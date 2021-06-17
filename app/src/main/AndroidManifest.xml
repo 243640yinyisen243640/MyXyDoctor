@@ -89,6 +89,9 @@
         <activity android:name=".ui.activity.tcm.TcmListActivity" />
         <activity android:name=".ui.activity.followupvisit.FollowUpVisitWaitDoListActivity" />
         <activity android:name=".ui.activity.healthrecordadd.HeightAndWeightAddActivity" />
+        <activity
+            android:name=".ui.activity.healthrecordadd.TemperatureAddActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".ui.activity.healthrecordadd.BloodOxygenAddActivity" />
         <activity android:name=".ui.activity.chat.ReplyAddActivity" />
         <activity android:name=".ui.activity.chat.FastReplyActivity" />
@@ -132,6 +135,9 @@
         <activity android:name=".ui.activity.healthrecord.HealthRecordHeightAndWeightListActivity" />
         <activity android:name=".ui.activity.healthrecord.HealthRecordSaccharifyListActivity" />
         <activity android:name=".ui.activity.healthrecord.HealthRecordBloodPressureListActivity" />
+        <activity
+            android:name=".ui.activity.healthrecord.HealthRecordTemperatureListActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".ui.activity.healthrecord.HealthRecordCheckListActivity" />
         <activity android:name=".ui.activity.healthrecord.HealthRecordCheckDetailActivity" />
         <activity android:name=".ui.activity.healthrecord.HealthRecordSportListActivity" />

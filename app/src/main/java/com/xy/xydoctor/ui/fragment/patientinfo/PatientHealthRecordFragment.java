@@ -113,7 +113,7 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
      */
     private void setEightRecord(String userid) {
         ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 12; i++) {
             list.add(i + "");
         }
         HealthRecordGvAdapter adapter = new HealthRecordGvAdapter(Utils.getApp(), R.layout.item_gv_health_record, list, userid);

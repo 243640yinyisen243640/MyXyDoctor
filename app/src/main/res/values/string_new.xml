@@ -14,4 +14,12 @@
     <string name="sure">确定</string>
     <string name="tip">提示</string>
     <string name="quit_login_out">确认退出登录吗？</string>
+    <string name="temperature_record">记录体温</string>
+    <string name="record_temperature">体温记录</string>
+    <string name="temperature_record_unit">℃</string>
+    <string name="temperature_record_title">体温</string>
+    <string name="temperature_record_default">36.5</string>
+    <string name="temperature_record_default_with_unit">体温℃</string>
+    <string name="up_temperature_automatic">自动上传</string>
+    <string name="up_temperature_manualc">手动上传</string>
 </resources>

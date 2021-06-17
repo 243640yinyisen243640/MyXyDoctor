@@ -55,6 +55,7 @@ import com.xy.xydoctor.bean.GetOnlineBloodBean;
 import com.xy.xydoctor.bean.OnlineTestGetBloodSugar;
 import com.xy.xydoctor.bean.UserInfoBean;
 import com.xy.xydoctor.constant.ConstantParam;
+import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
@@ -73,6 +74,7 @@ import java.util.UUID;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.rxjava3.functions.Consumer;
+import retrofit2.Call;
 import rxhttp.wrapper.param.RxHttp;
 
 /**
@@ -186,9 +188,14 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
     private UUID uuid_service;
     private UUID uuid_chara;
 
+    //温度开始
     private String bDeviceBName = "My Thermometer";
     private String bDeviceBCommend = "0XFFB2";
 
+    @BindView(R.id.ll_temperature_text_result)
+    LinearLayout llTemperature;
+    @BindView(R.id.tv_temperature_text_result)
+    TextView temperatureTextView;
 
     @Override
     protected int getLayoutId() {
@@ -408,7 +415,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
     }
 
     /**
-     * 血压计以及一体机开始扫描并连接
+     * 温度计扫描连接
      */
     private void startScanBpAndAio() {
         BleManager.getInstance().scanAndConnect(new BleScanAndConnectCallback() {
@@ -499,9 +506,10 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
                                         @Override
                                         public void run() {
                                             Log.e(TAG, "data==" + data);
-                                            dialogDismiss();
+                                            //                                            dialogDismiss();
                                             String convertString = ConvertUtils.bytes2HexString(data);
-                                            ToastUtils.showShort(DataConvert.hexStrToUTF8(convertString));
+                                            saveData(DataConvert.hexStrToUTF8(convertString));
+                                            //                                            ToastUtils.showShort(DataConvert.hexStrToUTF8(convertString));
                                         }
                                     });
                                 }
@@ -509,6 +517,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
                 }
 
                 openBleNotify(bleDevice, name);
+                Log.i("yys","=====");
                 dialogConnectSuccess();
             }
 
@@ -521,6 +530,35 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
             public void onScanning(BleDevice bleDevice) {
                 Log.e(TAG, "onScanning");
             }
+        });
+    }
+
+    /**
+     * 上传温度数据
+     *
+     * @param temperature
+     */
+    private void saveData(String temperature) {
+        String userid = getArguments().getString("userid");
+        String docId = SPStaticUtils.getString("docId");
+        String token = SPStaticUtils.getString("token");
+        Call<String> requestCall = DataManager.saveDataTemperature(token, userid, temperature, "", docId,"1", (call, response) -> {
+            if (response.code == 200) {
+                dialogDismiss();
+                //显示隐藏
+                llOnlineTestEmpty.setVisibility(View.GONE);
+                llBloodSugar.setVisibility(View.GONE);
+                llBloodOxygen.setVisibility(View.GONE);
+                llBodyFat.setVisibility(View.GONE);
+                llBloodPressure.setVisibility(View.GONE);
+                llTemperature.setVisibility(View.VISIBLE);
+                temperatureTextView.setText(temperature);
+                ToastUtils.showShort(response.msg);
+            } else {
+
+            }
+        }, (call, t) -> {
+            ToastUtils.showShort(getString(R.string.network_error));
         });
     }
 
@@ -1132,6 +1170,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
         if (6 == i || 3 == i) {
 
         } else if (4 == i) {
+            Log.i("yys","===i=="+i);
             dialogConnectSuccess();
         } else if (16 == i) {
             isConnectSuccess = true;
@@ -1194,6 +1233,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
 
     /**
      * 血糖
+     *
      *
      * @param gluData
      */

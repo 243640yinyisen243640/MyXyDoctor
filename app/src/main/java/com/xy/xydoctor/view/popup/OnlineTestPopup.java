@@ -11,6 +11,7 @@ import com.xy.xydoctor.ui.activity.healthrecordadd.BloodOxygenAddActivity;
 import com.xy.xydoctor.ui.activity.healthrecordadd.BloodPressureAddActivity;
 import com.xy.xydoctor.ui.activity.healthrecordadd.BloodSugarAddActivity;
 import com.xy.xydoctor.ui.activity.healthrecordadd.HeightAndWeightAddActivity;
+import com.xy.xydoctor.ui.activity.healthrecordadd.TemperatureAddActivity;
 
 import razerdp.basepopup.BasePopupWindow;
 
@@ -33,10 +34,12 @@ public class OnlineTestPopup extends BasePopupWindow implements View.OnClickList
         LinearLayout llBloodPressure = findViewById(R.id.ll_blood_pressure);
         LinearLayout llBloodOxygen = findViewById(R.id.ll_blood_oxygen);
         LinearLayout llHeightWeight = findViewById(R.id.ll_height_weight);
+        LinearLayout llTemperature = findViewById(R.id.ll_temperature);
         llBloodSugar.setOnClickListener(this);
         llBloodPressure.setOnClickListener(this);
         llBloodOxygen.setOnClickListener(this);
         llHeightWeight.setOnClickListener(this);
+        llTemperature.setOnClickListener(this);
     }
 
     @Override
@@ -63,6 +66,12 @@ public class OnlineTestPopup extends BasePopupWindow implements View.OnClickList
             case R.id.ll_height_weight://身高体重
                 intent = new Intent(context, HeightAndWeightAddActivity.class);
                 intent.putExtra("userId", userId);
+                break;
+                case R.id.ll_temperature://身高体温
+                intent = new Intent(context, TemperatureAddActivity.class);
+                intent.putExtra("userId", userId);
+                break;
+            default:
                 break;
         }
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

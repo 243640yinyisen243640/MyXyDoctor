@@ -108,4 +108,6 @@
     <!--血糖列表 end-->
     <color name="goods_details_transparent">#66000000</color>
     <color name="defaultTransparent">#00000000</color>
+
+    <color name="new_black_text">#3B4552</color>
 </resources>
