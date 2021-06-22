@@ -24,6 +24,7 @@ import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.ui.activity.director.DoctorListActivity;
+import com.xy.xydoctor.ui.activity.director.RemovePatientDoctorListActivity;
 import com.xy.xydoctor.ui.activity.patientadd.PatientAddSearchActivity;
 import com.xy.xydoctor.ui.activity.patienteducation.PatientEducationAndMassMsgActivity;
 import com.xy.xydoctor.ui.activity.user.SearchUserActivity;
@@ -49,6 +50,8 @@ public class HomeDoctorFragment extends BaseFragment implements SimpleImmersionO
     LinearLayout llPatientMyGroup;
     @BindView(R.id.ll_patient_msg)
     LinearLayout llPatientMsg;
+    @BindView(R.id.ll_patient_remove)
+    LinearLayout llPatientRemove;
     @BindView(R.id.ll_search)
     LinearLayout llSearch;
     @BindView(R.id.lv_patient_group)
@@ -102,7 +105,7 @@ public class HomeDoctorFragment extends BaseFragment implements SimpleImmersionO
                 });
     }
 
-    @OnClick({R.id.ll_patient_add, R.id.ll_patient_my_group, R.id.ll_patient_msg, R.id.ll_search})
+    @OnClick({R.id.ll_patient_add, R.id.ll_patient_my_group, R.id.ll_patient_msg, R.id.ll_search,R.id.ll_patient_remove})
     public void onViewClicked(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -126,6 +129,13 @@ public class HomeDoctorFragment extends BaseFragment implements SimpleImmersionO
             case R.id.ll_search:
                 intent = new Intent(getPageContext(), SearchUserActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.ll_patient_remove:
+                intent = new Intent(getActivity(), RemovePatientDoctorListActivity.class);
+                intent.putExtra("type", "homeDoctor");
+                startActivity(intent);
+                break;
+            default:
                 break;
         }
     }

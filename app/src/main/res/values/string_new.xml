@@ -22,4 +22,5 @@
     <string name="temperature_record_default_with_unit">体温℃</string>
     <string name="up_temperature_automatic">自动上传</string>
     <string name="up_temperature_manualc">手动上传</string>
+    <string name="doctor_remove">患者转移</string>
 </resources>

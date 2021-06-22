@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+    <!--搜索-->
+    <LinearLayout
+        android:id="@+id/ll_patient_search_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:background="@drawable/shape_bg_search">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:src="@drawable/ic_search" />
+
+        <TextView
+            style="@style/text_black_14_f_w"
+            android:padding="@dimen/dp_10"
+            android:text="请输入手机号或者姓名" />
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_select_list_patient"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_patient_search_list">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <Button
+        android:id="@+id/bt_group_add_patient"
+        style="@style/text_white_16_f_w"
+        android:layout_gravity="bottom"
+        android:background="@color/main_red"
+        android:layout_alignParentBottom="true"
+        android:text="移至" />
+
+
+</RelativeLayout>
