@@ -44,18 +44,19 @@ public class DoctorListAdapter extends CommonAdapter<DoctorListBean> {
         } else {
             tvUnReadNum.setVisibility(View.VISIBLE);
             imgRightArrow.setVisibility(View.GONE);
-        }
-        int totalUnReadCount = item.getNum();
-        if (totalUnReadCount > 0) {
-            tvUnReadNum.setVisibility(View.VISIBLE);
-            if (totalUnReadCount > 999) {
-                tvUnReadNum.setText("...");
+            int totalUnReadCount = item.getNum();
+            if (totalUnReadCount > 0) {
+                tvUnReadNum.setVisibility(View.VISIBLE);
+                if (totalUnReadCount > 999) {
+                    tvUnReadNum.setText("...");
+                } else {
+                    tvUnReadNum.setText(totalUnReadCount + "");
+                }
             } else {
-                tvUnReadNum.setText(totalUnReadCount + "");
+                tvUnReadNum.setVisibility(View.GONE);
             }
-        } else {
-            tvUnReadNum.setVisibility(View.GONE);
         }
+
         String picture = item.getPicture();
         QMUIRadiusImageView imgHead = viewHolder.getView(R.id.img_head);
         Glide.with(Utils.getApp()).load(picture).into(imgHead);
