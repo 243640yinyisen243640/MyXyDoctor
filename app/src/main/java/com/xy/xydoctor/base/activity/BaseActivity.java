@@ -217,7 +217,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
                     }
                 });
-                ToastUtils.showShort("该账号已在其他设备登录");
+                ToastUtils.showShort("您账号已过期，请重新登陆。");
                 SPStaticUtils.clear();
                 ActivityUtils.finishAllActivities();
                 Intent intent = new Intent(Utils.getApp(), LoginActivity.class);

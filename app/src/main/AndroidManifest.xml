@@ -64,6 +64,8 @@
         <activity
             android:name=".ui.activity.director.RemovePatientDoctorListActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.director.PatientForDoctorListActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.director.DoctorListActivity" />
         <activity android:name=".test.TestActivity" />
         <activity android:name=".ui.activity.homesign.SignPatientInfoActivity" />

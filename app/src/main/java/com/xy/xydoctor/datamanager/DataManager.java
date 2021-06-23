@@ -1,6 +1,8 @@
 package com.xy.xydoctor.datamanager;
 
 import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.SPStaticUtils;
+import com.lyd.librongim.myrongim.GroupListAllDataBean;
 import com.xy.xydoctor.base.retrofit.BaseNetworkUtils;
 import com.xy.xydoctor.base.retrofit.HHSoftBaseResponse;
 import com.xy.xydoctor.bean.UpdateBean;
@@ -22,6 +24,7 @@ public class DataManager {
 
     /**
      * 上传温度数据
+     *
      * @param accessToken
      * @param uid
      * @param temperature
@@ -31,7 +34,7 @@ public class DataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> saveDataTemperature(String accessToken,String uid,String temperature,String time,String docId,String type, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> saveDataTemperature(String accessToken, String uid, String temperature, String time, String docId, String type, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         HashMap<String, String> map = new HashMap<>();
         map.put("access_token", accessToken);
         map.put("uid", uid);
@@ -39,9 +42,25 @@ public class DataManager {
         map.put("datetime", time);
         //上传类型 1自动 2手动
         map.put("type", type);
-        map.put("docuserid",docId);
+        map.put("docuserid", docId);
+        map.put("version", ConstantParam.SERVER_VERSION);
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/port/record/addTemperatureData", map, successCallBack, failureCallBack);
     }
 
+    /**
+     * 获取医生下面的患者
+     *
+     * @param doctorID
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getGroupList(String doctorID, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("userid", doctorID);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        map.put("version",ConstantParam.SERVER_VERSION);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, GroupListAllDataBean.class, "/doctor/index/getGroupusers", map, successCallBack, failureCallBack);
+    }
 
 }

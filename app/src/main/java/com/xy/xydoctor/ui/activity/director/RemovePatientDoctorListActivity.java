@@ -1,8 +1,10 @@
 package com.xy.xydoctor.ui.activity.director;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +16,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.adapter.DoctorListAdapter;
+import com.xy.xydoctor.adapter.PatientForListAdapter;
 import com.xy.xydoctor.base.activity.BaseEventBusActivity;
 import com.xy.xydoctor.bean.DoctorListBean;
 import com.xy.xydoctor.constant.ConstantParam;
@@ -80,9 +82,17 @@ public class RemovePatientDoctorListActivity extends BaseEventBusActivity {
                     @Override
                     public void accept(List<DoctorListBean> list) throws Exception {
                         if (list != null && list.size() > 0) {
-                            String type = getIntent().getStringExtra("type");
-                            DoctorListAdapter adapter = new DoctorListAdapter(getPageContext(), R.layout.item_doctor_list, list, type);
+                            PatientForListAdapter adapter = new PatientForListAdapter(getPageContext(), list);
                             lvDoctorList.setAdapter(adapter);
+                            lvDoctorList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    Intent intent = new Intent(getPageContext(),PatientForDoctorListActivity.class);
+                                    intent.putExtra("doctorName",list.get(position).getDocname());
+                                    intent.putExtra("doctorID",list.get(position).getUserid());
+                                    startActivity(intent);
+                                }
+                            });
                         }
                     }
                 }, new OnError() {

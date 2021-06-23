@@ -8,8 +8,8 @@
         android:id="@+id/ll_patient_search_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="@dimen/dp_10"
         android:layout_marginBottom="@dimen/dp_10"
         android:background="@drawable/shape_bg_search">
@@ -38,12 +38,14 @@
     </androidx.recyclerview.widget.RecyclerView>
 
 
-    <Button
-        android:id="@+id/bt_group_add_patient"
+    <TextView
+        android:id="@+id/tv_group_add_patient"
         style="@style/text_white_16_f_w"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="@color/main_red"
-        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:padding="10dp"
         android:text="移至" />
 
 

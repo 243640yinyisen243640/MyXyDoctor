@@ -21,6 +21,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.TemperatureListAdapter;
 import com.xy.xydoctor.bean.TemperatureDataBean;
+import com.xy.xydoctor.constant.ConstantParam;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
@@ -77,6 +78,8 @@ public class HealthRecordTemperatureListActivity extends BaseHideLineActivity {
         map.put("starttime", beginTime);
         map.put("endtime", endTime);
         map.put("page", pageIndex);
+        map.put("version", ConstantParam.SERVER_VERSION);
+        Log.i("yys","map==="+map);
         RxHttp.postForm(XyUrl.GET_TEMPERATURE_LIST)
                 .addAll(map)
                 .asResponse(TemperatureDataBean.class)
