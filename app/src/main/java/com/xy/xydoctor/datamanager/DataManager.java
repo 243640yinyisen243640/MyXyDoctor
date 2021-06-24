@@ -95,7 +95,7 @@ public class DataManager {
         map.put("userids", userids);
         map.put("access_token", SPStaticUtils.getString("token"));
         map.put("version", ConstantParam.SERVER_VERSION);
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, GroupUserBeanPatient.class, "/doctor/Index/searchusers", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/doctor/index/moveUsers", map, successCallBack, failureCallBack);
     }
 
 }

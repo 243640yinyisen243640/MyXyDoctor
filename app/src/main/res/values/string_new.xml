@@ -25,4 +25,5 @@
     <string name="doctor_remove">患者转移</string>
     <string name="no_data">数据为空</string>
     <string name="please_choice_other_doctor">请选择其他医生</string>
+    <string name="please_choice_patient">请选择患者</string>
 </resources>

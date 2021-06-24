@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.Utils;
+import com.bumptech.glide.Glide;
 import com.lyd.librongim.myrongim.GroupUserBeanPatient;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 import com.xy.xydoctor.R;
@@ -39,12 +41,14 @@ public class PatientForDoctorAdapter extends BaseRecycleViewAdapter<GroupUserBea
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
         viewHolder.ageSexTextView.setCompoundDrawablesWithIntrinsicBounds(getList().get(position).getSex() == 1 ? R.drawable.male : R.drawable.female, 0, 0, 0);
+        viewHolder.ageSexTextView.setText(getList().get(position).getAge()+"");
         viewHolder.nameTextView.setText(getList().get(position).getNickname());
         if (getList().get(position).isCheck()) {
             viewHolder.checkCheckBox.setChecked(true);
         } else {
             viewHolder.checkCheckBox.setChecked(false);
         }
+        Glide.with(Utils.getApp()).load(getList().get(position).getPicture()).into(viewHolder.headImgView);
         viewHolder.clickLinearLayout.setOnClickListener(v -> {
             if (getListener() != null) {
                 getListener().adapterClickListener(position, v);

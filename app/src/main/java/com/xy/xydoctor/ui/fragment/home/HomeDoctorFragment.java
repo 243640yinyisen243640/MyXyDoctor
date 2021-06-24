@@ -73,6 +73,11 @@ public class HomeDoctorFragment extends BaseFragment implements SimpleImmersionO
         //EasyFloat.dismiss();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDoctorList();
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -81,7 +86,7 @@ public class HomeDoctorFragment extends BaseFragment implements SimpleImmersionO
 
     private void getDoctorList() {
         //LoadingDialogUtils.show(getActivity());
-        bleDialogUtils.showProgress(getActivity());
+//        bleDialogUtils.showProgress(getActivity());
         HashMap<String, Object> map = new HashMap<>();
         RxHttp.postForm(XyUrl.GET_DOCTOR_LIST)
                 .addAll(map)
@@ -105,7 +110,7 @@ public class HomeDoctorFragment extends BaseFragment implements SimpleImmersionO
                 });
     }
 
-    @OnClick({R.id.ll_patient_add, R.id.ll_patient_my_group, R.id.ll_patient_msg, R.id.ll_search,R.id.ll_patient_remove})
+    @OnClick({R.id.ll_patient_add, R.id.ll_patient_my_group, R.id.ll_patient_msg, R.id.ll_search, R.id.ll_patient_remove})
     public void onViewClicked(View view) {
         Intent intent = null;
         switch (view.getId()) {

@@ -22,7 +22,6 @@ import com.xy.xydoctor.adapter.PatientForListAdapter;
 import com.xy.xydoctor.base.activity.BaseEventBusActivity;
 import com.xy.xydoctor.bean.DoctorListBean;
 import com.xy.xydoctor.constant.ConstantParam;
-import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
@@ -32,7 +31,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import io.reactivex.rxjava3.functions.Consumer;
-import retrofit2.Call;
 import rxhttp.wrapper.param.RxHttp;
 
 /**
@@ -101,9 +99,10 @@ public class RemovePatientDoctorListActivity extends BaseEventBusActivity {
                                     intent.putExtra("doctorName", list.get(position).getDocname());
                                     intent.putExtra("doctorID", list.get(position).getUserid());
                                     startActivityForResult(intent, REQUEST_CODE_FOR_CHECK);
+                                    finish();
                                 }
                             });
-                        }
+                       }
                     }
                 }, new OnError() {
                     @Override

@@ -2,7 +2,6 @@ package com.xy.xydoctor.ui.activity.director;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -75,11 +74,25 @@ public class PatientForDoctorListActivity extends BaseActivity {
                 //                intent.putExtra("checkList", (Serializable) allDataBean);
                 //                setResult(RESULT_OK,intent);
                 //                finish();
+                List<GroupUserBeanPatient> checkList = new ArrayList<>();
+
+                if (allDataBean != null && allDataBean.size() > 0) {
+                    for (int i = 0; i < allDataBean.size(); i++) {
+                        if (allDataBean.get(i).isCheck()) {
+                            checkList.add(allDataBean.get(i));
+                        }
+                    }
+                }
+
+                if (checkList == null || checkList.size() == 0) {
+                    ToastUtils.showShort(getString(R.string.please_choice_patient));
+                    return;
+                }
                 intent = new Intent(getPageContext(), RemovePatientDoctorListResultActivity.class);
                 intent.putExtra("doctorID", doctorID);
                 intent.putExtra("checkList", (Serializable) allDataBean);
                 startActivity(intent);
-
+                finish();
                 break;
             case R.id.ll_patient_search_list:
                 intent = new Intent(getPageContext(), SearchPatientActivity.class);
@@ -109,7 +122,6 @@ public class PatientForDoctorListActivity extends BaseActivity {
                                 }
                             }
                         }
-                        Log.i("yys", "list.size()===" + list.size());
                         for (int i = 0; i < list.size(); i++) {
                             allDataBean.get(list.get(i)).setCheck(true);
                             adapter.notifyDataSetChanged();

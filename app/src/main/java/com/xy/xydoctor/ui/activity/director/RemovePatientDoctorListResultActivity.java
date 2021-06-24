@@ -22,6 +22,7 @@ import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
+import com.xy.xydoctor.utils.DialogUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -101,7 +102,15 @@ public class RemovePatientDoctorListResultActivity extends BaseEventBusActivity 
 
                                         ToastUtils.showShort(getString(R.string.please_choice_other_doctor));
                                     } else {
-                                        saveData(list.get(position).getUserid());
+                                        DialogUtils.getInstance().showDialog(getPageContext(), "提示", "确定要转移给" + list.get(position).getDocname() + "吗？", true, () -> {
+                                            if (checkList == null || checkList.size() == 0) {
+                                                ToastUtils.showShort(getString(R.string.please_choice_patient));
+                                                return;
+                                            }
+                                            saveData(list.get(position).getUserid());
+                                        });
+
+
                                     }
                                 }
                             });
@@ -132,6 +141,7 @@ public class RemovePatientDoctorListResultActivity extends BaseEventBusActivity 
         Call<String> requestCall = DataManager.removePatient(doctorID + "", substring, (call, response) -> {
             if (response.code == 200) {
 
+                finish();
             }
         }, (call, t) -> {
             ToastUtils.showShort(getString(R.string.network_error));

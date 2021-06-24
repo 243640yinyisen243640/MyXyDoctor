@@ -142,6 +142,11 @@ public class SearchPatientActivity extends BaseActivity {
                             checkList.add(allDataBean.get(i));
                         }
                     }
+
+                    if (checkList == null || checkList.size() == 0) {
+                        ToastUtils.showShort(getString(R.string.please_choice_patient));
+                        return;
+                    }
                     Intent intent = new Intent();
                     intent.putExtra("checkList", (Serializable) checkList);
                     setResult(RESULT_OK, intent);
