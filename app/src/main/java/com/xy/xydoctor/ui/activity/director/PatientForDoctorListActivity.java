@@ -60,6 +60,20 @@ public class PatientForDoctorListActivity extends BaseActivity {
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         patientRecyclerView.setLayoutManager(layoutManager);
         setTitle(doctorName);
+        getTvMore().setVisibility(View.VISIBLE);
+        getTvMore().setCompoundDrawablePadding(5);
+        getTvMore().setCompoundDrawablesWithIntrinsicBounds(R.drawable.patient_uncheck, 0, 0, 0);
+        getTvMore().setText("全选");
+        getTvMore().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getTvMore().setCompoundDrawablesWithIntrinsicBounds(R.drawable.patient_check, 0, 0, 0);
+                for (int i = 0; i < allDataBean.size(); i++) {
+                    allDataBean.get(i).setCheck(true);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
         getGroupList();
     }
 

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.util.SPStaticUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.clj.fastble.BleManager;
 import com.google.android.material.tabs.TabLayout;
 import com.gyf.immersionbar.ImmersionBar;
@@ -24,6 +25,7 @@ import com.xy.xydoctor.base.activity.BaseActivity;
 import com.xy.xydoctor.bean.IsLiverFileBean;
 import com.xy.xydoctor.bean.UserInfoBean;
 import com.xy.xydoctor.constant.ConstantParam;
+import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
@@ -31,6 +33,7 @@ import com.xy.xydoctor.ui.fragment.patientinfo.PatientHealthArchiveFragment;
 import com.xy.xydoctor.ui.fragment.patientinfo.PatientHealthRecordFragment;
 import com.xy.xydoctor.ui.fragment.patientinfo.PatientLiverFilesFragment;
 import com.xy.xydoctor.ui.fragment.patientinfo.PatientOnlineTestFragment;
+import com.xy.xydoctor.utils.DialogUtils;
 import com.xy.xydoctor.view.popup.OnlineTestPopup;
 
 import java.util.ArrayList;
@@ -40,6 +43,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.rxjava3.functions.Consumer;
+import retrofit2.Call;
 import rxhttp.wrapper.param.Method;
 import rxhttp.wrapper.param.RxHttp;
 
@@ -83,6 +87,8 @@ public class PatientInfoActivity extends BaseActivity {
         hideLine();
         TableLayoutUtils.setTabRippleColor(tlTab, getPageContext());
         tvTitleNew.setText("患者详情");
+        tvBaseRightNew.setText("解绑");
+
         initPopup();
         getUserInfo();
         getIsLiverInfo();
@@ -267,7 +273,7 @@ public class PatientInfoActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.rl_send_msg, R.id.img_online_test_add, R.id.btn_back_new})
+    @OnClick({R.id.rl_send_msg, R.id.img_online_test_add, R.id.btn_back_new, R.id.tv_base_right_new})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_back_new:
@@ -282,6 +288,30 @@ public class PatientInfoActivity extends BaseActivity {
             case R.id.img_online_test_add:
                 onlineTestPopup.showPopupWindow(imgOnlineTestAdd);
                 break;
+            case R.id.tv_base_right_new:
+                DialogUtils.getInstance().showDialog(getPageContext(), "提示", "确定要解绑吗？", true, new DialogUtils.DialogCallBack() {
+                    @Override
+                    public void execEvent() {
+                        breakBind();
+                    }
+                });
+
+                break;
+            default:
+                break;
         }
+    }
+
+
+    private void breakBind() {
+        String userGuid = SPStaticUtils.getString("userGuid");
+        Call<String> requestCall = DataManager.breakBind(userGuid, (call, response) -> {
+            if (response.code == 200) {
+
+                finish();
+            }
+        }, (call, t) -> {
+            ToastUtils.showShort(getString(R.string.network_error));
+        });
     }
 }

@@ -86,6 +86,12 @@ public class HomePatientFragment extends BaseEventBusFragment implements SimpleI
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        initValue();
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //状态栏

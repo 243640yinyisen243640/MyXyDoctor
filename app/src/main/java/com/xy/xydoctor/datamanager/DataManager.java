@@ -98,4 +98,20 @@ public class DataManager {
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/doctor/index/moveUsers", map, successCallBack, failureCallBack);
     }
 
+    /**
+     * 解绑患者
+     *
+     * @param guid
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> breakBind(String guid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("guid", guid);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        map.put("version", ConstantParam.SERVER_VERSION);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/unBindDoc", map, successCallBack, failureCallBack);
+    }
+
 }
