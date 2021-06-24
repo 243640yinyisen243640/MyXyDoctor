@@ -32,10 +32,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_select_list_patient"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/ll_patient_search_list">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_below="@+id/ll_patient_search_list"/>
 
-    </androidx.recyclerview.widget.RecyclerView>
 
 
     <TextView

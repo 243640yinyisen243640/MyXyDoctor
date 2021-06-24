@@ -2,7 +2,7 @@ package com.xy.xydoctor.datamanager;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
-import com.lyd.librongim.myrongim.GroupListAllDataBean;
+import com.lyd.librongim.myrongim.GroupUserBeanPatient;
 import com.xy.xydoctor.base.retrofit.BaseNetworkUtils;
 import com.xy.xydoctor.base.retrofit.HHSoftBaseResponse;
 import com.xy.xydoctor.bean.UpdateBean;
@@ -59,8 +59,43 @@ public class DataManager {
         HashMap<String, String> map = new HashMap<>();
         map.put("userid", doctorID);
         map.put("access_token", SPStaticUtils.getString("token"));
-        map.put("version",ConstantParam.SERVER_VERSION);
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, GroupListAllDataBean.class, "/doctor/index/getGroupusers", map, successCallBack, failureCallBack);
+        map.put("version", ConstantParam.SERVER_VERSION);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, GroupUserBeanPatient.class, "/doctor/index/getGroupusers", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 搜索结果
+     *
+     * @param keyWord
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getGroupListSearch(String keyWord, String docid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("keyword", keyWord);
+        map.put("docid", docid);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        map.put("version", ConstantParam.SERVER_VERSION);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, GroupUserBeanPatient.class, "/doctor/Index/searchusers", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 转移患者
+     *
+     * @param docid
+     * @param userids
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> removePatient(String docid, String userids, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("docid", docid);
+        map.put("userids", userids);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        map.put("version", ConstantParam.SERVER_VERSION);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, GroupUserBeanPatient.class, "/doctor/Index/searchusers", map, successCallBack, failureCallBack);
     }
 
 }

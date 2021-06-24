@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_search_remove"
+        style="@style/hh_fi_wr"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@drawable/patient_bg_shape">
+
+        <ImageView
+            style="@style/hh_wr_wr"
+            android:layout_gravity="center"
+            android:padding="@dimen/dp_10"
+            android:src="@drawable/patient_search" />
+
+
+        <EditText
+            android:id="@+id/et_input_tel_remove"
+            style="@style/et_base_style_no_bg"
+            android:layout_gravity="center"
+            android:layout_weight="0.8"
+            android:hint="请输入患者姓名、手机号快速搜索"
+            android:inputType="text"
+            android:maxLength="11" />
+
+
+        <ImageView
+            android:id="@+id/img_del_remove"
+            style="@style/hh_wr_wr"
+            android:layout_gravity="center"
+            android:padding="@dimen/dp_10"
+            android:src="@drawable/patient_search_del"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ry_search_result_remove"
+        style="@style/listView"
+        android:layout_above="@+id/bt_search_remove"
+        android:layout_below="@+id/ll_search_remove">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/bt_search_remove"
+        style="@style/text_white_16_f_w"
+        android:layout_alignParentBottom="true"
+        android:background="@color/main_red"
+        android:text="搜索" />
+
+
+</RelativeLayout>

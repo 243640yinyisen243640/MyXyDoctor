@@ -23,4 +23,6 @@
     <string name="up_temperature_automatic">自动上传</string>
     <string name="up_temperature_manualc">手动上传</string>
     <string name="doctor_remove">患者转移</string>
+    <string name="no_data">数据为空</string>
+    <string name="please_choice_other_doctor">请选择其他医生</string>
 </resources>

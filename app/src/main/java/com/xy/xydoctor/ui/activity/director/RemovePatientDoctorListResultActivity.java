@@ -1,17 +1,14 @@
 package com.xy.xydoctor.ui.activity.director;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.lyd.baselib.util.eventbus.BindEventBus;
-import com.lyd.baselib.util.eventbus.EventMessage;
 import com.lyd.librongim.myrongim.GroupUserBeanPatient;
 import com.rxjava.rxlife.RxLife;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -21,7 +18,6 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.PatientForListAdapter;
 import com.xy.xydoctor.base.activity.BaseEventBusActivity;
 import com.xy.xydoctor.bean.DoctorListBean;
-import com.xy.xydoctor.constant.ConstantParam;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
@@ -41,16 +37,14 @@ import rxhttp.wrapper.param.RxHttp;
  * 创建日期: 2020/5/18 9:36
  */
 @BindEventBus
-public class RemovePatientDoctorListActivity extends BaseEventBusActivity {
-    /**
-     * 搜索带回来选中的列表
-     */
-    private static final int REQUEST_CODE_FOR_CHECK = 10;
+public class RemovePatientDoctorListResultActivity extends BaseEventBusActivity {
+
     private static final String TAG = "DoctorListActivity";
     @BindView(R.id.lv_doctor_list)
     ListView lvDoctorList;
     @BindView(R.id.srl_doctor_list)
     SmartRefreshLayout srlDoctorList;
+    private int doctorID;
 
     private List<GroupUserBeanPatient> checkList;
 
@@ -62,6 +56,8 @@ public class RemovePatientDoctorListActivity extends BaseEventBusActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        doctorID = getIntent().getIntExtra("doctorID", 0);
+        checkList = (List<GroupUserBeanPatient>) getIntent().getSerializableExtra("checkList");
         setTitle(getString(R.string.doctor_remove));
         getTvMore().setVisibility(View.GONE);
         getDoctorList();
@@ -97,10 +93,16 @@ public class RemovePatientDoctorListActivity extends BaseEventBusActivity {
                             lvDoctorList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    Intent intent = new Intent(getPageContext(), PatientForDoctorListActivity.class);
-                                    intent.putExtra("doctorName", list.get(position).getDocname());
-                                    intent.putExtra("doctorID", list.get(position).getUserid());
-                                    startActivityForResult(intent, REQUEST_CODE_FOR_CHECK);
+                                    //                                    Intent intent = new Intent(getPageContext(), PatientForDoctorListActivity.class);
+                                    //                                    intent.putExtra("doctorName", list.get(position).getDocname());
+                                    //                                    intent.putExtra("doctorID", list.get(position).getUserid());
+                                    //                                    startActivityForResult(intent, REQUEST_CODE_FOR_CHECK);
+                                    if (doctorID == list.get(position).getUserid()) {
+
+                                        ToastUtils.showShort(getString(R.string.please_choice_other_doctor));
+                                    } else {
+                                        saveData(list.get(position).getUserid());
+                                    }
                                 }
                             });
                         }
@@ -114,40 +116,26 @@ public class RemovePatientDoctorListActivity extends BaseEventBusActivity {
 
     }
 
-    @Override
-    protected void receiveEvent(EventMessage event) {
-        super.receiveEvent(event);
-        switch (event.getCode()) {
-            case ConstantParam.EventCode.DOCTOR_ADD_SUCCESS:
-                //Log.e(TAG, "接收成功");
-                getDoctorList();
-                break;
-            case ConstantParam.EventCode.DOCTOR_TO_DO_2_DIRECTOR_TO_DO:
-                Log.e(TAG, "接收成功");
-                getDoctorList();
-
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case REQUEST_CODE_FOR_CHECK:
-                    if (data != null) {
-                        checkList = (List<GroupUserBeanPatient>) data.getSerializableExtra("checkList");
-                    }
-                    break;
-                default:
-                    break;
+    private void saveData(int doctorID) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < checkList.size(); i++) {
+            if (checkList.get(i).isCheck()) {
+                int userid = checkList.get(i).getUserid();
+                stringBuilder.append(userid);
+                stringBuilder.append(",");
             }
 
         }
-    }
+        //截取最后,
+        String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
 
+        Call<String> requestCall = DataManager.removePatient(doctorID + "", substring, (call, response) -> {
+            if (response.code == 200) {
+
+            }
+        }, (call, t) -> {
+            ToastUtils.showShort(getString(R.string.network_error));
+        });
+    }
 
 }

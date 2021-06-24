@@ -7,6 +7,7 @@
     android:padding="10dp">
 
     <LinearLayout
+        android:id="@+id/ll_click_remove"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -21,7 +22,7 @@
             app:qmui_is_circle="true" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="330dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="center"
@@ -54,6 +55,7 @@
             android:id="@+id/cb_remove_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:layout_gravity="center"
             android:background="@drawable/selector_patient_for_doctoe_check"
             android:button="@null"

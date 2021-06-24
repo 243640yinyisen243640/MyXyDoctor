@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,11 @@ public class PatientForDoctorAdapter extends BaseRecycleViewAdapter<GroupUserBea
         } else {
             viewHolder.checkCheckBox.setChecked(false);
         }
+        viewHolder.clickLinearLayout.setOnClickListener(v -> {
+            if (getListener() != null) {
+                getListener().adapterClickListener(position, v);
+            }
+        });
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -51,6 +57,7 @@ public class PatientForDoctorAdapter extends BaseRecycleViewAdapter<GroupUserBea
         TextView nameTextView;
         TextView ageSexTextView;
         CheckBox checkCheckBox;
+        LinearLayout clickLinearLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,6 +65,7 @@ public class PatientForDoctorAdapter extends BaseRecycleViewAdapter<GroupUserBea
             nameTextView = itemView.findViewById(R.id.tv_remove_name);
             ageSexTextView = itemView.findViewById(R.id.tv_remove_age_sex);
             checkCheckBox = itemView.findViewById(R.id.cb_remove_check);
+            clickLinearLayout = itemView.findViewById(R.id.ll_click_remove);
         }
 
     }
