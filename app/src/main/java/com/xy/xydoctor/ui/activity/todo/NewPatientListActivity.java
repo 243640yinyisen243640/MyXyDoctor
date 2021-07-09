@@ -144,8 +144,10 @@ public class NewPatientListActivity extends BaseEventBusActivity implements Adap
         switch (view.getId()) {
             case R.id.tv_yes:
 //                toDoOperate(position, "2");
+                int userid = getIntent().getIntExtra("userid", 0);
                 Intent intent = new Intent(getPageContext(), PatientApplyActivity.class);
                 intent.putExtra("name", list.get(position).getName());
+                intent.putExtra("docid",userid);
                 intent.putExtra("listID", list.get(position).getId());
                 startActivityForResult(intent,REQUEST_CODE_FOR_REFRESH);
                 break;

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.FileProvider;
 
 import com.blankj.utilcode.constant.PermissionConstants;
@@ -85,6 +86,8 @@ public class DoctorAddAndEditActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         String type = getIntent().getStringExtra("type");
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         if ("add".equals(type)) {
             setTitle("添加医生");
             imgEdit.setVisibility(View.GONE);

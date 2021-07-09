@@ -86,29 +86,6 @@ public class FollowUpVisitListActivity extends BaseHideLineActivity {
                 finish();
                 break;
             case R.id.tv_right:
-//                int currentItem = vpContent.getCurrentItem();
-//                if (0 == currentItem) {
-//                    Intent intent = new Intent(getPageContext(), FollowUpVisitAddActivity.class);
-//                    intent.putExtra("type", "1");
-//                    intent.putExtra("userid", getIntent().getStringExtra("userid"));
-//                    if (getIntent().getBooleanExtra("from_family", false)) {
-//                        intent.putExtra("is_family", true);
-//                    }
-//                    startActivity(intent);
-//                } else if (1 == currentItem) {
-//                    Intent intent = new Intent(getPageContext(), FollowUpVisitAddActivity.class);
-//                    intent.putExtra("type", "2");
-//                    intent.putExtra("userid", getIntent().getStringExtra("userid"));
-//                    if (getIntent().getBooleanExtra("from_family", false)) {
-//                        intent.putExtra("is_family", true);
-//                    }
-//                    startActivity(intent);
-//                } else {
-//                    Intent intent = new Intent(getPageContext(), FollowUpVisitAddActivity.class);
-//                    intent.putExtra("type", "3");
-//                    intent.putExtra("userid", getIntent().getStringExtra("userid"));
-//                    startActivity(intent);
-//                }
                 int currentItem = vpContent.getCurrentItem();
                 if (0 == currentItem) {
                     Intent intent = new Intent(getPageContext(), FollowUpVisitAddNewActivity.class);

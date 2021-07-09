@@ -3,7 +3,6 @@ package com.xy.xydoctor.window;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -73,7 +72,6 @@ public class FollowUpTemplatePopupWindow extends PopupWindow {
 
         sureTextView.setOnClickListener(v -> {
             dismiss();
-            Log.i("yys", "size==" + list.size());
             if (list.size()!=0){
                 if (!TextUtils.isEmpty(list.get(adapter.getClickPosition()).getId() + "")) {
                     iaFollowUpChoose.IAFollowUpChoose(list.get(adapter.getClickPosition()).getId(), list.get(adapter.getClickPosition()).getPlanname());

@@ -103,6 +103,7 @@ public class ToDoListAdapter extends CommonAdapter<ToDoListBean> {
                     }
                     intent.putExtra("userid", userId);
                     intent.putExtra("type", type);
+//                    intent.putExtra("docid",)
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Utils.getApp().startActivity(intent);
                 }

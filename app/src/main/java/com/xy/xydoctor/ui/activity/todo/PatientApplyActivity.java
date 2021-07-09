@@ -146,7 +146,8 @@ public class PatientApplyActivity extends XYSoftUIBaseActivity implements View.O
      * 获取模板列表
      */
     private void getFastReplyList() {
-        String docId = SPStaticUtils.getString("docId");
+        //        String docId = SPStaticUtils.getString("docId");
+        int docId = getIntent().getIntExtra("docid", 0);
         String token = SPStaticUtils.getString("token");
         String userGuid = SPStaticUtils.getString("userGuid");
         HashMap<String, Object> map = new HashMap<>();
@@ -156,7 +157,6 @@ public class PatientApplyActivity extends XYSoftUIBaseActivity implements View.O
         // 1：糖尿病 2：高血压
         map.put("type", type);
         map.put("version", ConstantParam.SERVER_VERSION);
-        Log.i("yys", "map==" + map);
         RxHttp.postForm(XyUrl.FOLLOW_UP_ADD_FOLLOW_LIST)
                 .addAll(map)
                 .asResponseList(FollowListBean.class)
