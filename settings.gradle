@@ -4,4 +4,6 @@ include ':libchart'
 include ':libfloatingview'
 include ':librongim'
 include ':utilcode'
+include ':appupdateX'
+include ':ColorViewLib'
 

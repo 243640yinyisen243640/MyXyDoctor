@@ -104,6 +104,8 @@ android {
         implementation project(':libfloatingview')
         implementation project(':librongim')
         implementation project(':libchart')
+        implementation project(':appupdateX')
+        implementation project(':ColorViewLib')
         //implementation project(':utilcode')
 
         //RxHttp开始
