@@ -5,6 +5,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+
         //gradle-plugin
 //        maven { url 'https://maven.aliyun.com/repository/google' }
 //        maven { url 'https://maven.aliyun.com/repository/public' }

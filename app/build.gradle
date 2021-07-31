@@ -106,6 +106,20 @@ android {
         implementation project(':libchart')
         implementation project(':appupdateX')
         implementation project(':ColorViewLib')
+        //城市选择器
+        implementation project(':citypickerview')
+        //展开收起(单独或RecyclerView的Item中使用)
+        implementation project(':lib')
+        implementation project(':shadowLibrary')
+        //圆角
+        implementation project(':roundcorners')
+        //卷尺
+        implementation project(':rulerlib')
+        //签名
+        implementation project(':library')
+        //图片浏览器
+        implementation project(':imagebrowserlibrary')
+        implementation project(':MPChartLib')
         //implementation project(':utilcode')
 
         //RxHttp开始
@@ -121,27 +135,27 @@ android {
         //黄油刀
         annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
         //城市选择器
-        implementation 'liji.library.dev:citypickerview:5.2.4'
+//        implementation 'liji.library.dev:citypickerview:5.2.4'
         //展开收起(单独或RecyclerView的Item中使用)
-        implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+//        implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 
         //没有提示 start
         //ShadowLayout
-        implementation 'com.github.lihangleo2:ShadowLayout:3.2.0'
+//        implementation 'com.github.lihangleo2:ShadowLayout:3.2.0'
         //圆角
-        implementation 'com.github.KuangGang:RoundCorners:1.1.0'
+//        implementation 'com.github.KuangGang:RoundCorners:1.1.0'
         //卷尺
-        implementation 'com.github.superSp:RulerView:v1.5'
+//        implementation 'com.github.superSp:RulerView:v1.5'
         //签名
-        implementation 'com.github.F1ReKing:SignatureView:1.1.0'
+//        implementation 'com.github.F1ReKing:SignatureView:1.1.0'
         //图片浏览器
-        implementation 'com.github.maning0303:MNImageBrowser:V1.3.7'
+//        implementation 'com.github.maning0303:MNImageBrowser:V1.3.7'
         //MPAndroidChart
-        implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+//        implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
         //没有提示 end
 
         //蓝牙
-        implementation 'com.clj.fastble:FastBleLib:2.3.4'
+        implementation 'com.clj.astble:FastBleLib:2.3.4'
         //Zxing
         implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
         implementation 'me.devilsen:czxing:1.0.17'
@@ -173,7 +187,7 @@ android {
 //        //极光推送 End
 
         //阿里推送 Start
-        def aliCloudVersion="3.2.3"
+        def aliCloudVersion = "3.2.3"
         //移动推送SDK
         implementation "com.aliyun.ams:alicloud-android-push:$aliCloudVersion"
         //辅助通道SDK
