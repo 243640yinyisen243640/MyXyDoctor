@@ -155,7 +155,7 @@ android {
         //没有提示 end
 
         //蓝牙
-        implementation 'com.clj.astble:FastBleLib:2.3.4'
+        implementation 'com.clj.fastble:FastBleLib:2.3.4'
         //Zxing
         implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
         implementation 'me.devilsen:czxing:1.0.17'
