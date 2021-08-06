@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:forceDarkAllowed" tools:targetApi = "q">false</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
 
     </style>
 
@@ -496,5 +496,28 @@
         <item name="android:windowBackground">@android:color/transparent</item><!--设置dialog的背景-->
         <item name="android:backgroundDimEnabled">true</item><!--背景是否模糊显示-->
         <item name="android:backgroundDimAmount">0.6</item><!--灰度-->
+    </style>
+
+    <style name="community_button_choice">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:gravity">bottom|center_horizontal</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="community_special_operate">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/shape_bg_white_5</item>
+        <item name="android:drawableRight">@drawable/selector_community_special_operate</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:textColor">@color/base_black</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:button">@null</item>
     </style>
 </resources>

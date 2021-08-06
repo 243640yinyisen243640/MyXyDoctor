@@ -25,14 +25,10 @@ public abstract class XYSoftUIBaseActivity extends XYSoftBaseActivity {
         contentView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         contentView.addView(topViewManager.topView(), new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         containerView = new FrameLayout(getPageContext());
-
         contentView.addView(containerView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1));
         setContentView(contentView);
     }
 
-    protected boolean isFullScreen() {
-        return isScreen;
-    }
 
     /**
      * 头部管理器

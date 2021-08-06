@@ -11,6 +11,7 @@
     <color name="background">#F2F2F2</color>
     <!-- 纯黑色 -->
     <color name="black">#000000</color>
+    <color name="base_black">#1A1A1A</color>
     <!-- 黑色字体 -->
     <color name="black_text">#323232</color>
     <!-- 白色-->

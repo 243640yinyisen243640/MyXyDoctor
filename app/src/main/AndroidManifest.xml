@@ -303,6 +303,10 @@
         <activity
             android:name=".ui.activity.todo.PatientApplyActivity"
             android:screenOrientation="portrait" />
+
+        <!--社区管理模块-->
+        <activity android:name=".ui.activity.community_management.SettingsPropertyActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

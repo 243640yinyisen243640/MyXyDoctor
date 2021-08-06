@@ -26,4 +26,14 @@
     <string name="no_data">数据为空</string>
     <string name="please_choice_other_doctor">请选择其他医生</string>
     <string name="please_choice_patient">请选择患者</string>
+    <string name="huahansoft_load_state_loading">正在加载</string>
+    <string name="huahansoft_load_state_no_data">暂无数据</string>
+    <string name="huahansoft_load_state_no_more_data">暂无更多数据</string>
+    <string name="huahansoft_load_state_failed">加载失败，点击重试</string>
+    <string name="community_setting_title">设置</string>
+    <string name="community_setting_version_updata">版本更新</string>
+    <string name="community_setting_out_login">退出当前账号</string>
+    <string name="community_special_operate_delete">删除该用户</string>
+    <string name="community_special_operate_die">医学死亡</string>
+    <string name="base_submit">提交</string>
 </resources>

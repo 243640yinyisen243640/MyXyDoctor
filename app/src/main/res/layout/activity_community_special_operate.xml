@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_background"
+    android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/cb_community_so_delete"
+        style="@style/community_special_operate"
+        android:layout_margin="10dp"
+        android:checked="true"
+        android:drawableLeft="@drawable/community_special_operate_delete"
+        android:text="@string/community_special_operate_delete" />
+
+    <CheckBox
+        android:id="@+id/cb_community_so_die"
+        style="@style/community_special_operate"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:drawableLeft="@drawable/community_special_operate_die"
+        android:text="@string/community_special_operate_die" />
+
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_community_so_submit"
+        style="@style/community_button_choice"
+        android:text="@string/base_submit" />
+
+
+</LinearLayout>
