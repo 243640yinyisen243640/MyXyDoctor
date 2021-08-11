@@ -25,6 +25,12 @@
         tools:layout="@layout/fragment_home_patient" />
 
     <fragment
+        android:id="@+id/navigation_community_manager"
+        android:name="com.xy.xydoctor.ui.fragment.community_management.FragmentCommunityManagement"
+        android:label="社区管理"
+        tools:layout="@layout/fragment_community_manager" />
+
+    <fragment
         android:id="@+id/navigation_user"
         android:name="com.xy.xydoctor.ui.fragment.home.HomeUserFragment"
         android:label="我的"

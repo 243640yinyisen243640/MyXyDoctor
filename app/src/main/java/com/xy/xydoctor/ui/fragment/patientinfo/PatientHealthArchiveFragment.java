@@ -1,6 +1,9 @@
 package com.xy.xydoctor.ui.fragment.patientinfo;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -8,6 +11,8 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -49,6 +54,7 @@ import com.xy.xydoctor.utils.CityPickerUtils;
 import com.xy.xydoctor.utils.DialogUtils;
 import com.xy.xydoctor.utils.PickerUtils;
 import com.xy.xydoctor.utils.TimeFormatUtils;
+import com.xy.xydoctor.utils.XyScreenUtils;
 
 import java.math.RoundingMode;
 import java.text.NumberFormat;
@@ -752,6 +758,7 @@ public class PatientHealthArchiveFragment extends BaseEventBusFragment implement
         String text = tvLeft.getText().toString();
         switch (text) {
             case "真实姓名":
+//                showEditDialog("");
                 DialogUtils.getInstance().showEditTextDialog(getPageContext(), "真实姓名", "请输入真实姓名", text1 -> {
                     tvRight.setText(text1);
                     toDoSave("nickname", text1);
@@ -1591,6 +1598,68 @@ public class PatientHealthArchiveFragment extends BaseEventBusFragment implement
                 break;
         }
     }
+
+    /**
+     * 显示编辑框
+     */
+    private void showEditDialog(String msg) {
+
+        Dialog dialog = new Dialog(getPageContext(), R.style.HuaHanSoft_Dialog_Base);
+        View view = View.inflate(getPageContext(), R.layout.activity_user_info_dialog, null);
+        EditText msgEditText = view.findViewById(R.id.tv_dialog_msg);
+        TextView cancelTextView = view.findViewById(R.id.tv_dialog_cancel);
+        TextView sureTextView = view.findViewById(R.id.tv_dialog_sure);
+
+        msgEditText.setText(msg);
+        //  msgEditText.setSelection(msg.length());
+        //设置14个字长
+        msgEditText.setMaxWidth(14);
+        dialog.setContentView(view);
+        android.view.WindowManager.LayoutParams attributes = dialog.getWindow().getAttributes();
+        attributes.width = XyScreenUtils.screenWidth(getPageContext()) - XyScreenUtils.dip2px(getPageContext(), 1);
+        dialog.getWindow().setAttributes(attributes);
+        cancelTextView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                dialog.dismiss();
+            }
+        });
+        sureTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+
+                String nick = msgEditText.getText().toString().trim();
+                if (TextUtils.isEmpty(nick)) {
+                    ToastUtils.showShort("");
+
+                    return;
+                }
+
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showInputMethod();
+            }
+        }, 100);
+
+    }
+
+
+    private void showInputMethod() {
+        //自动弹出键盘
+        InputMethodManager inputManager = (InputMethodManager) getPageContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+        //强制隐藏Android输入法窗口
+        // inputManager.hideSoftInputFromWindow(edit.getWindowToken(),0);
+    }
+
 
     @Override
     public void onClick(View v) {

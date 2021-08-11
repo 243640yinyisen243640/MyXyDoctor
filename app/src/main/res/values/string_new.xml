@@ -36,4 +36,12 @@
     <string name="community_special_operate_delete">删除该用户</string>
     <string name="community_special_operate_die">医学死亡</string>
     <string name="base_submit">提交</string>
+    <string name="community_manager_title">社区管理</string>
+    <string name="base_filter">筛选</string>
+    <string name="community_search_content">请输入姓名或手机号完成搜索</string>
+    <string name="community_add_user">添加用户</string>
+    <string name="community_num">小区数量</string>
+    <string name="community_wait_things_first">待办</string>
+    <string name="community_wait_things_second">事项</string>
+    <string name="community_wait_things_statistics">统计</string>
 </resources>

@@ -68,7 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         //View注入
         ButterKnife.bind(this);
         //状态栏
-        ImmersionBar.with(this).fitsSystemWindows(true).statusBarDarkFont(true).statusBarColor(R.color.white).init();
+        ImmersionBar.with(this).fitsSystemWindows(true).statusBarDarkFont(true).statusBarColor(R.color.transparent).init();
         //初始化数据
         init(savedInstanceState);
         setScreenOrientation(true);

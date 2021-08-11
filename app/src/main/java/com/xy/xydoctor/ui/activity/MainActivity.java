@@ -1,6 +1,7 @@
 package com.xy.xydoctor.ui.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -272,6 +273,14 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
                         setTitle("我的医生");
                         getTvMore().setVisibility(View.GONE);
                         break;
+                    case R.id.navigation_community_manager:
+                        navController.navigate(R.id.navigation_community_manager);
+                        hideTitleBar();
+                        hideBack();
+                        hideLine();
+                        setTitle("社区管理");
+                        getTvMore().setVisibility(View.GONE);
+                        break;
                     // case R.id.navigation_home_sign:
                     //     navController.navigate(R.id.navigation_home_sign);
                     //     showTitleBar();
@@ -289,6 +298,18 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
             }
         });
     }
+
+    private void initWindow(boolean isVisibility) {
+        if (isVisibility && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        } else {
+            //初始化，将状态栏和标题栏设为透明
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+    }
+
 
     /**
      * 设置别名
@@ -322,17 +343,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
     }
 
 
-    private void toUpDataNew() {
-        String token = SPStaticUtils.getString("token");
-        Call<String> requestCall = DataManager.getUpData(token, (call, response) -> {
-            if (response.code == 200) {
-                UpdateBean updateBean = (UpdateBean) response.object;
-                toDoUpdate(updateBean);
-            }
-        }, (call, t) -> {
 
-        });
-    }
 
 
     /**
@@ -647,5 +658,16 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
     protected void onStop() {
         super.onStop();
         FloatingView.get().detach(this);
+    }
+    private void toUpDataNew() {
+        String token = SPStaticUtils.getString("token");
+        Call<String> requestCall = DataManager.getUpData(token, (call, response) -> {
+            if (response.code == 200) {
+                UpdateBean updateBean = (UpdateBean) response.object;
+                toDoUpdate(updateBean);
+            }
+        }, (call, t) -> {
+
+        });
     }
 }

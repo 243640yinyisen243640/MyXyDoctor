@@ -15,6 +15,10 @@
         android:id="@+id/navigation_doctor"
         android:icon="@drawable/main_bottom_patient_selector"
         android:title="医生 " />
+    <item
+        android:id="@+id/navigation_community_manager"
+        android:icon="@drawable/main_bottom_community_namager_selector"
+        android:title="社区管理 " />
 
     <!--    <item-->
     <!--        android:id="@+id/navigation_home_sign"-->
