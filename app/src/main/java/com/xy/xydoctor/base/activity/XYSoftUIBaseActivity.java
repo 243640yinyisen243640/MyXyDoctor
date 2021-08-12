@@ -6,8 +6,11 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
+import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.manager.XYSoftDefaultTopViewManager;
+import com.xy.xydoctor.utils.StatusBarUtils;
 
 public abstract class XYSoftUIBaseActivity extends XYSoftBaseActivity {
     private LinearLayout contentView;
@@ -19,6 +22,7 @@ public abstract class XYSoftUIBaseActivity extends XYSoftBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtils.statusBarColor(this, ContextCompat.getColor(this, R.color.white));
         topViewManager = new XYSoftDefaultTopViewManager(this, false);
         contentView = new LinearLayout(getPageContext());
         contentView.setOrientation(LinearLayout.VERTICAL);

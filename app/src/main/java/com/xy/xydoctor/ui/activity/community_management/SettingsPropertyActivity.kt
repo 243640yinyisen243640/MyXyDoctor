@@ -2,9 +2,12 @@ package com.xy.xydoctor.ui.activity.community_management
 
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.xy.xydoctor.R
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity
+import com.xy.xydoctor.utils.StatusBarUtils
 
 /**
  * Author: LYD
@@ -13,7 +16,7 @@ import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity
 
  */
 class SettingsPropertyActivity : XYSoftUIBaseActivity(), View.OnClickListener {
-    private var versionLinerLayout: TextView? = null
+    private var versionLinerLayout: LinearLayout? = null
     private var versionTextView: TextView? = null
     private var outLoginTextView: TextView? = null
 

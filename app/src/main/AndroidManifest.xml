@@ -305,8 +305,12 @@
             android:screenOrientation="portrait" />
 
         <!--社区管理模块-->
-        <activity android:name=".ui.activity.community_management.SettingsPropertyActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.community_management.SettingsPropertyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.community_management.SpecialOperateActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
