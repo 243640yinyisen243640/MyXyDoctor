@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cb_filter_disease_type"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:button="@null"
+    android:gravity="center"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
+    android:text="糖尿病"
+    android:textColor="@color/selector_color_filter_text"
+    android:textSize="14sp">
+
+</TextView>

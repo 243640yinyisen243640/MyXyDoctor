@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/community_filter_title"
+            android:text="@string/community_filter_community" />
+
+        <TextView
+            android:id="@+id/tv_filter_all_community"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_bg_background_5"
+            android:drawableRight="@drawable/community_down"
+            android:paddingLeft="12dp"
+            android:paddingTop="15dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="15dp"
+            android:text="@string/community_filter_all_community"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            style="@style/community_filter_title"
+            android:text="@string/community_filter_building_infomation" />
+
+        <CheckBox
+            android:id="@+id/tv_filter_empty_room"
+            style="@style/community_filter_content_choose"
+            android:layout_marginTop="10dp"
+            android:text="@string/community_empty_room" />
+
+        <TextView
+            style="@style/community_filter_title"
+            android:text="@string/base_sex" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/tv_filter_female"
+                style="@style/community_filter_content_choose"
+                android:checked="true"
+                android:text="@string/base_male" />
+
+            <CheckBox
+                android:id="@+id/tv_filter_male"
+                style="@style/community_filter_content_choose"
+                android:layout_marginLeft="10dp"
+                android:text="@string/base_female" />
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/community_filter_title"
+            android:text="@string/community_age_util" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_filter_lowermost_age"
+                style="@style/community_filter_age"
+                android:hint="@string/community_age_lowermost" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="-"
+                android:textColor="@color/gray_light" />
+
+            <EditText
+                android:id="@+id/et_filter_most_age"
+                style="@style/community_filter_age"
+                android:hint="@string/community_age_most" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/community_filter_title"
+            android:text="@string/community_type_of_disease" />
+
+        <com.xy.xydoctor.customerView.NoConflictGridView
+            android:id="@+id/gv_community_type_of_disease"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="3"
+            android:verticalSpacing="10dp" />
+
+        <TextView
+            style="@style/community_filter_title"
+            android:text="@string/community_age_type_of_other" />
+
+        <com.xy.xydoctor.customerView.NoConflictGridView
+            android:id="@+id/gv_community_type_of_other"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="3"
+            android:verticalSpacing="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_filter_reset"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_white_black"
+                android:gravity="center"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:text="@string/filter_reset"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_filter_submit"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="2"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_bg_main_5"
+                android:gravity="center"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:text="@string/base_submit"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

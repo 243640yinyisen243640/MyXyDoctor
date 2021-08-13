@@ -592,4 +592,36 @@
         <item name="android:textColor">#4A4A4A</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="community_filter_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="community_filter_content_choose">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:background">@drawable/selector_community_filter_choose</item>
+        <item name="android:button">@null</item>
+        <item name="android:paddingLeft">40dp</item>
+        <item name="android:paddingRight">40dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/selector_color_filter_text</item>
+    </style>
+
+    <style name="community_filter_age">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:background">@drawable/shape_bg_background_5</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">35dp</item>
+        <item name="android:paddingRight">35dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>

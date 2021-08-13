@@ -311,6 +311,10 @@
         <activity
             android:name=".ui.activity.community_management.SpecialOperateActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.community_management.CommunityFilterActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

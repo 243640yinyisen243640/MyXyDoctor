@@ -651,7 +651,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
     @Override
     protected void onStart() {
         super.onStart();
-        FloatingView.get().attach(this);
+//        FloatingView.get().attach(this);
     }
 
     @Override

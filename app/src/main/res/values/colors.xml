@@ -111,4 +111,5 @@
 
     <color name="new_black_text">#3B4552</color>
     <color name="base_background">#F4F4F4</color>
+    <color name="defaultGrayText">#9F9F9F</color>
 </resources>

@@ -44,4 +44,18 @@
     <string name="community_wait_things_first">待办</string>
     <string name="community_wait_things_second">事项</string>
     <string name="community_wait_things_statistics">统计</string>
+    <string name="community_filter_community">小区</string>
+    <string name="community_filter_all_community">全部小区</string>
+    <string name="community_filter_building_infomation">楼层信息</string>
+    <string name="base_male">男</string>
+    <string name="base_female">女</string>
+    <string name="base_sex">性别</string>
+    <string name="community_age_util">年龄区间</string>
+    <string name="community_age_lowermost">最低年龄</string>
+    <string name="community_age_most">最高年龄</string>
+    <string name="community_type_of_disease">疾病类型</string>
+    <string name="community_age_type_of_other">其他</string>
+    <string name="community_empty_room">空房间</string>
+    <string name="filter_reset">重置</string>
+    <string name="waiting">请稍后&#8230;</string>
 </resources>
