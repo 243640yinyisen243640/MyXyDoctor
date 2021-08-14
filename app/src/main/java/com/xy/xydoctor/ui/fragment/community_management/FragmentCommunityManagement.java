@@ -8,7 +8,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.imuxuan.floatingview.FloatingView;
 import com.lyd.baselib.base.fragment.BaseFragment;
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.ui.activity.community_management.CommunityFilterActivity;
+import com.xy.xydoctor.ui.activity.community_management.CommunityUserInfoActivity;
 
 import butterknife.BindView;
 
@@ -109,12 +109,12 @@ public class FragmentCommunityManagement extends BaseFragment implements View.On
 
         switch (v.getId()) {
             case R.id.tv_community_add_user:
-                Intent intent = new Intent(getPageContext(), CommunityFilterActivity.class);
-
+                Intent intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
                 startActivity(intent);
                 break;
             default:
                 break;
+
         }
     }
 }
