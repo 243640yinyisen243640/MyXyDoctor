@@ -316,8 +316,20 @@
             android:name=".ui.activity.community_management.CommunityFilterActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.activity.community_management.CommunityUserInfoActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.community_management.CommunityUserInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.community_management.TextActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.community_management.CommunityFollowupAgentListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.community_management.CommunityFollowupAgentSearchListActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

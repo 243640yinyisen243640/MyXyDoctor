@@ -2,13 +2,17 @@ package com.xy.xydoctor.ui.fragment.community_management;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.imuxuan.floatingview.FloatingView;
 import com.lyd.baselib.base.fragment.BaseFragment;
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.ui.activity.community_management.CommunityUserInfoActivity;
+import com.xy.xydoctor.ui.activity.community_management.CommunityFilterActivity;
+import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentListActivity;
+import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentSearchListActivity;
+import com.xy.xydoctor.ui.activity.community_management.TextActivity;
 
 import butterknife.BindView;
 
@@ -50,6 +54,11 @@ public class FragmentCommunityManagement extends BaseFragment implements View.On
      */
     @BindView(R.id.tv_community_building_num)
     TextView buildingNumTextView;
+    /**
+     * 小区数量点击
+     */
+    @BindView(R.id.ll_community_filter_building_num)
+    LinearLayout buildingNumLinearLayout;
     /**
      * 用户数量
      */
@@ -93,23 +102,54 @@ public class FragmentCommunityManagement extends BaseFragment implements View.On
         ImmersionBar.with(this)
                 .statusBarColor(R.color.transparent)  //指定状态栏颜色,根据情况是否设置
                 .init();
+        getCommunityInfo();
 
     }
 
     private void initListener() {
         addUserTextView.setOnClickListener(this);
+        buildingNumLinearLayout.setOnClickListener(this);
+        toBeDoneNumTextView.setOnClickListener(this);
+        abnormalDataTextView.setOnClickListener(this);
+        followUpStatisticsTextView.setOnClickListener(this);
+        numStatisticsTextView.setOnClickListener(this);
     }
 
+    /**
+     * 获取详细信息
+     */
     private void getCommunityInfo() {
 
     }
 
     @Override
     public void onClick(View v) {
-
+        Intent intent;
         switch (v.getId()) {
             case R.id.tv_community_add_user:
-                Intent intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
+                intent = new Intent(getPageContext(), TextActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ll_community_filter_building_num:
+                //小区数量
+                intent = new Intent(getPageContext(), CommunityFollowupAgentListActivity.class);
+                //                intent.putExtra("commuinityName",)
+                startActivity(intent);
+                break;
+            case R.id.tv_community_follow_up_to_be_done:
+                //随访代办
+                intent = new Intent(getPageContext(), CommunityFollowupAgentListActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.tv_community_search:
+                intent = new Intent(getPageContext(), CommunityFollowupAgentSearchListActivity.class);
+                startActivity(intent);
+
+                break;
+            case R.id.tv_community_filter:
+
+                intent = new Intent(getPageContext(), CommunityFilterActivity.class);
                 startActivity(intent);
                 break;
             default:

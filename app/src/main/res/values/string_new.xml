@@ -72,4 +72,7 @@
     <string name="follow_up_agent_unit_num">单元数</string>
     <string name="follow_up_agent_households_num">随访住户</string>
     <string name="follow_up_agent_total_num">随访总人数</string>
+    <string name="community_data_abnormal_suagar">血糖</string>
+    <string name="community_data_abnormal_pressure">血压</string>
+    <string name="community_data_abnormal_title">数据异常</string>
 </resources>

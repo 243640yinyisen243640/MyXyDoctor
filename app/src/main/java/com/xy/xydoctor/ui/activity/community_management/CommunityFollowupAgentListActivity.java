@@ -32,13 +32,15 @@ import io.reactivex.rxjava3.functions.Consumer;
 import rxhttp.wrapper.param.RxHttp;
 
 /**
- * 描述:  血氧记录
+ * 描述:
  * 作者: LYD
  * 创建日期: 2020/5/26 11:07
  */
 public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
     @BindView(R.id.community_follow_img_top_back)
     ImageView imgTopBack;
+    @BindView(R.id.tv_community_follow_up_title)
+    TextView titleTextView;
     @BindView(R.id.et_follow_up_agent)
     TextView searchTextView;
     @BindView(R.id.rv_follow_up_agent_list)
@@ -62,6 +64,7 @@ public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         hideTitleBar();
+
         getData(beginTime, endTime);
         initRefresh();
     }
@@ -137,7 +140,7 @@ public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
     @OnClick({R.id.community_follow_img_top_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.img_top_back:
+            case R.id.community_follow_img_top_back:
                 finish();
                 break;
 

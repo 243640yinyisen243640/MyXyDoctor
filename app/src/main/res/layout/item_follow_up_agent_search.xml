@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:background="@drawable/shape_bg_white_5"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_fu_search_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_fu_search_sex"
+            style="@style/follow_up_search_infomation"
+            android:text="@string/app_name" />
+
+        <View style="@style/style_follow_up_search_line" />
+
+        <TextView
+
+            android:id="@+id/tv_fu_search_age"
+            style="@style/follow_up_search_infomation"
+            android:text="@string/app_name" />
+
+        <View style="@style/style_follow_up_search_line" />
+
+        <TextView
+            android:id="@+id/tv_fu_search_phone"
+            style="@style/follow_up_search_infomation"
+            android:text="@string/app_name" />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_fu_search_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/follow_up_agent_location"
+        android:drawablePadding="5dp"
+        android:text="@string/app_name"
+        android:textColor="#333333"
+        android:textSize="14sp" />
+    <TextView
+        android:id="@+id/tv_fu_location_search_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/app_name"
+        android:textColor="#858585"
+        android:textSize="12sp" />
+
+
+</LinearLayout>
