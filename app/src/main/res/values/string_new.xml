@@ -75,4 +75,17 @@
     <string name="community_data_abnormal_suagar">血糖</string>
     <string name="community_data_abnormal_pressure">血压</string>
     <string name="community_data_abnormal_title">数据异常</string>
+    <string name="data_abnormal_start_time">请选择时间</string>
+    <string name="data_abnormal_up">偏高</string>
+    <string name="data_abnormal_low">偏低</string>
+    <string name="data_abnormal_normal">正常</string>
+    <string name="data_abnormal_not">未测</string>
+    <string name="data_abnormal_yourself">自定义数值</string>
+    <string name="data_abnormal_filter_time">时间</string>
+    <string name="data_abnormal_filter_data_type">数据类型</string>
+    <string name="data_abnormal_filter_no_deal">未处理</string>
+    <string name="data_abnormal_filter_all">全部</string>
+    <string name="data_abnormal_filter_have_deal">已处理</string>
+    <string name="community_follow_up_statistics">随访统计</string>
+    <string name="community_statistics">数据统计</string>
 </resources>

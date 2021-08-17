@@ -19,9 +19,11 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.FollowUpVisitListAdapter;
 import com.xy.xydoctor.bean.FollowUpVisitListBean;
 import com.xy.xydoctor.constant.ConstantParam;
+import com.xy.xydoctor.imp.BaseCallBack;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
+import com.xy.xydoctor.view.popup.DataAbnormalPopup;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +43,8 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
     private static final String TAG = "FollowUpVisitFragment";
     @BindView(R.id.tv_data_abnormal_first)
     TextView firstTextView;
+    @BindView(R.id.ll_show_pop)
+    LinearLayout showLinearLayout;
     @BindView(R.id.tv_data_abnormal_second)
     TextView secondTextView;
     @BindView(R.id.tv_data_abnormal_down)
@@ -61,6 +65,9 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
     private int pageIndex = 2;
     //分页结束
 
+    //
+    DataAbnormalPopup popu;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_data_abnormal;
@@ -69,7 +76,14 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
     @Override
     protected void init(View rootView) {
         initRefresh();
+        popu = new DataAbnormalPopup(getPageContext(), new BaseCallBack() {
+            @Override
+            public void callBack(Object object) {
+
+            }
+        });
     }
+
 
     /**
      * 获取列表数据
@@ -122,7 +136,7 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
             public void onRefresh(RefreshLayout refreshLayout) {
                 srlFollowUpVisit.finishRefresh(2000);
                 pageIndex = 2;
-                getFollowUpList();
+                //                getFollowUpList();
             }
         });
         srlFollowUpVisit.setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -166,7 +180,7 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
      */
     @Override
     public void loadData() {
-        getFollowUpList();
+        //        getFollowUpList();
     }
 
     @Override
@@ -176,18 +190,46 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
             case ConstantParam.EventCode.FOLLOW_UP_VISIT_SUBMIT:
                 llEmpty.setVisibility(View.GONE);
                 srlFollowUpVisit.setVisibility(View.VISIBLE);
-                getFollowUpList();
+                //                getFollowUpList();
                 break;
         }
     }
+
     @OnClick({R.id.tv_data_abnormal_down})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_data_abnormal_down:
-
+                popu.showPopupWindow(showLinearLayout);
                 break;
             default:
                 break;
         }
     }
+
+
+    //    private DataAbnormalPopup menuWindow;
+    //
+    //    private void showMenuWindow() {
+    //        if (menuWindow != null && menuWindow.isShowing()) {
+    //            menuWindow.dismiss();
+    //        }
+    //        if (menuWindow == null) {
+    //            menuWindow = new DataAbnormalPopup(getPageContext(), object -> {
+    //                menuWindow.dismiss();
+    //                int position = (int) object;
+    //                Intent intent;
+    //                switch (position) {
+    //                    case 0:
+    //                        break;
+    //                    default:
+    //                        break;
+    //                }
+    //            });
+    //        }
+    //
+    //        if (!isRemoving()) {
+    //            menuWindow.showAsDropDown(showLinearLayout);
+    //        }
+    //    }
+
 }

@@ -9,6 +9,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.imuxuan.floatingview.FloatingView;
 import com.lyd.baselib.base.fragment.BaseFragment;
 import com.xy.xydoctor.R;
+import com.xy.xydoctor.ui.activity.community_management.CommunityDataAbnormalActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFilterActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentListActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentSearchListActivity;
@@ -148,8 +149,11 @@ public class FragmentCommunityManagement extends BaseFragment implements View.On
 
                 break;
             case R.id.tv_community_filter:
-
                 intent = new Intent(getPageContext(), CommunityFilterActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tv_community_abnormal_data:
+                intent = new Intent(getPageContext(), CommunityDataAbnormalActivity.class);
                 startActivity(intent);
                 break;
             default:

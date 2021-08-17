@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 
@@ -60,5 +61,16 @@ public class XYSoftDensityUtils {
         } else {
             return false;
         }
+    }
+    /**
+     * 获取屏幕的高（单位px）
+     *
+     * @param context
+     * @return
+     */
+    public static int screenHeight(Context context) {
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.heightPixels;
     }
 }

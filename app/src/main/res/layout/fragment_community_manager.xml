@@ -196,17 +196,17 @@
             <TextView
                 android:id="@+id/tv_community_follow_up_to_be_done"
                 style="@style/community_wait_thind_num"
-                android:text="@string/app_name" />
+                android:text="@string/follow_up_agent_title" />
 
             <TextView
                 android:id="@+id/tv_community_abnormal_data"
                 style="@style/community_wait_thind_num"
-                android:text="@string/app_name" />
+                android:text="@string/community_data_abnormal_title" />
 
             <TextView
                 android:id="@+id/tv_community_medication_reminder"
                 style="@style/community_wait_thind_num"
-                android:text="@string/app_name" />
+                android:text="@string/user_info_medicine_remind" />
         </LinearLayout>
 
 
@@ -224,13 +224,13 @@
                 android:id="@+id/tv_community_follow_up_statistics"
                 style="@style/community_follow_up"
                 android:drawableTop="@drawable/follow_up_statistics"
-                android:text="@string/app_name" />
+                android:text="@string/community_follow_up_statistics" />
 
             <TextView
                 android:id="@+id/tv_community_num_statistics"
                 style="@style/community_follow_up"
                 android:drawableTop="@drawable/num_statistics"
-                android:text="@string/app_name" />
+                android:text="@string/community_statistics" />
 
 
         </LinearLayout>
