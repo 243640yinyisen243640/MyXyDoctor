@@ -16,7 +16,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.adapter.FollowUpVisitListAdapter;
+import com.xy.xydoctor.adapter.community_manager.DataAbnormalListAdapter;
 import com.xy.xydoctor.bean.FollowUpVisitListBean;
 import com.xy.xydoctor.constant.ConstantParam;
 import com.xy.xydoctor.imp.BaseCallBack;
@@ -56,7 +56,7 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
     @BindView(R.id.ll_empty)
     LinearLayout llEmpty;
     //分页开始
-    private FollowUpVisitListAdapter adapter;
+    private DataAbnormalListAdapter adapter;
     //总数据
     private List<FollowUpVisitListBean.DataBean> list;
     //上拉加载数据
@@ -111,7 +111,7 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
                         srlFollowUpVisit.setVisibility(View.VISIBLE);
                         list = followUpVisitListBean.getData();
                         String type = getArguments().getString("type");
-                        adapter = new FollowUpVisitListAdapter(getPageContext(), R.layout.item_follow_up_visit_list, list, type);
+                        adapter = new DataAbnormalListAdapter(getPageContext(), R.layout.item_follow_up_visit_list, list, type);
                         lvFollowUpVisit.setAdapter(adapter);
                     }
                 }, new OnError() {
