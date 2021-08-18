@@ -29,6 +29,6 @@ public class DataAbnormalListAdapter extends CommonAdapter<FollowUpVisitListBean
     protected void convert(ViewHolder viewHolder, FollowUpVisitListBean.DataBean item, int position) {
         viewHolder.setText(R.id.tv_time, item.getPlan_name());
         MyListView lvChild = viewHolder.getView(R.id.lv_child);
-        lvChild.setAdapter(new FollowUpChildVisitListAdapter(lvChild.getContext(), R.layout.item_follow_up_child_visit_list, item.getPlan_list(), type));
+        lvChild.setAdapter(new FollowUpChildVisitListAdapter(lvChild.getContext(), R.layout.item_data_abnormal_child_list, item.getPlan_list(), type));
     }
 }

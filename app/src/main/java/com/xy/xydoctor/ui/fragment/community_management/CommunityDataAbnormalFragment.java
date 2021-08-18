@@ -111,7 +111,7 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
                         srlFollowUpVisit.setVisibility(View.VISIBLE);
                         list = followUpVisitListBean.getData();
                         String type = getArguments().getString("type");
-                        adapter = new DataAbnormalListAdapter(getPageContext(), R.layout.item_follow_up_visit_list, list, type);
+                        adapter = new DataAbnormalListAdapter(getPageContext(), R.layout.item_data_abnormal_list, list, type);
                         lvFollowUpVisit.setAdapter(adapter);
                     }
                 }, new OnError() {
