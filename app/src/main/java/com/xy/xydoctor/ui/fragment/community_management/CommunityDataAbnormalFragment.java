@@ -1,6 +1,5 @@
 package com.xy.xydoctor.ui.fragment.community_management;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -40,7 +39,7 @@ import rxhttp.wrapper.param.RxHttp;
  * Description: 数据异常
  */
 public class CommunityDataAbnormalFragment extends BaseLazyFragment {
-    private static final String TAG = "FollowUpVisitFragment";
+
     @BindView(R.id.tv_data_abnormal_first)
     TextView firstTextView;
     @BindView(R.id.ll_show_pop)
@@ -106,7 +105,7 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
                 .subscribe(new Consumer<FollowUpVisitListBean>() {
                     @Override
                     public void accept(FollowUpVisitListBean followUpVisitListBean) {
-                        Log.e(TAG, "成功回调执行了");
+
                         llEmpty.setVisibility(View.GONE);
                         srlFollowUpVisit.setVisibility(View.VISIBLE);
                         list = followUpVisitListBean.getData();
