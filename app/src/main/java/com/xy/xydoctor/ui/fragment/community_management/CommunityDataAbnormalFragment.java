@@ -19,6 +19,7 @@ import com.xy.xydoctor.adapter.community_manager.DataAbnormalListAdapter;
 import com.xy.xydoctor.bean.FollowUpVisitListBean;
 import com.xy.xydoctor.constant.ConstantParam;
 import com.xy.xydoctor.imp.BaseCallBack;
+import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
@@ -110,7 +111,17 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
                         srlFollowUpVisit.setVisibility(View.VISIBLE);
                         list = followUpVisitListBean.getData();
                         String type = getArguments().getString("type");
-                        adapter = new DataAbnormalListAdapter(getPageContext(), R.layout.item_data_abnormal_list, list, type);
+                        adapter = new DataAbnormalListAdapter(getPageContext(), R.layout.item_data_abnormal_list, list, type, new IAdapterViewClickListener() {
+                            @Override
+                            public void adapterClickListener(int position, View view) {
+                                //一级列表的点击事件
+                            }
+
+                            @Override
+                            public void adapterClickListener(int position, int index, View view) {
+                                //二级列表的点击事件
+                            }
+                        });
                         lvFollowUpVisit.setAdapter(adapter);
                     }
                 }, new OnError() {
@@ -206,29 +217,10 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
     }
 
 
-    //    private DataAbnormalPopup menuWindow;
-    //
-    //    private void showMenuWindow() {
-    //        if (menuWindow != null && menuWindow.isShowing()) {
-    //            menuWindow.dismiss();
-    //        }
-    //        if (menuWindow == null) {
-    //            menuWindow = new DataAbnormalPopup(getPageContext(), object -> {
-    //                menuWindow.dismiss();
-    //                int position = (int) object;
-    //                Intent intent;
-    //                switch (position) {
-    //                    case 0:
-    //                        break;
-    //                    default:
-    //                        break;
-    //                }
-    //            });
-    //        }
-    //
-    //        if (!isRemoving()) {
-    //            menuWindow.showAsDropDown(showLinearLayout);
-    //        }
-    //    }
 
+    public void setCheckAll(){
+
+        //在activity 里面点击处理，下面会出现全选按钮，列表会出现让选择的按钮，点击全选 会走这个方法，这个方法是让让一级二级列表全部选中
+
+    }
 }

@@ -9,17 +9,20 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_data_abnormal_click"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="13dp">
 
         <TextView
+            android:id="@+id/tv_data_abnormal_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/selector_community_special_operate" />
 
         <TextView
+            android:id="@+id/tv_data_abnormal_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -32,13 +35,10 @@
     </LinearLayout>
 
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/data_gray_light" />
+
 
     <com.lyd.baselib.widget.view.MyListView
-        android:id="@+id/lv_child"
+        android:id="@+id/lv_data_abnormal_child"
         android:background="@drawable/shape_bg_white_0_0_5_5"
         style="@style/listView" />
 

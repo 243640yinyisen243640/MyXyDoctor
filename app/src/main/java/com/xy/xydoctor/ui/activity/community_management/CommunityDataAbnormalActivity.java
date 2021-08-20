@@ -1,8 +1,13 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -27,11 +32,23 @@ public class CommunityDataAbnormalActivity extends XYSoftUIBaseActivity implemen
 
     private List<Fragment> fragments;
 
+    private View checkView;
+    /**
+     * 当前选中fragment
+     */
+    private int index = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText(R.string.community_data_abnormal_title);
 
+        topViewManager().moreTextView().setText(R.string.base_deal);
+        topViewManager().moreTextView().setOnClickListener(v -> {
+            topViewManager().moreTextView().setText(R.string.sure);
+            //头部的a按钮是处理 ，处理-确定
+            initCheckView();
+        });
         containerView().addView(initView());
         initListener();
         initValues();
@@ -53,6 +70,7 @@ public class CommunityDataAbnormalActivity extends XYSoftUIBaseActivity implemen
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         viewPager.clearOnPageChangeListeners();
+        index = radioGroup.indexOfChild(radioGroup.findViewById(checkedId));
         viewPager.setCurrentItem(radioGroup.indexOfChild(radioGroup.findViewById(checkedId)));
         viewPager.addOnPageChangeListener(this);
     }
@@ -64,6 +82,7 @@ public class CommunityDataAbnormalActivity extends XYSoftUIBaseActivity implemen
 
     @Override
     public void onPageSelected(int position) {
+        index = position;
         radioGroup.setOnCheckedChangeListener(null);
         radioGroup.check(radioGroup.getChildAt(position).getId());
         radioGroup.setOnCheckedChangeListener(this);
@@ -85,6 +104,34 @@ public class CommunityDataAbnormalActivity extends XYSoftUIBaseActivity implemen
         viewPager.setCurrentItem(0);//默认选中项
         radioGroup.check(radioGroup.getChildAt(0).getId());
         viewPager.setOffscreenPageLimit(fragments.size());
+
+    }
+
+    private void initCheckView() {
+        if (checkView == null) {
+            checkView = View.inflate(getPageContext(), R.layout.include_data_abnormal_check_all, null);
+            TextView checkAllTextView = checkView.findViewById(R.id.tv_data_abnormal_check_all_click);
+
+            checkAllTextView.setOnClickListener(v -> {
+
+                if (checkAllTextView.isSelected()){
+                    checkAllTextView.setSelected(false);
+                }else {
+                    checkAllTextView.setSelected(true);
+
+                }
+
+                CommunityDataAbnormalFragment fragment = (CommunityDataAbnormalFragment) fragments.get(index);
+                fragment.setCheckAll();
+            });
+
+        }
+        if (containerView().indexOfChild(checkView) != -1) {
+            containerView().removeView(checkView);
+        }
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.BOTTOM;
+        containerView().addView(checkView, params);
 
     }
 }

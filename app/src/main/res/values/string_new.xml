@@ -89,4 +89,7 @@
     <string name="community_follow_up_statistics">随访统计</string>
     <string name="community_statistics">数据统计</string>
     <string name="please_input_building_name_to_search">输入小区名称进行搜索</string>
+    <string name="base_check_all">全选</string>
+    <string name="base_deal">处理</string>
+    <string name="data_abnormal_remind">异常提醒</string>
 </resources>
