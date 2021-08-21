@@ -54,14 +54,14 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
         typeInfoList.add(typeInfo2);
         DiseaseTypeInfo typeInfo3 = new DiseaseTypeInfo("超重/肥胖");
         typeInfoList.add(typeInfo3);
-        DiseaseTypeInfo typeInfo4 = new DiseaseTypeInfo("超重/肥胖");
+        DiseaseTypeInfo typeInfo4 = new DiseaseTypeInfo("冠心病");
         typeInfoList.add(typeInfo4);
         DiseaseTypeInfo typeInfo5 = new DiseaseTypeInfo("脑卒中");
         typeInfoList.add(typeInfo5);
         DiseaseTypeInfo typeInfo6 = new DiseaseTypeInfo("脂肪肝");
         typeInfoList.add(typeInfo6);
 
-        FilterDiseaseTypeAdapter diseaseTypeAdapter = new FilterDiseaseTypeAdapter(getPageContext(), typeInfoList);
+        FilterDiseaseTypeAdapter diseaseTypeAdapter = new FilterDiseaseTypeAdapter(getPageContext(), typeInfoList, "1");
         diseaseGridView.setAdapter(diseaseTypeAdapter);
 
 
@@ -82,7 +82,7 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
             diseaseTypeAdapter.notifyDataSetChanged();
 
         });
-        FilterDiseaseTypeAdapter otherTypeAdapter = new FilterDiseaseTypeAdapter(getPageContext(), otherInfoList);
+        FilterDiseaseTypeAdapter otherTypeAdapter = new FilterDiseaseTypeAdapter(getPageContext(), otherInfoList, "1");
         otherGridView.setAdapter(otherTypeAdapter);
 
         otherGridView.setOnItemClickListener((parent, view, position, id) -> {
@@ -136,7 +136,7 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_filter_all_community:
-//                chooseBuilding();
+                //                chooseBuilding();
                 break;
             case R.id.tv_filter_reset:
                 break;
@@ -148,38 +148,38 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
     }
 
     /**
-     * 物流
+     *
      */
-//    private void chooseBuilding() {
-//        TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
-//        Call<String> requestCall = GoodsDataManager.getDeliverCompany((call, response) -> {
-//            TipUtils.getInstance().dismissProgressDialog();
-//            if (100 == response.code) {
-//                List<LogisticsCompanyInfo> logisticsCompanyInfos = (List<LogisticsCompanyInfo>) response.object;
-//                if (logisticsCompanyInfos != null && logisticsCompanyInfos.size() > 0) {
-//                    OptionsPickerView optionsPickerView = new OptionsPickerBuilder(context, (options1, options2, options3, v) -> {
-//                        logisticsCompanyID = logisticsCompanyInfos.get(options1).getLogisticsCompanyID();
-//                        String s = logisticsCompanyInfos.get(options1).getLogisticsCompany();
-//                        companyTextView.setText(s);
-//                        companyTextView.setTextSize(16);
-//                        companyTextView.setTextColor(context.getResources().getColor(R.color.black));
-//                    }).setLineSpacingMultiplier(2.5f)
-//                            .setCancelColor(ContextCompat.getColor(context, R.color.text_gray))
-//                            .setSubmitColor(ContextCompat.getColor(context, R.color.main_base_color))
-//                            .build();
-//                    List<String> list = new ArrayList<>();
-//                    for (int i = 0; i < logisticsCompanyInfos.size(); i++) {
-//                        String typeName = logisticsCompanyInfos.get(i).getLogisticsCompany();
-//                        list.add(typeName);
-//                    }
-//                    optionsPickerView.setPicker(list);
-//                    optionsPickerView.show();
-//                }
-//            } else {
-//                TipUtils.getInstance().showToast(context, response.msg);
-//            }
-//        }, (call, throwable) -> {
-//        });
-//
-//    }
+    //    private void chooseBuilding() {
+    //        TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
+    //        Call<String> requestCall = GoodsDataManager.getDeliverCompany((call, response) -> {
+    //            TipUtils.getInstance().dismissProgressDialog();
+    //            if (100 == response.code) {
+    //                List<LogisticsCompanyInfo> logisticsCompanyInfos = (List<LogisticsCompanyInfo>) response.object;
+    //                if (logisticsCompanyInfos != null && logisticsCompanyInfos.size() > 0) {
+    //                    OptionsPickerView optionsPickerView = new OptionsPickerBuilder(context, (options1, options2, options3, v) -> {
+    //                        logisticsCompanyID = logisticsCompanyInfos.get(options1).getLogisticsCompanyID();
+    //                        String s = logisticsCompanyInfos.get(options1).getLogisticsCompany();
+    //                        companyTextView.setText(s);
+    //                        companyTextView.setTextSize(16);
+    //                        companyTextView.setTextColor(context.getResources().getColor(R.color.black));
+    //                    }).setLineSpacingMultiplier(2.5f)
+    //                            .setCancelColor(ContextCompat.getColor(context, R.color.text_gray))
+    //                            .setSubmitColor(ContextCompat.getColor(context, R.color.main_base_color))
+    //                            .build();
+    //                    List<String> list = new ArrayList<>();
+    //                    for (int i = 0; i < logisticsCompanyInfos.size(); i++) {
+    //                        String typeName = logisticsCompanyInfos.get(i).getLogisticsCompany();
+    //                        list.add(typeName);
+    //                    }
+    //                    optionsPickerView.setPicker(list);
+    //                    optionsPickerView.show();
+    //                }
+    //            } else {
+    //                TipUtils.getInstance().showToast(context, response.msg);
+    //            }
+    //        }, (call, throwable) -> {
+    //        });
+    //
+    //    }
 }

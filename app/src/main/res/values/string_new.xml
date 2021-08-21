@@ -92,4 +92,21 @@
     <string name="base_check_all">全选</string>
     <string name="base_deal">处理</string>
     <string name="data_abnormal_remind">异常提醒</string>
+    <string name="user_add_name">姓名</string>
+    <string name="user_add_phone">手机号</string>
+    <string name="user_add_sex">性别</string>
+    <string name="user_add_born_time">出生日期</string>
+    <string name="user_add_master_relation">与户主关系</string>
+    <string name="user_add_hospital_choose">选择医院</string>
+    <string name="user_add_department_choose">选择科室</string>
+    <string name="user_add_doctor_choose">选择医生</string>
+    <string name="please_choose">请选择</string>
+    <string name="user_add_title">添加用户</string>
+    <string name="user_add_bind_device">绑定设备</string>
+    <string name="user_add_special_info">特殊信息</string>
+    <string name="user_add_device_sugar">血糖仪</string>
+    <string name="user_add_device_pressure">血压计</string>
+    <string name="user_add_please_input_name">请输入姓名</string>
+    <string name="user_add_please_input_phone">请输入手机号</string>
+    <string name="user_add_please_choose_sex">请选择性别</string>
 </resources>

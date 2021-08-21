@@ -15,6 +15,7 @@ import com.xy.xydoctor.adapter.FollowManagementGvAdapter;
 import com.xy.xydoctor.adapter.HealthRecordGvAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.customerView.NoConflictGridView;
+import com.xy.xydoctor.view.popup.OnlineTestPopup;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,10 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
      * 头像
      */
     private ImageView headImageView;
+    /**
+     * 头像
+     */
+    private ImageView deadImageView;
     /**
      * 姓名
      */
@@ -83,6 +88,9 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
      */
     private LinearLayout medicanLinearLayout;
 
+    private ImageView textImageView;
+    private OnlineTestPopup onlineTestPopup;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,6 +135,7 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         View view = View.inflate(getPageContext(), R.layout.activity_user_info, null);
         backImageView = view.findViewById(R.id.iv_user_info_back);
         headImageView = view.findViewById(R.id.iv_user_info_head);
+        deadImageView = view.findViewById(R.id.iv_user_info_dead);
         nameTextView = view.findViewById(R.id.tv_user_info_name);
         sexAndAgeTextView = view.findViewById(R.id.tv_user_info_sex_and_age);
         diseaseFirstTextView = view.findViewById(R.id.tv_user_info_disease_first);
@@ -139,6 +148,7 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         gvHealthRecord = view.findViewById(R.id.gv_user_info_health_record);
         gvManagementRecord = view.findViewById(R.id.gv_follow_up_management_health_record);
         medicanLinearLayout = view.findViewById(R.id.ll_user_info_user_medican);
+        textImageView = view.findViewById(R.id.iv_user_info_text);
         return view;
     }
 
@@ -151,8 +161,34 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
                 break;
             case R.id.ll_user_info_user_medican:
                 break;
+            case R.id.iv_user_info_text:
+                onlineTestPopup = new OnlineTestPopup(getPageContext(), getIntent().getStringExtra("userid"));
+                onlineTestPopup.showPopupWindow(textImageView);
+                break;
             default:
                 break;
         }
     }
+
+    //    private void initCheckView() {
+    //        if (textView == null) {
+    //            textView = View.inflate(getPageContext(), R.layout.include_data_abnormal_text_view, null);
+    //            ImageView textImageView = textView.findViewById(R.id.iv_data_abnormal_text);
+    //
+    //            textImageView.setOnClickListener(v -> {
+    //
+    //
+    //            });
+    //
+    //        }
+    //        if (containerView().indexOfChild(textView) != -1) {
+    //            containerView().removeView(textView);
+    //        }
+    //        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    //        params.bottomMargin = XYSoftDensityUtils.dip2px(getPageContext(), 65);
+    //        params.rightMargin = XYSoftDensityUtils.dip2px(getPageContext(), 10);
+    //        params.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+    //        containerView().addView(textView, params);
+    //
+    //    }
 }

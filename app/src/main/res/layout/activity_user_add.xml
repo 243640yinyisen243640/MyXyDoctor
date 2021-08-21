@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_bg_white_5"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_user_add_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/community_location"
+            android:drawablePadding="5dp"
+            android:padding="10dp"
+            android:text="@string/app_name"
+            android:textColor="#858585"
+            android:textSize="12sp" />
+
+        <View style="@style/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_add_left"
+                android:text="@string/user_add_name" />
+
+            <EditText
+                android:id="@+id/et_user_add_name"
+                style="@style/user_add_right"
+                android:hint="@string/user_add_please_input_name" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_add_left"
+                android:text="@string/user_add_phone" />
+
+            <EditText
+                android:id="@+id/et_user_add_phone"
+                style="@style/user_add_right"
+                android:hint="@string/user_add_please_input_phone" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_add_left"
+                android:text="@string/user_add_sex" />
+
+            <TextView
+                android:id="@+id/tv_user_add_sex"
+                style="@style/user_add_right_choose"
+                android:text="@string/base_female"
+                android:textColor="@color/base_black" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_add_left"
+                android:text="@string/user_add_born_time" />
+
+            <TextView
+                android:id="@+id/tv_user_add_born"
+                style="@style/user_add_right_choose"
+                android:text="@string/please_choose" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_add_left"
+                android:text="@string/user_add_master_relation" />
+
+            <TextView
+                android:id="@+id/tv_user_add_master_relation"
+                style="@style/user_add_right_choose"
+                android:text="@string/please_choose" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_add_left"
+                android:text="@string/user_add_hospital_choose" />
+
+            <TextView
+                android:id="@+id/tv_user_add_hospital_choose"
+                style="@style/user_add_right_choose"
+                android:text="@string/please_choose" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_add_left"
+                android:text="@string/user_add_department_choose" />
+
+            <TextView
+                android:id="@+id/tv_user_add_department_choose"
+                style="@style/user_add_right_choose"
+                android:text="@string/please_choose" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_add_left"
+                android:text="@string/user_add_doctor_choose" />
+
+            <TextView
+                android:id="@+id/tv_user_add_doctor_choose"
+                style="@style/user_add_right_choose"
+                android:text="@string/please_choose" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <TextView
+            style="@style/community_filter_title"
+            android:padding="15dp"
+            android:text="@string/community_type_of_disease"
+            android:textStyle="normal" />
+
+        <com.xy.xydoctor.customerView.NoConflictGridView
+            android:id="@+id/gv_user_add_disease"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="3"
+            android:verticalSpacing="10dp" />
+
+
+        <TextView
+            style="@style/community_filter_title"
+            android:padding="15dp"
+            android:text="@string/user_add_special_info"
+            android:textStyle="normal" />
+
+        <com.xy.xydoctor.customerView.NoConflictGridView
+            android:id="@+id/gv_user_add_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="3"
+            android:verticalSpacing="10dp" />
+
+        <TextView
+            style="@style/community_filter_title"
+            android:padding="15dp"
+            android:text="@string/user_add_bind_device"
+            android:textStyle="normal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/user_add_device_sugar" />
+
+            <EditText
+                android:id="@+id/et_user_add_device_sugar"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_white_black" />
+
+            <ImageView
+                android:id="@+id/iv_user_add_device_sugar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                android:src="@drawable/user_add_sacn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/user_add_device_pressure" />
+
+            <EditText
+                android:id="@+id/et_user_add_device_pressure"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_white_black" />
+
+            <ImageView
+                android:id="@+id/iv_user_add_device_pressure"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                android:src="@drawable/user_add_sacn" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

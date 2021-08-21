@@ -20,9 +20,14 @@ import java.util.List;
  */
 public class FilterDiseaseTypeAdapter extends XYSoftBaseAdapter<DiseaseTypeInfo> {
     private int pos = 0;
+    /**
+     * 1:是筛选  2：添加用户
+     */
+    private String type;
 
-    public FilterDiseaseTypeAdapter(Context context, List<DiseaseTypeInfo> list) {
+    public FilterDiseaseTypeAdapter(Context context, List<DiseaseTypeInfo> list, String type) {
         super(context, list);
+        this.type = type;
     }
 
     @Override
@@ -38,11 +43,20 @@ public class FilterDiseaseTypeAdapter extends XYSoftBaseAdapter<DiseaseTypeInfo>
         }
         DiseaseTypeInfo typeInfo = getList().get(position);
         holder.checkTextView.setText(typeInfo.getDiseaseName());
-        if (typeInfo.isCheck()) {
-            holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.community_filter_choose));
+        if ("1".equals(type)) {
+            if (typeInfo.isCheck()) {
+                holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.community_filter_choose));
+            } else {
+                holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_background_5));
+            }
         } else {
-            holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_background_5));
+            if (typeInfo.isCheck()) {
+                holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_main_90));
+            } else {
+                holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_white_black_90));
+            }
         }
+
 
         return convertView;
     }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/iv_data_abnormal_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="@dimen/dp_40"
+    android:scaleType="centerCrop"
+    android:src="@drawable/online_test_add"
+    android:visibility="visible" >
+
+
+
+</ImageView>

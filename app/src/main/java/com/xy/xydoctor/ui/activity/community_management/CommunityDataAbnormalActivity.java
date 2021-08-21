@@ -1,7 +1,6 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,10 +43,16 @@ public class CommunityDataAbnormalActivity extends XYSoftUIBaseActivity implemen
         topViewManager().titleTextView().setText(R.string.community_data_abnormal_title);
 
         topViewManager().moreTextView().setText(R.string.base_deal);
+
         topViewManager().moreTextView().setOnClickListener(v -> {
-            topViewManager().moreTextView().setText(R.string.sure);
-            //头部的a按钮是处理 ，处理-确定
-            initCheckView();
+            if (topViewManager().moreTextView().getText().equals("处理")) {
+                topViewManager().moreTextView().setText(R.string.sure);
+                //头部的按钮是处理 ，处理-确定
+                initCheckView();
+            } else {
+                //这个是点击确定按钮应该走的逻辑
+            }
+
         });
         containerView().addView(initView());
         initListener();
@@ -114,9 +119,9 @@ public class CommunityDataAbnormalActivity extends XYSoftUIBaseActivity implemen
 
             checkAllTextView.setOnClickListener(v -> {
 
-                if (checkAllTextView.isSelected()){
+                if (checkAllTextView.isSelected()) {
                     checkAllTextView.setSelected(false);
-                }else {
+                } else {
                     checkAllTextView.setSelected(true);
 
                 }
