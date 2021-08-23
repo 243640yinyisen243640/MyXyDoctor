@@ -319,9 +319,6 @@
         <activity
             android:name=".ui.activity.community_management.CommunityUserInfoActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.community_management.TextActivity"
-            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.activity.community_management.CommunityFollowupAgentListActivity"

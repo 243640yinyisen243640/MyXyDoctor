@@ -13,7 +13,6 @@ import com.xy.xydoctor.ui.activity.community_management.CommunityDataAbnormalAct
 import com.xy.xydoctor.ui.activity.community_management.CommunityFilterActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentListActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentSearchListActivity;
-import com.xy.xydoctor.ui.activity.community_management.TextActivity;
 
 import butterknife.BindView;
 
@@ -128,8 +127,7 @@ public class FragmentCommunityManagement extends BaseFragment implements View.On
         Intent intent;
         switch (v.getId()) {
             case R.id.tv_community_add_user:
-                intent = new Intent(getPageContext(), TextActivity.class);
-                startActivity(intent);
+
                 break;
             case R.id.ll_community_filter_building_num:
                 //小区数量
