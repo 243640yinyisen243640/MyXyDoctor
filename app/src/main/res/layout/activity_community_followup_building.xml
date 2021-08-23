@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/include_community_follow_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/community_follow_up_building_bg_top"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_fub_building_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/tv_fub_building_location"
+                    style="@style/community_base_location"
+                    android:text="@string/app_name" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_fub_building_num"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/follow_up_agent_building_num"
+                        android:textColor="#9D9D9D"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/gray_light" />
+
+                    <TextView
+                        android:id="@+id/tv_fub_building_unit_num"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/follow_up_agent_unit_num"
+                        android:textColor="#9D9D9D"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/gray_light" />
+
+                    <TextView
+                        android:id="@+id/tv_fub_building_person_num"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/follow_up_agent_households_num"
+                        android:textColor="#9D9D9D"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/gray_light" />
+
+                    <TextView
+                        android:id="@+id/tv_fub_building_all_person_num"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/follow_up_agent_total_num"
+                        android:textColor="#9D9D9D"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/gray_light" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/community_follow_up_building_bg_bottom"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/tv_fub_building_high_pressure"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/flb_high_pressure_num"
+                    android:textColor="#FF564F"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_fub_building_sugar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/follow_up_agent_households_num"
+                    android:textColor="#FF854F"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_fub_building_all_num"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/follow_up_agent_total_num"
+                    android:textColor="#3D98DF"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_fub_building_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/community_follow_up_roof" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_fub_building_unit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <com.xy.xydoctor.customerView.HHAtMostGridView
+            android:id="@+id/gv_fub_building_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp" />
+
+    </LinearLayout>
+
+</ScrollView>
