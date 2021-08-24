@@ -39,7 +39,6 @@
 
     <com.lyd.baselib.widget.view.MyListView
         android:id="@+id/lv_data_abnormal_child"
-        android:background="@drawable/shape_bg_white_0_0_5_5"
         style="@style/listView" />
 
 

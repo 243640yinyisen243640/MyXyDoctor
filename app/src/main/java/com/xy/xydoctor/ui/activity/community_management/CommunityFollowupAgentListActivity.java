@@ -72,7 +72,6 @@ public class CommunityFollowupAgentListActivity extends XYSoftUIBaseActivity {
         getData();
         initRefresh();
         initListener();
-
     }
 
     private void initListener() {

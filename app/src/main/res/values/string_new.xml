@@ -111,4 +111,5 @@
     <string name="user_add_please_choose_sex">请选择性别</string>
     <string name="flb_high_pressure_num">高血压人数</string>
     <string name="fu_more_title_change_list">切换列表</string>
+    <string name="user_medicine_edit_seheme">修改方案</string>
 </resources>
