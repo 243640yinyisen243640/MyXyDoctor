@@ -158,7 +158,7 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
             public void onRefresh(RefreshLayout refreshLayout) {
                 srlFollowUpVisit.finishRefresh(2000);
                 pageIndex = 2;
-                //                getFollowUpList();
+                getFollowUpList();
             }
         });
         srlFollowUpVisit.setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -202,7 +202,7 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
      */
     @Override
     public void loadData() {
-        //        getFollowUpList();
+        getFollowUpList();
     }
 
     @Override
@@ -212,7 +212,7 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
             case ConstantParam.EventCode.FOLLOW_UP_VISIT_SUBMIT:
                 llEmpty.setVisibility(View.GONE);
                 srlFollowUpVisit.setVisibility(View.VISIBLE);
-                //                getFollowUpList();
+                getFollowUpList();
                 break;
         }
     }
