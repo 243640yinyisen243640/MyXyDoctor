@@ -1,29 +1,23 @@
 package com.xy.xydoctor.adapter.community_manager;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.content.Context;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
-import com.xy.xydoctor.R;
 import com.xy.xydoctor.bean.FollowUpAgentListBean;
+import com.zhy.adapter.abslistview.CommonAdapter;
+import com.zhy.adapter.abslistview.ViewHolder;
 
 import java.util.List;
 
 
-public class FollowupAgentSearchListAdapter extends BaseQuickAdapter<FollowUpAgentListBean, BaseViewHolder> {
+public class FollowupAgentSearchListAdapter extends CommonAdapter<FollowUpAgentListBean> {
 
-    public FollowupAgentSearchListAdapter(@Nullable List<FollowUpAgentListBean> data) {
-        super(R.layout.item_follow_up_agent_search, data);
+
+    public FollowupAgentSearchListAdapter(Context context, int layoutId, List<FollowUpAgentListBean> datas) {
+        super(context, layoutId, datas);
     }
 
     @Override
-    protected void convert(@NonNull BaseViewHolder holder, FollowUpAgentListBean bean) {
-        String datetime = bean.getDatetime();
-        holder.setText(R.id.tv_oxygen_time, datetime);
-        String oxygen = bean.getOxygen();
-        String bpmval = bean.getBpmval();
-        holder.setText(R.id.tv_oxygen_number, oxygen + "" + "/" + bpmval);
-        holder.setText(R.id.tv_tongyong, "%" + "/" + "bmp");
+    protected void convert(ViewHolder viewHolder, FollowUpAgentListBean item, int position) {
+
     }
 }

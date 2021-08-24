@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.rxjava.rxlife.RxLife;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -33,7 +32,7 @@ import io.reactivex.rxjava3.functions.Consumer;
 import rxhttp.wrapper.param.RxHttp;
 
 /**
- * 描述:
+ * 描述:搜索页面
  * 作者: LYD
  * 创建日期: 2020/5/26 11:07
  */
@@ -45,7 +44,7 @@ public class CommunityFollowupAgentSearchListActivity extends BaseHideLineActivi
     @BindView(R.id.tv_follow_up_search_sure)
     TextView searchTextView;
     @BindView(R.id.rv_follow_up_agent_list_search)
-    RecyclerView rvList;
+    ListView rvList;
     @BindView(R.id.srl_follow_up_agent_search)
     SmartRefreshLayout srlHeightAndWeight;
 
@@ -121,8 +120,7 @@ public class CommunityFollowupAgentSearchListActivity extends BaseHideLineActivi
                                 list.clear();
                             }
                             list.addAll(tempList);
-                            adapter = new FollowupAgentSearchListAdapter(list);
-                            rvList.setLayoutManager(new LinearLayoutManager(getPageContext()));
+                            adapter = new FollowupAgentSearchListAdapter(getPageContext(), R.layout.item_follow_up_agent_search, list);
                             rvList.setAdapter(adapter);
                         } else {
                             list.addAll(tempList);

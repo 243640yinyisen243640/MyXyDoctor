@@ -38,6 +38,10 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
         String title = getIntent().getStringExtra("buildingName");
         topViewManager().titleTextView().setText(title);
         topViewManager().moreTextView().setCompoundDrawablesWithIntrinsicBounds(R.drawable.fub_top_add, 0, 0, 0);
+
+        topViewManager().moreTextView().setOnClickListener(v -> {
+            //
+        });
         containerView().addView(initView());
         initValue();
     }

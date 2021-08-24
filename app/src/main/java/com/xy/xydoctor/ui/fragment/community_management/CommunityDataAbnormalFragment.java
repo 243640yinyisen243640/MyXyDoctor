@@ -1,5 +1,6 @@
 package com.xy.xydoctor.ui.fragment.community_management;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -23,6 +24,7 @@ import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
+import com.xy.xydoctor.ui.activity.community_management.DataAbnormalRemindListActivity;
 import com.xy.xydoctor.view.popup.DataAbnormalPopup;
 
 import java.util.HashMap;
@@ -35,7 +37,7 @@ import io.reactivex.rxjava3.functions.Consumer;
 import rxhttp.wrapper.param.RxHttp;
 
 /**
- * Author: LYD
+ * Author: LYD  type   1：血糖 2：血压
  * Date: 2021/8/16 16:36
  * Description: 数据异常
  */
@@ -106,7 +108,6 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
                 .subscribe(new Consumer<FollowUpVisitListBean>() {
                     @Override
                     public void accept(FollowUpVisitListBean followUpVisitListBean) {
-
                         llEmpty.setVisibility(View.GONE);
                         srlFollowUpVisit.setVisibility(View.VISIBLE);
                         list = followUpVisitListBean.getData();
@@ -120,6 +121,17 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
                             @Override
                             public void adapterClickListener(int position, int index, View view) {
                                 //二级列表的点击事件
+                                switch (view.getId()) {
+                                    case R.id.ll_data_abnormal_child_click:
+                                        Intent intent = new Intent(getPageContext(), DataAbnormalRemindListActivity.class);
+                                        intent.putExtra("type", type);
+                                        startActivity(intent);
+                                        break;
+                                    case R.id.tv_data_abnormal_child_check:
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
                         });
                         lvFollowUpVisit.setAdapter(adapter);
@@ -217,8 +229,7 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
     }
 
 
-
-    public void setCheckAll(){
+    public void setCheckAll() {
 
         //在activity 里面点击处理，下面会出现全选按钮，列表会出现让选择的按钮，点击全选 会走这个方法，这个方法是让让一级二级列表全部选中
 

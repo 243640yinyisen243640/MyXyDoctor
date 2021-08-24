@@ -334,6 +334,13 @@
         <activity
             android:name=".ui.activity.community_management.CommunityFollowUpBuildingActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.community_management.UserAddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.community_management.DataAbnormalRemindListActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

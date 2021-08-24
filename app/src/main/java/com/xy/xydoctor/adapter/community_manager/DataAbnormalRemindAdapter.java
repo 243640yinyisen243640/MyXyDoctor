@@ -40,6 +40,7 @@ public class DataAbnormalRemindAdapter extends UIBaseRecycleViewAdapter<DataAbno
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         ViewHolder holder = (ViewHolder) viewHolder;
         DataAbnormalRemindInfo videoInfo = getList().get(position);
+
         if (getList().size() == 1) {
             holder.bgLinerLayout.setBackgroundResource(R.drawable.shape_bg_white_5);
         } else {

@@ -1,29 +1,66 @@
 package com.xy.xydoctor.adapter.community_manager;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.xy.xydoctor.R;
+import com.xy.xydoctor.base.adapter.BaseRecycleViewAdapter;
 import com.xy.xydoctor.bean.FollowUpAgentListBean;
+import com.xy.xydoctor.imp.IAdapterViewClickListener;
 
 import java.util.List;
 
 
-public class FollowupAgentListAdapter extends BaseQuickAdapter<FollowUpAgentListBean, BaseViewHolder> {
+public class FollowupAgentListAdapter extends BaseRecycleViewAdapter<FollowUpAgentListBean> {
 
-    public FollowupAgentListAdapter(@Nullable List<FollowUpAgentListBean> data) {
-        super(R.layout.adapter_follow_up_agent, data);
+    public FollowupAgentListAdapter(Context mContext, List<FollowUpAgentListBean> mList, IAdapterViewClickListener mListener) {
+        super(mContext, mList, mListener);
+    }
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        View view = View.inflate(getContext(), R.layout.adapter_follow_up_agent, null);
+        return new ViewHolder(view);
     }
 
     @Override
-    protected void convert(@NonNull BaseViewHolder holder, FollowUpAgentListBean bean) {
-        String datetime = bean.getDatetime();
-        holder.setText(R.id.tv_oxygen_time, datetime);
-        String oxygen = bean.getOxygen();
-        String bpmval = bean.getBpmval();
-        holder.setText(R.id.tv_oxygen_number, oxygen + "" + "/" + bpmval);
-        holder.setText(R.id.tv_tongyong, "%" + "/" + "bmp");
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ViewHolder viewHolder = (ViewHolder) holder;
+
+        viewHolder.clickLinearLayout.setOnClickListener(v -> {
+            if (getListener() != null) {
+                getListener().adapterClickListener(position, v);
+            }
+        });
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        TextView nameTextView;
+        TextView locationTextView;
+        TextView buildingNumTextView;
+        TextView unitNumTextView;
+        TextView personNumTextView;
+        TextView allPersonNumTextView;
+        LinearLayout clickLinearLayout;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            nameTextView = itemView.findViewById(R.id.tv_fu_building_name);
+            locationTextView = itemView.findViewById(R.id.tv_fu_building_location);
+            buildingNumTextView = itemView.findViewById(R.id.tv_fu_building_num);
+            unitNumTextView = itemView.findViewById(R.id.tv_fu_unit_num);
+            personNumTextView = itemView.findViewById(R.id.tv_fu_person_num);
+            allPersonNumTextView = itemView.findViewById(R.id.tv_fu_all_person_num);
+            clickLinearLayout = itemView.findViewById(R.id.ll_fu_click);
+        }
+
     }
 }

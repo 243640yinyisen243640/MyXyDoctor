@@ -1,5 +1,6 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.FollowupAgentListAdapter;
 import com.xy.xydoctor.bean.FollowUpAgentListBean;
+import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
@@ -32,8 +34,9 @@ import io.reactivex.rxjava3.functions.Consumer;
 import rxhttp.wrapper.param.RxHttp;
 
 /**
- * 描述:
- * 作者: LYD
+ * 描述:随访代办列表，小区数量列表
+ * * 作者: LYD
+ * * @param type 1：是全部小区 2：是随访代办
  * 创建日期: 2020/5/26 11:07
  */
 public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
@@ -53,8 +56,11 @@ public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
     private List<FollowUpAgentListBean> tempList; //用于临时保存ListView显示的数据
     private FollowupAgentListAdapter adapter;
 
-    private String beginTime = "";
-    private String endTime = "";
+    /**
+     * 1：全部小区  2：随访代办
+     */
+    private String type = "1";
+
 
     @Override
     protected int getLayoutId() {
@@ -65,7 +71,8 @@ public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
     protected void init(Bundle savedInstanceState) {
         hideTitleBar();
 
-        getData(beginTime, endTime);
+
+        getData();
         initRefresh();
     }
 
@@ -76,7 +83,7 @@ public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 pageIndex = 1;
-                getData(beginTime, endTime);
+                getData();
                 srlHeightAndWeight.finishRefresh();
                 refreshLayout.setNoMoreData(false);//恢复没有更多数据的原始状态
             }
@@ -86,18 +93,16 @@ public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
                 ++pageIndex;
-                getData(beginTime, endTime);
+                getData();
             }
         });
     }
 
 
-    private void getData(String b, String e) {
+    private void getData() {
         HashMap map = new HashMap<>();
         String userid = getIntent().getStringExtra("userid");
         map.put("uid", userid);
-        map.put("begintime", b);
-        map.put("endtime", e);
         map.put("page", 1);
         RxHttp.postForm(XyUrl.GET_BLOOD_OXYGEN)
                 .addAll(map)
@@ -121,8 +126,21 @@ public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
                                 list.clear();
                             }
                             list.addAll(tempList);
-                            adapter = new FollowupAgentListAdapter(list);
+                            adapter = new FollowupAgentListAdapter(getPageContext(), list, new IAdapterViewClickListener() {
+                                @Override
+                                public void adapterClickListener(int position, View view) {
+                                    Intent intent = new Intent(getPageContext(), CommunityFollowUpBuildingActivity.class);
+                                    intent.putExtra("buildingName", list.get(position).getBpmval());
+                                    startActivity(intent);
+                                }
+
+                                @Override
+                                public void adapterClickListener(int position, int index, View view) {
+
+                                }
+                            });
                             rvList.setLayoutManager(new LinearLayoutManager(getPageContext()));
+
                             rvList.setAdapter(adapter);
                         } else {
                             list.addAll(tempList);

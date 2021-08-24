@@ -13,6 +13,7 @@ import com.xy.xydoctor.ui.activity.community_management.CommunityDataAbnormalAct
 import com.xy.xydoctor.ui.activity.community_management.CommunityFilterActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentListActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentSearchListActivity;
+import com.xy.xydoctor.ui.activity.community_management.UserAddActivity;
 
 import butterknife.BindView;
 
@@ -127,24 +128,25 @@ public class FragmentCommunityManagement extends BaseFragment implements View.On
         Intent intent;
         switch (v.getId()) {
             case R.id.tv_community_add_user:
-
+                startActivity(new Intent(getPageContext(), UserAddActivity.class));
                 break;
             case R.id.ll_community_filter_building_num:
-                //小区数量
+                //小区数量  进入到当前社区的小区列表 ，从点击到进入楼栋模型，展示当前小区的楼栋数
+                //现在传的type值只是我自己定义的，看接口如何让传，在改
                 intent = new Intent(getPageContext(), CommunityFollowupAgentListActivity.class);
-                //                intent.putExtra("commuinityName",)
+                intent.putExtra("type", "1");
+//                intent.putExtra("commuinityName", );
                 startActivity(intent);
                 break;
             case R.id.tv_community_follow_up_to_be_done:
-                //随访代办
+                //随访代办  进入到当前社区的有随访的列表 ，点击条目进入楼栋模型，展示当前小区的楼栋数,
                 intent = new Intent(getPageContext(), CommunityFollowupAgentListActivity.class);
+                intent.putExtra("type", "2");
                 startActivity(intent);
                 break;
-
             case R.id.tv_community_search:
                 intent = new Intent(getPageContext(), CommunityFollowupAgentSearchListActivity.class);
                 startActivity(intent);
-
                 break;
             case R.id.tv_community_filter:
                 intent = new Intent(getPageContext(), CommunityFilterActivity.class);
