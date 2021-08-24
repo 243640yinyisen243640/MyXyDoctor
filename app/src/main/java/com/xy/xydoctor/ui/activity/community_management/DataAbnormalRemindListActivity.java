@@ -160,16 +160,5 @@ public class DataAbnormalRemindListActivity extends XYSoftUIBaseActivity {
                 });
     }
 
-    @OnClick({R.id.iv_data_abnormal_remind_back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.iv_data_abnormal_remind_back:
-                finish();
-                break;
-
-            default:
-                break;
-        }
-    }
 
 }

@@ -15,6 +15,8 @@ import com.xy.xydoctor.customerView.HHAtMostGridView;
 /**
  * Author: LYD
  * Date: 2021/8/23 16:38
+ *
+ * @paramtype 1:小区数量 2：随访待办
  * Description: 随访代办的那个楼层图
  */
 public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
@@ -31,16 +33,35 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
     private RecyclerView numRecycleView;
     private RecyclerView unitRecycleView;
     private HHAtMostGridView contentGridView;
+    /**
+     * 1：小区数量 2随访待办
+     */
+    private String type;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String title = getIntent().getStringExtra("buildingName");
-        topViewManager().titleTextView().setText(title);
-        topViewManager().moreTextView().setCompoundDrawablesWithIntrinsicBounds(R.drawable.fub_top_add, 0, 0, 0);
+        type = getIntent().getStringExtra("type");
+
+        if ("1".equals(type)) {
+            topViewManager().titleTextView().setText(title);
+            topViewManager().moreTextView().setCompoundDrawablesWithIntrinsicBounds(R.drawable.fub_top_add, 0, 0, 0);
+        } else {
+            topViewManager().titleTextView().setText(R.string.follow_up_agent_title);
+            topViewManager().moreTextView().setText(R.string.fu_more_title_change_list);
+        }
+
 
         topViewManager().moreTextView().setOnClickListener(v -> {
-            //
+            // 1:小区数量 2：随访待办
+            if ("1".equals(type)) {
+                //添加楼栋
+
+            } else {
+                //进入到待随访  失访  已完成的页面
+            }
+
         });
         containerView().addView(initView());
         initValue();

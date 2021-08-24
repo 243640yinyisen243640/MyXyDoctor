@@ -2,11 +2,14 @@ package com.xy.xydoctor.ui.activity.community_management;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,19 +20,19 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.FollowupAgentListAdapter;
+import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
+import com.xy.xydoctor.base.custom.GridSpaceItemDecoration;
+import com.xy.xydoctor.base.utils.XYSoftDensityUtils;
 import com.xy.xydoctor.bean.FollowUpAgentListBean;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
-import com.xy.xydoctor.ui.activity.healthrecord.BaseHideLineActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import io.reactivex.rxjava3.functions.Consumer;
 import rxhttp.wrapper.param.RxHttp;
 
@@ -39,17 +42,10 @@ import rxhttp.wrapper.param.RxHttp;
  * * @param type 1：是全部小区 2：是随访代办
  * 创建日期: 2020/5/26 11:07
  */
-public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
-    @BindView(R.id.community_follow_img_top_back)
-    ImageView imgTopBack;
-    @BindView(R.id.tv_community_follow_up_title)
-    TextView titleTextView;
-    @BindView(R.id.et_follow_up_agent)
-    TextView searchTextView;
-    @BindView(R.id.rv_follow_up_agent_list)
-    RecyclerView rvList;
-    @BindView(R.id.srl_follow_up_agent)
-    SmartRefreshLayout srlHeightAndWeight;
+public class CommunityFollowupAgentListActivity extends XYSoftUIBaseActivity {
+    private EditText searchTextView;
+    private RecyclerView followUpList;
+    private SmartRefreshLayout followSmartRefreshLayout;
 
     private int pageIndex = 1;//当前获取的是第几页的数据
     private List<FollowUpAgentListBean> list = new ArrayList<>();//ListView显示的数据
@@ -63,33 +59,71 @@ public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
 
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.activity_community_follow_up_agent_list;
-    }
-
-    @Override
-    protected void init(Bundle savedInstanceState) {
-        hideTitleBar();
-
-
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if ("1".equals(type)) {
+            String commuinityName = getIntent().getStringExtra("commuinityName");
+            topViewManager().titleTextView().setText(commuinityName);
+        } else {
+            topViewManager().titleTextView().setText(R.string.follow_up_agent_title);
+        }
+        containerView().addView(initView());
+        initValues();
         getData();
         initRefresh();
+        initListener();
+
     }
 
+    private void initListener() {
+        searchTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                getData();
+            }
+        });
+    }
+
+    private void initValues() {
+        //设置每一个item间距
+        GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
+        followUpList.addItemDecoration(new GridSpaceItemDecoration(XYSoftDensityUtils.dip2px(getPageContext(), 0), false));
+        followUpList.setLayoutManager(layoutManager);
+    }
+
+    private View initView() {
+        View view = View.inflate(getPageContext(), R.layout.activity_community_follow_up_agent_list, null);
+        searchTextView = view.findViewById(R.id.et_follow_up_agent);
+        followUpList = view.findViewById(R.id.rv_follow_up_agent_list);
+        followSmartRefreshLayout = view.findViewById(R.id.srl_follow_up_agent);
+        return view;
+    }
+
+
     private void initRefresh() {
-        srlHeightAndWeight.setEnableAutoLoadMore(true);//开启自动加载功能(非必须）
+        followSmartRefreshLayout.setEnableAutoLoadMore(true);//开启自动加载功能(非必须）
         //下拉刷新
-        srlHeightAndWeight.setOnRefreshListener(new OnRefreshListener() {
+        followSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 pageIndex = 1;
                 getData();
-                srlHeightAndWeight.finishRefresh();
+                followSmartRefreshLayout.finishRefresh();
                 refreshLayout.setNoMoreData(false);//恢复没有更多数据的原始状态
             }
         });
         //上拉加载
-        srlHeightAndWeight.setOnLoadMoreListener(new OnLoadMoreListener() {
+        followSmartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
                 ++pageIndex;
@@ -114,9 +148,9 @@ public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
                         tempList = myTreatPlanBeans;
                         //少于10条,将不会再次触发加载更多事件
                         if (tempList.size() < 10) {
-                            srlHeightAndWeight.finishLoadMoreWithNoMoreData();
+                            followSmartRefreshLayout.finishLoadMoreWithNoMoreData();
                         } else {
-                            srlHeightAndWeight.finishLoadMore();
+                            followSmartRefreshLayout.finishLoadMore();
                         }
                         //设置数据
                         if (pageIndex == 1) {
@@ -131,6 +165,7 @@ public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
                                 public void adapterClickListener(int position, View view) {
                                     Intent intent = new Intent(getPageContext(), CommunityFollowUpBuildingActivity.class);
                                     intent.putExtra("buildingName", list.get(position).getBpmval());
+                                    intent.putExtra("type", type);
                                     startActivity(intent);
                                 }
 
@@ -139,9 +174,9 @@ public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
 
                                 }
                             });
-                            rvList.setLayoutManager(new LinearLayoutManager(getPageContext()));
+                            followUpList.setLayoutManager(new LinearLayoutManager(getPageContext()));
 
-                            rvList.setAdapter(adapter);
+                            followUpList.setAdapter(adapter);
                         } else {
                             list.addAll(tempList);
                             adapter.notifyDataSetChanged();
@@ -154,17 +189,4 @@ public class CommunityFollowupAgentListActivity extends BaseHideLineActivity {
                     }
                 });
     }
-
-    @OnClick({R.id.community_follow_img_top_back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.community_follow_img_top_back:
-                finish();
-                break;
-
-            default:
-                break;
-        }
-    }
-
 }

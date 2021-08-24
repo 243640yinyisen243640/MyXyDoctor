@@ -5,30 +5,6 @@
     android:background="@color/background"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
-
-        <ImageView
-            android:id="@+id/iv_data_abnormal_remind_back"
-            style="@style/hh_wr_wr"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:padding="@dimen/dp_12"
-            android:src="@drawable/img_base_back_red" />
-
-        <TextView
-            android:id="@+id/tv_data_abnormal_remind_title"
-            style="@style/text_white_16_w_w"
-            android:layout_gravity="center"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:text="@string/data_abnormal_remind"
-            android:textColor="@color/main_red"
-            android:textSize="20sp" />
-    </FrameLayout>
-
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/srl_data_abnormal_remind_agent"
         style="@style/hh_fi_fi">
