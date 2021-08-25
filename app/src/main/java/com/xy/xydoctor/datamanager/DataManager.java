@@ -5,10 +5,12 @@ import com.blankj.utilcode.util.SPStaticUtils;
 import com.lyd.librongim.myrongim.GroupUserBeanPatient;
 import com.xy.xydoctor.base.retrofit.BaseNetworkUtils;
 import com.xy.xydoctor.base.retrofit.HHSoftBaseResponse;
+import com.xy.xydoctor.bean.FollowUpAgentListBean;
 import com.xy.xydoctor.bean.UpdateBean;
 import com.xy.xydoctor.constant.ConstantParam;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.functions.BiConsumer;
 import retrofit2.Call;
@@ -113,5 +115,27 @@ public class DataManager {
         map.put("version", ConstantParam.SERVER_VERSION);
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/unBindDoc", map, successCallBack, failureCallBack);
     }
+
+    /**
+     * cbl
+     *
+     * @param userID
+     * @param goodsUserID
+     * @param page
+     * @param pageSize
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> goodsList(String userID, String page, String pageSize, String goodsType, String keyWords, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("goodsType", goodsType);
+        map.put("userID", userID);
+        map.put("page", page);
+        map.put("pageSize", pageSize);
+        map.put("keyWords", keyWords);
+        return BaseNetworkUtils.getRequest(false, BaseNetworkUtils.JSON_ARRAY, FollowUpAgentListBean.class, "goodslist", map, successCallBack, failureCallBack);
+    }
+
 
 }

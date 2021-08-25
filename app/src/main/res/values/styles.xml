@@ -778,4 +778,5 @@
         <item name="android:paddingBottom">10dp</item>
         <item name="android:textColor">@color/main_red</item>
     </style>
+
 </resources>

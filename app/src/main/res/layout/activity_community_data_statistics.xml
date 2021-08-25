@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+
+        <com.xy.xydoctor.customerView.CirclePercentView
+            android:id="@+id/circle_percent_progress1"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            app:circleBgColor="@color/gray_text"
+            app:circleIsGradient="false"
+            app:circleProgressColor="@color/gray_text" />
+
+        <com.xy.xydoctor.customerView.CirclePercentView
+            android:id="@+id/circle_percent_progress2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            app:circleBgColor="@color/gray_text"
+            app:circleIsGradient="false"
+            app:circleProgressColor="@color/red" />
+
+        <com.xy.xydoctor.customerView.CirclePercentView
+            android:id="@+id/circle_percent_progress3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            app:circleBgColor="@color/gray_text"
+            app:circleIsGradient="false"
+            app:circleProgressColor="@color/black" />
+
+    </FrameLayout>
+
+</LinearLayout>

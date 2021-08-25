@@ -18,11 +18,7 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.customerView.LoadingCircleView;
 
 
-/**
- * @类说明 用于显示Toast提示和ProgressDialog提示的工具类
- * @作者 hhsoft
- * @创建日期 2019/8/22 16:44
- */
+
 public class TipUtils {
     //定义了唯一的实例对象;//增加volatile关键字，确保实例化instance时，编译成汇编指令的执行顺序
     private volatile static TipUtils mInstance;

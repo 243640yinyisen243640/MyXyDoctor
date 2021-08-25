@@ -1,5 +1,7 @@
 package com.xy.xydoctor.bean;
 
+import java.util.List;
+
 public class FollowUpAgentListBean {
 
 
@@ -16,6 +18,16 @@ public class FollowUpAgentListBean {
     private String bpmval;
     private int type;
     private String datetime;
+
+    private List<FollowUpAgentListBean> plan_list;
+
+    public List<FollowUpAgentListBean> getPlan_list() {
+        return plan_list;
+    }
+
+    public void setPlan_list(List<FollowUpAgentListBean> plan_list) {
+        this.plan_list = plan_list;
+    }
 
     public int getOid() {
         return oid;

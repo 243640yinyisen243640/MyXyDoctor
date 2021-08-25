@@ -13,6 +13,7 @@ import com.xy.xydoctor.ui.activity.community_management.CommunityDataAbnormalAct
 import com.xy.xydoctor.ui.activity.community_management.CommunityFilterActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentListActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentSearchListActivity;
+import com.xy.xydoctor.ui.activity.community_management.CommunityUserMedicineActivity;
 import com.xy.xydoctor.ui.activity.community_management.UserAddActivity;
 
 import butterknife.BindView;
@@ -114,6 +115,7 @@ public class FragmentCommunityManagement extends BaseFragment implements View.On
         abnormalDataTextView.setOnClickListener(this);
         followUpStatisticsTextView.setOnClickListener(this);
         numStatisticsTextView.setOnClickListener(this);
+        medicationReminderTextView.setOnClickListener(this);
     }
 
     /**
@@ -154,6 +156,10 @@ public class FragmentCommunityManagement extends BaseFragment implements View.On
                 break;
             case R.id.tv_community_abnormal_data:
                 intent = new Intent(getPageContext(), CommunityDataAbnormalActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tv_community_medication_reminder:
+                intent = new Intent(getPageContext(), CommunityUserMedicineActivity.class);
                 startActivity(intent);
                 break;
             default:
