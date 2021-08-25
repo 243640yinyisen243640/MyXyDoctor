@@ -1,10 +1,12 @@
 package com.xy.xydoctor.ui.fragment.community_management;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -19,12 +21,15 @@ import com.xy.xydoctor.base.fragment.XYBaseFragment;
 import com.xy.xydoctor.bean.FollowUpAgentListBean;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
+import com.xy.xydoctor.ui.activity.community_management.CommunityNoFinishActivity;
 import com.xy.xydoctor.utils.TipUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * 类描述：
@@ -35,7 +40,7 @@ import retrofit2.Call;
  */
 public class CommunityFollowUpListFragment extends XYBaseFragment implements TabFragmentAdapter.RefeshFragment {
 
-    private static final int REQUEST_CODE_FOR_GOODS_REFRESH = 10;
+    private static final int REQUEST_CODE_FOR_REFRESH = 10;
     private SmartRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
     private List<FollowUpAgentListBean> mList = new ArrayList<>();
@@ -248,8 +253,28 @@ public class CommunityFollowUpListFragment extends XYBaseFragment implements Tab
         @Override
         public void adapterClickListener(int position, int index, View view) {
             //二级的点击事件
+            switch (view.getId()) {
+                case R.id.tv_fuc_child_no_finish:
+                    Intent intent = new Intent(getPageContext(), CommunityNoFinishActivity.class);
+                    startActivityForResult(intent,REQUEST_CODE_FOR_REFRESH);
+                    break;
+                case R.id.tv_fuc_child_call_phone:
+
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_REFRESH) {
+                mPageIndex = 1;
+                onPageLoad();
+            }
+        }
+    }
 }

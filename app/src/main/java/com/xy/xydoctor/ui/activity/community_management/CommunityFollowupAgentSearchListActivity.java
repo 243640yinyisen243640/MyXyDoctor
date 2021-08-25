@@ -135,7 +135,7 @@ public class CommunityFollowupAgentSearchListActivity extends BaseHideLineActivi
                 });
     }
 
-    @OnClick({R.id.community_follow_img_top_back})
+    @OnClick({R.id.iv_follow_search_img_top_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_follow_search_img_top_back:

@@ -2,7 +2,9 @@ package com.xy.xydoctor.adapter.community_manager;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.TextView;
 
+import com.xy.xydoctor.R;
 import com.xy.xydoctor.bean.FollowUpAgentListBean;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.zhy.adapter.abslistview.CommonAdapter;
@@ -26,8 +28,11 @@ public class CommunityFollowUpChangeChildListAdapter extends CommonAdapter<Follo
 
     @Override
     protected void convert(ViewHolder viewHolder, FollowUpAgentListBean item, int position) {
-
-
+        TextView callTextView = viewHolder.getView(R.id.tv_fuc_child_call_phone);
+        TextView noFinishTextView = viewHolder.getView(R.id.tv_fuc_child_no_finish);
+        MyClickListener clickListener = new MyClickListener(position);
+        callTextView.setOnClickListener(clickListener);
+        noFinishTextView.setOnClickListener(clickListener);
     }
 
     /**

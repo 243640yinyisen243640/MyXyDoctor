@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="@string/no_finish_reason"
+            android:textColor="@color/base_black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_no_finish_choose_reason"
+            style="@style/user_add_right_choose"
+            android:paddingRight="15dp"
+            android:text="@string/please_choose" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_no_finish_choose_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/selector_community_no_finish"
+        android:padding="15dp"
+        android:text="@string/no_finish_close_follow"
+        android:textColor="@color/base_black"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_no_finish_submit"
+        style="@style/community_button_choice"
+        android:text="@string/base_submit" />
+
+
+</LinearLayout>

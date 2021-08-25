@@ -9,6 +9,27 @@ public class DiseaseTypeInfo {
     private boolean isCheck;
     private String diseaseName;
 
+    private String sugarType;
+    private String pressureType;
+
+
+
+    public String getSugarType() {
+        return sugarType;
+    }
+
+    public void setSugarType(String sugarType) {
+        this.sugarType = sugarType;
+    }
+
+    public String getPressureType() {
+        return pressureType;
+    }
+
+    public void setPressureType(String pressureType) {
+        this.pressureType = pressureType;
+    }
+
     public DiseaseTypeInfo(String diseaseName) {
         this.diseaseName = diseaseName;
     }

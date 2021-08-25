@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <View style="@style/line" />
@@ -9,130 +9,163 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_use_medicine_child_name"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textColor="@color/base_black"
-            android:textSize="15sp" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_fuc_child_name_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/base_black"
+                android:textSize="17sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_fuc_child_sex"
+                    style="@style/follow_up_search_infomation"
+                    android:text="@string/app_name" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/gray_light" />
+
+                <TextView
+                    android:id="@+id/tv_fuc_child_age"
+                    style="@style/follow_up_search_infomation"
+                    android:text="@string/app_name" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/gray_light" />
+
+                <TextView
+                    android:id="@+id/tv_fuc_child_phone"
+                    style="@style/follow_up_search_infomation"
+                    android:text="@string/app_name" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/gray_light" />
+            </LinearLayout>
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_use_medicine_child_last_day"
+            android:id="@+id/tv_fuc_child_call_phone"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_bg_main_gradient_90_0_90_0"
-            android:paddingLeft="10dp"
-            android:paddingTop="8dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="8dp"
-            android:text="@string/app_name"
-            android:textColor="@color/white"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/community_base_phone"
+            android:padding="15dp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_use_medicine_child_times_amount"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/app_name"
-        android:textColor="@color/data_gray_light"
-        android:textSize="13sp" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_fuc_child_sugar"
+            style="@style/follow_up_change_disease_type"
+            android:text="@string/app_name" />
+
+        <TextView
+            android:id="@+id/tv_fuc_child_pressure"
+            style="@style/follow_up_change_disease_type"
+            android:layout_marginLeft="5dp"
+            android:text="@string/app_name" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_use_medicine_child_all"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textColor="@color/data_gray_light"
-            android:textSize="13sp" />
+            android:id="@+id/tv_fuc_child_sugar_follow"
+            style="@style/follow_up_change_sugar_pressure"
+            android:drawableLeft="@drawable/follow_up_chage_sugar"
+            android:text="@string/app_name" />
 
         <TextView
-            android:id="@+id/tv_use_medicine_child_have"
+            android:id="@+id/tv_fuc_child_pressure_follow"
+            style="@style/follow_up_change_sugar_pressure"
+            android:layout_marginLeft="8dp"
+            android:drawableLeft="@drawable/follow_up_chage_pressure"
+            android:text="@string/app_name" />
+
+        <View
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textColor="@color/data_gray_light"
-            android:textSize="13sp" />
+            android:layout_height="1dp"
+            android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/tv_use_medicine_child_last"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textColor="@color/data_gray_light"
-            android:textSize="13sp" />
-
+            android:id="@+id/tv_fuc_child_no_finish"
+            style="@style/user_medicine_tip"
+            android:layout_gravity="right"
+            android:layout_marginLeft="10dp"
+            android:text="@string/goods_add_spe_no_finish" />
     </LinearLayout>
-
-    <View
-        style="@style/line"
-        android:layout_marginTop="12dp" />
-
-    <TextView
-        android:id="@+id/tv_use_medicine_child_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/app_name"
-        android:textColor="@color/data_gray_light"
-        android:textSize="13sp" />
-
-    <View
-        style="@style/line"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp" />
-
-    <TextView
-        android:id="@+id/tv_use_medicine_child_end_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/app_name"
-        android:textColor="@color/data_gray_light"
-        android:textSize="13sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right">
+        android:background="@drawable/shape_bg_background_5"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/follow_up_memo"
+                android:textColor="@color/base_text_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_fuc_child_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/data_gray_light"
+                android:textSize="12sp" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_use_medicine_child_edit"
-            style="@style/user_medicine_tip"
-            android:text="@string/user_medicine_edit_seheme" />
-
-        <TextView
-            android:id="@+id/tv_use_medicine_child_finish"
-            style="@style/user_medicine_tip"
-            android:layout_marginLeft="10dp"
-            android:text="@string/user_medicine_edit_seheme" />
-
-        <TextView
-            android:id="@+id/tv_use_medicine_child_remind_user"
-            style="@style/user_medicine_tip"
-            android:layout_marginLeft="10dp"
-            android:text="@string/user_medicine_edit_seheme" />
+            android:id="@+id/tv_fuc_child_memo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/app_name"
+            android:textColor="@color/base_text_gray"
+            android:textSize="12sp" />
 
     </LinearLayout>
+
 
 </LinearLayout>

@@ -48,6 +48,7 @@ public class CommunityFollowUpChangeListAdapter extends RecyclerView.Adapter<Com
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FollowUpAgentListBean info = list.get(position);
 
+
         CommunityFollowUpChangeChildListAdapter childListAdapter = new CommunityFollowUpChangeChildListAdapter(context, R.layout.item_community_follow_up_change_child_list, list.get(position).getPlan_list(), type, position, clickListener);
         holder.myListView.setAdapter(childListAdapter);
     }

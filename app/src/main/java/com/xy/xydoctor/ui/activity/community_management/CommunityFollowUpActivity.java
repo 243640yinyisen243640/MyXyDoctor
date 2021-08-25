@@ -22,12 +22,8 @@ import java.util.List;
  *
  * @author android.yys
  */
-public class CommunityFollowUpActivityActivity extends XYSoftUIBaseActivity implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener {
+public class CommunityFollowUpActivity extends XYSoftUIBaseActivity implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener {
 
-    /**
-     * 搜索
-     */
-    private static final int REQUEST_CODE_FOR_SEARCH = 10;
     private RadioGroup radioGroup;
     private ViewPager viewPager;
 
@@ -85,11 +81,9 @@ public class CommunityFollowUpActivityActivity extends XYSoftUIBaseActivity impl
     private void initValues() {
         fragments = new ArrayList<>();
         for (int i = 1; i < 4; i++) {
-            CommunityFollowUpListFragment talkFragment = CommunityFollowUpListFragment.newInstance(i + "", getIntent().getStringExtra("goodsUserID"));
+            CommunityFollowUpListFragment talkFragment = CommunityFollowUpListFragment.newInstance(i + "");
             fragments.add(talkFragment);
         }
-
-
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), fragments));
         viewPager.setCurrentItem(0);//默认选中项
         radioGroup.check(radioGroup.getChildAt(0).getId());

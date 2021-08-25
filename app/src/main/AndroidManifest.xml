@@ -344,6 +344,9 @@
         <activity
             android:name=".ui.activity.community_management.CommunityUserMedicineActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.community_management.CommunityNoFinishActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

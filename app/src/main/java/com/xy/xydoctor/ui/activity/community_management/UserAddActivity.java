@@ -3,6 +3,7 @@ package com.xy.xydoctor.ui.activity.community_management;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -78,21 +79,25 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
     /**
      * 血糖仪输入
      */
-    private TextView sugarEditText;
+    private EditText sugarEditText;
     /**
      * 血糖仪扫一扫
      */
-    private TextView sugarImageView;
+    private ImageView sugarImageView;
     /**
      * 血压计输入
      */
-    private TextView pressureEditText;
+    private EditText pressureEditText;
     /**
      * 血压计扫一扫
      */
-    private TextView pressureImageView;
+    private ImageView pressureImageView;
 
     private String sex;
+
+    private List<DiseaseTypeInfo> typeInfoList;
+
+    private FilterDiseaseTypeAdapter diseaseTypeAdapter;
 
 
     @Override
@@ -136,7 +141,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
     }
 
     private void initValues() {
-        List<DiseaseTypeInfo> typeInfoList = new ArrayList<>();
+        typeInfoList = new ArrayList<>();
         DiseaseTypeInfo typeInfo1 = new DiseaseTypeInfo("糖尿病");
         typeInfoList.add(typeInfo1);
         DiseaseTypeInfo typeInfo2 = new DiseaseTypeInfo("高血压");
@@ -150,7 +155,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         DiseaseTypeInfo typeInfo6 = new DiseaseTypeInfo("冠心病");
         typeInfoList.add(typeInfo6);
 
-        FilterDiseaseTypeAdapter diseaseTypeAdapter = new FilterDiseaseTypeAdapter(getPageContext(), typeInfoList, "2");
+        diseaseTypeAdapter = new FilterDiseaseTypeAdapter(getPageContext(), typeInfoList, "2");
         diseaseGridView.setAdapter(diseaseTypeAdapter);
 
 
@@ -166,9 +171,16 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         otherInfoList.add(otherInfoList4);
 
         diseaseGridView.setOnItemClickListener((parent, view, position, id) -> {
-
-            typeInfoList.get(position).setCheck(!typeInfoList.get(position).isCheck());
-            diseaseTypeAdapter.notifyDataSetChanged();
+            List<DiseaseTypeInfo> sugarList = new ArrayList<>();
+            DiseaseTypeInfo sugar1 = new DiseaseTypeInfo("一型");
+            sugarList.add(sugar1);
+            DiseaseTypeInfo sugar2 = new DiseaseTypeInfo("二型");
+            sugarList.add(sugar2);
+            DiseaseTypeInfo sugar3 = new DiseaseTypeInfo("妊娠");
+            sugarList.add(sugar3);
+            DiseaseTypeInfo sugar4 = new DiseaseTypeInfo("其他");
+            sugarList.add(sugar4);
+            showSugarOrPressureType(sugarList, typeInfoList.get(position).getDiseaseName(), position);
 
         });
         FilterDiseaseTypeAdapter otherTypeAdapter = new FilterDiseaseTypeAdapter(getPageContext(), otherInfoList, "2");
@@ -212,40 +224,28 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
 
 
     /**
-     *
+     * 选择糖尿病或者高血压的类型
      */
-    //    private void chooseBuilding() {
-    //        TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
-    //        Call<String> requestCall = GoodsDataManager.getDeliverCompany((call, response) -> {
-    //            TipUtils.getInstance().dismissProgressDialog();
-    //            if (100 == response.code) {
-    //                List<LogisticsCompanyInfo> logisticsCompanyInfos = (List<LogisticsCompanyInfo>) response.object;
-    //                if (logisticsCompanyInfos != null && logisticsCompanyInfos.size() > 0) {
-    //                    OptionsPickerView optionsPickerView = new OptionsPickerBuilder(context, (options1, options2, options3, v) -> {
-    //                        logisticsCompanyID = logisticsCompanyInfos.get(options1).getLogisticsCompanyID();
-    //                        String s = logisticsCompanyInfos.get(options1).getLogisticsCompany();
-    //                        companyTextView.setText(s);
-    //                        companyTextView.setTextSize(16);
-    //                        companyTextView.setTextColor(context.getResources().getColor(R.color.black));
-    //                    }).setLineSpacingMultiplier(2.5f)
-    //                            .setCancelColor(ContextCompat.getColor(context, R.color.text_gray))
-    //                            .setSubmitColor(ContextCompat.getColor(context, R.color.main_base_color))
-    //                            .build();
-    //                    List<String> list = new ArrayList<>();
-    //                    for (int i = 0; i < logisticsCompanyInfos.size(); i++) {
-    //                        String typeName = logisticsCompanyInfos.get(i).getLogisticsCompany();
-    //                        list.add(typeName);
-    //                    }
-    //                    optionsPickerView.setPicker(list);
-    //                    optionsPickerView.show();
-    //                }
-    //            } else {
-    //                TipUtils.getInstance().showToast(context, response.msg);
-    //            }
-    //        }, (call, throwable) -> {
-    //        });
-    //
-    //    }
+    private void showSugarOrPressureType(List<DiseaseTypeInfo> diseaseTypeInfos, String diseaseName, int position) {
+        OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
+            String s = diseaseTypeInfos.get(options1).getDiseaseName();
+            typeInfoList.get(position).setDiseaseName(s);
+            typeInfoList.get(position).setCheck(!typeInfoList.get(position).isCheck());
+            diseaseTypeAdapter.notifyDataSetChanged();
+        }).setLineSpacingMultiplier(2.5f)
+                .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray))
+                .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
+                .setTitleText(diseaseName)
+                .build();
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < diseaseTypeInfos.size(); i++) {
+            String typeName = diseaseTypeInfos.get(i).getDiseaseName();
+            list.add(typeName);
+        }
+        optionsPickerView.setPicker(list);
+        optionsPickerView.show();
+
+    }
 
 
     private void showTimeWindow() {
@@ -261,7 +261,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                 .setType(new boolean[]{true, true, true, false, false, false})
                 .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.gray_light))
                 .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
-//                .setDecorView(all)
+                //                .setDecorView(all)
                 .build();
         timePickerView.show();
     }

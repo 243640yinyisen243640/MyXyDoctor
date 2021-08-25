@@ -33,7 +33,7 @@ import rxhttp.wrapper.param.RxHttp;
 /**
  * Author: LYD
  * Date: 2021/8/16 16:36
- * Description: 数据异常
+ * Description: 用药提醒
  */
 public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
 

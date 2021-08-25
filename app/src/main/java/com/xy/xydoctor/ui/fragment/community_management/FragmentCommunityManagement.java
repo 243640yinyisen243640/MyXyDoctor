@@ -17,13 +17,14 @@ import com.xy.xydoctor.ui.activity.community_management.CommunityUserMedicineAct
 import com.xy.xydoctor.ui.activity.community_management.UserAddActivity;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Author: LYD
  * Date: 2021/8/10 16:36
  * Description: 社区管理
  */
-public class FragmentCommunityManagement extends BaseFragment implements View.OnClickListener {
+public class FragmentCommunityManagement extends BaseFragment {
 
     /**
      * 筛选
@@ -100,7 +101,6 @@ public class FragmentCommunityManagement extends BaseFragment implements View.On
     @Override
     protected void init(View rootView) {
         FloatingView.get().remove();
-        initListener();
         ImmersionBar.with(this)
                 .statusBarColor(R.color.transparent)  //指定状态栏颜色,根据情况是否设置
                 .init();
@@ -108,15 +108,6 @@ public class FragmentCommunityManagement extends BaseFragment implements View.On
 
     }
 
-    private void initListener() {
-        addUserTextView.setOnClickListener(this);
-        buildingNumLinearLayout.setOnClickListener(this);
-        toBeDoneNumTextView.setOnClickListener(this);
-        abnormalDataTextView.setOnClickListener(this);
-        followUpStatisticsTextView.setOnClickListener(this);
-        numStatisticsTextView.setOnClickListener(this);
-        medicationReminderTextView.setOnClickListener(this);
-    }
 
     /**
      * 获取详细信息
@@ -125,10 +116,11 @@ public class FragmentCommunityManagement extends BaseFragment implements View.On
 
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent intent;
-        switch (v.getId()) {
+
+    @OnClick({R.id.tv_community_add_user, R.id.ll_community_filter_building_num, R.id.tv_community_follow_up_to_be_done, R.id.tv_community_search, R.id.tv_community_medication_reminder})
+    public void onViewClicked(View view) {
+        Intent intent = null;
+        switch (view.getId()) {
             case R.id.tv_community_add_user:
                 startActivity(new Intent(getPageContext(), UserAddActivity.class));
                 break;
@@ -137,7 +129,7 @@ public class FragmentCommunityManagement extends BaseFragment implements View.On
                 //现在传的type值只是我自己定义的，看接口如何让传，在改
                 intent = new Intent(getPageContext(), CommunityFollowupAgentListActivity.class);
                 intent.putExtra("type", "1");
-//                intent.putExtra("commuinityName", );
+                //                intent.putExtra("commuinityName", );
                 startActivity(intent);
                 break;
             case R.id.tv_community_follow_up_to_be_done:
@@ -164,7 +156,6 @@ public class FragmentCommunityManagement extends BaseFragment implements View.On
                 break;
             default:
                 break;
-
         }
     }
 }
