@@ -181,7 +181,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" />
 
-        <com.xy.xydoctor.customerView.HHAtMostGridView
+        <com.xy.xydoctor.customerView.NoConflictGridView
             android:id="@+id/gv_fub_building_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

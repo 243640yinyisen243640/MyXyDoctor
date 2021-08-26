@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
-import com.xy.xydoctor.customerView.HHAtMostGridView;
+import com.xy.xydoctor.customerView.NoConflictGridView;
 
 /**
  * Author: LYD
@@ -32,7 +32,7 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
     private TextView deseaseAllNumTextView;
     private RecyclerView numRecycleView;
     private RecyclerView unitRecycleView;
-    private HHAtMostGridView contentGridView;
+    private NoConflictGridView contentGridView;
     /**
      * 1：小区数量 2随访待办
      */

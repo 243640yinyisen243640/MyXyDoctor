@@ -305,47 +305,57 @@
             android:screenOrientation="portrait" />
 
         <!--社区管理模块-->
+        <!--社区管理人员的设置页面-->
         <activity
             android:name=".ui.activity.community_management.SettingsPropertyActivity"
             android:screenOrientation="portrait" />
+        <!--特殊操作-->
         <activity
             android:name=".ui.activity.community_management.SpecialOperateActivity"
             android:screenOrientation="portrait" />
-
+        <!--筛选-->
         <activity
             android:name=".ui.activity.community_management.CommunityFilterActivity"
             android:screenOrientation="portrait" />
-
+        <!--个人信息-->
         <activity
             android:name=".ui.activity.community_management.CommunityUserInfoActivity"
             android:screenOrientation="portrait" />
-
+        <!--从首页进的随访待办-->
         <activity
             android:name=".ui.activity.community_management.CommunityFollowupAgentListActivity"
             android:screenOrientation="portrait" />
-
+        <!--搜索-->
         <activity
             android:name=".ui.activity.community_management.CommunityFollowupAgentSearchListActivity"
             android:screenOrientation="portrait" />
+        <!--数据异常-->
         <activity
             android:name=".ui.activity.community_management.CommunityDataAbnormalActivity"
             android:screenOrientation="portrait" />
-
+        <!--随访待办的楼栋模型-->
         <activity
             android:name=".ui.activity.community_management.CommunityFollowUpBuildingActivity"
             android:screenOrientation="portrait" />
-
+        <!--添加用户-->
         <activity
             android:name=".ui.activity.community_management.UserAddActivity"
             android:screenOrientation="portrait" />
+        <!--数据异常提醒-->
         <activity
             android:name=".ui.activity.community_management.DataAbnormalRemindListActivity"
             android:screenOrientation="portrait" />
+        <!--用药提醒-->
         <activity
             android:name=".ui.activity.community_management.CommunityUserMedicineActivity"
             android:screenOrientation="portrait" />
+        <!--未完成-->
         <activity
             android:name=".ui.activity.community_management.CommunityNoFinishActivity"
+            android:screenOrientation="portrait" />
+        <!--楼栋设置-->
+        <activity
+            android:name=".ui.activity.community_management.CommunityAddBuildingActivity"
             android:screenOrientation="portrait" />
     </application>
 
