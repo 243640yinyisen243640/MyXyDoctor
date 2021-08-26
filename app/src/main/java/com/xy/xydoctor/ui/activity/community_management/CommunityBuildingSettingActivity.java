@@ -1,7 +1,9 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 
 import androidx.annotation.Nullable;
 
@@ -16,7 +18,10 @@ import com.xy.xydoctor.customerView.NoConflictGridView;
  * Description:楼栋设置
  */
 public class CommunityBuildingSettingActivity extends XYSoftUIBaseActivity {
-
+    /**
+     * 编辑楼栋，删除，回来刷新
+     */
+    private static final int REQUEST_CODE_FOR_REFRESH = 10;
     private NoConflictGridView gridView;
 
     private CommunityBuildingSettingAdapter adapter;
@@ -32,6 +37,18 @@ public class CommunityBuildingSettingActivity extends XYSoftUIBaseActivity {
         containerView().addView(initView());
 
         initValues();
+
+        initListener();
+    }
+
+    private void initListener() {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getPageContext(), CommunityEditBuildingActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
+            }
+        });
     }
 
     private void initValues() {
@@ -49,4 +66,13 @@ public class CommunityBuildingSettingActivity extends XYSoftUIBaseActivity {
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_REFRESH) {
+                initValues();
+            }
+        }
+    }
 }

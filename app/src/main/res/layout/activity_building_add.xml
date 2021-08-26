@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/base_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@drawable/shape_bg_white_5"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_add_left"
+                android:drawableRight="@null"
+                android:paddingLeft="15dp"
+                android:text="@string/add_building_num" />
+
+            <EditText
+                android:id="@+id/et_building_num"
+                style="@style/user_add_right"
+                android:hint="@string/please_add_building_num"
+                android:padding="15dp" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/line"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_add_left"
+                android:drawableRight="@null"
+                android:paddingLeft="15dp"
+                android:text="@string/add_building_high" />
+
+            <EditText
+                android:id="@+id/et_building_high"
+                style="@style/user_add_right"
+                android:hint="@string/please_add_building_high"
+                android:padding="15dp" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/line"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_add_left"
+                android:drawableRight="@null"
+                android:paddingLeft="15dp"
+                android:text="@string/add_building_unit_num" />
+
+            <EditText
+                android:id="@+id/et_building_unit_num"
+                style="@style/user_add_right"
+                android:hint="@string/please_add_building_unit_num"
+                android:padding="15dp" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/line"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp" />
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_add_building_submit"
+        style="@style/community_button_choice"
+        android:text="@string/sure" />
+
+</LinearLayout>

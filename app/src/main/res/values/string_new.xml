@@ -121,4 +121,12 @@
     <string name="no_finish_close_follow">关闭随访</string>
     <string name="community_add_buliding_set">楼栋设置</string>
     <string name="base_add">添加</string>
+    <string name="add_building_title">添加楼栋</string>
+    <string name="add_building_edit_title">编辑楼栋</string>
+    <string name="add_building_num">小区楼号</string>
+    <string name="please_add_building_num">请输入小区楼号</string>
+    <string name="please_add_building_high">请输入层高</string>
+    <string name="please_add_building_unit_num">请输入单元数量</string>
+    <string name="add_building_high">层高</string>
+    <string name="add_building_unit_num">单元数量</string>
 </resources>
