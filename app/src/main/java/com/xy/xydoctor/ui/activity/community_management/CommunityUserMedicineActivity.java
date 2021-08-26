@@ -54,6 +54,7 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        topViewManager().titleTextView().setText("用药提醒");
         containerView().addView(initView());
         getFollowUpList();
         initRefresh();

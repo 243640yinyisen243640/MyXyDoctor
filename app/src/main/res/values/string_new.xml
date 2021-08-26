@@ -101,7 +101,7 @@
     <string name="user_add_department_choose">选择科室</string>
     <string name="user_add_doctor_choose">选择医生</string>
     <string name="please_choose">请选择</string>
-    <string name="user_add_title">添加用户</string>
+    <string name="user_add_title">添加成员</string>
     <string name="user_add_bind_device">绑定设备</string>
     <string name="user_add_special_info">特殊信息</string>
     <string name="user_add_device_sugar">血糖仪</string>
@@ -129,4 +129,5 @@
     <string name="please_add_building_unit_num">请输入单元数量</string>
     <string name="add_building_high">层高</string>
     <string name="add_building_unit_num">单元数量</string>
+    <string name="base_save">保存</string>
 </resources>

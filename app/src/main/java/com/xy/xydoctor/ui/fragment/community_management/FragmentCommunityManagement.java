@@ -123,6 +123,7 @@ public class FragmentCommunityManagement extends BaseFragment {
         switch (view.getId()) {
             case R.id.tv_community_add_user:
                 startActivity(new Intent(getPageContext(), UserAddActivity.class));
+
                 break;
             case R.id.ll_community_filter_building_num:
                 //小区数量  进入到当前社区的小区列表 ，从点击到进入楼栋模型，展示当前小区的楼栋数

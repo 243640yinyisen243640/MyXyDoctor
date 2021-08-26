@@ -1,14 +1,17 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.lyd.baselib.util.TurnsUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
+import com.xy.xydoctor.window.CommunityAddBuildingPopupWindow;
 
 /**
  * Author: LYD
@@ -32,7 +35,10 @@ public class CommunityAddBuildingActivity extends XYSoftUIBaseActivity {
 
     private void initListener() {
         sureTextView.setOnClickListener(v -> {
-
+            CommunityAddBuildingPopupWindow addBuildingPopupWindow = new CommunityAddBuildingPopupWindow(getPageContext(), TurnsUtils.getInt(unitEditText.getText().toString(), 0));
+            if (!addBuildingPopupWindow.isShowing()) {
+                addBuildingPopupWindow.showAtLocation(containerView(), Gravity.CENTER, 0, 0);
+            }
         });
     }
 
@@ -44,4 +50,12 @@ public class CommunityAddBuildingActivity extends XYSoftUIBaseActivity {
         sureTextView = view.findViewById(R.id.tv_add_building_submit);
         return view;
     }
+
+
+    private void setUnitNum() {
+
+
+    }
+
+
 }
