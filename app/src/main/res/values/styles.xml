@@ -808,5 +808,20 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="community_add_medicine_choose">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/shape_bg_white_black_90</item>
+        <item name="android:drawableRight">@drawable/right_arrow_down</item>
+        <item name="android:drawablePadding">25dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">10.5dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingRight">10.5dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textColor">@color/base_text_gray</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
 
 </resources>
