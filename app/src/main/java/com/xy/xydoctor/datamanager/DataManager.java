@@ -5,7 +5,7 @@ import com.blankj.utilcode.util.SPStaticUtils;
 import com.lyd.librongim.myrongim.GroupUserBeanPatient;
 import com.xy.xydoctor.base.retrofit.BaseNetworkUtils;
 import com.xy.xydoctor.base.retrofit.HHSoftBaseResponse;
-import com.xy.xydoctor.bean.FollowUpAgentListBean;
+import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
 import com.xy.xydoctor.bean.UpdateBean;
 import com.xy.xydoctor.constant.ConstantParam;
 

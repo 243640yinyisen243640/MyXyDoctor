@@ -18,7 +18,7 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.CommunityFollowUpChangeListAdapter;
 import com.xy.xydoctor.base.adapter.TabFragmentAdapter;
 import com.xy.xydoctor.base.fragment.XYBaseFragment;
-import com.xy.xydoctor.bean.FollowUpAgentListBean;
+import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.xy.xydoctor.ui.activity.community_management.CommunityNoFinishActivity;

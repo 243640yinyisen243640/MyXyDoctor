@@ -355,7 +355,7 @@
             android:screenOrientation="portrait" />
         <!--楼栋设置-->
         <activity
-            android:name=".ui.activity.community_management.CommunityAddBuildingActivity"
+            android:name=".ui.activity.community_management.CommunityBuildingSettingActivity"
             android:screenOrientation="portrait" />
     </application>
 

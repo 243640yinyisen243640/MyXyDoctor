@@ -16,7 +16,7 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.FilterDiseaseTypeAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
-import com.xy.xydoctor.bean.DiseaseTypeInfo;
+import com.xy.xydoctor.bean.community_manamer.DiseaseTypeInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.customerView.NoConflictGridView;
 import com.xy.xydoctor.utils.DataUtils;

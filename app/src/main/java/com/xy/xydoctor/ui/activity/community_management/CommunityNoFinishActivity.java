@@ -11,7 +11,7 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
-import com.xy.xydoctor.bean.DiseaseTypeInfo;
+import com.xy.xydoctor.bean.community_manamer.DiseaseTypeInfo;
 
 import java.util.ArrayList;
 import java.util.List;

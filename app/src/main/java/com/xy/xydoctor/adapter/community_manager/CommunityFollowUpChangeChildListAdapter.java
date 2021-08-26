@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.bean.FollowUpAgentListBean;
+import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;

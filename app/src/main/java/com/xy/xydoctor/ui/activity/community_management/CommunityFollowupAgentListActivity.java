@@ -23,7 +23,7 @@ import com.xy.xydoctor.adapter.community_manager.FollowupAgentListAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.base.custom.GridSpaceItemDecoration;
 import com.xy.xydoctor.base.utils.XYSoftDensityUtils;
-import com.xy.xydoctor.bean.FollowUpAgentListBean;
+import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;

@@ -1,5 +1,6 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -21,6 +22,10 @@ import com.xy.xydoctor.customerView.NoConflictGridView;
  */
 public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
 
+    /**
+     * 添加楼栋回来刷新
+     */
+    private static final int REQUEST_CODE_FOR_ADD_BUILDING = 10;
     private TextView nameTextView;
     private TextView locationTextView;
     private TextView buildingNumTextView;
@@ -58,6 +63,8 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
             if ("1".equals(type)) {
                 //添加楼栋
 
+                Intent intent = new Intent(getPageContext(), CommunityBuildingSettingActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_FOR_ADD_BUILDING);
             } else {
                 //进入到待随访  失访  已完成的页面
             }
@@ -65,6 +72,12 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
         });
         containerView().addView(initView());
         initValue();
+
+        getData();
+    }
+
+    private void getData() {
+
     }
 
 
@@ -95,5 +108,15 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
         unitRecycleView = view.findViewById(R.id.rv_fub_building_unit);
         contentGridView = view.findViewById(R.id.gv_fub_building_content);
         return view;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_ADD_BUILDING) {
+                getData();
+            }
+        }
     }
 }

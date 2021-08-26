@@ -1,4 +1,4 @@
-package com.xy.xydoctor.bean;
+package com.xy.xydoctor.bean.community_manamer;
 
 /**
  * Author: LYD
