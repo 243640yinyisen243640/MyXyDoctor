@@ -67,6 +67,8 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
                 startActivityForResult(intent, REQUEST_CODE_FOR_ADD_BUILDING);
             } else {
                 //进入到待随访  失访  已完成的页面
+                Intent intent = new Intent(getPageContext(), CommunityFollowUpActivity.class);
+                startActivity(intent);
             }
 
         });

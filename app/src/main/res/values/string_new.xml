@@ -112,7 +112,7 @@
     <string name="flb_high_pressure_num">高血压人数</string>
     <string name="fu_more_title_change_list">切换列表</string>
     <string name="user_medicine_edit_seheme">修改方案</string>
-    <string name="goods_add_goods">待随访</string>
+    <string name="community_wait_follow_up">待随访</string>
     <string name="goods_add_server">失访</string>
     <string name="goods_add_spe">已完成</string>
     <string name="goods_add_spe_no_finish">未完成</string>

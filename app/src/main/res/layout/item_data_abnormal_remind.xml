@@ -21,10 +21,9 @@
 
         <TextView
             android:id="@+id/tv_data_abnormal_remind_high_or_low"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:drawableRight="@drawable/base_arrow_right"
             android:text="@string/app_name"
             android:textColor="@color/base_text_gray"
             android:textSize="13sp" />
