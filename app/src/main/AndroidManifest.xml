@@ -366,6 +366,12 @@
         <activity
             android:name=".ui.activity.community_management.CommunityMedicineAddActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.community_management.CommunityUserMedicineRecordListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.community_management.CommunityBuildingUnitActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.xy.xydoctor.ui.activity.community_management;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -10,8 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xy.xydoctor.R;
+import com.xy.xydoctor.adapter.community_manager.ClassTopListAdapter;
+import com.xy.xydoctor.adapter.community_manager.CommunityBuildingModelListAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.customerView.NoConflictGridView;
+import com.xy.xydoctor.imp.IAdapterViewClickListener;
+
+import java.util.ArrayList;
 
 /**
  * Author: LYD
@@ -76,6 +82,11 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
         initValue();
 
         getData();
+
+        initListener();
+    }
+
+    private void initListener() {
     }
 
     private void getData() {
@@ -93,6 +104,41 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
         unitRecycleView.setLayoutManager(linearLayoutManager);
         unitRecycleView.setHasFixedSize(true);
         unitRecycleView.setNestedScrollingEnabled(false);
+
+
+        ClassTopListAdapter topListAdapter = new ClassTopListAdapter(getPageContext(), new ArrayList<>(), new IAdapterViewClickListener() {
+            @Override
+            public void adapterClickListener(int position, View view) {
+
+            }
+
+            @Override
+            public void adapterClickListener(int position, int index, View view) {
+
+            }
+        });
+        numRecycleView.setAdapter(topListAdapter);
+
+        CommunityBuildingModelListAdapter unitAdapter = new CommunityBuildingModelListAdapter(getPageContext(), new ArrayList<>(), "", new IAdapterViewClickListener() {
+            @Override
+            public void adapterClickListener(int position, View view) {
+
+            }
+
+            @Override
+            public void adapterClickListener(int position, int index, View view) {
+
+            }
+        });
+        unitRecycleView.setAdapter(unitAdapter);
+
+        contentGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getPageContext(),CommunityBuildingUnitActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private View initView() {

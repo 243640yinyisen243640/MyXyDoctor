@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:background="@drawable/shape_bg_white_5"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/fu_sugar_pressure_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/shape_bg_base_main_rectangle"
+        android:drawablePadding="10dp"
+        android:text="@string/user_info_healthy_record"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+    <com.lyd.baselib.widget.view.MyListView
+        android:id="@+id/lv_fu_sugar_pressure_child"
+        style="@style/listView" />
+
+
+</LinearLayout>

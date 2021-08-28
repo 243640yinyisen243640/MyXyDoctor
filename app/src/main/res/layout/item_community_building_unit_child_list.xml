@@ -71,7 +71,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_fuc_child_call_phone"
+            android:id="@+id/tv_fuc_child_call_phone_unit"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:drawableLeft="@drawable/community_base_phone"
@@ -120,7 +120,7 @@
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/tv_fuc_child_no_finish"
+            android:id="@+id/tv_fuc_child_no_finish_unit"
             style="@style/user_medicine_tip"
             android:layout_gravity="right"
             android:layout_marginLeft="10dp"

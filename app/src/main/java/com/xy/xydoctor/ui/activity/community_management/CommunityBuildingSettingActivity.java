@@ -32,7 +32,8 @@ public class CommunityBuildingSettingActivity extends XYSoftUIBaseActivity {
         topViewManager().titleTextView().setText(R.string.community_add_buliding_set);
         topViewManager().moreTextView().setText(R.string.base_add);
         topViewManager().moreTextView().setOnClickListener(v -> {
-
+            Intent intent = new Intent(getPageContext(), CommunityAddBuildingActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
         });
         containerView().addView(initView());
 
