@@ -140,4 +140,8 @@
     <string name="please_add_medicine_smoke_times">请输入服用次数</string>
     <string name="please_add_medicine_dose">请输入用药剂量</string>
     <string name="user_medicine_record">服药记录</string>
+    <string name="follow_up_all_person_num">总人数</string>
+    <string name="follow_up_sugar_person_num">糖尿病人数</string>
+    <string name="follow_up_pressure_person_num">高血压人数</string>
+    <string name="follow_up_total_person_num">同时合并人数</string>
 </resources>

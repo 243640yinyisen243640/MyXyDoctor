@@ -496,12 +496,26 @@
         <item>空腹血糖达标率</item>
         <item>非空腹血糖达标率</item>
     </array>
+    <array name="reach_follow_statics_name">
+        <item>打不通电话</item>
+        <item>患者拒绝</item>
+        <item>拒接</item>
+        <item>数据不清</item>
+        <item>其他</item>
+    </array>
 
 
     <array name="reach_the_stand_rate_pic">
         <item>@drawable/reach_the_stand_rate_one</item>
         <item>@drawable/reach_the_stand_rate_two</item>
         <item>@drawable/reach_the_stand_rate_three</item>
+    </array>
+    <array name="reach_follow_statics_pic">
+        <item>@drawable/follow_phone_not_normal</item>
+        <item>@drawable/follow_phone_not_patient_refuse</item>
+        <item>@drawable/follow_phone_refuse</item>
+        <item>@drawable/follow_phone_data_no_clear</item>
+        <item>@drawable/follow_phone_not_other</item>
     </array>
 
     <array name="patient_count_bottom_select">

@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/iv_data_static_finish"
+                    android:id="@+id/img_top_back"
                     style="@style/hh_wr_wr"
                     android:layout_centerVertical="true"
                     android:layout_gravity="left"
@@ -41,14 +41,14 @@
             </FrameLayout>
 
             <TextView
-                android:id="@+id/tv_ds_time"
+                android:id="@+id/tv_fs_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/shape_bg_main_white_90"
-                android:drawableRight="@drawable/base_arrow_down_white"
+                android:drawableRight="@drawable/right_arrow_down"
                 android:drawablePadding="40dp"
                 android:gravity="center"
                 android:paddingLeft="12dp"
@@ -66,9 +66,52 @@
             android:layout_marginTop="-50dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/shape_bg_white_5"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp">
+            android:padding="20dp">
+
+
+            <TextView
+                android:id="@+id/tv_fub_building_high_pressure"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/flb_high_pressure_num"
+                android:textColor="#FF564F"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_fub_building_sugar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/follow_up_agent_households_num"
+                android:textColor="#FF854F"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_fub_building_all_num"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/follow_up_agent_total_num"
+                android:textColor="#3D98DF"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/shape_bg_white_5"
+            android:orientation="horizontal"
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/tv_ds_all_person_num"
@@ -76,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/follow_up_all_person_num"
+                android:text="@string/follow_up_agent_building_num"
                 android:textColor="#9D9D9D"
                 android:textSize="13sp" />
 
@@ -93,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/follow_up_sugar_person_num"
+                android:text="@string/follow_up_agent_unit_num"
                 android:textColor="#9D9D9D"
                 android:textSize="13sp" />
 
@@ -105,12 +148,12 @@
                 android:background="@color/gray_light" />
 
             <TextView
-                android:id="@+id/tv_ds_pressure_num"
+                android:id="@+id/tv_ds_sugar_pressure_num"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/follow_up_pressure_person_num"
+                android:text="@string/follow_up_agent_households_num"
                 android:textColor="#9D9D9D"
                 android:textSize="13sp" />
 
@@ -127,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/follow_up_total_person_num"
+                android:text="@string/follow_up_agent_total_num"
                 android:textColor="#9D9D9D"
                 android:textSize="13sp" />
 
@@ -139,6 +182,7 @@
                 android:background="@color/gray_light" />
 
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -215,7 +259,7 @@
                         android:layout_gravity="right">
 
                         <com.xy.xydoctor.customerView.CirclePercentView
-                            android:id="@+id/cpv_ds_first"
+                            android:id="@+id/circle_percent_progress1"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
                             android:layout_gravity="center"
@@ -224,7 +268,7 @@
                             app:circleProgressColor="@color/gray_text" />
 
                         <com.xy.xydoctor.customerView.CirclePercentView
-                            android:id="@+id/cpv_ds_second"
+                            android:id="@+id/circle_percent_progress2"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_gravity="center"
@@ -233,7 +277,7 @@
                             app:circleProgressColor="@color/red" />
 
                         <com.xy.xydoctor.customerView.CirclePercentView
-                            android:id="@+id/cpv_ds_third"
+                            android:id="@+id/circle_percent_progress3"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
@@ -247,14 +291,7 @@
 
             </FrameLayout>
 
-            <!--柱状图-->
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/bar_ds_finish_sugar"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginRight="@dimen/dp_10"
-                android:layout_marginBottom="@dimen/dp_10" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -263,59 +300,43 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="25dp"
             android:background="@drawable/shape_bg_white_5"
-            android:orientation="vertical">
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="血糖数据统计"
-                android:textColor="@color/base_black"
-                android:textSize="17sp" />
-
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:paddingRight="30dp">
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:drawableLeft="@drawable/shape_bg_green_2"
-                    android:drawablePadding="10dp"
-                    android:text="非空腹达标率"
-                    android:textColor="#333333"
-                    android:textSize="14sp" />
+                    android:src="@drawable/follow_phone_not_normal" />
 
-                <com.xy.xydoctor.customerView.CirclePercentView
-                    android:id="@+id/cpv_ds_sugar"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="right"
-                    app:circleBgColor="@color/gray_text"
-                    app:circleIsGradient="false"
-                    app:circleProgressColor="#2FE081" />
-            </FrameLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="测量完成率"
-                android:textColor="@color/base_black"
-                android:textSize="14sp" />
-            <!--柱状图-->
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/bar_ds_finish_pressure"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="@dimen/dp_10"
-                android:layout_marginBottom="@dimen/dp_10" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="打不通电话" />
+
+                    <ProgressBar
+                        android:id="@+id/pb_rate"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:layout_marginTop="7dp"
+                        android:max="100"
+                        android:progress="50" />
+                </LinearLayout>
+
+
+            </LinearLayout>
 
 
         </LinearLayout>
