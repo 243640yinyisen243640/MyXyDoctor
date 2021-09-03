@@ -20,7 +20,32 @@ public class DataAbnormalInfo {
     private String com_name;
     private String com_id;
 
+    /**
+     * 是否选中
+     */
+    private boolean isCheck;
 
+
+    /**
+     * 点击是按钮是选中状态还是未选中状态
+     */
+    private boolean isSelected;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
 
     public List<DataAbnormalChildInfo> getCommunityUser() {
         return communityUser;

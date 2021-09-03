@@ -14,6 +14,7 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.adapter.UIBaseRecycleViewAdapter;
 import com.xy.xydoctor.bean.community_manamer.DataAbnormalInfo;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
+import com.zhy.adapter.abslistview.CommonAdapter;
 
 import java.util.List;
 
@@ -23,8 +24,9 @@ import java.util.List;
  * 创建日期: 2019/7/19 11:09
  */
 public class DataAbnormalListAdapter extends UIBaseRecycleViewAdapter<DataAbnormalInfo> {
-    private IAdapterViewClickListener clickListener;
     private String type;
+
+    private DataAbnormalChildVisitListAdapter childVisitListAdapter;
 
 
     public DataAbnormalListAdapter(Context mContext, List<DataAbnormalInfo> mList, String type, IAdapterViewClickListener mListener) {
@@ -49,32 +51,38 @@ public class DataAbnormalListAdapter extends UIBaseRecycleViewAdapter<DataAbnorm
 
         viewHolder.nameTextView.setText(info.getCom_name());
 
-        OnAdapterItemClickListener adapterItemClickListener = new OnAdapterItemClickListener(position);
+        if (info.isSelected()) {
+            viewHolder.checkTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_special_operate_check, 0, 0, 0);
+        } else {
+            viewHolder.checkTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_special_operate_uncheck, 0, 0, 0);
+        }
 
-        viewHolder.clickLinearLayout.setOnClickListener(adapterItemClickListener);
+
+        if (info.getCommunityUser() == null || info.getCommunityUser().size() == 0) {
+            viewHolder.myListView.setVisibility(View.GONE);
+        } else {
+            viewHolder.myListView.setVisibility(View.VISIBLE);
+        }
+        if (info.isCheck()) {
+            viewHolder.checkTextView.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.checkTextView.setVisibility(View.GONE);
+            childVisitListAdapter = new DataAbnormalChildVisitListAdapter(getContext(), R.layout.item_data_abnormal_child_list, info.getCommunityUser(), type, position, getListener());
+
+            viewHolder.myListView.setAdapter(childVisitListAdapter);
+        }
 
 
-        viewHolder.myListView.setAdapter(new DataAbnormalChildVisitListAdapter(getContext(), R.layout.item_data_abnormal_child_list, info.getCommunityUser(), type, position,  clickListener));
+        if (getListener() != null) {
+            viewHolder.checkTextView.setOnClickListener(v -> {
+                getListener().adapterClickListener(position, v);
+            });
+
+        }
 
 
     }
 
-
-    private class OnAdapterItemClickListener implements View.OnClickListener {
-        private int position;
-
-        public OnAdapterItemClickListener(int position) {
-            this.position = position;
-
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (clickListener != null) {
-                clickListener.adapterClickListener(position, v);
-            }
-        }
-    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView checkTextView;
@@ -89,6 +97,11 @@ public class DataAbnormalListAdapter extends UIBaseRecycleViewAdapter<DataAbnorm
             myListView = itemView.findViewById(R.id.lv_data_abnormal_child);
             clickLinearLayout = itemView.findViewById(R.id.ll_data_abnormal_click);
         }
+    }
+
+
+    public CommonAdapter adapter() {
+        return childVisitListAdapter;
     }
 
 }

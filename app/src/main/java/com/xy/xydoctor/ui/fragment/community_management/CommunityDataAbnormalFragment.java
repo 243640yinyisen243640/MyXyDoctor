@@ -1,6 +1,7 @@
 package com.xy.xydoctor.ui.fragment.community_management;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -287,20 +288,40 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
     public void setCheckAll() {
 
         //在activity 里面点击处理，下面会出现全选按钮，列表会出现让选择的按钮，点击全选 会走这个方法，这个方法是让让一级二级列表全部选中
+        for (int i = 0; i < mList.size(); i++) {
+            mList.get(i).setSelected(true);
+        }
 
+        for (int i = 0; i < mList.size(); i++) {
+            for (int j = 0; j < mList.get(i).getCommunityUser().size(); j++) {
+                mList.get(i).getCommunityUser().get(j).setSelected(true);
+            }
+        }
+        mAdapter.notifyDataSetChanged();
+
+        mAdapter.adapter().notifyDataSetChanged();
+    }
+
+    /**
+     * 在activity里面，点击处理，列表会显示选择按钮
+     */
+    public void setCheckIsVisible() {
+        for (int i = 0; i < mList.size(); i++) {
+            mList.get(i).setCheck(!mList.get(i).isCheck());
+        }
+
+        for (int i = 0; i < mList.size(); i++) {
+            for (int j = 0; j < mList.get(i).getCommunityUser().size(); j++) {
+                mList.get(i).getCommunityUser().get(j).setCheck(!mList.get(i).getCommunityUser().get(j).isCheck());
+            }
+        }
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_data_abnormal_down:
-                //                popu = new DataAbnormalPopup(getPageContext(), new BaseCallBack() {
-                //                    @Override
-                //                    public void callBack(Object object) {
-                //
-                //                    }
-                //                });
-                //                popu.showPopupWindow(showLinearLayout);
                 showMenuWindow();
 
                 break;
@@ -310,6 +331,9 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
     }
 
 
+    /**
+     * 展示筛选的pop
+     */
     private void showMenuWindow() {
         popu = new DataAbnormalPopup1(getPageContext(), object -> {
 
@@ -333,6 +357,17 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
         public void adapterClickListener(int position, View view) {
 
             //一级的点击事件
+
+            switch (view.getId()) {
+                case R.id.tv_data_abnormal_check:
+
+                    Log.i("yys", "==tv_data_abnormal_check");
+                    mList.get(position).setSelected(!mList.get(position).isSelected());
+                    mAdapter.notifyDataSetChanged();
+                    break;
+                default:
+                    break;
+            }
         }
 
         @Override
@@ -340,8 +375,16 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
             //二级的点击事件
             switch (view.getId()) {
 
+                case R.id.tv_data_abnormal_child_check:
+                    Log.i("yys", "tv_data_abnormal_child_check==");
+                    mList.get(position).getCommunityUser().get(index).setSelected(!mList.get(position).getCommunityUser().get(index).isSelected());
+                    mAdapter.adapter().notifyDataSetChanged();
+                    break;
+                case R.id.tv_data_abnormal_child_phone_img:
+                    break;
                 default:
                     break;
+
             }
         }
     }

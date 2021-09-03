@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/selector_community_special_operate"
+            android:drawableLeft="@drawable/community_special_operate_uncheck"
             android:visibility="gone" />
 
         <LinearLayout

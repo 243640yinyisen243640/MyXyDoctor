@@ -35,6 +35,34 @@ public class DataAbnormalChildInfo {
      */
     private String house_num;
 
+    /**
+     * 是否选中，这个是在activity里面点击头部按钮，让选择按钮显示隐藏
+     */
+
+    private boolean isCheck;
+
+    /**
+     * 点击是按钮是选中状态还是未选中状态
+     */
+    private boolean isSelected;
+
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
+
     public List<SugarOrPressureInfo> getList() {
         return list;
     }

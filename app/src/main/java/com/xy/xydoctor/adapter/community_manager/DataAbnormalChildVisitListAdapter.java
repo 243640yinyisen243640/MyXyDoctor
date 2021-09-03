@@ -48,6 +48,15 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
         viewHolder.setText(R.id.tv_data_abnormal_child_phone, item.getTel());
         viewHolder.setText(R.id.tv_data_abnormal_child_location, item.getBuild_name() + item.getUnit_name() + item.getHouse_num());
         LinearLayout clickLinearLayout = viewHolder.getView(R.id.ll_data_abnormal_child_click);
+        TextView checkTextView = viewHolder.getView(R.id.tv_data_abnormal_child_check);
+
+        if (item.isSelected()) {
+            checkTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_special_operate_check, 0, 0, 0);
+        } else {
+            checkTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_special_operate_uncheck, 0, 0, 0);
+        }
+
+
         SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
 
         if (item.getList() != null && item.getList().size() >= 1) {
@@ -93,6 +102,16 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
         } else {
             clickLinearLayout.setVisibility(View.GONE);
         }
+
+        if (item.isCheck()) {
+            checkTextView.setVisibility(View.VISIBLE);
+        } else {
+            checkTextView.setVisibility(View.GONE);
+        }
+
+        MyClickListener adapterItemClickListener = new MyClickListener(position);
+        checkTextView.setOnClickListener(adapterItemClickListener);
+
     }
 
     /**
@@ -109,6 +128,7 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
         @Override
         public void onClick(View v) {
             if (clickListener != null) {
+
                 clickListener.adapterClickListener(parentPosi, childPosi, v);
             }
         }

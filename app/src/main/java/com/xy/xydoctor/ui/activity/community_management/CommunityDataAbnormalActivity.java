@@ -49,8 +49,11 @@ public class CommunityDataAbnormalActivity extends XYSoftUIBaseActivity implemen
                 topViewManager().moreTextView().setText(R.string.sure);
                 //头部的按钮是处理 ，处理-确定
                 initCheckView();
+                CommunityDataAbnormalFragment fragment = (CommunityDataAbnormalFragment) fragments.get(index);
+                fragment.setCheckIsVisible();
             } else {
                 //这个是点击确定按钮应该走的逻辑
+
             }
 
         });
