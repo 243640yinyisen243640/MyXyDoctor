@@ -48,14 +48,15 @@ public class CommunityFollowUpListFragment extends XYBaseFragment implements Tab
     private int mPageIndex = 1, mPageSize = 6, mPageCount = 0;
     private CommunityFollowUpChangeListAdapter mAdapter;
     private boolean mIsLoading = false;
+    private String searchContent = "";
+    private NestedScrollView presentNestedSrcollView;
+    private TextView stateTextView;
     /**
      * 1：待随访:2：失访:3：已完成
      */
     private String type;
 
-    private String searchContent = "";
-    private NestedScrollView presentNestedSrcollView;
-    private TextView stateTextView;
+
 
 
     public static CommunityFollowUpListFragment newInstance(String type) {

@@ -130,6 +130,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
         //getIsFamily();
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -202,16 +203,34 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
      * 初始化底部导航
      */
     private void initBottomBar() {
+        int type = SPStaticUtils.getInt("docType");
         MenuItem patientItem = bnvMain.getMenu().findItem(R.id.navigation_patient);
         MenuItem doctorItem = bnvMain.getMenu().findItem(R.id.navigation_doctor);
-        int type = SPStaticUtils.getInt("docType");
-        //医生
+        MenuItem workItem = bnvMain.getMenu().findItem(R.id.navigation_home);
+        MenuItem myItem = bnvMain.getMenu().findItem(R.id.navigation_user);
+        MenuItem managerItem = bnvMain.getMenu().findItem(R.id.navigation_community_manager);
+        //3:主任  4:医生  10:物业
+        //是主任的话显示的是工作台，医生，我的
+        //是医生的话显示的是工作台，患者，我的
+        //是物业的话显示的是社区管理
         if (3 == type) {
+            workItem.setVisible(true);
             patientItem.setVisible(false);
             doctorItem.setVisible(true);
-        } else {
+            myItem.setVisible(true);
+            managerItem.setVisible(true);
+        } else if (4 == type) {
+            workItem.setVisible(true);
             patientItem.setVisible(true);
             doctorItem.setVisible(false);
+            myItem.setVisible(true);
+            managerItem.setVisible(true);
+        } else {
+            workItem.setVisible(false);
+            patientItem.setVisible(false);
+            doctorItem.setVisible(false);
+            myItem.setVisible(false);
+            managerItem.setVisible(true);
         }
         showTitleBar();
         hideBack();
@@ -341,9 +360,6 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
         final Conversation.ConversationType[] conversationTypes = {Conversation.ConversationType.PRIVATE};
         RongIM.getInstance().addUnReadMessageCountChangedObserver(this, conversationTypes);
     }
-
-
-
 
 
     /**
@@ -651,7 +667,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
     @Override
     protected void onStart() {
         super.onStart();
-//        FloatingView.get().attach(this);
+        //        FloatingView.get().attach(this);
     }
 
     @Override
@@ -659,6 +675,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
         super.onStop();
         FloatingView.get().detach(this);
     }
+
     private void toUpDataNew() {
         String token = SPStaticUtils.getString("token");
         Call<String> requestCall = DataManager.getUpData(token, (call, response) -> {

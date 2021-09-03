@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.ke.gson.plugin'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion versions.compileSdk
@@ -126,14 +127,19 @@ android {
         //RxHttp
         def rxHttpVersion = "2.5.7"
         implementation "com.ljx.rxhttp:rxhttp:$rxHttpVersion"
-        annotationProcessor "com.ljx.rxhttp:rxhttp-compiler:$rxHttpVersion"
+        //annotationProcessor "com.ljx.rxhttp:rxhttp-compiler:$rxHttpVersion"
+        kapt "com.ljx.rxhttp:rxhttp-compiler:$rxHttpVersion"
         //RxLife
         implementation 'com.ljx.rxlife3:rxlife-rxjava:3.0.0'
         //RxHttp结束
 
         //必备工具类开始
         //黄油刀
-        annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+//        kapt 'com.jakewharton:butterknife-compiler:10.2.3'
+
+        implementation 'com.jakewharton:butterknife:10.2.3'
+        kapt 'com.jakewharton:butterknife-compiler:10.2.3'
+
         //城市选择器
 //        implementation 'liji.library.dev:citypickerview:5.2.4'
         //展开收起(单独或RecyclerView的Item中使用)

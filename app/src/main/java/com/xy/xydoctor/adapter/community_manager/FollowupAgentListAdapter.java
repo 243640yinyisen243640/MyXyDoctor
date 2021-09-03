@@ -1,18 +1,27 @@
 package com.xy.xydoctor.adapter.community_manager;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.adapter.BaseRecycleViewAdapter;
 import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
+import com.xy.xydoctor.utils.XyScreenUtils;
 
 import java.util.List;
 
@@ -26,7 +35,6 @@ public class FollowupAgentListAdapter extends BaseRecycleViewAdapter<FollowUpAge
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = View.inflate(getContext(), R.layout.adapter_follow_up_agent, null);
         return new ViewHolder(view);
     }
@@ -34,6 +42,15 @@ public class FollowupAgentListAdapter extends BaseRecycleViewAdapter<FollowUpAge
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
+        FollowUpAgentListBean info = getList().get(position);
+        viewHolder.nameTextView.setText(info.getCom_name());
+        viewHolder.locationTextView.setText(info.getCom_address());
+
+
+        setTextStyle(info.getBuild_count(), getContext().getString(R.string.follow_up_agent_building_num), R.color.community_content_black, viewHolder.buildingNumTextView, 16);
+        setTextStyle(info.getUnity_count(), getContext().getString(R.string.follow_up_agent_unit_num), R.color.community_content_black, viewHolder.unitNumTextView, 16);
+        setTextStyle(info.getHouse_count(), getContext().getString(R.string.community_house_count), R.color.community_content_black, viewHolder.personNumTextView, 16);
+        setTextStyle(info.getMember_count(), getContext().getString(R.string.community_member_count), R.color.community_content_black, viewHolder.allPersonNumTextView, 16);
 
         viewHolder.clickLinearLayout.setOnClickListener(v -> {
             if (getListener() != null) {
@@ -41,6 +58,22 @@ public class FollowupAgentListAdapter extends BaseRecycleViewAdapter<FollowUpAge
             }
         });
     }
+
+
+    private void setTextStyle(String content, String title, int color, TextView textView, int size) {
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+        spannableStringBuilder.append(content).append("\n");
+        int start = spannableStringBuilder.length();
+
+        spannableStringBuilder.append(title);
+        int end = spannableStringBuilder.length();
+        spannableStringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(), color)), 0, start, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.setSpan(new AbsoluteSizeSpan(XyScreenUtils.sp2px(getContext(), size)), 0, start, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.setSpan(new StyleSpan(Typeface.NORMAL), 0, start, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
+        textView.setText(spannableStringBuilder);
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;

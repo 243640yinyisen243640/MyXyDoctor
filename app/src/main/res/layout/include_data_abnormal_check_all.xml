@@ -3,6 +3,7 @@
     android:id="@+id/tv_data_abnormal_check_all_click"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:drawableLeft="@drawable/selector_community_special_operate"
     android:drawablePadding="10dp"
     android:padding="15dp"

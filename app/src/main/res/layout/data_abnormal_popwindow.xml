@@ -1,183 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/scrollView"
     android:layout_width="match_parent"
-    android:id="@+id/ll_show_pop_all"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:orientation="vertical"
-    android:padding="15dp">
-
-    <TextView
-        style="@style/data_abnormal_title"
-        android:text="@string/data_abnormal_filter_time" />
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_show_pop_all"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:orientation="horizontal">
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <TextView
-            android:id="@+id/tv_data_abnormal_start_time"
-            style="@style/data_abnormal_choose_time"
-            android:text="@string/data_abnormal_start_time" />
+            style="@style/data_abnormal_title"
+            android:text="@string/data_abnormal_filter_time" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:text="-" />
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_data_abnormal_start_time"
+                style="@style/data_abnormal_choose_time"
+                android:text="@string/data_abnormal_start_time" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="-" />
+
+            <TextView
+                android:id="@+id/tv_data_abnormal_end_time"
+                style="@style/data_abnormal_choose_time"
+                android:text="@string/data_abnormal_start_time" />
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_data_abnormal_end_time"
-            style="@style/data_abnormal_choose_time"
-            android:text="@string/data_abnormal_start_time" />
+            style="@style/data_abnormal_title"
+            android:text="@string/community_data_abnormal_suagar" />
 
-    </LinearLayout>
-
-    <TextView
-        style="@style/data_abnormal_title"
-        android:text="@string/community_data_abnormal_suagar" />
-
-    <com.xy.xydoctor.customerView.NoConflictGridView
-        android:id="@+id/gv_data_abnormal_sugar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:horizontalSpacing="10dp"
-        android:numColumns="3"
-        android:verticalSpacing="10dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <CheckBox
-            style="@style/data_abnormal_sugar_text"
-            android:text="@string/data_abnormal_up" />
-
-        <CheckBox
-            style="@style/data_abnormal_sugar_text"
-            android:layout_marginLeft="10dp"
-            android:text="@string/data_abnormal_low" />
-
-        <CheckBox
-            style="@style/data_abnormal_sugar_text"
-            android:layout_marginLeft="10dp"
-            android:text="@string/data_abnormal_normal" />
-
-        <CheckBox
-            style="@style/data_abnormal_sugar_text"
-            android:layout_marginLeft="10dp"
-            android:text="@string/data_abnormal_not" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/et_data_abnormal_first"
-            style="@style/data_abnormal_sugar_edit"
-            android:hint="@string/data_abnormal_yourself" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <com.xy.xydoctor.customerView.NoConflictGridView
+            android:id="@+id/gv_data_abnormal_sugar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:text="-" />
+            android:horizontalSpacing="7dp"
+            android:numColumns="3"
+            android:verticalSpacing="7dp" />
 
-        <EditText
-            android:id="@+id/et_data_abnormal_second"
-            style="@style/data_abnormal_sugar_edit"
-            android:hint="@string/data_abnormal_yourself" />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
-    <TextView
-        style="@style/data_abnormal_title"
-        android:layout_marginTop="15dp"
-        android:text="@string/data_abnormal_filter_data_type" />
+            <CheckBox
+                style="@style/data_abnormal_sugar_text"
+                android:text="@string/data_abnormal_up" />
 
-    <com.xy.xydoctor.customerView.NoConflictGridView
-        android:id="@+id/gv_data_abnormal_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:horizontalSpacing="10dp"
-        android:numColumns="3"
-        android:verticalSpacing="10dp" />
+            <CheckBox
+                style="@style/data_abnormal_sugar_text"
+                android:layout_marginLeft="10dp"
+                android:text="@string/data_abnormal_low" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
+            <CheckBox
+                style="@style/data_abnormal_sugar_text"
+                android:layout_marginLeft="10dp"
+                android:text="@string/data_abnormal_normal" />
 
-        <CheckBox
-            style="@style/data_abnormal_sugar_text"
-            android:layout_width="wrap_content"
-            android:layout_weight="0"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:text="@string/data_abnormal_up" />
+            <CheckBox
+                style="@style/data_abnormal_sugar_text"
+                android:layout_marginLeft="10dp"
+                android:text="@string/data_abnormal_not" />
 
-        <CheckBox
-            style="@style/data_abnormal_sugar_text"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="0"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:text="@string/data_abnormal_filter_all" />
+        </LinearLayout>
 
-        <CheckBox
-            style="@style/data_abnormal_sugar_text"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="0"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:text="@string/data_abnormal_filter_have_deal" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/et_data_abnormal_first"
+                style="@style/data_abnormal_sugar_edit"
+                android:hint="@string/data_abnormal_yourself" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="-" />
+
+            <EditText
+                android:id="@+id/et_data_abnormal_second"
+                style="@style/data_abnormal_sugar_edit"
+                android:hint="@string/data_abnormal_yourself" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_data_abnormal_filter_reset"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_bg_white_black"
-            android:gravity="center"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:text="@string/filter_reset"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            style="@style/data_abnormal_title"
+            android:layout_marginTop="15dp"
+            android:text="@string/data_abnormal_filter_data_type" />
 
-        <TextView
-            android:id="@+id/tv_data_abnormal_filter_submit"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="2"
-            android:background="@drawable/shape_bg_main_5"
-            android:gravity="center"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:text="@string/base_filter"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
+        <com.xy.xydoctor.customerView.NoConflictGridView
+            android:id="@+id/gv_data_abnormal_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="7dp"
+            android:numColumns="3"
+            android:verticalSpacing="7dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <CheckBox
+                style="@style/data_abnormal_sugar_text"
+                android:layout_width="wrap_content"
+                android:layout_weight="0"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:text="@string/data_abnormal_up" />
+
+            <CheckBox
+                style="@style/data_abnormal_sugar_text"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:text="@string/data_abnormal_filter_all" />
+
+            <CheckBox
+                style="@style/data_abnormal_sugar_text"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:text="@string/data_abnormal_filter_have_deal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_data_abnormal_filter_reset"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_white_black"
+                android:gravity="center"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:text="@string/filter_reset"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_data_abnormal_filter_submit"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="2"
+                android:background="@drawable/shape_bg_main_5"
+                android:gravity="center"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:text="@string/base_filter"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+
     </LinearLayout>
 
 
-</LinearLayout>
+</ScrollView>

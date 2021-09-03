@@ -71,6 +71,8 @@ public class LoginViewModel extends ScopeViewModel {
                         SPStaticUtils.put("docName", docName);
                         SPStaticUtils.put("docHeadImg", docHeadImg);
                         SPStaticUtils.put("docType", type);
+                        SPStaticUtils.put("hospitalname", loginBean.getHospitalname());
+                        SPStaticUtils.put("isproperty", loginBean.getIsproperty());
                         data.postValue(true);
 
 

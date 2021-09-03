@@ -101,7 +101,7 @@ public class CommunityDataAbnormalActivity extends XYSoftUIBaseActivity implemen
     private void initValues() {
         fragments = new ArrayList<>();
         for (int i = 1; i < 3; i++) {
-            CommunityDataAbnormalFragment talkFragment = new CommunityDataAbnormalFragment();
+            CommunityDataAbnormalFragment talkFragment = CommunityDataAbnormalFragment.newInstance(i + "");
             Bundle bundle = new Bundle();
             bundle.putString("type", i + "");
             talkFragment.setArguments(bundle);

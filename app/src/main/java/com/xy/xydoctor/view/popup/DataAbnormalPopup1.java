@@ -1,9 +1,14 @@
 package com.xy.xydoctor.view.popup;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -12,12 +17,14 @@ import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.DataAbnormalAdapter;
+import com.xy.xydoctor.base.utils.XYSoftDensityUtils;
 import com.xy.xydoctor.bean.community_manamer.DataAbnormalInfo;
 import com.xy.xydoctor.bean.community_manamer.DiseaseTypeInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.customerView.NoConflictGridView;
 import com.xy.xydoctor.imp.BaseCallBack;
 import com.xy.xydoctor.utils.DataUtils;
+import com.xy.xydoctor.utils.XyScreenUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,14 +33,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import razerdp.basepopup.BasePopupWindow;
-
 /**
  * 描述: 数据异常的筛选
  * 作者: LYD
  * 创建日期: 2019/7/14 11:25
  */
-public class DataAbnormalPopup extends BasePopupWindow {
+public class DataAbnormalPopup1 extends PopupWindow {
 
     private Context context;
 
@@ -41,18 +46,38 @@ public class DataAbnormalPopup extends BasePopupWindow {
     private TextView endTextView;
     private LinearLayout allLiner;
 
-    public DataAbnormalPopup(Context context, BaseCallBack callBack) {
+    public DataAbnormalPopup1(Context context, BaseCallBack callBack) {
         super(context);
         this.context = context;
-        setBackPressEnable(true);
-        setAlignBackground(true);
-        NoConflictGridView sugarGridView = findViewById(R.id.gv_data_abnormal_sugar);
-        NoConflictGridView typeGridView = findViewById(R.id.gv_data_abnormal_type);
-        startTextView = findViewById(R.id.tv_data_abnormal_start_time);
-        endTextView = findViewById(R.id.tv_data_abnormal_end_time);
-        TextView resetTextView = findViewById(R.id.tv_data_abnormal_filter_reset);
-        TextView submitTextView = findViewById(R.id.tv_data_abnormal_filter_submit);
-        allLiner = findViewById(R.id.ll_show_pop_all);
+        View view = View.inflate(context, R.layout.data_abnormal_popwindow, null);
+
+        NoConflictGridView sugarGridView = view.findViewById(R.id.gv_data_abnormal_sugar);
+        NoConflictGridView typeGridView = view.findViewById(R.id.gv_data_abnormal_type);
+        startTextView = view.findViewById(R.id.tv_data_abnormal_start_time);
+        endTextView = view.findViewById(R.id.tv_data_abnormal_end_time);
+        TextView resetTextView = view.findViewById(R.id.tv_data_abnormal_filter_reset);
+        TextView submitTextView = view.findViewById(R.id.tv_data_abnormal_filter_submit);
+        allLiner = view.findViewById(R.id.ll_show_pop_all);
+        this.setContentView(view);
+        // 设置SelectPicPopupWindow弹出窗体的宽
+        this.setWidth(FrameLayout.LayoutParams.MATCH_PARENT);
+        // 设置SelectPicPopupWindow弹出窗体的高
+        //        this.setHeight(XyScreenUtils.dip2px(context, 250));
+        this.setHeight(FrameLayout.LayoutParams.WRAP_CONTENT);
+
+
+        // 设置SelectPicPopupWindow弹出窗体动画效果
+        this.setAnimationStyle(R.style.Base_Window_Fade_Anim);
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(ContextCompat.getColor(context, R.color.transparent));
+        // 设置SelectPicPopupWindow弹出窗体的背景
+        this.setBackgroundDrawable(dw);
+        // 设置SelectPicPopupWindow弹出窗体可点击
+        this.setFocusable(true);
+        this.setOutsideTouchable(false);
+        this.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+        //因为某些机型是虚拟按键的,所以要加上以下设置防止挡住按键.
+        this.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
 
         List<DiseaseTypeInfo> abnormalInfos = new ArrayList<>();
@@ -104,11 +129,6 @@ public class DataAbnormalPopup extends BasePopupWindow {
         endTextView.setOnClickListener(v -> {
             showTimeWindow(2);
         });
-    }
-
-    @Override
-    public View onCreateContentView() {
-        return createPopupById(R.layout.data_abnormal_popwindow);
     }
 
 
@@ -176,5 +196,13 @@ public class DataAbnormalPopup extends BasePopupWindow {
 
     }
 
-
+    @Override
+    public void showAsDropDown(View parent) {//parent 你要把popUpWindow放在哪个控件下方
+        //该window，不需要充满全屏，不需写以下代码
+        if (Build.VERSION.SDK_INT == 24) {// 只有7.0 的系统有这个问题
+            //            setHeight(HHSoftScreenUtils.screenHeight(parent.getContext()) - HHSoftDensityUtils.dip2px(parent.getContext(), 48) - HHSoftScreenUtils.statusBarHeight(parent.getContext()) - HHSoftDensityUtils.dip2px(parent.getContext(), 43));
+            setHeight(XyScreenUtils.screenHeight(parent.getContext()) - XyScreenUtils.dip2px(parent.getContext(), 48) - XYSoftDensityUtils.statusBarHeight(parent.getContext()));
+        }
+        super.showAsDropDown(parent, 0, 0);
+    }
 }

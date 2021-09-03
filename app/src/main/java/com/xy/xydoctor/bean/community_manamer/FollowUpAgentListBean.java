@@ -13,11 +13,34 @@ public class FollowUpAgentListBean {
      * datetime : 2020-05-14 14:40
      */
 
-    private int oid;
-    private String oxygen;
-    private String bpmval;
-    private int type;
-    private String datetime;
+    /**
+     * 小区id
+     */
+    private int com_id;
+    /**
+     * 小区名
+     */
+    private String com_name;
+    /**
+     * 小区地址
+     */
+    private String com_address;
+    /**
+     * 楼栋数
+     */
+    private String build_count;
+    /**
+     * 单元数
+     */
+    private String unity_count;
+    /**
+     * 户数
+     */
+    private String house_count;
+    /**
+     * 总人数
+     */
+    private String member_count;
 
     private List<FollowUpAgentListBean> plan_list;
 
@@ -29,43 +52,59 @@ public class FollowUpAgentListBean {
         this.plan_list = plan_list;
     }
 
-    public int getOid() {
-        return oid;
+    public int getCom_id() {
+        return com_id;
     }
 
-    public void setOid(int oid) {
-        this.oid = oid;
+    public void setCom_id(int com_id) {
+        this.com_id = com_id;
     }
 
-    public String getOxygen() {
-        return oxygen;
+    public String getCom_name() {
+        return com_name;
     }
 
-    public void setOxygen(String oxygen) {
-        this.oxygen = oxygen;
+    public void setCom_name(String com_name) {
+        this.com_name = com_name;
     }
 
-    public String getBpmval() {
-        return bpmval;
+    public String getCom_address() {
+        return com_address;
     }
 
-    public void setBpmval(String bpmval) {
-        this.bpmval = bpmval;
+    public void setCom_address(String com_address) {
+        this.com_address = com_address;
     }
 
-    public int getType() {
-        return type;
+    public String getBuild_count() {
+        return build_count;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setBuild_count(String build_count) {
+        this.build_count = build_count;
     }
 
-    public String getDatetime() {
-        return datetime;
+    public String getUnity_count() {
+        return unity_count;
     }
 
-    public void setDatetime(String datetime) {
-        this.datetime = datetime;
+    public void setUnity_count(String unity_count) {
+        this.unity_count = unity_count;
+    }
+
+    public String getHouse_count() {
+        return house_count;
+    }
+
+    public void setHouse_count(String house_count) {
+        this.house_count = house_count;
+    }
+
+    public String getMember_count() {
+        return member_count;
+    }
+
+    public void setMember_count(String member_count) {
+        this.member_count = member_count;
     }
 }

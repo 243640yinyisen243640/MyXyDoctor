@@ -152,7 +152,7 @@ public class BaseNetworkUtils {
                     //Type objectType = type(HHSoftResponseListJson.class, clazz);
                     //response.object = ((HHSoftResponseListJson) gson.fromJson(result, objectType)).data;
                     response.object = fromJsonToList(response.result, clazz);
-                } else if (response.code == 101) {
+                } else if (response.code == 3002) {
                     response.object = new ArrayList<>();
                 }
             }

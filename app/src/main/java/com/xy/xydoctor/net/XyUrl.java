@@ -321,6 +321,9 @@ public class XyUrl {
     private static MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
 
 
+    public final static String GET_COMMUNITY_LIST = HOST_URL + "/doctor/community/communityLists";
+
+
     /**
      * 上传json数据
      *

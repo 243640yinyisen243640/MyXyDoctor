@@ -1,231 +1,286 @@
 package com.xy.xydoctor.ui.fragment.community_management;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.ToastUtils;
-import com.lyd.baselib.base.fragment.BaseLazyFragment;
-import com.lyd.baselib.util.eventbus.EventMessage;
-import com.rxjava.rxlife.RxLife;
+import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.DataAbnormalListAdapter;
-import com.xy.xydoctor.bean.FollowUpVisitListBean;
-import com.xy.xydoctor.constant.ConstantParam;
-import com.xy.xydoctor.imp.BaseCallBack;
+import com.xy.xydoctor.base.fragment.XYBaseFragment;
+import com.xy.xydoctor.bean.community_manamer.DataAbnormalInfo;
+import com.xy.xydoctor.constant.DataFormatManager;
+import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
-import com.xy.xydoctor.net.ErrorInfo;
-import com.xy.xydoctor.net.OnError;
-import com.xy.xydoctor.net.XyUrl;
-import com.xy.xydoctor.ui.activity.community_management.DataAbnormalRemindListActivity;
-import com.xy.xydoctor.view.popup.DataAbnormalPopup;
+import com.xy.xydoctor.utils.DataUtils;
+import com.xy.xydoctor.utils.TipUtils;
+import com.xy.xydoctor.view.popup.DataAbnormalPopup1;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-import io.reactivex.rxjava3.functions.Consumer;
-import rxhttp.wrapper.param.RxHttp;
+import retrofit2.Call;
 
 /**
- * Author: LYD  type   1：血糖 2：血压
+ * Author: LYD  type   1：血压 2：血糖
  * Date: 2021/8/16 16:36
  * Description: 数据异常
  */
-public class CommunityDataAbnormalFragment extends BaseLazyFragment {
+public class CommunityDataAbnormalFragment extends XYBaseFragment implements View.OnClickListener {
 
-    @BindView(R.id.tv_data_abnormal_first)
-    TextView firstTextView;
-    @BindView(R.id.ll_show_pop)
-    LinearLayout showLinearLayout;
-    @BindView(R.id.tv_data_abnormal_second)
-    TextView secondTextView;
-    @BindView(R.id.tv_data_abnormal_down)
-    TextView filterTextView;
-    @BindView(R.id.lv_data_abnormal)
-    ListView lvFollowUpVisit;
-    @BindView(R.id.srl_data_abnormal)
-    SmartRefreshLayout srlFollowUpVisit;
-    @BindView(R.id.ll_empty)
-    LinearLayout llEmpty;
-    //分页开始
-    private DataAbnormalListAdapter adapter;
-    //总数据
-    private List<FollowUpVisitListBean.DataBean> list;
-    //上拉加载数据
-    private List<FollowUpVisitListBean.DataBean> tempList;
-    //上拉加载页数
-    private int pageIndex = 2;
-    //分页结束
+    private DataAbnormalListAdapter mAdapter;
+    private static final int REQUEST_CODE_FOR_REFRESH = 10;
+    private SmartRefreshLayout mRefreshLayout;
+    private RecyclerView mRecyclerView;
+    private List<DataAbnormalInfo> mList = new ArrayList<>();
+    private List<DataAbnormalInfo> mTempList;
+    private int mPageIndex = 1, mPageSize = 6, mPageCount = 0;
+    private boolean mIsLoading = false;
+    private NestedScrollView presentNestedSrcollView;
+    private TextView stateTextView;
 
+    private TextView filterTextView;
+    private TextView secondTextView;
+    private TextView firstTextView;
+
+    private LinearLayout showLinearLayout;
     //
-    DataAbnormalPopup popu;
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_data_abnormal;
-    }
-
-    @Override
-    protected void init(View rootView) {
-        initRefresh();
-        popu = new DataAbnormalPopup(getPageContext(), new BaseCallBack() {
-            @Override
-            public void callBack(Object object) {
-
-            }
-        });
-    }
-
+    private DataAbnormalPopup1 popu;
 
     /**
-     * 获取列表数据
+     * 1血压2血糖
      */
-    private void getFollowUpList() {
-        String type = getArguments().getString("type");
-        String userId = getArguments().getString("userId");
-        Map<String, Object> map = new HashMap<>();
-        map.put("userid", userId);
-        map.put("page", 1);
-        map.put("type", type);
-        LogUtils.e(getArguments().getBoolean("is_family", false));
-        if (getArguments().getBoolean("is_family", false)) {
-            map.put("is_family", 1);
-        }
-        RxHttp.postJson(XyUrl.GET_FOLLOW_NEW)
-                .addAll(map)
-                .asResponse(FollowUpVisitListBean.class)
-                .to(RxLife.toMain(this))
-                .subscribe(new Consumer<FollowUpVisitListBean>() {
-                    @Override
-                    public void accept(FollowUpVisitListBean followUpVisitListBean) {
-                        llEmpty.setVisibility(View.GONE);
-                        srlFollowUpVisit.setVisibility(View.VISIBLE);
-                        list = followUpVisitListBean.getData();
-                        String type = getArguments().getString("type");
-                        adapter = new DataAbnormalListAdapter(getPageContext(), R.layout.item_data_abnormal_list, list, type, new IAdapterViewClickListener() {
-                            @Override
-                            public void adapterClickListener(int position, View view) {
-                                //一级列表的点击事件
-                            }
+    private String type;
 
-                            @Override
-                            public void adapterClickListener(int position, int index, View view) {
-                                //二级列表的点击事件
-                                switch (view.getId()) {
-                                    case R.id.ll_data_abnormal_child_click:
-                                        Intent intent = new Intent(getPageContext(), DataAbnormalRemindListActivity.class);
-                                        intent.putExtra("type", type);
-                                        startActivity(intent);
-                                        break;
-                                    case R.id.tv_data_abnormal_child_check:
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                        });
-                        lvFollowUpVisit.setAdapter(adapter);
+    /**
+     * 1高2低3正常4未测量5自定义
+     */
+    private String style = "1";
+    /**
+     * 血糖起始值
+     */
+    private String startSugar = "";
+    /**
+     * 血糖结束值
+     */
+    private String endSugar = "";
+    /**
+     * 处理是否 0全部 1是 2否
+     */
+    private String status = "2";
+    /**
+     * 开始时间
+     */
+    private String starttime;
+    /**
+     * 结束时间
+     */
+    private String endtime;
+
+    public static CommunityDataAbnormalFragment newInstance(String type) {
+        Bundle bundle = new Bundle();
+        bundle.putString("type", type);
+        CommunityDataAbnormalFragment fragment = new CommunityDataAbnormalFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    @Override
+    protected void onCreate() {
+        topViewManager().topView().removeAllViews();
+        starttime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
+        endtime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
+        if (getArguments() != null) {
+            type = getArguments().getString("type");
+
+            if ("1".equals(type)) {
+                type = "2";
+            } else {
+                type = "1";
+            }
+        }
+        containerView().addView(initVew());
+
+        initValue();
+        initLinstener();
+        onPageLoad();
+    }
+
+
+    private View initVew() {
+        View view = View.inflate(getPageContext(), R.layout.fragment_data_abnormal, null);
+        mRefreshLayout = getViewByID(view, R.id.refreshLayout_data_abnormal);
+        mRecyclerView = getViewByID(view, R.id.rv_live_data_abnormal);
+        presentNestedSrcollView = getViewByID(view, R.id.nsv_present_nodate_data_abnormal);
+        stateTextView = getViewByID(view, R.id.tv_no_data_data_abnormal);
+        firstTextView = getViewByID(view, R.id.tv_data_abnormal_first);
+        secondTextView = getViewByID(view, R.id.tv_data_abnormal_second);
+        filterTextView = getViewByID(view, R.id.tv_data_abnormal_down);
+        showLinearLayout = getViewByID(view, R.id.ll_show_pop);
+        return view;
+    }
+
+
+    protected void onPageLoad() {
+        if (mIsLoading) {
+            return;
+        }
+        mIsLoading = true;
+        Call<String> requestCall = DataManager.getDataAbnormalList(type, starttime, endtime, style, startSugar, endSugar, mPageIndex + "", status,
+                (call, response) -> {
+                    mIsLoading = false;
+                    if (1 != mPageIndex) {
+                        mRefreshLayout.finishLoadMore();
+                    } else {
+                        mRefreshLayout.finishRefresh();
                     }
-                }, new OnError() {
-                    @Override
-                    public void onError(ErrorInfo error) {
-                        ToastUtils.cancel();
-                        if (error.getErrorCode() == ConstantParam.DEFAULT_NO_DATA) {
-                            llEmpty.setVisibility(View.VISIBLE);
-                            srlFollowUpVisit.setVisibility(View.GONE);
+                    if (200 == response.code) {
+                        mTempList = (List<DataAbnormalInfo>) response.object;
+                        mPageCount = mTempList == null ? 0 : mTempList.size();
+                        if (1 == mPageIndex) {
+                            if (mList == null) {
+                                mList = new ArrayList<>();
+                            } else {
+                                mList.clear();
+                            }
+                            mList.addAll(mTempList);
+                            if (mAdapter == null) {
+                                mAdapter = new DataAbnormalListAdapter(getPageContext(), mList, type, new OnItemClickListener());
+                                mRecyclerView.setAdapter(mAdapter);
+                            } else {
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        } else {
+                            mList.addAll(mTempList);
+                            mAdapter.notifyDataSetChanged();
+                        }
+                        //如果是加载成功
+                        mRefreshLayout.setVisibility(View.VISIBLE);
+                        presentNestedSrcollView.setVisibility(View.GONE);
+                    } else if (30002 == response.code) {
+                        mPageCount = 0;
+                        if (1 == mPageIndex) {
+                            //如果是没有数据
+                            mRefreshLayout.setVisibility(View.GONE);
+                            presentNestedSrcollView.setVisibility(View.VISIBLE);
+
+                        } else {
+                            TipUtils.getInstance().showToast(getPageContext(), R.string.huahansoft_load_state_no_more_data);
+                        }
+                    } else {
+                        mPageCount = 0;
+                        if (1 == mPageIndex) {
+                            mRefreshLayout.setVisibility(View.GONE);
+                            presentNestedSrcollView.setVisibility(View.VISIBLE);
+                        } else {
+                            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
                         }
                     }
+                    if (mList.size() > 0) {
+                        changeLoadUI(response.code);
+                    } else {
+                        changeLoadUI(101);
+                    }
+
+                }, (call, t) -> {
+                    handleRequestFailure();
                 });
+        addRequestCallToMap("goodsList", requestCall);
     }
 
-    /**
-     * 刷新数据
-     */
-    private void initRefresh() {
-        //刷新开始
-        srlFollowUpVisit.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshLayout) {
-                srlFollowUpVisit.finishRefresh(2000);
-                pageIndex = 2;
-                getFollowUpList();
-            }
-        });
-        srlFollowUpVisit.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(RefreshLayout refreshlayout) {
-                srlFollowUpVisit.finishLoadMore(2000);
-                String type = getArguments().getString("type");
-                String userId = getArguments().getString("userId");
-                HashMap<String, Object> map = new HashMap<>();
-                LogUtils.e(getArguments().getBoolean("is_family", false));
-                if (getArguments().getBoolean("is_family", false)) {
-                    map.put("is_family", 1);
+    private void handleRequestFailure() {
+        mPageCount = 0;
+        mIsLoading = false;
+        if (1 != mPageIndex) {
+            mRefreshLayout.finishLoadMore();
+        } else {
+            mRefreshLayout.finishRefresh();
+        }
+        if (1 == mPageIndex) {
+
+            mRefreshLayout.setVisibility(View.GONE);
+            presentNestedSrcollView.setVisibility(View.VISIBLE);
+        } else {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        }
+        changeLoadUI(-1);
+    }
+
+    private void changeLoadUI(int responseCode) {
+        presentNestedSrcollView.setVisibility(View.GONE);
+        mRefreshLayout.setVisibility(View.VISIBLE);
+        if (1 == mPageIndex) {
+            if (200 != responseCode) {
+                if (30002 == responseCode) {
+                    stateTextView.setText(getString(R.string.huahansoft_load_state_no_data));
+                } else {
+                    stateTextView.setText(getString(R.string.network_error));
                 }
-                map.put("userid", userId);
-                map.put("page", pageIndex);
-                map.put("type", type);
-                RxHttp.postForm(XyUrl.GET_FOLLOW_NEW).addAll(map)
-                        .asResponse(FollowUpVisitListBean.class)
-                        .to(RxLife.toMain(getActivity()))
-                        .subscribe(new Consumer<FollowUpVisitListBean>() {
-                            @Override
-                            public void accept(FollowUpVisitListBean followUpVisitListBean) throws Exception {
-                                tempList = followUpVisitListBean.getData();
-                                list.addAll(tempList);
-                                pageIndex++;
-                                adapter.notifyDataSetChanged();
-                            }
-                        }, new OnError() {
-                            @Override
-                            public void onError(ErrorInfo error) throws Exception {
+                stateTextView.setOnClickListener(view -> {
+                    onPageLoad();
+                });
+                mRefreshLayout.setVisibility(View.GONE);
+                presentNestedSrcollView.setVisibility(View.VISIBLE);
+            }
+        }
+    }
 
-                            }
-                        });
+
+    private void initValue() {
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+        //解决底部滚动到顶部时，顶部item上方偶尔会出现一大片间隔的问题
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                int[] first = new int[2];
+                layoutManager.findFirstCompletelyVisibleItemPositions(first);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && (first[0] == 1 || first[1] == 1)) {
+                    layoutManager.invalidateSpanAssignments();
+                }
             }
         });
-        //刷新结束
     }
 
-    /**
-     * 懒加载
-     */
-    @Override
-    public void loadData() {
-        getFollowUpList();
-    }
+    private void initLinstener() {
 
-    @Override
-    protected void receiveEvent(EventMessage event) {
-        super.receiveEvent(event);
-        switch (event.getCode()) {
-            case ConstantParam.EventCode.FOLLOW_UP_VISIT_SUBMIT:
-                llEmpty.setVisibility(View.GONE);
-                srlFollowUpVisit.setVisibility(View.VISIBLE);
-                getFollowUpList();
-                break;
-        }
-    }
+        filterTextView.setOnClickListener(this);
+        //设置下拉刷新和上拉加载监听
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
 
-    @OnClick({R.id.tv_data_abnormal_down})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.tv_data_abnormal_down:
-                popu.showPopupWindow(showLinearLayout);
-                break;
-            default:
-                break;
-        }
+                mPageIndex = 1;
+                onPageLoad();
+            }
+        });
+        mRefreshLayout.setEnableLoadMore(false);
+        mRefreshLayout.setEnableRefresh(true);
+        //        mRefreshLayout.setEnableAutoLoadMore(true);
+        // mRefreshLayout.setEnableLoadMoreWhenContentNotFull(false);
+       /* mRefreshLayout.setScrollBoundaryDecider(new ScrollBoundaryDecider() {
+            @Override
+            public boolean canRefresh(View content) {
+                return false;
+            }
+
+            @Override
+            public boolean canLoadMore(View content) {
+                return mPageCount == mPageSize && !mIsLoading;
+            }
+        });*/
+        mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            mPageIndex++;
+            onPageLoad();
+        });
     }
 
 
@@ -233,5 +288,61 @@ public class CommunityDataAbnormalFragment extends BaseLazyFragment {
 
         //在activity 里面点击处理，下面会出现全选按钮，列表会出现让选择的按钮，点击全选 会走这个方法，这个方法是让让一级二级列表全部选中
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_data_abnormal_down:
+                //                popu = new DataAbnormalPopup(getPageContext(), new BaseCallBack() {
+                //                    @Override
+                //                    public void callBack(Object object) {
+                //
+                //                    }
+                //                });
+                //                popu.showPopupWindow(showLinearLayout);
+                showMenuWindow();
+
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    private void showMenuWindow() {
+        popu = new DataAbnormalPopup1(getPageContext(), object -> {
+
+            int position = (int) object;
+            switch (position) {
+
+
+                default:
+                    break;
+            }
+
+        });
+
+        if (!popu.isShowing()) {
+            popu.showAsDropDown(showLinearLayout);
+        }
+    }
+
+    private class OnItemClickListener implements IAdapterViewClickListener {
+        @Override
+        public void adapterClickListener(int position, View view) {
+
+            //一级的点击事件
+        }
+
+        @Override
+        public void adapterClickListener(int position, int index, View view) {
+            //二级的点击事件
+            switch (view.getId()) {
+
+                default:
+                    break;
+            }
+        }
     }
 }

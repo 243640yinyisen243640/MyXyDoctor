@@ -298,7 +298,7 @@
                     android:layout_gravity="right"
                     app:circleBgColor="@color/gray_text"
                     app:circleIsGradient="false"
-                    app:circleProgressColor="#2FE081" />
+                    app:circleProgressColor="@color/base_black" />
             </FrameLayout>
 
             <TextView

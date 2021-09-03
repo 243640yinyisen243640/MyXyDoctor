@@ -16,6 +16,9 @@ public class LoginBean implements Serializable {
      */
     private String depname;
     private String docname;
+    /**
+     * 3:主任  4:医生  10:物业
+     */
     private int type;
     private String telephoe;
     private String access_token;
@@ -23,6 +26,31 @@ public class LoginBean implements Serializable {
     private int userid;
     private String username;
     private String picture;
+    /**
+     * 是否加入社区医院 1:未加入 2:已加入
+     */
+    private String isproperty;
+    /**
+     * 医院名字
+     */
+    private String hospitalname;
+
+
+    public String getIsproperty() {
+        return isproperty;
+    }
+
+    public void setIsproperty(String isproperty) {
+        this.isproperty = isproperty;
+    }
+
+    public String getHospitalname() {
+        return hospitalname;
+    }
+
+    public void setHospitalname(String hospitalname) {
+        this.hospitalname = hospitalname;
+    }
 
     public String getDepname() {
         return depname;
