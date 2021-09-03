@@ -1,8 +1,10 @@
 package com.xy.xydoctor.ui.fragment.community_management;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -86,12 +88,53 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
      */
     private String endtime;
 
+    /**
+     * activity里面的全选按钮
+     */
+    private TextView checkTextView;
+
+    private View checkView;
+
+
     public static CommunityDataAbnormalFragment newInstance(String type) {
         Bundle bundle = new Bundle();
         bundle.putString("type", type);
         CommunityDataAbnormalFragment fragment = new CommunityDataAbnormalFragment();
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    public List<DataAbnormalInfo> checkList() {
+        return mList;
+    }
+
+    private void initCheckView() {
+        if (checkView == null) {
+            checkView = View.inflate(getPageContext(), R.layout.include_data_abnormal_check_all, null);
+            checkTextView = checkView.findViewById(R.id.tv_data_abnormal_check_all_click);
+
+            checkTextView.setOnClickListener(v -> {
+
+                if (checkTextView.isSelected()) {
+                    checkTextView.setSelected(false);
+                    setUnCheckAll();
+                } else {
+                    checkTextView.setSelected(true);
+                    setCheckAll();
+                }
+            });
+        }
+        if (containerView().indexOfChild(checkView) != -1) {
+            containerView().removeView(checkView);
+        }
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.BOTTOM;
+        containerView().addView(checkView, params);
+
+    }
+
+    public void setCheckAllIsVisible() {
+        initCheckView();
     }
 
     @Override
@@ -284,21 +327,34 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
         });
     }
 
-
+    /**
+     * 设置全选
+     */
     public void setCheckAll() {
 
         //在activity 里面点击处理，下面会出现全选按钮，列表会出现让选择的按钮，点击全选 会走这个方法，这个方法是让让一级二级列表全部选中
         for (int i = 0; i < mList.size(); i++) {
-            mList.get(i).setSelected(!mList.get(i).isSelected());
-        }
-
-        for (int i = 0; i < mList.size(); i++) {
+            mList.get(i).setSelected(true);
             for (int j = 0; j < mList.get(i).getCommunityUser().size(); j++) {
-                mList.get(i).getCommunityUser().get(j).setSelected(!mList.get(i).getCommunityUser().get(j).isCheck());
+                mList.get(i).getCommunityUser().get(j).setSelected(true);
             }
         }
         mAdapter.notifyDataSetChanged();
+        mAdapter.adapter().notifyDataSetChanged();
+    }
 
+    /**
+     * 设置未全选
+     */
+    public void setUnCheckAll() {
+
+        for (int i = 0; i < mList.size(); i++) {
+            mList.get(i).setSelected(false);
+            for (int j = 0; j < mList.get(i).getCommunityUser().size(); j++) {
+                mList.get(i).getCommunityUser().get(j).setSelected(false);
+            }
+        }
+        mAdapter.notifyDataSetChanged();
         mAdapter.adapter().notifyDataSetChanged();
     }
 
@@ -317,6 +373,12 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
         }
         mAdapter.notifyDataSetChanged();
     }
+
+    public void setDataRefresh() {
+        mPageIndex = 1;
+        onPageLoad();
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -352,18 +414,42 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
         }
     }
 
+
+
     private class OnItemClickListener implements IAdapterViewClickListener {
+
         @Override
         public void adapterClickListener(int position, View view) {
 
-            //一级的点击事件
-
             switch (view.getId()) {
+                //一级的点击事件
                 case R.id.tv_data_abnormal_check:
-
-                    Log.i("yys", "==tv_data_abnormal_check");
-                    mList.get(position).setSelected(!mList.get(position).isSelected());
+                    //点击一级
+                    if (mList.get(position).isSelected()) {
+                        //点击时是选中
+                        for (int i = 0; i < mList.get(position).getCommunityUser().size(); i++) {
+                            mList.get(position).getCommunityUser().get(i).setSelected(false);
+                        }
+                        mList.get(position).setSelected(false);
+                    } else {
+                        //点击时是未选中
+                        for (int i = 0; i < mList.get(position).getCommunityUser().size(); i++) {
+                            mList.get(position).getCommunityUser().get(i).setSelected(true);
+                        }
+                        mList.get(position).setSelected(true);
+                    }
+                    for (int i = 0; i < mList.size(); i++) {
+                        //判断是否全选
+                        if (!mList.get(i).isSelected()) {
+                            //没有全选
+                          checkTextView.setSelected(false);
+                            break;
+                        }
+                        //全选
+                        checkTextView.setSelected(true);
+                    }
                     mAdapter.notifyDataSetChanged();
+                    mAdapter.adapter().notifyDataSetChanged();
                     break;
                 default:
                     break;
@@ -372,12 +458,32 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
 
         @Override
         public void adapterClickListener(int position, int index, View view) {
-            //二级的点击事件
             switch (view.getId()) {
-
                 case R.id.tv_data_abnormal_child_check:
-                    Log.i("yys", "tv_data_abnormal_child_check==");
+                    //二级的点击事件
+                    //二级按钮改变
                     mList.get(position).getCommunityUser().get(index).setSelected(!mList.get(position).getCommunityUser().get(index).isSelected());
+                    //判断二级按钮是否选中
+                    for (int i = 0; i < mList.get(position).getCommunityUser().size(); i++) {
+                        if (!mList.get(position).getCommunityUser().get(i).isSelected()) {
+                            //没有完全选中
+                            mList.get(position).setSelected(false);
+                            break;
+                        }
+                        //完全选中
+                        mList.get(position).setSelected(true);
+                    }
+                    for (int i = 0; i < mList.size(); i++) {
+                        //判断是否全选
+                        if (!mList.get(i).isSelected()) {
+                            //没有全选
+                            checkTextView.setSelected(false);
+                            break;
+                        }
+                        //全选
+                        checkTextView.setSelected(true);
+                    }
+                    mAdapter.notifyDataSetChanged();
                     mAdapter.adapter().notifyDataSetChanged();
                     break;
                 case R.id.tv_data_abnormal_child_phone_img:

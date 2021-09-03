@@ -148,4 +148,5 @@
     <string name="community_member_count">总人数</string>
     <string name="community_building_count">小区楼栋</string>
     <string name="community_person_count">小区用户</string>
+    <string name="you_can_not_choose_person">你没有选择用户</string>
 </resources>

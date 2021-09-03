@@ -171,12 +171,12 @@ public class DataManager {
     /**
      * @param type            1血压2血糖
      * @param starttime       开始时间
-     * @param endtime   结束时间
-     * @param style 1高2低3正常4未测量5自定义
-     * @param startSugar 血糖起始值
-     * @param endSugar 血糖结束值
-     * @param page 页码
-     * @param status 处理是否 0全部 1是 2否
+     * @param endtime         结束时间
+     * @param style           1高2低3正常4未测量5自定义
+     * @param startSugar      血糖起始值
+     * @param endSugar        血糖结束值
+     * @param page            页码
+     * @param status          处理是否 0全部 1是 2否
      * @param
      * @param successCallBack
      * @param failureCallBack
@@ -184,7 +184,7 @@ public class DataManager {
      */
     public static Call<String> getDataAbnormalList(String type, String starttime, String endtime, String style,
                                                    String startSugar, String endSugar, String page, String status,
-                                                    BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+                                                   BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("type", type);
         map.put("starttime", starttime);
@@ -196,6 +196,22 @@ public class DataManager {
         map.put("status", status);
         map.put("access_token", SPStaticUtils.getString("token"));
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, DataAbnormalInfo.class, "/doctor/Community/getStatistics", map, successCallBack, failureCallBack);
+    }
+
+
+    /**
+     * @param userid          用户id集合，英文逗号隔开
+     * @param type            1血压2血糖
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> loadCheckList(String userid, String type, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userid", userid);
+        map.put("type", type);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, FollowUpAgentListBean.class, "/doctor/community/communityLists", map, successCallBack, failureCallBack);
     }
 
 
