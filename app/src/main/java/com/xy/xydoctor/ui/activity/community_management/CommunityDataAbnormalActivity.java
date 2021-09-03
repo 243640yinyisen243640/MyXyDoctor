@@ -124,16 +124,15 @@ public class CommunityDataAbnormalActivity extends XYSoftUIBaseActivity implemen
             TextView checkAllTextView = checkView.findViewById(R.id.tv_data_abnormal_check_all_click);
 
             checkAllTextView.setOnClickListener(v -> {
+                CommunityDataAbnormalFragment fragment = (CommunityDataAbnormalFragment) fragments.get(index);
 
                 if (checkAllTextView.isSelected()) {
                     checkAllTextView.setSelected(false);
                 } else {
                     checkAllTextView.setSelected(true);
-
+                    fragment.setCheckAll();
                 }
 
-                CommunityDataAbnormalFragment fragment = (CommunityDataAbnormalFragment) fragments.get(index);
-                fragment.setCheckAll();
             });
 
         }
