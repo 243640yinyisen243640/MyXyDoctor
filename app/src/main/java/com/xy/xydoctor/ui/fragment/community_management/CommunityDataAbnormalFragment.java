@@ -289,12 +289,12 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
 
         //在activity 里面点击处理，下面会出现全选按钮，列表会出现让选择的按钮，点击全选 会走这个方法，这个方法是让让一级二级列表全部选中
         for (int i = 0; i < mList.size(); i++) {
-            mList.get(i).setSelected(true);
+            mList.get(i).setSelected(!mList.get(i).isSelected());
         }
 
         for (int i = 0; i < mList.size(); i++) {
             for (int j = 0; j < mList.get(i).getCommunityUser().size(); j++) {
-                mList.get(i).getCommunityUser().get(j).setSelected(true);
+                mList.get(i).getCommunityUser().get(j).setSelected(!mList.get(i).getCommunityUser().get(j).isCheck());
             }
         }
         mAdapter.notifyDataSetChanged();
