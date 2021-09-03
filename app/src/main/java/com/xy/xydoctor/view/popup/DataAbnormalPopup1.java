@@ -3,9 +3,13 @@ package com.xy.xydoctor.view.popup;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -23,7 +27,9 @@ import com.xy.xydoctor.bean.community_manamer.DiseaseTypeInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.customerView.NoConflictGridView;
 import com.xy.xydoctor.imp.BaseCallBack;
+import com.xy.xydoctor.imp.IACommunityFilterChoose;
 import com.xy.xydoctor.utils.DataUtils;
+import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.utils.XyScreenUtils;
 
 import java.text.ParseException;
@@ -45,6 +51,13 @@ public class DataAbnormalPopup1 extends PopupWindow {
     private TextView startTextView;
     private TextView endTextView;
     private LinearLayout allLiner;
+    private IACommunityFilterChoose iaCommunityFilterChoose;
+
+    private String starttime;
+    private String endtime;
+
+    private boolean isChange1 = false;
+    private boolean isChange2 = false;
 
     public DataAbnormalPopup1(Context context, BaseCallBack callBack) {
         super(context);
@@ -53,6 +66,8 @@ public class DataAbnormalPopup1 extends PopupWindow {
 
         NoConflictGridView sugarGridView = view.findViewById(R.id.gv_data_abnormal_sugar);
         NoConflictGridView typeGridView = view.findViewById(R.id.gv_data_abnormal_type);
+        EditText firstEditText = view.findViewById(R.id.et_data_abnormal_first);
+        EditText secondEditText = view.findViewById(R.id.et_data_abnormal_second);
         startTextView = view.findViewById(R.id.tv_data_abnormal_start_time);
         endTextView = view.findViewById(R.id.tv_data_abnormal_end_time);
         TextView resetTextView = view.findViewById(R.id.tv_data_abnormal_filter_reset);
@@ -79,6 +94,11 @@ public class DataAbnormalPopup1 extends PopupWindow {
         //因为某些机型是虚拟按键的,所以要加上以下设置防止挡住按键.
         this.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
+        starttime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
+        endtime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
+
+        startTextView.setText(starttime);
+        endTextView.setText(endtime);
 
         List<DiseaseTypeInfo> abnormalInfos = new ArrayList<>();
         DiseaseTypeInfo abnormalInfo1 = new DiseaseTypeInfo(context.getString(R.string.data_abnormal_up));
@@ -112,13 +132,21 @@ public class DataAbnormalPopup1 extends PopupWindow {
         sugarGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                abnormalAdapter.setClickPosition(position);
+                isChange1 = true;
+                isChange2 = true;
+                firstEditText.setText("");
+                secondEditText.setText("");
+                abnormalInfos.get(position).setCheck(!abnormalInfos.get(position).isCheck());
+                abnormalAdapter.notifyDataSetChanged();
+                //                abnormalAdapter.setClickPosition(position);
             }
         });
         typeGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                typeDataAbnormalAdapter.setClickPosition(position);
+                typeList.get(position).setCheck(typeList.get(position).isCheck());
+                typeDataAbnormalAdapter.notifyDataSetChanged();
+                //                typeDataAbnormalAdapter.setClickPosition(position);
             }
         });
 
@@ -128,6 +156,112 @@ public class DataAbnormalPopup1 extends PopupWindow {
 
         endTextView.setOnClickListener(v -> {
             showTimeWindow(2);
+        });
+
+        firstEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (isChange1) {
+                    isChange1 = false;
+                    return;
+                }
+                for (int i = 0; i < abnormalInfos.size(); i++) {
+                    abnormalInfos.get(i).setCheck(false);
+                    abnormalAdapter.notifyDataSetChanged();
+                    //                    abnormalAdapter.setClickPosition(i);
+                }
+            }
+        });
+
+        secondEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (isChange2) {
+                    isChange2 = false;
+                    return;
+                }
+                for (int i = 0; i < abnormalInfos.size(); i++) {
+                    abnormalInfos.get(i).setCheck(false);
+                    abnormalAdapter.notifyDataSetChanged();
+                    //                    abnormalAdapter.setClickPosition(i);
+                }
+            }
+        });
+
+        resetTextView.setOnClickListener(v -> {
+            startTextView.setText("");
+            endTextView.setText("");
+
+            for (int i = 0; i < abnormalInfos.size(); i++) {
+                abnormalInfos.get(i).setCheck(false);
+            }
+            abnormalAdapter.notifyDataSetChanged();
+
+            firstEditText.setText("");
+            secondEditText.setText("");
+
+            for (int i = 0; i < typeList.size(); i++) {
+                typeList.get(i).setCheck(false);
+            }
+            typeDataAbnormalAdapter.notifyDataSetChanged();
+
+        });
+
+        submitTextView.setOnClickListener(v -> {
+            String style = "";
+            String sugar = "";
+            String startSugar = "";
+            String endSugar = "";
+            if (TextUtils.isEmpty(firstEditText.getText().toString().trim()) && TextUtils.isEmpty(secondEditText.getText().toString().trim())) {
+                for (int i = 0; i < abnormalInfos.size(); i++) {
+                    if (abnormalInfos.get(i).isCheck()) {
+                        sugar = (i + 1) + "";
+                    }
+                }
+            } else {
+                TipUtils.getInstance().showToast(context, R.string.please_input_sugar);
+                sugar = "0";
+            }
+            startSugar = firstEditText.getText().toString().trim();
+            endSugar = secondEditText.getText().toString().trim();
+
+            for (int i = 0; i < typeList.size(); i++) {
+                if (typeList.get(i).isSelected()) {
+                    style = (i + 1) + "";
+                } else {
+                    style = "0";
+                }
+            }
+
+            if ("0".equals(sugar)) {
+                TipUtils.getInstance().showToast(context, R.string.please_choose_sugar);
+                return;
+            }
+            if ("0".equals(style)) {
+                TipUtils.getInstance().showToast(context, R.string.please_choose_data_type);
+                return;
+            }
+            iaCommunityFilterChoose.IAFollowUpChoose(starttime, endtime, sugar, startSugar, endSugar, style);
         });
     }
 
@@ -173,8 +307,10 @@ public class DataAbnormalPopup1 extends PopupWindow {
             String content = DataUtils.convertDateToString(date, DataFormatManager.TIME_FORMAT_Y_M_D);
             if (1 == type) {
                 startTextView.setText(content);
+                starttime = content;
             } else {
                 endTextView.setText(content);
+                endtime = content;
             }
 
         }).setDate(currentDate).setRangDate(startDate, endDate)
@@ -204,5 +340,15 @@ public class DataAbnormalPopup1 extends PopupWindow {
             setHeight(XyScreenUtils.screenHeight(parent.getContext()) - XyScreenUtils.dip2px(parent.getContext(), 48) - XYSoftDensityUtils.statusBarHeight(parent.getContext()));
         }
         super.showAsDropDown(parent, 0, 0);
+    }
+
+
+    /**
+     * 交给activity的方法回调，设置监听
+     *
+     * @param filterChoose
+     */
+    public void setOnChooseOkListener(IACommunityFilterChoose filterChoose) {
+        this.iaCommunityFilterChoose = filterChoose;
     }
 }

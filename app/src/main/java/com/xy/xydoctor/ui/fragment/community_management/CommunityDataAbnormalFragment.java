@@ -22,6 +22,7 @@ import com.xy.xydoctor.base.fragment.XYBaseFragment;
 import com.xy.xydoctor.bean.community_manamer.DataAbnormalInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.datamanager.DataManager;
+import com.xy.xydoctor.imp.IACommunityFilterChoose;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.xy.xydoctor.utils.DataUtils;
 import com.xy.xydoctor.utils.TipUtils;
@@ -37,7 +38,7 @@ import retrofit2.Call;
  * Date: 2021/8/16 16:36
  * Description: 数据异常
  */
-public class CommunityDataAbnormalFragment extends XYBaseFragment implements View.OnClickListener {
+public class CommunityDataAbnormalFragment extends XYBaseFragment implements View.OnClickListener, IACommunityFilterChoose {
 
     private DataAbnormalListAdapter mAdapter;
     private static final int REQUEST_CODE_FOR_REFRESH = 10;
@@ -108,6 +109,9 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
         return mList;
     }
 
+    /**
+     * 全选按钮
+     */
     private void initCheckView() {
         if (checkView == null) {
             checkView = View.inflate(getPageContext(), R.layout.include_data_abnormal_check_all, null);
@@ -376,6 +380,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
 
     public void setDataRefresh() {
         mPageIndex = 1;
+        checkTextView.setVisibility(View.GONE);
         onPageLoad();
     }
 
@@ -408,12 +413,16 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
             }
 
         });
-
+        popu.setOnChooseOkListener(this);
         if (!popu.isShowing()) {
             popu.showAsDropDown(showLinearLayout);
         }
     }
 
+    @Override
+    public void IAFollowUpChoose(String startTime, String endTime, String sugar, String startSugar, String endSugar, String style) {
+
+    }
 
 
     private class OnItemClickListener implements IAdapterViewClickListener {
@@ -442,7 +451,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
                         //判断是否全选
                         if (!mList.get(i).isSelected()) {
                             //没有全选
-                          checkTextView.setSelected(false);
+                            checkTextView.setSelected(false);
                             break;
                         }
                         //全选

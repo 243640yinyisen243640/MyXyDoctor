@@ -17,24 +17,26 @@
             android:id="@+id/tv_data_abnormal_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_bg_white_main_90"
+            android:background="@drawable/shape_bg_main_90_low"
             android:paddingLeft="15dp"
             android:paddingTop="10dp"
+            android:textColor="@color/main_red"
             android:paddingRight="15dp"
             android:paddingBottom="10dp"
-            android:text="@string/app_name" />
+            android:text="@string/data_abnormal_up" />
 
         <TextView
             android:id="@+id/tv_data_abnormal_second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/shape_bg_white_main_90"
+            android:background="@drawable/shape_bg_main_90_low"
             android:paddingLeft="15dp"
             android:paddingTop="10dp"
             android:paddingRight="15dp"
             android:paddingBottom="10dp"
-            android:text="@string/app_name" />
+            android:textColor="@color/main_red"
+            android:text="@string/data_abnormal_filter_no_deal" />
 
         <View
             android:layout_width="0dp"

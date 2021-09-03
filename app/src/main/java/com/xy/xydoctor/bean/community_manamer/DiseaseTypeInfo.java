@@ -9,10 +9,18 @@ public class DiseaseTypeInfo {
     private boolean isCheck;
     private String diseaseName;
 
+    private int checkID;
+
     private String sugarType;
     private String pressureType;
 
+    public int getCheckID() {
+        return checkID;
+    }
 
+    public void setCheckID(int checkID) {
+        this.checkID = checkID;
+    }
 
     public String getSugarType() {
         return sugarType;

@@ -10,8 +10,8 @@ public class HHSoftTopViewInfo {
     public String titleTextColor = "#FF564F";
     public int titleLeftDrawable = 0;
     public int backLeftDrawable = R.drawable.img_base_back_red;
-    public int moreSize = 14;//单位sp
-    public String moreTextColor = "#323232";
+    public int moreSize = 15;//单位sp
+    public String moreTextColor = "#FF564F";
     public String topLineColor = "#F2F2F2";
     public int topLineHeight = 1;
     public int showStatusBar = 0;

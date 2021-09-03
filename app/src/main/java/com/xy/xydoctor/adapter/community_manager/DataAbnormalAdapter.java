@@ -40,11 +40,20 @@ public class DataAbnormalAdapter extends XYSoftBaseAdapter<DiseaseTypeInfo> {
         DiseaseTypeInfo typeInfo = getList().get(position);
         holder.checkTextView.setText(typeInfo.getDiseaseName());
 
-        if (position == pos) {
-            holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_white_main_90));
-        } else {
-            holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_white_black_90));
+//        if (position == pos) {
+//            holder.checkTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.main_red));
+//            holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_main_90_low));
+//        } else {
+//            holder.checkTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+//            holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_white_black_90));
+//        }
 
+        if (typeInfo.isCheck()) {
+            holder.checkTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.main_red));
+            holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_main_90_low));
+        } else {
+            holder.checkTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_white_black_90));
         }
         return convertView;
     }

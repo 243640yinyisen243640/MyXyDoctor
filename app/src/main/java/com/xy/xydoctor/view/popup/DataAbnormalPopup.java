@@ -87,13 +87,15 @@ public class DataAbnormalPopup extends BasePopupWindow {
         sugarGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                abnormalAdapter.setClickPosition(position);
+                abnormalInfos.get(position).setCheck(!abnormalInfos.get(position).isCheck());
+                abnormalAdapter.notifyDataSetChanged();
             }
         });
         typeGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                typeDataAbnormalAdapter.setClickPosition(position);
+                typeList.get(position).setCheck(!typeList.get(position).isCheck());
+                typeDataAbnormalAdapter.notifyDataSetChanged();
             }
         });
 

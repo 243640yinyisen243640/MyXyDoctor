@@ -67,8 +67,8 @@ public class CommunityDataAbnormalActivity extends XYSoftUIBaseActivity implemen
                     }
                 }
                 if (checkList.size() == 0) {
-                    TipUtils.getInstance().showToast(getPageContext(),R.string.you_can_not_choose_person);
-                }else {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.you_can_not_choose_person);
+                } else {
                     saveData(checkList);
                 }
             }
@@ -100,6 +100,7 @@ public class CommunityDataAbnormalActivity extends XYSoftUIBaseActivity implemen
         }
         Call<String> requestCall = DataManager.loadCheckList(substring, type, (call, response) -> {
             if (response.code == 200) {
+                topViewManager().moreTextView().setText("处理");
                 CommunityDataAbnormalFragment fragment = (CommunityDataAbnormalFragment) fragments.get(index);
                 fragment.setDataRefresh();
             }
