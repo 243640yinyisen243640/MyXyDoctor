@@ -7,6 +7,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -49,6 +50,7 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
         viewHolder.setText(R.id.tv_data_abnormal_child_location, item.getBuild_name() + item.getUnit_name() + item.getHouse_num());
         LinearLayout clickLinearLayout = viewHolder.getView(R.id.ll_data_abnormal_child_click);
         TextView checkTextView = viewHolder.getView(R.id.tv_data_abnormal_child_check);
+        TextView lightTextView = viewHolder.getView(R.id.tv_data_abnormal_child_high_or_low);
 
         if (item.isSelected()) {
             checkTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_special_operate_check, 0, 0, 0);
@@ -65,29 +67,28 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
 
             int start = stringBuilder.length();
 
+            Log.i("yys", "type==" + type);
             if ("1".equals(type)) {
                 stringBuilder.append("   " + item.getList().get(position).getDiastole()).append("/").append(item.getList().get(position).getSystolic()).append("");
-                stringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context, R.color.data_gray_light)), 0, start, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                int end = stringBuilder.length();
+                stringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context, R.color.community_content_black)), 0, start, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                 stringBuilder.setSpan(new StyleSpan(Typeface.NORMAL), 0, start, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
                 //1偏高2低3正常
-                TextView lightTextView = viewHolder.getView(R.id.tv_data_abnormal_child_high_or_low);
 
                 if ("1".equals(item.getList().get(position).getIshight())) {
-                    lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_hign, 0);
+                    lightTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_hign, 0, 0, 0);
                 } else if ("2".equals(item.getList().get(position).getIshight())) {
-                    lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_low, 0);
+                    lightTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_low, 0, 0, 0);
                 } else {
-                    lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_normal, 0);
+                    lightTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_normal, 0, 0, 0);
                 }
                 lightTextView.setText("mmHg");
+
             } else {
                 stringBuilder.append("   " + item.getList().get(position).getGlucosevalue()).append("mmol/L");
                 stringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context, R.color.data_gray_light)), 0, start, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                 stringBuilder.setSpan(new StyleSpan(Typeface.NORMAL), 0, start, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-
                 //1偏高2低3正常
-                TextView lightTextView = viewHolder.getView(R.id.tv_data_abnormal_child_high_or_low);
-
                 if ("1".equals(item.getList().get(position).getIshight())) {
                     lightTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_hign, 0, 0, 0);
                 } else if ("2".equals(item.getList().get(position).getIshight())) {
@@ -97,7 +98,7 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
                 }
                 lightTextView.setText(item.getList().get(position).getCategoryname());
             }
-
+            lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.base_arrow_right, 0);
             viewHolder.setText(R.id.tv_data_abnormal_child_time_and_amonut, stringBuilder.toString());
         } else {
             clickLinearLayout.setVisibility(View.GONE);

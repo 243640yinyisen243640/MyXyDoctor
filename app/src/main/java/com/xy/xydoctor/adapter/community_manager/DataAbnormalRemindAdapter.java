@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.adapter.UIBaseRecycleViewAdapter;
-import com.xy.xydoctor.bean.community_manamer.DataAbnormalRemindInfo;
+import com.xy.xydoctor.bean.community_manamer.SugarOrPressureInfo;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 
 import java.util.List;
@@ -21,10 +21,10 @@ import java.util.List;
  * Date: 2021/8/20 16:06
  * Description: 异常提醒
  */
-public class DataAbnormalRemindAdapter extends UIBaseRecycleViewAdapter<DataAbnormalRemindInfo> {
+public class DataAbnormalRemindAdapter extends UIBaseRecycleViewAdapter<SugarOrPressureInfo> {
     private int pos = 0;
 
-    public DataAbnormalRemindAdapter(Context mContext, List<DataAbnormalRemindInfo> mList,String type, IAdapterViewClickListener mListener) {
+    public DataAbnormalRemindAdapter(Context mContext, List<SugarOrPressureInfo> mList, String type, IAdapterViewClickListener mListener) {
         super(mContext, mList, mListener);
     }
 
@@ -39,7 +39,7 @@ public class DataAbnormalRemindAdapter extends UIBaseRecycleViewAdapter<DataAbno
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         ViewHolder holder = (ViewHolder) viewHolder;
-        DataAbnormalRemindInfo videoInfo = getList().get(position);
+        SugarOrPressureInfo sugarOrPressureInfo = getList().get(position);
 
         if (getList().size() == 1) {
             holder.bgLinerLayout.setBackgroundResource(R.drawable.shape_bg_white_5);
@@ -61,6 +61,7 @@ public class DataAbnormalRemindAdapter extends UIBaseRecycleViewAdapter<DataAbno
         TextView HighAndLowTextView;
         LinearLayout bgLinerLayout;
         View line;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             bgLinerLayout = itemView.findViewById(R.id.ll_data_abnormal_remind_bg);

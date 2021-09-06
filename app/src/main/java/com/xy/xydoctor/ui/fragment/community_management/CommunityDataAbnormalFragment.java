@@ -32,6 +32,7 @@ import com.xy.xydoctor.utils.DataUtils;
 import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.view.popup.DataAbnormalPopup1;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -406,7 +407,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
      * 展示筛选的pop
      */
     private void showMenuWindow() {
-        popu = new DataAbnormalPopup1(getPageContext(),type, object -> {
+        popu = new DataAbnormalPopup1(getPageContext(), type, object -> {
 
             int position = (int) object;
             switch (position) {
@@ -524,6 +525,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
                     break;
                 case R.id.ll_data_abnormal_child_click:
                     Intent intent1 = new Intent(getPageContext(), DataAbnormalRemindListActivity.class);
+                    intent1.putExtra("sugarOrPressureList", (Serializable) mList.get(position).getCommunityUser().get(index).getList());
                     startActivity(intent1);
                     break;
                 default:

@@ -212,7 +212,7 @@ public class DataManager {
         map.put("userid", userid);
         map.put("type", type);
         map.put("access_token", SPStaticUtils.getString("token"));
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, FollowUpAgentListBean.class, "/doctor/community/communityLists", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, FollowUpAgentListBean.class, "/doctor/Community/editWorning", map, successCallBack, failureCallBack);
     }
 
     /**

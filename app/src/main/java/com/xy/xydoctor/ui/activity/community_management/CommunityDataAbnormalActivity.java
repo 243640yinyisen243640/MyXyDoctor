@@ -1,6 +1,7 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
 
@@ -93,7 +94,8 @@ public class CommunityDataAbnormalActivity extends XYSoftUIBaseActivity implemen
         //截取最后,
         String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
         String type = "";
-        if (index == 1) {
+        Log.i("yys", "index==" + index);
+        if (index == 0) {
             type = "2";
         } else {
             type = "1";
