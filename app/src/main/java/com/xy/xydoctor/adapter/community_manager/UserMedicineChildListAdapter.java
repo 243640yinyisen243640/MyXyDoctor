@@ -3,7 +3,7 @@ package com.xy.xydoctor.adapter.community_manager;
 import android.content.Context;
 import android.view.View;
 
-import com.xy.xydoctor.bean.UseMedicineListBean;
+import com.xy.xydoctor.bean.community_manamer.UseMedicineListBean;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;

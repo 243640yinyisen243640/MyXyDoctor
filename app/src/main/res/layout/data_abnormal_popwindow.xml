@@ -43,6 +43,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_data_abnormal_sugar_pressure"
             style="@style/data_abnormal_title"
             android:text="@string/community_data_abnormal_suagar" />
 
@@ -82,6 +83,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_data_abnormal_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

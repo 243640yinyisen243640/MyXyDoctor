@@ -59,9 +59,15 @@ public class DataAbnormalPopup1 extends PopupWindow {
     private boolean isChange1 = false;
     private boolean isChange2 = false;
 
-    public DataAbnormalPopup1(Context context, BaseCallBack callBack) {
+    /**
+     * 1血压  2血糖
+     */
+    private String type;
+
+    public DataAbnormalPopup1(Context context, String type, BaseCallBack callBack) {
         super(context);
         this.context = context;
+        this.type = type;
         View view = View.inflate(context, R.layout.data_abnormal_popwindow, null);
 
         NoConflictGridView sugarGridView = view.findViewById(R.id.gv_data_abnormal_sugar);
@@ -72,6 +78,16 @@ public class DataAbnormalPopup1 extends PopupWindow {
         endTextView = view.findViewById(R.id.tv_data_abnormal_end_time);
         TextView resetTextView = view.findViewById(R.id.tv_data_abnormal_filter_reset);
         TextView submitTextView = view.findViewById(R.id.tv_data_abnormal_filter_submit);
+        LinearLayout inputLinearLayout = view.findViewById(R.id.ll_data_abnormal_input);
+        TextView sugarOrPressureTextView = view.findViewById(R.id.tv_data_abnormal_sugar_pressure);
+
+        if ("1".equals(type)) {
+            inputLinearLayout.setVisibility(View.GONE);
+            sugarOrPressureTextView.setText(context.getString(R.string.community_base_pressure));
+        } else {
+            inputLinearLayout.setVisibility(View.VISIBLE);
+            sugarOrPressureTextView.setText(context.getString(R.string.community_base_sugar));
+        }
         allLiner = view.findViewById(R.id.ll_show_pop_all);
         this.setContentView(view);
         // 设置SelectPicPopupWindow弹出窗体的宽

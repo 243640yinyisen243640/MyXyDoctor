@@ -111,7 +111,7 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
 
         MyClickListener adapterItemClickListener = new MyClickListener(position);
         checkTextView.setOnClickListener(adapterItemClickListener);
-
+        clickLinearLayout.setOnClickListener(adapterItemClickListener);
     }
 
     /**

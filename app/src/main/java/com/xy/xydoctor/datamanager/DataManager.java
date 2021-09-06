@@ -7,6 +7,7 @@ import com.xy.xydoctor.base.retrofit.BaseNetworkUtils;
 import com.xy.xydoctor.base.retrofit.HHSoftBaseResponse;
 import com.xy.xydoctor.bean.UpdateBean;
 import com.xy.xydoctor.bean.community_manamer.CommunityManagerInfo;
+import com.xy.xydoctor.bean.community_manamer.CommunityUseMedicineInfo;
 import com.xy.xydoctor.bean.community_manamer.DataAbnormalInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
 import com.xy.xydoctor.constant.ConstantParam;
@@ -212,6 +213,21 @@ public class DataManager {
         map.put("type", type);
         map.put("access_token", SPStaticUtils.getString("token"));
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, FollowUpAgentListBean.class, "/doctor/community/communityLists", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param userid          患者userid，患者详情进入，必填
+     * @param page
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> useMedicineRemind(String userid, String page, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userid", userid);
+        map.put("page", page);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, CommunityUseMedicineInfo.class, "/doctor/Pharmacy/getPharmacyLists", map, successCallBack, failureCallBack);
     }
 
 

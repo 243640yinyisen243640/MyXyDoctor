@@ -2,14 +2,17 @@ package com.xy.xydoctor.adapter.community_manager;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lyd.baselib.widget.view.MyListView;
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.bean.UseMedicineListBean;
+import com.xy.xydoctor.base.adapter.UIBaseRecycleViewAdapter;
+import com.xy.xydoctor.bean.community_manamer.CommunityUseMedicineInfo;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
-import com.zhy.adapter.abslistview.CommonAdapter;
-import com.zhy.adapter.abslistview.ViewHolder;
 
 import java.util.List;
 
@@ -18,25 +21,57 @@ import java.util.List;
  * 作者: LYD
  * 创建日期: 2019/7/19 11:09
  */
-public class UserMedicineListAdapter extends CommonAdapter<UseMedicineListBean.DataBean> {
+public class UserMedicineListAdapter extends UIBaseRecycleViewAdapter<CommunityUseMedicineInfo> {
     private IAdapterViewClickListener clickListener;
     private String type;
 
-    public UserMedicineListAdapter(Context context, int layoutId, List<UseMedicineListBean.DataBean> datas, IAdapterViewClickListener clickListener) {
-        super(context, layoutId, datas);
-        this.clickListener = clickListener;
+    public UserMedicineListAdapter(Context mContext, List<CommunityUseMedicineInfo> mList, IAdapterViewClickListener mListener) {
+        super(mContext, mList, mListener);
+    }
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = View.inflate(getContext(), R.layout.item_user_medicine_list, null);
+        return new ViewHolder(view);
     }
 
     @Override
-    protected void convert(ViewHolder viewHolder, UseMedicineListBean.DataBean item, int position) {
-        viewHolder.setText(R.id.tv_user_medicine_phone, item.getPlan_name());
-        MyListView lvChild = viewHolder.getView(R.id.lv_user_medicine_child);
-        TextView phoneTextView = viewHolder.getView(R.id.tv_user_medicine_phone);
-        OnAdapterItemClickListener adapterItemClickListener = new OnAdapterItemClickListener(position);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ViewHolder viewHolder = (ViewHolder) holder;
+        CommunityUseMedicineInfo info = getList().get(position);
 
-        phoneTextView.setOnClickListener(adapterItemClickListener);
-        lvChild.setAdapter(new UserMedicineChildListAdapter(lvChild.getContext(), R.layout.item_user_medicine_child_list, item.getPlan_list(), type, position, clickListener));
+
+
+        if (getListener() != null) {
+            viewHolder.phoneTextView.setOnClickListener(v -> {
+                getListener().adapterClickListener(position, v);
+            });
+
+        }
+
     }
+
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        TextView nameTextView;
+        TextView sexTextView;
+        TextView ageTextView;
+        TextView locationTextView;
+        TextView phoneTextView;
+        MyListView myListView;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            nameTextView = itemView.findViewById(R.id.tv_user_medicine_name);
+            sexTextView = itemView.findViewById(R.id.tv_user_medicine_sex);
+            ageTextView = itemView.findViewById(R.id.tv_user_medicine_age);
+            locationTextView = itemView.findViewById(R.id.tv_user_medicine_location);
+            phoneTextView = itemView.findViewById(R.id.tv_user_medicine_phone);
+            myListView = itemView.findViewById(R.id.lv_user_medicine_child);
+        }
+    }
+
 
     private class OnAdapterItemClickListener implements View.OnClickListener {
         private int position;

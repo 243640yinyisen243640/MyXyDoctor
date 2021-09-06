@@ -1,5 +1,7 @@
 package com.xy.xydoctor.ui.fragment.community_management;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -25,6 +27,7 @@ import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.imp.IACommunityFilterChoose;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
+import com.xy.xydoctor.ui.activity.community_management.DataAbnormalRemindListActivity;
 import com.xy.xydoctor.utils.DataUtils;
 import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.view.popup.DataAbnormalPopup1;
@@ -403,7 +406,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
      * 展示筛选的pop
      */
     private void showMenuWindow() {
-        popu = new DataAbnormalPopup1(getPageContext(), object -> {
+        popu = new DataAbnormalPopup1(getPageContext(),type, object -> {
 
             int position = (int) object;
             switch (position) {
@@ -514,6 +517,14 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
                     mAdapter.adapter().notifyDataSetChanged();
                     break;
                 case R.id.tv_data_abnormal_child_phone_img:
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    Uri data = Uri.parse("tel:" + mList.get(position).getCommunityUser().get(index).getTel());
+                    intent.setData(data);
+                    startActivity(intent);
+                    break;
+                case R.id.ll_data_abnormal_child_click:
+                    Intent intent1 = new Intent(getPageContext(), DataAbnormalRemindListActivity.class);
+                    startActivity(intent1);
                     break;
                 default:
                     break;

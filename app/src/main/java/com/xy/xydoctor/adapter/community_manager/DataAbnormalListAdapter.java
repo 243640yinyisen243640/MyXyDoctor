@@ -95,7 +95,7 @@ public class DataAbnormalListAdapter extends UIBaseRecycleViewAdapter<DataAbnorm
             checkTextView = itemView.findViewById(R.id.tv_data_abnormal_check);
             nameTextView = itemView.findViewById(R.id.tv_data_abnormal_name);
             myListView = itemView.findViewById(R.id.lv_data_abnormal_child);
-            clickLinearLayout = itemView.findViewById(R.id.ll_data_abnormal_click);
+
         }
     }
 
