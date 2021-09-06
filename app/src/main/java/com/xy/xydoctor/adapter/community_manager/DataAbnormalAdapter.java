@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.adapter.XYSoftBaseAdapter;
-import com.xy.xydoctor.bean.community_manamer.DiseaseTypeInfo;
+import com.xy.xydoctor.bean.community_manamer.FilterSugarPressureInfo;
 
 import java.util.List;
 
@@ -18,10 +18,10 @@ import java.util.List;
  * Date: 2021/8/17 15:30
  * Description: 数据异常血糖 数据类型
  */
-public class DataAbnormalAdapter extends XYSoftBaseAdapter<DiseaseTypeInfo> {
+public class DataAbnormalAdapter extends XYSoftBaseAdapter<FilterSugarPressureInfo> {
     private int pos = 0;
 
-    public DataAbnormalAdapter(Context context, List<DiseaseTypeInfo> list) {
+    public DataAbnormalAdapter(Context context, List<FilterSugarPressureInfo> list) {
         super(context, list);
     }
 
@@ -37,7 +37,7 @@ public class DataAbnormalAdapter extends XYSoftBaseAdapter<DiseaseTypeInfo> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        DiseaseTypeInfo typeInfo = getList().get(position);
+        FilterSugarPressureInfo typeInfo = getList().get(position);
         holder.checkTextView.setText(typeInfo.getDiseaseName());
 
 //        if (position == pos) {

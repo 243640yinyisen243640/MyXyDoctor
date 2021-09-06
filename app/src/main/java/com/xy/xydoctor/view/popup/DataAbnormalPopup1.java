@@ -6,6 +6,7 @@ import android.os.Build;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -22,8 +23,7 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.DataAbnormalAdapter;
 import com.xy.xydoctor.base.utils.XYSoftDensityUtils;
-import com.xy.xydoctor.bean.community_manamer.DataAbnormalInfo;
-import com.xy.xydoctor.bean.community_manamer.DiseaseTypeInfo;
+import com.xy.xydoctor.bean.community_manamer.FilterSugarPressureInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.customerView.NoConflictGridView;
 import com.xy.xydoctor.imp.BaseCallBack;
@@ -100,16 +100,16 @@ public class DataAbnormalPopup1 extends PopupWindow {
         startTextView.setText(starttime);
         endTextView.setText(endtime);
 
-        List<DiseaseTypeInfo> abnormalInfos = new ArrayList<>();
-        DiseaseTypeInfo abnormalInfo1 = new DiseaseTypeInfo(context.getString(R.string.data_abnormal_up));
+        List<FilterSugarPressureInfo> abnormalInfos = new ArrayList<>();
+        FilterSugarPressureInfo abnormalInfo1 = new FilterSugarPressureInfo(context.getString(R.string.data_abnormal_up), "1");
         abnormalInfos.add(abnormalInfo1);
-        DiseaseTypeInfo abnormalInfo2 = new DiseaseTypeInfo(context.getString(R.string.data_abnormal_low));
+        FilterSugarPressureInfo abnormalInfo2 = new FilterSugarPressureInfo(context.getString(R.string.data_abnormal_low), "2");
         abnormalInfos.add(abnormalInfo2);
 
-        DiseaseTypeInfo abnormalInfo3 = new DiseaseTypeInfo(context.getString(R.string.data_abnormal_normal));
+        FilterSugarPressureInfo abnormalInfo3 = new FilterSugarPressureInfo(context.getString(R.string.data_abnormal_normal), "3");
         abnormalInfos.add(abnormalInfo3);
 
-        DiseaseTypeInfo abnormalInfo4 = new DiseaseTypeInfo(context.getString(R.string.data_abnormal_not));
+        FilterSugarPressureInfo abnormalInfo4 = new FilterSugarPressureInfo(context.getString(R.string.data_abnormal_not), "4");
 
         abnormalInfos.add(abnormalInfo4);
 
@@ -117,16 +117,16 @@ public class DataAbnormalPopup1 extends PopupWindow {
         sugarGridView.setAdapter(abnormalAdapter);
 
 
-        List<DataAbnormalInfo> typeList = new ArrayList<>();
-        DataAbnormalInfo typeInfo1 = new DataAbnormalInfo(context.getString(R.string.data_abnormal_filter_no_deal));
+        List<FilterSugarPressureInfo> typeList = new ArrayList<>();
+        FilterSugarPressureInfo typeInfo1 = new FilterSugarPressureInfo(context.getString(R.string.data_abnormal_filter_no_deal), "2");
         typeList.add(typeInfo1);
-        DataAbnormalInfo typeInfo2 = new DataAbnormalInfo(context.getString(R.string.data_abnormal_filter_all));
+        FilterSugarPressureInfo typeInfo2 = new FilterSugarPressureInfo(context.getString(R.string.data_abnormal_filter_all), "0");
         typeList.add(typeInfo2);
 
-        DataAbnormalInfo typeInfo3 = new DataAbnormalInfo(context.getString(R.string.data_abnormal_filter_have_deal));
+        FilterSugarPressureInfo typeInfo3 = new FilterSugarPressureInfo(context.getString(R.string.data_abnormal_filter_have_deal), "1");
         typeList.add(typeInfo3);
 
-        DataAbnormalAdapter typeDataAbnormalAdapter = new DataAbnormalAdapter(context, abnormalInfos);
+        DataAbnormalAdapter typeDataAbnormalAdapter = new DataAbnormalAdapter(context, typeList);
         typeGridView.setAdapter(typeDataAbnormalAdapter);
 
         sugarGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -136,7 +136,12 @@ public class DataAbnormalPopup1 extends PopupWindow {
                 isChange2 = true;
                 firstEditText.setText("");
                 secondEditText.setText("");
-                abnormalInfos.get(position).setCheck(!abnormalInfos.get(position).isCheck());
+
+                for (int i = 0; i < abnormalInfos.size(); i++) {
+                    abnormalInfos.get(i).setCheck(false);
+                }
+                abnormalInfos.get(position).setCheck(true);
+                //                abnormalInfos.get(position).setCheck(!abnormalInfos.get(position).isCheck());
                 abnormalAdapter.notifyDataSetChanged();
                 //                abnormalAdapter.setClickPosition(position);
             }
@@ -144,7 +149,13 @@ public class DataAbnormalPopup1 extends PopupWindow {
         typeGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                typeList.get(position).setCheck(typeList.get(position).isCheck());
+                //                typeList.get(position).setCheck(!typeList.get(position).isCheck());
+                for (int i = 0; i < typeList.size(); i++) {
+                    typeList.get(i).setCheck(false);
+                }
+                typeList.get(position).setCheck(true);
+
+
                 typeDataAbnormalAdapter.notifyDataSetChanged();
                 //                typeDataAbnormalAdapter.setClickPosition(position);
             }
@@ -228,40 +239,40 @@ public class DataAbnormalPopup1 extends PopupWindow {
         });
 
         submitTextView.setOnClickListener(v -> {
-            String style = "";
-            String sugar = "";
+            String status = "-1";
+            String statusName = "";
+            String style = "-1";
+            String styleName = "";
             String startSugar = "";
             String endSugar = "";
             if (TextUtils.isEmpty(firstEditText.getText().toString().trim()) && TextUtils.isEmpty(secondEditText.getText().toString().trim())) {
                 for (int i = 0; i < abnormalInfos.size(); i++) {
                     if (abnormalInfos.get(i).isCheck()) {
-                        sugar = (i + 1) + "";
+                        style = abnormalInfos.get(i).getCheckID();
+                        styleName = abnormalInfos.get(i).getDiseaseName();
                     }
                 }
-            } else {
-                TipUtils.getInstance().showToast(context, R.string.please_input_sugar);
-                sugar = "0";
             }
             startSugar = firstEditText.getText().toString().trim();
             endSugar = secondEditText.getText().toString().trim();
 
             for (int i = 0; i < typeList.size(); i++) {
-                if (typeList.get(i).isSelected()) {
-                    style = (i + 1) + "";
-                } else {
-                    style = "0";
+                if (typeList.get(i).isCheck()) {
+                    status = typeList.get(i).getCheckID();
+                    statusName = typeList.get(i).getDiseaseName();
                 }
             }
 
-            if ("0".equals(sugar)) {
+            if ("-1".equals(style) && (TextUtils.isEmpty(startSugar) || TextUtils.isEmpty(endSugar))) {
                 TipUtils.getInstance().showToast(context, R.string.please_choose_sugar);
                 return;
             }
-            if ("0".equals(style)) {
+            if ("-1".equals(status)) {
                 TipUtils.getInstance().showToast(context, R.string.please_choose_data_type);
                 return;
             }
-            iaCommunityFilterChoose.IAFollowUpChoose(starttime, endtime, sugar, startSugar, endSugar, style);
+            Log.i("yys", "status==" + status + "statusName" + "style==" + style + "styleName==" + styleName);
+            iaCommunityFilterChoose.IAFollowUpChoose(starttime, endtime, style, styleName, startSugar, endSugar, status, statusName);
         });
     }
 

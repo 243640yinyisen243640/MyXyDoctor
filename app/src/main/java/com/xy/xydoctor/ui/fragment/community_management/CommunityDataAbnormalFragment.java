@@ -1,6 +1,7 @@
 package com.xy.xydoctor.ui.fragment.community_management;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -420,10 +421,27 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
     }
 
     @Override
-    public void IAFollowUpChoose(String startTime, String endTime, String sugar, String startSugar, String endSugar, String style) {
+    public void IAFollowUpChoose(String startTime, String endTime, String style, String styleName, String startSugar, String endSugar, String status, String statusName) {
+        this.starttime = startTime;
+        this.endtime = endTime;
+        this.startSugar = startSugar;
+        this.endSugar = endSugar;
+        this.status = status;
 
+        Log.i("yys", "statusName==" + statusName + "styleName==" + styleName);
+        secondTextView.setText(statusName);
+
+        if ("1".equals(style) || "2".equals(style) || "3".equals(style) || "4".equals(style)) {
+            this.style = style;
+            firstTextView.setText(styleName);
+        } else {
+            this.style = "5";
+            firstTextView.setText(startSugar + "-" + endSugar);
+        }
+
+        popu.dismiss();
+        onPageLoad();
     }
-
 
     private class OnItemClickListener implements IAdapterViewClickListener {
 

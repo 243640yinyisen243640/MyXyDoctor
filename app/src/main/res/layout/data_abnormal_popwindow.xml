@@ -90,6 +90,7 @@
             <EditText
                 android:id="@+id/et_data_abnormal_first"
                 style="@style/data_abnormal_sugar_edit"
+                android:inputType="numberDecimal"
                 android:hint="@string/data_abnormal_yourself" />
 
             <TextView
@@ -102,6 +103,7 @@
             <EditText
                 android:id="@+id/et_data_abnormal_second"
                 style="@style/data_abnormal_sugar_edit"
+                android:inputType="numberDecimal"
                 android:hint="@string/data_abnormal_yourself" />
         </LinearLayout>
 
