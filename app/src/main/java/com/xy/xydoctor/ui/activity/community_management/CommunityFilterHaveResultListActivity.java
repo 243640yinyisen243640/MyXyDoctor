@@ -18,6 +18,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.CommunityFilterListAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
+import com.xy.xydoctor.bean.community_manamer.CommunityFilterChildInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityFilterInfo;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
@@ -40,8 +41,8 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
     private static final int REQUEST_CODE_FOR_REFRESH = 10;
     private SmartRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
-    private List<CommunityFilterInfo> mList = new ArrayList<>();
-    private List<CommunityFilterInfo> mTempList;
+    private List<CommunityFilterChildInfo> mList = new ArrayList<>();
+    private List<CommunityFilterChildInfo> mTempList;
     private int mPageIndex = 1, mPageSize = 6, mPageCount = 0;
     private CommunityFilterListAdapter mAdapter;
     private boolean mIsLoading = false;
@@ -104,8 +105,13 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
         topViewManager().titleTextView().setText("筛选列表");
         topViewManager().moreTextView().setText(R.string.base_filter);
         topViewManager().moreTextView().setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.filter, 0);
-        topViewManager().moreTextView().setCompoundDrawablePadding(10);
+        topViewManager().moreTextView().setCompoundDrawablePadding(2);
 
+        topViewManager().moreTextView().setOnClickListener(v -> {
+            Intent intent = new Intent(getPageContext(), CommunityFilterActivity.class);
+            intent.putExtra("type", "2");
+            startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
+        });
         initView();
         initValue();
         initLinstener();
@@ -145,6 +151,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
         onPageLoad();
     }
 
+
     protected void onPageLoad() {
         if (mIsLoading) {
             return;
@@ -159,7 +166,8 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                         mRefreshLayout.finishRefresh();
                     }
                     if (200 == response.code) {
-                        mTempList = (List<CommunityFilterInfo>) response.object;
+                        CommunityFilterInfo info = (CommunityFilterInfo) response.object;
+                        mTempList = info.getLists();
                         mPageCount = mTempList == null ? 0 : mTempList.size();
                         if (1 == mPageIndex) {
                             if (mList == null) {
@@ -169,7 +177,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                             }
                             mList.addAll(mTempList);
                             if (mAdapter == null) {
-                                mAdapter = new CommunityFilterListAdapter(getPageContext(), mList, "", new OnItemClickListener());
+                                mAdapter = new CommunityFilterListAdapter(getPageContext(), mList, isEmpty, new OnItemClickListener());
                                 mRecyclerView.setAdapter(mAdapter);
                             } else {
                                 mAdapter.notifyDataSetChanged();
@@ -314,18 +322,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
 
         @Override
         public void adapterClickListener(int position, int index, View view) {
-            //二级的点击事件
-            switch (view.getId()) {
-                case R.id.tv_fuc_child_no_finish:
-                    Intent intent = new Intent(getPageContext(), CommunityNoFinishActivity.class);
-                    startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
-                    break;
-                case R.id.tv_fuc_child_call_phone:
 
-                    break;
-                default:
-                    break;
-            }
         }
     }
 
@@ -334,8 +331,42 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE_FOR_REFRESH) {
-                mPageIndex = 1;
-                onPageLoad();
+                if (data != null) {
+                    String infoStr = data.getStringExtra("info");
+                    CommunityFilterInfo info = new Gson().fromJson(infoStr, CommunityFilterInfo.class);
+                    isEmpty = info.getIsempty();
+                    com_id = info.getCom_id();
+                    sex = info.getSex();
+                    age_min = info.getAge_min();
+                    age_max = info.getAge_max();
+                    if (filterInfo.getDiseaseTypeInfos() != null && filterInfo.getDiseaseTypeInfos().size() != 0) {
+
+                        StringBuilder stringBuilderDisease = new StringBuilder();
+                        for (int i = 0; i < filterInfo.getDiseaseTypeInfos().size(); i++) {
+                            String userid = filterInfo.getDiseaseTypeInfos().get(i).getCheckID();
+                            stringBuilderDisease.append(userid);
+                            stringBuilderDisease.append(",");
+
+                        }
+                        //截取最后,
+                        disease = stringBuilderDisease.substring(0, stringBuilderDisease.length() - 1);
+                    }
+
+                    if (filterInfo.getOtherList() != null && filterInfo.getOtherList().size() != 0) {
+                        StringBuilder stringBuilderOther = new StringBuilder();
+                        for (int i = 0; i < filterInfo.getOtherList().size(); i++) {
+                            String userid = filterInfo.getOtherList().get(i).getCheckID();
+                            stringBuilderOther.append(userid);
+                            stringBuilderOther.append(",");
+
+                        }
+                        //截取最后
+                        other = stringBuilderOther.substring(0, stringBuilderOther.length() - 1);
+                    }
+                    mPageIndex = 1;
+                    onPageLoad();
+                }
+
             }
         }
     }

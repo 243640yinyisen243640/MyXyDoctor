@@ -227,6 +227,7 @@ public class FragmentCommunityManagement extends BaseFragment {
                 break;
             case R.id.tv_community_filter:
                 intent = new Intent(getPageContext(), CommunityFilterActivity.class);
+                intent.putExtra("type","1");
                 startActivity(intent);
                 break;
             case R.id.tv_community_abnormal_data:

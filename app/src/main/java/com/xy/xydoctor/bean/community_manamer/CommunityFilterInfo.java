@@ -19,6 +19,26 @@ public class CommunityFilterInfo {
     private List<FilterSugarPressureInfo> diseaseTypeInfos;
     private List<FilterSugarPressureInfo> otherList;
 
+    private List<CommunityFilterChildInfo> lists;
+
+    private String totalCount;
+
+    public List<CommunityFilterChildInfo> getLists() {
+        return lists;
+    }
+
+    public void setLists(List<CommunityFilterChildInfo> lists) {
+        this.lists = lists;
+    }
+
+    public String getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(String totalCount) {
+        this.totalCount = totalCount;
+    }
+
     public List<FilterSugarPressureInfo> getDiseaseTypeInfos() {
         return diseaseTypeInfos;
     }

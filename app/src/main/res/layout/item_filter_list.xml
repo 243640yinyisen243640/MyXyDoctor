@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_bg_white_5"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,42 +21,23 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_filter_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/app_name"
                     android:textColor="@color/base_black"
                     android:textSize="17sp" />
 
-                <ImageView
-                    android:id="@+id/iv_filter_follow"
+                <com.lyd.baselib.widget.view.MyListView
+                    android:id="@+id/ml_filter_img"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:src="@drawable/community_impotant_follow" />
+                    android:layout_height="wrap_content" />
 
-                <ImageView
-                    android:id="@+id/iv_filter_party_member"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:src="@drawable/community_party_member" />
 
-                <ImageView
-                    android:id="@+id/iv_filter_handicapped"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:src="@drawable/community_handicapped" />
-
-                <ImageView
-                    android:id="@+id/iv_community_mental_illness"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:src="@drawable/community_mental_illness" />
 
             </LinearLayout>
 
@@ -113,7 +94,7 @@
                 app:flexWrap="wrap" />
 
             <TextView
-                android:id="@+id/t_filter_location"
+                android:id="@+id/tv_filter_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"

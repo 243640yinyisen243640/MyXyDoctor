@@ -101,11 +101,14 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
      */
     private String disease;
 
+    private String type;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText(R.string.base_filter);
+        type = getIntent().getStringExtra("type");
         containerView().addView(initView());
         initListener();
         initValues();
@@ -113,17 +116,17 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
 
     private void initValues() {
         diseaseList = new ArrayList<>();
-        FilterSugarPressureInfo typeInfo1 = new FilterSugarPressureInfo("糖尿病","1");
+        FilterSugarPressureInfo typeInfo1 = new FilterSugarPressureInfo("糖尿病", "1");
         diseaseList.add(typeInfo1);
-        FilterSugarPressureInfo typeInfo2 = new FilterSugarPressureInfo("高血压","2");
+        FilterSugarPressureInfo typeInfo2 = new FilterSugarPressureInfo("高血压", "2");
         diseaseList.add(typeInfo2);
-        FilterSugarPressureInfo typeInfo3 = new FilterSugarPressureInfo("超重/肥胖","3");
+        FilterSugarPressureInfo typeInfo3 = new FilterSugarPressureInfo("超重/肥胖", "3");
         diseaseList.add(typeInfo3);
-        FilterSugarPressureInfo typeInfo4 = new FilterSugarPressureInfo("冠心病","4");
+        FilterSugarPressureInfo typeInfo4 = new FilterSugarPressureInfo("冠心病", "4");
         diseaseList.add(typeInfo4);
-        FilterSugarPressureInfo typeInfo5 = new FilterSugarPressureInfo("脑卒中","5");
+        FilterSugarPressureInfo typeInfo5 = new FilterSugarPressureInfo("脑卒中", "5");
         diseaseList.add(typeInfo5);
-        FilterSugarPressureInfo typeInfo6 = new FilterSugarPressureInfo("脂肪肝","6");
+        FilterSugarPressureInfo typeInfo6 = new FilterSugarPressureInfo("脂肪肝", "6");
         diseaseList.add(typeInfo6);
 
         diseaseTypeAdapter = new FilterDiseaseTypeAdapter(getPageContext(), diseaseList, "1");
@@ -131,15 +134,15 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
 
 
         otherInfoList = new ArrayList<>();
-        FilterSugarPressureInfo otherInfoList1 = new FilterSugarPressureInfo("残疾人","1");
+        FilterSugarPressureInfo otherInfoList1 = new FilterSugarPressureInfo("残疾人", "1");
         otherInfoList.add(otherInfoList1);
-        FilterSugarPressureInfo otherInfoList2 = new FilterSugarPressureInfo("精神问题","2");
+        FilterSugarPressureInfo otherInfoList2 = new FilterSugarPressureInfo("精神问题", "2");
         otherInfoList.add(otherInfoList2);
-        FilterSugarPressureInfo otherInfoList3 = new FilterSugarPressureInfo("党员","3");
+        FilterSugarPressureInfo otherInfoList3 = new FilterSugarPressureInfo("党员", "3");
         otherInfoList.add(otherInfoList3);
-        FilterSugarPressureInfo otherInfoList4 = new FilterSugarPressureInfo("重点关注","4");
+        FilterSugarPressureInfo otherInfoList4 = new FilterSugarPressureInfo("重点关注", "4");
         otherInfoList.add(otherInfoList4);
-        FilterSugarPressureInfo otherInfoList5 = new FilterSugarPressureInfo("死亡","5");
+        FilterSugarPressureInfo otherInfoList5 = new FilterSugarPressureInfo("死亡", "5");
         otherInfoList.add(otherInfoList5);
         diseaseGridView.setOnItemClickListener((parent, view, position, id) -> {
             Log.i("yys", "diseaseGridView");
@@ -280,10 +283,17 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
                 }
 
                 info.setOtherList(otherList);
+                if ("1".equals(type)) {
+                    Intent intent = new Intent(getPageContext(), CommunityFilterHaveResultListActivity.class);
+                    intent.putExtra("info", new Gson().toJson(info));
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent();
+                    intent.putExtra("info", new Gson().toJson(info));
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
 
-                Intent intent = new Intent(getPageContext(), CommunityFilterHaveResultListActivity.class);
-                intent.putExtra("info", new Gson().toJson(info));
-                startActivity(intent);
                 break;
             default:
                 break;
