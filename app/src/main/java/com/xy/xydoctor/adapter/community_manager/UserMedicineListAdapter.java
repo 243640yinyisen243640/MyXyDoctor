@@ -40,35 +40,26 @@ public class UserMedicineListAdapter extends UIBaseRecycleViewAdapter<CommunityU
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
         CommunityUseMedicineInfo info = getList().get(position);
+        viewHolder.nameTextView.setText(info.getCom_name());
+        viewHolder.locationTextView.setText(info.getCom_address());
 
-
-
-        if (getListener() != null) {
-            viewHolder.phoneTextView.setOnClickListener(v -> {
-                getListener().adapterClickListener(position, v);
-            });
-
-        }
-
+        UserMedicineChildListAdapter adapter = new UserMedicineChildListAdapter(getContext(), R.layout.item_user_medicine_child_list, info.getPharmacys(), "", position, clickListener);
+        viewHolder.myListView.setAdapter(adapter);
     }
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
-        TextView sexTextView;
-        TextView ageTextView;
         TextView locationTextView;
-        TextView phoneTextView;
         MyListView myListView;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameTextView = itemView.findViewById(R.id.tv_user_medicine_name);
-            sexTextView = itemView.findViewById(R.id.tv_user_medicine_sex);
-            ageTextView = itemView.findViewById(R.id.tv_user_medicine_age);
-            locationTextView = itemView.findViewById(R.id.tv_user_medicine_location);
-            phoneTextView = itemView.findViewById(R.id.tv_user_medicine_phone);
+            nameTextView = itemView.findViewById(R.id.tv_um_name);
+            locationTextView = itemView.findViewById(R.id.tv_um_location);
             myListView = itemView.findViewById(R.id.lv_user_medicine_child);
+
         }
     }
 

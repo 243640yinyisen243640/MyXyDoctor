@@ -33,7 +33,6 @@ import retrofit2.Call;
  */
 public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
 
-    private TextView nameAndLocationTextView;
     private UserMedicineListAdapter mAdapter;
     private SmartRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -58,7 +57,6 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
 
     private View initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_user_medicine, null);
-        nameAndLocationTextView = view.findViewById(R.id.tv_um_name_and_location);
         mRefreshLayout = getViewByID(view, R.id.refreshLayout_data_remind);
         mRecyclerView = getViewByID(view, R.id.rv_live_data_remind);
         presentNestedSrcollView = getViewByID(view, R.id.nsv_present_nodate_remind);
@@ -178,7 +176,7 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
                 }, (call, t) -> {
                     handleRequestFailure();
                 });
-        addRequestCallToMap("goodsList", requestCall);
+
     }
 
     private void handleRequestFailure() {
