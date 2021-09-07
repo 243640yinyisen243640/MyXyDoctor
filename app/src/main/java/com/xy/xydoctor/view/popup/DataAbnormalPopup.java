@@ -51,7 +51,7 @@ public class DataAbnormalPopup extends BasePopupWindow {
         endTextView = findViewById(R.id.tv_data_abnormal_end_time);
         TextView resetTextView = findViewById(R.id.tv_data_abnormal_filter_reset);
         TextView submitTextView = findViewById(R.id.tv_data_abnormal_filter_submit);
-        allLiner = findViewById(R.id.ll_show_pop_all);
+//        allLiner = findViewById(R.id.ll_show_pop_all);
 
 
         List<FilterSugarPressureInfo> abnormalInfos = new ArrayList<>();
@@ -163,7 +163,7 @@ public class DataAbnormalPopup extends BasePopupWindow {
                 .setSubmitColor(ContextCompat.getColor(context, R.color.main_red))
                 .setCancelColor(ContextCompat.getColor(context, R.color.black_text))
                 //                .isDialog(true)
-                .setDecorView(allLiner)
+//                .setDecorView(allLiner)
                 .build();
         //        //设置dialog弹出位置
         //        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM);

@@ -94,24 +94,38 @@
                 android:visibility="visible">
 
                 <TextView
-                    android:id="@+id/tv_data_abnormal_child_time_and_amonut"
+                    android:id="@+id/tv_data_abnormal_child_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/app_name"
+                    android:textColor="@color/base_text_gray"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_data_abnormal_child_amonut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="@string/app_name"
+                    android:textStyle="bold"
                     android:textColor="@color/community_content_black"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/tv_data_abnormal_child_high_or_low"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:drawableRight="@drawable/base_arrow_right"
                     android:drawablePadding="5dp"
                     android:text="@string/app_name"
                     android:textColor="@color/data_gray_light"
                     android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/base_arrow_right"
+                    android:drawablePadding="5dp"/>
 
 
             </LinearLayout>

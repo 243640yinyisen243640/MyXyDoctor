@@ -1,11 +1,13 @@
 package com.xy.xydoctor.bean.community_manamer;
 
+import java.io.Serializable;
+
 /**
  * Author: LYD
  * Date: 2021/9/2 15:23
  * Description:
  */
-public class SugarOrPressureInfo {
+public class SugarOrPressureInfo implements Serializable {
 
 
     /**

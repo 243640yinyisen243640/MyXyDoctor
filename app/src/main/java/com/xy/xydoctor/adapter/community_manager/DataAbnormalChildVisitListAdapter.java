@@ -1,18 +1,10 @@
 package com.xy.xydoctor.adapter.community_manager;
 
 import android.content.Context;
-import android.graphics.Typeface;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.core.content.ContextCompat;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.bean.community_manamer.DataAbnormalChildInfo;
@@ -59,36 +51,23 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
         }
 
 
-        SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
-
         if (item.getList() != null && item.getList().size() >= 1) {
             clickLinearLayout.setVisibility(View.VISIBLE);
-            stringBuilder.append(item.getList().get(position).getDatetime());
+            viewHolder.setText(R.id.tv_data_abnormal_child_time, item.getList().get(position).getDatetime());
 
-            int start = stringBuilder.length();
-
-            Log.i("yys", "type==" + type);
             if ("1".equals(type)) {
-                stringBuilder.append("   " + item.getList().get(position).getDiastole()).append("/").append(item.getList().get(position).getSystolic()).append("");
-                int end = stringBuilder.length();
-                stringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context, R.color.community_content_black)), 0, start, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-                stringBuilder.setSpan(new StyleSpan(Typeface.NORMAL), 0, start, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                viewHolder.setText(R.id.tv_data_abnormal_child_amonut, item.getList().get(position).getDiastole() + "/" + item.getList().get(position).getSystolic());
                 //1偏高2低3正常
-
                 if ("1".equals(item.getList().get(position).getIshight())) {
-                    lightTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_hign, 0, 0, 0);
+                    lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_hign, 0);
                 } else if ("2".equals(item.getList().get(position).getIshight())) {
-                    lightTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_low, 0, 0, 0);
+                    lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_low, 0);
                 } else {
-                    lightTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_normal, 0, 0, 0);
+                    lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0,R.drawable.sugar_or_pressure_normal, 0);
                 }
                 lightTextView.setText("mmHg");
-
             } else {
-                stringBuilder.append("   " + item.getList().get(position).getGlucosevalue()).append("mmol/L");
-                stringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context, R.color.data_gray_light)), 0, start, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-                stringBuilder.setSpan(new StyleSpan(Typeface.NORMAL), 0, start, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-                //1偏高2低3正常
+                viewHolder.setText(R.id.tv_data_abnormal_child_amonut,item.getList().get(position).getGlucosevalue()+"    mmol/L");
                 if ("1".equals(item.getList().get(position).getIshight())) {
                     lightTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_hign, 0, 0, 0);
                 } else if ("2".equals(item.getList().get(position).getIshight())) {
@@ -98,8 +77,9 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
                 }
                 lightTextView.setText(item.getList().get(position).getCategoryname());
             }
-            lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.base_arrow_right, 0);
-            viewHolder.setText(R.id.tv_data_abnormal_child_time_and_amonut, stringBuilder.toString());
+
+            Log.i("yys","getIshight=="+item.getList().get(position).getIshight());
+
         } else {
             clickLinearLayout.setVisibility(View.GONE);
         }

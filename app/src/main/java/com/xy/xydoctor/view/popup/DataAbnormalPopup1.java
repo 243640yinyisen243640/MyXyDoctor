@@ -7,7 +7,9 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -93,7 +95,7 @@ public class DataAbnormalPopup1 extends PopupWindow {
         // 设置SelectPicPopupWindow弹出窗体的宽
         this.setWidth(FrameLayout.LayoutParams.MATCH_PARENT);
         // 设置SelectPicPopupWindow弹出窗体的高
-        //        this.setHeight(XyScreenUtils.dip2px(context, 250));
+//                this.setHeight(XyScreenUtils.dip2px(context, 350));
         this.setHeight(FrameLayout.LayoutParams.WRAP_CONTENT);
 
 
@@ -344,17 +346,17 @@ public class DataAbnormalPopup1 extends PopupWindow {
                 .setType(new boolean[]{true, true, true, false, false, false})
                 .setSubmitColor(ContextCompat.getColor(context, R.color.main_red))
                 .setCancelColor(ContextCompat.getColor(context, R.color.black_text))
-                //                .isDialog(true)
-                .setDecorView(allLiner)
+                                .isDialog(true)
+//                .setDecorView(allLiner)
                 .build();
-        //        //设置dialog弹出位置
-        //        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM);
-        //        params.leftMargin = 0;
-        //        params.rightMargin = 0;
-        //        ViewGroup contentContainer = timePickerView.getDialogContainerLayout();
-        //        contentContainer.setLayoutParams(params);
-        //        timePickerView.getDialog().getWindow().setGravity(Gravity.BOTTOM);//可以改成Bottom
-        //        timePickerView.getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                //设置dialog弹出位置
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM);
+                params.leftMargin = 0;
+                params.rightMargin = 0;
+                ViewGroup contentContainer = timePickerView.getDialogContainerLayout();
+                contentContainer.setLayoutParams(params);
+                timePickerView.getDialog().getWindow().setGravity(Gravity.BOTTOM);//可以改成Bottom
+                timePickerView.getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         timePickerView.show();
 
     }
