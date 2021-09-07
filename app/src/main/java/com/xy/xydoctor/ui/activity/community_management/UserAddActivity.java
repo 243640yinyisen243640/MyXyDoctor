@@ -16,7 +16,6 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.FilterDiseaseTypeAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
-import com.xy.xydoctor.bean.community_manamer.DiseaseTypeInfo;
 import com.xy.xydoctor.bean.community_manamer.FilterSugarPressureInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.customerView.NoConflictGridView;
@@ -143,43 +142,43 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
 
     private void initValues() {
         typeInfoList = new ArrayList<>();
-        FilterSugarPressureInfo typeInfo1 = new FilterSugarPressureInfo("糖尿病","1");
+        FilterSugarPressureInfo typeInfo1 = new FilterSugarPressureInfo("糖尿病", "1");
         typeInfoList.add(typeInfo1);
-        FilterSugarPressureInfo typeInfo2 = new FilterSugarPressureInfo("高血压");
+        FilterSugarPressureInfo typeInfo2 = new FilterSugarPressureInfo("高血压", "2");
         typeInfoList.add(typeInfo2);
-        FilterSugarPressureInfo typeInfo3 = new FilterSugarPressureInfo("超重/肥胖");
+        FilterSugarPressureInfo typeInfo3 = new FilterSugarPressureInfo("超重/肥胖", "3");
         typeInfoList.add(typeInfo3);
-        FilterSugarPressureInfo typeInfo4 = new FilterSugarPressureInfo("脑卒中");
+        FilterSugarPressureInfo typeInfo4 = new FilterSugarPressureInfo("脑卒中", "4");
         typeInfoList.add(typeInfo4);
-        FilterSugarPressureInfo typeInfo5 = new FilterSugarPressureInfo("脂肪肝");
+        FilterSugarPressureInfo typeInfo5 = new FilterSugarPressureInfo("脂肪肝", "5");
         typeInfoList.add(typeInfo5);
-        FilterSugarPressureInfo typeInfo6 = new FilterSugarPressureInfo("冠心病");
+        FilterSugarPressureInfo typeInfo6 = new FilterSugarPressureInfo("冠心病", "6");
         typeInfoList.add(typeInfo6);
 
         diseaseTypeAdapter = new FilterDiseaseTypeAdapter(getPageContext(), typeInfoList, "2");
         diseaseGridView.setAdapter(diseaseTypeAdapter);
 
 
-        List<DiseaseTypeInfo> otherInfoList = new ArrayList<>();
-        DiseaseTypeInfo otherInfoList3 = new DiseaseTypeInfo("党员");
+        List<FilterSugarPressureInfo> otherInfoList = new ArrayList<>();
+        FilterSugarPressureInfo otherInfoList3 = new FilterSugarPressureInfo("党员", "1");
         otherInfoList.add(otherInfoList3);
-        DiseaseTypeInfo otherInfoList1 = new DiseaseTypeInfo("残疾人");
+        FilterSugarPressureInfo otherInfoList1 = new FilterSugarPressureInfo("残疾人", "2");
         otherInfoList.add(otherInfoList1);
-        DiseaseTypeInfo otherInfoList2 = new DiseaseTypeInfo("精神疾病");
+        FilterSugarPressureInfo otherInfoList2 = new FilterSugarPressureInfo("精神疾病", "3");
         otherInfoList.add(otherInfoList2);
 
-        DiseaseTypeInfo otherInfoList4 = new DiseaseTypeInfo("重点关注");
+        FilterSugarPressureInfo otherInfoList4 = new FilterSugarPressureInfo("重点关注", "4");
         otherInfoList.add(otherInfoList4);
 
         diseaseGridView.setOnItemClickListener((parent, view, position, id) -> {
-            List<DiseaseTypeInfo> sugarList = new ArrayList<>();
-            DiseaseTypeInfo sugar1 = new DiseaseTypeInfo("一型");
+            List<FilterSugarPressureInfo> sugarList = new ArrayList<>();
+            FilterSugarPressureInfo sugar1 = new FilterSugarPressureInfo("一型", "1");
             sugarList.add(sugar1);
-            DiseaseTypeInfo sugar2 = new DiseaseTypeInfo("二型");
+            FilterSugarPressureInfo sugar2 = new FilterSugarPressureInfo("二型", "2");
             sugarList.add(sugar2);
-            DiseaseTypeInfo sugar3 = new DiseaseTypeInfo("妊娠");
+            FilterSugarPressureInfo sugar3 = new FilterSugarPressureInfo("妊娠", "3");
             sugarList.add(sugar3);
-            DiseaseTypeInfo sugar4 = new DiseaseTypeInfo("其他");
+            FilterSugarPressureInfo sugar4 = new FilterSugarPressureInfo("其他", "4");
             sugarList.add(sugar4);
             showSugarOrPressureType(sugarList, typeInfoList.get(position).getDiseaseName(), position);
 
@@ -227,7 +226,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
     /**
      * 选择糖尿病或者高血压的类型
      */
-    private void showSugarOrPressureType(List<DiseaseTypeInfo> diseaseTypeInfos, String diseaseName, int position) {
+    private void showSugarOrPressureType(List<FilterSugarPressureInfo> diseaseTypeInfos, String diseaseName, int position) {
         OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
             String s = diseaseTypeInfos.get(options1).getDiseaseName();
             typeInfoList.get(position).setDiseaseName(s);

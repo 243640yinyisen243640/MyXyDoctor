@@ -115,7 +115,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
 
             StringBuilder stringBuilderDisease = new StringBuilder();
             for (int i = 0; i < filterInfo.getDiseaseTypeInfos().size(); i++) {
-                int userid = filterInfo.getDiseaseTypeInfos().get(i).getCheckID();
+                String userid = filterInfo.getDiseaseTypeInfos().get(i).getCheckID();
                 stringBuilderDisease.append(userid);
                 stringBuilderDisease.append(",");
 
@@ -127,7 +127,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
         if (filterInfo.getOtherList() != null && filterInfo.getOtherList().size() != 0) {
             StringBuilder stringBuilderOther = new StringBuilder();
             for (int i = 0; i < filterInfo.getOtherList().size(); i++) {
-                int userid = filterInfo.getOtherList().get(i).getCheckID();
+                String userid = filterInfo.getOtherList().get(i).getCheckID();
                 stringBuilderOther.append(userid);
                 stringBuilderOther.append(",");
 
