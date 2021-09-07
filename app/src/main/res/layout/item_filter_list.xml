@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <FrameLayout
+        android:id="@+id/fl_filter_have"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_white_5"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_filter_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/base_black"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:id="@+id/iv_filter_follow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/community_impotant_follow" />
+
+                <ImageView
+                    android:id="@+id/iv_filter_party_member"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/community_party_member" />
+
+                <ImageView
+                    android:id="@+id/iv_filter_handicapped"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/community_handicapped" />
+
+                <ImageView
+                    android:id="@+id/iv_community_mental_illness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/community_mental_illness" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_filter_sex"
+                    style="@style/follow_up_search_infomation"
+                    android:text="@string/app_name" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/gray_light" />
+
+                <TextView
+                    android:id="@+id/tv_filter_age"
+                    style="@style/follow_up_search_infomation"
+                    android:text="@string/app_name" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/gray_light" />
+
+                <TextView
+                    android:id="@+id/tv_filter_tel"
+                    style="@style/follow_up_search_infomation"
+                    android:text="@string/app_name" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/gray_light" />
+            </LinearLayout>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/flex_fsiui_desease_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:alignContent="stretch"
+                app:alignItems="stretch"
+                app:flexWrap="wrap" />
+
+            <TextView
+                android:id="@+id/t_filter_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textColor="@color/base_text_gray"
+                android:textSize="13sp" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_filter_have_dead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"
+            android:src="@drawable/user_info_have_dead" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_filter_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_white_5"
+        android:drawableLeft="@drawable/community_location"
+        android:drawableRight="@drawable/community_filter_add"
+        android:drawablePadding="5dp"
+        android:padding="15dp"
+        android:text="@string/app_name"
+        android:textColor="@color/community_content_black"
+        android:textSize="14sp" />
+
+
+</LinearLayout>

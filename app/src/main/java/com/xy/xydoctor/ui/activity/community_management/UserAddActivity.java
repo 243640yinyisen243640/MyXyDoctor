@@ -17,6 +17,7 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.FilterDiseaseTypeAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.bean.community_manamer.DiseaseTypeInfo;
+import com.xy.xydoctor.bean.community_manamer.FilterSugarPressureInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.customerView.NoConflictGridView;
 import com.xy.xydoctor.utils.DataUtils;
@@ -95,7 +96,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
 
     private String sex;
 
-    private List<DiseaseTypeInfo> typeInfoList;
+    private List<FilterSugarPressureInfo> typeInfoList;
 
     private FilterDiseaseTypeAdapter diseaseTypeAdapter;
 
@@ -142,17 +143,17 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
 
     private void initValues() {
         typeInfoList = new ArrayList<>();
-        DiseaseTypeInfo typeInfo1 = new DiseaseTypeInfo("糖尿病");
+        FilterSugarPressureInfo typeInfo1 = new FilterSugarPressureInfo("糖尿病","1");
         typeInfoList.add(typeInfo1);
-        DiseaseTypeInfo typeInfo2 = new DiseaseTypeInfo("高血压");
+        FilterSugarPressureInfo typeInfo2 = new FilterSugarPressureInfo("高血压");
         typeInfoList.add(typeInfo2);
-        DiseaseTypeInfo typeInfo3 = new DiseaseTypeInfo("超重/肥胖");
+        FilterSugarPressureInfo typeInfo3 = new FilterSugarPressureInfo("超重/肥胖");
         typeInfoList.add(typeInfo3);
-        DiseaseTypeInfo typeInfo4 = new DiseaseTypeInfo("脑卒中");
+        FilterSugarPressureInfo typeInfo4 = new FilterSugarPressureInfo("脑卒中");
         typeInfoList.add(typeInfo4);
-        DiseaseTypeInfo typeInfo5 = new DiseaseTypeInfo("脂肪肝");
+        FilterSugarPressureInfo typeInfo5 = new FilterSugarPressureInfo("脂肪肝");
         typeInfoList.add(typeInfo5);
-        DiseaseTypeInfo typeInfo6 = new DiseaseTypeInfo("冠心病");
+        FilterSugarPressureInfo typeInfo6 = new FilterSugarPressureInfo("冠心病");
         typeInfoList.add(typeInfo6);
 
         diseaseTypeAdapter = new FilterDiseaseTypeAdapter(getPageContext(), typeInfoList, "2");

@@ -6,6 +6,7 @@ import com.lyd.librongim.myrongim.GroupUserBeanPatient;
 import com.xy.xydoctor.base.retrofit.BaseNetworkUtils;
 import com.xy.xydoctor.base.retrofit.HHSoftBaseResponse;
 import com.xy.xydoctor.bean.UpdateBean;
+import com.xy.xydoctor.bean.community_manamer.CommunityFilterInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityManagerInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityUseMedicineInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityUseMedicineUserInfo;
@@ -290,7 +291,7 @@ public class DataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> loadMedicineData(String id, String userid, String drugname, String number,String times,
+    public static Call<String> loadMedicineData(String id, String userid, String drugname, String number, String times,
                                                 String timeType, String dosage, String type,
                                                 String starttime,
                                                 BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
@@ -306,5 +307,54 @@ public class DataManager {
         map.put("starttime", starttime);
         map.put("access_token", SPStaticUtils.getString("token"));
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, CommunityUseMedicineUserInfo.class, "/doctor/Pharmacy/addCommunityMedicine", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 获取小区列表
+     *
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getCommunityList(BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, CommunityUseMedicineInfo.class, "/doctor/community/communityBaseList", map, successCallBack, failureCallBack);
+    }
+
+
+    /**
+     * @param isempty         是否空房间  0：空房间  1：不是空房间
+     * @param com_id          小区id，全部小区传0
+     * @param sex             性别 1：男 2：女
+     * @param age_min         年龄最小值
+     * @param age_max         年龄最大值
+     * @param other           其他信息(英文逗号分隔)1：残疾，  2：精神问题 3：党员 4：重点关注 5：死亡
+     * @param disease         疾病类型(英文逗号分隔)
+     *                        1：糖尿病
+     *                        2：高血压
+     *                        3：超重/肥胖
+     *                        4：冠心病
+     *                        5：脑卒中
+     *                        6：脂肪肝
+     * @param page
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+
+    public static Call<String> getFilterList(String isempty, String com_id, String sex, String age_min,
+                                             String age_max, String other, String disease, String page, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("isempty", isempty);
+        map.put("com_id", com_id);
+        map.put("sex", sex);
+        map.put("age_min", age_min);
+        map.put("age_max", age_max);
+        map.put("other", other);
+        map.put("disease", disease);
+        map.put("page", page);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, CommunityFilterInfo.class, "/doctor/Community/search", map, successCallBack, failureCallBack);
     }
 }

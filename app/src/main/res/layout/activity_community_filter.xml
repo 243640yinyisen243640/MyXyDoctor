@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:paddingBottom="20dp"
         android:orientation="vertical">
 
         <TextView
@@ -53,7 +54,6 @@
             <CheckBox
                 android:id="@+id/tv_filter_female"
                 style="@style/community_filter_content_choose"
-                android:checked="true"
                 android:text="@string/base_male" />
 
             <CheckBox

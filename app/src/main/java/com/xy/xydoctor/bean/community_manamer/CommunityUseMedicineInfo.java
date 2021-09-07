@@ -18,6 +18,16 @@ public class CommunityUseMedicineInfo {
      */
     private String com_address;
 
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private List<CommunityUseMedicineUserInfo> pharmacys;
 
 

@@ -71,8 +71,10 @@ public class CommunityMedicineAddActivity extends XYSoftUIBaseActivity implement
         containerView().addView(initView());
         if ("2".equals(type)) {
             pharmacy_id = getIntent().getStringExtra("pharmacy_id");
+            nameEditText.setEnabled(false);
             getDataInfo();
         } else {
+            nameEditText.setEnabled(true);
             userid = getIntent().getStringExtra("userid");
             startTime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
             chooseTimeTextView.setText(startTime);
@@ -141,6 +143,8 @@ public class CommunityMedicineAddActivity extends XYSoftUIBaseActivity implement
     private void bindData(CommunityUseMedicineUserInfo info) {
         nameEditText.setText(info.getDrugname());
         allAmountEditText.setText(info.getNumber());
+        typeCheckId = info.getType();
+        timeTypeId = info.getTimeType();
         if ("1".equals(info.getType())) {
             chooseAmountTextView.setText("mg");
             doseTextView.setText("mg/次");

@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.adapter.XYSoftBaseAdapter;
-import com.xy.xydoctor.bean.community_manamer.DiseaseTypeInfo;
+import com.xy.xydoctor.bean.community_manamer.FilterSugarPressureInfo;
 
 import java.util.List;
 
@@ -18,14 +18,14 @@ import java.util.List;
  * Date: 2021/8/12 14:49
  * Description: 疾病类型
  */
-public class FilterDiseaseTypeAdapter extends XYSoftBaseAdapter<DiseaseTypeInfo> {
+public class FilterDiseaseTypeAdapter extends XYSoftBaseAdapter<FilterSugarPressureInfo> {
     private int pos = 0;
     /**
      * 1:是筛选  2：添加用户
      */
     private String type;
 
-    public FilterDiseaseTypeAdapter(Context context, List<DiseaseTypeInfo> list, String type) {
+    public FilterDiseaseTypeAdapter(Context context, List<FilterSugarPressureInfo> list, String type) {
         super(context, list);
         this.type = type;
     }
@@ -41,7 +41,7 @@ public class FilterDiseaseTypeAdapter extends XYSoftBaseAdapter<DiseaseTypeInfo>
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        DiseaseTypeInfo typeInfo = getList().get(position);
+        FilterSugarPressureInfo typeInfo = getList().get(position);
         holder.checkTextView.setText(typeInfo.getDiseaseName());
         if ("1".equals(type)) {
             if (typeInfo.isCheck()) {
