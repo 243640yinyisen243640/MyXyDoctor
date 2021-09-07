@@ -101,6 +101,9 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        topViewManager().titleTextView().setText("筛选列表");
+        topViewManager().moreTextView().setText(R.string.base_filter);
+
         initView();
         initValue();
         initLinstener();
