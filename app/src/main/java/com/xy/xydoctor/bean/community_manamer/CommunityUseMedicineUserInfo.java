@@ -28,12 +28,10 @@ public class CommunityUseMedicineUserInfo {
      */
     private String drugname;
     /**
-     *
      * 总含量
      */
     private String number;
     /**
-     *
      * 用药剂量
      */
     private String dosage;
@@ -72,6 +70,18 @@ public class CommunityUseMedicineUserInfo {
     private String unit_type;
 
     private String times;
+    /**
+     * 药品单位类型 1mg 2g 3iu 4ml 5ug
+     */
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getTimes() {
         return times;

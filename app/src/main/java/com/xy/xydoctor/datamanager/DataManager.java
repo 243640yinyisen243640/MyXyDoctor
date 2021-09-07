@@ -8,6 +8,7 @@ import com.xy.xydoctor.base.retrofit.HHSoftBaseResponse;
 import com.xy.xydoctor.bean.UpdateBean;
 import com.xy.xydoctor.bean.community_manamer.CommunityManagerInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityUseMedicineInfo;
+import com.xy.xydoctor.bean.community_manamer.CommunityUseMedicineUserInfo;
 import com.xy.xydoctor.bean.community_manamer.DataAbnormalInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
 import com.xy.xydoctor.constant.ConstantParam;
@@ -233,6 +234,7 @@ public class DataManager {
 
     /**
      * 完成代办
+     *
      * @param pharmacy_id     用药id
      * @param successCallBack
      * @param failureCallBack
@@ -246,8 +248,7 @@ public class DataManager {
     }
 
     /**
-     *
-     * @param pharmacy_id  用药id
+     * @param pharmacy_id     用药id
      * @param successCallBack
      * @param failureCallBack
      * @return
@@ -260,4 +261,50 @@ public class DataManager {
     }
 
 
+    /**
+     * 获取用药详情
+     *
+     * @param pharmacy_id
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getUseMedicineInfo(String pharmacy_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", pharmacy_id);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, CommunityUseMedicineUserInfo.class, "/doctor/Pharmacy/communityMedicine", map, successCallBack, failureCallBack);
+    }
+
+
+    /**
+     * @param id              记录id 修改时传
+     * @param userid          用户id 添加时传
+     * @param drugname        药品名
+     * @param number          总量
+     * @param timeType        次数类型 1日 2周 3月
+     * @param dosage          用药剂量
+     * @param type            药品单位类型 1mg 2g 3iu 4ml 5ug
+     * @param starttime       开始用药时间 2021-01-01
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> loadMedicineData(String id, String userid, String drugname, String number,String times,
+                                                String timeType, String dosage, String type,
+                                                String starttime,
+                                                BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", id);
+        map.put("userid", userid);
+        map.put("drugname", drugname);
+        map.put("number", number);
+        map.put("times", times);
+        map.put("timeType", timeType);
+        map.put("dosage", dosage);
+        map.put("type", type);
+        map.put("starttime", starttime);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, CommunityUseMedicineUserInfo.class, "/doctor/Pharmacy/addCommunityMedicine", map, successCallBack, failureCallBack);
+    }
 }

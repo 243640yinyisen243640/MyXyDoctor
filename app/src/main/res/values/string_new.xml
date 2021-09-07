@@ -137,6 +137,7 @@
     <string name="add_medicine_smoke_times">服用次数</string>
     <string name="add_medicine_all_amount">药品总量</string>
     <string name="add_medicine_dose">用药剂量</string>
+    <string name="add_medicine_start_time">开始服用时间</string>
     <string name="please_add_medicine_name">请输入药品名称</string>
     <string name="please_add_medicine_all_amount">请输入药品总量</string>
     <string name="please_add_medicine_smoke_times">请输入服用次数</string>

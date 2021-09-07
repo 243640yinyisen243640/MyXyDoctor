@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
     android:background="@color/base_background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:background="@drawable/shape_bg_white_5"
         android:orientation="vertical"
         android:padding="10dp">
@@ -142,6 +142,7 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/tv_add_medicine_dose"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -152,9 +153,15 @@
 
         </LinearLayout>
 
+        <View
+            style="@style/line"
+            android:layout_marginTop="12dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_white_5"
+            android:layout_marginTop="10dp"
             android:gravity="center">
 
             <TextView
@@ -162,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:text="@string/add_medicine_name"
+                android:text="@string/add_medicine_start_time"
                 android:textColor="@color/base_black"
                 android:textSize="15sp" />
 

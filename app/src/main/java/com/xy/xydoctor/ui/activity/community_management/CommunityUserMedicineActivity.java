@@ -45,6 +45,8 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
     private NestedScrollView presentNestedSrcollView;
     private TextView stateTextView;
 
+    private static final int REQUEST_CODE_FOR_REFRESH = 10;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -241,6 +243,10 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
                     break;
                 case R.id.tv_use_medicine_child_edit:
 
+                    Intent intent1 = new Intent(getPageContext(), CommunityMedicineAddActivity.class);
+                    intent1.putExtra("pharmacy_id", mList.get(position).getPharmacys().get(index).getId());
+                    intent1.putExtra("type", "2");
+                    startActivityForResult(intent1, REQUEST_CODE_FOR_REFRESH);
                     break;
                 case R.id.tv_use_medicine_child_finish:
                     finishWaiting(position, index);
@@ -253,6 +259,21 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
                 default:
                     break;
 
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_CODE_FOR_REFRESH:
+                    mPageIndex = 1;
+                    onPageLoad();
+                    break;
+                default:
+                    break;
             }
         }
     }
