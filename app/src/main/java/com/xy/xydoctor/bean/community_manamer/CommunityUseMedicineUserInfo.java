@@ -71,6 +71,16 @@ public class CommunityUseMedicineUserInfo {
      */
     private String unit_type;
 
+    private String times;
+
+    public String getTimes() {
+        return times;
+    }
+
+    public void setTimes(String times) {
+        this.times = times;
+    }
+
     public String getUnit_type() {
         return unit_type;
     }

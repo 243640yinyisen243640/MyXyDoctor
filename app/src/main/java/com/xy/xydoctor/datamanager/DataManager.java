@@ -231,4 +231,33 @@ public class DataManager {
     }
 
 
+    /**
+     * 完成代办
+     * @param pharmacy_id     用药id
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> finishWaiting(String pharmacy_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("pharmacy_id", pharmacy_id);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/doctor/Pharmacy/finishPharmacy", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     *
+     * @param pharmacy_id  用药id
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> remindUser(String pharmacy_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("pharmacy_id", pharmacy_id);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/doctor/Pharmacy/sendMsg", map, successCallBack, failureCallBack);
+    }
+
+
 }

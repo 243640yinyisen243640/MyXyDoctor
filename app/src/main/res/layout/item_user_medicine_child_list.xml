@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +16,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="10dp">
 
             <TextView
                 android:id="@+id/tv_user_child_medicine_name"
@@ -90,6 +92,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:paddingLeft="10dp"
             android:textColor="@color/base_black"
             android:textSize="15sp" />
 
@@ -113,9 +116,13 @@
         android:id="@+id/tv_use_medicine_child_times_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="@string/app_name"
         android:textColor="@color/data_gray_light"
         android:textSize="13sp" />
+
     <View
         style="@style/line"
         android:layout_marginTop="10dp"
@@ -168,6 +175,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="@string/app_name"
         android:textColor="@color/data_gray_light"
         android:textSize="13sp" />
@@ -181,6 +190,8 @@
         android:id="@+id/tv_use_medicine_child_end_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="@string/app_name"
         android:textColor="@color/data_gray_light"
         android:textSize="13sp" />
@@ -189,7 +200,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:gravity="right">
+        android:gravity="right"
+        android:paddingLeft="5dp"
+        android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/tv_use_medicine_child_edit"
@@ -200,13 +213,13 @@
             android:id="@+id/tv_use_medicine_child_finish"
             style="@style/user_medicine_tip"
             android:layout_marginLeft="10dp"
-            android:text="@string/user_medicine_edit_seheme" />
+            android:text="@string/user_medicine_finish_follow" />
 
         <TextView
             android:id="@+id/tv_use_medicine_child_remind_user"
             style="@style/user_medicine_tip"
             android:layout_marginLeft="10dp"
-            android:text="@string/user_medicine_edit_seheme" />
+            android:text="@string/user_medicine_remind_user" />
 
     </LinearLayout>
 

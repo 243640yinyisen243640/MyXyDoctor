@@ -1,5 +1,7 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -117,7 +119,7 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
             return;
         }
         mIsLoading = true;
-        Call<String> requestCall = DataManager.useMedicineRemind("0", mPageIndex+"",
+        Call<String> requestCall = DataManager.useMedicineRemind("0", mPageIndex + "",
                 (call, response) -> {
                     mIsLoading = false;
                     if (1 != mPageIndex) {
@@ -231,12 +233,64 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
         @Override
         public void adapterClickListener(int position, int index, View view) {
             switch (view.getId()) {
+                case R.id.tv_user_child_medicine_phone:
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    Uri data = Uri.parse("tel:" + mList.get(position).getPharmacys().get(index).getTel());
+                    intent.setData(data);
+                    startActivity(intent);
+                    break;
+                case R.id.tv_use_medicine_child_edit:
+
+                    break;
+                case R.id.tv_use_medicine_child_finish:
+                    finishWaiting(position, index);
+                    break;
+                case R.id.tv_use_medicine_child_remind_user:
+                    remindUser(position, index);
+                    break;
+
 
                 default:
                     break;
 
             }
         }
+    }
+
+    /**
+     * 完成代办
+     *
+     * @param position
+     * @param index
+     */
+    private void finishWaiting(int position, int index) {
+        Call<String> requestCall = DataManager.finishWaiting(mList.get(position).getPharmacys().get(index).getId(), (call, response) -> {
+            if (response.code == 200) {
+                mPageIndex = 1;
+                onPageLoad();
+            }
+        }, (Call, t) -> {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        });
+    }
+
+    /**
+     * 提醒用户
+     *
+     * @param position
+     * @param index
+     */
+    private void remindUser(int position, int index) {
+        Call<String> requestCall = DataManager.remindUser(mList.get(position).getPharmacys().get(index).getId(), (call, response) -> {
+            if (response.code == 200) {
+                //                mPageIndex = 1;
+                //                onPageLoad();
+                //                mAdapter.returnAdapter().notifyDataSetChanged();
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (Call, t) -> {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        });
     }
 
 }
