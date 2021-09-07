@@ -103,6 +103,8 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
 
         topViewManager().titleTextView().setText("筛选列表");
         topViewManager().moreTextView().setText(R.string.base_filter);
+        topViewManager().moreTextView().setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.filter, 0);
+        topViewManager().moreTextView().setCompoundDrawablePadding(10);
 
         initView();
         initValue();
