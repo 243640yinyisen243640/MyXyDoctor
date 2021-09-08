@@ -133,7 +133,7 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
 
     private void bindData(CommunityUserInfo userInfo) {
 
-        LoadImgUtils.loadRoundImage(getPageContext(), R.drawable.default_img_head, userInfo.getPicture(), headImageView);
+        LoadImgUtils.loadCircleImage(getPageContext(), R.drawable.default_img_head, userInfo.getPicture(), headImageView);
         nameTextView.setText(userInfo.getNickname());
         sexAndAgeTextView.setText(userInfo.getAge() + "岁");
         if ("1".equals(userInfo.getSex())) {
@@ -141,9 +141,34 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         } else {
             sexAndAgeTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.base_community_female, 0, 0, 0);
         }
+        if ("1".equals(userInfo.getDiabeteslei())) {
+            diseaseFirstTextView.setText(R.string.community_user_info_sugar_one);
+        } else if ("2".equals(userInfo.getDiabeteslei())) {
+            diseaseFirstTextView.setText(R.string.community_user_info_sugar_two);
+        } else if ("3".equals(userInfo.getDiabeteslei())) {
+            diseaseFirstTextView.setText(R.string.community_user_info_sugar_three);
+        } else if ("4".equals(userInfo.getDiabeteslei())) {
+            diseaseFirstTextView.setText(R.string.community_user_info_sugar_four);
+        } else {
+            diseaseFirstTextView.setText(R.string.community_user_info_sugar_no);
+        }
+        if ("1".equals(userInfo.getBloodLevel())) {
+            diseaseSecondTextView.setText(R.string.community_user_info_pressure_one);
+        } else {
+            diseaseSecondTextView.setText(R.string.community_user_info_pressure_two);
+        }
 
-        diseaseFirstTextView.setText(userInfo.getDiabeteslei());
-        diseaseSecondTextView.setText(userInfo.getBloodLevel());
+        sugarTextTextView.setText(userInfo.getSugarNum());
+        sugarFollowView.setText(userInfo.getSugarFlg());
+        pressureTextTextView.setText(userInfo.getBloodNum());
+        pressureFollowTextView.setText(userInfo.getBloodFlg());
+
+        if ("1".equals(userInfo.getIsdeath())){
+            deadImageView.setVisibility(View.VISIBLE);
+        }else {
+            deadImageView.setVisibility(View.GONE);
+        }
+
 
     }
 

@@ -63,6 +63,19 @@ public class CommunityUserInfo {
      */
     private String bloodFlg;
 
+    /**
+     * 死亡 1是 2否
+     */
+    private String isdeath;
+
+    public String getIsdeath() {
+        return isdeath;
+    }
+
+    public void setIsdeath(String isdeath) {
+        this.isdeath = isdeath;
+    }
+
     public String getUserid() {
         return userid;
     }

@@ -2,16 +2,12 @@ package com.xy.xydoctor.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.Utils;
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordBloodPressureListActivity;
-import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordBloodSugarMainActivity;
-import com.xy.xydoctor.ui.activity.patient.PatientInfoActivity;
+import com.xy.xydoctor.ui.activity.community_management.CommunitySugarOrPressureListActivity;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 
@@ -45,26 +41,23 @@ public class FollowManagementGvAdapter extends CommonAdapter {
                 break;
         }
         //跳转
-        viewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ActivityUtils.finishToActivity(PatientInfoActivity.class, false);
-                Intent intent = null;
-                switch (position) {
-                    case 0:
-                        intent = new Intent(Utils.getApp(), HealthRecordBloodSugarMainActivity.class);
-                        break;
-                    case 1:
-                        intent = new Intent(Utils.getApp(), HealthRecordBloodPressureListActivity.class);
-                        break;
-
-                    default:
-                        break;
-                }
-                intent.putExtra("userid", userId);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                Utils.getApp().startActivity(intent);
+        viewHolder.getConvertView().setOnClickListener(v -> {
+            Intent intent = null;
+            /**
+             * 1血糖2血压
+             */
+            switch (position) {
+                case 0:
+                    intent = new Intent(Utils.getApp(), CommunitySugarOrPressureListActivity.class).putExtra("userid", userId).putExtra("type", "1");
+                    break;
+                case 1:
+                    intent = new Intent(Utils.getApp(), CommunitySugarOrPressureListActivity.class).putExtra("userid", userId).putExtra("type", "2");
+                    break;
+                default:
+                    break;
             }
+
+            Utils.getApp().startActivity(intent);
         });
     }
 }

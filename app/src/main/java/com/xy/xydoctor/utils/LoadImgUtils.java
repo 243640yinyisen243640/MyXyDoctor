@@ -56,4 +56,26 @@ public class LoadImgUtils {
 
     }
 
+    /**
+     * 加载圆角图片
+     *
+     * @param context
+     * @param defaultImageResourceId 占位图片
+     * @param imagePath              图片路径
+     * @param imageView              ImageView对象
+     */
+    public static void loadCircleImage(Context context, int defaultImageResourceId, String imagePath, ImageView imageView) {
+        RequestOptions options = RequestOptions.circleCropTransform();
+        //                .diskCacheStrategy(DiskCacheStrategy.NONE)//不做磁盘缓存
+        //                .skipMemoryCache(true);//不做内存缓存
+        Glide.with(context)
+                .asBitmap()
+                .load(imagePath)
+                .placeholder(defaultImageResourceId)
+                .error(defaultImageResourceId)
+                .apply(options)
+                .into(imageView);
+    }
+
+
 }

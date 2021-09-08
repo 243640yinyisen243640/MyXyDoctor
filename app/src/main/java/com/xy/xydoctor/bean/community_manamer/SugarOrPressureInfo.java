@@ -1,6 +1,7 @@
 package com.xy.xydoctor.bean.community_manamer;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Author: LYD
@@ -37,6 +38,29 @@ public class SugarOrPressureInfo implements Serializable {
      * 舒张压
      */
     private String systolic;
+
+    /**
+     * 年份
+     */
+    private String year;
+
+    private List<SugarOrPressureChildInfo> list;
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public List<SugarOrPressureChildInfo> getList() {
+        return list;
+    }
+
+    public void setList(List<SugarOrPressureChildInfo> list) {
+        this.list = list;
+    }
 
     public String getUserid() {
         return userid;

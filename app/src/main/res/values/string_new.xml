@@ -115,6 +115,9 @@
     <string name="user_medicine_finish_follow">完成待办</string>
     <string name="user_medicine_remind_user">提醒用户</string>
     <string name="community_wait_follow_up">待随访</string>
+    <string name="community_wait_follow_up_finish">随访完成</string>
+    <string name="community_wait_follow_up_over_time">已过期</string>
+    <string name="community_wait_follow_up_close">关闭随访</string>
     <string name="goods_add_server">失访</string>
     <string name="goods_add_spe">已完成</string>
     <string name="goods_add_spe_no_finish">未完成</string>
@@ -158,4 +161,13 @@
     <string name="please_choose_sugar">请选择血糖或输入血糖</string>
     <string name="community_base_sugar">血糖</string>
     <string name="community_base_pressure">血压</string>
+    <string name="community_user_info_sugar_one">I型糖尿病</string>
+    <string name="community_user_info_sugar_two">II型糖尿病</string>
+    <string name="community_user_info_sugar_three">妊娠糖尿病</string>
+    <string name="community_user_info_sugar_four">其他</string>
+    <string name="community_user_info_sugar_no">无</string>
+    <string name="community_user_info_pressure_one">一级高血压</string>
+    <string name="community_user_info_pressure_two">二级高血压</string>
+    <string name="community_times_di">第</string>
+    <string name="community_follow_times">次随访</string>
 </resources>
