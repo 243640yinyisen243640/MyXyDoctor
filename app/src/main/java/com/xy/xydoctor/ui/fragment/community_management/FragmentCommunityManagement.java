@@ -19,7 +19,9 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.bean.community_manamer.CommunityManagerInfo;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.ui.activity.community_management.CommunityDataAbnormalActivity;
+import com.xy.xydoctor.ui.activity.community_management.CommunityDataStatisticsActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFilterActivity;
+import com.xy.xydoctor.ui.activity.community_management.CommunityFollowStatisticsActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentListActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentSearchListActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityUserMedicineActivity;
@@ -199,7 +201,7 @@ public class FragmentCommunityManagement extends BaseFragment {
     }
 
 
-    @OnClick({R.id.tv_community_add_user, R.id.ll_community_filter_building_num, R.id.tv_community_follow_up_to_be_done, R.id.tv_community_search, R.id.tv_community_medication_reminder, R.id.tv_community_filter, R.id.tv_community_abnormal_data})
+    @OnClick({R.id.tv_community_add_user, R.id.ll_community_filter_building_num, R.id.tv_community_follow_up_to_be_done, R.id.tv_community_search, R.id.tv_community_medication_reminder, R.id.tv_community_filter, R.id.tv_community_abnormal_data, R.id.tv_community_follow_up_statistics, R.id.tv_community_num_statistics})
     public void onViewClicked(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -237,6 +239,14 @@ public class FragmentCommunityManagement extends BaseFragment {
             case R.id.tv_community_medication_reminder:
                 intent = new Intent(getPageContext(), CommunityUserMedicineActivity.class);
                 intent.putExtra("userid", "0");
+                startActivity(intent);
+                break;
+            case R.id.tv_community_follow_up_statistics:
+                intent = new Intent(getPageContext(), CommunityFollowStatisticsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tv_community_num_statistics:
+                intent = new Intent(getPageContext(), CommunityDataStatisticsActivity.class);
                 startActivity(intent);
                 break;
             default:

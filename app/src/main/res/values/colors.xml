@@ -119,4 +119,9 @@
     <color name="community_home_index_medicine">#F69315</color>
     <color name="community_home_index_gray">#858585</color>
     <color name="community_content_black">#333333</color>
+    <color name="community_statics_red">#FF6877</color>
+    <color name="community_statics_blue">#75A3FD</color>
+    <color name="community_statics_green">#1FB5B7</color>
+    <color name="community_statics_gray">#F0F3F7</color>
+    <color name="community_statics_progress_blue">#1479EE</color>
 </resources>

@@ -8,6 +8,7 @@ import com.xy.xydoctor.base.retrofit.HHSoftBaseResponse;
 import com.xy.xydoctor.bean.UpdateBean;
 import com.xy.xydoctor.bean.community_manamer.CommunityFilterInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityManagerInfo;
+import com.xy.xydoctor.bean.community_manamer.CommunityStaticsInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityUseMedicineInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityUseMedicineUserInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityUserInfo;
@@ -405,5 +406,18 @@ public class DataManager {
         map.put("type", type);
         map.put("access_token", SPStaticUtils.getString("token"));
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, SugarOrPressureInfo.class, "/doctor/Community/communityFollowList", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param years           年份
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getFollowStatics(String years, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("years", years);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, CommunityStaticsInfo.class, "/doctor/Community/followStatistic", map, successCallBack, failureCallBack);
     }
 }

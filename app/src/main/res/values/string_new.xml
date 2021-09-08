@@ -170,4 +170,14 @@
     <string name="community_user_info_pressure_two">二级高血压</string>
     <string name="community_times_di">第</string>
     <string name="community_follow_times">次随访</string>
+    <string name="community_statics_all_times">随访总次数</string>
+    <string name="community_statics_finish_times">完成随访次数</string>
+    <string name="community_statics_no_times">未随访次数</string>
+    <string name="community_statics_lost_times">失访次数</string>
+    <string name="community_statics_person_num">居民总人数</string>
+    <string name="community_statics_all_num">随访总人数</string>
+    <string name="community_statics_current_num">当前随访人数</string>
+    <string name="community_statics_patient_num">患者比例</string>
+    <string name="community_statics_year_finish_num">年随访完成率</string>
+    <string name="community_statics_year_lost_num">年失访率</string>
 </resources>
