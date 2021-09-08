@@ -47,6 +47,8 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
 
     private static final int REQUEST_CODE_FOR_REFRESH = 10;
 
+    private String userid = "";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

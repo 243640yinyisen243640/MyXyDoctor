@@ -163,9 +163,9 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         pressureTextTextView.setText(userInfo.getBloodNum());
         pressureFollowTextView.setText(userInfo.getBloodFlg());
 
-        if ("1".equals(userInfo.getIsdeath())){
+        if ("1".equals(userInfo.getIsdeath())) {
             deadImageView.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             deadImageView.setVisibility(View.GONE);
         }
 
@@ -176,6 +176,7 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         backImageView.setOnClickListener(this);
         deviceManagerTextView.setOnClickListener(this);
         medicanLinearLayout.setOnClickListener(this);
+        textImageView.setOnClickListener(this);
     }
 
     private void initValues() {
@@ -241,10 +242,12 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
                 finish();
                 break;
             case R.id.ll_user_info_user_medican:
-
+                Intent intent = new Intent(getPageContext(), CommunityUserMedicineActivity.class);
+                intent.putExtra("userid", userid);
+                startActivity(intent);
                 break;
             case R.id.iv_user_info_text:
-                onlineTestPopup = new OnlineTestPopup(getPageContext(), getIntent().getStringExtra("userid"));
+                onlineTestPopup = new OnlineTestPopup(getPageContext(), userid);
                 onlineTestPopup.showPopupWindow(textImageView);
                 break;
             default:
