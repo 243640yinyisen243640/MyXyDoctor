@@ -6,6 +6,7 @@ import com.lyd.librongim.myrongim.GroupUserBeanPatient;
 import com.xy.xydoctor.base.retrofit.BaseNetworkUtils;
 import com.xy.xydoctor.base.retrofit.HHSoftBaseResponse;
 import com.xy.xydoctor.bean.UpdateBean;
+import com.xy.xydoctor.bean.community_manamer.CommunityDataStaticsInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityFilterInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityManagerInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityStaticsInfo;
@@ -419,5 +420,19 @@ public class DataManager {
         map.put("years", years);
         map.put("access_token", SPStaticUtils.getString("token"));
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, CommunityStaticsInfo.class, "/doctor/Community/followStatistic", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 数据统计
+     * @param years
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getDataStatics(String years, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("years", years);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, CommunityDataStaticsInfo.class, "/doctor/Community/dataStatistic", map, successCallBack, failureCallBack);
     }
 }
