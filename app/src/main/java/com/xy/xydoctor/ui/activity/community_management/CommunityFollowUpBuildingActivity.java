@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * Author: LYD
  * Date: 2021/8/23 16:38
  *
- * @paramtype 1:小区数量 2：随访待办
+ * @paramtype 1:小区数量 2：随访待办  buildingName
  * Description: 随访代办的那个楼层图
  */
 public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {

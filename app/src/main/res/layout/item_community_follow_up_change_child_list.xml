@@ -22,7 +22,6 @@
                 android:id="@+id/tv_fuc_child_name_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
                 android:textColor="@color/base_black"
                 android:textSize="17sp" />
 
@@ -34,8 +33,7 @@
 
                 <TextView
                     android:id="@+id/tv_fuc_child_sex"
-                    style="@style/follow_up_search_infomation"
-                    android:text="@string/app_name" />
+                    style="@style/follow_up_search_infomation"/>
 
                 <View
                     android:layout_width="0.5dp"
@@ -46,8 +44,7 @@
 
                 <TextView
                     android:id="@+id/tv_fuc_child_age"
-                    style="@style/follow_up_search_infomation"
-                    android:text="@string/app_name" />
+                    style="@style/follow_up_search_infomation"/>
 
                 <View
                     android:layout_width="0.5dp"
@@ -58,8 +55,7 @@
 
                 <TextView
                     android:id="@+id/tv_fuc_child_phone"
-                    style="@style/follow_up_search_infomation"
-                    android:text="@string/app_name" />
+                    style="@style/follow_up_search_infomation" />
 
                 <View
                     android:layout_width="0.5dp"
@@ -84,14 +80,12 @@
 
         <TextView
             android:id="@+id/tv_fuc_child_sugar"
-            style="@style/follow_up_change_disease_type"
-            android:text="@string/app_name" />
+            style="@style/follow_up_change_disease_type" />
 
         <TextView
             android:id="@+id/tv_fuc_child_pressure"
             style="@style/follow_up_change_disease_type"
-            android:layout_marginLeft="5dp"
-            android:text="@string/app_name" />
+            android:layout_marginLeft="5dp" />
 
     </LinearLayout>
 

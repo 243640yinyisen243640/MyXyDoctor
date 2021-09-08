@@ -88,7 +88,6 @@
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/community_location"
                     android:drawablePadding="5dp"
-                    android:text="@string/app_name"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -132,7 +131,6 @@
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/base_arrow_right"
                     android:drawablePadding="5dp"
-                    android:text="@string/app_name"
                     android:textColor="@color/main_red"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -158,8 +156,7 @@
                 android:id="@+id/tv_community_building_num"
                 style="@style/community_building_num"
                 android:drawableLeft="@drawable/community_building_num"
-                android:gravity="left|center"
-                android:text="@string/app_name" />
+                android:gravity="left|center" />
 
             <View
                 android:layout_width="0.5dp"
@@ -172,8 +169,7 @@
                 android:id="@+id/tv_community_person_num"
                 style="@style/community_building_num"
                 android:gravity="left|center"
-                android:drawableLeft="@drawable/community_person_num"
-                android:text="@string/app_name" />
+                android:drawableLeft="@drawable/community_person_num"/>
         </LinearLayout>
 
         <LinearLayout

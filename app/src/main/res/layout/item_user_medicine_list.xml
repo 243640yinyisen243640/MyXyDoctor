@@ -28,7 +28,6 @@
                 android:id="@+id/tv_um_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
                 android:textColor="@color/community_content_black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -40,7 +39,6 @@
                 android:layout_marginTop="5dp"
                 android:background="@color/white"
                 android:includeFontPadding="false"
-                android:text="@string/app_name"
                 android:textColor="@color/community_home_index_gray"
                 android:textSize="14sp" />
         </LinearLayout>

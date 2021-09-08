@@ -29,7 +29,6 @@
             android:drawableRight="@drawable/base_arrow_right"
             android:drawablePadding="5dp"
             android:padding="15dp"
-            android:text="@string/app_name"
             android:textColor="@color/base_black"
             android:textSize="14sp" />
 

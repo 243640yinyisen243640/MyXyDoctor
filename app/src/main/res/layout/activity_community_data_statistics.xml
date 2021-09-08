@@ -55,7 +55,6 @@
                 android:paddingTop="8dp"
                 android:paddingRight="12dp"
                 android:paddingBottom="8dp"
-                android:text="@string/app_name"
                 android:textColor="@color/white" />
         </LinearLayout>
 

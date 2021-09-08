@@ -115,7 +115,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
 
         topViewManager().titleTextView().setText("筛选列表");
         topViewManager().moreTextView().setText(R.string.base_filter);
-        topViewManager().moreTextView().setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.selector_community_filter_choose, 0);
+        topViewManager().moreTextView().setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.community_filter_red, 0);
         topViewManager().moreTextView().setCompoundDrawablePadding(2);
 
         topViewManager().moreTextView().setOnClickListener(v -> {
@@ -337,8 +337,23 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
     private class OnItemClickListener implements IAdapterViewClickListener {
         @Override
         public void adapterClickListener(int position, View view) {
+            Intent intent;
 
             //一级的点击事件
+            switch (view.getId()) {
+                case R.id.ll_filter_click:
+                    intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
+                    intent.putExtra("userid", mList.get(position).getUserid());
+                    startActivity(intent);
+                    break;
+                case R.id.tv_filter_empty:
+                    intent = new Intent(getPageContext(), CommunityFollowUpBuildingActivity.class);
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
+
+            }
         }
 
         @Override

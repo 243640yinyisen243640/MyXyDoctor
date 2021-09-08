@@ -15,6 +15,7 @@
         android:visibility="visible">
 
         <LinearLayout
+            android:id="@+id/ll_filter_click"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -30,7 +31,6 @@
                     android:id="@+id/tv_filter_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/app_name"
                     android:textColor="@color/base_black"
                     android:textSize="17sp" />
 
@@ -50,8 +50,7 @@
 
                 <TextView
                     android:id="@+id/tv_filter_sex"
-                    style="@style/follow_up_search_infomation"
-                    android:text="@string/app_name" />
+                    style="@style/follow_up_search_infomation" />
 
                 <View
                     android:layout_width="0.5dp"
@@ -62,8 +61,7 @@
 
                 <TextView
                     android:id="@+id/tv_filter_age"
-                    style="@style/follow_up_search_infomation"
-                    android:text="@string/app_name" />
+                    style="@style/follow_up_search_infomation" />
 
                 <View
                     android:layout_width="0.5dp"
@@ -74,8 +72,7 @@
 
                 <TextView
                     android:id="@+id/tv_filter_tel"
-                    style="@style/follow_up_search_infomation"
-                    android:text="@string/app_name" />
+                    style="@style/follow_up_search_infomation"/>
 
                 <View
                     android:layout_width="0.5dp"
@@ -128,9 +125,9 @@
         android:drawableRight="@drawable/community_filter_add"
         android:drawablePadding="5dp"
         android:padding="15dp"
-        android:text="@string/app_name"
         android:textColor="@color/community_content_black"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:visibility="gone"/>
 
 
 </LinearLayout>

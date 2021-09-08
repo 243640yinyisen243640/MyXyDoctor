@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -108,6 +109,12 @@ public class CommunityFilterListAdapter extends UIBaseRecycleViewAdapter<Communi
             }
         });
 
+        viewHolder.clickLinearLayout.setOnClickListener(v -> {
+            if (getListener() != null) {
+                getListener().adapterClickListener(position, v);
+            }
+        });
+
 
     }
 
@@ -123,6 +130,7 @@ public class CommunityFilterListAdapter extends UIBaseRecycleViewAdapter<Communi
         TextView locationTextView;
         ImageView deadImageView;
         TextView emptyTextView;
+        LinearLayout clickLinearLayout;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -137,6 +145,7 @@ public class CommunityFilterListAdapter extends UIBaseRecycleViewAdapter<Communi
             locationTextView = itemView.findViewById(R.id.tv_filter_location);
             deadImageView = itemView.findViewById(R.id.iv_filter_have_dead);
             emptyTextView = itemView.findViewById(R.id.tv_filter_empty);
+            clickLinearLayout = itemView.findViewById(R.id.ll_filter_click);
 
         }
     }

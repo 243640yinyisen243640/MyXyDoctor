@@ -1,5 +1,6 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,21 +9,32 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.constant.PermissionConstants;
+import com.blankj.utilcode.util.PermissionUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.Utils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.FollowManagementGvAdapter;
-import com.xy.xydoctor.adapter.HealthRecordGvAdapter;
+import com.xy.xydoctor.adapter.community_manager.HealthRecordGvAdapter1;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
+import com.xy.xydoctor.bean.community_manamer.CommunityUserInfo;
 import com.xy.xydoctor.customerView.NoConflictGridView;
+import com.xy.xydoctor.datamanager.DataManager;
+import com.xy.xydoctor.ui.activity.mydevice.ScanActivity;
+import com.xy.xydoctor.utils.LoadImgUtils;
+import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.view.popup.OnlineTestPopup;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+
 /**
  * Author: LYD
  * Date: 2021/8/13 9:09
- * Description: 个人信息
+ * param :userid 用户id
+ * Description: 社区的个人信息
  */
 public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
 
@@ -91,12 +103,13 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
     private ImageView textImageView;
     private OnlineTestPopup onlineTestPopup;
 
+    private String userid;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         topViewManager().topView().removeAllViews();
-
+        userid = getIntent().getStringExtra("userid");
         containerView().addView(initView());
         ImmersionBar.with(this)
                 .statusBarColor(R.color.transparent)  //指定状态栏颜色,根据情况是否设置
@@ -104,6 +117,34 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         initListener();
 
         initValues();
+        getData();
+    }
+
+    private void getData() {
+        Call<String> requestCall = DataManager.getCommunityUserInfo(userid, (call, response) -> {
+            if (response.code == 200) {
+                CommunityUserInfo userInfo = (CommunityUserInfo) response.object;
+                bindData(userInfo);
+            }
+        }, (call, t) -> {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        });
+    }
+
+    private void bindData(CommunityUserInfo userInfo) {
+
+        LoadImgUtils.loadRoundImage(getPageContext(), R.drawable.default_img_head, userInfo.getPicture(), headImageView);
+        nameTextView.setText(userInfo.getNickname());
+        sexAndAgeTextView.setText(userInfo.getAge() + "岁");
+        if ("1".equals(userInfo.getSex())) {
+            sexAndAgeTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.base_community_male, 0, 0, 0);
+        } else {
+            sexAndAgeTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.base_community_female, 0, 0, 0);
+        }
+
+        diseaseFirstTextView.setText(userInfo.getDiabeteslei());
+        diseaseSecondTextView.setText(userInfo.getBloodLevel());
+
     }
 
     private void initListener() {
@@ -118,8 +159,7 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         for (int i = 0; i < 11; i++) {
             list.add(i + "");
         }
-        String userid = getIntent().getStringExtra("userid");
-        HealthRecordGvAdapter adapter = new HealthRecordGvAdapter(Utils.getApp(), R.layout.item_gv_health_record, list, userid);
+        HealthRecordGvAdapter1 adapter = new HealthRecordGvAdapter1(Utils.getApp(), R.layout.item_gv_health_record, list, userid);
         gvHealthRecord.setAdapter(adapter);
 
         ArrayList<String> managementList = new ArrayList<>();
@@ -156,10 +196,27 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_user_info_device_manager:
+                PermissionUtils
+                        .permission(PermissionConstants.CAMERA)
+                        .callback(new PermissionUtils.SimpleCallback() {
+                            @Override
+                            public void onGranted() {
+                                Intent intent = new Intent(getPageContext(), ScanActivity.class);
+                                intent.putExtra("type", 4);
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onDenied() {
+                                ToastUtils.showShort("请允许使用相机权限");
+                            }
+                        }).request();
                 break;
             case R.id.iv_user_info_back:
+                finish();
                 break;
             case R.id.ll_user_info_user_medican:
+
                 break;
             case R.id.iv_user_info_text:
                 onlineTestPopup = new OnlineTestPopup(getPageContext(), getIntent().getStringExtra("userid"));

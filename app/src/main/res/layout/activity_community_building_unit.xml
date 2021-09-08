@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/community_location"
             android:drawablePadding="5dp"
-            android:text="@string/app_name"
             android:textColor="@color/base_text_gray"
             android:textSize="14sp" />
 
@@ -39,7 +38,6 @@
                     android:id="@+id/tv_building_unit_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/app_name"
                     android:textColor="@color/base_black"
                     android:textSize="17sp" />
 
@@ -74,8 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/community_impotant_follow"
-                    android:drawablePadding="5dp"
-                    android:text="@string/app_name" />
+                    android:drawablePadding="5dp" />
 
             </LinearLayout>
 
@@ -90,8 +87,7 @@
 
             <TextView
                 android:id="@+id/tv_building_unit_sex"
-                style="@style/follow_up_search_infomation"
-                android:text="@string/app_name" />
+                style="@style/follow_up_search_infomation"/>
 
             <View
                 android:layout_width="0.5dp"
@@ -102,8 +98,7 @@
 
             <TextView
                 android:id="@+id/tv_building_unit_age"
-                style="@style/follow_up_search_infomation"
-                android:text="@string/app_name" />
+                style="@style/follow_up_search_infomation"/>
 
             <View
                 android:layout_width="0.5dp"
@@ -114,8 +109,7 @@
 
             <TextView
                 android:id="@+id/tv_building_unit_phone"
-                style="@style/follow_up_search_infomation"
-                android:text="@string/app_name" />
+                style="@style/follow_up_search_infomation"/>
 
             <View
                 android:layout_width="0.5dp"
@@ -131,14 +125,12 @@
 
             <TextView
                 android:id="@+id/tv_building_unit_sugar"
-                style="@style/follow_up_change_disease_type"
-                android:text="@string/app_name" />
+                style="@style/follow_up_change_disease_type" />
 
             <TextView
                 android:id="@+id/tv_building_unit_pressure"
                 style="@style/follow_up_change_disease_type"
-                android:layout_marginLeft="5dp"
-                android:text="@string/app_name" />
+                android:layout_marginLeft="5dp" />
 
         </LinearLayout>
 
@@ -152,15 +144,13 @@
                 android:id="@+id/tv_building_unit_sugar_follow"
                 style="@style/follow_up_change_sugar_pressure"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/follow_up_chage_sugar"
-                android:text="@string/app_name" />
+                android:drawableLeft="@drawable/follow_up_chage_sugar" />
 
             <TextView
                 android:id="@+id/tv_building_unit_pressure_follow"
                 style="@style/follow_up_change_sugar_pressure"
                 android:layout_marginLeft="8dp"
-                android:drawableLeft="@drawable/follow_up_chage_pressure"
-                android:text="@string/app_name" />
+                android:drawableLeft="@drawable/follow_up_chage_pressure" />
 
             <View
                 android:layout_width="0dp"
@@ -189,7 +179,6 @@
                 android:id="@+id/tv_building_unit_time_and_sugar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
                 android:textColor="@color/data_gray_light"
                 android:textSize="13sp" />
 
@@ -199,7 +188,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:drawableLeft="@drawable/sugar_or_pressure_low"
-                android:text="@string/app_name"
                 android:textColor="@color/base_text_gray"
                 android:textSize="13sp" />
 
@@ -211,7 +199,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:drawableRight="@drawable/sugar_or_pressure_low"
-            android:text="@string/app_name"
             android:textColor="@color/base_text_gray"
             android:textSize="13sp" />
     </LinearLayout>
