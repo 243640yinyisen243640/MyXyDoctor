@@ -242,7 +242,7 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
                 finish();
                 break;
             case R.id.ll_user_info_user_medican:
-                Intent intent = new Intent(getPageContext(), CommunityUserMedicineActivity.class);
+                Intent intent = new Intent(getPageContext(), CommunityUserMedicineRecordListActivity.class);
                 intent.putExtra("userid", userid);
                 startActivity(intent);
                 break;

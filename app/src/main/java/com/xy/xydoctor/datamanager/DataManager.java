@@ -235,6 +235,21 @@ public class DataManager {
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, CommunityUseMedicineInfo.class, "/doctor/Pharmacy/getPharmacyLists", map, successCallBack, failureCallBack);
     }
 
+    /**
+     * @param userid          患者userid，患者详情进入，必填
+     * @param page
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> useMedicineRemindUser(String userid, String page, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userid", userid);
+        map.put("page", page);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, CommunityUseMedicineUserInfo.class, "/doctor/Pharmacy/getPharmacyLists", map, successCallBack, failureCallBack);
+    }
+
 
     /**
      * 完成代办

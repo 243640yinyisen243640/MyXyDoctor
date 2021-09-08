@@ -17,7 +17,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.CommunityUserMedicineForSomeOneListAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
-import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
+import com.xy.xydoctor.bean.community_manamer.CommunityUseMedicineUserInfo;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.xy.xydoctor.utils.TipUtils;
@@ -39,28 +39,28 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
     private static final int REQUEST_CODE_FOR_REFRESH = 10;
     private SmartRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
-    private List<FollowUpAgentListBean> mList = new ArrayList<>();
-    private List<FollowUpAgentListBean> mTempList;
+    private List<CommunityUseMedicineUserInfo> mList = new ArrayList<>();
+    private List<CommunityUseMedicineUserInfo> mTempList;
     private int mPageIndex = 1, mPageSize = 6, mPageCount = 0;
     private CommunityUserMedicineForSomeOneListAdapter mAdapter;
     private boolean mIsLoading = false;
-    /**
-     * 1：待随访:2：失访:3：已完成
-     */
-    private String type;
 
-    private String searchContent = "";
     private NestedScrollView presentNestedSrcollView;
     private TextView stateTextView;
+
+    private String userid;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        userid = getIntent().getStringExtra("userid");
         topViewManager().titleTextView().setText(R.string.user_info_medicine_remind);
         topViewManager().moreTextView().setText(R.string.add_medicine_title);
         topViewManager().moreTextView().setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), CommunityMedicineAddActivity.class);
+            intent.putExtra("userid", userid);
+            intent.putExtra("type", "1");
             startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
         });
         initView();
@@ -74,7 +74,7 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
             return;
         }
         mIsLoading = true;
-        Call<String> requestCall = DataManager.goodsList("", mPageIndex + "", mPageSize + "", type, searchContent,
+        Call<String> requestCall = DataManager.useMedicineRemindUser(userid, mPageIndex + "",
                 (call, response) -> {
                     mIsLoading = false;
                     if (1 != mPageIndex) {
@@ -83,7 +83,7 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
                         mRefreshLayout.finishRefresh();
                     }
                     if (200 == response.code) {
-                        mTempList = (List<FollowUpAgentListBean>) response.object;
+                        mTempList = (List<CommunityUseMedicineUserInfo>) response.object;
                         mPageCount = mTempList == null ? 0 : mTempList.size();
                         if (1 == mPageIndex) {
                             if (mList == null) {
@@ -93,7 +93,7 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
                             }
                             mList.addAll(mTempList);
                             if (mAdapter == null) {
-                                mAdapter = new CommunityUserMedicineForSomeOneListAdapter(getPageContext(), mList, "", new OnItemClickListener());
+                                mAdapter = new CommunityUserMedicineForSomeOneListAdapter(getPageContext(), mList, new OnItemClickListener());
                                 mRecyclerView.setAdapter(mAdapter);
                             } else {
                                 mAdapter.notifyDataSetChanged();
@@ -105,7 +105,7 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
                         //如果是加载成功
                         mRefreshLayout.setVisibility(View.VISIBLE);
                         presentNestedSrcollView.setVisibility(View.GONE);
-                    } else if (101 == response.code) {
+                    } else if (30002 == response.code) {
                         mPageCount = 0;
                         if (1 == mPageIndex) {
                             //如果是没有数据
@@ -127,7 +127,7 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
                     if (mList.size() > 0) {
                         changeLoadUI(response.code);
                     } else {
-                        changeLoadUI(101);
+                        changeLoadUI(30002);
                     }
 
                 }, (call, t) -> {
@@ -158,8 +158,8 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
         presentNestedSrcollView.setVisibility(View.GONE);
         mRefreshLayout.setVisibility(View.VISIBLE);
         if (1 == mPageIndex) {
-            if (100 != responseCode) {
-                if (101 == responseCode) {
+            if (200 != responseCode) {
+                if (30002 == responseCode) {
                     stateTextView.setText(getString(R.string.huahansoft_load_state_no_data));
                 } else {
                     stateTextView.setText(getString(R.string.network_error));
@@ -167,8 +167,6 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
                 stateTextView.setOnClickListener(view -> {
                     onPageLoad();
                 });
-                mRefreshLayout.setVisibility(View.VISIBLE);
-                presentNestedSrcollView.setVisibility(View.GONE);
                 mRefreshLayout.setVisibility(View.GONE);
                 presentNestedSrcollView.setVisibility(View.VISIBLE);
             }
@@ -177,7 +175,6 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_use_medicine_for_some_one, null);
-
         mRefreshLayout = getViewByID(view, R.id.refreshLayout_record);
         mRecyclerView = getViewByID(view, R.id.rv_um_record);
         presentNestedSrcollView = getViewByID(view, R.id.nsv_um_record_nodate);
@@ -187,7 +184,7 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
     }
 
     private void initValue() {
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         //解决底部滚动到顶部时，顶部item上方偶尔会出现一大片间隔的问题
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -237,6 +234,16 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
         @Override
         public void adapterClickListener(int position, View view) {
 
+            switch (view.getId()) {
+                case R.id.tv_use_medicine_child_edit_so:
+                    Intent intent = new Intent(getPageContext(), CommunityMedicineAddActivity.class);
+                    intent.putExtra("userid", userid);
+                    intent.putExtra("type", "1");
+                    startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
+                    break;
+                default:
+                    break;
+            }
             //一级的点击事件
         }
 

@@ -53,6 +53,7 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        userid = getIntent().getStringExtra("userid");
         topViewManager().titleTextView().setText("用药提醒");
         containerView().addView(initView());
 
@@ -123,7 +124,7 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
             return;
         }
         mIsLoading = true;
-        Call<String> requestCall = DataManager.useMedicineRemind("0", mPageIndex + "",
+        Call<String> requestCall = DataManager.useMedicineRemind(userid, mPageIndex + "",
                 (call, response) -> {
                     mIsLoading = false;
                     if (1 != mPageIndex) {
