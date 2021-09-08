@@ -2,11 +2,15 @@ package com.xy.xydoctor.ui.activity.community_management;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -49,6 +53,11 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
 
     private NestedScrollView presentNestedSrcollView;
     private TextView stateTextView;
+
+    /**
+     * 筛选结果
+     */
+    private TextView haveResultTextView;
 
     /**
      * 是否空房间
@@ -95,6 +104,8 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
     private String filterInfoStr;
 
     private CommunityFilterInfo filterInfo;
+
+    private CommunityFilterInfo resultResponseInfo;
 
 
     @Override
@@ -166,8 +177,17 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                         mRefreshLayout.finishRefresh();
                     }
                     if (200 == response.code) {
-                        CommunityFilterInfo info = (CommunityFilterInfo) response.object;
-                        mTempList = info.getLists();
+                        resultResponseInfo = (CommunityFilterInfo) response.object;
+                        SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
+                        stringBuilder.append("已筛选");
+                        int start = stringBuilder.length();
+                        stringBuilder.append(resultResponseInfo.getTotalCount());
+                        int end = stringBuilder.length();
+                        stringBuilder.append("个");
+                        stringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getPageContext(), R.color.main_red)), start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+
+                        haveResultTextView.setText(stringBuilder);
+                        mTempList = resultResponseInfo.getLists();
                         mPageCount = mTempList == null ? 0 : mTempList.size();
                         if (1 == mPageIndex) {
                             if (mList == null) {
@@ -257,17 +277,18 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
     }
 
     private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_prefrerential_goods, null);
-        mRefreshLayout = getViewByID(view, R.id.refreshLayout);
-        mRecyclerView = getViewByID(view, R.id.rv_live);
-        presentNestedSrcollView = getViewByID(view, R.id.nsv_present_nodate);
-        stateTextView = getViewByID(view, R.id.tv_no_data);
+        View view = View.inflate(getPageContext(), R.layout.activity_community_filter_list, null);
+        mRefreshLayout = getViewByID(view, R.id.refreshLayout_filter);
+        mRecyclerView = getViewByID(view, R.id.rv_live_filter);
+        presentNestedSrcollView = getViewByID(view, R.id.nsv_present_nodate_filter);
+        stateTextView = getViewByID(view, R.id.tv_no_data_filter);
+        haveResultTextView = getViewByID(view, R.id.tv_filter_have_result);
         containerView().addView(view);
 
     }
 
     private void initValue() {
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         //解决底部滚动到顶部时，顶部item上方偶尔会出现一大片间隔的问题
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

@@ -287,6 +287,7 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
                     Intent intent = new Intent(getPageContext(), CommunityFilterHaveResultListActivity.class);
                     intent.putExtra("info", new Gson().toJson(info));
                     startActivity(intent);
+                    finish();
                 } else {
                     Intent intent = new Intent();
                     intent.putExtra("info", new Gson().toJson(info));

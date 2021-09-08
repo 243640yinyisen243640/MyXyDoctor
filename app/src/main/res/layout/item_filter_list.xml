@@ -10,13 +10,15 @@
         android:id="@+id/fl_filter_have"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:background="@drawable/shape_bg_white_5"
         android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,12 +40,11 @@
                     android:layout_height="wrap_content" />
 
 
-
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="20dp"
                 android:gravity="center|left"
                 android:orientation="horizontal">
 
@@ -84,19 +85,23 @@
                     android:background="@color/gray_light" />
             </LinearLayout>
 
+
             <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/flex_fsiui_desease_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 app:alignContent="stretch"
                 app:alignItems="stretch"
                 app:flexWrap="wrap" />
+
 
             <TextView
                 android:id="@+id/tv_filter_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/community_location"
+                android:drawablePadding="5dp"
                 android:includeFontPadding="false"
                 android:textColor="@color/base_text_gray"
                 android:textSize="13sp" />
@@ -109,13 +114,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|right"
-            android:src="@drawable/user_info_have_dead" />
+            android:src="@drawable/user_info_have_dead"
+            android:visibility="gone" />
     </FrameLayout>
 
     <TextView
         android:id="@+id/tv_filter_empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:background="@drawable/shape_bg_white_5"
         android:drawableLeft="@drawable/community_location"
         android:drawableRight="@drawable/community_filter_add"

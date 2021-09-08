@@ -1,6 +1,8 @@
 package com.xy.xydoctor.adapter.community_manager;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -8,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.flexbox.FlexboxLayout;
@@ -16,6 +19,7 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.adapter.UIBaseRecycleViewAdapter;
 import com.xy.xydoctor.bean.community_manamer.CommunityFilterChildInfo;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
+import com.xy.xydoctor.utils.XyScreenUtils;
 
 import java.util.List;
 
@@ -25,6 +29,10 @@ import java.util.List;
  * 创建日期: 2019/7/19 11:09
  */
 public class CommunityFilterListAdapter extends UIBaseRecycleViewAdapter<CommunityFilterChildInfo> {
+    /**
+     * 0：空房间
+     * 1：不是空房间
+     */
     private String isEmpty;
 
 
@@ -49,10 +57,58 @@ public class CommunityFilterListAdapter extends UIBaseRecycleViewAdapter<Communi
         if ("1".equals(isEmpty)) {
             viewHolder.noFrameLayout.setVisibility(View.VISIBLE);
             viewHolder.emptyTextView.setVisibility(View.GONE);
+            if (info.getDiseases() != null && info.getDiseases().size() > 0) {
+                Log.i("yys", "size==" + info.getDiseases().size());
+                viewHolder.typeFlexboxLayout.setVisibility(View.VISIBLE);
+                int padding = XyScreenUtils.dip2px(getContext(), 5);
+                FlexboxLayout.LayoutParams flexLP = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, XyScreenUtils.dip2px(getContext(), 20));
+                flexLP.setMargins(0, padding * 2, padding * 2, 0);
+                for (int i = 0; i < info.getDiseases().size(); i++) {
+                    Log.i("yys", "text==" + info.getDiseases().get(i));
+                    TextView textView = new TextView(getContext());
+                    textView.setTextSize(12);
+                    textView.setPadding(padding * 2, 0, padding * 2, 0);
+                    textView.setGravity(Gravity.CENTER);
+                    textView.setTextColor(ContextCompat.getColor(getContext(), R.color.community_disease_type));
+                    textView.setBackgroundResource(R.drawable.shape_bg_blue__light_2);
+                    textView.setText(info.getDiseases().get(i));
+                    viewHolder.typeFlexboxLayout.addView(textView, flexLP);
+                }
+            } else {
+                viewHolder.typeFlexboxLayout.setVisibility(View.GONE);
+            }
+
+            /**
+             * 是否死亡
+             *      * 1:是
+             *      * 2:否
+             */
+            if ("1".equals(info.getIsdeath())) {
+                viewHolder.deadImageView.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.deadImageView.setVisibility(View.GONE);
+            }
+            viewHolder.nameTextView.setText(info.getNickname());
+            viewHolder.sexTextView.setText(info.getSex());
+            viewHolder.telTextView.setText(info.getTel());
+            viewHolder.ageTextView.setText(info.getAge() + "岁");
+            viewHolder.locationTextView.setText(info.getCom_name() + info.getBuild_name() + "号楼" + info.getUnit_name() + "单元" + info.getHouse_num());
         } else {
             viewHolder.noFrameLayout.setVisibility(View.GONE);
             viewHolder.emptyTextView.setVisibility(View.VISIBLE);
+            viewHolder.emptyTextView.setText(info.getCom_name() + info.getBuild_name() + "号楼" + info.getUnit_name() + "单元" + info.getHouse_num());
         }
+
+        CommunityFilterDeseaseImgAdapter imgAdapter = new CommunityFilterDeseaseImgAdapter(getContext(), info.getImgs());
+        viewHolder.myListView.setAdapter(imgAdapter);
+
+        viewHolder.emptyTextView.setOnClickListener(v -> {
+            if (getListener() != null) {
+                getListener().adapterClickListener(position, v);
+            }
+        });
+
+
     }
 
 
