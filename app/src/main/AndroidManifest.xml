@@ -382,8 +382,12 @@
         <activity
             android:name=".ui.activity.community_management.CommunityFollowStatisticsActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.community_management.CommunityDataStatisticsActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.community_management.CommunityDataStatisticsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".base.activity.BaseWebView1Activity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

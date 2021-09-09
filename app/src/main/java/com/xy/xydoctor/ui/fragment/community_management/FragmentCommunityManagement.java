@@ -16,10 +16,10 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.imuxuan.floatingview.FloatingView;
 import com.lyd.baselib.base.fragment.BaseFragment;
 import com.xy.xydoctor.R;
+import com.xy.xydoctor.base.activity.BaseWebView1Activity;
 import com.xy.xydoctor.bean.community_manamer.CommunityManagerInfo;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.ui.activity.community_management.CommunityDataAbnormalActivity;
-import com.xy.xydoctor.ui.activity.community_management.CommunityDataStatisticsActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFilterActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowStatisticsActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentListActivity;
@@ -246,7 +246,11 @@ public class FragmentCommunityManagement extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.tv_community_num_statistics:
-                intent = new Intent(getPageContext(), CommunityDataStatisticsActivity.class);
+                //                intent = new Intent(getPageContext(), CommunityDataStatisticsActivity.class);
+                //                startActivity(intent);
+                intent = new Intent(getPageContext(), BaseWebView1Activity.class);
+                intent.putExtra("title", "血压随访");
+                intent.putExtra("url", "http://d.xiyuns.cn/mobile/community/bloodsugar");
                 startActivity(intent);
                 break;
             default:
