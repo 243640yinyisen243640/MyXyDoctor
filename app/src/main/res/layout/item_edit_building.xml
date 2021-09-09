@@ -8,9 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <TextView
+            android:id="@+id/tv_item_add_building_name"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/add_building_num"
@@ -28,8 +30,7 @@
 
     </LinearLayout>
 
-    <View
-        style="@style/line"
-        android:layout_marginTop="15dp" />
+    <View android:id="@+id/view_edit_build"
+        style="@style/line" />
 
 </LinearLayout>

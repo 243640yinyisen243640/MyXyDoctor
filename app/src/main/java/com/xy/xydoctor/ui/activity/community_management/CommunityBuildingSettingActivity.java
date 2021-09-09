@@ -52,7 +52,6 @@ public class CommunityBuildingSettingActivity extends XYSoftUIBaseActivity {
         });
         containerView().addView(initView());
 
-        initValues();
 
         initListener();
 
@@ -80,22 +79,16 @@ public class CommunityBuildingSettingActivity extends XYSoftUIBaseActivity {
     private void initListener() {
         gridView.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getPageContext(), CommunityEditBuildingActivity.class);
+            intent.putExtra("buildingid", listChildListInfos.get(position).getBuild_id());
             startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
         });
     }
 
-    private void initValues() {
-        getBuildingIno();
-    }
 
     private View initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_community_add_building, null);
         gridView = view.findViewById(R.id.gv_community_add_building);
         return view;
-    }
-
-    private void getBuildingIno() {
-        //调到接口之后设置到GridView上面
     }
 
 
@@ -104,7 +97,7 @@ public class CommunityBuildingSettingActivity extends XYSoftUIBaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE_FOR_REFRESH) {
-                initValues();
+                getData();
             }
         }
     }

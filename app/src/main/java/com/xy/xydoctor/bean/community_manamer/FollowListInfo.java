@@ -18,6 +18,34 @@ public class FollowListInfo {
      */
     private String unit_name;
 
+    List<UpLoadParamInfo> build_data;
+    private String unit_num;
+    private String layer;
+
+    public List<UpLoadParamInfo> getBuild_data() {
+        return build_data;
+    }
+
+    public void setBuild_data(List<UpLoadParamInfo> build_data) {
+        this.build_data = build_data;
+    }
+
+    public String getUnit_num() {
+        return unit_num;
+    }
+
+    public void setUnit_num(String unit_num) {
+        this.unit_num = unit_num;
+    }
+
+    public String getLayer() {
+        return layer;
+    }
+
+    public void setLayer(String layer) {
+        this.layer = layer;
+    }
+
     private List<FollowListChildListInfo> communityUser;
 
     public List<FollowListChildListInfo> getCommunityUser() {
