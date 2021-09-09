@@ -15,6 +15,7 @@ import com.xy.xydoctor.bean.community_manamer.CommunityUseMedicineUserInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityUserInfo;
 import com.xy.xydoctor.bean.community_manamer.DataAbnormalInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
+import com.xy.xydoctor.bean.community_manamer.FollowUpListAllInfo;
 import com.xy.xydoctor.bean.community_manamer.SugarOrPressureInfo;
 import com.xy.xydoctor.constant.ConstantParam;
 
@@ -125,26 +126,6 @@ public class DataManager {
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/unBindDoc", map, successCallBack, failureCallBack);
     }
 
-    /**
-     * cbl
-     *
-     * @param userID
-     * @param page
-     * @param pageSize
-     * @param successCallBack
-     * @param failureCallBack
-     * @return
-     */
-    public static Call<String> goodsList(String userID, String page, String pageSize, String goodsType, String keyWords, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
-        Map<String, String> map = new HashMap<>();
-        map.put("goodsType", goodsType);
-        map.put("userID", userID);
-        map.put("page", page);
-        map.put("pageSize", pageSize);
-        map.put("keyWords", keyWords);
-        map.put("access_token", SPStaticUtils.getString("token"));
-        return BaseNetworkUtils.getRequest(false, BaseNetworkUtils.JSON_ARRAY, FollowUpAgentListBean.class, "goodslist", map, successCallBack, failureCallBack);
-    }
 
     public static Call<String> getCommunityHomeData(BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
@@ -424,6 +405,7 @@ public class DataManager {
 
     /**
      * 数据统计
+     *
      * @param years
      * @param successCallBack
      * @param failureCallBack
@@ -434,5 +416,18 @@ public class DataManager {
         map.put("years", years);
         map.put("access_token", SPStaticUtils.getString("token"));
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, CommunityDataStaticsInfo.class, "/doctor/Community/dataStatistic", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param status          1待随访 2失访 3已完成
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getFollowList(String status, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("status", status);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, FollowUpListAllInfo.class, "/doctor/Community/followLists", map, successCallBack, failureCallBack);
     }
 }
