@@ -14,10 +14,17 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.view.TimePickerView;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.YAxis;
+import com.gyf.immersionbar.ImmersionBar;
+import com.horen.chart.barchart.BarChartHelper;
+import com.horen.chart.barchart.IBarData;
 import com.lyd.baselib.util.TurnsUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
+import com.xy.xydoctor.bean.TestBarData;
 import com.xy.xydoctor.bean.community_manamer.CommunityDataStaticsInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.customerView.CirclePercentView;
@@ -26,6 +33,10 @@ import com.xy.xydoctor.utils.DataUtils;
 import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.utils.XyScreenUtils;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 import retrofit2.Call;
 
 /**
@@ -33,7 +44,7 @@ import retrofit2.Call;
  * Date: 2021/8/25 11:31
  * Description: 数据统计血糖
  */
-public class CommunityDataStatisticsActivity extends XYSoftUIBaseActivity {
+public class CommunityDataStatisticsActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
 
     /**
      * 时间 ， 总人数 高血糖，高血压，合并人数
@@ -44,12 +55,14 @@ public class CommunityDataStatisticsActivity extends XYSoftUIBaseActivity {
      */
     private CirclePercentView firstCpv, secondCpv, thirdCpv;
 
+    private TextView allRateTextView, emptyRateTextView, unemptyRateTextView;
+
     private BarChart sugarBarChart;
 
     private CirclePercentView pressureCpv;
 
     private BarChart pressureBc;
-
+    private TextView pressureRateTextView;
 
     private String time;
 
@@ -59,8 +72,17 @@ public class CommunityDataStatisticsActivity extends XYSoftUIBaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
+        ImmersionBar.with(this)
+                .statusBarColor(R.color.transparent)  //指定状态栏颜色,根据情况是否设置
+                .init();
         containerView().addView(initView());
         initValues();
+        initListener();
+        getData();
+    }
+
+    private void initListener() {
+        timeTextView.setOnClickListener(this);
     }
 
 
@@ -77,20 +99,128 @@ public class CommunityDataStatisticsActivity extends XYSoftUIBaseActivity {
 
     private void bindData() {
 
-        setTextStyle(getString(R.string.community_statics_all_times), staticsInfo.getCommunityUser(), R.color.base_black, allPersonTextView, 12);
-        setTextStyle(getString(R.string.community_statics_finish_times), staticsInfo.getSugarUser(), R.color.base_black, sugarPersonTextView, 12);
-        setTextStyle(getString(R.string.community_statics_no_times), staticsInfo.getBloodUser(), R.color.base_black, pressurePersonTextView, 12);
-        setTextStyle(getString(R.string.community_statics_lost_times), staticsInfo.getBothUsers(), R.color.base_black, totalPersonTextView, 12);
+        setTextStyle(getString(R.string.community_statics_sugar_person), staticsInfo.getCommunityUser(), R.color.community_content_black, allPersonTextView, 12);
+        setTextStyle(getString(R.string.community_statics_sugar_person), staticsInfo.getSugarUser(), R.color.community_content_black, sugarPersonTextView, 12);
+        setTextStyle(getString(R.string.community_statics_pressure_person), staticsInfo.getBloodUser(), R.color.community_content_black, pressurePersonTextView, 12);
+        setTextStyle(getString(R.string.community_statics_total_person), staticsInfo.getBothUsers(), R.color.community_content_black, totalPersonTextView, 12);
 
-//        setTextStyle1(getString(R.string.community_statics_patient_num), staticsInfo.getSugarRates(), R.color.community_content_black, patientTextView);
-//        setTextStyle1(getString(R.string.community_statics_year_finish_num), staticsInfo.getEmptyRates(), R.color.community_content_black, yearFinishTextView);
-//        setTextStyle1(getString(R.string.community_statics_year_lost_num), staticsInfo.getUnemptyRates(), R.color.community_content_black, yearLostTextView);
+        setTextStyle1(getString(R.string.community_statics_all_rate), staticsInfo.getSugarRates(), R.color.base_black, allRateTextView);
+        setTextStyle1(getString(R.string.community_statics_empty_rate), staticsInfo.getEmptyRates(), R.color.base_black, emptyRateTextView);
+        setTextStyle1(getString(R.string.community_statics_unempty_rate), staticsInfo.getUnemptyRates(), R.color.base_black, unemptyRateTextView);
+        setTextStyle1(getString(R.string.community_statics_all_rate), staticsInfo.getAllBlood(), R.color.base_black, pressureRateTextView);
 
         firstCpv.setPercentage(TurnsUtils.getFloat(staticsInfo.getSugarRates(), 0));
         secondCpv.setPercentage(TurnsUtils.getFloat(staticsInfo.getEmptyRates(), 0));
         thirdCpv.setPercentage(TurnsUtils.getFloat(staticsInfo.getUnemptyRates(), 0));
+        pressureCpv.setPercentage(TurnsUtils.getFloat(staticsInfo.getBloodRates(), 0));
+        setBarChart();
+        setBarChartPressure();
+    }
+
+    /**
+     * 设置血糖
+     */
+    private void setBarChart() {
+        //线的名字集合
+        List<String> names = new ArrayList<>();
+        names.add("血糖");
+        names.add("血糖");
+        //多条柱状图数据集合
+        List<IBarData> data = new ArrayList<>();
+        // 单个柱状图数据
+
+        data.add(new TestBarData((TurnsUtils.getInt(staticsInfo.getSugarOne(), 0)), "第一季度"));
+        data.add(new TestBarData((TurnsUtils.getInt(staticsInfo.getSugarTwo(), 0)), "第二季度"));
+        data.add(new TestBarData((TurnsUtils.getInt(staticsInfo.getSugarThree(), 0)), "第三季度"));
+        data.add(new TestBarData((TurnsUtils.getInt(staticsInfo.getSugarFour(), 0)), "第四季度"));
+        data.add(new TestBarData((TurnsUtils.getInt(staticsInfo.getAlllSugar(), 0)), "年度"));
 
 
+        //设置y轴数据
+        YAxis leftAxis = sugarBarChart.getAxisLeft();
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setLabelCount(5, false);
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMaximum(100);
+
+        //设置不可点击
+        sugarBarChart.setTouchEnabled(true);
+        new BarChartHelper.Builder()
+                .setContext(getPageContext())
+                // 柱状图
+                .setBarChart(sugarBarChart)
+                .setBarColor(ContextCompat.getColor(getPageContext(), R.color.community_statics_barchart_green))
+                // 多柱状图
+                .setBarData(data)
+                // 多柱状图 标签名集合
+                .setLabels(names)
+                //一页X轴显示个数
+                .setDisplayCount(5)
+                // 标签显示隐藏
+                .setLegendEnable(false)
+                // 标签文字大小
+                .setLegendTextSize(16)
+                // 是否显示右边Y轴
+                .setyAxisRightEnable(false)
+                //X,Y轴是否绘制网格线
+                .setDrawGridLines(false)
+                .setGroupSpace(0.4f)
+                //X轴是否显示自定义数据，在IBarData接口中定义
+                .setXValueEnable(true)
+                .build();
+    }
+
+    /**
+     * 设置血压
+     */
+    private void setBarChartPressure() {
+        //线的名字集合
+        List<String> names = new ArrayList<>();
+        names.add("血糖");
+        names.add("血糖");
+        //多条柱状图数据集合
+        List<IBarData> data = new ArrayList<>();
+        // 单个柱状图数据
+
+        data.add(new TestBarData((TurnsUtils.getInt(staticsInfo.getBloodOne(), 0)), "第一季度"));
+        data.add(new TestBarData((TurnsUtils.getInt(staticsInfo.getBloodTwo(), 0)), "第二季度"));
+        data.add(new TestBarData((TurnsUtils.getInt(staticsInfo.getBloodThree(), 0)), "第三季度"));
+        data.add(new TestBarData((TurnsUtils.getInt(staticsInfo.getBloodFour(), 0)), "第四季度"));
+        data.add(new TestBarData((TurnsUtils.getInt(staticsInfo.getAllBlood(), 0)), "年度"));
+
+
+        //设置y轴数据
+        YAxis leftAxis = pressureBc.getAxisLeft();
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setLabelCount(5, false);
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMaximum(100);
+
+        //设置不可点击
+        pressureBc.setTouchEnabled(true);
+        new BarChartHelper.Builder()
+                .setContext(getPageContext())
+                // 柱状图
+                .setBarChart(pressureBc)
+                .setBarColor(ContextCompat.getColor(getPageContext(), R.color.community_statics_barchart_orange))
+                // 多柱状图
+                .setBarData(data)
+                // 多柱状图 标签名集合
+                .setLabels(names)
+                //一页X轴显示个数
+                .setDisplayCount(5)
+                // 标签显示隐藏
+                .setLegendEnable(false)
+                // 标签文字大小
+                .setLegendTextSize(16)
+                // 是否显示右边Y轴
+                .setyAxisRightEnable(false)
+                //X,Y轴是否绘制网格线
+                .setDrawGridLines(false)
+                .setGroupSpace(0.4f)
+                //X轴是否显示自定义数据，在IBarData接口中定义
+                .setXValueEnable(true)
+                .build();
     }
 
     private void setTextStyle(String content, String title, int color, TextView textView, int size) {
@@ -139,11 +269,57 @@ public class CommunityDataStatisticsActivity extends XYSoftUIBaseActivity {
         pressurePersonTextView = view.findViewById(R.id.tv_ds_pressure_num);
         totalPersonTextView = view.findViewById(R.id.tv_ds_total_person_num);
         firstCpv = view.findViewById(R.id.cpv_ds_first);
+        allRateTextView = view.findViewById(R.id.tv_ds_sugar_all_rate);
         secondCpv = view.findViewById(R.id.cpv_ds_second);
+        emptyRateTextView = view.findViewById(R.id.tv_ds_sugar_empty_rate);
+
         thirdCpv = view.findViewById(R.id.cpv_ds_third);
+        unemptyRateTextView = view.findViewById(R.id.tv_ds_sugar_unempty_rate);
         sugarBarChart = view.findViewById(R.id.bar_ds_finish_sugar);
         pressureCpv = view.findViewById(R.id.cpv_ds_sugar);
         pressureBc = view.findViewById(R.id.bar_ds_finish_pressure);
+        pressureRateTextView = view.findViewById(R.id.tv_ds_finish_pressure);
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_ds_time:
+                showTimeWindow();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void showTimeWindow() {
+        Calendar currentDate = Calendar.getInstance();
+        Calendar startDate = Calendar.getInstance();
+        Calendar endDate = Calendar.getInstance();
+        int currentYear = currentDate.get(Calendar.YEAR);
+        startDate.set(currentYear - 120, 0, 1, 0, 0);
+        TimePickerView timePickerView = new TimePickerBuilder(getPageContext(), (date, v) -> {
+            String content = DataUtils.convertDateToString(date, DataFormatManager.TIME_FORMAT_Y);
+            timeTextView.setText(content);
+            time = content;
+            getData();
+        }).setDate(currentDate).setRangDate(startDate, endDate)
+                .setType(new boolean[]{true, false, false, false, false, false})
+                .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
+                .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.black_text))
+                //                .isDialog(true)
+                //                .setDecorView(allLiner)
+                .build();
+        //        //设置dialog弹出位置
+        //        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM);
+        //        params.leftMargin = 0;
+        //        params.rightMargin = 0;
+        //        ViewGroup contentContainer = timePickerView.getDialogContainerLayout();
+        //        contentContainer.setLayoutParams(params);
+        //        timePickerView.getDialog().getWindow().setGravity(Gravity.BOTTOM);//可以改成Bottom
+        //        timePickerView.getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        timePickerView.show();
+
     }
 }

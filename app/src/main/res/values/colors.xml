@@ -124,4 +124,7 @@
     <color name="community_statics_green">#1FB5B7</color>
     <color name="community_statics_gray">#F0F3F7</color>
     <color name="community_statics_progress_blue">#1479EE</color>
+    <color name="community_statics_barchart_green">#26BFBA</color>
+    <color name="community_statics_barchart_orange">#F27144</color>
+    <color name="community_statics_barchart_pressure_green">#2FE081</color>
 </resources>

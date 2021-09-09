@@ -20,7 +20,8 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
                 <ImageView
                     android:id="@+id/iv_data_static_finish"
@@ -82,8 +83,8 @@
             <View
                 android:layout_width="0.5dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
                 android:background="@color/gray_light" />
 
             <TextView
@@ -99,8 +100,8 @@
             <View
                 android:layout_width="0.5dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
                 android:background="@color/gray_light" />
 
             <TextView
@@ -115,9 +116,9 @@
 
             <View
                 android:layout_width="0.5dp"
-                android:layout_height="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
                 android:background="@color/gray_light" />
 
             <TextView
@@ -130,12 +131,6 @@
                 android:textColor="@color/data_gray_light"
                 android:textSize="18sp" />
 
-            <View
-                android:layout_width="0.5dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/gray_light" />
 
         </LinearLayout>
 
@@ -172,30 +167,41 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="10dp"
+                        android:text="血糖达标率"
+                        android:textColor="@color/base_black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_ds_sugar_all_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
                         android:drawableLeft="@drawable/shape_bg_main_2"
                         android:drawablePadding="10dp"
-                        android:text="总达标率"
+                        android:text="@string/community_statics_all_rate"
                         android:textColor="#333333"
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_ds_sugar_empty_rate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:drawableLeft="@drawable/shape_bg_blue_2"
                         android:drawablePadding="10dp"
-                        android:text="空腹达标率"
+                        android:text="@string/community_statics_empty_rate"
                         android:textColor="#333333"
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_ds_sugar_unempty_rate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:drawableLeft="@drawable/shape_bg_green_2"
                         android:drawablePadding="10dp"
-                        android:text="非空腹达标率"
+                        android:text="@string/community_statics_unempty_rate"
                         android:textColor="#333333"
                         android:textSize="14sp" />
 
@@ -247,6 +253,30 @@
             </FrameLayout>
 
             <!--柱状图-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="测量完成率"
+                    android:textColor="@color/base_black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:text="(%)"
+                    android:textColor="#B7B7B7"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/bar_ds_finish_sugar"
                 android:layout_width="match_parent"
@@ -269,9 +299,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="血糖数据统计"
+                android:text="血压数据统计"
+                android:layout_marginLeft="15dp"
                 android:textColor="@color/base_black"
                 android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="血压达标率"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/base_black"
+                android:textSize="14sp" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -281,12 +321,13 @@
                 android:paddingRight="30dp">
 
                 <TextView
+                    android:id="@+id/tv_ds_finish_pressure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:drawableLeft="@drawable/shape_bg_green_2"
+                    android:layout_gravity="center|left"
+                    android:drawableLeft="@drawable/shape_bg_green_light_2"
                     android:drawablePadding="10dp"
-                    android:text="非空腹达标率"
+                    android:text="@string/community_statics_all_rate"
                     android:textColor="#333333"
                     android:textSize="14sp" />
 
@@ -295,24 +336,42 @@
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_gravity="right"
-                    app:circleBgColor="@color/gray_text"
+                    app:circleBgColor="@color/community_statics_gray"
                     app:circleIsGradient="false"
-                    app:circleProgressColor="@color/base_black" />
+                    app:circleProgressColor="@color/community_statics_barchart_pressure_green" />
             </FrameLayout>
 
-            <TextView
+
+            <!--柱状图-->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="测量完成率"
-                android:textColor="@color/base_black"
-                android:textSize="14sp" />
-            <!--柱状图-->
+                android:layout_marginStart="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="测量完成率"
+                    android:textColor="@color/base_black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:text="(%)"
+                    android:textColor="#B7B7B7"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/bar_ds_finish_pressure"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="@dimen/dp_10"
                 android:layout_marginBottom="@dimen/dp_10" />
 

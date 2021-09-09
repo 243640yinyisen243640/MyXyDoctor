@@ -180,4 +180,11 @@
     <string name="community_statics_patient_num">患者比例</string>
     <string name="community_statics_year_finish_num">年随访完成率</string>
     <string name="community_statics_year_lost_num">年失访率</string>
+    <string name="community_statics_all_rate">总达标率</string>
+    <string name="community_statics_empty_rate">空腹达标率</string>
+    <string name="community_statics_unempty_rate">非空腹达标率</string>
+    <string name="community_statics_all_person">总人数</string>
+    <string name="community_statics_sugar_person">糖尿病人数</string>
+    <string name="community_statics_pressure_person">高血压人数</string>
+    <string name="community_statics_total_person">同时合并人数</string>
 </resources>

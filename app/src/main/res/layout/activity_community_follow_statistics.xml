@@ -4,7 +4,9 @@
     style="@style/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/base_background">
+    android:background="@color/base_background"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,7 +51,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/shape_bg_main_white_90"
-                android:drawableRight="@drawable/right_arrow_down"
+                android:drawableRight="@drawable/base_arrow_down_white"
                 android:drawablePadding="40dp"
                 android:gravity="center"
                 android:paddingLeft="12dp"
@@ -308,7 +310,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@null"
-                android:dividerHeight="0dp" />
+                android:dividerHeight="0dp"
+                android:focusable="false" />
 
 
         </LinearLayout>

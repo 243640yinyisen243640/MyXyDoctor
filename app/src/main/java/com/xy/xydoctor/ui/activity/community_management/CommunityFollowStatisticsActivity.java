@@ -198,6 +198,7 @@ public class CommunityFollowStatisticsActivity extends XYSoftUIBaseActivity impl
         yearLostTextView = view.findViewById(R.id.tv_fs_follow_year_lost_num);
         listView = view.findViewById(R.id.rv_fs_follow_rate);
 
+        listView.setItemsCanFocus(false);
 
         firstCpv.setPercentage(50);//传入百分比的值
         secondCpv.setPercentage(30);//传入百分比的值
@@ -230,9 +231,10 @@ public class CommunityFollowStatisticsActivity extends XYSoftUIBaseActivity impl
         int currentYear = currentDate.get(Calendar.YEAR);
         startDate.set(currentYear - 120, 0, 1, 0, 0);
         TimePickerView timePickerView = new TimePickerBuilder(getPageContext(), (date, v) -> {
-            String content = DataUtils.convertDateToString(date, DataFormatManager.TIME_FORMAT_Y_M_D);
+            String content = DataUtils.convertDateToString(date, DataFormatManager.TIME_FORMAT_Y);
             timeTextView.setText(content);
             time = content;
+            getData();
         }).setDate(currentDate).setRangDate(startDate, endDate)
                 .setType(new boolean[]{true, false, false, false, false, false})
                 .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
