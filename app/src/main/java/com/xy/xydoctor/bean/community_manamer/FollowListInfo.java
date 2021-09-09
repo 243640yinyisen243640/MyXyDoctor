@@ -18,7 +18,15 @@ public class FollowListInfo {
      */
     private String unit_name;
 
-    private List<FollowListInfo> communityUser;
+    private List<FollowListChildListInfo> communityUser;
+
+    public List<FollowListChildListInfo> getCommunityUser() {
+        return communityUser;
+    }
+
+    public void setCommunityUser(List<FollowListChildListInfo> communityUser) {
+        this.communityUser = communityUser;
+    }
 
     public String getBuild_id() {
         return build_id;

@@ -3,6 +3,7 @@ package com.xy.xydoctor.ui.fragment.community_management;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RadioButton;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,8 +13,10 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.CommunityFollowUpChangeListAdapter;
 import com.xy.xydoctor.base.adapter.TabFragmentAdapter;
 import com.xy.xydoctor.base.fragment.XYBaseFragment;
+import com.xy.xydoctor.bean.community_manamer.FollowUpListAllInfo;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
+import com.xy.xydoctor.ui.activity.community_management.CommunityFollowUpActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityNoFinishActivity;
 import com.xy.xydoctor.utils.TipUtils;
 
@@ -37,6 +40,8 @@ public class CommunityFollowUpListFragment extends XYBaseFragment implements Tab
      * 1：待随访:2：失访:3：已完成
      */
     private String type;
+
+    private FollowUpListAllInfo allInfo;
 
     public static CommunityFollowUpListFragment newInstance(String type) {
         Bundle bundle = new Bundle();
@@ -62,16 +67,31 @@ public class CommunityFollowUpListFragment extends XYBaseFragment implements Tab
 
         Call<String> requestCall = DataManager.getFollowList(type, (call, response) -> {
             if (200 == response.code) {
-
+                allInfo = (FollowUpListAllInfo) response.object;
+                bindData();
+            } else {
+                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
         });
     }
 
+    private void bindData() {
+        CommunityFollowUpActivity activity = (CommunityFollowUpActivity) getActivity();
+        RadioButton firstRadioButton = activity.showFirst();
+        firstRadioButton.setText(allInfo.getFollowing());
+        RadioButton secondRadioButton = activity.showSecond();
+        secondRadioButton.setText(allInfo.getLosting());
+        RadioButton thirdRadioButton = activity.showThird();
+        thirdRadioButton.setText(allInfo.getFinished());
+
+        mAdapter = new CommunityFollowUpChangeListAdapter(getPageContext(), allInfo.getList(), type, new OnItemClickListener());
+    }
+
 
     private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_prefrerential_goods, null);
+        View view = View.inflate(getPageContext(), R.layout.activity_follow_up_list, null);
         mRecyclerView = getViewByID(view, R.id.rv_live_follow);
         containerView().addView(view);
 

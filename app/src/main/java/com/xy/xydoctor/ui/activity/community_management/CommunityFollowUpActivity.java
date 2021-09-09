@@ -2,6 +2,7 @@ package com.xy.xydoctor.ui.activity.community_management;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
@@ -25,6 +26,7 @@ import java.util.List;
 public class CommunityFollowUpActivity extends XYSoftUIBaseActivity implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener {
 
     private RadioGroup radioGroup;
+    private RadioButton waitRadioButton, lostRadioButton, finishRadioButton;
     private ViewPager viewPager;
 
     private List<Fragment> fragments;
@@ -48,6 +50,9 @@ public class CommunityFollowUpActivity extends XYSoftUIBaseActivity implements V
     private View initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_community_follow_up_change, null);
         radioGroup = getViewByID(view, R.id.rg_spe_shelves);
+        waitRadioButton = getViewByID(view, R.id.rb_follow_wait_follow);
+        lostRadioButton = getViewByID(view, R.id.rb_follow_lost_follow);
+        finishRadioButton = getViewByID(view, R.id.rb_follow_finish_follow);
         viewPager = getViewByID(view, R.id.vp_spe_shelves);
         return view;
     }
@@ -88,7 +93,17 @@ public class CommunityFollowUpActivity extends XYSoftUIBaseActivity implements V
         viewPager.setCurrentItem(0);//默认选中项
         radioGroup.check(radioGroup.getChildAt(0).getId());
         viewPager.setOffscreenPageLimit(fragments.size());
-
     }
 
+    public RadioButton showFirst() {
+        return waitRadioButton;
+    }
+
+    public RadioButton showSecond() {
+        return waitRadioButton;
+    }
+
+    public RadioButton showThird() {
+        return waitRadioButton;
+    }
 }

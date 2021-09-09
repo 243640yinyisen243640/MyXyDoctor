@@ -388,6 +388,10 @@
         <activity
             android:name=".base.activity.BaseWebView1Activity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.community_management.CommunityFollowUpActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

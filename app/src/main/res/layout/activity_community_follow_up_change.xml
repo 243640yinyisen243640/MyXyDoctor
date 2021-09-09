@@ -20,16 +20,19 @@
             android:paddingTop="10dp">
 
             <RadioButton
+                android:id="@+id/rb_follow_wait_follow"
                 style="@style/shelves_goods_rb_other"
                 android:checked="true"
                 android:text="@string/community_wait_follow_up" />
 
 
             <RadioButton
+                android:id="@+id/rb_follow_lost_follow"
                 style="@style/shelves_goods_rb_other"
                 android:text="@string/goods_add_server" />
 
             <RadioButton
+                android:id="@+id/rb_follow_finish_follow"
                 style="@style/shelves_goods_rb_other"
                 android:text="@string/goods_add_spe" />
 

@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lyd.baselib.widget.view.MyListView;
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
+import com.xy.xydoctor.base.adapter.UIBaseRecycleViewAdapter;
+import com.xy.xydoctor.bean.community_manamer.FollowListInfo;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 
 import java.util.List;
@@ -20,43 +21,34 @@ import java.util.List;
  * 作者: LYD
  * 创建日期: 2019/7/19 11:09
  */
-public class CommunityFollowUpChangeListAdapter extends RecyclerView.Adapter<CommunityFollowUpChangeListAdapter.ViewHolder> {
-    private Context context;
-    private List<FollowUpAgentListBean> list;
-    private IAdapterViewClickListener clickListener;
+public class CommunityFollowUpChangeListAdapter extends UIBaseRecycleViewAdapter<FollowListInfo> {
 
     private String type;
 
-
-    public CommunityFollowUpChangeListAdapter(Context context, List<FollowUpAgentListBean> list, String type, IAdapterViewClickListener clickListener) {
-        this.context = context;
-        this.list = list;
-        this.type = type;
-        this.clickListener = clickListener;
+    public CommunityFollowUpChangeListAdapter(Context mContext, List<FollowListInfo> mList, String type, IAdapterViewClickListener mListener) {
+        super(mContext, mList, mListener);
     }
+
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //实例化得到Item布局文件的View对象
-        View v = View.inflate(context, R.layout.item_community_follow_up_change, null);
+        View v = View.inflate(getContext(), R.layout.item_community_follow_up_change, null);
         //返回MyViewHolder的对象
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        FollowUpAgentListBean info = list.get(position);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ViewHolder viewHolder = (ViewHolder) holder;
+        FollowListInfo info = getList().get(position);
 
-
-        CommunityFollowUpChangeChildListAdapter childListAdapter = new CommunityFollowUpChangeChildListAdapter(context, R.layout.item_community_follow_up_change_child_list, list.get(position).getPlan_list(), type, position, clickListener);
-        holder.myListView.setAdapter(childListAdapter);
+        viewHolder.nameTextView.setText(info.getBuild_name() + "号楼" + info.getUnit_name() + "单元");
+        CommunityFollowUpChangeChildListAdapter childListAdapter = new CommunityFollowUpChangeChildListAdapter(getContext(), info.getCommunityUser(), getListener());
+        viewHolder.myListView.setAdapter(childListAdapter);
     }
 
-    @Override
-    public int getItemCount() {
-        return list == null ? 0 : list.size();
-    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView nameTextView;

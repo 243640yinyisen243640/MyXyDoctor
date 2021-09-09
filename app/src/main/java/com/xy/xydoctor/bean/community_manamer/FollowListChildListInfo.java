@@ -75,4 +75,124 @@ public class FollowListChildListInfo {
      时间
      */
     private String finishtime;
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getDiabeteslei() {
+        return diabeteslei;
+    }
+
+    public void setDiabeteslei(String diabeteslei) {
+        this.diabeteslei = diabeteslei;
+    }
+
+    public String getBloodLevel() {
+        return bloodLevel;
+    }
+
+    public void setBloodLevel(String bloodLevel) {
+        this.bloodLevel = bloodLevel;
+    }
+
+    public String getBuild_id() {
+        return build_id;
+    }
+
+    public void setBuild_id(String build_id) {
+        this.build_id = build_id;
+    }
+
+    public String getBuild_name() {
+        return build_name;
+    }
+
+    public void setBuild_name(String build_name) {
+        this.build_name = build_name;
+    }
+
+    public String getUnit_name() {
+        return unit_name;
+    }
+
+    public void setUnit_name(String unit_name) {
+        this.unit_name = unit_name;
+    }
+
+    public String getHouse_num() {
+        return house_num;
+    }
+
+    public void setHouse_num(String house_num) {
+        this.house_num = house_num;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getSugar() {
+        return sugar;
+    }
+
+    public void setSugar(String sugar) {
+        this.sugar = sugar;
+    }
+
+    public String getBlood() {
+        return blood;
+    }
+
+    public void setBlood(String blood) {
+        this.blood = blood;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getFinishtime() {
+        return finishtime;
+    }
+
+    public void setFinishtime(String finishtime) {
+        this.finishtime = finishtime;
+    }
 }
