@@ -14,6 +14,7 @@ import com.xy.xydoctor.bean.community_manamer.CommunityUseMedicineInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityUseMedicineUserInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityUserInfo;
 import com.xy.xydoctor.bean.community_manamer.DataAbnormalInfo;
+import com.xy.xydoctor.bean.community_manamer.DepartmentInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowListChildListInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowListInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
@@ -512,5 +513,20 @@ public class DataManager {
         map.put("build_id", build_id);
         map.put("access_token", SPStaticUtils.getString("token"));
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/doctor/Community/delBuild", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 获取小区列表
+     *
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getDepartmentList(String build_id, String hosp_userid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("build_id", build_id);
+        map.put("hosp_userid", hosp_userid);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, DepartmentInfo.class, "/doctor/community/getHosDep", map, successCallBack, failureCallBack);
     }
 }

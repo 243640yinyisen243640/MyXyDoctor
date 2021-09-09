@@ -174,6 +174,55 @@
             android:text="@string/community_type_of_disease"
             android:textStyle="normal" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/cb_filter_disease_sugar"
+                style="@style/user_add_type"
+                android:text="糖尿病" />
+
+            <TextView
+                android:id="@+id/cb_filter_disease_presure"
+                style="@style/user_add_type"
+                android:layout_marginLeft="3dp"
+                android:text="高血压" />
+
+            <TextView
+                android:id="@+id/tv_filter_disease_over_weight"
+                style="@style/user_add_type"
+                android:layout_marginLeft="3dp"
+                android:text="超重/肥胖" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_filter_disease_head"
+                style="@style/user_add_type"
+                android:text="脑卒中" />
+
+            <CheckBox
+                android:id="@+id/cb_filter_disease_fatty"
+                style="@style/user_add_type"
+                android:layout_marginLeft="3dp"
+                android:text="脂肪肝" />
+
+            <CheckBox
+                android:id="@+id/cb_filter_disease_heart"
+                style="@style/user_add_type"
+                android:layout_marginLeft="3dp"
+                android:text="冠心病" />
+
+        </LinearLayout>
+
         <com.xy.xydoctor.customerView.NoConflictGridView
             android:id="@+id/gv_user_add_disease"
             android:layout_width="match_parent"
@@ -182,7 +231,8 @@
             android:layout_marginBottom="15dp"
             android:horizontalSpacing="10dp"
             android:numColumns="3"
-            android:verticalSpacing="10dp" />
+            android:verticalSpacing="10dp"
+            android:visibility="gone" />
 
 
         <TextView
@@ -190,6 +240,68 @@
             android:padding="15dp"
             android:text="@string/user_add_special_info"
             android:textStyle="normal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_filter_disease_apart"
+                style="@style/user_add_type"
+                android:text="党员" />
+
+            <CheckBox
+                android:id="@+id/cb_filter_disease_ill"
+                style="@style/user_add_type"
+                android:layout_marginLeft="3dp"
+                android:text="残疾人" />
+
+            <CheckBox
+                android:id="@+id/cb_filter_disease_mental"
+                style="@style/user_add_type"
+                android:layout_marginLeft="3dp"
+                android:text="精神疾病" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_filter_disease_important"
+                style="@style/user_add_type"
+                android:text="重点关注" />
+
+            <CheckBox
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:button="@null"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:text="@string/app_name"
+                android:textColor="@color/white" />
+
+            <CheckBox
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:button="@null"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:text="@string/app_name"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
 
         <com.xy.xydoctor.customerView.NoConflictGridView
             android:id="@+id/gv_user_add_type"
@@ -199,7 +311,8 @@
             android:layout_marginBottom="15dp"
             android:horizontalSpacing="10dp"
             android:numColumns="3"
-            android:verticalSpacing="10dp" />
+            android:verticalSpacing="10dp"
+            android:visibility="gone" />
 
         <TextView
             style="@style/community_filter_title"

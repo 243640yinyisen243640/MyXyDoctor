@@ -10,6 +10,5 @@
     android:paddingBottom="12dp"
     android:text="糖尿病"
     android:textColor="@color/selector_color_filter_text"
-    android:textSize="14sp">
+    android:textSize="14sp"/>
 
-</TextView>

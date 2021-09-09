@@ -837,5 +837,18 @@
         <item name="android:textSize">13sp</item>
     </style>
 
+    <style name="user_add_type">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:background">@drawable/selector_community_user_add_choose</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textColor">@color/selector_color_filter_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 
 </resources>

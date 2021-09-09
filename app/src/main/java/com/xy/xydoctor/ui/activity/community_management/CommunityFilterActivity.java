@@ -332,6 +332,8 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
                 TipUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (call, throwable) -> {
+            TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.network_error);
+
         });
 
     }

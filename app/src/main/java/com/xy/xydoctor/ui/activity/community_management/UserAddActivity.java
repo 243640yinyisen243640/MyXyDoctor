@@ -2,6 +2,7 @@ package com.xy.xydoctor.ui.activity.community_management;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,14 +17,18 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.FilterDiseaseTypeAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
+import com.xy.xydoctor.bean.community_manamer.DepartmentInfo;
 import com.xy.xydoctor.bean.community_manamer.FilterSugarPressureInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
-import com.xy.xydoctor.customerView.NoConflictGridView;
+import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.utils.DataUtils;
+import com.xy.xydoctor.utils.TipUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * Author: LYD
@@ -68,14 +73,11 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
      * 选择医生
      */
     private TextView doctorTextView;
-    /**
-     * 疾病
-     */
-    private NoConflictGridView diseaseGridView;
-    /**
-     * 类型
-     */
-    private NoConflictGridView typeGridView;
+
+    private TextView sugarTextView, pressureTextView, overTextView;
+
+    private CheckBox headCheckBox, fattyCheckBox, heartCheckBox;
+    private CheckBox apartCheckBox, illCheckBox, mentalCheckBox, importantCheckBox;
     /**
      * 血糖仪输入
      */
@@ -99,14 +101,21 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
 
     private FilterDiseaseTypeAdapter diseaseTypeAdapter;
 
+    private String departmentid = "-1";
+    private String doctorID = "-1";
+    private String hospitalid;
+
+    private String diabeteslei;
+
+    private String buildid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        buildid = getIntent().getStringExtra("buildid");
         topViewManager().titleTextView().setText(R.string.user_add_title);
         containerView().addView(initView());
         initListener();
-        initValues();
     }
 
     private void initListener() {
@@ -131,8 +140,16 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         hospitalTextView = view.findViewById(R.id.tv_user_add_hospital_choose);
         departmentTextView = view.findViewById(R.id.tv_user_add_department_choose);
         doctorTextView = view.findViewById(R.id.tv_user_add_doctor_choose);
-        diseaseGridView = view.findViewById(R.id.gv_user_add_disease);
-        typeGridView = view.findViewById(R.id.gv_user_add_type);
+        sugarTextView = view.findViewById(R.id.cb_filter_disease_sugar);
+        pressureTextView = view.findViewById(R.id.cb_filter_disease_presure);
+        overTextView = view.findViewById(R.id.tv_filter_disease_over_weight);
+        headCheckBox = view.findViewById(R.id.cb_filter_disease_head);
+        fattyCheckBox = view.findViewById(R.id.cb_filter_disease_fatty);
+        heartCheckBox = view.findViewById(R.id.cb_filter_disease_heart);
+        apartCheckBox = view.findViewById(R.id.cb_filter_disease_apart);
+        illCheckBox = view.findViewById(R.id.cb_filter_disease_ill);
+        mentalCheckBox = view.findViewById(R.id.cb_filter_disease_mental);
+        importantCheckBox = view.findViewById(R.id.cb_filter_disease_important);
         sugarEditText = view.findViewById(R.id.et_user_add_device_sugar);
         sugarImageView = view.findViewById(R.id.iv_user_add_device_sugar);
         pressureEditText = view.findViewById(R.id.et_user_add_device_pressure);
@@ -140,59 +157,6 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         return view;
     }
 
-    private void initValues() {
-        typeInfoList = new ArrayList<>();
-        FilterSugarPressureInfo typeInfo1 = new FilterSugarPressureInfo("糖尿病", "1");
-        typeInfoList.add(typeInfo1);
-        FilterSugarPressureInfo typeInfo2 = new FilterSugarPressureInfo("高血压", "2");
-        typeInfoList.add(typeInfo2);
-        FilterSugarPressureInfo typeInfo3 = new FilterSugarPressureInfo("超重/肥胖", "3");
-        typeInfoList.add(typeInfo3);
-        FilterSugarPressureInfo typeInfo4 = new FilterSugarPressureInfo("脑卒中", "4");
-        typeInfoList.add(typeInfo4);
-        FilterSugarPressureInfo typeInfo5 = new FilterSugarPressureInfo("脂肪肝", "5");
-        typeInfoList.add(typeInfo5);
-        FilterSugarPressureInfo typeInfo6 = new FilterSugarPressureInfo("冠心病", "6");
-        typeInfoList.add(typeInfo6);
-
-        diseaseTypeAdapter = new FilterDiseaseTypeAdapter(getPageContext(), typeInfoList, "2");
-        diseaseGridView.setAdapter(diseaseTypeAdapter);
-
-
-        List<FilterSugarPressureInfo> otherInfoList = new ArrayList<>();
-        FilterSugarPressureInfo otherInfoList3 = new FilterSugarPressureInfo("党员", "1");
-        otherInfoList.add(otherInfoList3);
-        FilterSugarPressureInfo otherInfoList1 = new FilterSugarPressureInfo("残疾人", "2");
-        otherInfoList.add(otherInfoList1);
-        FilterSugarPressureInfo otherInfoList2 = new FilterSugarPressureInfo("精神疾病", "3");
-        otherInfoList.add(otherInfoList2);
-
-        FilterSugarPressureInfo otherInfoList4 = new FilterSugarPressureInfo("重点关注", "4");
-        otherInfoList.add(otherInfoList4);
-
-        diseaseGridView.setOnItemClickListener((parent, view, position, id) -> {
-            List<FilterSugarPressureInfo> sugarList = new ArrayList<>();
-            FilterSugarPressureInfo sugar1 = new FilterSugarPressureInfo("一型", "1");
-            sugarList.add(sugar1);
-            FilterSugarPressureInfo sugar2 = new FilterSugarPressureInfo("二型", "2");
-            sugarList.add(sugar2);
-            FilterSugarPressureInfo sugar3 = new FilterSugarPressureInfo("妊娠", "3");
-            sugarList.add(sugar3);
-            FilterSugarPressureInfo sugar4 = new FilterSugarPressureInfo("其他", "4");
-            sugarList.add(sugar4);
-            showSugarOrPressureType(sugarList, typeInfoList.get(position).getDiseaseName(), position);
-
-        });
-        FilterDiseaseTypeAdapter otherTypeAdapter = new FilterDiseaseTypeAdapter(getPageContext(), otherInfoList, "2");
-        typeGridView.setAdapter(otherTypeAdapter);
-
-        typeGridView.setOnItemClickListener((parent, view, position, id) -> {
-            otherInfoList.get(position).setCheck(!otherInfoList.get(position).isCheck());
-            otherTypeAdapter.notifyDataSetChanged();
-
-        });
-
-    }
 
     @Override
     public void onClick(View v) {
@@ -208,14 +172,35 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
 
                 break;
             case R.id.tv_user_add_hospital_choose:
+                getHospital();
                 break;
             case R.id.tv_user_add_department_choose:
+                getDepartment();
                 break;
             case R.id.tv_user_add_doctor_choose:
+                if ("-1".equals(departmentid)) {
+                    TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.user_add_department_choose);
+                    return;
+                }
+                getDepartmentDoctor();
                 break;
             case R.id.iv_user_add_device_sugar:
                 break;
             case R.id.iv_user_add_device_pressure:
+                break;
+            case R.id.cb_filter_disease_sugar:
+                List<FilterSugarPressureInfo> sugarList = new ArrayList<>();
+                FilterSugarPressureInfo info1 = new FilterSugarPressureInfo("I型糖尿病", "1");
+                sugarList.add(info1);
+                FilterSugarPressureInfo info2 = new FilterSugarPressureInfo("II型糖尿病", "1");
+                sugarList.add(info2);
+                FilterSugarPressureInfo info3 = new FilterSugarPressureInfo("妊娠糖尿病", "1");
+                sugarList.add(info3);
+                FilterSugarPressureInfo info4 = new FilterSugarPressureInfo("其他", "1");
+                sugarList.add(info4);
+                FilterSugarPressureInfo info5 = new FilterSugarPressureInfo("无", "0");
+                sugarList.add(info5);
+                getSugar(sugarList);
                 break;
             default:
                 break;
@@ -223,27 +208,116 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
     }
 
 
-    /**
-     * 选择糖尿病或者高血压的类型
-     */
-    private void showSugarOrPressureType(List<FilterSugarPressureInfo> diseaseTypeInfos, String diseaseName, int position) {
-        OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
-            String s = diseaseTypeInfos.get(options1).getDiseaseName();
-            typeInfoList.get(position).setDiseaseName(s);
-            typeInfoList.get(position).setCheck(!typeInfoList.get(position).isCheck());
-            diseaseTypeAdapter.notifyDataSetChanged();
-        }).setLineSpacingMultiplier(2.5f)
-                .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray))
-                .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
-                .setTitleText(diseaseName)
-                .build();
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < diseaseTypeInfos.size(); i++) {
-            String typeName = diseaseTypeInfos.get(i).getDiseaseName();
-            list.add(typeName);
+    private void getHospital() {
+        List<DepartmentInfo> logisticsCompanyInfos = new ArrayList<>();
+        if (logisticsCompanyInfos != null && logisticsCompanyInfos.size() > 0) {
+            OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
+                hospitalid = logisticsCompanyInfos.get(options1).getHosp_userid();
+                String s = logisticsCompanyInfos.get(options1).getHosp_name();
+                hospitalTextView.setText(s);
+            }).setLineSpacingMultiplier(2.5f)
+                    .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
+                    .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
+                    .build();
+            List<String> list = new ArrayList<>();
+            for (int i = 0; i < logisticsCompanyInfos.size(); i++) {
+                String typeName = logisticsCompanyInfos.get(i).getHosp_name();
+                list.add(typeName);
+            }
+            optionsPickerView.setPicker(list);
+            optionsPickerView.show();
         }
-        optionsPickerView.setPicker(list);
-        optionsPickerView.show();
+
+    }
+
+    private void getSugar(List<FilterSugarPressureInfo> releationList) {
+        if (releationList != null && releationList.size() > 0) {
+            OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
+                diabeteslei = releationList.get(options1).getCheckID();
+                String s = releationList.get(options1).getDiseaseName();
+                sugarTextView.setText(s);
+                diseaseTypeAdapter.notifyDataSetChanged();
+            }).setLineSpacingMultiplier(2.5f)
+                    .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
+                    .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
+                    .build();
+            List<String> list = new ArrayList<>();
+            for (int i = 0; i < releationList.size(); i++) {
+                String typeName = releationList.get(i).getDiseaseName();
+                list.add(typeName);
+            }
+            optionsPickerView.setPicker(list);
+            optionsPickerView.show();
+        }
+    }
+
+    /**
+     * 获取科室
+     */
+    private void getDepartment() {
+        TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
+        Call<String> requestCall = DataManager.getDepartmentList(buildid, hospitalid, (call, response) -> {
+            TipUtils.getInstance().dismissProgressDialog();
+            if (200 == response.code) {
+                List<DepartmentInfo> logisticsCompanyInfos = (List<DepartmentInfo>) response.object;
+                if (logisticsCompanyInfos != null && logisticsCompanyInfos.size() > 0) {
+                    OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
+                        departmentid = logisticsCompanyInfos.get(options1).getDep_userid();
+                        String s = logisticsCompanyInfos.get(options1).getDepname();
+                        departmentTextView.setText(s);
+                    }).setLineSpacingMultiplier(2.5f)
+                            .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
+                            .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
+                            .build();
+                    List<String> list = new ArrayList<>();
+                    for (int i = 0; i < logisticsCompanyInfos.size(); i++) {
+                        String typeName = logisticsCompanyInfos.get(i).getDepname();
+                        list.add(typeName);
+                    }
+                    optionsPickerView.setPicker(list);
+                    optionsPickerView.show();
+                }
+            } else {
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, throwable) -> {
+            TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.network_error);
+        });
+
+    }
+
+    /**
+     * 获取楼栋
+     */
+    private void getDepartmentDoctor() {
+        TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
+        Call<String> requestCall = DataManager.getCommunityList((call, response) -> {
+            TipUtils.getInstance().dismissProgressDialog();
+            if (200 == response.code) {
+                List<DepartmentInfo> logisticsCompanyInfos = (List<DepartmentInfo>) response.object;
+                if (logisticsCompanyInfos != null && logisticsCompanyInfos.size() > 0) {
+                    OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
+                        doctorID = logisticsCompanyInfos.get(options1).getDoc_userid();
+                        String s = logisticsCompanyInfos.get(options1).getDocname();
+                        departmentTextView.setText(s);
+                    }).setLineSpacingMultiplier(2.5f)
+                            .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
+                            .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
+                            .build();
+                    List<String> list = new ArrayList<>();
+                    for (int i = 0; i < logisticsCompanyInfos.size(); i++) {
+                        String typeName = logisticsCompanyInfos.get(i).getDocname();
+                        list.add(typeName);
+                    }
+                    optionsPickerView.setPicker(list);
+                    optionsPickerView.show();
+                }
+            } else {
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, throwable) -> {
+            TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.network_error);
+        });
 
     }
 
