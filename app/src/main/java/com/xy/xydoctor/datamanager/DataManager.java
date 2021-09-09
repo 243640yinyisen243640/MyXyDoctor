@@ -430,4 +430,26 @@ public class DataManager {
         map.put("access_token", SPStaticUtils.getString("token"));
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, FollowUpListAllInfo.class, "/doctor/Community/followLists", map, successCallBack, failureCallBack);
     }
+
+    /**
+     * @param status 1待随访 2失访
+     * @param userid 患者userid
+     * @param close 关闭 1是 0否
+     * @param reasonType 1未接通 2拒绝随访 3拒接 4数据不清 5其它
+     * @param reason 原因
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+
+    public static Call<String> followEdit(String status,String userid,String close,String reasonType, String reason, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("status", status);
+        map.put("userid", userid);
+        map.put("close", close);
+        map.put("reasonType", reasonType);
+        map.put("reason", reason);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/doctor/Community/editFollow", map, successCallBack, failureCallBack);
+    }
 }

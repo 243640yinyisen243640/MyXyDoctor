@@ -1,6 +1,7 @@
 package com.xy.xydoctor.ui.fragment.community_management;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
@@ -124,13 +125,19 @@ public class CommunityFollowUpListFragment extends XYBaseFragment implements Tab
         @Override
         public void adapterClickListener(int position, int index, View view) {
             //二级的点击事件
+            Intent intent;
             switch (view.getId()) {
                 case R.id.tv_fuc_child_no_finish:
-                    Intent intent = new Intent(getPageContext(), CommunityNoFinishActivity.class);
+                    intent = new Intent(getPageContext(), CommunityNoFinishActivity.class);
+                    intent.putExtra("type", type);
+                    intent.putExtra("userid", allInfo.getList().get(position).getCommunityUser().get(index).getUserid());
                     startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
                     break;
                 case R.id.tv_fuc_child_call_phone:
-
+                    intent = new Intent(Intent.ACTION_DIAL);
+                    Uri data = Uri.parse("tel:" + allInfo.getList().get(position).getCommunityUser().get(index).getTel());
+                    intent.setData(data);
+                    startActivity(intent);
                     break;
                 default:
                     break;

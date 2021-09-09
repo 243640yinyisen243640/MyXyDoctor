@@ -27,8 +27,10 @@ public class CommunityFollowUpChangeChildListAdapter extends XYSoftBaseAdapter<F
     private IAdapterViewClickListener clickListener;
     private int parentPosi;
 
-    public CommunityFollowUpChangeChildListAdapter(Context context, List<FollowListChildListInfo> list, IAdapterViewClickListener clickListener) {
+    public CommunityFollowUpChangeChildListAdapter(Context context, List<FollowListChildListInfo> list, String type, IAdapterViewClickListener clickListener) {
         super(context, list);
+        this.clickListener = clickListener;
+        this.type = type;
     }
 
     @Override
@@ -56,8 +58,14 @@ public class CommunityFollowUpChangeChildListAdapter extends XYSoftBaseAdapter<F
         }
         FollowListChildListInfo info = getList().get(position);
 
+        if ("3".equals(type)) {
+            holder.noFinishTextView.setVisibility(View.GONE);
+        } else {
+            holder.noFinishTextView.setVisibility(View.VISIBLE);
+        }
+
         SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
-        stringBuilder.append(info.getNickname());
+        stringBuilder.append(info.getNickname() + "  ");
         int start = stringBuilder.length();
         stringBuilder.append(info.getHouse_num());
         stringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(), R.color.base_black)), 0, start, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
@@ -84,14 +92,14 @@ public class CommunityFollowUpChangeChildListAdapter extends XYSoftBaseAdapter<F
             holder.pressureTextView.setText(R.string.community_user_info_pressure_two);
         }
 
-        holder.sugarFollowTextView.setText(info.getSugar());
-        holder.pressureFollowTextView.setText(info.getBlood());
+        holder.sugarFollowTextView.setText("血糖随访" + info.getSugar());
+        holder.pressureFollowTextView.setText("血压随访" + info.getBlood());
 
         if ("2".equals(type)) {
-            if (!TextUtils.isEmpty(info.getReason())){
+            if (!TextUtils.isEmpty(info.getReason())) {
                 holder.memoLinearLayout.setVisibility(View.VISIBLE);
             }
-        }else {
+        } else {
             holder.memoLinearLayout.setVisibility(View.GONE);
         }
         MyClickListener clickListener = new MyClickListener(position);

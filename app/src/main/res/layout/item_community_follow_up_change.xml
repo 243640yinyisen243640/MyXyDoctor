@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_follow_click"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -15,6 +16,7 @@
             android:id="@+id/tv_fuc_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="10dp"
             android:layout_marginLeft="15dp"
             android:drawableLeft="@drawable/community_location"
             android:drawablePadding="5dp"

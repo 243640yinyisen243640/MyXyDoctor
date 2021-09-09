@@ -3,6 +3,7 @@ package com.xy.xydoctor.adapter.community_manager;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,20 +46,27 @@ public class CommunityFollowUpChangeListAdapter extends UIBaseRecycleViewAdapter
         FollowListInfo info = getList().get(position);
 
         viewHolder.nameTextView.setText(info.getBuild_name() + "号楼" + info.getUnit_name() + "单元");
-        CommunityFollowUpChangeChildListAdapter childListAdapter = new CommunityFollowUpChangeChildListAdapter(getContext(), info.getCommunityUser(), getListener());
+        CommunityFollowUpChangeChildListAdapter childListAdapter = new CommunityFollowUpChangeChildListAdapter(getContext(), info.getCommunityUser(), type, getListener());
         viewHolder.myListView.setAdapter(childListAdapter);
+        viewHolder.clickLinearLayout.setOnClickListener(v -> {
+            if (getListener() != null) {
+                getListener().adapterClickListener(position, v);
+            }
+        });
+
     }
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView nameTextView;
         private MyListView myListView;
+        LinearLayout clickLinearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.tv_fuc_name);
             myListView = itemView.findViewById(R.id.lv_fuc_child);
-
+            clickLinearLayout = itemView.findViewById(R.id.ll_follow_click);
         }
     }
 

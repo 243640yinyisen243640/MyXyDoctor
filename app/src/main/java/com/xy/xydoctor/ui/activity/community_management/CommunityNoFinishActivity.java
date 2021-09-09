@@ -11,10 +11,14 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
-import com.xy.xydoctor.bean.community_manamer.DiseaseTypeInfo;
+import com.xy.xydoctor.bean.community_manamer.FilterSugarPressureInfo;
+import com.xy.xydoctor.datamanager.DataManager;
+import com.xy.xydoctor.utils.TipUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * Author: LYD
@@ -27,18 +31,35 @@ public class CommunityNoFinishActivity extends XYSoftUIBaseActivity implements V
     private TextView closeTextView;
     private TextView submitTextView;
 
+    private String checkID = "0";
+
+    /**
+     * 1:待随访  2：失访
+     */
+    private String type;
+    private String userid;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        type = getIntent().getStringExtra("type");
+        userid = getIntent().getStringExtra("userid");
         topViewManager().titleTextView().setText(R.string.goods_add_spe_no_finish);
         containerView().addView(initView());
+        initLiseter();
+    }
+
+    private void initLiseter() {
+        reasonTextView.setOnClickListener(this);
+        closeTextView.setOnClickListener(this);
+        submitTextView.setOnClickListener(this);
     }
 
     private View initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_community_no_finish, null);
-        reasonTextView = findViewById(R.id.tv_no_finish_choose_reason);
-        closeTextView = findViewById(R.id.tv_no_finish_choose_close);
-        submitTextView = findViewById(R.id.tv_no_finish_submit);
+        reasonTextView = view.findViewById(R.id.tv_no_finish_choose_reason);
+        closeTextView = view.findViewById(R.id.tv_no_finish_choose_close);
+        submitTextView = view.findViewById(R.id.tv_no_finish_submit);
         return view;
     }
 
@@ -47,16 +68,16 @@ public class CommunityNoFinishActivity extends XYSoftUIBaseActivity implements V
 
         switch (v.getId()) {
             case R.id.tv_no_finish_choose_reason:
-                List<DiseaseTypeInfo> reasonList = new ArrayList<>();
-                DiseaseTypeInfo sugar1 = new DiseaseTypeInfo("电话打不通");
+                List<FilterSugarPressureInfo> reasonList = new ArrayList<>();
+                FilterSugarPressureInfo sugar1 = new FilterSugarPressureInfo("电话打不通", "1");
                 reasonList.add(sugar1);
-                DiseaseTypeInfo sugar2 = new DiseaseTypeInfo("患者拒绝随访");
+                FilterSugarPressureInfo sugar2 = new FilterSugarPressureInfo("患者拒绝随访", "2");
                 reasonList.add(sugar2);
-                DiseaseTypeInfo sugar3 = new DiseaseTypeInfo("拒接");
+                FilterSugarPressureInfo sugar3 = new FilterSugarPressureInfo("拒接", "3");
                 reasonList.add(sugar3);
-                DiseaseTypeInfo sugar4 = new DiseaseTypeInfo("患者个人检验数据不清楚");
+                FilterSugarPressureInfo sugar4 = new FilterSugarPressureInfo("患者个人检验数据不清楚", "4");
                 reasonList.add(sugar4);
-                DiseaseTypeInfo sugar5 = new DiseaseTypeInfo("其他");
+                FilterSugarPressureInfo sugar5 = new FilterSugarPressureInfo("其他", "5");
                 reasonList.add(sugar5);
                 showSugarOrPressureType(reasonList);
                 break;
@@ -68,19 +89,34 @@ public class CommunityNoFinishActivity extends XYSoftUIBaseActivity implements V
                 }
                 break;
             case R.id.tv_no_finish_submit:
+                upLoadData();
                 break;
             default:
                 break;
         }
     }
 
+    private void upLoadData() {
+        Call<String> requestCall = DataManager.followEdit(type, userid, closeTextView.isSelected() ? "1" : "0", checkID, "", (call, response) -> {
+            if (response.code == 200) {
+                setResult(RESULT_OK);
+                finish();
+            } else {
+                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+            }
+        }, (call, t) -> {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        });
+    }
+
     /**
      * 选择糖尿病或者高血压的类型
      */
-    private void showSugarOrPressureType(List<DiseaseTypeInfo> diseaseTypeInfos) {
+    private void showSugarOrPressureType(List<FilterSugarPressureInfo> diseaseTypeInfos) {
         OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
             String s = diseaseTypeInfos.get(options1).getDiseaseName();
             reasonTextView.setText(s);
+            checkID = diseaseTypeInfos.get(options1).getCheckID();
         }).setLineSpacingMultiplier(2.5f)
                 .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray))
                 .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
