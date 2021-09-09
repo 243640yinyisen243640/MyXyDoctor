@@ -132,6 +132,7 @@
     <string name="please_add_building_num">请输入小区楼号</string>
     <string name="please_add_building_high">请输入层高</string>
     <string name="please_add_building_unit_num">请输入单元数量</string>
+    <string name="please_add_building_zero">不能输入零</string>
     <string name="add_building_high">层高</string>
     <string name="add_building_unit_num">单元数量</string>
     <string name="base_save">保存</string>
@@ -187,4 +188,7 @@
     <string name="community_statics_sugar_person">糖尿病人数</string>
     <string name="community_statics_pressure_person">高血压人数</string>
     <string name="community_statics_total_person">同时合并人数</string>
+    <string name="plwase_choose_reason">请选择原因</string>
+    <string name="every_unit_house_num">单元每层户数</string>
+    <string name="plwase_input_every_unit">请输入每单元的户数</string>
 </resources>

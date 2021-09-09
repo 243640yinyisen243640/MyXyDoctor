@@ -1,6 +1,8 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
@@ -8,38 +10,51 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.google.gson.Gson;
 import com.lyd.baselib.util.TurnsUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
+import com.xy.xydoctor.bean.community_manamer.UpLoadParamInfo;
+import com.xy.xydoctor.datamanager.DataManager;
+import com.xy.xydoctor.imp.IACommunityUpLoadChoose;
+import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.window.CommunityAddBuildingPopupWindow;
+
+import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * Author: LYD
  * Date: 2021/8/26 9:59
  * Description: 添加楼栋
  */
-public class CommunityAddBuildingActivity extends XYSoftUIBaseActivity {
+public class CommunityAddBuildingActivity extends XYSoftUIBaseActivity implements View.OnClickListener, IACommunityUpLoadChoose {
 
     private EditText numEditText;
     private EditText highEditText;
     private EditText unitEditText;
     private TextView sureTextView;
 
+    private String buildingNum;
+    private String buildingHigh;
+    private String buildingUnit;
+
+
+    private String comid;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        comid = getIntent().getStringExtra("comid");
         topViewManager().titleTextView().setText(R.string.add_building_title);
         containerView().addView(initView());
         initListener();
     }
 
     private void initListener() {
-        sureTextView.setOnClickListener(v -> {
-            CommunityAddBuildingPopupWindow addBuildingPopupWindow = new CommunityAddBuildingPopupWindow(getPageContext(), TurnsUtils.getInt(unitEditText.getText().toString(), 0));
-            if (!addBuildingPopupWindow.isShowing()) {
-                addBuildingPopupWindow.showAtLocation(containerView(), Gravity.CENTER, 0, 0);
-            }
-        });
+
+        sureTextView.setOnClickListener(this);
     }
 
     private View initView() {
@@ -52,9 +67,67 @@ public class CommunityAddBuildingActivity extends XYSoftUIBaseActivity {
     }
 
 
-    private void setUnitNum() {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_add_building_submit:
+                buildingNum = numEditText.getText().toString().trim();
+                buildingHigh = highEditText.getText().toString().trim();
+                buildingUnit = unitEditText.getText().toString().trim();
+                Log.i("yys", "num==" + buildingNum + "hign==" + buildingHigh + "unit==" + buildingUnit);
+                if (TextUtils.isEmpty(buildingNum)) {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.please_add_building_num);
+                    return;
+                }
+                if (TextUtils.isEmpty(buildingHigh)) {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.please_add_building_high);
+                    return;
+                }
+                if (TextUtils.isEmpty(buildingUnit)) {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.please_add_building_unit_num);
+                    return;
+                }
 
+                if ("0".equals(buildingNum)) {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.please_add_building_zero);
+                    return;
+                }
+                if ("0".equals(buildingHigh)) {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.please_add_building_zero);
+                    return;
+                }
+                if ("0".equals(buildingUnit)) {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.please_add_building_zero);
+                    return;
+                }
 
+                CommunityAddBuildingPopupWindow addBuildingPopupWindow = new CommunityAddBuildingPopupWindow(getPageContext(), TurnsUtils.getInt(unitEditText.getText().toString(), 0));
+                addBuildingPopupWindow.setOnChooseOkListener(this);
+                addBuildingPopupWindow.showAtLocation(containerView(), Gravity.CENTER, 0, 0);
+
+                //每次都是new一个没必要判断
+                //                if (!addBuildingPopupWindow.isShowing()) {
+                //                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void IAUpParamChoose(List<UpLoadParamInfo> list) {
+        String result = new Gson().toJson(list);
+        Call<String> requestCall = DataManager.ces(result, comid, buildingNum, buildingHigh,
+                (call, response) -> {
+                    if (response.code == 200) {
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+
+                }, (call, t) -> {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+                });
+        addRequestCallToMap("ces", requestCall);
     }
 
 

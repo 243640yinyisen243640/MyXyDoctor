@@ -16,7 +16,7 @@ public class FollowUpAgentListBean {
     /**
      * 小区id
      */
-    private int com_id;
+    private String com_id;
     /**
      * 小区名
      */
@@ -52,11 +52,11 @@ public class FollowUpAgentListBean {
         this.plan_list = plan_list;
     }
 
-    public int getCom_id() {
+    public String getCom_id() {
         return com_id;
     }
 
-    public void setCom_id(int com_id) {
+    public void setCom_id(String com_id) {
         this.com_id = com_id;
     }
 

@@ -13,13 +13,16 @@
         android:textColor="@color/base_black"
         android:textSize="15sp" />
 
+    <!--这个控件就是单元每层户数吧-->
     <EditText
         android:id="@+id/et_add_building_unit_pop"
         android:layout_width="match_parent"
         android:layout_height="34dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/shape_bg_white_black"
-        android:inputType="number" />
+        android:hint="@string/every_unit_house_num"
+        android:inputType="number"
+        android:paddingLeft="5dp" />
 
 
 </LinearLayout>

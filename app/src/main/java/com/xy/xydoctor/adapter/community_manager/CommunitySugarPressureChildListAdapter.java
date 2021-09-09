@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.adapter.XYSoftBaseAdapter;
 import com.xy.xydoctor.bean.community_manamer.SugarOrPressureChildInfo;
-import com.xy.xydoctor.utils.toChineseNumUtill;
+import com.xy.xydoctor.utils.NumberToChineseUtil;
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class CommunitySugarPressureChildListAdapter extends XYSoftBaseAdapter<Su
         }
         SugarOrPressureChildInfo info = getList().get(position);
 
-        holder.titleTextView.setText(getContext().getString(R.string.community_times_di) + toChineseNumUtill.numberToChinese(info.getTimes()) + getContext().getString(R.string.community_follow_times));
+        holder.titleTextView.setText(getContext().getString(R.string.community_times_di) + NumberToChineseUtil.intToChinese(info.getTimes()) + getContext().getString(R.string.community_follow_times));
 
         holder.timeTextView.setText(info.getEndtime());
         //随访状态 0待开启（不可点击） 1待随访 2随访完成 3已过期 4关闭随访

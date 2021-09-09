@@ -7,7 +7,8 @@ import android.widget.TextView;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.adapter.XYSoftBaseAdapter;
-import com.xy.xydoctor.bean.community_manamer.BuildingInfo;
+import com.xy.xydoctor.bean.community_manamer.FollowListChildListInfo;
+import com.xy.xydoctor.imp.IAdapterViewClickListener;
 
 import java.util.List;
 
@@ -16,8 +17,10 @@ import java.util.List;
  * Date: 2021/8/26 10:03
  * Description: 楼栋设置
  */
-public class CommunityBuildingSettingAdapter extends XYSoftBaseAdapter<BuildingInfo> {
-    public CommunityBuildingSettingAdapter(Context context, List<BuildingInfo> list) {
+public class CommunityBuildingSettingAdapter extends XYSoftBaseAdapter<FollowListChildListInfo> {
+    private IAdapterViewClickListener clickListener;
+
+    public CommunityBuildingSettingAdapter(Context context, List<FollowListChildListInfo> list) {
         super(context, list);
     }
 
@@ -32,8 +35,9 @@ public class CommunityBuildingSettingAdapter extends XYSoftBaseAdapter<BuildingI
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        BuildingInfo typeInfo = getList().get(position);
+        FollowListChildListInfo typeInfo = getList().get(position);
 
+        holder.buildingTextView.setText(typeInfo.getBuild_name());
 
 
         return convertView;

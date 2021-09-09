@@ -6,6 +6,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -27,10 +28,11 @@ public class CommunityFollowUpChangeChildListAdapter extends XYSoftBaseAdapter<F
     private IAdapterViewClickListener clickListener;
     private int parentPosi;
 
-    public CommunityFollowUpChangeChildListAdapter(Context context, List<FollowListChildListInfo> list, String type, IAdapterViewClickListener clickListener) {
+    public CommunityFollowUpChangeChildListAdapter(Context context, List<FollowListChildListInfo> list, String type, int parentPosi, IAdapterViewClickListener clickListener) {
         super(context, list);
         this.clickListener = clickListener;
         this.type = type;
+        this.parentPosi = parentPosi;
     }
 
     @Override
@@ -58,6 +60,7 @@ public class CommunityFollowUpChangeChildListAdapter extends XYSoftBaseAdapter<F
         }
         FollowListChildListInfo info = getList().get(position);
 
+        Log.i("yys", "type===" + type);
         if ("3".equals(type)) {
             holder.noFinishTextView.setVisibility(View.GONE);
         } else {

@@ -28,6 +28,7 @@ public class CommunityFollowUpChangeListAdapter extends UIBaseRecycleViewAdapter
 
     public CommunityFollowUpChangeListAdapter(Context mContext, List<FollowListInfo> mList, String type, IAdapterViewClickListener mListener) {
         super(mContext, mList, mListener);
+        this.type = type;
     }
 
 
@@ -46,7 +47,7 @@ public class CommunityFollowUpChangeListAdapter extends UIBaseRecycleViewAdapter
         FollowListInfo info = getList().get(position);
 
         viewHolder.nameTextView.setText(info.getBuild_name() + "号楼" + info.getUnit_name() + "单元");
-        CommunityFollowUpChangeChildListAdapter childListAdapter = new CommunityFollowUpChangeChildListAdapter(getContext(), info.getCommunityUser(), type, getListener());
+        CommunityFollowUpChangeChildListAdapter childListAdapter = new CommunityFollowUpChangeChildListAdapter(getContext(), info.getCommunityUser(), type, position, getListener());
         viewHolder.myListView.setAdapter(childListAdapter);
         viewHolder.clickLinearLayout.setOnClickListener(v -> {
             if (getListener() != null) {

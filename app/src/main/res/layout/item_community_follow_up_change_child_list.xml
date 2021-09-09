@@ -97,6 +97,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -124,7 +125,7 @@
             android:layout_gravity="right"
             android:layout_marginLeft="10dp"
             android:text="@string/goods_add_spe_no_finish"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout

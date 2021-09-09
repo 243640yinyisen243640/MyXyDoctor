@@ -1,36 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/transparent"
+    android:gravity="center"
     android:orientation="vertical"
     android:padding="10dp">
 
-    <ScrollView
-        style="@style/scrollView"
-        android:layout_marginBottom="75dp">
-
-
-        <LinearLayout
-            android:id="@+id/ll_add_unit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-
-    </ScrollView>
-
-    <TextView
-        android:id="@+id/tv_add_building_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:layout_gravity="center"
-        android:background="@drawable/shape_bg_main_5"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/shape_bg_white_5"
         android:gravity="center"
-        android:paddingLeft="40dp"
-        android:paddingTop="12dp"
-        android:paddingRight="40dp"
-        android:paddingBottom="12dp"
-        android:text="@string/base_save"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:orientation="vertical">
+
+        <ScrollView style="@style/scrollView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_add_unit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="70dp"
+                    android:orientation="vertical" />
+
+                <TextView
+                    android:id="@+id/tv_add_building_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/shape_bg_main_5"
+                    android:gravity="center"
+                    android:paddingLeft="40dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="40dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/base_save"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </LinearLayout>
+
 
 </LinearLayout>

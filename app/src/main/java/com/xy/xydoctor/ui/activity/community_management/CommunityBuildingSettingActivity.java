@@ -3,14 +3,20 @@ package com.xy.xydoctor.ui.activity.community_management;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 
 import androidx.annotation.Nullable;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.CommunityBuildingSettingAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
+import com.xy.xydoctor.bean.community_manamer.FollowListChildListInfo;
 import com.xy.xydoctor.customerView.NoConflictGridView;
+import com.xy.xydoctor.datamanager.DataManager;
+import com.xy.xydoctor.utils.TipUtils;
+
+import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * Author: LYD
@@ -26,13 +32,22 @@ public class CommunityBuildingSettingActivity extends XYSoftUIBaseActivity {
 
     private CommunityBuildingSettingAdapter adapter;
 
+    /**
+     * 小区id
+     */
+    private String comid;
+
+    private List<FollowListChildListInfo> listChildListInfos;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        comid = getIntent().getStringExtra("comid");
         topViewManager().titleTextView().setText(R.string.community_add_buliding_set);
         topViewManager().moreTextView().setText(R.string.base_add);
         topViewManager().moreTextView().setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), CommunityAddBuildingActivity.class);
+            intent.putExtra("comid", comid);
             startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
         });
         containerView().addView(initView());
@@ -40,15 +55,32 @@ public class CommunityBuildingSettingActivity extends XYSoftUIBaseActivity {
         initValues();
 
         initListener();
+
+        getData();
+    }
+
+    private void getData() {
+        Call<String> requestCall = DataManager.getBuildingList(comid, (call, response) -> {
+            if (response.code == 200) {
+                listChildListInfos = (List<FollowListChildListInfo>) response.object;
+                bindData();
+            } else {
+                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+            }
+        }, (call, t) -> {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        });
+    }
+
+    private void bindData() {
+        adapter = new CommunityBuildingSettingAdapter(getPageContext(), listChildListInfos);
+        gridView.setAdapter(adapter);
     }
 
     private void initListener() {
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getPageContext(), CommunityEditBuildingActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
-            }
+        gridView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(getPageContext(), CommunityEditBuildingActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
         });
     }
 

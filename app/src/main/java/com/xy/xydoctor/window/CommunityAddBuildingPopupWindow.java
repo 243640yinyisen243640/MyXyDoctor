@@ -2,8 +2,7 @@ package com.xy.xydoctor.window;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -15,8 +14,10 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.bean.community_manamer.AddBuildingInfo;
-import com.xy.xydoctor.utils.toChineseNumUtill;
+import com.xy.xydoctor.bean.community_manamer.UpLoadParamInfo;
+import com.xy.xydoctor.imp.IACommunityUpLoadChoose;
+import com.xy.xydoctor.utils.NumberToChineseUtil;
+import com.xy.xydoctor.utils.TipUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +29,15 @@ import java.util.List;
  */
 public class CommunityAddBuildingPopupWindow extends PopupWindow {
     private LinearLayout addLiner;
-    private TextView saveTextView;
+    private List <EditText>textViews;
     private int size;
 
     private Context context;
 
-    private List<AddBuildingInfo> list = new ArrayList<>();
+    private IACommunityUpLoadChoose iaCommunityFilterChoose;
+
+    private List<UpLoadParamInfo> list;
+    private List<UpLoadParamInfo> list1;
 
     public CommunityAddBuildingPopupWindow(Context context, int size) {
         super(context);
@@ -42,19 +46,20 @@ public class CommunityAddBuildingPopupWindow extends PopupWindow {
 
         View view = View.inflate(context, R.layout.popupwindow_add_building, null);
         addLiner = view.findViewById(R.id.ll_add_unit);
+        TextView saveTextView = view.findViewById(R.id.tv_add_building_save);
         addView();
         this.setContentView(view);
-        initValues();
 
         // 设置SelectPicPopupWindow的View
         // 设置SelectPicPopupWindow弹出窗体的宽
         this.setWidth(FrameLayout.LayoutParams.MATCH_PARENT);
         // 设置SelectPicPopupWindow弹出窗体的高
         this.setHeight(FrameLayout.LayoutParams.MATCH_PARENT);
+        //        this.setHeight(XyScreenUtils.dip2px(context, 300));
         // 设置SelectPicPopupWindow弹出窗体可点击
         this.setFocusable(true);
         // 设置SelectPicPopupWindow弹出窗体动画效果
-        //        this.setAnimationStyle(R.style.);
+        this.setAnimationStyle(R.style.Base_Window_Fade_Anim);
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(ContextCompat.getColor(context, R.color.goods_details_transparent));
         // 设置SelectPicPopupWindow弹出窗体的背景
@@ -65,42 +70,42 @@ public class CommunityAddBuildingPopupWindow extends PopupWindow {
 
         });
 
-
-    }
-
-    private void initValues() {
-
+        saveTextView.setOnClickListener(v -> {
+            list1 = new ArrayList<>();
+            for (int i = 0; i < list.size(); i++) {
+                if (TextUtils.isEmpty((textViews.get(i)).getText().toString().trim())){
+                    TipUtils.getInstance().showToast(context, R.string.plwase_input_every_unit);
+                    return;
+                }
+                //为了防止连续点击活着第一次接口掉不成功出现重复数据
+                list1.add(new UpLoadParamInfo(list.get(i).getUnit_name(),(textViews.get(i)).getText().toString().trim()));
+            }
+            iaCommunityFilterChoose.IAUpParamChoose(list1);
+        });
     }
 
 
     private void addView() {
         addLiner.removeAllViews();
+        list = new ArrayList<>();
+        textViews= new ArrayList<>();
         for (int i = 1; i <= size; i++) {
             View contentView = View.inflate(context, R.layout.include_add_building, null);
             EditText unitEditText = contentView.findViewById(R.id.et_add_building_unit_pop);
             TextView numTextView = contentView.findViewById(R.id.tv_add_building_num_pop);
-            numTextView.setText(toChineseNumUtill.TooltoCh(i));
-            unitEditText.setTag(i);
-            int finalI = i;
-            unitEditText.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    list.get(finalI).setUnit(s.toString());
-                }
-            });
+            String unit_name = NumberToChineseUtil.intToChinese(i) + "单元";
+            numTextView.setText(unit_name);
             addLiner.addView(contentView);
+            UpLoadParamInfo upLoadParamInfo = new UpLoadParamInfo();
+            upLoadParamInfo.setUnit_name(unit_name);
+            list.add(upLoadParamInfo);
+            textViews.add(unitEditText);
         }
 
+    }
+
+    public void setOnChooseOkListener(IACommunityUpLoadChoose filterChoose) {
+        this.iaCommunityFilterChoose = filterChoose;
     }
 
 }

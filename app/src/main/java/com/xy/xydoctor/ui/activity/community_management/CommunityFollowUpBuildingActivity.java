@@ -59,7 +59,7 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
         type = getIntent().getStringExtra("type");
         comid = getIntent().getStringExtra("comid");
 
-        Log.i("yys", "type==" + type);
+
         if ("2".equals(type)) {
             topViewManager().titleTextView().setText(R.string.follow_up_agent_title);
             topViewManager().moreTextView().setText(R.string.fu_more_title_change_list);
@@ -81,6 +81,7 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
             } else {
                 //添加楼栋
                 Intent intent = new Intent(getPageContext(), CommunityBuildingSettingActivity.class);
+                intent.putExtra("comid", comid);
                 startActivityForResult(intent, REQUEST_CODE_FOR_ADD_BUILDING);
             }
 
