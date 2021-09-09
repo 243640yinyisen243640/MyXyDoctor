@@ -23,17 +23,20 @@
                 android:id="@+id/rb_follow_wait_follow"
                 style="@style/shelves_goods_rb_other"
                 android:checked="true"
+                android:gravity="center"
                 android:text="@string/community_wait_follow_up" />
 
 
             <RadioButton
                 android:id="@+id/rb_follow_lost_follow"
                 style="@style/shelves_goods_rb_other"
+                android:gravity="center"
                 android:text="@string/goods_add_server" />
 
             <RadioButton
                 android:id="@+id/rb_follow_finish_follow"
                 style="@style/shelves_goods_rb_other"
+                android:gravity="center"
                 android:text="@string/goods_add_spe" />
 
         </RadioGroup>
@@ -45,7 +48,6 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_spe_shelves"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

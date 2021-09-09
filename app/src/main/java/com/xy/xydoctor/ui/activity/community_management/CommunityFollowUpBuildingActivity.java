@@ -2,11 +2,13 @@ package com.xy.xydoctor.ui.activity.community_management;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +25,7 @@ import java.util.ArrayList;
  * Author: LYD
  * Date: 2021/8/23 16:38
  *
- * @paramtype 1:小区数量 2：随访待办  buildingName
+ * @paramtype 1:小区数量 2：随访待办 3:添加用户  buildingName小区名字  comid小区id
  * Description: 随访代办的那个楼层图
  */
 public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
@@ -45,36 +47,41 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
     private RecyclerView unitRecycleView;
     private NoConflictGridView contentGridView;
     /**
-     * 1：小区数量 2随访待办
+     * 1：小区数量 2随访待办 3添加用户
      */
     private String type;
+
+    private String comid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String title = getIntent().getStringExtra("buildingName");
         type = getIntent().getStringExtra("type");
+        comid = getIntent().getStringExtra("comid");
 
-        if ("1".equals(type)) {
-            topViewManager().titleTextView().setText(title);
-            topViewManager().moreTextView().setCompoundDrawablesWithIntrinsicBounds(R.drawable.fub_top_add, 0, 0, 0);
-        } else {
+        Log.i("yys", "type==" + type);
+        if ("2".equals(type)) {
             topViewManager().titleTextView().setText(R.string.follow_up_agent_title);
             topViewManager().moreTextView().setText(R.string.fu_more_title_change_list);
+            topViewManager().moreTextView().setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_red));
+        } else {
+            String title = getIntent().getStringExtra("buildingName");
+            topViewManager().titleTextView().setText(title);
+            topViewManager().moreTextView().setCompoundDrawablesWithIntrinsicBounds(R.drawable.fub_top_add, 0, 0, 0);
         }
 
 
         topViewManager().moreTextView().setOnClickListener(v -> {
             // 1:小区数量 2：随访待办
-            if ("1".equals(type)) {
-                //添加楼栋
-
-                Intent intent = new Intent(getPageContext(), CommunityBuildingSettingActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_FOR_ADD_BUILDING);
-            } else {
+            if ("2".equals(type)) {
                 //进入到待随访  失访  已完成的页面
                 Intent intent = new Intent(getPageContext(), CommunityFollowUpActivity.class);
                 startActivity(intent);
+
+            } else {
+                //添加楼栋
+                Intent intent = new Intent(getPageContext(), CommunityBuildingSettingActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_FOR_ADD_BUILDING);
             }
 
         });
@@ -101,7 +108,10 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
         numRecycleView.setHasFixedSize(true);
         numRecycleView.setNestedScrollingEnabled(false);
 
-        unitRecycleView.setLayoutManager(linearLayoutManager);
+
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getPageContext());
+        linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
+        unitRecycleView.setLayoutManager(linearLayoutManager1);
         unitRecycleView.setHasFixedSize(true);
         unitRecycleView.setNestedScrollingEnabled(false);
 
@@ -135,7 +145,7 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity {
         contentGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getPageContext(),CommunityBuildingUnitActivity.class);
+                Intent intent = new Intent(getPageContext(), CommunityBuildingUnitActivity.class);
                 startActivity(intent);
             }
         });

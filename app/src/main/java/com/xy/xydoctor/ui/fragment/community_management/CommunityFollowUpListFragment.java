@@ -80,13 +80,13 @@ public class CommunityFollowUpListFragment extends XYBaseFragment implements Tab
     private void bindData() {
         CommunityFollowUpActivity activity = (CommunityFollowUpActivity) getActivity();
         RadioButton firstRadioButton = activity.showFirst();
-        firstRadioButton.setText(allInfo.getFollowing());
+        firstRadioButton.setText(getString(R.string.community_wait_follow_up) + "\n" + "(" + allInfo.getFollowing() + ")");
         RadioButton secondRadioButton = activity.showSecond();
-        secondRadioButton.setText(allInfo.getLosting());
+        secondRadioButton.setText(getString(R.string.goods_add_server) + "\n" + "(" + allInfo.getLosting() + ")");
         RadioButton thirdRadioButton = activity.showThird();
-        thirdRadioButton.setText(allInfo.getFinished());
-
+        thirdRadioButton.setText(getString(R.string.goods_add_spe) + "\n" + "(" + allInfo.getFinished() + ")");
         mAdapter = new CommunityFollowUpChangeListAdapter(getPageContext(), allInfo.getList(), type, new OnItemClickListener());
+        mRecyclerView.setAdapter(mAdapter);
     }
 
 

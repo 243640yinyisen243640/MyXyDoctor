@@ -100,10 +100,10 @@ public class CommunityFollowUpActivity extends XYSoftUIBaseActivity implements V
     }
 
     public RadioButton showSecond() {
-        return waitRadioButton;
+        return lostRadioButton;
     }
 
     public RadioButton showThird() {
-        return waitRadioButton;
+        return finishRadioButton;
     }
 }

@@ -1,9 +1,9 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -66,7 +66,6 @@ public class CommunityFollowupAgentListActivity extends XYSoftUIBaseActivity {
         if ("1".equals(type)) {
             String commuinityName = SPStaticUtils.getString("hospitalname");
             topViewManager().titleTextView().setText(commuinityName);
-            Log.i("yys", "commuinityName==" + commuinityName);
         } else if ("2".equals(type)) {
             topViewManager().titleTextView().setText(R.string.follow_up_agent_title);
         } else {
@@ -268,7 +267,11 @@ public class CommunityFollowupAgentListActivity extends XYSoftUIBaseActivity {
             //一级的点击事件
             switch (view.getId()) {
                 case R.id.ll_fu_click:
-
+                    Intent intent = new Intent(getPageContext(), CommunityFollowUpBuildingActivity.class);
+                    intent.putExtra("type", type);
+                    intent.putExtra("comid", mList.get(position).getCom_id());
+                    intent.putExtra("buildingName", mList.get(position).getCom_name());
+                    startActivity(intent);
                     break;
                 default:
                     break;
