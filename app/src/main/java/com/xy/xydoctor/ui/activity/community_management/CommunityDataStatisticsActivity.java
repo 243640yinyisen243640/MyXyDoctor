@@ -9,6 +9,7 @@ import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -46,6 +47,7 @@ import retrofit2.Call;
  */
 public class CommunityDataStatisticsActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
 
+    private ImageView backImageView;
     /**
      * 时间 ， 总人数 高血糖，高血压，合并人数
      */
@@ -83,6 +85,7 @@ public class CommunityDataStatisticsActivity extends XYSoftUIBaseActivity implem
 
     private void initListener() {
         timeTextView.setOnClickListener(this);
+        backImageView.setOnClickListener(this);
     }
 
 
@@ -263,6 +266,7 @@ public class CommunityDataStatisticsActivity extends XYSoftUIBaseActivity implem
 
     private View initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_community_data_statistics, null);
+        backImageView = view.findViewById(R.id.iv_data_static_finish);
         timeTextView = view.findViewById(R.id.tv_ds_time);
         allPersonTextView = view.findViewById(R.id.tv_ds_all_person_num);
         sugarPersonTextView = view.findViewById(R.id.tv_ds_sugar_person_num);
@@ -287,6 +291,9 @@ public class CommunityDataStatisticsActivity extends XYSoftUIBaseActivity implem
         switch (v.getId()) {
             case R.id.tv_ds_time:
                 showTimeWindow();
+                break;
+            case R.id.iv_data_static_finish:
+                finish();
                 break;
             default:
                 break;

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/base_background"
+    android:descendantFocusability="blocksDescendants"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
@@ -310,6 +311,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@null"
+                android:focusableInTouchMode="true"
                 android:dividerHeight="0dp"
                 android:focusable="false" />
 
