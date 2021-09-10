@@ -53,7 +53,10 @@
             <EditText
                 android:id="@+id/et_user_add_phone"
                 style="@style/user_add_right"
-                android:hint="@string/user_add_please_input_phone" />
+                android:hint="@string/user_add_please_input_phone"
+                android:imeOptions="actionSearch"
+                android:inputType="phone"
+                android:lines="1" />
 
         </LinearLayout>
 
@@ -185,7 +188,7 @@
                 android:text="糖尿病" />
 
             <TextView
-                android:id="@+id/cb_filter_disease_presure"
+                android:id="@+id/tv_filter_disease_presure"
                 style="@style/user_add_type"
                 android:layout_marginLeft="3dp"
                 android:text="高血压" />
@@ -222,17 +225,6 @@
                 android:text="冠心病" />
 
         </LinearLayout>
-
-        <com.xy.xydoctor.customerView.NoConflictGridView
-            android:id="@+id/gv_user_add_disease"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:horizontalSpacing="10dp"
-            android:numColumns="3"
-            android:verticalSpacing="10dp"
-            android:visibility="gone" />
 
 
         <TextView
@@ -285,9 +277,9 @@
                 android:background="@null"
                 android:button="@null"
                 android:gravity="center"
-                android:textSize="14sp"
                 android:text="@string/app_name"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
             <CheckBox
                 android:layout_width="0dp"
@@ -297,9 +289,9 @@
                 android:background="@null"
                 android:button="@null"
                 android:gravity="center"
-                android:textSize="14sp"
                 android:text="@string/app_name"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -376,6 +368,11 @@
                 android:paddingLeft="10dp"
                 android:src="@drawable/user_add_sacn" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_add_user_submit"
+            style="@style/community_button_choice"
+            android:text="@string/base_add" />
 
     </LinearLayout>
 

@@ -1,7 +1,11 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,12 +19,13 @@ import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.adapter.community_manager.FilterDiseaseTypeAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.bean.community_manamer.DepartmentInfo;
 import com.xy.xydoctor.bean.community_manamer.FilterSugarPressureInfo;
+import com.xy.xydoctor.bean.community_manamer.SearchInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.datamanager.DataManager;
+import com.xy.xydoctor.param.UserAddReq;
 import com.xy.xydoctor.utils.DataUtils;
 import com.xy.xydoctor.utils.TipUtils;
 
@@ -37,6 +42,7 @@ import retrofit2.Call;
  */
 public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
 
+    private static final int REQUEST_CODE_FOR_IME_CODE = 10;
     /**
      * 位置信息
      */
@@ -95,72 +101,72 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
      */
     private ImageView pressureImageView;
 
+
+    private TextView addTextView;
+
+    /**
+     * 房间id
+     */
+    private String houserid;
+
     private String sex;
 
-    private List<FilterSugarPressureInfo> typeInfoList;
+    /**
+     * 生日
+     */
+    private String born;
 
-    private FilterDiseaseTypeAdapter diseaseTypeAdapter;
 
+    /**
+     * 科室id
+     */
     private String departmentid = "-1";
+    /**
+     * 医生id
+     */
     private String doctorID = "-1";
-    private String hospitalid;
+    /**
+     * 医院id
+     */
+    private String hospitalid = "-1";
 
+    /**
+     * 糖尿病类型id
+     */
     private String diabeteslei;
 
+    /**
+     * 血压等级
+     */
+    private String bloodLevel;
+
+    /**
+     * 楼栋id
+     */
     private String buildid;
+
+    /**
+     * 关系id
+     */
+    private String releationId = "-1";
+
+    private UserAddReq addReq;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         buildid = getIntent().getStringExtra("buildid");
+        houserid = getIntent().getStringExtra("houserid");
         topViewManager().titleTextView().setText(R.string.user_add_title);
         containerView().addView(initView());
         initListener();
     }
 
-    private void initListener() {
-        sexTextView.setOnClickListener(this);
-        bornTextView.setOnClickListener(this);
-        relationTextView.setOnClickListener(this);
-        hospitalTextView.setOnClickListener(this);
-        departmentTextView.setOnClickListener(this);
-        doctorTextView.setOnClickListener(this);
-        sugarImageView.setOnClickListener(this);
-        pressureImageView.setOnClickListener(this);
-    }
-
-    private View initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_user_add, null);
-        locationTextView = view.findViewById(R.id.tv_user_add_location);
-        nameEditText = view.findViewById(R.id.et_user_add_name);
-        phoneEditText = view.findViewById(R.id.et_user_add_phone);
-        sexTextView = view.findViewById(R.id.tv_user_add_sex);
-        bornTextView = view.findViewById(R.id.tv_user_add_born);
-        relationTextView = view.findViewById(R.id.tv_user_add_master_relation);
-        hospitalTextView = view.findViewById(R.id.tv_user_add_hospital_choose);
-        departmentTextView = view.findViewById(R.id.tv_user_add_department_choose);
-        doctorTextView = view.findViewById(R.id.tv_user_add_doctor_choose);
-        sugarTextView = view.findViewById(R.id.cb_filter_disease_sugar);
-        pressureTextView = view.findViewById(R.id.cb_filter_disease_presure);
-        overTextView = view.findViewById(R.id.tv_filter_disease_over_weight);
-        headCheckBox = view.findViewById(R.id.cb_filter_disease_head);
-        fattyCheckBox = view.findViewById(R.id.cb_filter_disease_fatty);
-        heartCheckBox = view.findViewById(R.id.cb_filter_disease_heart);
-        apartCheckBox = view.findViewById(R.id.cb_filter_disease_apart);
-        illCheckBox = view.findViewById(R.id.cb_filter_disease_ill);
-        mentalCheckBox = view.findViewById(R.id.cb_filter_disease_mental);
-        importantCheckBox = view.findViewById(R.id.cb_filter_disease_important);
-        sugarEditText = view.findViewById(R.id.et_user_add_device_sugar);
-        sugarImageView = view.findViewById(R.id.iv_user_add_device_sugar);
-        pressureEditText = view.findViewById(R.id.et_user_add_device_pressure);
-        pressureImageView = view.findViewById(R.id.iv_user_add_device_pressure);
-        return view;
-    }
-
 
     @Override
     public void onClick(View v) {
-
+        Intent intent;
         switch (v.getId()) {
             case R.id.tv_user_add_sex:
                 chooseSexWindow();
@@ -169,10 +175,27 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                 showTimeWindow();
                 break;
             case R.id.tv_user_add_master_relation:
-
+                // 1 户主 2配偶 3子女 4儿媳 5女婿 6父母 0其他
+                List<FilterSugarPressureInfo> releationShapeList = new ArrayList<>();
+                FilterSugarPressureInfo releation1 = new FilterSugarPressureInfo("户主", "1");
+                releationShapeList.add(releation1);
+                FilterSugarPressureInfo releation2 = new FilterSugarPressureInfo("2配偶", "2");
+                releationShapeList.add(releation2);
+                FilterSugarPressureInfo releation3 = new FilterSugarPressureInfo("子女", "3");
+                releationShapeList.add(releation3);
+                FilterSugarPressureInfo releation4 = new FilterSugarPressureInfo("儿媳", "4");
+                releationShapeList.add(releation4);
+                FilterSugarPressureInfo releation5 = new FilterSugarPressureInfo("女婿", "5");
+                releationShapeList.add(releation5);
+                FilterSugarPressureInfo releation6 = new FilterSugarPressureInfo("父母", "6");
+                releationShapeList.add(releation6);
+                releationShapeList.add(releation5);
+                FilterSugarPressureInfo releation7 = new FilterSugarPressureInfo("其他", "0");
+                releationShapeList.add(releation7);
+                getSugar(releationShapeList, "1");
                 break;
             case R.id.tv_user_add_hospital_choose:
-                getHospital();
+                getHospital("", "1");
                 break;
             case R.id.tv_user_add_department_choose:
                 getDepartment();
@@ -182,61 +205,206 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                     TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.user_add_department_choose);
                     return;
                 }
-                getDepartmentDoctor();
+                getDoctor();
                 break;
             case R.id.iv_user_add_device_sugar:
+                intent = new Intent(getPageContext(), CommunityScanActivity.class);
+                intent.putExtra("type", "2");
+                startActivityForResult(intent, REQUEST_CODE_FOR_IME_CODE);
                 break;
             case R.id.iv_user_add_device_pressure:
+                intent = new Intent(getPageContext(), CommunityScanActivity.class);
+                intent.putExtra("type", "1");
+                startActivityForResult(intent, REQUEST_CODE_FOR_IME_CODE);
                 break;
             case R.id.cb_filter_disease_sugar:
-                List<FilterSugarPressureInfo> sugarList = new ArrayList<>();
-                FilterSugarPressureInfo info1 = new FilterSugarPressureInfo("I型糖尿病", "1");
-                sugarList.add(info1);
-                FilterSugarPressureInfo info2 = new FilterSugarPressureInfo("II型糖尿病", "1");
-                sugarList.add(info2);
-                FilterSugarPressureInfo info3 = new FilterSugarPressureInfo("妊娠糖尿病", "1");
-                sugarList.add(info3);
-                FilterSugarPressureInfo info4 = new FilterSugarPressureInfo("其他", "1");
-                sugarList.add(info4);
-                FilterSugarPressureInfo info5 = new FilterSugarPressureInfo("无", "0");
-                sugarList.add(info5);
-                getSugar(sugarList);
+
+                if (sugarTextView.isSelected()) {
+                    sugarTextView.setSelected(false);
+                } else {
+                    List<FilterSugarPressureInfo> sugarList = new ArrayList<>();
+                    FilterSugarPressureInfo info1 = new FilterSugarPressureInfo("I型糖尿病", "1");
+                    sugarList.add(info1);
+                    FilterSugarPressureInfo info2 = new FilterSugarPressureInfo("II型糖尿病", "2");
+                    sugarList.add(info2);
+                    FilterSugarPressureInfo info3 = new FilterSugarPressureInfo("妊娠糖尿病", "3");
+                    sugarList.add(info3);
+                    FilterSugarPressureInfo info4 = new FilterSugarPressureInfo("其他", "4");
+                    sugarList.add(info4);
+                    FilterSugarPressureInfo info5 = new FilterSugarPressureInfo("无", "0");
+                    sugarList.add(info5);
+                    getSugar(sugarList, "2");
+                }
+
+                break;
+            case R.id.tv_filter_disease_presure:
+
+                if (pressureTextView.isSelected()) {
+                    pressureTextView.setSelected(false);
+                } else {
+                    List<FilterSugarPressureInfo> pressureList = new ArrayList<>();
+                    FilterSugarPressureInfo pressureinfo1 = new FilterSugarPressureInfo("一级高血压", "1");
+                    pressureList.add(pressureinfo1);
+                    FilterSugarPressureInfo pressureinfo2 = new FilterSugarPressureInfo("二级高血压", "2");
+                    pressureList.add(pressureinfo2);
+
+                    getSugar(pressureList, "3");
+                }
+
+
+                break;
+            case R.id.tv_filter_disease_over_weight:
+                if (overTextView.isSelected()) {
+                    overTextView.setSelected(false);
+                } else {
+                    overTextView.setSelected(true);
+                }
+                break;
+            case R.id.tv_add_user_submit:
+                upLoadData();
                 break;
             default:
                 break;
         }
     }
 
+    /**
+     * 上传数据
+     */
+    private void upLoadData() {
+        addReq = new UserAddReq();
 
-    private void getHospital() {
-        List<DepartmentInfo> logisticsCompanyInfos = new ArrayList<>();
-        if (logisticsCompanyInfos != null && logisticsCompanyInfos.size() > 0) {
-            OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
-                hospitalid = logisticsCompanyInfos.get(options1).getHosp_userid();
-                String s = logisticsCompanyInfos.get(options1).getHosp_name();
-                hospitalTextView.setText(s);
-            }).setLineSpacingMultiplier(2.5f)
-                    .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
-                    .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
-                    .build();
-            List<String> list = new ArrayList<>();
-            for (int i = 0; i < logisticsCompanyInfos.size(); i++) {
-                String typeName = logisticsCompanyInfos.get(i).getHosp_name();
-                list.add(typeName);
-            }
-            optionsPickerView.setPicker(list);
-            optionsPickerView.show();
+        String name = nameEditText.getText().toString().trim();
+        if (TextUtils.isEmpty(name)) {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.user_add_please_input_name);
+            return;
         }
+        String tel = phoneEditText.getText().toString().trim();
+        if (TextUtils.isEmpty(tel)) {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.user_add_please_input_phone);
+            return;
+        }
+
+        if ("-1".equals(releationId)) {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.please_choose_user_add_master_relation);
+            return;
+        }
+        if ("-1".equals(hospitalid)) {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.user_add_hospital_choose);
+            return;
+        }
+        if ("-1".equals(departmentid)) {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.user_add_department_choose);
+            return;
+        }
+        if ("-1".equals(doctorID)) {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.user_add_doctor_choose);
+            return;
+        }
+
+
+        addReq.setNickname(name);
+        addReq.setTel(tel);
+        addReq.setHouse_id(houserid);
+        addReq.setSex(sex);
+        addReq.setBirthtime(born);
+        addReq.setRelation(releationId);
+        addReq.setHos_userid(hospitalid);
+        addReq.setDep_userid(departmentid);
+        addReq.setDoc_userid(doctorID);
+        addReq.setDiabeteslei(diabeteslei);
+        addReq.setHypertension(pressureTextView.isSelected() ? "1" : "2");
+        if ("1".equals(addReq.getHypertension())) {
+            addReq.setBloodLevel(bloodLevel);
+        } else {
+            addReq.setBloodLevel("0");
+        }
+
+        addReq.setStroke(headCheckBox.isChecked() ? "1" : "2");
+        addReq.setFat(overTextView.isSelected() ? "1" : "2");
+        addReq.setFattyliver(fattyCheckBox.isChecked() ? "1" : "2");
+        addReq.setCoronary(heartCheckBox.isChecked() ? "1" : "2");
+        addReq.setParty_member(apartCheckBox.isChecked() ? "1" : "2");
+        addReq.setMental_illness(mentalCheckBox.isChecked() ? "1" : "2");
+        addReq.setDisability(illCheckBox.isChecked() ? "1" : "2");
+        addReq.setIscare(importantCheckBox.isChecked() ? "1" : "2");
+        addReq.setSugar_imei(sugarEditText.getText().toString().trim());
+        addReq.setBlood_imei(pressureEditText.getText().toString().trim());
+
+        Call<String> requestCall = DataManager.addUser(addReq, (call, response) -> {
+            if (response.code == 200) {
+                setResult(RESULT_OK);
+                finish();
+            } else {
+                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+            }
+        }, (call, t) -> {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        });
+    }
+
+
+    /**
+     * 获取医生列表
+     */
+    private void getDoctor() {
+        TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
+        Call<String> requestCall = DataManager.getDoctorList(departmentid, buildid, (call, response) -> {
+            TipUtils.getInstance().dismissProgressDialog();
+            if (200 == response.code) {
+                List<DepartmentInfo> logisticsCompanyInfos = (List<DepartmentInfo>) response.object;
+                if (logisticsCompanyInfos != null && logisticsCompanyInfos.size() > 0) {
+                    OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
+                        doctorID = logisticsCompanyInfos.get(options1).getDep_userid();
+                        String s = logisticsCompanyInfos.get(options1).getDepname();
+                        doctorTextView.setText(s);
+                    }).setLineSpacingMultiplier(2.5f)
+                            .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
+                            .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
+                            .build();
+                    List<String> list = new ArrayList<>();
+                    for (int i = 0; i < logisticsCompanyInfos.size(); i++) {
+                        String typeName = logisticsCompanyInfos.get(i).getDepname();
+                        list.add(typeName);
+                    }
+                    optionsPickerView.setPicker(list);
+                    optionsPickerView.show();
+                }
+            } else {
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, throwable) -> {
+            TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.network_error);
+        });
 
     }
 
-    private void getSugar(List<FilterSugarPressureInfo> releationList) {
+
+    /**
+     * 获取糖尿病的类型
+     *
+     * @param releationList
+     * @param type          1:关系  2：糖尿病类型
+     */
+    private void getSugar(List<FilterSugarPressureInfo> releationList, String type) {
         if (releationList != null && releationList.size() > 0) {
             OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
-                diabeteslei = releationList.get(options1).getCheckID();
-                String s = releationList.get(options1).getDiseaseName();
-                sugarTextView.setText(s);
-                diseaseTypeAdapter.notifyDataSetChanged();
+                if ("1".equals(type)) {
+                    releationId = releationList.get(options1).getCheckID();
+                    String s = releationList.get(options1).getDiseaseName();
+                    relationTextView.setText(s);
+                } else if ("2".equals(type)) {
+                    sugarTextView.setSelected(true);
+                    diabeteslei = releationList.get(options1).getCheckID();
+                    String s = releationList.get(options1).getDiseaseName();
+                    sugarTextView.setText(s);
+                } else {
+                    bloodLevel = releationList.get(options1).getCheckID();
+                    String s = releationList.get(options1).getDiseaseName();
+                    pressureTextView.setText(s);
+                    pressureTextView.setSelected(true);
+
+                }
             }).setLineSpacingMultiplier(2.5f)
                     .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
                     .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
@@ -252,7 +420,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
     }
 
     /**
-     * 获取科室
+     * 根据医院id 获取科室
      */
     private void getDepartment() {
         TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
@@ -287,33 +455,143 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
     }
 
     /**
-     * 获取楼栋
+     * @param tel  电话
+     * @param type 1：选择主要是获取医院的id 2：是根据手机号去搜索
      */
-    private void getDepartmentDoctor() {
+    private void getHospital(String tel, String type) {
         TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
-        Call<String> requestCall = DataManager.getCommunityList((call, response) -> {
+        Call<String> requestCall = DataManager.getHospitalList(tel, buildid, (call, response) -> {
             TipUtils.getInstance().dismissProgressDialog();
             if (200 == response.code) {
-                List<DepartmentInfo> logisticsCompanyInfos = (List<DepartmentInfo>) response.object;
-                if (logisticsCompanyInfos != null && logisticsCompanyInfos.size() > 0) {
-                    OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
-                        doctorID = logisticsCompanyInfos.get(options1).getDoc_userid();
-                        String s = logisticsCompanyInfos.get(options1).getDocname();
-                        departmentTextView.setText(s);
-                    }).setLineSpacingMultiplier(2.5f)
-                            .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
-                            .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
-                            .build();
-                    List<String> list = new ArrayList<>();
-                    for (int i = 0; i < logisticsCompanyInfos.size(); i++) {
-                        String typeName = logisticsCompanyInfos.get(i).getDocname();
-                        list.add(typeName);
+                SearchInfo searchInfo = (SearchInfo) response.object;
+                if ("1".equals(type)) {
+                    List<DepartmentInfo> logisticsCompanyInfos = searchInfo.getHosInfo();
+                    if (logisticsCompanyInfos != null && logisticsCompanyInfos.size() > 0) {
+                        OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
+                            hospitalid = logisticsCompanyInfos.get(options1).getDep_userid();
+                            String s = logisticsCompanyInfos.get(options1).getDepname();
+                            hospitalTextView.setText(s);
+                        }).setLineSpacingMultiplier(2.5f)
+                                .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
+                                .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
+                                .build();
+                        List<String> list = new ArrayList<>();
+                        for (int i = 0; i < logisticsCompanyInfos.size(); i++) {
+                            String typeName = logisticsCompanyInfos.get(i).getDepname();
+                            list.add(typeName);
+                        }
+                        optionsPickerView.setPicker(list);
+                        optionsPickerView.show();
                     }
-                    optionsPickerView.setPicker(list);
-                    optionsPickerView.show();
+                } else {
+                    //搜索到人，这里要赋值，同时设置是否可以点击
+
+                    nameEditText.setText(searchInfo.getNickname());
+                    sex = searchInfo.getSex();
+                    if ("1".equals(searchInfo.getSex())) {
+                        sexTextView.setText("男");
+                    } else {
+                        sexTextView.setText("女");
+                    }
+                    born = searchInfo.getBirthtime();
+                    bornTextView.setText(born);
+                    diabeteslei = searchInfo.getDiabeteslei();
+                    if ("1".equals(searchInfo.getDiabeteslei())) {
+                        sugarTextView.setText(R.string.community_user_info_sugar_one);
+                        sugarTextView.setSelected(true);
+                    } else if ("2".equals(searchInfo.getDiabeteslei())) {
+                        sugarTextView.setText(R.string.community_user_info_sugar_two);
+                        sugarTextView.setSelected(true);
+                    } else if ("3".equals(searchInfo.getDiabeteslei())) {
+                        sugarTextView.setText(R.string.community_user_info_sugar_three);
+                        sugarTextView.setSelected(true);
+                    } else if ("4".equals(searchInfo.getDiabeteslei())) {
+                        sugarTextView.setText(R.string.community_user_info_sugar_four);
+                        sugarTextView.setSelected(true);
+                    } else {
+                        sugarTextView.setText(R.string.community_user_info_sugar_no);
+                        sugarTextView.setSelected(false);
+                    }
+                    if ("0".equals(searchInfo.getHypertension())) {
+                        pressureTextView.setSelected(false);
+                    } else if ("1".equals(searchInfo.getHypertension())) {
+                        pressureTextView.setSelected(true);
+                        bloodLevel = "1";
+                        pressureTextView.setText(R.string.community_user_info_pressure_one);
+                    } else {
+                        bloodLevel = "2";
+                        pressureTextView.setText(R.string.community_user_info_pressure_two);
+                    }
+
+                    if ("1".equals(searchInfo.getFat())) {
+                        overTextView.setSelected(true);
+                    } else {
+                        overTextView.setSelected(false);
+                    }
+
+                    if ("1".equals(searchInfo.getStroke())) {
+                        headCheckBox.setChecked(true);
+                    } else {
+                        headCheckBox.setChecked(false);
+                    }
+                    if ("1".equals(searchInfo.getFattyliver())) {
+                        fattyCheckBox.setChecked(true);
+                    } else {
+                        fattyCheckBox.setChecked(false);
+                    }
+                    if ("1".equals(searchInfo.getCoronary())) {
+                        heartCheckBox.setChecked(true);
+                    } else {
+                        heartCheckBox.setChecked(false);
+                    }
+
+                    if ("1".equals(searchInfo.getParty_member())) {
+                        apartCheckBox.setChecked(true);
+                    } else {
+                        apartCheckBox.setChecked(false);
+                    }
+
+                    if ("1".equals(searchInfo.getDisability())) {
+                        illCheckBox.setChecked(true);
+                    } else {
+                        illCheckBox.setChecked(false);
+                    }
+
+                    if ("1".equals(searchInfo.getMental_illness())) {
+                        mentalCheckBox.setChecked(true);
+                    } else {
+                        mentalCheckBox.setChecked(false);
+                    }
+                    if ("1".equals(searchInfo.getIscare())) {
+                        importantCheckBox.setChecked(true);
+                    } else {
+                        importantCheckBox.setChecked(false);
+                    }
+                    if (TextUtils.isEmpty(searchInfo.getSugar_imei())) {
+                        sugarEditText.setText(searchInfo.getSugar_imei());
+                    }
+                    if (TextUtils.isEmpty(searchInfo.getBlood_imei())) {
+                        pressureEditText.setText(searchInfo.getSugar_imei());
+                    }
+
+                    //这一块是关于医生科室
+                    if (!TextUtils.isEmpty(searchInfo.getDocname())) {
+                        //绑定医生
+                        hospitalTextView.setClickable(false);
+                        departmentTextView.setClickable(false);
+                        doctorTextView.setClickable(false);
+                        doctorID = searchInfo.getDoc_id();
+                        departmentid = searchInfo.getDep_userid();
+                        hospitalid = searchInfo.getHos_userid();
+                    } else {
+                        hospitalTextView.setClickable(true);
+                        departmentTextView.setClickable(true);
+                        doctorTextView.setClickable(true);
+                    }
                 }
-            } else {
-                TipUtils.getInstance().showToast(getPageContext(), response.msg);
+
+            } else if (response.code == 30004) {
+                //这是没搜索到人
             }
         }, (call, throwable) -> {
             TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.network_error);
@@ -329,7 +607,8 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         int currentYear = currentDate.get(Calendar.YEAR);
         startDate.set(currentYear - 120, 0, 1, 0, 0);
         TimePickerView timePickerView = new TimePickerBuilder(getPageContext(), (date, v) -> {
-            String content = DataUtils.convertDateToString(date, DataFormatManager.TIME_FORMAT_H_M);
+            String content = DataUtils.convertDateToString(date, DataFormatManager.TIME_FORMAT_Y_M_D);
+            born = content;
             bornTextView.setText(content);
         }).setDate(currentDate).setRangDate(startDate, endDate)
                 .setType(new boolean[]{true, true, true, false, false, false})
@@ -349,8 +628,8 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         sexList.add(getString(R.string.base_male));
         sexList.add(getString(R.string.base_female));
         OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
-            sex = options1 + "";
-            sexTextView.setText("1".equals(sex) ? "女" : "男");
+            sex = options1 + 1 + "";
+            sexTextView.setText("1".equals(sex) ? "男" : "女");
         }).setLineSpacingMultiplier(2.5f)
                 .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_light))
                 .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
@@ -358,4 +637,85 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         optionsPickerView.setPicker(sexList);
         optionsPickerView.show();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_IME_CODE) {
+                if (data != null) {
+                    String type = data.getStringExtra("type");
+                    String imei = data.getStringExtra("imei");
+                    if ("1".equals(type)) {
+                        pressureEditText.setText(imei);
+                    } else {
+                        sugarEditText.setText(imei);
+                    }
+                }
+            }
+        }
+    }
+
+    private void initListener() {
+        sexTextView.setOnClickListener(this);
+        bornTextView.setOnClickListener(this);
+        relationTextView.setOnClickListener(this);
+        hospitalTextView.setOnClickListener(this);
+        departmentTextView.setOnClickListener(this);
+        doctorTextView.setOnClickListener(this);
+        sugarImageView.setOnClickListener(this);
+        pressureImageView.setOnClickListener(this);
+        pressureTextView.setOnClickListener(this);
+        sugarTextView.setOnClickListener(this);
+        overTextView.setOnClickListener(this);
+        addTextView.setOnClickListener(this);
+
+
+        phoneEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                        (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    //do something;
+                    getHospital(phoneEditText.getText().toString().trim(), "2");
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+    }
+
+    private View initView() {
+        View view = View.inflate(getPageContext(), R.layout.activity_user_add, null);
+        locationTextView = view.findViewById(R.id.tv_user_add_location);
+        nameEditText = view.findViewById(R.id.et_user_add_name);
+        phoneEditText = view.findViewById(R.id.et_user_add_phone);
+        sexTextView = view.findViewById(R.id.tv_user_add_sex);
+        bornTextView = view.findViewById(R.id.tv_user_add_born);
+        relationTextView = view.findViewById(R.id.tv_user_add_master_relation);
+        hospitalTextView = view.findViewById(R.id.tv_user_add_hospital_choose);
+        departmentTextView = view.findViewById(R.id.tv_user_add_department_choose);
+        doctorTextView = view.findViewById(R.id.tv_user_add_doctor_choose);
+
+
+        sugarTextView = view.findViewById(R.id.cb_filter_disease_sugar);
+        pressureTextView = view.findViewById(R.id.tv_filter_disease_presure);
+        overTextView = view.findViewById(R.id.tv_filter_disease_over_weight);
+        headCheckBox = view.findViewById(R.id.cb_filter_disease_head);
+        fattyCheckBox = view.findViewById(R.id.cb_filter_disease_fatty);
+        heartCheckBox = view.findViewById(R.id.cb_filter_disease_heart);
+        apartCheckBox = view.findViewById(R.id.cb_filter_disease_apart);
+        illCheckBox = view.findViewById(R.id.cb_filter_disease_ill);
+        mentalCheckBox = view.findViewById(R.id.cb_filter_disease_mental);
+        importantCheckBox = view.findViewById(R.id.cb_filter_disease_important);
+        sugarEditText = view.findViewById(R.id.et_user_add_device_sugar);
+        sugarImageView = view.findViewById(R.id.iv_user_add_device_sugar);
+        pressureEditText = view.findViewById(R.id.et_user_add_device_pressure);
+        pressureImageView = view.findViewById(R.id.iv_user_add_device_pressure);
+        addTextView = view.findViewById(R.id.tv_add_user_submit);
+        return view;
+    }
+
 }

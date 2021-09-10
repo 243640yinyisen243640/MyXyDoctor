@@ -97,6 +97,7 @@
     <string name="user_add_sex">性别</string>
     <string name="user_add_born_time">出生日期</string>
     <string name="user_add_master_relation">与户主关系</string>
+    <string name="please_choose_user_add_master_relation">请选择与户主关系</string>
     <string name="user_add_hospital_choose">选择医院</string>
     <string name="user_add_department_choose">选择科室</string>
     <string name="user_add_doctor_choose">选择医生</string>

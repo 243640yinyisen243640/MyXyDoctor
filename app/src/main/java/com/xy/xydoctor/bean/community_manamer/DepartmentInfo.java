@@ -9,7 +9,7 @@ public class DepartmentInfo {
     private String dep_userid;
     private String depname;
     private String hosp_userid;
-    private String hosp_name;
+    private String hospitalname;
     private String doc_userid;
     private String docname;
 
@@ -22,11 +22,11 @@ public class DepartmentInfo {
     }
 
     public String getHosp_name() {
-        return hosp_name;
+        return hospitalname;
     }
 
     public void setHosp_name(String hosp_name) {
-        this.hosp_name = hosp_name;
+        this.hospitalname = hosp_name;
     }
 
     public String getDoc_userid() {

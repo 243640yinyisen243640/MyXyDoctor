@@ -19,8 +19,10 @@ import com.xy.xydoctor.bean.community_manamer.FollowListChildListInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowListInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
 import com.xy.xydoctor.bean.community_manamer.FollowUpListAllInfo;
+import com.xy.xydoctor.bean.community_manamer.SearchInfo;
 import com.xy.xydoctor.bean.community_manamer.SugarOrPressureInfo;
 import com.xy.xydoctor.constant.ConstantParam;
+import com.xy.xydoctor.param.UserAddReq;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -529,4 +531,54 @@ public class DataManager {
         map.put("access_token", SPStaticUtils.getString("token"));
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, DepartmentInfo.class, "/doctor/community/getHosDep", map, successCallBack, failureCallBack);
     }
+
+    /**
+     * 获取医生列表
+     *
+     * @param dep_userid
+     * @param build_id
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getDoctorList(String dep_userid, String build_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("dep_userid", dep_userid);
+        map.put("build_id", build_id);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, DepartmentInfo.class, "/doctor/Community/getDepDoc", map, successCallBack, failureCallBack);
+    }
+
+
+    /**
+     * 获取医院的id,这个是搜索
+     *
+     * @param tel
+     * @param build_id
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getHospitalList(String tel, String build_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("tel", tel);
+        map.put("build_id", build_id);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, SearchInfo.class, "/doctor/Community/searchTel", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 添加成员
+     *
+     * @param addReq
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> addUser(UserAddReq addReq, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, SearchInfo.class, "/doctor/Community/searchTel", addReq.initAddParamMap(), successCallBack, failureCallBack);
+    }
+
+
 }
