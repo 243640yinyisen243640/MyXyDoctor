@@ -9,11 +9,13 @@
         android:id="@+id/tv_top_class_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:drawableBottom="@drawable/member_child_selector_rb_bottom"
         android:drawablePadding="10dp"
         android:gravity="center"
         android:text="@string/app_name"
-        android:textColor="@color/selector_color_filter_text"
+        android:textColor="@color/base_black"
         android:textSize="12sp" />
 
 

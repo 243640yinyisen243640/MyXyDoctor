@@ -7,6 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/base_background"
         android:orientation="vertical">
 
         <include
@@ -167,29 +168,50 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_fub_building_num"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:background="@color/white"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/community_follow_up_roof" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_fub_building_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_fub_building_unit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/community_follow_up_roof" />
 
-        <com.xy.xydoctor.customerView.NoConflictGridView
-            android:id="@+id/gv_fub_building_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_fub_building_unit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical" />
+
+            <com.xy.xydoctor.customerView.NoConflictGridView
+                android:id="@+id/gv_fub_building_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/base_background"
+                android:horizontalSpacing="5dp"
+                android:numColumns="4"
+                android:verticalSpacing="5dp" />
+        </LinearLayout>
+
 
     </LinearLayout>
 

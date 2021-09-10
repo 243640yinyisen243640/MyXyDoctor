@@ -9,6 +9,7 @@ import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,10 +18,13 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.lyd.baselib.util.TurnsUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.ClassTopListAdapter;
 import com.xy.xydoctor.adapter.community_manager.CommunityBuildingModelListAdapter;
+import com.xy.xydoctor.adapter.community_manager.CommunityRoomAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
+import com.xy.xydoctor.bean.community_manamer.CommunityFilterInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowListInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
 import com.xy.xydoctor.customerView.NoConflictGridView;
@@ -72,7 +76,18 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
      * 几号楼
      */
     private ClassTopListAdapter topListAdapter;
+    /**
+     * 几单元
+     */
     private CommunityBuildingModelListAdapter unitAdapter;
+
+    private List<FollowListInfo> buildList;
+
+    /**
+     * 当前选中的item
+     */
+    private int buildindex = 0;
+    private int unitindex = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,11 +125,10 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
         containerView().addView(initView());
         initValue();
 
-        getCommunityInfo();
 
         initListener();
-        //        getCommunityInfo();
-        //        getBuildingUnitInfo();
+        getCommunityInfo();
+        getBuildingUnitInfo();
     }
 
     private void initListener() {
@@ -178,59 +192,118 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
     private void getBuildingUnitInfo() {
         Call<String> requestCall = DataManager.getCommunityBuildUnitInfo(comid, (call, response) -> {
             if (response.code == 200) {
-                List<FollowListInfo> buildList = (List<FollowListInfo>) response.object;
-                getRoomInfo(buildList);
+                buildList = (List<FollowListInfo>) response.object;
+                getRoomInfo();
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
         });
     }
 
-    private void getRoomInfo(List<FollowListInfo> buildingInfoList) {
-        Call<String> requestCall = DataManager.getCommunityRoomInfo(unityid, (call, response) -> {
-            if (response.code == 200) {
+    private void getRoomInfo() {
+        if (buildList != null && buildList.size() > 0) {
+            if (buildList.get(0).getUnits() != null && buildList.get(0).getUnits().size() > 0) {
+                unityid = buildList.get(buildindex).getUnits().get(unitindex).getId();
+                Call<String> requestCall = DataManager.getCommunityRoomInfo(unityid, (call, response) -> {
+                    if (response.code == 200) {
+                        List<CommunityFilterInfo> roomList = (List<CommunityFilterInfo>) response.object;
+                        //上面几号楼的点击
+                        topListAdapter = new ClassTopListAdapter(getPageContext(), buildList, new OnItemClickListener());
+                        numRecycleView.setAdapter(topListAdapter);
+                        //上面几单元的点击
+                        unitAdapter = new CommunityBuildingModelListAdapter(getPageContext(), buildList.get(buildindex).getUnits(), new OnItemClickListener1());
+                        unitRecycleView.setAdapter(unitAdapter);
+                        //上面房间的点击
 
-                topListAdapter = new ClassTopListAdapter(getPageContext(), buildingInfoList, new IAdapterViewClickListener() {
-                    @Override
-                    public void adapterClickListener(int position, View view) {
-
+                        contentGridView.setNumColumns(TurnsUtils.getInt(buildList.get(buildindex).getUnits().get(unitindex).getHousehold(), 0));
+                        contentGridView.setOnItemClickListener((parent, view, position, id) -> {
+                            Intent intent = new Intent(getPageContext(), CommunityBuildingUnitActivity.class);
+                            startActivity(intent);
+                        });
+                        CommunityRoomAdapter roomAdapter = new CommunityRoomAdapter(getPageContext(), roomList);
+                        contentGridView.setAdapter(roomAdapter);
                     }
 
-                    @Override
-                    public void adapterClickListener(int position, int index, View view) {
 
-                    }
+                }, (call, t) -> {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
                 });
-                numRecycleView.setAdapter(topListAdapter);
-
-                unitAdapter = new CommunityBuildingModelListAdapter(getPageContext(), buildingInfoList, new IAdapterViewClickListener() {
-                    @Override
-                    public void adapterClickListener(int position, View view) {
-
-                    }
-
-                    @Override
-                    public void adapterClickListener(int position, int index, View view) {
-
-                    }
-                });
-                unitRecycleView.setAdapter(unitAdapter);
             }
+        }
 
-            contentGridView.setOnItemClickListener((parent, view, position, id) -> {
-                Intent intent = new Intent(getPageContext(), CommunityBuildingUnitActivity.class);
-                startActivity(intent);
-            });
-            //            contentGridView.setAdapter();
-        }, (call, t) -> {
-            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
-        });
     }
 
+
+    private class OnItemClickListener implements IAdapterViewClickListener {
+
+        @Override
+        public void adapterClickListener(int position, View view) {
+
+            switch (view.getId()) {
+                case R.id.ll_top_class:
+                    Log.i("yys", "1position==" + position);
+                    buildindex = position;
+                    for (int i = 0; i < buildList.size(); i++) {
+                        buildList.get(i).setCheck(false);
+                    }
+                    buildList.get(position).setCheck(true);
+                    topListAdapter.notifyDataSetChanged();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        @Override
+        public void adapterClickListener(int position, int index, View view) {
+            switch (view.getId()) {
+
+
+                default:
+                    break;
+
+            }
+        }
+    }
+
+    private class OnItemClickListener1 implements IAdapterViewClickListener {
+
+        @Override
+        public void adapterClickListener(int position, View view) {
+
+            switch (view.getId()) {
+                case R.id.ll_build_unit_click:
+                    Log.i("yys", "2position==" + position);
+
+                    for (int i = 0; i < buildList.get(buildindex).getUnits().size(); i++) {
+                        buildList.get(buildindex).getUnits().get(i).setCheck(false);
+                    }
+                    unitindex = position;
+                    buildList.get(buildindex).getUnits().get(position).setCheck(true);
+                    unitAdapter.notifyDataSetChanged();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        @Override
+        public void adapterClickListener(int position, int index, View view) {
+            switch (view.getId()) {
+
+
+                default:
+                    break;
+
+            }
+        }
+    }
 
     private void initValue() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getPageContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
         numRecycleView.setLayoutManager(linearLayoutManager);
         numRecycleView.setHasFixedSize(true);
         numRecycleView.setNestedScrollingEnabled(false);
@@ -269,7 +342,6 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE_FOR_ADD_BUILDING) {
-                getCommunityInfo();
             }
         }
     }

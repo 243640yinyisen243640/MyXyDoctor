@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_build_bg"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_white_heavy">
+
+    <TextView
+        android:id="@+id/tv_building_room_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="10dp"
+        android:text="@string/app_name"
+        android:textColor="@color/base_black"
+        android:textSize="13sp" />
+
+    <ImageView
+        android:id="@+id/iv_building_room_ill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="2dp"
+        android:src="@drawable/community_mental_illness"
+        android:visibility="gone" />
+
+</FrameLayout>

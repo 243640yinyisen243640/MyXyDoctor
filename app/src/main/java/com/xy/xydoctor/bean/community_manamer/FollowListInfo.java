@@ -21,6 +21,16 @@ public class FollowListInfo {
     private String id;
     private List<UpLoadParamInfo> units;
 
+    private boolean isCheck;
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
+
     public String getId() {
         return id;
     }

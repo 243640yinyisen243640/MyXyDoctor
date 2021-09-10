@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xy.xydoctor.R;
@@ -43,11 +44,14 @@ public class ClassTopListAdapter extends UIBaseRecycleViewAdapter<FollowListInfo
         ViewHolder viewHolder = (ViewHolder) holder;
         FollowListInfo info = getList().get(position);
 
-        viewHolder.nameTextView.setText(info.getBuild_name()+"号楼");
-        if (position == pos) {
+        viewHolder.nameTextView.setText(info.getBuild_name());
+        if (info.isCheck()) {
             viewHolder.nameTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.shape_bg_red);
+            viewHolder.nameTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.main_red));
         } else {
             viewHolder.nameTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.shape_bg_transparent);
+            viewHolder.nameTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.base_black));
+
         }
 
 

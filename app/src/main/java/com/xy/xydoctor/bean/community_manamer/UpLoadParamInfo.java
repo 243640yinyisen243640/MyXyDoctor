@@ -9,6 +9,15 @@ public class UpLoadParamInfo {
     private String unit_name;
     private String household;
     private String id;
+    private boolean isCheck;
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
 
     public String getId() {
         return id;

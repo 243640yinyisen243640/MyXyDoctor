@@ -8,6 +8,11 @@ import java.util.List;
  * Description: 筛选
  */
 public class CommunityFilterInfo {
+    /**
+     * 是否为空房间
+     * 0：空房间
+     * 1：非空房间
+     */
     private String isempty;
     private String com_id = "0";
     private String sex;
