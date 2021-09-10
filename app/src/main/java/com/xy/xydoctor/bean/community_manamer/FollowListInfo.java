@@ -18,6 +18,25 @@ public class FollowListInfo {
      */
     private String unit_name;
 
+    private String id;
+    private List<UpLoadParamInfo> units;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<UpLoadParamInfo> getUnits() {
+        return units;
+    }
+
+    public void setUnits(List<UpLoadParamInfo> units) {
+        this.units = units;
+    }
+
     List<UpLoadParamInfo> build_data;
     private String unit_num;
     private String layer;

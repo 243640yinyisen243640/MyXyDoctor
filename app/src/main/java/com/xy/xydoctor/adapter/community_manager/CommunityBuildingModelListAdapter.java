@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lyd.baselib.widget.view.MyListView;
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
+import com.xy.xydoctor.base.adapter.UIBaseRecycleViewAdapter;
+import com.xy.xydoctor.bean.community_manamer.FollowListInfo;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 
 import java.util.List;
@@ -20,33 +21,18 @@ import java.util.List;
  * 作者: LYD
  * 创建日期: 2019/7/19 11:09
  */
-public class CommunityBuildingModelListAdapter extends RecyclerView.Adapter<CommunityBuildingModelListAdapter.ViewHolder> {
-    private Context context;
-    private List<FollowUpAgentListBean> list;
-    private IAdapterViewClickListener clickListener;
-
-    private String type;
+public class CommunityBuildingModelListAdapter extends UIBaseRecycleViewAdapter<FollowListInfo> {
 
 
-    public CommunityBuildingModelListAdapter(Context context, List<FollowUpAgentListBean> list, String type, IAdapterViewClickListener clickListener) {
-        this.context = context;
-        this.list = list;
-        this.type = type;
-        this.clickListener = clickListener;
-    }
-
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //实例化得到Item布局文件的View对象
-        View v = View.inflate(context, R.layout.item_building_model_type, null);
-        //返回MyViewHolder的对象
-        return new ViewHolder(v);
+    public CommunityBuildingModelListAdapter(Context mContext, List<FollowListInfo> mList, IAdapterViewClickListener mListener) {
+        super(mContext, mList, mListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        FollowUpAgentListBean info = list.get(position);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ViewHolder viewHolder = (ViewHolder) holder;
+        FollowListInfo info = getList().get(position);
+
         //        if (typeInfo.isCheck()) {
         //            holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_main_90));
         //        } else {
@@ -54,10 +40,15 @@ public class CommunityBuildingModelListAdapter extends RecyclerView.Adapter<Comm
         //        }
     }
 
+    @NonNull
     @Override
-    public int getItemCount() {
-        return list == null ? 0 : list.size();
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //实例化得到Item布局文件的View对象
+        View v = View.inflate(getContext(), R.layout.item_building_model_type, null);
+        //返回MyViewHolder的对象
+        return new ViewHolder(v);
     }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView nameTextView;

@@ -77,6 +77,7 @@ public class CommunityAddBuildingPopupWindow extends PopupWindow {
                     TipUtils.getInstance().showToast(context, R.string.plwase_input_every_unit);
                     return;
                 }
+                dismiss();
                 //为了防止连续点击活着第一次接口掉不成功出现重复数据
                 list1.add(new UpLoadParamInfo(list.get(i).getUnit_name(),(textViews.get(i)).getText().toString().trim()));
             }

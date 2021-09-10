@@ -10,19 +10,20 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.google.gson.Gson;
+import com.alibaba.fastjson.JSON;
+import com.blankj.utilcode.util.SPStaticUtils;
 import com.lyd.baselib.util.TurnsUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
+import com.xy.xydoctor.bean.community_manamer.CommunityAddBuildingInfo;
 import com.xy.xydoctor.bean.community_manamer.UpLoadParamInfo;
-import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.imp.IACommunityUpLoadChoose;
+import com.xy.xydoctor.net.OkHttpCallBack;
+import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.window.CommunityAddBuildingPopupWindow;
 
 import java.util.List;
-
-import retrofit2.Call;
 
 /**
  * Author: LYD
@@ -116,18 +117,39 @@ public class CommunityAddBuildingActivity extends XYSoftUIBaseActivity implement
 
     @Override
     public void IAUpParamChoose(List<UpLoadParamInfo> list) {
-        String result = new Gson().toJson(list);
-        Call<String> requestCall = DataManager.ces(result, comid, buildingNum, buildingHigh,
-                (call, response) -> {
-                    if (response.code == 200) {
-                        setResult(RESULT_OK);
-                        finish();
-                    }
+        CommunityAddBuildingInfo info = new CommunityAddBuildingInfo();
+        info.setAccess_token(SPStaticUtils.getString("token"));
+        info.setCom_id(comid);
+        info.setBuild_name(buildingNum);
+        info.setLayer(buildingHigh);
+        info.setUnit_data(list);
+        String jsonResult = JSON.toJSONString(info);
+        XyUrl.okPostJson(XyUrl.ADD_BUILDING, jsonResult, new OkHttpCallBack<String>() {
+            @Override
+            public void onSuccess(String value) {
+                setResult(RESULT_OK);
+                finish();
+            }
 
-                }, (call, t) -> {
-                    TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
-                });
-        addRequestCallToMap("ces", requestCall);
+            @Override
+            public void onError(int errorCode, final String errorMsg) {
+                Log.i("yys", "code==" + errorCode + "errorMsg==" + errorMsg);
+                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+            }
+        });
+
+        //        String result = new Gson().toJson(list);
+        //        Call<String> requestCall = DataManager.ces(result, comid, buildingNum, buildingHigh,
+        //                (call, response) -> {
+        //                    if (response.code == 200) {
+        //                        setResult(RESULT_OK);
+        //                        finish();
+        //                    }
+        //
+        //                }, (call, t) -> {
+        //                    TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        //                });
+        //        addRequestCallToMap("ces", requestCall);
     }
 
 

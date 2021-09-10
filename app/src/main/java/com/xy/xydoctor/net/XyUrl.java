@@ -314,6 +314,7 @@ public class XyUrl {
     //接口列表结束
     //随访提交
     public final static String FOLLOW_ADD = HOST_URL + "/port/Followmgt/addFollow";
+    public final static String ADD_BUILDING = HOST_URL + "/doctor/Community/addCommunity";
     //获取随访模板列表
     public final static String FOLLOW_UP_ADD_FOLLOW_LIST = HOST_URL + "/doctor/Followmgt/followsPlan";
 

@@ -8,6 +8,15 @@ package com.xy.xydoctor.bean.community_manamer;
 public class UpLoadParamInfo {
     private String unit_name;
     private String household;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public UpLoadParamInfo() {
     }

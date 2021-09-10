@@ -567,6 +567,7 @@ public class DataManager {
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, SearchInfo.class, "/doctor/Community/searchTel", map, successCallBack, failureCallBack);
     }
 
+
     /**
      * 添加成员
      *
@@ -580,5 +581,49 @@ public class DataManager {
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, SearchInfo.class, "/doctor/Community/searchTel", addReq.initAddParamMap(), successCallBack, failureCallBack);
     }
 
+    /**
+     * @param type            查询类型 1:普通小区列表 2：待办小区列表
+     * @param com_id
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getCommunityDetails(String type, String com_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("type", type);
+        map.put("com_id", com_id);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, FollowUpAgentListBean.class, "/doctor/Community/communityDetail", map, successCallBack, failureCallBack);
+    }
+
+
+    /**
+     * 获取楼栋单元
+     *
+     * @param com_id
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getCommunityBuildUnitInfo(String com_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("com_id", com_id);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, FollowListInfo.class, "/doctor/Community/getBuilds", map, successCallBack, failureCallBack);
+    }
+
+
+    /**
+     * @param unit_id
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getCommunityRoomInfo(String unit_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("unit_id", unit_id);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, CommunityFilterInfo.class, "/doctor/Community/getHouses", map, successCallBack, failureCallBack);
+    }
 
 }

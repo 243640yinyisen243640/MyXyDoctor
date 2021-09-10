@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/include_community_follow_up"
+            layout="@layout/include_community_follow_up_building"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_5" />
@@ -24,9 +24,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/community_follow_up_building_bg_top"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/tv_fub_building_name"
@@ -106,14 +107,17 @@
                         android:gravity="center"
                         android:text="@string/follow_up_agent_total_num"
                         android:textColor="#9D9D9D"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        android:visibility="gone" />
 
                     <View
+                        android:id="@+id/view_fub"
                         android:layout_width="0.5dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:background="@color/gray_light" />
+                        android:background="@color/gray_light"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -122,7 +126,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/community_follow_up_building_bg_bottom"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -144,8 +148,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/follow_up_agent_households_num"
-                    android:textColor="#FF854F"
+                    android:text="@string/follow_up_sugar_person_num"
+                    android:textColor="@color/community_statics_orange"
                     android:textSize="13sp" />
 
                 <TextView
@@ -154,8 +158,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/follow_up_agent_total_num"
-                    android:textColor="#3D98DF"
+                    android:text="@string/follow_up_total_person_num"
+                    android:textColor="@color/community_follow_blue"
                     android:textSize="13sp" />
 
             </LinearLayout>

@@ -4,15 +4,6 @@ import java.util.List;
 
 public class FollowUpAgentListBean {
 
-
-    /**
-     * oid : 47
-     * oxygen : 95.7
-     * bpmval : 85.0
-     * type : 2
-     * datetime : 2020-05-14 14:40
-     */
-
     /**
      * 小区id
      */
@@ -41,6 +32,33 @@ public class FollowUpAgentListBean {
      * 总人数
      */
     private String member_count;
+    private String gxy_count;
+    private String diabeteslei_count;
+    private String both_count;
+
+    public String getGxy_count() {
+        return gxy_count;
+    }
+
+    public void setGxy_count(String gxy_count) {
+        this.gxy_count = gxy_count;
+    }
+
+    public String getDiabeteslei_count() {
+        return diabeteslei_count;
+    }
+
+    public void setDiabeteslei_count(String diabeteslei_count) {
+        this.diabeteslei_count = diabeteslei_count;
+    }
+
+    public String getBoth_count() {
+        return both_count;
+    }
+
+    public void setBoth_count(String both_count) {
+        this.both_count = both_count;
+    }
 
     private List<FollowUpAgentListBean> plan_list;
 
