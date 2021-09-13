@@ -15,6 +15,7 @@ import com.xy.xydoctor.bean.community_manamer.CommunityUseMedicineUserInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityUserInfo;
 import com.xy.xydoctor.bean.community_manamer.DataAbnormalInfo;
 import com.xy.xydoctor.bean.community_manamer.DepartmentInfo;
+import com.xy.xydoctor.bean.community_manamer.FamilyAllInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowListChildListInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowListInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
@@ -626,4 +627,18 @@ public class DataManager {
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, CommunityFilterInfo.class, "/doctor/Community/getHouses", map, successCallBack, failureCallBack);
     }
 
+    /**
+     * 房间用户列表
+     *
+     * @param house_id
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getFamilyInfo(String house_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("house_id", house_id);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, FamilyAllInfo.class, "/doctor/Community/houseUsers", map, successCallBack, failureCallBack);
+    }
 }

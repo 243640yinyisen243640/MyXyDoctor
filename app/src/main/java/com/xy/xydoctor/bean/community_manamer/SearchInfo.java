@@ -23,15 +23,24 @@ public class SearchInfo {
     /**
      *
      */
+    private String age;
+    /**
+     *
+     */
     private String birthtime;
     /**
      * 糖尿病类型
      */
     private String diabeteslei;
     /**
-     * 高血压  0:无  1：一级  2：二级
+     * 高血压  0:无  1：一级  2：二级   在家庭成员model中
+     * 这个仅表示为是否高血压
      */
     private String hypertension;
+    /**
+     * 血压等级 1：一级  2：二级
+     */
+    private String bloodLevel;
     /**
      * 医院id
      */
@@ -101,6 +110,209 @@ public class SearchInfo {
     private String iscare;
 
     private List<DepartmentInfo> hosInfo;
+    /**
+     * 楼栋信息
+     */
+    private String houseinfo;
+    /**
+     * 随访状态，
+     * 0：不显示待随访
+     * 1：显示待随访
+     */
+    private String follow_status;
+    /**
+     * 血糖数据是否为空
+     * 1：为空
+     * 2：不为空
+     */
+    private String sugarEmpty;
+    /**
+     * 血压数据是否为空
+     * 1：为空
+     * 2：不为空
+     */
+    private String bloodEmpty;
+    /**
+     * 血糖值
+     */
+    private String glucosevalue;
+    /**
+     * 时间
+     */
+    private String datetime;
+    /**
+     * 测量时间点 早餐后
+     */
+    private String category;
+    /**
+     * 1偏高 2偏低 3正常
+     */
+    private String ishight;
+
+    /**
+     * 收缩
+     */
+    private String systolic;
+    /**
+     * 舒张
+     */
+    private String diastole;
+    /**
+     * 户主关系 1 户主 2配偶 3子女 4儿媳 5女婿 6父母 0其他
+     */
+    private String relation;
+
+    public String getRelation() {
+        return relation;
+    }
+
+    public void setRelation(String relation) {
+        this.relation = relation;
+    }
+
+    public String getSystolic() {
+        return systolic;
+    }
+
+    public void setSystolic(String systolic) {
+        this.systolic = systolic;
+    }
+
+    public String getDiastole() {
+        return diastole;
+    }
+
+    public void setDiastole(String diastole) {
+        this.diastole = diastole;
+    }
+
+    public String getGlucosevalue() {
+        return glucosevalue;
+    }
+
+    public void setGlucosevalue(String glucosevalue) {
+        this.glucosevalue = glucosevalue;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getIshight() {
+        return ishight;
+    }
+
+    public void setIshight(String ishight) {
+        this.ishight = ishight;
+    }
+
+    private List<SugarOrPressureInfo> sugar;
+    private List<SugarOrPressureInfo> blood;
+
+    private List<String> img;
+
+    private String sugar_follow;
+    private String blood_follow;
+
+    public String getSugar_follow() {
+        return sugar_follow;
+    }
+
+    public void setSugar_follow(String sugar_follow) {
+        this.sugar_follow = sugar_follow;
+    }
+
+    public String getBlood_follow() {
+        return blood_follow;
+    }
+
+    public void setBlood_follow(String blood_follow) {
+        this.blood_follow = blood_follow;
+    }
+
+    public String getBloodLevel() {
+        return bloodLevel;
+    }
+
+    public void setBloodLevel(String bloodLevel) {
+        this.bloodLevel = bloodLevel;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getHouseinfo() {
+        return houseinfo;
+    }
+
+    public void setHouseinfo(String houseinfo) {
+        this.houseinfo = houseinfo;
+    }
+
+    public String getFollow_status() {
+        return follow_status;
+    }
+
+    public void setFollow_status(String follow_status) {
+        this.follow_status = follow_status;
+    }
+
+    public String getSugarEmpty() {
+        return sugarEmpty;
+    }
+
+    public void setSugarEmpty(String sugarEmpty) {
+        this.sugarEmpty = sugarEmpty;
+    }
+
+    public String getBloodEmpty() {
+        return bloodEmpty;
+    }
+
+    public void setBloodEmpty(String bloodEmpty) {
+        this.bloodEmpty = bloodEmpty;
+    }
+
+    public List<String> getImg() {
+        return img;
+    }
+
+    public void setImg(List<String> img) {
+        this.img = img;
+    }
+
+    public List<SugarOrPressureInfo> getSugar() {
+        return sugar;
+    }
+
+    public void setSugar(List<SugarOrPressureInfo> sugar) {
+        this.sugar = sugar;
+    }
+
+    public List<SugarOrPressureInfo> getBlood() {
+        return blood;
+    }
+
+    public void setBlood(List<SugarOrPressureInfo> blood) {
+        this.blood = blood;
+    }
 
     public String getUserid() {
         return userid;

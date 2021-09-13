@@ -34,7 +34,7 @@
                     android:textColor="@color/base_black"
                     android:textSize="17sp" />
 
-                <com.lyd.baselib.widget.view.MyListView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ml_filter_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -72,7 +72,7 @@
 
                 <TextView
                     android:id="@+id/tv_filter_tel"
-                    style="@style/follow_up_search_infomation"/>
+                    style="@style/follow_up_search_infomation" />
 
                 <View
                     android:layout_width="0.5dp"
@@ -127,7 +127,7 @@
         android:padding="15dp"
         android:textColor="@color/community_content_black"
         android:textSize="14sp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 
 </LinearLayout>

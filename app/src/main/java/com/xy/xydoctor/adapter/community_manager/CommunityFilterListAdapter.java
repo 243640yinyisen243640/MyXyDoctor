@@ -1,7 +1,6 @@
 package com.xy.xydoctor.adapter.community_manager;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.flexbox.FlexboxLayout;
-import com.lyd.baselib.widget.view.MyListView;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.adapter.UIBaseRecycleViewAdapter;
 import com.xy.xydoctor.bean.community_manamer.CommunityFilterChildInfo;
@@ -53,19 +52,18 @@ public class CommunityFilterListAdapter extends UIBaseRecycleViewAdapter<Communi
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
         CommunityFilterChildInfo info = getList().get(position);
-
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
+        viewHolder.myListView.setLayoutManager(layoutManager);
 
         if ("1".equals(isEmpty)) {
             viewHolder.noFrameLayout.setVisibility(View.VISIBLE);
             viewHolder.emptyTextView.setVisibility(View.GONE);
             if (info.getDiseases() != null && info.getDiseases().size() > 0) {
-                Log.i("yys", "size==" + info.getDiseases().size());
                 viewHolder.typeFlexboxLayout.setVisibility(View.VISIBLE);
                 int padding = XyScreenUtils.dip2px(getContext(), 5);
                 FlexboxLayout.LayoutParams flexLP = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, XyScreenUtils.dip2px(getContext(), 20));
                 flexLP.setMargins(0, padding * 2, padding * 2, 0);
                 for (int i = 0; i < info.getDiseases().size(); i++) {
-                    Log.i("yys", "text==" + info.getDiseases().get(i));
                     TextView textView = new TextView(getContext());
                     textView.setTextSize(12);
                     textView.setPadding(padding * 2, 0, padding * 2, 0);
@@ -100,7 +98,17 @@ public class CommunityFilterListAdapter extends UIBaseRecycleViewAdapter<Communi
             viewHolder.emptyTextView.setText(info.getCom_name() + info.getBuild_name() + "号楼" + info.getUnit_name() + "单元" + info.getHouse_num());
         }
 
-        CommunityFilterDeseaseImgAdapter imgAdapter = new CommunityFilterDeseaseImgAdapter(getContext(), info.getImgs());
+        CommunityFilterDeseaseImgAdapter imgAdapter = new CommunityFilterDeseaseImgAdapter(getContext(), info.getImgs(), new IAdapterViewClickListener() {
+            @Override
+            public void adapterClickListener(int position, View view) {
+
+            }
+
+            @Override
+            public void adapterClickListener(int position, int index, View view) {
+
+            }
+        });
         viewHolder.myListView.setAdapter(imgAdapter);
 
         viewHolder.emptyTextView.setOnClickListener(v -> {
@@ -122,7 +130,7 @@ public class CommunityFilterListAdapter extends UIBaseRecycleViewAdapter<Communi
     class ViewHolder extends RecyclerView.ViewHolder {
         FrameLayout noFrameLayout;
         TextView nameTextView;
-        MyListView myListView;
+        RecyclerView myListView;
         TextView sexTextView;
         TextView ageTextView;
         TextView telTextView;

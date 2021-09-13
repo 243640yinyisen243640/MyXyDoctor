@@ -13,15 +13,6 @@
         android:padding="10dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_building_unit_location_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/community_location"
-            android:drawablePadding="5dp"
-            android:text="@string/app_name"
-            android:textColor="@color/base_text_gray"
-            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,26 +34,11 @@
                     android:textColor="@color/base_black"
                     android:textSize="17sp" />
 
-                <ImageView
-                    android:id="@+id/iv_building_unit_party_member_item"
-                    android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/ml_family_child_img"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:src="@drawable/community_party_member" />
-
-                <ImageView
-                    android:id="@+id/iv_building_unit_handicapped_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:src="@drawable/community_handicapped" />
-
-                <ImageView
-                    android:id="@+id/iv_building_unit_mental_illness_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:src="@drawable/community_mental_illness" />
+                    android:layout_weight="1" />
 
                 <View
                     android:layout_width="0dp"
@@ -89,6 +65,18 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_building_unit_relation_item"
+                style="@style/follow_up_search_infomation"
+                android:text="@string/app_name" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/gray_light" />
+
+            <TextView
                 android:id="@+id/tv_building_unit_sex_item"
                 style="@style/follow_up_search_infomation"
                 android:text="@string/app_name" />
@@ -102,18 +90,6 @@
 
             <TextView
                 android:id="@+id/tv_building_unit_age_item"
-                style="@style/follow_up_search_infomation"
-                android:text="@string/app_name" />
-
-            <View
-                android:layout_width="0.5dp"
-                android:layout_height="12dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/gray_light" />
-
-            <TextView
-                android:id="@+id/tv_building_unit_phone_item"
                 style="@style/follow_up_search_infomation"
                 android:text="@string/app_name" />
 
@@ -181,6 +157,7 @@
             android:background="@drawable/shape_dotted_line" />
 
         <LinearLayout
+            android:id="@+id/ll_sugar_child"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">

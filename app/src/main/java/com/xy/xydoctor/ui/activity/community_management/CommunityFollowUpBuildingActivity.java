@@ -27,6 +27,7 @@ import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.bean.community_manamer.CommunityFilterInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowListInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
+import com.xy.xydoctor.bean.community_manamer.UpLoadParamInfo;
 import com.xy.xydoctor.customerView.NoConflictGridView;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
@@ -124,8 +125,6 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
         });
         containerView().addView(initView());
         initValue();
-
-
         initListener();
         getCommunityInfo();
         getBuildingUnitInfo();
@@ -193,44 +192,60 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
         Call<String> requestCall = DataManager.getCommunityBuildUnitInfo(comid, (call, response) -> {
             if (response.code == 200) {
                 buildList = (List<FollowListInfo>) response.object;
-                getRoomInfo();
+                if (buildList != null && buildList.size() > 0) {
+                    initUnitData();
+                }
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
         });
     }
 
-    private void getRoomInfo() {
-        if (buildList != null && buildList.size() > 0) {
-            if (buildList.get(0).getUnits() != null && buildList.get(0).getUnits().size() > 0) {
-                unityid = buildList.get(buildindex).getUnits().get(unitindex).getId();
-                Call<String> requestCall = DataManager.getCommunityRoomInfo(unityid, (call, response) -> {
-                    if (response.code == 200) {
-                        List<CommunityFilterInfo> roomList = (List<CommunityFilterInfo>) response.object;
-                        //上面几号楼的点击
-                        topListAdapter = new ClassTopListAdapter(getPageContext(), buildList, new OnItemClickListener());
-                        numRecycleView.setAdapter(topListAdapter);
-                        //上面几单元的点击
-                        unitAdapter = new CommunityBuildingModelListAdapter(getPageContext(), buildList.get(buildindex).getUnits(), new OnItemClickListener1());
-                        unitRecycleView.setAdapter(unitAdapter);
-                        //上面房间的点击
-
-                        contentGridView.setNumColumns(TurnsUtils.getInt(buildList.get(buildindex).getUnits().get(unitindex).getHousehold(), 0));
-                        contentGridView.setOnItemClickListener((parent, view, position, id) -> {
-                            Intent intent = new Intent(getPageContext(), CommunityBuildingUnitActivity.class);
-                            startActivity(intent);
-                        });
-                        CommunityRoomAdapter roomAdapter = new CommunityRoomAdapter(getPageContext(), roomList);
-                        contentGridView.setAdapter(roomAdapter);
-                    }
-
-
-                }, (call, t) -> {
-                    TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
-                });
-            }
+    private void initUnitData() {
+        //展示楼数据
+        topListAdapter = new ClassTopListAdapter(getPageContext(), buildList, new OnItemClickListener());
+        numRecycleView.setAdapter(topListAdapter);
+        showUnitData();
+        List<UpLoadParamInfo> units = buildList.get(0).getUnits();
+        if (units != null && units.size() > 0) {
+            unityid = units.get(0).getId();
         }
+        getRoomInfo();
+    }
 
+    private void getRoomInfo() {
+        Call<String> requestCall = DataManager.getCommunityRoomInfo(unityid, (call, response) -> {
+            if (response.code == 200) {
+                List<CommunityFilterInfo> roomList = (List<CommunityFilterInfo>) response.object;
+                int anInt = TurnsUtils.getInt(buildList.get(buildindex).getUnits().get(unitindex).getHousehold(), 0);
+                if (anInt < 4) {
+                    anInt = 4;
+                }
+                if (anInt > 5) {
+                    anInt = 5;
+                }
+                contentGridView.setNumColumns(anInt);
+                contentGridView.setOnItemClickListener((parent, view, position, id) -> {
+                    Intent intent = new Intent(getPageContext(), CommunityBuildingUnitActivity.class);
+                    intent.putExtra("house_id", roomList.get(position).getId());
+                    intent.putExtra("house_name", roomList.get(position).getHouse_num());
+                    startActivity(intent);
+                });
+                contentGridView.setVisibility(View.VISIBLE);
+                CommunityRoomAdapter roomAdapter = new CommunityRoomAdapter(getPageContext(), roomList);
+                contentGridView.setAdapter(roomAdapter);
+            } else {
+                showRoomError();
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, t) -> {
+            showRoomError();
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        });
+    }
+
+    private void showRoomError() {
+        contentGridView.setVisibility(View.GONE);
     }
 
 
@@ -238,16 +253,17 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
 
         @Override
         public void adapterClickListener(int position, View view) {
-
             switch (view.getId()) {
                 case R.id.ll_top_class:
                     Log.i("yys", "1position==" + position);
                     buildindex = position;
+                    unitindex = 0;
                     for (int i = 0; i < buildList.size(); i++) {
                         buildList.get(i).setCheck(false);
                     }
                     buildList.get(position).setCheck(true);
                     topListAdapter.notifyDataSetChanged();
+                    showUnitData();
                     break;
 
                 default:
@@ -267,6 +283,15 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
         }
     }
 
+    /**
+     * 展示单元
+     */
+    private void showUnitData() {
+        List<UpLoadParamInfo> units = buildList.get(buildindex).getUnits();
+        unitAdapter = new CommunityBuildingModelListAdapter(getPageContext(), units, new OnItemClickListener1());
+        unitRecycleView.setAdapter(unitAdapter);
+    }
+
     private class OnItemClickListener1 implements IAdapterViewClickListener {
 
         @Override
@@ -275,13 +300,14 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
             switch (view.getId()) {
                 case R.id.ll_build_unit_click:
                     Log.i("yys", "2position==" + position);
-
                     for (int i = 0; i < buildList.get(buildindex).getUnits().size(); i++) {
                         buildList.get(buildindex).getUnits().get(i).setCheck(false);
                     }
                     unitindex = position;
                     buildList.get(buildindex).getUnits().get(position).setCheck(true);
                     unitAdapter.notifyDataSetChanged();
+                    unityid = buildList.get(buildindex).getUnits().get(unitindex).getId();
+                    getRoomInfo();
                     break;
                 default:
                     break;

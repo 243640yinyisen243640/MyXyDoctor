@@ -8,6 +8,8 @@ import java.util.List;
  * Description: 筛选
  */
 public class CommunityFilterInfo {
+
+    private String id;
     /**
      * 是否为空房间
      * 0：空房间
@@ -45,6 +47,15 @@ public class CommunityFilterInfo {
     private String unit_id;
     private String build_id;
     private String build_name;
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getHouse_num() {
         return house_num;

@@ -3,7 +3,6 @@
     android:id="@+id/iv_filter_desease_img"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:src="@drawable/community_unmental_illness">
+    android:paddingLeft="5dp"
+    android:src="@drawable/community_unmental_illness" />
 
-</ImageView>
