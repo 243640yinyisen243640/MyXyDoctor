@@ -35,8 +35,10 @@ public class CommunityBuildingModelListAdapter extends UIBaseRecycleViewAdapter<
         UpLoadParamInfo info = getList().get(position);
         viewHolder.nameTextView.setText(info.getUnit_name());
         if (info.isCheck()) {
-            viewHolder.nameTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_main_90));
+            viewHolder.nameTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.main_red));
+            viewHolder.nameTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_main_90_low));
         } else {
+            viewHolder.nameTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.base_black));
             viewHolder.nameTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_white_black_90));
         }
 

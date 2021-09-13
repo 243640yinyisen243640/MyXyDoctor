@@ -16,17 +16,20 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.DataAbnormalListAdapter;
 import com.xy.xydoctor.base.fragment.XYBaseFragment;
+import com.xy.xydoctor.bean.community_manamer.DataAbnormalChildInfo;
 import com.xy.xydoctor.bean.community_manamer.DataAbnormalInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.imp.IACommunityFilterChoose;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
+import com.xy.xydoctor.ui.activity.community_management.CommunityDataAbnormalActivity;
 import com.xy.xydoctor.ui.activity.community_management.DataAbnormalRemindListActivity;
 import com.xy.xydoctor.utils.DataUtils;
 import com.xy.xydoctor.utils.TipUtils;
@@ -98,6 +101,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
      * activity里面的全选按钮
      */
     private TextView checkTextView;
+    private TextView sureTextView;
 
     private View checkView;
 
@@ -121,6 +125,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
         if (checkView == null) {
             checkView = View.inflate(getPageContext(), R.layout.include_data_abnormal_check_all, null);
             checkTextView = checkView.findViewById(R.id.tv_data_abnormal_check_all_click);
+            sureTextView = checkView.findViewById(R.id.tv_data_abnormal_check_all_sure);
 
             checkTextView.setOnClickListener(v -> {
 
@@ -132,6 +137,25 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
                     setCheckAll();
                 }
             });
+
+            sureTextView.setOnClickListener(v -> {
+                //这个是点击确定按钮应该走的逻辑
+                List<DataAbnormalChildInfo> checkList = new ArrayList<>();
+                for (int i = 0; i < mList.size(); i++) {
+                    for (int j = 0; j < mList.get(i).getCommunityUser().size(); j++) {
+                        if (mList.get(i).getCommunityUser().get(j).isSelected()) {
+                            checkList.add(mList.get(i).getCommunityUser().get(j));
+                        }
+                    }
+                }
+                if (checkList.size() == 0) {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.you_can_not_choose_person);
+                } else {
+                    saveData(checkList);
+                }
+            });
+        } else {
+            checkView.setVisibility(View.VISIBLE);
         }
         if (containerView().indexOfChild(checkView) != -1) {
             containerView().removeView(checkView);
@@ -140,6 +164,32 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
         params.gravity = Gravity.BOTTOM;
         containerView().addView(checkView, params);
 
+    }
+
+    /**
+     * 上传数据
+     *
+     * @param checkList
+     */
+    private void saveData(List<DataAbnormalChildInfo> checkList) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < checkList.size(); i++) {
+            String userid = checkList.get(i).getUserid();
+            stringBuilder.append(userid);
+            stringBuilder.append(",");
+
+        }
+        //截取最后,
+        String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
+
+        Call<String> requestCall = DataManager.loadCheckList(substring, type, (call, response) -> {
+            if (response.code == 200) {
+                mPageIndex = 1;
+                onPageLoad();
+            }
+        }, (call, t) -> {
+            ToastUtils.showShort(getString(R.string.network_error));
+        });
     }
 
     public void setCheckAllIsVisible() {
@@ -196,6 +246,8 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
                         mRefreshLayout.finishRefresh();
                     }
                     if (200 == response.code) {
+                        CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
+                        activity.topTextView().setText("处理");
                         mTempList = (List<DataAbnormalInfo>) response.object;
                         mPageCount = mTempList == null ? 0 : mTempList.size();
                         if (1 == mPageIndex) {
@@ -240,7 +292,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
                     if (mList.size() > 0) {
                         changeLoadUI(response.code);
                     } else {
-                        changeLoadUI(101);
+                        changeLoadUI(30002);
                     }
 
                 }, (call, t) -> {
@@ -385,7 +437,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
 
     public void setDataRefresh() {
         mPageIndex = 1;
-        checkTextView.setVisibility(View.GONE);
+        checkView.setVisibility(View.GONE);
         onPageLoad();
     }
 
@@ -434,6 +486,13 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
 
         Log.i("yys", "statusName==" + statusName + "styleName==" + styleName);
         secondTextView.setText(statusName);
+        CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
+        TextView more = activity.topTextView();
+        if ("未处理".equals(statusName)) {
+            more.setVisibility(View.VISIBLE);
+        } else {
+            more.setVisibility(View.GONE);
+        }
 
         if ("1".equals(style) || "2".equals(style) || "3".equals(style) || "4".equals(style)) {
             this.style = style;

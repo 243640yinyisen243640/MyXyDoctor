@@ -202,14 +202,16 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
     }
 
     private void initUnitData() {
-        //展示楼数据
-        topListAdapter = new ClassTopListAdapter(getPageContext(), buildList, new OnItemClickListener());
-        numRecycleView.setAdapter(topListAdapter);
-        showUnitData();
+            //展示楼数据
+            buildList.get(0).setCheck(true);
+            topListAdapter = new ClassTopListAdapter(getPageContext(), buildList, new OnItemClickListener());
+            numRecycleView.setAdapter(topListAdapter);
         List<UpLoadParamInfo> units = buildList.get(0).getUnits();
         if (units != null && units.size() > 0) {
             unityid = units.get(0).getId();
+            buildList.get(0).getUnits().get(0).setCheck(true);
         }
+        showUnitData();
         getRoomInfo();
     }
 
@@ -229,6 +231,7 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
                     Intent intent = new Intent(getPageContext(), CommunityBuildingUnitActivity.class);
                     intent.putExtra("house_id", roomList.get(position).getId());
                     intent.putExtra("house_name", roomList.get(position).getHouse_num());
+                    intent.putExtra("build_id", buildList.get(buildindex).getId());
                     startActivity(intent);
                 });
                 contentGridView.setVisibility(View.VISIBLE);

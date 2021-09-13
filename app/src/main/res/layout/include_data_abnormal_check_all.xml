@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tv_data_abnormal_check_all_click"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:drawableLeft="@drawable/selector_community_special_operate"
-    android:drawablePadding="10dp"
-    android:padding="15dp"
-    android:text="@string/base_check_all"
-    android:textColor="@color/black_text"
-    android:textSize="15sp">
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_data_abnormal_check_all_click"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/selector_community_special_operate"
+        android:drawablePadding="10dp"
+        android:padding="15dp"
+        android:text="@string/base_check_all"
+        android:textColor="@color/black_text"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_data_abnormal_check_all_sure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:drawablePadding="10dp"
+        android:padding="15dp"
+        android:text="@string/sure"
+        android:textColor="@color/black_text"
+        android:textSize="15sp" />
 
 
-</TextView>
+</LinearLayout>

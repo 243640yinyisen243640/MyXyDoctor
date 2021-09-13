@@ -53,32 +53,32 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
 
         if (item.getList() != null && item.getList().size() >= 1) {
             clickLinearLayout.setVisibility(View.VISIBLE);
-            viewHolder.setText(R.id.tv_data_abnormal_child_time, item.getList().get(position).getDatetime());
+            viewHolder.setText(R.id.tv_data_abnormal_child_time, item.getList().get(0).getDatetime());
 
             if ("1".equals(type)) {
-                viewHolder.setText(R.id.tv_data_abnormal_child_amonut, item.getList().get(position).getDiastole() + "/" + item.getList().get(position).getSystolic());
+                viewHolder.setText(R.id.tv_data_abnormal_child_amonut, item.getList().get(0).getDiastole() + "/" + item.getList().get(0).getSystolic());
                 //1偏高2低3正常
-                if ("1".equals(item.getList().get(position).getIshight())) {
+                if ("1".equals(item.getList().get(0).getIshight())) {
                     lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_hign, 0);
-                } else if ("2".equals(item.getList().get(position).getIshight())) {
+                } else if ("2".equals(item.getList().get(0).getIshight())) {
                     lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_low, 0);
                 } else {
                     lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0,R.drawable.sugar_or_pressure_normal, 0);
                 }
                 lightTextView.setText("mmHg");
             } else {
-                viewHolder.setText(R.id.tv_data_abnormal_child_amonut,item.getList().get(position).getGlucosevalue()+"    mmol/L");
-                if ("1".equals(item.getList().get(position).getIshight())) {
+                viewHolder.setText(R.id.tv_data_abnormal_child_amonut,item.getList().get(0).getGlucosevalue()+"    mmol/L");
+                if ("1".equals(item.getList().get(0).getIshight())) {
                     lightTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_hign, 0, 0, 0);
-                } else if ("2".equals(item.getList().get(position).getIshight())) {
+                } else if ("2".equals(item.getList().get(0).getIshight())) {
                     lightTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_low, 0, 0, 0);
                 } else {
                     lightTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_normal, 0, 0, 0);
                 }
-                lightTextView.setText(item.getList().get(position).getCategoryname());
+                lightTextView.setText(item.getList().get(0).getCategoryname());
             }
 
-            Log.i("yys","getIshight=="+item.getList().get(position).getIshight());
+            Log.i("yys","getIshight=="+item.getList().get(0).getIshight());
 
         } else {
             clickLinearLayout.setVisibility(View.GONE);

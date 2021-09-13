@@ -1,5 +1,6 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -37,6 +38,7 @@ import retrofit2.Call;
  */
 public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implements TabFragmentAdapter.RefeshFragment {
 
+    private static final int REQUEST_CODE_FOR_REFRESH = 10;
     private CommunityBuildingUnitListAdapter mAdapter;
 
     private LinearLayout allLinearLayout;
@@ -66,6 +68,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
      * 房间名字
      */
     private String house_name;
+    private String build_id;
     private FamilyAllInfo info;
 
 
@@ -74,8 +77,18 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         super.onCreate(savedInstanceState);
         house_id = getIntent().getStringExtra("house_id");
         house_name = getIntent().getStringExtra("house_name");
+        build_id = getIntent().getStringExtra("build_id");
         topViewManager().titleTextView().setText(house_name);
+        topViewManager().moreTextView().setText("添加成员");
+        topViewManager().moreTextView().setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_red));
 
+        topViewManager().moreTextView().setOnClickListener(v -> {
+            Intent intent = new Intent(getPageContext(), UserAddActivity.class);
+            intent.putExtra("houserid", house_id);
+            intent.putExtra("houserid", house_id);
+            intent.putExtra("buildid", build_id);
+            startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
+        });
         initView();
 
         initValues();
@@ -85,6 +98,8 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
     private void initValues() {
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
         imgListView.setLayoutManager(layoutManager);
+        StaggeredGridLayoutManager layoutManager1 = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        memberMyListView.setLayoutManager(layoutManager1);
     }
 
     private void getDataInfo() {
@@ -154,7 +169,23 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         }
         ageTextView.setText(info.getMaster().getAge());
 
-        sugarTextView.setText(info.getMaster().getDiabeteslei());
+
+        if ("1".equals(info.getMaster().getDiabeteslei())) {
+            sugarTextView.setText(R.string.community_user_info_sugar_one);
+
+        } else if ("2".equals(info.getMaster().getDiabeteslei())) {
+            sugarTextView.setText(R.string.community_user_info_sugar_two);
+
+        } else if ("3".equals(info.getMaster().getDiabeteslei())) {
+            sugarTextView.setText(R.string.community_user_info_sugar_three);
+
+        } else if ("4".equals(info.getMaster().getDiabeteslei())) {
+            sugarTextView.setText(R.string.community_user_info_sugar_four);
+
+        } else {
+            sugarTextView.setText(R.string.community_user_info_sugar_no);
+
+        }
         if ("1".equals(info.getMaster().getHypertension())) {
             pressureTextView.setVisibility(View.VISIBLE);
             if ("1".equals(info.getMaster().getBloodLevel())) {
@@ -175,10 +206,10 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
             waitFollowTextView.setVisibility(View.VISIBLE);
         }
 
-        if (info.getMaster().getSugar() != null && info.getMaster().getSugar().size() > 0) {
+        if ("2".equals(info.getMaster().getSugarEmpty())) {
             sugarLinearLayout.setVisibility(View.VISIBLE);
             SpannableStringBuilder sugarStringBuilder = new SpannableStringBuilder();
-            sugarStringBuilder.append(info.getMaster().getDatetime());
+            sugarStringBuilder.append(info.getMaster().getDatetime() + "  ");
             int start = sugarStringBuilder.length();
             sugarStringBuilder.append(info.getMaster().getGlucosevalue());
             int end = sugarStringBuilder.length();
@@ -199,12 +230,12 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
             sugarLinearLayout.setVisibility(View.GONE);
         }
 
-        if (info.getMaster().getBlood() != null && info.getMaster().getBlood().size() > 0) {
+        if ("2".equals(info.getMaster().getBlood())) {
             timePressureTextView.setVisibility(View.VISIBLE);
             SpannableStringBuilder pressureStringBuilder = new SpannableStringBuilder();
-            pressureStringBuilder.append(info.getMaster().getDatetime());
+            pressureStringBuilder.append(info.getMaster().getDatetime() + "  ");
             int start = pressureStringBuilder.length();
-            pressureStringBuilder.append(info.getMaster().getSystolic()).append(info.getMaster().getDiastole());
+            pressureStringBuilder.append(info.getMaster().getSystolic()).append("/").append(info.getMaster().getDiastole() + "   ");
             int end = pressureStringBuilder.length();
             pressureStringBuilder.append(" mmHg");
             pressureStringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getPageContext(), R.color.base_black)), start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);

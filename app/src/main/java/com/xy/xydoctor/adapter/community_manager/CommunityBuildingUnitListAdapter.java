@@ -7,6 +7,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -32,14 +33,14 @@ import java.util.List;
 public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<SearchInfo> {
 
 
-    public CommunityBuildingUnitListAdapter(Context mContext, List mList, IAdapterViewClickListener mListener) {
+    public CommunityBuildingUnitListAdapter(Context mContext, List<SearchInfo> mList, IAdapterViewClickListener mListener) {
         super(mContext, mList, mListener);
     }
-
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.i("yys", "onCreateViewHolder===");
         //实例化得到Item布局文件的View对象
         View v = View.inflate(getContext(), R.layout.item_community_building_unit, null);
         //返回MyViewHolder的对象
@@ -94,7 +95,6 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
         } else {
             viewHolder.relationTextView.setText("其他");
         }
-        viewHolder.relationTextView.setText(info.getRelation());
         if ("1".equals(info.getSex())) {
             viewHolder.sexTextView.setText(R.string.base_male);
         } else {
@@ -103,7 +103,21 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
 
         viewHolder.ageTextView.setText(info.getAge());
 
-        viewHolder.sugarTextView.setText(info.getDiabeteslei());
+        if ("1".equals(info.getDiabeteslei())) {
+            viewHolder.sugarTextView.setText(R.string.community_user_info_sugar_one);
+
+        } else if ("2".equals(info.getDiabeteslei())) {
+            viewHolder.sugarTextView.setText(R.string.community_user_info_sugar_two);
+
+        } else if ("3".equals(info.getDiabeteslei())) {
+            viewHolder.sugarTextView.setText(R.string.community_user_info_sugar_three);
+
+        } else if ("4".equals(info.getDiabeteslei())) {
+            viewHolder.sugarTextView.setText(R.string.community_user_info_sugar_four);
+
+        } else {
+            viewHolder.sugarTextView.setText(R.string.community_user_info_sugar_no);
+        }
         if ("1".equals(info.getHypertension())) {
             viewHolder.pressureTextView.setVisibility(View.VISIBLE);
             if ("1".equals(info.getBloodLevel())) {
@@ -124,22 +138,23 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
             viewHolder.waitFollowTextView.setVisibility(View.VISIBLE);
         }
 
-        if (info.getSugar() != null && info.getSugar().size() > 0) {
+        Log.i("yys", "sugar==" + info.getSugarEmpty() + "blood==" + info.getBloodEmpty());
+        if ("2".equals(info.getSugarEmpty())) {
             viewHolder.sugarLinearLayout.setVisibility(View.VISIBLE);
             SpannableStringBuilder sugarStringBuilder = new SpannableStringBuilder();
-            sugarStringBuilder.append(info.getDatetime());
+            sugarStringBuilder.append(info.getSugar().getDatetime());
             int start = sugarStringBuilder.length();
-            sugarStringBuilder.append(info.getGlucosevalue());
+            sugarStringBuilder.append(info.getSugar().getGlucosevalue());
             int end = sugarStringBuilder.length();
             sugarStringBuilder.append("    mmol/L");
             sugarStringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(), R.color.base_black)), start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
             sugarStringBuilder.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
 
             viewHolder.timeSugarTextView.setText(sugarStringBuilder);
-            viewHolder.unitTextView.setText(info.getCategory());
-            if ("1".equals(info.getIshight())) {
+            viewHolder.unitTextView.setText(info.getSugar().getCategory());
+            if ("1".equals(info.getSugar().getIshight())) {
                 viewHolder.unitTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_hign, 0, 0, 0);
-            } else if ("2".equals(info.getIshight())) {
+            } else if ("2".equals(info.getSugar().getIshight())) {
                 viewHolder.unitTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_low, 0, 0, 0);
             } else {
                 viewHolder.unitTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_normal, 0, 0, 0);
@@ -148,12 +163,12 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
             viewHolder.sugarLinearLayout.setVisibility(View.GONE);
         }
 
-        if (info.getBlood() != null && info.getBlood().size() > 0) {
+        if ("2".equals(info.getBloodEmpty())) {
             viewHolder.timePressureTextView.setVisibility(View.VISIBLE);
             SpannableStringBuilder pressureStringBuilder = new SpannableStringBuilder();
-            pressureStringBuilder.append(info.getDatetime());
+            pressureStringBuilder.append(info.getBlood().getDatetime());
             int start = pressureStringBuilder.length();
-            pressureStringBuilder.append(info.getSystolic()).append(info.getDiastole());
+            pressureStringBuilder.append(info.getBlood().getSystolic()).append(info.getBlood().getDiastole());
             int end = pressureStringBuilder.length();
             pressureStringBuilder.append(" mmHg");
             pressureStringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(), R.color.base_black)), start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
@@ -161,9 +176,9 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
 
             viewHolder.timePressureTextView.setText(pressureStringBuilder);
 
-            if ("1".equals(info.getIshight())) {
+            if ("1".equals(info.getBlood().getIshight())) {
                 viewHolder.timePressureTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_hign, 0);
-            } else if ("2".equals(info.getIshight())) {
+            } else if ("2".equals(info.getBlood().getIshight())) {
                 viewHolder.timePressureTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_low, 0);
             } else {
                 viewHolder.timePressureTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_normal, 0);
@@ -194,6 +209,7 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
         private TextView sugarTextView;
         private TextView pressureTextView;
         private TextView sugarFollowTextView;
+        private View line;
         private TextView pressureFollowTextView;
         private TextView waitFollowTextView;
         private TextView timeSugarTextView;
@@ -206,10 +222,11 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
             ImgListView = itemView.findViewById(R.id.ml_family_child_img);
             followTextView = itemView.findViewById(R.id.tv_building_unit_follow_item);
             relationTextView = itemView.findViewById(R.id.tv_building_unit_relation_item);
-            relationTextView = itemView.findViewById(R.id.ll_sugar_child);
+            sugarLinearLayout = itemView.findViewById(R.id.ll_sugar_child);
             sexTextView = itemView.findViewById(R.id.tv_building_unit_sex_item);
             ageTextView = itemView.findViewById(R.id.tv_building_unit_age_item);
             sugarTextView = itemView.findViewById(R.id.tv_building_unit_sugar_item);
+            line = itemView.findViewById(R.id.view_line);
             pressureTextView = itemView.findViewById(R.id.tv_building_unit_pressure_item);
             sugarFollowTextView = itemView.findViewById(R.id.tv_building_unit_sugar_follow_item);
             pressureFollowTextView = itemView.findViewById(R.id.tv_building_unit_pressure_follow_item);
@@ -217,7 +234,6 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
             timeSugarTextView = itemView.findViewById(R.id.tv_building_unit_time_and_sugar_item);
             unitTextView = itemView.findViewById(R.id.tv_building_unit_unit_item);
             timePressureTextView = itemView.findViewById(R.id.tv_building_unit_time_and_pressure_item);
-
         }
     }
 

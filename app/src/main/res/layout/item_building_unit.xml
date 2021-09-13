@@ -13,9 +13,9 @@
         android:layout_weight="1"
         android:button="@null"
         android:gravity="center"
-        android:paddingLeft="10dp"
+        android:paddingLeft="15dp"
         android:paddingTop="8dp"
-        android:paddingRight="10dp"
+        android:paddingRight="15dp"
         android:paddingBottom="8dp"
         android:textColor="@color/selector_color_filter_text"
         android:textSize="14sp" />

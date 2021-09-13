@@ -5,375 +5,384 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/shape_bg_white_5"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_user_add_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/community_location"
-            android:drawablePadding="5dp"
-            android:padding="10dp"
-            android:textColor="#858585"
-            android:textSize="12sp" />
-
-        <View style="@style/line" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_margin="15dp"
+            android:background="@drawable/shape_bg_white_5"
+            android:orientation="vertical">
 
             <TextView
-                style="@style/user_add_left"
-                android:text="@string/user_add_name" />
-
-            <EditText
-                android:id="@+id/et_user_add_name"
-                style="@style/user_add_right"
-                android:hint="@string/user_add_please_input_name" />
-
-        </LinearLayout>
-
-        <View style="@style/line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/user_add_left"
-                android:text="@string/user_add_phone" />
-
-            <EditText
-                android:id="@+id/et_user_add_phone"
-                style="@style/user_add_right"
-                android:hint="@string/user_add_please_input_phone"
-                android:imeOptions="actionSearch"
-                android:inputType="phone"
-                android:lines="1" />
-
-        </LinearLayout>
-
-        <View style="@style/line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/user_add_left"
-                android:text="@string/user_add_sex" />
-
-            <TextView
-                android:id="@+id/tv_user_add_sex"
-                style="@style/user_add_right_choose"
-                android:text="@string/base_female"
-                android:textColor="@color/base_black" />
-
-        </LinearLayout>
-
-        <View style="@style/line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/user_add_left"
-                android:text="@string/user_add_born_time" />
-
-            <TextView
-                android:id="@+id/tv_user_add_born"
-                style="@style/user_add_right_choose"
-                android:text="@string/please_choose" />
-
-        </LinearLayout>
-
-        <View style="@style/line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/user_add_left"
-                android:text="@string/user_add_master_relation" />
-
-            <TextView
-                android:id="@+id/tv_user_add_master_relation"
-                style="@style/user_add_right_choose"
-                android:text="@string/please_choose" />
-
-        </LinearLayout>
-
-        <View style="@style/line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/user_add_left"
-                android:text="@string/user_add_hospital_choose" />
-
-            <TextView
-                android:id="@+id/tv_user_add_hospital_choose"
-                style="@style/user_add_right_choose"
-                android:text="@string/please_choose" />
-
-        </LinearLayout>
-
-        <View style="@style/line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/user_add_left"
-                android:text="@string/user_add_department_choose" />
-
-            <TextView
-                android:id="@+id/tv_user_add_department_choose"
-                style="@style/user_add_right_choose"
-                android:text="@string/please_choose" />
-
-        </LinearLayout>
-
-        <View style="@style/line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/user_add_left"
-                android:text="@string/user_add_doctor_choose" />
-
-            <TextView
-                android:id="@+id/tv_user_add_doctor_choose"
-                style="@style/user_add_right_choose"
-                android:text="@string/please_choose" />
-
-        </LinearLayout>
-
-        <View style="@style/line" />
-
-        <TextView
-            style="@style/community_filter_title"
-            android:padding="15dp"
-            android:text="@string/community_type_of_disease"
-            android:textStyle="normal" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/cb_filter_disease_sugar"
-                style="@style/user_add_type"
-                android:text="糖尿病" />
-
-            <TextView
-                android:id="@+id/tv_filter_disease_presure"
-                style="@style/user_add_type"
-                android:layout_marginLeft="3dp"
-                android:text="高血压" />
-
-            <TextView
-                android:id="@+id/tv_filter_disease_over_weight"
-                style="@style/user_add_type"
-                android:layout_marginLeft="3dp"
-                android:text="超重/肥胖" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/cb_filter_disease_head"
-                style="@style/user_add_type"
-                android:text="脑卒中" />
-
-            <CheckBox
-                android:id="@+id/cb_filter_disease_fatty"
-                style="@style/user_add_type"
-                android:layout_marginLeft="3dp"
-                android:text="脂肪肝" />
-
-            <CheckBox
-                android:id="@+id/cb_filter_disease_heart"
-                style="@style/user_add_type"
-                android:layout_marginLeft="3dp"
-                android:text="冠心病" />
-
-        </LinearLayout>
-
-
-        <TextView
-            style="@style/community_filter_title"
-            android:padding="15dp"
-            android:text="@string/user_add_special_info"
-            android:textStyle="normal" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/cb_filter_disease_apart"
-                style="@style/user_add_type"
-                android:text="党员" />
-
-            <CheckBox
-                android:id="@+id/cb_filter_disease_ill"
-                style="@style/user_add_type"
-                android:layout_marginLeft="3dp"
-                android:text="残疾人" />
-
-            <CheckBox
-                android:id="@+id/cb_filter_disease_mental"
-                style="@style/user_add_type"
-                android:layout_marginLeft="3dp"
-                android:text="精神疾病" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/cb_filter_disease_important"
-                style="@style/user_add_type"
-                android:text="重点关注" />
-
-            <CheckBox
-                android:layout_width="0dp"
+                android:id="@+id/tv_user_add_location"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_weight="1"
-                android:background="@null"
-                android:button="@null"
-                android:gravity="center"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:drawableLeft="@drawable/community_location"
+                android:drawablePadding="5dp"
+                android:padding="10dp"
+                android:textColor="#858585"
+                android:textSize="12sp" />
 
-            <CheckBox
-                android:layout_width="0dp"
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_weight="1"
-                android:background="@null"
-                android:button="@null"
-                android:gravity="center"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_name" />
 
-        <com.xy.xydoctor.customerView.NoConflictGridView
-            android:id="@+id/gv_user_add_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:horizontalSpacing="10dp"
-            android:numColumns="3"
-            android:verticalSpacing="10dp"
-            android:visibility="gone" />
+                <EditText
+                    android:id="@+id/et_user_add_name"
+                    style="@style/user_add_right"
+                    android:hint="@string/user_add_please_input_name" />
 
-        <TextView
-            style="@style/community_filter_title"
-            android:padding="15dp"
-            android:text="@string/user_add_bind_device"
-            android:textStyle="normal" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_phone" />
+
+                <EditText
+                    android:id="@+id/et_user_add_phone"
+                    style="@style/user_add_right"
+                    android:hint="@string/user_add_please_input_phone"
+                    android:imeOptions="actionSearch"
+                    android:inputType="phone"
+                    android:lines="1" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_sex" />
+
+                <TextView
+                    android:id="@+id/tv_user_add_sex"
+                    style="@style/user_add_right_choose"
+                    android:text="@string/base_female"
+                    android:textColor="@color/base_black" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_born_time" />
+
+                <TextView
+                    android:id="@+id/tv_user_add_born"
+                    style="@style/user_add_right_choose"
+                    android:text="@string/please_choose" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_master_relation" />
+
+                <TextView
+                    android:id="@+id/tv_user_add_master_relation"
+                    style="@style/user_add_right_choose"
+                    android:text="@string/please_choose" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_hospital_choose" />
+
+                <TextView
+                    android:id="@+id/tv_user_add_hospital_choose"
+                    style="@style/user_add_right_choose"
+                    android:text="@string/please_choose" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_department_choose" />
+
+                <TextView
+                    android:id="@+id/tv_user_add_department_choose"
+                    style="@style/user_add_right_choose"
+                    android:text="@string/please_choose" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_doctor_choose" />
+
+                <TextView
+                    android:id="@+id/tv_user_add_doctor_choose"
+                    style="@style/user_add_right_choose"
+                    android:text="@string/please_choose" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/user_add_device_sugar" />
+                style="@style/community_filter_title"
+                android:padding="15dp"
+                android:text="@string/community_type_of_disease"
+                android:textStyle="normal" />
 
-            <EditText
-                android:id="@+id/et_user_add_device_sugar"
-                android:layout_width="0dp"
-                android:layout_height="34dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_bg_white_black" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/iv_user_add_device_sugar"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingLeft="10dp"
-                android:src="@drawable/user_add_sacn" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/cb_filter_disease_sugar"
+                    style="@style/user_add_type"
+                    android:text="糖尿病" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_filter_disease_presure"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="高血压" />
+
+                <TextView
+                    android:id="@+id/tv_filter_disease_over_weight"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="超重/肥胖" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/cb_filter_disease_head"
+                    style="@style/user_add_type"
+                    android:text="脑卒中" />
+
+                <CheckBox
+                    android:id="@+id/cb_filter_disease_fatty"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="脂肪肝" />
+
+                <CheckBox
+                    android:id="@+id/cb_filter_disease_heart"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="冠心病" />
+
+            </LinearLayout>
+
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                style="@style/community_filter_title"
+                android:padding="15dp"
+                android:text="@string/user_add_special_info"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/cb_filter_disease_apart"
+                    style="@style/user_add_type"
+                    android:text="党员" />
+
+                <CheckBox
+                    android:id="@+id/cb_filter_disease_ill"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="残疾人" />
+
+                <CheckBox
+                    android:id="@+id/cb_filter_disease_mental"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="精神疾病" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/cb_filter_disease_important"
+                    style="@style/user_add_type"
+                    android:text="重点关注" />
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <com.xy.xydoctor.customerView.NoConflictGridView
+                android:id="@+id/gv_user_add_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:horizontalSpacing="10dp"
+                android:numColumns="3"
+                android:verticalSpacing="10dp"
+                android:visibility="gone" />
+
+            <TextView
+                style="@style/community_filter_title"
+                android:padding="15dp"
+                android:text="@string/user_add_bind_device"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/user_add_device_pressure" />
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/et_user_add_device_pressure"
-                android:layout_width="0dp"
-                android:layout_height="34dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_bg_white_black" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/user_add_device_sugar" />
 
-            <ImageView
-                android:id="@+id/iv_user_add_device_pressure"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingLeft="10dp"
-                android:src="@drawable/user_add_sacn" />
+                <EditText
+                    android:id="@+id/et_user_add_device_sugar"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_bg_white_black" />
+
+                <ImageView
+                    android:id="@+id/iv_user_add_device_sugar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="10dp"
+                    android:src="@drawable/user_add_sacn" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/user_add_device_pressure" />
+
+                <EditText
+                    android:id="@+id/et_user_add_device_pressure"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_bg_white_black" />
+
+                <ImageView
+                    android:id="@+id/iv_user_add_device_pressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="10dp"
+                    android:src="@drawable/user_add_sacn" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <TextView
             android:id="@+id/tv_add_user_submit"
             style="@style/community_button_choice"
             android:text="@string/base_add" />
-
     </LinearLayout>
+
 
 </ScrollView>

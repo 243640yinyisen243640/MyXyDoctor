@@ -44,6 +44,9 @@ public class SugarOrPressureInfo implements Serializable {
      */
     private String year;
 
+
+
+
     private List<SugarOrPressureChildInfo> list;
 
     public String getYear() {

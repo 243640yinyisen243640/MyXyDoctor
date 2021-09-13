@@ -218,13 +218,15 @@ public class SearchInfo {
         this.ishight = ishight;
     }
 
-    private List<SugarOrPressureInfo> sugar;
-    private List<SugarOrPressureInfo> blood;
+    private SugarOrPressureInfo sugar;
+    private SugarOrPressureInfo blood;
 
     private List<String> img;
 
     private String sugar_follow;
     private String blood_follow;
+
+
 
     public String getSugar_follow() {
         return sugar_follow;
@@ -298,19 +300,19 @@ public class SearchInfo {
         this.img = img;
     }
 
-    public List<SugarOrPressureInfo> getSugar() {
+    public SugarOrPressureInfo getSugar() {
         return sugar;
     }
 
-    public void setSugar(List<SugarOrPressureInfo> sugar) {
+    public void setSugar(SugarOrPressureInfo sugar) {
         this.sugar = sugar;
     }
 
-    public List<SugarOrPressureInfo> getBlood() {
+    public SugarOrPressureInfo getBlood() {
         return blood;
     }
 
-    public void setBlood(List<SugarOrPressureInfo> blood) {
+    public void setBlood(SugarOrPressureInfo blood) {
         this.blood = blood;
     }
 
