@@ -148,6 +148,21 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
         textView.setText(spannableStringBuilder);
     }
 
+    private void setTextStyle1(String content, String title, int color, TextView textView, int size) {
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+        spannableStringBuilder.append(content).append("\n");
+        int start = spannableStringBuilder.length();
+
+        spannableStringBuilder.append(title);
+        int end = spannableStringBuilder.length();
+        spannableStringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getPageContext(), color)), 0, start, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getPageContext(), color)), start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.setSpan(new AbsoluteSizeSpan(XyScreenUtils.sp2px(getPageContext(), size)), 0, start, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.setSpan(new StyleSpan(Typeface.NORMAL), 0, start, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
+        textView.setText(spannableStringBuilder);
+    }
+
 
     /**
      * 获取房间详情
@@ -158,7 +173,19 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
                 FollowUpAgentListBean info = (FollowUpAgentListBean) response.object;
                 nameTextView.setText(info.getCom_name());
                 locationTextView.setText(info.getCom_address());
-                if ("1".equals(type)) {
+                if ("2".equals(type)) {
+                    allPersonNumTextView.setVisibility(View.GONE);
+                    lineView.setVisibility(View.GONE);
+                    setTextStyle(info.getBuild_count(), getString(R.string.follow_up_agent_building_num), R.color.community_content_black, buildingNumTextView, 17);
+                    setTextStyle(info.getUnity_count(), getString(R.string.follow_up_agent_unit_num), R.color.community_content_black, unitNumTextView, 17);
+                    setTextStyle(info.getHouse_count(), getString(R.string.follow_up_agent_households_num1), R.color.community_content_black, personNumTextView, 17);
+
+                    setTextStyle1(info.getMember_count(), getString(R.string.follow_up_agent_total_num), R.color.community_follow_blue, pressureTextView, 17);
+                    setTextStyle1(info.getGxy_count(), getString(R.string.flb_high_pressure_num), R.color.main_red, sugarTextView, 17);
+                    setTextStyle1(info.getDiabeteslei_count(), getString(R.string.follow_up_sugar_person_num), R.color.community_statics_orange, deseaseAllNumTextView, 17);
+
+                } else {
+
                     allPersonNumTextView.setVisibility(View.VISIBLE);
                     lineView.setVisibility(View.VISIBLE);
                     setTextStyle(info.getBuild_count(), getString(R.string.follow_up_agent_building_num), R.color.community_content_black, buildingNumTextView, 17);
@@ -169,17 +196,6 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
                     setTextStyle(info.getGxy_count(), getString(R.string.flb_high_pressure_num), R.color.main_red, pressureTextView, 17);
                     setTextStyle(info.getDiabeteslei_count(), getString(R.string.follow_up_sugar_person_num), R.color.community_statics_orange, sugarTextView, 17);
                     setTextStyle(info.getBoth_count(), getString(R.string.follow_up_total_person_num), R.color.community_follow_blue, deseaseAllNumTextView, 17);
-
-                } else {
-                    allPersonNumTextView.setVisibility(View.GONE);
-                    lineView.setVisibility(View.GONE);
-                    setTextStyle(info.getBuild_count(), getString(R.string.follow_up_agent_building_num), R.color.community_content_black, buildingNumTextView, 17);
-                    setTextStyle(info.getUnity_count(), getString(R.string.follow_up_agent_unit_num), R.color.community_content_black, unitNumTextView, 17);
-                    setTextStyle(info.getHouse_count(), getString(R.string.follow_up_agent_households_num1), R.color.community_content_black, personNumTextView, 17);
-
-                    setTextStyle(info.getMember_count(), getString(R.string.follow_up_agent_total_num), R.color.community_follow_blue, pressureTextView, 17);
-                    setTextStyle(info.getGxy_count(), getString(R.string.flb_high_pressure_num), R.color.main_red, sugarTextView, 17);
-                    setTextStyle(info.getDiabeteslei_count(), getString(R.string.follow_up_sugar_person_num), R.color.community_statics_orange, allPersonNumTextView, 17);
 
                 }
             }

@@ -207,7 +207,7 @@ public class FragmentCommunityManagement extends BaseFragment {
         switch (view.getId()) {
             case R.id.tv_community_add_user:
                 intent = new Intent(getPageContext(), CommunityFollowupAgentListActivity.class);
-                intent.putExtra("type", "1");
+                intent.putExtra("type", "3");
                 startActivity(intent);
                 break;
             case R.id.ll_community_filter_building_num:

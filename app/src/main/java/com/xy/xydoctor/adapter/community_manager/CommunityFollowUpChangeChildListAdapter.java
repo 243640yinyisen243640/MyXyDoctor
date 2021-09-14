@@ -108,6 +108,8 @@ public class CommunityFollowUpChangeChildListAdapter extends XYSoftBaseAdapter<F
         MyClickListener clickListener = new MyClickListener(position);
         holder.callPhoneTextView.setOnClickListener(clickListener);
         holder.noFinishTextView.setOnClickListener(clickListener);
+        holder.sugarFollowTextView.setOnClickListener(clickListener);
+        holder.pressureFollowTextView.setOnClickListener(clickListener);
         return convertView;
     }
 

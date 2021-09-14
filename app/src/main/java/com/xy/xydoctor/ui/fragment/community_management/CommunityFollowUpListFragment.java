@@ -19,6 +19,7 @@ import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowUpActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityNoFinishActivity;
+import com.xy.xydoctor.ui.activity.community_management.CommunitySugarOrPressureListActivity;
 import com.xy.xydoctor.utils.TipUtils;
 
 import retrofit2.Call;
@@ -137,6 +138,16 @@ public class CommunityFollowUpListFragment extends XYBaseFragment implements Tab
                     intent = new Intent(Intent.ACTION_DIAL);
                     Uri data = Uri.parse("tel:" + allInfo.getList().get(position).getCommunityUser().get(index).getTel());
                     intent.setData(data);
+                    startActivity(intent);
+                    break;
+                case R.id.tv_fuc_child_sugar_follow:
+                    intent = new Intent(getPageContext(), CommunitySugarOrPressureListActivity.class);
+                    intent.putExtra("type", "1");
+                    startActivity(intent);
+                    break;
+                case R.id.tv_fuc_child_pressure_follow:
+                    intent = new Intent(getPageContext(), CommunitySugarOrPressureListActivity.class);
+                    intent.putExtra("type", "2");
                     startActivity(intent);
                     break;
                 default:

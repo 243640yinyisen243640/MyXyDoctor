@@ -312,6 +312,8 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
             case R.id.iv_update_close:
                 updatePopup.dismiss();
                 break;
+            default:
+                break;
         }
     }
 }
