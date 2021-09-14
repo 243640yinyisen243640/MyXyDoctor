@@ -45,21 +45,24 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ml_family_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1" />
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_height="0.5dp"
+                    android:layout_height="1dp"
                     android:layout_weight="1" />
+
 
                 <TextView
                     android:id="@+id/tv_building_unit_follow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/community_impotant_follow"
-                    android:drawablePadding="5dp" />
+                    android:drawablePadding="5dp"
+                    android:padding="10dp" />
 
 
             </LinearLayout>
@@ -210,7 +213,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/lv_building_unit_child"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp" />
 
         </LinearLayout>
     </LinearLayout>

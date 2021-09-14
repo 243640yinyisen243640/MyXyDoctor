@@ -21,11 +21,13 @@
         android:id="@+id/tv_data_abnormal_check_all_sure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:drawablePadding="10dp"
-        android:padding="15dp"
+        android:background="@drawable/shape_main_90"
+        android:paddingLeft="20dp"
+        android:paddingTop="8dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="8dp"
         android:text="@string/sure"
-        android:textColor="@color/black_text"
+        android:textColor="@color/white"
         android:textSize="15sp" />
 
 

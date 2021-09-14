@@ -156,6 +156,8 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
         Call<String> requestCall = DataManager.getCommunityDetails(type, comid, (call, response) -> {
             if (response.code == 200) {
                 FollowUpAgentListBean info = (FollowUpAgentListBean) response.object;
+                nameTextView.setText(info.getCom_name());
+                locationTextView.setText(info.getCom_address());
                 if ("1".equals(type)) {
                     allPersonNumTextView.setVisibility(View.VISIBLE);
                     lineView.setVisibility(View.VISIBLE);
@@ -164,9 +166,9 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
                     setTextStyle(info.getHouse_count(), getString(R.string.follow_up_agent_households_num1), R.color.community_content_black, personNumTextView, 17);
                     setTextStyle(info.getMember_count(), getString(R.string.follow_up_agent_total_num1), R.color.community_content_black, allPersonNumTextView, 17);
 
-                    setTextStyle(info.getMember_count(), getString(R.string.flb_high_pressure_num), R.color.main_red, pressureTextView, 17);
-                    setTextStyle(info.getMember_count(), getString(R.string.follow_up_sugar_person_num), R.color.community_statics_orange, sugarTextView, 17);
-                    setTextStyle(info.getMember_count(), getString(R.string.follow_up_total_person_num), R.color.community_follow_blue, deseaseAllNumTextView, 17);
+                    setTextStyle(info.getGxy_count(), getString(R.string.flb_high_pressure_num), R.color.main_red, pressureTextView, 17);
+                    setTextStyle(info.getDiabeteslei_count(), getString(R.string.follow_up_sugar_person_num), R.color.community_statics_orange, sugarTextView, 17);
+                    setTextStyle(info.getBoth_count(), getString(R.string.follow_up_total_person_num), R.color.community_follow_blue, deseaseAllNumTextView, 17);
 
                 } else {
                     allPersonNumTextView.setVisibility(View.GONE);
@@ -202,10 +204,10 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
     }
 
     private void initUnitData() {
-            //展示楼数据
-            buildList.get(0).setCheck(true);
-            topListAdapter = new ClassTopListAdapter(getPageContext(), buildList, new OnItemClickListener());
-            numRecycleView.setAdapter(topListAdapter);
+        //展示楼数据
+        buildList.get(0).setCheck(true);
+        topListAdapter = new ClassTopListAdapter(getPageContext(), buildList, new OnItemClickListener());
+        numRecycleView.setAdapter(topListAdapter);
         List<UpLoadParamInfo> units = buildList.get(0).getUnits();
         if (units != null && units.size() > 0) {
             unityid = units.get(0).getId();

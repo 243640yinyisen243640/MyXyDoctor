@@ -245,8 +245,9 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
                     } else {
                         mRefreshLayout.finishRefresh();
                     }
+                    CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
                     if (200 == response.code) {
-                        CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
+                        activity.topTextView().setVisibility(View.VISIBLE);
                         activity.topTextView().setText("处理");
                         mTempList = (List<DataAbnormalInfo>) response.object;
                         mPageCount = mTempList == null ? 0 : mTempList.size();
@@ -271,6 +272,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
                         mRefreshLayout.setVisibility(View.VISIBLE);
                         presentNestedSrcollView.setVisibility(View.GONE);
                     } else if (30002 == response.code) {
+                        activity.topTextView().setVisibility(View.GONE);
                         mPageCount = 0;
                         if (1 == mPageIndex) {
                             //如果是没有数据

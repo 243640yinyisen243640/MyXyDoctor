@@ -76,7 +76,7 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
             viewHolder.followTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_impotant_follow, 0, 0, 0);
             viewHolder.followTextView.setText(R.string.community_have_follow);
         } else {
-            viewHolder.followTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_unimpotant_follow, 0, 0, 0);
+            viewHolder.followTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_family_unfollow, 0, 0, 0);
             viewHolder.followTextView.setText(R.string.community_have_unfollow);
         }
         if ("1".equals(info.getRelation())) {

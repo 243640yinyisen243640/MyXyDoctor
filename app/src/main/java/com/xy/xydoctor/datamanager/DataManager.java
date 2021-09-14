@@ -641,4 +641,21 @@ public class DataManager {
         map.put("access_token", SPStaticUtils.getString("token"));
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, FamilyAllInfo.class, "/doctor/Community/houseUsers", map, successCallBack, failureCallBack);
     }
+
+    /**
+     * 关注操作
+     *
+     * @param care            关注 1是 2否
+     * @param userid
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> followUser(String care, String userid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("care", care);
+        map.put("userid", userid);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/doctor/Community/editCare", map, successCallBack, failureCallBack);
+    }
 }

@@ -21,7 +21,6 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.CommunityBuildingUnitListAdapter;
 import com.xy.xydoctor.adapter.community_manager.CommunityFilterDeseaseImgAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
-import com.xy.xydoctor.base.adapter.TabFragmentAdapter;
 import com.xy.xydoctor.bean.community_manamer.FamilyAllInfo;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
@@ -36,7 +35,7 @@ import retrofit2.Call;
  * @author android.yys
  * @date 2021/1/15
  */
-public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implements TabFragmentAdapter.RefeshFragment {
+public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
 
     private static final int REQUEST_CODE_FOR_REFRESH = 10;
     private CommunityBuildingUnitListAdapter mAdapter;
@@ -82,8 +81,13 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
 
         initView();
 
+        initListener();
         initValues();
         getDataInfo();
+    }
+
+    private void initListener() {
+        followTextView.setOnClickListener(this);
     }
 
 
@@ -102,6 +106,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         imgListView.setLayoutManager(layoutManager);
         StaggeredGridLayoutManager layoutManager1 = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         memberMyListView.setLayoutManager(layoutManager1);
+        memberMyListView.setNestedScrollingEnabled(false);
     }
 
     private void getDataInfo() {
@@ -153,7 +158,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
             followTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_impotant_follow, 0, 0, 0);
             followTextView.setText(R.string.community_have_follow);
         } else {
-            followTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_unimpotant_follow, 0, 0, 0);
+            followTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_family_unfollow, 0, 0, 0);
             followTextView.setText(R.string.community_have_unfollow);
         }
 
@@ -183,12 +188,18 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
 
 
         if ("1".equals(info.getMaster().getDiabeteslei())) {
+            sugarTextView.setVisibility(View.VISIBLE);
+
             sugarTextView.setText(R.string.community_user_info_sugar_one);
 
         } else if ("2".equals(info.getMaster().getDiabeteslei())) {
+            sugarTextView.setVisibility(View.VISIBLE);
+
             sugarTextView.setText(R.string.community_user_info_sugar_two);
 
         } else if ("3".equals(info.getMaster().getDiabeteslei())) {
+            sugarTextView.setVisibility(View.VISIBLE);
+
             sugarTextView.setText(R.string.community_user_info_sugar_three);
 
         } else if ("4".equals(info.getMaster().getDiabeteslei())) {
@@ -196,7 +207,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
 
         } else {
             sugarTextView.setText(R.string.community_user_info_sugar_no);
-
+            sugarTextView.setVisibility(View.GONE);
         }
         if ("1".equals(info.getMaster().getHypertension())) {
             pressureTextView.setVisibility(View.VISIBLE);
@@ -271,12 +282,62 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         memberMyListView.setAdapter(mAdapter);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_building_unit_follow:
+                // 1是 2否
+                if ("1".equals(info.getMaster().getIscare())) {
+                    followUser("2", info.getMaster().getUserid(), "1", 0);
+                } else {
+                    followUser("1", info.getMaster().getUserid(), "1", 0);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void followUser(String isFollow, String userid, String type, int position) {
+        Call<String> requestCall = DataManager.followUser(isFollow, userid, (call, response) -> {
+            if (response.code == 200) {
+                if ("1".equals(type)) {
+                    if ("1".equals(isFollow)) {
+                        followTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_impotant_follow, 0, 0, 0);
+                        followTextView.setText(R.string.community_have_follow);
+                    } else {
+                        followTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_family_unfollow, 0, 0, 0);
+                        followTextView.setText(R.string.community_have_unfollow);
+                    }
+                } else {
+                    if ("1".equals(isFollow)) {
+                        info.getMembers().get(position).setIscare("1");
+                    } else {
+                        info.getMembers().get(position).setIscare("2");
+                    }
+                    mAdapter.notifyDataSetChanged();
+                }
+
+            }
+        }, (call, t) -> {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        });
+    }
+
     private class OnItemClickListener implements IAdapterViewClickListener {
 
         @Override
         public void adapterClickListener(int position, View view) {
 
             switch (view.getId()) {
+                case R.id.tv_building_unit_follow_item:
+                    if ("1".equals(info.getMembers().get(position).getIscare())) {
+                        followUser("2", info.getMembers().get(position).getUserid(), "2", position);
+                    } else {
+                        followUser("1", info.getMembers().get(position).getUserid(), "2", position);
+                    }
+                    break;
+
 
                 default:
                     break;
