@@ -3,6 +3,7 @@ package com.xy.xydoctor.ui.activity.community_management;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -39,6 +40,7 @@ import retrofit2.Call;
  * Author: LYD
  * Date: 2021/8/21 17:32
  * Description:添加用户
+ * 传参 houseinfo 几单元几号楼
  */
 public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
 
@@ -105,9 +107,16 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
     private TextView addTextView;
 
     /**
+     * 如果搜索出来，那这个是必传的
+     */
+    private String userid;
+
+    /**
      * 房间id
      */
     private String houserid;
+
+    private String houseInfo;
 
     private String sex;
 
@@ -120,15 +129,15 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
     /**
      * 科室id
      */
-    private String departmentid = "-1";
+    private String departmentid = "0";
     /**
      * 医生id
      */
-    private String doctorID = "-1";
+    private String doctorID = "0";
     /**
      * 医院id
      */
-    private String hospitalid = "-1";
+    private String hospitalid = "0";
 
     /**
      * 糖尿病类型id
@@ -139,6 +148,10 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
      * 血压等级
      */
     private String bloodLevel;
+    /**
+     * 是否是高血压  1否 2是
+     */
+    private String hypertension = "1";
 
     /**
      * 楼栋id
@@ -158,9 +171,15 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         buildid = getIntent().getStringExtra("buildid");
         houserid = getIntent().getStringExtra("houserid");
+        houseInfo = getIntent().getStringExtra("houseinfo");
         topViewManager().titleTextView().setText(R.string.user_add_title);
         containerView().addView(initView());
+        initValues();
         initListener();
+    }
+
+    private void initValues() {
+        locationTextView.setText(houseInfo);
     }
 
 
@@ -201,10 +220,11 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                 getDepartment();
                 break;
             case R.id.tv_user_add_doctor_choose:
-                if ("-1".equals(departmentid)) {
-                    TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.user_add_department_choose);
+                if ("0".equals(departmentid) || "0".equals(hospitalid)) {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.user_add_department_choose_or_doctor);
                     return;
                 }
+
                 getDoctor();
                 break;
             case R.id.iv_user_add_device_sugar:
@@ -289,20 +309,20 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
             TipUtils.getInstance().showToast(getPageContext(), R.string.please_choose_user_add_master_relation);
             return;
         }
-        if ("-1".equals(hospitalid)) {
+        if ("0".equals(hospitalid) || TextUtils.isEmpty(hospitalid)) {
             TipUtils.getInstance().showToast(getPageContext(), R.string.user_add_hospital_choose);
             return;
         }
-        if ("-1".equals(departmentid)) {
+        if ("0".equals(departmentid) || TextUtils.isEmpty(departmentid)) {
             TipUtils.getInstance().showToast(getPageContext(), R.string.user_add_department_choose);
             return;
         }
-        if ("-1".equals(doctorID)) {
+        if ("0".equals(doctorID) || TextUtils.isEmpty(doctorID)) {
             TipUtils.getInstance().showToast(getPageContext(), R.string.user_add_doctor_choose);
             return;
         }
 
-
+        addReq.setUserid(userid);
         addReq.setNickname(name);
         addReq.setTel(tel);
         addReq.setHouse_id(houserid);
@@ -348,23 +368,23 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
      * 获取医生列表
      */
     private void getDoctor() {
-        TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
         Call<String> requestCall = DataManager.getDoctorList(departmentid, buildid, (call, response) -> {
-            TipUtils.getInstance().dismissProgressDialog();
+            Log.i("yys", "departmentid==" + departmentid);
             if (200 == response.code) {
-                List<DepartmentInfo> logisticsCompanyInfos = (List<DepartmentInfo>) response.object;
+                SearchInfo searchInfo = (SearchInfo) response.object;
+                List<DepartmentInfo> logisticsCompanyInfos = searchInfo.getDoc_list();
                 if (logisticsCompanyInfos != null && logisticsCompanyInfos.size() > 0) {
                     OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
-                        doctorID = logisticsCompanyInfos.get(options1).getDep_userid();
-                        String s = logisticsCompanyInfos.get(options1).getDepname();
+                        doctorID = logisticsCompanyInfos.get(options1).getDoc_userid();
+                        String s = logisticsCompanyInfos.get(options1).getDocname();
                         doctorTextView.setText(s);
                     }).setLineSpacingMultiplier(2.5f)
-                            .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
+                            .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
                             .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
                             .build();
                     List<String> list = new ArrayList<>();
                     for (int i = 0; i < logisticsCompanyInfos.size(); i++) {
-                        String typeName = logisticsCompanyInfos.get(i).getDepname();
+                        String typeName = logisticsCompanyInfos.get(i).getDocname();
                         list.add(typeName);
                     }
                     optionsPickerView.setPicker(list);
@@ -459,33 +479,26 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
      * @param type 1：选择主要是获取医院的id 2：是根据手机号去搜索
      */
     private void getHospital(String tel, String type) {
-        TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
         Call<String> requestCall = DataManager.getHospitalList(tel, buildid, (call, response) -> {
-            TipUtils.getInstance().dismissProgressDialog();
-            if (200 == response.code) {
-                SearchInfo searchInfo = (SearchInfo) response.object;
-                if ("1".equals(type)) {
-                    List<DepartmentInfo> logisticsCompanyInfos = searchInfo.getHosInfo();
-                    if (logisticsCompanyInfos != null && logisticsCompanyInfos.size() > 0) {
-                        OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
-                            hospitalid = logisticsCompanyInfos.get(options1).getDep_userid();
-                            String s = logisticsCompanyInfos.get(options1).getDepname();
-                            hospitalTextView.setText(s);
-                        }).setLineSpacingMultiplier(2.5f)
-                                .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
-                                .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
-                                .build();
-                        List<String> list = new ArrayList<>();
-                        for (int i = 0; i < logisticsCompanyInfos.size(); i++) {
-                            String typeName = logisticsCompanyInfos.get(i).getDepname();
-                            list.add(typeName);
-                        }
-                        optionsPickerView.setPicker(list);
-                        optionsPickerView.show();
-                    }
-                } else {
-                    //搜索到人，这里要赋值，同时设置是否可以点击
+            Log.i("yys", "type===" + type + "code==" + response.code);
+            if ("1".equals(type)) {
+                if (30004 == response.code) {
+                    SearchInfo searchInfo = (SearchInfo) response.object;
+                    Log.i("yys", "searchinfo==" + (searchInfo == null));
+                    hospitalid = searchInfo.getHospital().getHos_userid();
+                    hospitalTextView.setText(searchInfo.getHospital().getHosp_name());
+                } else if (200 == response.code) {
+                    SearchInfo searchInfo = (SearchInfo) response.object;
+                    hospitalid = searchInfo.getHosInfo().getHosp_userid();
+                    hospitalTextView.setText(searchInfo.getHosInfo().getHosp_name());
+                }
 
+            } else if ("2".equals(type)) {
+                //这是搜索到人
+                if (response.code == 200) {
+                    SearchInfo searchInfo = (SearchInfo) response.object;
+                    //搜索到人，这里要赋值，同时设置是否可以点击
+                    userid = searchInfo.getUserid();
                     nameEditText.setText(searchInfo.getNickname());
                     sex = searchInfo.getSex();
                     if ("1".equals(searchInfo.getSex())) {
@@ -495,6 +508,30 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                     }
                     born = searchInfo.getBirthtime();
                     bornTextView.setText(born);
+                    if (!TextUtils.isEmpty(searchInfo.getHospitalname())) {
+                        hospitalid = searchInfo.getHos_userid();
+                        hospitalTextView.setText(searchInfo.getHospitalname());
+                        hospitalTextView.setClickable(true);
+                    } else {
+                        hospitalTextView.setClickable(false);
+                    }
+                    if (!TextUtils.isEmpty(searchInfo.getDepname())) {
+                        departmentid = searchInfo.getDep_userid();
+                        departmentTextView.setText(searchInfo.getDepname());
+                        departmentTextView.setClickable(true);
+                    } else {
+                        departmentTextView.setClickable(false);
+                    }
+
+                    if (!TextUtils.isEmpty(searchInfo.getDocname())) {
+                        doctorID = searchInfo.getDoc_id();
+                        doctorTextView.setText(searchInfo.getDocname());
+                        doctorTextView.setClickable(true);
+                    } else {
+                        doctorTextView.setClickable(false);
+                    }
+
+
                     diabeteslei = searchInfo.getDiabeteslei();
                     if ("1".equals(searchInfo.getDiabeteslei())) {
                         sugarTextView.setText(R.string.community_user_info_sugar_one);
@@ -508,19 +545,27 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                     } else if ("4".equals(searchInfo.getDiabeteslei())) {
                         sugarTextView.setText(R.string.community_user_info_sugar_four);
                         sugarTextView.setSelected(true);
+                    } else if ("0".equals(searchInfo.getDiabeteslei())) {
+                        sugarTextView.setText(R.string.community_user_info_sugar_zero);
+                        sugarTextView.setSelected(false);
                     } else {
-                        sugarTextView.setText(R.string.community_user_info_sugar_no);
+                        sugarTextView.setText(R.string.community_user_info_sugar_zero);
                         sugarTextView.setSelected(false);
                     }
+                    hypertension = searchInfo.getHypertension();
+
                     if ("0".equals(searchInfo.getHypertension())) {
                         pressureTextView.setSelected(false);
+                        pressureTextView.setText(R.string.community_user_info_pressure_zero);
                     } else if ("1".equals(searchInfo.getHypertension())) {
                         pressureTextView.setSelected(true);
                         bloodLevel = "1";
                         pressureTextView.setText(R.string.community_user_info_pressure_one);
+                        pressureTextView.setSelected(true);
                     } else {
                         bloodLevel = "2";
                         pressureTextView.setText(R.string.community_user_info_pressure_two);
+                        pressureTextView.setSelected(true);
                     }
 
                     if ("1".equals(searchInfo.getFat())) {
@@ -574,6 +619,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                         pressureEditText.setText(searchInfo.getSugar_imei());
                     }
 
+
                     //这一块是关于医生科室
                     if (!TextUtils.isEmpty(searchInfo.getDocname())) {
                         //绑定医生
@@ -588,10 +634,13 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                         departmentTextView.setClickable(true);
                         doctorTextView.setClickable(true);
                     }
+                } else if (30004 == response.code) {
+                    SearchInfo searchInfo = (SearchInfo) response.object;
+                    hospitalid = searchInfo.getHospital().getHosp_userid();
+                    hospitalTextView.setText(searchInfo.getHospital().getHosp_name());
                 }
 
-            } else if (response.code == 30004) {
-                //这是没搜索到人
+
             }
         }, (call, throwable) -> {
             TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.network_error);
@@ -612,7 +661,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
             bornTextView.setText(content);
         }).setDate(currentDate).setRangDate(startDate, endDate)
                 .setType(new boolean[]{true, true, true, false, false, false})
-                .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.gray_light))
+                .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
                 .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
                 //                .setDecorView(all)
                 .build();

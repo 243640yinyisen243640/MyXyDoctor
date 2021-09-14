@@ -78,21 +78,23 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         house_id = getIntent().getStringExtra("house_id");
         house_name = getIntent().getStringExtra("house_name");
         build_id = getIntent().getStringExtra("build_id");
-        topViewManager().titleTextView().setText(house_name);
-        topViewManager().moreTextView().setText("添加成员");
-        topViewManager().moreTextView().setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_red));
 
-        topViewManager().moreTextView().setOnClickListener(v -> {
-            Intent intent = new Intent(getPageContext(), UserAddActivity.class);
-            intent.putExtra("houserid", house_id);
-            intent.putExtra("houserid", house_id);
-            intent.putExtra("buildid", build_id);
-            startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
-        });
+
         initView();
 
         initValues();
         getDataInfo();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_REFRESH) {
+                getDataInfo();
+            }
+        }
     }
 
     private void initValues() {
@@ -106,10 +108,20 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         Call<String> requestCall = DataManager.getFamilyInfo(house_id, (call, response) -> {
             if (response.code == 200) {
                 info = (FamilyAllInfo) response.object;
-                allLinearLayout.setVisibility(View.VISIBLE);
+                topViewManager().titleTextView().setText(house_name);
+                topViewManager().moreTextView().setText("添加成员");
+                topViewManager().moreTextView().setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_red));
+
+                topViewManager().moreTextView().setOnClickListener(v -> {
+                    Intent intent = new Intent(getPageContext(), UserAddActivity.class);
+                    intent.putExtra("houserid", house_id);
+                    intent.putExtra("houserid", house_id);
+                    intent.putExtra("buildid", build_id);
+                    intent.putExtra("houseinfo", info.getMaster().getHouseinfo());
+                    startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
+                });
+
                 bindData();
-            } else {
-                allLinearLayout.setVisibility(View.GONE);
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);

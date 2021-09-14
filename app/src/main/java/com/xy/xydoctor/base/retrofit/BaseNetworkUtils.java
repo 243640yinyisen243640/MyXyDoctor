@@ -145,6 +145,8 @@ public class BaseNetworkUtils {
             if (JSON_OBJECT == parseMode) {
                 if (200 == response.code) {
                     response.object = new Gson().fromJson(response.result, clazz);
+                } else if (30004 == response.code) {
+                    response.object = new Gson().fromJson(response.result, clazz);
                 }
             } else if (JSON_ARRAY == parseMode) {
                 if (response.code == 200) {
@@ -152,7 +154,7 @@ public class BaseNetworkUtils {
                     //Type objectType = type(HHSoftResponseListJson.class, clazz);
                     //response.object = ((HHSoftResponseListJson) gson.fromJson(result, objectType)).data;
                     response.object = fromJsonToList(response.result, clazz);
-                } else if (response.code == 3002) {
+                } else if (response.code == 30002) {
                     response.object = new ArrayList<>();
                 }
             }

@@ -12,6 +12,23 @@ public class DepartmentInfo {
     private String hospitalname;
     private String doc_userid;
     private String docname;
+    private String hos_userid;
+
+    public String getHospitalname() {
+        return hospitalname;
+    }
+
+    public void setHospitalname(String hospitalname) {
+        this.hospitalname = hospitalname;
+    }
+
+    public String getHos_userid() {
+        return hos_userid;
+    }
+
+    public void setHos_userid(String hos_userid) {
+        this.hos_userid = hos_userid;
+    }
 
     public String getHosp_userid() {
         return hosp_userid;

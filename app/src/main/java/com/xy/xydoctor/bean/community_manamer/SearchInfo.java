@@ -109,7 +109,8 @@ public class SearchInfo {
      */
     private String iscare;
 
-    private List<DepartmentInfo> hosInfo;
+    private DepartmentInfo hospital;
+    private DepartmentInfo hosInfo;
     /**
      * 楼栋信息
      */
@@ -161,6 +162,17 @@ public class SearchInfo {
      * 户主关系 1 户主 2配偶 3子女 4儿媳 5女婿 6父母 0其他
      */
     private String relation;
+
+    private List<DepartmentInfo> doc_list;
+
+
+    public List<DepartmentInfo> getDoc_list() {
+        return doc_list;
+    }
+
+    public void setDoc_list(List<DepartmentInfo> doc_list) {
+        this.doc_list = doc_list;
+    }
 
     public String getRelation() {
         return relation;
@@ -225,7 +237,6 @@ public class SearchInfo {
 
     private String sugar_follow;
     private String blood_follow;
-
 
 
     public String getSugar_follow() {
@@ -492,11 +503,19 @@ public class SearchInfo {
         this.iscare = iscare;
     }
 
-    public List<DepartmentInfo> getHosInfo() {
+    public DepartmentInfo getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(DepartmentInfo hospital) {
+        this.hospital = hospital;
+    }
+
+    public DepartmentInfo getHosInfo() {
         return hosInfo;
     }
 
-    public void setHosInfo(List<DepartmentInfo> hosInfo) {
+    public void setHosInfo(DepartmentInfo hosInfo) {
         this.hosInfo = hosInfo;
     }
 }

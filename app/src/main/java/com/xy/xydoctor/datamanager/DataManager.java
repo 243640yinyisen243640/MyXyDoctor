@@ -547,7 +547,7 @@ public class DataManager {
         map.put("dep_userid", dep_userid);
         map.put("build_id", build_id);
         map.put("access_token", SPStaticUtils.getString("token"));
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, DepartmentInfo.class, "/doctor/Community/getDepDoc", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, SearchInfo.class, "/doctor/Community/getDepDoc", map, successCallBack, failureCallBack);
     }
 
 
