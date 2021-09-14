@@ -13,13 +13,44 @@
         android:drawableLeft="@drawable/community_special_operate_delete"
         android:text="@string/community_special_operate_delete" />
 
-    <CheckBox
-        android:id="@+id/cb_community_so_die"
-        style="@style/community_special_operate"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:drawableLeft="@drawable/community_special_operate_die"
-        android:text="@string/community_special_operate_die" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_white_5"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:id="@+id/cb_community_so_die"
+            style="@style/community_special_operate"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/community_special_operate_die"
+            android:text="@string/community_special_operate_die" />
+
+        <EditText
+            android:id="@+id/tv_et_community_so_reason"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/shape_bg_white_black"
+            android:gravity="top"
+            android:hint="@string/please_input_die_reason"
+            android:padding="5dp"
+            android:textColor="@color/data_gray_light"
+            android:textSize="13sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_community_so_reason_tip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:visibility="gone"
+            android:text="*请谨慎操作，该操作一经确认，不可恢复"
+            android:textColor="@color/main_red" />
+    </LinearLayout>
 
 
     <View

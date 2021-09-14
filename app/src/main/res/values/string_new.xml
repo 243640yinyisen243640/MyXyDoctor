@@ -200,4 +200,5 @@
     <string name="base_delete">删除</string>
     <string name="community_have_follow">已关注</string>
     <string name="community_have_unfollow">重点关注</string>
+    <string name="please_input_die_reason">请输入死亡原因</string>
 </resources>

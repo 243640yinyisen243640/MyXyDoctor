@@ -90,6 +90,8 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
     private int buildindex = 0;
     private int unitindex = 0;
 
+    private FollowUpAgentListBean info;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,9 +170,12 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
      * 获取房间详情
      */
     private void getCommunityInfo() {
+        if ("3".equals(type)) {
+            type = "1";
+        }
         Call<String> requestCall = DataManager.getCommunityDetails(type, comid, (call, response) -> {
             if (response.code == 200) {
-                FollowUpAgentListBean info = (FollowUpAgentListBean) response.object;
+                info = (FollowUpAgentListBean) response.object;
                 nameTextView.setText(info.getCom_name());
                 locationTextView.setText(info.getCom_address());
                 if ("2".equals(type)) {
@@ -397,6 +402,9 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_follow_up_agent:
+                Intent intent = new Intent(getPageContext(), CommunityFollowupAgentSearchListActivity.class);
+                intent.putExtra("comid", comid);
+                startActivity(intent);
                 break;
             default:
                 break;

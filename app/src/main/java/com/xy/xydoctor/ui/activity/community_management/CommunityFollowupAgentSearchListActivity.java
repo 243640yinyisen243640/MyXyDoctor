@@ -3,6 +3,7 @@ package com.xy.xydoctor.ui.activity.community_management;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -57,13 +58,16 @@ public class CommunityFollowupAgentSearchListActivity extends XYSoftUIBaseActivi
      */
     private String searchContent = "";
 
+    private String comid;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         topViewManager().topView().removeAllViews();
-
+        Log.i("yys", "comid==" + comid);
+        comid = getIntent().getStringExtra("comid");
         containerView().addView(initView());
         initValue();
         initLinstener();
@@ -125,7 +129,7 @@ public class CommunityFollowupAgentSearchListActivity extends XYSoftUIBaseActivi
             return;
         }
         mIsLoading = true;
-        Call<String> requestCall = DataManager.searchUser("", searchContent, mPageIndex + "",
+        Call<String> requestCall = DataManager.searchUser(comid, searchContent, mPageIndex + "",
                 (call, response) -> {
                     mIsLoading = false;
                     if (1 != mPageIndex) {

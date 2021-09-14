@@ -225,6 +225,7 @@ public class FragmentCommunityManagement extends BaseFragment {
                 break;
             case R.id.tv_community_search:
                 intent = new Intent(getPageContext(), CommunityFollowupAgentSearchListActivity.class);
+                intent.putExtra("comid", "0");
                 startActivity(intent);
                 break;
             case R.id.tv_community_filter:
