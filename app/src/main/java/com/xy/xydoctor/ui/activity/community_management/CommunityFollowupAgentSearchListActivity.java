@@ -64,10 +64,9 @@ public class CommunityFollowupAgentSearchListActivity extends XYSoftUIBaseActivi
 
         topViewManager().topView().removeAllViews();
 
-        initView();
+        containerView().addView(initView());
         initValue();
         initLinstener();
-        onPageLoad();
     }
 
 
@@ -270,7 +269,7 @@ public class CommunityFollowupAgentSearchListActivity extends XYSoftUIBaseActivi
         View view = View.inflate(getPageContext(), R.layout.activity_community_follow_up_agent_search_list, null);
         finishImageView = getViewByID(view, R.id.iv_follow_search_img_top_back);
         contentEditText = getViewByID(view, R.id.et_follow_up_search);
-        sureTextView = getViewByID(view, R.id.iv_follow_search_img_top_back);
+        sureTextView = getViewByID(view, R.id.tv_follow_up_search_sure);
         mRefreshLayout = getViewByID(view, R.id.refreshLayout_search);
         mRecyclerView = getViewByID(view, R.id.rv_live_search);
         presentNestedSrcollView = getViewByID(view, R.id.nsv_present_nodate_search);
