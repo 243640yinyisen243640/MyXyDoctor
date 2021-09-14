@@ -1,150 +1,282 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.rxjava.rxlife.RxLife;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.FollowupAgentSearchListAdapter;
+import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
-import com.xy.xydoctor.net.ErrorInfo;
-import com.xy.xydoctor.net.OnError;
-import com.xy.xydoctor.net.XyUrl;
-import com.xy.xydoctor.ui.activity.healthrecord.BaseHideLineActivity;
+import com.xy.xydoctor.datamanager.DataManager;
+import com.xy.xydoctor.imp.IAdapterViewClickListener;
+import com.xy.xydoctor.utils.TipUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-import io.reactivex.rxjava3.functions.Consumer;
-import rxhttp.wrapper.param.RxHttp;
+import retrofit2.Call;
 
 /**
  * 描述:搜索页面
  * 作者: LYD
  * 创建日期: 2020/5/26 11:07
  */
-public class CommunityFollowupAgentSearchListActivity extends BaseHideLineActivity {
-    @BindView(R.id.iv_follow_search_img_top_back)
-    ImageView imgTopBack;
-    @BindView(R.id.et_follow_up_search)
-    EditText searchEditText;
-    @BindView(R.id.tv_follow_up_search_sure)
-    TextView searchTextView;
-    @BindView(R.id.rv_follow_up_agent_list_search)
-    ListView rvList;
-    @BindView(R.id.srl_follow_up_agent_search)
-    SmartRefreshLayout srlHeightAndWeight;
+public class CommunityFollowupAgentSearchListActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
+    private static final int REQUEST_CODE_FOR_REFRESH = 10;
+    private SmartRefreshLayout mRefreshLayout;
+    private RecyclerView mRecyclerView;
+    private List<FollowUpAgentListBean> mList = new ArrayList<>();
+    private List<FollowUpAgentListBean> mTempList;
+    private int mPageIndex = 1, mPageSize = 6, mPageCount = 0;
+    private boolean mIsLoading = false;
 
-    private int pageIndex = 1;//当前获取的是第几页的数据
-    private List<FollowUpAgentListBean> list = new ArrayList<>();//ListView显示的数据
-    private List<FollowUpAgentListBean> tempList; //用于临时保存ListView显示的数据
-    private FollowupAgentSearchListAdapter adapter;
+    private NestedScrollView presentNestedSrcollView;
+    private TextView stateTextView;
+    private FollowupAgentSearchListAdapter mAdapter;
 
-    private String beginTime = "";
-    private String endTime = "";
+    private ImageView finishImageView;
+    private EditText contentEditText;
+    private TextView sureTextView;
+
+    /**
+     * 搜索内容
+     */
+    private String searchContent = "";
+
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.activity_community_follow_up_agent_search_list;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        topViewManager().topView().removeAllViews();
+
+        initView();
+        initValue();
+        initLinstener();
+        onPageLoad();
     }
 
-    @Override
-    protected void init(Bundle savedInstanceState) {
-        hideTitleBar();
-        getData(beginTime, endTime);
-        initRefresh();
-    }
 
-    private void initRefresh() {
-        srlHeightAndWeight.setEnableAutoLoadMore(true);//开启自动加载功能(非必须）
-        //下拉刷新
-        srlHeightAndWeight.setOnRefreshListener(new OnRefreshListener() {
+    private void initValue() {
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+        //解决底部滚动到顶部时，顶部item上方偶尔会出现一大片间隔的问题
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                pageIndex = 1;
-                getData(beginTime, endTime);
-                srlHeightAndWeight.finishRefresh();
-                refreshLayout.setNoMoreData(false);//恢复没有更多数据的原始状态
-            }
-        });
-        //上拉加载
-        srlHeightAndWeight.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(RefreshLayout refreshLayout) {
-                ++pageIndex;
-                getData(beginTime, endTime);
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                int[] first = new int[2];
+                layoutManager.findFirstCompletelyVisibleItemPositions(first);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && (first[0] == 1 || first[1] == 1)) {
+                    layoutManager.invalidateSpanAssignments();
+                }
             }
         });
     }
 
+    private void initLinstener() {
+        finishImageView.setOnClickListener(this);
+        sureTextView.setOnClickListener(this);
 
-    private void getData(String b, String e) {
-        HashMap map = new HashMap<>();
-        String userid = getIntent().getStringExtra("userid");
-        map.put("uid", userid);
-        map.put("begintime", b);
-        map.put("endtime", e);
-        map.put("page", 1);
-        RxHttp.postForm(XyUrl.GET_BLOOD_OXYGEN)
-                .addAll(map)
-                .asResponseList(FollowUpAgentListBean.class)
-                .to(RxLife.toMain(this))
-                .subscribe(new Consumer<List<FollowUpAgentListBean>>() {
-                    @Override
-                    public void accept(List<FollowUpAgentListBean> myTreatPlanBeans) throws Exception {
-                        tempList = myTreatPlanBeans;
-                        //少于10条,将不会再次触发加载更多事件
-                        if (tempList.size() < 10) {
-                            srlHeightAndWeight.finishLoadMoreWithNoMoreData();
-                        } else {
-                            srlHeightAndWeight.finishLoadMore();
-                        }
-                        //设置数据
-                        if (pageIndex == 1) {
-                            if (list == null) {
-                                list = new ArrayList<>();
+        //设置下拉刷新和上拉加载监听
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
+
+                mPageIndex = 1;
+                onPageLoad();
+            }
+        });
+        mRefreshLayout.setEnableLoadMore(true);
+        mRefreshLayout.setEnableRefresh(true);
+        //        mRefreshLayout.setEnableAutoLoadMore(true);
+        // mRefreshLayout.setEnableLoadMoreWhenContentNotFull(false);
+       /* mRefreshLayout.setScrollBoundaryDecider(new ScrollBoundaryDecider() {
+            @Override
+            public boolean canRefresh(View content) {
+                return false;
+            }
+
+            @Override
+            public boolean canLoadMore(View content) {
+                return mPageCount == mPageSize && !mIsLoading;
+            }
+        });*/
+        mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            mPageIndex++;
+            onPageLoad();
+        });
+    }
+
+    protected void onPageLoad() {
+        if (mIsLoading) {
+            return;
+        }
+        mIsLoading = true;
+        Call<String> requestCall = DataManager.searchUser("", searchContent, mPageIndex + "",
+                (call, response) -> {
+                    mIsLoading = false;
+                    if (1 != mPageIndex) {
+                        mRefreshLayout.finishLoadMore();
+                    } else {
+                        mRefreshLayout.finishRefresh();
+                    }
+                    if (200 == response.code) {
+                        mTempList = (List<FollowUpAgentListBean>) response.object;
+                        mPageCount = mTempList == null ? 0 : mTempList.size();
+                        if (1 == mPageIndex) {
+                            if (mList == null) {
+                                mList = new ArrayList<>();
                             } else {
-                                list.clear();
+                                mList.clear();
                             }
-                            list.addAll(tempList);
-                            adapter = new FollowupAgentSearchListAdapter(getPageContext(), R.layout.item_follow_up_agent_search, list);
-                            rvList.setAdapter(adapter);
+                            mList.addAll(mTempList);
+                            if (mAdapter == null) {
+                                mAdapter = new FollowupAgentSearchListAdapter(getPageContext(), mList, new OnItemClickListener());
+                                mRecyclerView.setAdapter(mAdapter);
+                            } else {
+                                mAdapter.notifyDataSetChanged();
+                            }
                         } else {
-                            list.addAll(tempList);
-                            adapter.notifyDataSetChanged();
+                            mList.addAll(mTempList);
+                            mAdapter.notifyDataSetChanged();
+                        }
+                        //如果是加载成功
+                        mRefreshLayout.setVisibility(View.VISIBLE);
+                        presentNestedSrcollView.setVisibility(View.GONE);
+                    } else if (30002 == response.code) {
+                        mPageCount = 0;
+                        if (1 == mPageIndex) {
+                            //如果是没有数据
+                            mRefreshLayout.setVisibility(View.GONE);
+                            presentNestedSrcollView.setVisibility(View.VISIBLE);
+
+                        } else {
+                            TipUtils.getInstance().showToast(getPageContext(), R.string.huahansoft_load_state_no_more_data);
+                        }
+                    } else {
+                        mPageCount = 0;
+                        if (1 == mPageIndex) {
+                            mRefreshLayout.setVisibility(View.GONE);
+                            presentNestedSrcollView.setVisibility(View.VISIBLE);
+                        } else {
+                            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
                         }
                     }
-                }, new OnError() {
-                    @Override
-                    public void onError(ErrorInfo error) throws Exception {
-
+                    if (mList.size() > 0) {
+                        changeLoadUI(response.code);
+                    } else {
+                        changeLoadUI(30002);
                     }
+
+                }, (call, t) -> {
+                    handleRequestFailure();
                 });
     }
 
-    @OnClick({R.id.iv_follow_search_img_top_back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
+    private void handleRequestFailure() {
+        mPageCount = 0;
+        mIsLoading = false;
+        if (1 != mPageIndex) {
+            mRefreshLayout.finishLoadMore();
+        } else {
+            mRefreshLayout.finishRefresh();
+        }
+        if (1 == mPageIndex) {
+
+            mRefreshLayout.setVisibility(View.GONE);
+            presentNestedSrcollView.setVisibility(View.VISIBLE);
+        } else {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        }
+        changeLoadUI(-1);
+    }
+
+    private void changeLoadUI(int responseCode) {
+        presentNestedSrcollView.setVisibility(View.GONE);
+        mRefreshLayout.setVisibility(View.VISIBLE);
+        if (1 == mPageIndex) {
+            if (200 != responseCode) {
+                if (30002 == responseCode) {
+                    stateTextView.setText(getString(R.string.huahansoft_load_state_no_data));
+                } else {
+                    stateTextView.setText(getString(R.string.network_error));
+                }
+                stateTextView.setOnClickListener(view -> {
+                    onPageLoad();
+                });
+                mRefreshLayout.setVisibility(View.GONE);
+                presentNestedSrcollView.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.iv_follow_search_img_top_back:
                 finish();
                 break;
+            case R.id.tv_follow_up_search_sure:
+                String content = contentEditText.getText().toString().trim();
+                if (TextUtils.isEmpty(content)) {
+                    TipUtils.getInstance().showToast(getPageContext(), "请输入关键字");
+                    return;
+                }
+                searchContent = content;
+                mPageIndex = 1;
+                onPageLoad();
 
+                break;
             default:
                 break;
         }
     }
+
+    private class OnItemClickListener implements IAdapterViewClickListener {
+        @Override
+        public void adapterClickListener(int position, View view) {
+            Intent intent;
+
+            //一级的点击事件
+            switch (view.getId()) {
+
+                default:
+                    break;
+
+            }
+        }
+
+        @Override
+        public void adapterClickListener(int position, int index, View view) {
+
+        }
+    }
+
+    private View initView() {
+        View view = View.inflate(getPageContext(), R.layout.activity_community_follow_up_agent_search_list, null);
+        finishImageView = getViewByID(view, R.id.iv_follow_search_img_top_back);
+        contentEditText = getViewByID(view, R.id.et_follow_up_search);
+        sureTextView = getViewByID(view, R.id.iv_follow_search_img_top_back);
+        mRefreshLayout = getViewByID(view, R.id.refreshLayout_search);
+        mRecyclerView = getViewByID(view, R.id.rv_live_search);
+        presentNestedSrcollView = getViewByID(view, R.id.nsv_present_nodate_search);
+        stateTextView = getViewByID(view, R.id.tv_no_data_search);
+        return view;
+    }
+
 
 }

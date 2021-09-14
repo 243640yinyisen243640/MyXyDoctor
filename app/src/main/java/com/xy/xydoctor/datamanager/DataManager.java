@@ -658,4 +658,13 @@ public class DataManager {
         map.put("access_token", SPStaticUtils.getString("token"));
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/doctor/Community/editCare", map, successCallBack, failureCallBack);
     }
+
+    public static Call<String> searchUser(String com_id, String keyword, String page, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("com_id", com_id);
+        map.put("keyword", keyword);
+        map.put("page", page);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, FollowUpAgentListBean.class, "/doctor/Community/searchUser", map, successCallBack, failureCallBack);
+    }
 }
