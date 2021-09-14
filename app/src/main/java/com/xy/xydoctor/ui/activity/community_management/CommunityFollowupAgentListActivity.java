@@ -61,6 +61,7 @@ public class CommunityFollowupAgentListActivity extends XYSoftUIBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        KeyboardUtils.hideSoftInput(CommunityFollowupAgentListActivity.this);
         type = getIntent().getStringExtra("type");
         KeyboardUtils.hideSoftInput(CommunityFollowupAgentListActivity.this);
         if ("1".equals(type)) {

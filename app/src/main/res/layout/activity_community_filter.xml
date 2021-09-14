@@ -2,15 +2,18 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/scrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:descendantFocusability="blocksDescendants">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:paddingBottom="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
 
         <TextView
             style="@style/community_filter_title"
@@ -144,8 +147,8 @@
                 android:id="@+id/tv_filter_submit"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="2"
                 android:layout_marginLeft="10dp"
+                android:layout_weight="2"
                 android:background="@drawable/shape_bg_main_5"
                 android:gravity="center"
                 android:paddingLeft="30dp"
