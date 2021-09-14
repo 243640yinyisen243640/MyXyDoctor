@@ -3,6 +3,7 @@ package com.xy.xydoctor.adapter.community_manager;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,18 +44,25 @@ public class CommunitySugarOrPressureListAdapter extends UIBaseRecycleViewAdapte
 
         viewHolder.yearTextView.setText(info.getYear() + "年");
 
-        CommunitySugarPressureChildListAdapter childListAdapter = new CommunitySugarPressureChildListAdapter(getContext(), info.getList());
+        viewHolder.clickLinearLayout.setOnClickListener(v -> {
+            if (getListener() != null) {
+                getListener().adapterClickListener(position, v);
+            }
+        });
+        CommunitySugarPressureChildListAdapter childListAdapter = new CommunitySugarPressureChildListAdapter(getContext(), info.getList(),position,getListener());
         viewHolder.myListView.setAdapter(childListAdapter);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView yearTextView;
         private MyListView myListView;
+        private LinearLayout clickLinearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             yearTextView = itemView.findViewById(R.id.fu_sugar_pressure_year);
             myListView = itemView.findViewById(R.id.lv_fu_sugar_pressure_child);
+            clickLinearLayout = itemView.findViewById(R.id.ll_sugar_or_pressure_click);
 
         }
     }

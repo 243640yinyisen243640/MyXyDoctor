@@ -3,6 +3,7 @@ package com.xy.xydoctor.adapter.community_manager;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -10,14 +11,19 @@ import androidx.core.content.ContextCompat;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.adapter.XYSoftBaseAdapter;
 import com.xy.xydoctor.bean.community_manamer.SugarOrPressureChildInfo;
+import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.xy.xydoctor.utils.NumberToChineseUtil;
 
 import java.util.List;
 
 public class CommunitySugarPressureChildListAdapter extends XYSoftBaseAdapter<SugarOrPressureChildInfo> {
+    private IAdapterViewClickListener clickListener;
+    private int parPosition;
 
-    public CommunitySugarPressureChildListAdapter(Context context, List<SugarOrPressureChildInfo> list) {
+    public CommunitySugarPressureChildListAdapter(Context context, List<SugarOrPressureChildInfo> list, int parPosition, IAdapterViewClickListener clickListener) {
         super(context, list);
+        this.clickListener = clickListener;
+        this.parPosition = parPosition;
     }
 
 
@@ -31,6 +37,7 @@ public class CommunitySugarPressureChildListAdapter extends XYSoftBaseAdapter<Su
             holder.titleTextView = convertView.findViewById(R.id.fu_sugar_pressure_title_child);
             holder.stateTextView = convertView.findViewById(R.id.fu_sugar_pressure_state_child);
             holder.lineView = convertView.findViewById(R.id.view_sugar_or_pressure);
+            holder.clickLinearLayout = convertView.findViewById(R.id.ll_sugar_or_pressure_child_click);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -79,6 +86,9 @@ public class CommunitySugarPressureChildListAdapter extends XYSoftBaseAdapter<Su
         } else {
             holder.lineView.setVisibility(View.VISIBLE);
         }
+        MyClickListener clickListener = new MyClickListener(position);
+
+        holder.clickLinearLayout.setOnClickListener(clickListener);
         return convertView;
 
 
@@ -88,10 +98,29 @@ public class CommunitySugarPressureChildListAdapter extends XYSoftBaseAdapter<Su
         textView.setTextColor(ContextCompat.getColor(getContext(), color));
     }
 
+
     private class ViewHolder {
         TextView titleTextView;
         TextView timeTextView;
         TextView stateTextView;
         View lineView;
+        LinearLayout clickLinearLayout;
     }
+
+    private class MyClickListener implements View.OnClickListener {
+
+        private int childPosi;
+
+        public MyClickListener(int childPosi) {
+            this.childPosi = childPosi;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (clickListener != null) {
+                clickListener.adapterClickListener(parPosition, childPosi, v);
+            }
+        }
+    }
+
 }
