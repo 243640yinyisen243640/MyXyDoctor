@@ -33,7 +33,7 @@ import retrofit2.Call;
 /**
  * Author: LYD
  * Date: 2021/8/13 9:09
- * param :userid 用户id
+ * param :userid 用户id  username
  * Description: 社区的个人信息
  */
 public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
@@ -54,6 +54,8 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
      * 姓名
      */
     private TextView nameTextView;
+
+    private LinearLayout clickLinearLayout;
     /**
      * 性别和年龄
      */
@@ -104,12 +106,14 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
     private OnlineTestPopup onlineTestPopup;
 
     private String userid;
+    private String username;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
         userid = getIntent().getStringExtra("userid");
+        username = getIntent().getStringExtra("username");
         containerView().addView(initView());
         ImmersionBar.with(this)
                 .statusBarColor(R.color.transparent)  //指定状态栏颜色,根据情况是否设置
@@ -177,6 +181,7 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         deviceManagerTextView.setOnClickListener(this);
         medicanLinearLayout.setOnClickListener(this);
         textImageView.setOnClickListener(this);
+        clickLinearLayout.setOnClickListener(this);
     }
 
     private void initValues() {
@@ -203,6 +208,7 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         headImageView = view.findViewById(R.id.iv_user_info_head);
         deadImageView = view.findViewById(R.id.iv_user_info_dead);
         nameTextView = view.findViewById(R.id.tv_user_info_name);
+        clickLinearLayout = view.findViewById(R.id.ll_user_info_healthy);
         sexAndAgeTextView = view.findViewById(R.id.tv_user_info_sex_and_age);
         diseaseFirstTextView = view.findViewById(R.id.tv_user_info_disease_first);
         diseaseSecondTextView = view.findViewById(R.id.tv_user_info_disease_second);
@@ -249,6 +255,12 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
             case R.id.iv_user_info_text:
                 onlineTestPopup = new OnlineTestPopup(getPageContext(), userid);
                 onlineTestPopup.showPopupWindow(textImageView);
+                break;
+            case R.id.ll_user_info_healthy:
+                Intent intent1 = new Intent(getPageContext(), PatientHealthArchiveActivity.class);
+                intent1.putExtra("userid", userid);
+                intent1.putExtra("username", username);
+                startActivity(intent1);
                 break;
             default:
                 break;

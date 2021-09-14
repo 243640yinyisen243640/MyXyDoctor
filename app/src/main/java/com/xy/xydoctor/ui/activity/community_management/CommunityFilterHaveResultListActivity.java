@@ -344,6 +344,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                 case R.id.ll_filter_click:
                     intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
                     intent.putExtra("userid", mList.get(position).getUserid());
+                    intent.putExtra("username", mList.get(position).getNickname());
                     startActivity(intent);
                     break;
                 case R.id.tv_filter_empty:

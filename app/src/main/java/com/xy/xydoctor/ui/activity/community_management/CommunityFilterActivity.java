@@ -202,6 +202,7 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
                 communityID = "0";
                 isClickable(false);
 
+
             } else {
                 isClickable(true);
             }
@@ -221,10 +222,10 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
         allCommunityTextView.setClickable(isClickable);
         maleCheckBox.setClickable(isClickable);
         femaleCheckBox.setClickable(isClickable);
-        lowermostEditText.setClickable(isClickable);
+        lowermostEditText.setEnabled(isClickable);
         mostEditText.setEnabled(isClickable);
-        diseaseGridView.setClickable(isClickable);
-        otherGridView.setClickable(isClickable);
+        diseaseGridView.setEnabled(isClickable);
+        otherGridView.setEnabled(isClickable);
     }
 
     @Override
@@ -236,6 +237,7 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
             case R.id.tv_filter_reset:
                 allCommunityTextView.setText("全部小区");
                 communityID = "0";
+
                 buildingInformationCb.setChecked(false);
                 maleCheckBox.setChecked(false);
                 femaleCheckBox.setChecked(false);

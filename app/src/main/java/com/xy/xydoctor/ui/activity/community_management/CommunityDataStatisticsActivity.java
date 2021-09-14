@@ -102,7 +102,7 @@ public class CommunityDataStatisticsActivity extends XYSoftUIBaseActivity implem
 
     private void bindData() {
 
-        setTextStyle(getString(R.string.community_statics_sugar_person), staticsInfo.getCommunityUser(), R.color.community_content_black, allPersonTextView, 12);
+        setTextStyle(getString(R.string.community_statics_all_person), staticsInfo.getCommunityUser(), R.color.community_content_black, allPersonTextView, 12);
         setTextStyle(getString(R.string.community_statics_sugar_person), staticsInfo.getSugarUser(), R.color.community_content_black, sugarPersonTextView, 12);
         setTextStyle(getString(R.string.community_statics_pressure_person), staticsInfo.getBloodUser(), R.color.community_content_black, pressurePersonTextView, 12);
         setTextStyle(getString(R.string.community_statics_total_person), staticsInfo.getBothUsers(), R.color.community_content_black, totalPersonTextView, 12);

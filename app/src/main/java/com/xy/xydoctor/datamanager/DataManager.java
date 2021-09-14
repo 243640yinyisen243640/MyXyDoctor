@@ -667,4 +667,23 @@ public class DataManager {
         map.put("access_token", SPStaticUtils.getString("token"));
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, FollowUpAgentListBean.class, "/doctor/Community/searchUser", map, successCallBack, failureCallBack);
     }
+
+    /**
+     * 编辑用户
+     *
+     * @param userid
+     * @param type            1删除2死亡
+     * @param reason
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> editUser(String userid, String type, String reason, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userid", userid);
+        map.put("type", type);
+        map.put("reason", reason);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/doctor/Community/editUser", map, successCallBack, failureCallBack);
+    }
 }
