@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/include_community_follow_up_building"
+            layout="@layout/include_community_follow_up_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_5" />

@@ -291,9 +291,9 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
                         buildList.get(i).setCheck(false);
                     }
                     for (int i = 0; i < buildList.get(buildindex).getUnits().size(); i++) {
-                        if (i==0){
+                        if (i == 0) {
                             buildList.get(buildindex).getUnits().get(i).setCheck(true);
-                        }else {
+                        } else {
                             buildList.get(buildindex).getUnits().get(i).setCheck(false);
                         }
                     }
@@ -363,6 +363,11 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
     }
 
     private void initValue() {
+        if ("2".equals(type)) {
+            searchTextView.setVisibility(View.GONE);
+        } else {
+            searchTextView.setVisibility(View.VISIBLE);
+        }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getPageContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
@@ -382,7 +387,7 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
 
     private View initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_community_followup_building, null);
-        searchTextView = view.findViewById(R.id.tv_follow_up_agent);
+        searchTextView = view.findViewById(R.id.tv_follow_up_agent_user);
         nameTextView = view.findViewById(R.id.tv_fub_building_name);
         locationTextView = view.findViewById(R.id.tv_fub_building_location);
         buildingNumTextView = view.findViewById(R.id.tv_fub_building_num);
@@ -411,7 +416,7 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_follow_up_agent:
+            case R.id.tv_follow_up_agent_user:
                 Intent intent = new Intent(getPageContext(), CommunityFollowupAgentSearchListActivity.class);
                 intent.putExtra("comid", comid);
                 startActivity(intent);

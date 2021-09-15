@@ -97,7 +97,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
             intent.putExtra("houserid", house_id);
             intent.putExtra("houserid", house_id);
             intent.putExtra("buildid", build_id);
-            intent.putExtra("houseinfo", numid + unitid + roomnum);
+            intent.putExtra("houseinfo", numid +"号楼"+ unitid + roomnum);
             startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
         });
         initView();

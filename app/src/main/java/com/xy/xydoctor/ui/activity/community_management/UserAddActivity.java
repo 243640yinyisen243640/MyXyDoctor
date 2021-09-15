@@ -201,7 +201,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                 List<FilterSugarPressureInfo> releationShapeList = new ArrayList<>();
                 FilterSugarPressureInfo releation1 = new FilterSugarPressureInfo("户主", "1");
                 releationShapeList.add(releation1);
-                FilterSugarPressureInfo releation2 = new FilterSugarPressureInfo("2配偶", "2");
+                FilterSugarPressureInfo releation2 = new FilterSugarPressureInfo("配偶", "2");
                 releationShapeList.add(releation2);
                 FilterSugarPressureInfo releation3 = new FilterSugarPressureInfo("子女", "3");
                 releationShapeList.add(releation3);
