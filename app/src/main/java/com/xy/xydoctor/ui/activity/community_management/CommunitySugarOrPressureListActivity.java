@@ -1,5 +1,6 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.CommunitySugarOrPressureListAdapter;
+import com.xy.xydoctor.base.activity.WebViewActivity;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.bean.community_manamer.SugarOrPressureInfo;
 import com.xy.xydoctor.datamanager.DataManager;
@@ -37,6 +39,8 @@ public class CommunitySugarOrPressureListActivity extends XYSoftUIBaseActivity {
 
     private String type;
 
+    private List<SugarOrPressureInfo> list;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +64,7 @@ public class CommunitySugarOrPressureListActivity extends XYSoftUIBaseActivity {
             if (response.code == 200) {
                 mRecyclerView.setVisibility(View.VISIBLE);
                 presentNestedSrcollView.setVisibility(View.GONE);
-                List<SugarOrPressureInfo> list = (List<SugarOrPressureInfo>) response.object;
+                list = (List<SugarOrPressureInfo>) response.object;
                 CommunitySugarOrPressureListAdapter adapter = new CommunitySugarOrPressureListAdapter(getPageContext(), list, new OnItemClickListener());
                 mRecyclerView.setAdapter(adapter);
             } else if (response.code == 30002) {
@@ -110,6 +114,16 @@ public class CommunitySugarOrPressureListActivity extends XYSoftUIBaseActivity {
 
         @Override
         public void adapterClickListener(int position, int index, View view) {
+            switch (view.getId()) {
+                case R.id.ll_sugar_or_pressure_child_click:
+                    Intent intent = new Intent(getPageContext(), WebViewActivity.class);
+                    intent.putExtra("url", list.get(position).getList().get(index).getLink());
+                    intent.putExtra("id", list.get(position).getList().get(index).getId());
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
+            }
 
         }
     }

@@ -43,6 +43,7 @@ public class SugarOrPressureInfo implements Serializable {
      * 年份
      */
     private String year;
+    private String link;
 
 
 
