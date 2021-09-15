@@ -232,8 +232,6 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                 break;
 
             case R.id.iv_user_add_device_sugar:
-
-
                 PermissionUtils
                         .permission(PermissionConstants.CAMERA)
                         .callback(new PermissionUtils.SimpleCallback() {
@@ -514,7 +512,6 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
      */
     private void getHospital(String tel, String type) {
         Call<String> requestCall = DataManager.getHospitalList(tel, buildid, (call, response) -> {
-            Log.i("yys", "type===" + type + "code==" + response.code);
             if ("1".equals(type)) {
                 if (30004 == response.code) {
                     SearchInfo searchInfo = (SearchInfo) response.object;
@@ -668,6 +665,9 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                         departmentTextView.setClickable(true);
                         doctorTextView.setClickable(true);
                     }
+
+                    sugarEditText.setText(searchInfo.getSugar_imei());
+                    pressureEditText.setText(searchInfo.getBlood_imei());
                 } else if (30004 == response.code) {
                     SearchInfo searchInfo = (SearchInfo) response.object;
                     hospitalid = searchInfo.getHospital().getHosp_userid();

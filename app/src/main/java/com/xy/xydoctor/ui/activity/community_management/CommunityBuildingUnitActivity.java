@@ -41,6 +41,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
     private CommunityBuildingUnitListAdapter mAdapter;
 
     private LinearLayout allLinearLayout;
+    private LinearLayout holdLinearLayout;
     private LinearLayout emptyLinearLayout;
     private TextView nameTextView;
     private TextView locationTextView;
@@ -146,147 +147,153 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
     }
 
     private void bindData() {
-        nameTextView.setText(info.getMaster().getNickname());
-        if (info.getMaster().getImg() != null && info.getMaster().getImg().size() > 0) {
-            imgListView.setVisibility(View.VISIBLE);
-            CommunityFilterDeseaseImgAdapter imgAdapter = new CommunityFilterDeseaseImgAdapter(getPageContext(), info.getMaster().getImg(), new IAdapterViewClickListener() {
-                @Override
-                public void adapterClickListener(int position, View view) {
+        if (info.getMaster() == null) {
+            holdLinearLayout.setVisibility(View.GONE);
+        } else {
+            holdLinearLayout.setVisibility(View.VISIBLE);
+            nameTextView.setText(info.getMaster().getNickname());
+            if (info.getMaster().getImg() != null && info.getMaster().getImg().size() > 0) {
+                imgListView.setVisibility(View.VISIBLE);
+                CommunityFilterDeseaseImgAdapter imgAdapter = new CommunityFilterDeseaseImgAdapter(getPageContext(), info.getMaster().getImg(), new IAdapterViewClickListener() {
+                    @Override
+                    public void adapterClickListener(int position, View view) {
 
+                    }
+
+                    @Override
+                    public void adapterClickListener(int position, int index, View view) {
+
+                    }
+                });
+                imgListView.setAdapter(imgAdapter);
+            } else {
+                imgListView.setVisibility(View.GONE);
+            }
+
+            locationTextView.setText(info.getMaster().getHouseinfo());
+            if ("1".equals(info.getMaster().getIscare())) {
+                followTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_impotant_follow, 0, 0, 0);
+                followTextView.setText(R.string.community_have_follow);
+            } else {
+                followTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_family_unfollow, 0, 0, 0);
+                followTextView.setText(R.string.community_have_unfollow);
+            }
+
+            if ("1".equals(info.getMaster().getSex())) {
+                sexTextView.setText(R.string.base_male);
+            } else {
+                sexTextView.setText(R.string.base_female);
+            }
+
+
+            if ("1".equals(info.getMaster().getRelation())) {
+                releationTextView.setText("户主");
+            } else if ("2".equals(info.getMaster().getRelation())) {
+                releationTextView.setText("配偶");
+            } else if ("3".equals(info.getMaster().getRelation())) {
+                releationTextView.setText("子女");
+            } else if ("4".equals(info.getMaster().getRelation())) {
+                releationTextView.setText("儿媳");
+            } else if ("5".equals(info.getMaster().getRelation())) {
+                releationTextView.setText("女婿");
+            } else if ("6".equals(info.getMaster().getRelation())) {
+                releationTextView.setText("父母");
+            } else {
+                releationTextView.setText("其他");
+            }
+            ageTextView.setText(info.getMaster().getAge());
+
+
+            if ("1".equals(info.getMaster().getDiabeteslei())) {
+                sugarTextView.setVisibility(View.VISIBLE);
+
+                sugarTextView.setText(R.string.community_user_info_sugar_one);
+
+            } else if ("2".equals(info.getMaster().getDiabeteslei())) {
+                sugarTextView.setVisibility(View.VISIBLE);
+
+                sugarTextView.setText(R.string.community_user_info_sugar_two);
+
+            } else if ("3".equals(info.getMaster().getDiabeteslei())) {
+                sugarTextView.setVisibility(View.VISIBLE);
+
+                sugarTextView.setText(R.string.community_user_info_sugar_three);
+
+            } else if ("4".equals(info.getMaster().getDiabeteslei())) {
+                sugarTextView.setText(R.string.community_user_info_sugar_four);
+
+            } else {
+                sugarTextView.setText(R.string.community_user_info_sugar_no);
+                sugarTextView.setVisibility(View.GONE);
+            }
+            if ("1".equals(info.getMaster().getHypertension())) {
+                pressureTextView.setVisibility(View.VISIBLE);
+                if ("1".equals(info.getMaster().getBloodLevel())) {
+                    pressureTextView.setText("1级高血压");
+                } else {
+                    pressureTextView.setText("2级高血压");
                 }
+            } else {
+                pressureTextView.setVisibility(View.GONE);
+            }
 
-                @Override
-                public void adapterClickListener(int position, int index, View view) {
+            sugarFollowTextView.setText("血糖随访" + info.getMaster().getSugar_follow());
+            pressureFollowTextView.setText("血压随访" + info.getMaster().getBlood_follow());
 
+            if ("0".equals(info.getMaster().getFollow_status())) {
+                waitFollowTextView.setVisibility(View.GONE);
+            } else {
+                waitFollowTextView.setVisibility(View.VISIBLE);
+            }
+
+            if ("2".equals(info.getMaster().getSugarEmpty())) {
+                sugarLinearLayout.setVisibility(View.VISIBLE);
+                SpannableStringBuilder sugarStringBuilder = new SpannableStringBuilder();
+                sugarStringBuilder.append(info.getMaster().getDatetime() + "  ");
+                int start = sugarStringBuilder.length();
+                sugarStringBuilder.append(info.getMaster().getGlucosevalue());
+                int end = sugarStringBuilder.length();
+                sugarStringBuilder.append("    mmol/L");
+                sugarStringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getPageContext(), R.color.base_black)), start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                sugarStringBuilder.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
+                timeSugarTextView.setText(sugarStringBuilder);
+                unitTextView.setText(info.getMaster().getCategory());
+                if ("1".equals(info.getMaster().getIshight())) {
+                    unitTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_hign, 0, 0, 0);
+                } else if ("2".equals(info.getMaster().getIshight())) {
+                    unitTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_low, 0, 0, 0);
+                } else {
+                    unitTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_normal, 0, 0, 0);
                 }
-            });
-            imgListView.setAdapter(imgAdapter);
-        } else {
-            imgListView.setVisibility(View.GONE);
-        }
-
-        locationTextView.setText(info.getMaster().getHouseinfo());
-        if ("1".equals(info.getMaster().getIscare())) {
-            followTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_impotant_follow, 0, 0, 0);
-            followTextView.setText(R.string.community_have_follow);
-        } else {
-            followTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_family_unfollow, 0, 0, 0);
-            followTextView.setText(R.string.community_have_unfollow);
-        }
-
-        if ("1".equals(info.getMaster().getSex())) {
-            sexTextView.setText(R.string.base_male);
-        } else {
-            sexTextView.setText(R.string.base_female);
-        }
-
-
-        if ("1".equals(info.getMaster().getRelation())) {
-            releationTextView.setText("户主");
-        } else if ("2".equals(info.getMaster().getRelation())) {
-            releationTextView.setText("配偶");
-        } else if ("3".equals(info.getMaster().getRelation())) {
-            releationTextView.setText("子女");
-        } else if ("4".equals(info.getMaster().getRelation())) {
-            releationTextView.setText("儿媳");
-        } else if ("5".equals(info.getMaster().getRelation())) {
-            releationTextView.setText("女婿");
-        } else if ("6".equals(info.getMaster().getRelation())) {
-            releationTextView.setText("父母");
-        } else {
-            releationTextView.setText("其他");
-        }
-        ageTextView.setText(info.getMaster().getAge());
-
-
-        if ("1".equals(info.getMaster().getDiabeteslei())) {
-            sugarTextView.setVisibility(View.VISIBLE);
-
-            sugarTextView.setText(R.string.community_user_info_sugar_one);
-
-        } else if ("2".equals(info.getMaster().getDiabeteslei())) {
-            sugarTextView.setVisibility(View.VISIBLE);
-
-            sugarTextView.setText(R.string.community_user_info_sugar_two);
-
-        } else if ("3".equals(info.getMaster().getDiabeteslei())) {
-            sugarTextView.setVisibility(View.VISIBLE);
-
-            sugarTextView.setText(R.string.community_user_info_sugar_three);
-
-        } else if ("4".equals(info.getMaster().getDiabeteslei())) {
-            sugarTextView.setText(R.string.community_user_info_sugar_four);
-
-        } else {
-            sugarTextView.setText(R.string.community_user_info_sugar_no);
-            sugarTextView.setVisibility(View.GONE);
-        }
-        if ("1".equals(info.getMaster().getHypertension())) {
-            pressureTextView.setVisibility(View.VISIBLE);
-            if ("1".equals(info.getMaster().getBloodLevel())) {
-                pressureTextView.setText("1级高血压");
             } else {
-                pressureTextView.setText("2级高血压");
+                sugarLinearLayout.setVisibility(View.GONE);
             }
-        } else {
-            pressureTextView.setVisibility(View.GONE);
-        }
 
-        sugarFollowTextView.setText("血糖随访" + info.getMaster().getSugar_follow());
-        pressureFollowTextView.setText("血压随访" + info.getMaster().getBlood_follow());
+            if ("2".equals(info.getMaster().getBlood())) {
+                timePressureTextView.setVisibility(View.VISIBLE);
+                SpannableStringBuilder pressureStringBuilder = new SpannableStringBuilder();
+                pressureStringBuilder.append(info.getMaster().getDatetime() + "  ");
+                int start = pressureStringBuilder.length();
+                pressureStringBuilder.append(info.getMaster().getSystolic()).append("/").append(info.getMaster().getDiastole() + "   ");
+                int end = pressureStringBuilder.length();
+                pressureStringBuilder.append(" mmHg");
+                pressureStringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getPageContext(), R.color.base_black)), start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                pressureStringBuilder.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
 
-        if ("0".equals(info.getMaster().getFollow_status())) {
-            waitFollowTextView.setVisibility(View.GONE);
-        } else {
-            waitFollowTextView.setVisibility(View.VISIBLE);
-        }
+                timePressureTextView.setText(pressureStringBuilder);
 
-        if ("2".equals(info.getMaster().getSugarEmpty())) {
-            sugarLinearLayout.setVisibility(View.VISIBLE);
-            SpannableStringBuilder sugarStringBuilder = new SpannableStringBuilder();
-            sugarStringBuilder.append(info.getMaster().getDatetime() + "  ");
-            int start = sugarStringBuilder.length();
-            sugarStringBuilder.append(info.getMaster().getGlucosevalue());
-            int end = sugarStringBuilder.length();
-            sugarStringBuilder.append("    mmol/L");
-            sugarStringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getPageContext(), R.color.base_black)), start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-            sugarStringBuilder.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-
-            timeSugarTextView.setText(sugarStringBuilder);
-            unitTextView.setText(info.getMaster().getCategory());
-            if ("1".equals(info.getMaster().getIshight())) {
-                unitTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_hign, 0, 0, 0);
-            } else if ("2".equals(info.getMaster().getIshight())) {
-                unitTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_low, 0, 0, 0);
+                if ("1".equals(info.getMaster().getIshight())) {
+                    timePressureTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_hign, 0);
+                } else if ("2".equals(info.getMaster().getIshight())) {
+                    timePressureTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_low, 0);
+                } else {
+                    timePressureTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_normal, 0);
+                }
             } else {
-                unitTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_normal, 0, 0, 0);
+                timePressureTextView.setVisibility(View.GONE);
             }
-        } else {
-            sugarLinearLayout.setVisibility(View.GONE);
-        }
 
-        if ("2".equals(info.getMaster().getBlood())) {
-            timePressureTextView.setVisibility(View.VISIBLE);
-            SpannableStringBuilder pressureStringBuilder = new SpannableStringBuilder();
-            pressureStringBuilder.append(info.getMaster().getDatetime() + "  ");
-            int start = pressureStringBuilder.length();
-            pressureStringBuilder.append(info.getMaster().getSystolic()).append("/").append(info.getMaster().getDiastole() + "   ");
-            int end = pressureStringBuilder.length();
-            pressureStringBuilder.append(" mmHg");
-            pressureStringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getPageContext(), R.color.base_black)), start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-            pressureStringBuilder.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-
-            timePressureTextView.setText(pressureStringBuilder);
-
-            if ("1".equals(info.getMaster().getIshight())) {
-                timePressureTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_hign, 0);
-            } else if ("2".equals(info.getMaster().getIshight())) {
-                timePressureTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_low, 0);
-            } else {
-                timePressureTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_normal, 0);
-            }
-        } else {
-            timePressureTextView.setVisibility(View.GONE);
         }
 
         mAdapter = new CommunityBuildingUnitListAdapter(getPageContext(), info.getMembers(), new OnItemClickListener());
@@ -373,6 +380,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         View view = View.inflate(getPageContext(), R.layout.activity_community_building_unit, null);
         nameTextView = view.findViewById(R.id.tv_building_unit_name);
         allLinearLayout = view.findViewById(R.id.ll_building_unit_all);
+        holdLinearLayout = view.findViewById(R.id.ll_building_unit_hold);
         emptyLinearLayout = view.findViewById(R.id.ll_building_unit_empty);
         locationTextView = view.findViewById(R.id.tv_building_unit_location);
         imgListView = view.findViewById(R.id.ml_family_img);

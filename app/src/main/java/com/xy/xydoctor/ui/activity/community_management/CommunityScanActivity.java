@@ -1,36 +1,25 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.TypedValue;
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
-import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.ColorUtils;
-import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.BaseActivity;
-import com.xy.xydoctor.ui.activity.mydevice.InputImeiActivity;
-import com.xy.xydoctor.utils.GifSizeFilter;
 import com.xy.xydoctor.utils.zxing.MyZXingUtils;
 import com.zhihu.matisse.Matisse;
-import com.zhihu.matisse.MimeType;
-import com.zhihu.matisse.engine.impl.GlideEngine;
-import com.zhihu.matisse.filter.Filter;
-import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import me.devilsen.czxing.util.BarCodeUtil;
 import me.devilsen.czxing.view.ScanBoxView;
 import me.devilsen.czxing.view.ScanListener;
@@ -96,38 +85,6 @@ public class CommunityScanActivity extends BaseActivity implements ScanListener 
         mScanView.setScanListener(this);
     }
 
-    @OnClick({R.id.img_to_select_pic})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.img_to_select_pic:
-                PermissionUtils
-                        .permission(PermissionConstants.STORAGE)
-                        .callback(new PermissionUtils.SimpleCallback() {
-                            @Override
-                            public void onGranted() {
-                                Matisse.from(CommunityScanActivity.this)
-                                        .choose(MimeType.ofImage(), false)
-                                        .countable(true)
-                                        .maxSelectable(1)//最多选一张
-                                        //这两行要连用 是否在选择图片中展示照相 和适配安卓7.0 FileProvider
-                                        .capture(true)
-                                        .captureStrategy(new CaptureStrategy(true, "com.xy.xydoctor.FileProvider", "Test"))
-                                        .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-                                        .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
-                                        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                                        .thumbnailScale(0.85f)
-                                        .imageEngine(new GlideEngine())
-                                        .forResult(CODE_SELECT_IMAGE);
-                            }
-
-                            @Override
-                            public void onDenied() {
-                                ToastUtils.showShort("请允许使用存储权限");
-                            }
-                        }).request();
-                break;
-        }
-    }
 
     @Override
     public void onScanSuccess(String resultText, me.devilsen.czxing.code.BarcodeFormat format) {
@@ -138,10 +95,11 @@ public class CommunityScanActivity extends BaseActivity implements ScanListener 
             String startText = resultText.substring(0, resultText.indexOf("IMEI="));
             resultText = resultText.substring(startText.length() + 5);
         }
-        Intent intent = new Intent(getPageContext(), InputImeiActivity.class);
+        Intent intent = new Intent();
         intent.putExtra("imei", resultText);
         intent.putExtra("type", type);
-        startActivity(intent);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     @Override
