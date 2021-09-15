@@ -3,6 +3,7 @@ package com.xy.xydoctor.ui.activity.community_management;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.GridView;
 
 import androidx.annotation.Nullable;
 
@@ -10,7 +11,6 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.CommunityBuildingSettingAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.bean.community_manamer.FollowListChildListInfo;
-import com.xy.xydoctor.customerView.NoConflictGridView;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.utils.TipUtils;
 
@@ -28,7 +28,7 @@ public class CommunityBuildingSettingActivity extends XYSoftUIBaseActivity {
      * 编辑楼栋，删除，回来刷新
      */
     private static final int REQUEST_CODE_FOR_REFRESH = 10;
-    private NoConflictGridView gridView;
+    private GridView gridView;
 
     private CommunityBuildingSettingAdapter adapter;
 

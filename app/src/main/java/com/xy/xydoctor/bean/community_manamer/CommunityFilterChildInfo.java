@@ -33,6 +33,10 @@ public class CommunityFilterChildInfo {
      */
     private String house_num;
     /**
+     * 楼栋id
+     */
+    private String build_id;
+    /**
      * 楼栋
      */
     private String build_name;
@@ -63,6 +67,41 @@ public class CommunityFilterChildInfo {
      */
     private String isdeath;
 
+    private String unit_id;
+    private String house_id;
+    private String com_id;
+
+    public String getBuild_id() {
+        return build_id;
+    }
+
+    public void setBuild_id(String build_id) {
+        this.build_id = build_id;
+    }
+
+    public String getUnit_id() {
+        return unit_id;
+    }
+
+    public void setUnit_id(String unit_id) {
+        this.unit_id = unit_id;
+    }
+
+    public String getHouse_id() {
+        return house_id;
+    }
+
+    public void setHouse_id(String house_id) {
+        this.house_id = house_id;
+    }
+
+    public String getCom_id() {
+        return com_id;
+    }
+
+    public void setCom_id(String com_id) {
+        this.com_id = com_id;
+    }
 
     public String getUserid() {
         return userid;

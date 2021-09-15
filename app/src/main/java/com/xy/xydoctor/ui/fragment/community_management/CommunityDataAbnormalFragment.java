@@ -370,7 +370,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
             }
         });
         mRefreshLayout.setEnableLoadMore(false);
-        mRefreshLayout.setEnableRefresh(true);
+        mRefreshLayout.setEnableRefresh(false);
         //        mRefreshLayout.setEnableAutoLoadMore(true);
         // mRefreshLayout.setEnableLoadMoreWhenContentNotFull(false);
        /* mRefreshLayout.setScrollBoundaryDecider(new ScrollBoundaryDecider() {

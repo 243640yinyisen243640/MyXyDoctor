@@ -41,6 +41,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
     private CommunityBuildingUnitListAdapter mAdapter;
 
     private LinearLayout allLinearLayout;
+    private LinearLayout emptyLinearLayout;
     private TextView nameTextView;
     private TextView locationTextView;
     private RecyclerView imgListView;
@@ -70,6 +71,10 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
     private String build_id;
     private FamilyAllInfo info;
 
+    private String numid;
+    private String unitid;
+    private String roomnum;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,7 +83,22 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         house_name = getIntent().getStringExtra("house_name");
         build_id = getIntent().getStringExtra("build_id");
 
+        numid = getIntent().getStringExtra("numid");
+        unitid = getIntent().getStringExtra("unitid");
+        roomnum = getIntent().getStringExtra("roomnum");
 
+        topViewManager().titleTextView().setText(house_name);
+        topViewManager().moreTextView().setText("添加成员");
+        topViewManager().moreTextView().setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_red));
+
+        topViewManager().moreTextView().setOnClickListener(v -> {
+            Intent intent = new Intent(getPageContext(), UserAddActivity.class);
+            intent.putExtra("houserid", house_id);
+            intent.putExtra("houserid", house_id);
+            intent.putExtra("buildid", build_id);
+            intent.putExtra("houseinfo", numid + unitid + roomnum);
+            startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
+        });
         initView();
 
         initListener();
@@ -113,20 +133,12 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         Call<String> requestCall = DataManager.getFamilyInfo(house_id, (call, response) -> {
             if (response.code == 200) {
                 info = (FamilyAllInfo) response.object;
-                topViewManager().titleTextView().setText(house_name);
-                topViewManager().moreTextView().setText("添加成员");
-                topViewManager().moreTextView().setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_red));
-
-                topViewManager().moreTextView().setOnClickListener(v -> {
-                    Intent intent = new Intent(getPageContext(), UserAddActivity.class);
-                    intent.putExtra("houserid", house_id);
-                    intent.putExtra("houserid", house_id);
-                    intent.putExtra("buildid", build_id);
-                    intent.putExtra("houseinfo", info.getMaster().getHouseinfo());
-                    startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
-                });
-
+                allLinearLayout.setVisibility(View.VISIBLE);
+                emptyLinearLayout.setVisibility(View.GONE);
                 bindData();
+            } else {
+                allLinearLayout.setVisibility(View.GONE);
+                emptyLinearLayout.setVisibility(View.VISIBLE);
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
@@ -361,6 +373,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         View view = View.inflate(getPageContext(), R.layout.activity_community_building_unit, null);
         nameTextView = view.findViewById(R.id.tv_building_unit_name);
         allLinearLayout = view.findViewById(R.id.ll_building_unit_all);
+        emptyLinearLayout = view.findViewById(R.id.ll_building_unit_empty);
         locationTextView = view.findViewById(R.id.tv_building_unit_location);
         imgListView = view.findViewById(R.id.ml_family_img);
         followTextView = view.findViewById(R.id.tv_building_unit_follow);

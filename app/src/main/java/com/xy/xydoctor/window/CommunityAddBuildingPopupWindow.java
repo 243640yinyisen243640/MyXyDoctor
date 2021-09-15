@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.xy.xydoctor.R;
+import com.xy.xydoctor.bean.community_manamer.UpLoadParamAddBuildingInfo;
 import com.xy.xydoctor.bean.community_manamer.UpLoadParamInfo;
 import com.xy.xydoctor.imp.IACommunityUpLoadChoose;
 import com.xy.xydoctor.utils.NumberToChineseUtil;
@@ -36,8 +37,8 @@ public class CommunityAddBuildingPopupWindow extends PopupWindow {
 
     private IACommunityUpLoadChoose iaCommunityFilterChoose;
 
-    private List<UpLoadParamInfo> list;
-    private List<UpLoadParamInfo> list1;
+    private List<UpLoadParamAddBuildingInfo> list;
+    private List<UpLoadParamAddBuildingInfo> list1;
 
     public CommunityAddBuildingPopupWindow(Context context, int size) {
         super(context);
@@ -79,7 +80,7 @@ public class CommunityAddBuildingPopupWindow extends PopupWindow {
                 }
                 dismiss();
                 //为了防止连续点击活着第一次接口掉不成功出现重复数据
-                list1.add(new UpLoadParamInfo(list.get(i).getUnit_name(),(textViews.get(i)).getText().toString().trim()));
+                list1.add(new UpLoadParamAddBuildingInfo(list.get(i).getUnit_name(),(textViews.get(i)).getText().toString().trim()));
             }
             iaCommunityFilterChoose.IAUpParamChoose(list1);
         });
@@ -97,7 +98,7 @@ public class CommunityAddBuildingPopupWindow extends PopupWindow {
             String unit_name = NumberToChineseUtil.intToChinese(i) + "单元";
             numTextView.setText(unit_name);
             addLiner.addView(contentView);
-            UpLoadParamInfo upLoadParamInfo = new UpLoadParamInfo();
+            UpLoadParamAddBuildingInfo upLoadParamInfo = new UpLoadParamAddBuildingInfo();
             upLoadParamInfo.setUnit_name(unit_name);
             list.add(upLoadParamInfo);
             textViews.add(unitEditText);

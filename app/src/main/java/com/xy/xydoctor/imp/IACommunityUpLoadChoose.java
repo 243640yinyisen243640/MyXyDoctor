@@ -1,9 +1,9 @@
 package com.xy.xydoctor.imp;
 
-import com.xy.xydoctor.bean.community_manamer.UpLoadParamInfo;
+import com.xy.xydoctor.bean.community_manamer.UpLoadParamAddBuildingInfo;
 
 import java.util.List;
 
 public interface IACommunityUpLoadChoose {
-    void IAUpParamChoose(List<UpLoadParamInfo> list);
+    void IAUpParamChoose(List<UpLoadParamAddBuildingInfo> list);
 }

@@ -43,6 +43,7 @@ import retrofit2.Call;
 public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity {
 
     private static final int REQUEST_CODE_FOR_REFRESH = 10;
+    private static final int REQUEST_CODE_FOR_REFRESH_EMPTY = 11;
     private SmartRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
     private List<CommunityFilterChildInfo> mList = new ArrayList<>();
@@ -211,14 +212,15 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                         presentNestedSrcollView.setVisibility(View.GONE);
                     } else if (30002 == response.code) {
                         mPageCount = 0;
-                        if (1 == mPageIndex) {
-                            //如果是没有数据
-                            mRefreshLayout.setVisibility(View.GONE);
-                            presentNestedSrcollView.setVisibility(View.VISIBLE);
 
-                        } else {
-                            TipUtils.getInstance().showToast(getPageContext(), R.string.huahansoft_load_state_no_more_data);
-                        }
+                        //如果是没有数据
+                        mRefreshLayout.setVisibility(View.GONE);
+                        presentNestedSrcollView.setVisibility(View.VISIBLE);
+
+
+                    } else if (201 == response.code) {
+                        TipUtils.getInstance().showToast(getPageContext(), R.string.huahansoft_load_state_no_more_data);
+
                     } else {
                         mPageCount = 0;
                         if (1 == mPageIndex) {
@@ -348,8 +350,11 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                     startActivity(intent);
                     break;
                 case R.id.tv_filter_empty:
-                    intent = new Intent(getPageContext(), CommunityFollowUpBuildingActivity.class);
-                    startActivity(intent);
+                    intent = new Intent(getPageContext(), UserAddActivity.class);
+                    intent.putExtra("buildid", mList.get(position).getBuild_id());
+                    intent.putExtra("houserid", mList.get(position).getHouse_id());
+                    intent.putExtra("houseinfo", mList.get(position).getBuild_name() + "号楼" + mList.get(position).getUnit_name() + mList.get(position).getHouse_num());
+                    startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
                     break;
                 default:
                     break;
@@ -404,6 +409,9 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                     onPageLoad();
                 }
 
+            } else {
+                mPageIndex = 1;
+                onPageLoad();
             }
         }
     }

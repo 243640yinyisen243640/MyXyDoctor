@@ -9,17 +9,17 @@ import java.util.List;
  */
 public class CommunityAddBuildingInfo {
 
-    private List<UpLoadParamInfo> unit_data;
+    private List<UpLoadParamAddBuildingInfo> unit_data;
     private String com_id;
     private String build_name;
     private String access_token;
     private String layer;
 
-    public List<UpLoadParamInfo> getUnit_data() {
+    public List<UpLoadParamAddBuildingInfo> getUnit_data() {
         return unit_data;
     }
 
-    public void setUnit_data(List<UpLoadParamInfo> unit_data) {
+    public void setUnit_data(List<UpLoadParamAddBuildingInfo> unit_data) {
         this.unit_data = unit_data;
     }
 

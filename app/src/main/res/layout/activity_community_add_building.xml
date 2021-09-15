@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.xy.xydoctor.customerView.NoConflictGridView xmlns:android="http://schemas.android.com/apk/res/android"
+<GridView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/gv_community_add_building"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="15dp"
     android:layout_marginStart="15dp"
+    android:layout_marginTop="15dp"
     android:layout_marginEnd="15dp"
     android:layout_marginBottom="15dp"
     android:horizontalSpacing="10dp"
     android:numColumns="3"
     android:verticalSpacing="10dp">
 
-</com.xy.xydoctor.customerView.NoConflictGridView>
+</GridView>

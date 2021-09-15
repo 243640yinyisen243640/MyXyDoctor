@@ -16,7 +16,7 @@ import com.lyd.baselib.util.TurnsUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.bean.community_manamer.CommunityAddBuildingInfo;
-import com.xy.xydoctor.bean.community_manamer.UpLoadParamInfo;
+import com.xy.xydoctor.bean.community_manamer.UpLoadParamAddBuildingInfo;
 import com.xy.xydoctor.imp.IACommunityUpLoadChoose;
 import com.xy.xydoctor.net.OkHttpCallBack;
 import com.xy.xydoctor.net.XyUrl;
@@ -116,7 +116,7 @@ public class CommunityAddBuildingActivity extends XYSoftUIBaseActivity implement
     }
 
     @Override
-    public void IAUpParamChoose(List<UpLoadParamInfo> list) {
+    public void IAUpParamChoose(List<UpLoadParamAddBuildingInfo> list) {
         CommunityAddBuildingInfo info = new CommunityAddBuildingInfo();
         info.setAccess_token(SPStaticUtils.getString("token"));
         info.setCom_id(comid);
@@ -124,6 +124,8 @@ public class CommunityAddBuildingActivity extends XYSoftUIBaseActivity implement
         info.setLayer(buildingHigh);
         info.setUnit_data(list);
         String jsonResult = JSON.toJSONString(info);
+        Log.i("yys", "json==" + jsonResult);
+
         XyUrl.okPostJson(XyUrl.ADD_BUILDING, jsonResult, new OkHttpCallBack<String>() {
             @Override
             public void onSuccess(String value) {
@@ -133,7 +135,6 @@ public class CommunityAddBuildingActivity extends XYSoftUIBaseActivity implement
 
             @Override
             public void onError(int errorCode, final String errorMsg) {
-                Log.i("yys", "code==" + errorCode + "errorMsg==" + errorMsg);
                 TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
             }
         });

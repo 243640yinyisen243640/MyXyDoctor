@@ -255,6 +255,9 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
                     intent.putExtra("house_id", roomList.get(position).getId());
                     intent.putExtra("house_name", roomList.get(position).getHouse_num());
                     intent.putExtra("build_id", buildList.get(buildindex).getId());
+                    intent.putExtra("numid", buildList.get(buildindex).getBuild_name());
+                    intent.putExtra("unitid", buildList.get(buildindex).getUnits().get(unitindex).getUnit_name());
+                    intent.putExtra("roomnum", roomList.get(position).getHouse_num());
                     startActivity(intent);
                 });
                 contentGridView.setVisibility(View.VISIBLE);

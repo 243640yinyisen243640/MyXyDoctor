@@ -276,8 +276,8 @@ public class XyUrl {
     //环境
     private final static boolean EXTERNAL_RELEASE = BuildConfig.ENVIRONMENT;
     //正式地址
-        private final static String DOMAIN = "http://port.xiyuns.cn";
-//    private final static String DOMAIN = "http://alb.xiyuns.cn";
+    private final static String DOMAIN = "http://port.xiyuns.cn";
+    //    private final static String DOMAIN = "http://alb.xiyuns.cn";
     //测试地址
     private final static String DOMAIN_TEST = "http://d.xiyuns.cn";
     //设置为默认域名
@@ -351,10 +351,12 @@ public class XyUrl {
             @Override
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 //dismissProgress();
+                Log.i("yys", "code==" + response);
                 try {
                     String res = response.body().string();
                     JSONObject object = new JSONObject(res);
                     String code = object.getString("code");
+
                     if ("200".equals(code)) {
                         String msg = object.getString("msg");
                         callback.onSuccess(msg);

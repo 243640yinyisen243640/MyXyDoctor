@@ -107,7 +107,7 @@ public class CommunityFollowupAgentListActivity extends XYSoftUIBaseActivity {
                 onPageLoad();
             }
         });
-        mRefreshLayout.setEnableLoadMore(true);
+        mRefreshLayout.setEnableLoadMore(false);
         mRefreshLayout.setEnableRefresh(true);
         //        mRefreshLayout.setEnableAutoLoadMore(true);
         // mRefreshLayout.setEnableLoadMoreWhenContentNotFull(false);
