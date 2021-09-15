@@ -85,7 +85,8 @@ public class SplashActivity extends AppCompatActivity {
                     showPrivacyProtectDialog();
                 } else {
                     String token = SPStaticUtils.getString("token");
-                    if (TextUtils.isEmpty(token)) {
+                    String isproperty = SPStaticUtils.getString("isproperty");
+                    if (TextUtils.isEmpty(token)||TextUtils.isEmpty(isproperty)) {
                         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     } else {
                         startActivity(new Intent(SplashActivity.this, MainActivity.class));

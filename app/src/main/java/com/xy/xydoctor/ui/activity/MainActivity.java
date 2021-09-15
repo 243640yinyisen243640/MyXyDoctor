@@ -204,12 +204,14 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
      */
     private void initBottomBar() {
         int type = SPStaticUtils.getInt("docType");
+        String isproperty = SPStaticUtils.getString("isproperty");
         MenuItem patientItem = bnvMain.getMenu().findItem(R.id.navigation_patient);
         MenuItem doctorItem = bnvMain.getMenu().findItem(R.id.navigation_doctor);
         MenuItem workItem = bnvMain.getMenu().findItem(R.id.navigation_home);
         MenuItem myItem = bnvMain.getMenu().findItem(R.id.navigation_user);
         MenuItem managerItem = bnvMain.getMenu().findItem(R.id.navigation_community_manager);
-        //3:主任  4:医生  10:物业
+        // type:3:主任  4:医生  10:物业
+        //isproperty是否加入社区医院 1:未加入 2:已加入
         //是主任的话显示的是工作台，医生，我的
         //是医生的话显示的是工作台，患者，我的
         //是物业的话显示的是社区管理
@@ -220,11 +222,20 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
             myItem.setVisible(true);
             managerItem.setVisible(true);
         } else if (4 == type) {
-            workItem.setVisible(true);
-            patientItem.setVisible(true);
-            doctorItem.setVisible(false);
-            myItem.setVisible(true);
-            managerItem.setVisible(true);
+            if ("2".equals(isproperty)) {
+                workItem.setVisible(true);
+                patientItem.setVisible(true);
+                doctorItem.setVisible(false);
+                myItem.setVisible(true);
+                managerItem.setVisible(true);
+            } else {
+                workItem.setVisible(true);
+                patientItem.setVisible(true);
+                doctorItem.setVisible(false);
+                myItem.setVisible(true);
+                managerItem.setVisible(false);
+            }
+
         } else {
             workItem.setVisible(false);
             patientItem.setVisible(false);
