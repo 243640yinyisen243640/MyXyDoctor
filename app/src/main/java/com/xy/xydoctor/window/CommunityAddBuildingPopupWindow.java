@@ -2,7 +2,9 @@ package com.xy.xydoctor.window;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -15,7 +17,6 @@ import androidx.core.content.ContextCompat;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.bean.community_manamer.UpLoadParamAddBuildingInfo;
-import com.xy.xydoctor.bean.community_manamer.UpLoadParamInfo;
 import com.xy.xydoctor.imp.IACommunityUpLoadChoose;
 import com.xy.xydoctor.utils.NumberToChineseUtil;
 import com.xy.xydoctor.utils.TipUtils;
@@ -30,7 +31,6 @@ import java.util.List;
  */
 public class CommunityAddBuildingPopupWindow extends PopupWindow {
     private LinearLayout addLiner;
-    private List <EditText>textViews;
     private int size;
 
     private Context context;
@@ -38,7 +38,6 @@ public class CommunityAddBuildingPopupWindow extends PopupWindow {
     private IACommunityUpLoadChoose iaCommunityFilterChoose;
 
     private List<UpLoadParamAddBuildingInfo> list;
-    private List<UpLoadParamAddBuildingInfo> list1;
 
     public CommunityAddBuildingPopupWindow(Context context, int size) {
         super(context);
@@ -48,6 +47,10 @@ public class CommunityAddBuildingPopupWindow extends PopupWindow {
         View view = View.inflate(context, R.layout.popupwindow_add_building, null);
         addLiner = view.findViewById(R.id.ll_add_unit);
         TextView saveTextView = view.findViewById(R.id.tv_add_building_save);
+        list = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            list.add(new UpLoadParamAddBuildingInfo());
+        }
         addView();
         this.setContentView(view);
 
@@ -72,36 +75,45 @@ public class CommunityAddBuildingPopupWindow extends PopupWindow {
         });
 
         saveTextView.setOnClickListener(v -> {
-            list1 = new ArrayList<>();
             for (int i = 0; i < list.size(); i++) {
-                if (TextUtils.isEmpty((textViews.get(i)).getText().toString().trim())){
+                if (TextUtils.isEmpty(list.get(i).getHousehold())){
                     TipUtils.getInstance().showToast(context, R.string.plwase_input_every_unit);
                     return;
                 }
                 dismiss();
-                //为了防止连续点击活着第一次接口掉不成功出现重复数据
-                list1.add(new UpLoadParamAddBuildingInfo(list.get(i).getUnit_name(),(textViews.get(i)).getText().toString().trim()));
             }
-            iaCommunityFilterChoose.IAUpParamChoose(list1);
+            iaCommunityFilterChoose.IAUpParamChoose(list);
         });
     }
 
 
     private void addView() {
         addLiner.removeAllViews();
-        list = new ArrayList<>();
-        textViews= new ArrayList<>();
-        for (int i = 1; i <= size; i++) {
+        for (int i = 0; i < size; i++) {//
             View contentView = View.inflate(context, R.layout.include_add_building, null);
             EditText unitEditText = contentView.findViewById(R.id.et_add_building_unit_pop);
             TextView numTextView = contentView.findViewById(R.id.tv_add_building_num_pop);
             String unit_name = NumberToChineseUtil.intToChinese(i) + "单元";
             numTextView.setText(unit_name);
             addLiner.addView(contentView);
-            UpLoadParamAddBuildingInfo upLoadParamInfo = new UpLoadParamAddBuildingInfo();
-            upLoadParamInfo.setUnit_name(unit_name);
-            list.add(upLoadParamInfo);
-            textViews.add(unitEditText);
+            list.get(i).setUnit_name(unit_name);
+            int finalI = i;
+            unitEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    list.get(finalI).setHousehold(s.toString());
+                }
+            });
         }
 
     }

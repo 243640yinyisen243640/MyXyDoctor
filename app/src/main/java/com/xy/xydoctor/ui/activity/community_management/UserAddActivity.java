@@ -19,6 +19,9 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.blankj.utilcode.constant.PermissionConstants;
+import com.blankj.utilcode.util.PermissionUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.bean.community_manamer.DepartmentInfo;
@@ -227,15 +230,46 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
 
                 getDoctor();
                 break;
+
             case R.id.iv_user_add_device_sugar:
-                intent = new Intent(getPageContext(), CommunityScanActivity.class);
-                intent.putExtra("type", "2");
-                startActivityForResult(intent, REQUEST_CODE_FOR_IME_CODE);
+
+
+                PermissionUtils
+                        .permission(PermissionConstants.CAMERA)
+                        .callback(new PermissionUtils.SimpleCallback() {
+                            @Override
+                            public void onGranted() {
+                                Intent intent = new Intent(getPageContext(), CommunityScanActivity.class);
+                                intent.putExtra("type", "2");
+                                startActivityForResult(intent, REQUEST_CODE_FOR_IME_CODE);
+                            }
+
+                            @Override
+                            public void onDenied() {
+                                ToastUtils.showShort("请允许使用相机权限");
+                            }
+                        }).request();
+
+
                 break;
             case R.id.iv_user_add_device_pressure:
-                intent = new Intent(getPageContext(), CommunityScanActivity.class);
-                intent.putExtra("type", "1");
-                startActivityForResult(intent, REQUEST_CODE_FOR_IME_CODE);
+
+                PermissionUtils
+                        .permission(PermissionConstants.CAMERA)
+                        .callback(new PermissionUtils.SimpleCallback() {
+                            @Override
+                            public void onGranted() {
+                                Intent intent = new Intent(getPageContext(), CommunityScanActivity.class);
+                                intent.putExtra("type", "1");
+                                startActivityForResult(intent, REQUEST_CODE_FOR_IME_CODE);
+                            }
+
+                            @Override
+                            public void onDenied() {
+                                ToastUtils.showShort("请允许使用相机权限");
+                            }
+                        }).request();
+
                 break;
             case R.id.cb_filter_disease_sugar:
 

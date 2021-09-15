@@ -106,9 +106,6 @@ public class CommunityAddBuildingActivity extends XYSoftUIBaseActivity implement
                 addBuildingPopupWindow.setOnChooseOkListener(this);
                 addBuildingPopupWindow.showAtLocation(containerView(), Gravity.CENTER, 0, 0);
 
-                //每次都是new一个没必要判断
-                //                if (!addBuildingPopupWindow.isShowing()) {
-                //                }
                 break;
             default:
                 break;

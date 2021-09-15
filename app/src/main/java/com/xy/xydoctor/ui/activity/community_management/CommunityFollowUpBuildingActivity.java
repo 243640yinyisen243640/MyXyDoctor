@@ -290,6 +290,13 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
                     for (int i = 0; i < buildList.size(); i++) {
                         buildList.get(i).setCheck(false);
                     }
+                    for (int i = 0; i < buildList.get(buildindex).getUnits().size(); i++) {
+                        if (i==0){
+                            buildList.get(buildindex).getUnits().get(i).setCheck(true);
+                        }else {
+                            buildList.get(buildindex).getUnits().get(i).setCheck(false);
+                        }
+                    }
                     buildList.get(position).setCheck(true);
                     topListAdapter.notifyDataSetChanged();
                     showUnitData();
