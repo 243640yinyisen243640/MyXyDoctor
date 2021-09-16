@@ -395,7 +395,6 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         addReq.setIscare(importantCheckBox.isChecked() ? "1" : "2");
         addReq.setSugar_imei(sugarEditText.getText().toString().trim());
         addReq.setBlood_imei(pressureEditText.getText().toString().trim());
-
         Call<String> requestCall = DataManager.addUser(addReq, (call, response) -> {
             addTextView.setClickable(true);
             if (response.code == 200) {
