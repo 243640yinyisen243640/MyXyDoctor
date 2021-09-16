@@ -228,10 +228,10 @@ public class CommunityFollowupAgentSearchListActivity extends XYSoftUIBaseActivi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_follow_search_img_top_back:
+            case R.id.iv_follow_search_img_top_back_user:
                 finish();
                 break;
-            case R.id.tv_follow_up_search_sure:
+            case R.id.tv_follow_up_search_sure_user:
                 String content = contentEditText.getText().toString().trim();
                 if (TextUtils.isEmpty(content)) {
                     TipUtils.getInstance().showToast(getPageContext(), "请输入关键字");
@@ -274,9 +274,9 @@ public class CommunityFollowupAgentSearchListActivity extends XYSoftUIBaseActivi
 
     private View initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_community_follow_up_agent_search_list, null);
-        finishImageView = getViewByID(view, R.id.iv_follow_search_img_top_back);
-        contentEditText = getViewByID(view, R.id.et_follow_up_search);
-        sureTextView = getViewByID(view, R.id.tv_follow_up_search_sure);
+        finishImageView = getViewByID(view, R.id.iv_follow_search_img_top_back_user);
+        contentEditText = getViewByID(view, R.id.et_follow_up_search_user);
+        sureTextView = getViewByID(view, R.id.tv_follow_up_search_sure_user);
         mRefreshLayout = getViewByID(view, R.id.refreshLayout_search);
         mRecyclerView = getViewByID(view, R.id.rv_live_search);
         presentNestedSrcollView = getViewByID(view, R.id.nsv_present_nodate_search);

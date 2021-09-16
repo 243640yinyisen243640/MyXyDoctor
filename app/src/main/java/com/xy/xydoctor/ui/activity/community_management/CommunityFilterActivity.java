@@ -150,7 +150,6 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
         FilterSugarPressureInfo otherInfoList5 = new FilterSugarPressureInfo("死亡", "5");
         otherInfoList.add(otherInfoList5);
         diseaseGridView.setOnItemClickListener((parent, view, position, id) -> {
-            Log.i("yys", "diseaseGridView");
             diseaseList.get(position).setCheck(!diseaseList.get(position).isCheck());
             diseaseTypeAdapter.notifyDataSetChanged();
 

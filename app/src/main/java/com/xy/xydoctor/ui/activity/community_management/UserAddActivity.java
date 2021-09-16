@@ -287,8 +287,8 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                     sugarList.add(info3);
                     FilterSugarPressureInfo info4 = new FilterSugarPressureInfo("其他", "4");
                     sugarList.add(info4);
-                    FilterSugarPressureInfo info5 = new FilterSugarPressureInfo("无", "0");
-                    sugarList.add(info5);
+                    //                    FilterSugarPressureInfo info5 = new FilterSugarPressureInfo("无", "0");
+                    //                    sugarList.add(info5);
                     getSugar(sugarList, "2");
                 }
 
@@ -724,6 +724,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         sexList.add(getString(R.string.base_male));
         sexList.add(getString(R.string.base_female));
         OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
+            Log.i("yys", "option1==" + options1);
             sex = options1 + 1 + "";
             sexTextView.setText("1".equals(sex) ? "男" : "女");
         }).setLineSpacingMultiplier(2.5f)
