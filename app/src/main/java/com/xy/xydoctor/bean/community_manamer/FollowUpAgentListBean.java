@@ -21,13 +21,25 @@ public class FollowUpAgentListBean {
      */
     private String build_count;
     /**
+     * 几号楼
+     */
+    private String build_name;
+    /**
      * 单元数
      */
     private String unity_count;
     /**
+     * 几单元
+     */
+    private String unit_name;
+    /**
      * 户数
      */
     private String house_count;
+    /**
+     * 201
+     */
+    private String house_num;
     /**
      * 总人数
      */
@@ -35,6 +47,76 @@ public class FollowUpAgentListBean {
     private String gxy_count;
     private String diabeteslei_count;
     private String both_count;
+
+    private String userid;
+    private String nickname;
+    private String tel;
+    private String sex;
+    private String age;
+
+    public String getHouse_num() {
+        return house_num;
+    }
+
+    public void setHouse_num(String house_num) {
+        this.house_num = house_num;
+    }
+
+    public String getUnit_name() {
+        return unit_name;
+    }
+
+    public void setUnit_name(String unit_name) {
+        this.unit_name = unit_name;
+    }
+
+    public String getBuild_name() {
+        return build_name;
+    }
+
+    public void setBuild_name(String build_name) {
+        this.build_name = build_name;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
 
     public String getGxy_count() {
         return gxy_count;

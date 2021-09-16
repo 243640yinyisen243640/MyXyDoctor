@@ -3,7 +3,6 @@ package com.xy.xydoctor.ui.activity.community_management;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -66,7 +65,6 @@ public class CommunityFollowupAgentSearchListActivity extends XYSoftUIBaseActivi
         super.onCreate(savedInstanceState);
 
         topViewManager().topView().removeAllViews();
-        Log.i("yys", "comid==" + comid);
         comid = getIntent().getStringExtra("comid");
         containerView().addView(initView());
         initValue();
@@ -256,7 +254,12 @@ public class CommunityFollowupAgentSearchListActivity extends XYSoftUIBaseActivi
 
             //一级的点击事件
             switch (view.getId()) {
-
+                case R.id.ll_fu_search_click:
+                    intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
+                    intent.putExtra("userid", mList.get(position).getUserid());
+                    intent.putExtra("username", mList.get(position).getNickname());
+                    startActivity(intent);
+                    break;
                 default:
                     break;
 

@@ -3,6 +3,7 @@ package com.xy.xydoctor.adapter.community_manager;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,21 @@ public class FollowupAgentSearchListAdapter extends UIBaseRecycleViewAdapter<Fol
         ViewHolder viewHolder = (ViewHolder) holder;
         FollowUpAgentListBean info = getList().get(position);
 
+        viewHolder.nameTextView.setText(info.getNickname());
+        if ("1".equals(info.getSex())) {
+            viewHolder.sexTextView.setText(R.string.base_male);
+        } else {
+            viewHolder.sexTextView.setText(R.string.base_female);
+        }
+        viewHolder.ageTextView.setText(info.getAge() + "岁");
+        viewHolder.phoneTextView.setText(info.getTel());
+        viewHolder.locationTextView.setText(info.getCom_name() + info.getBuild_name() + "号楼" + info.getUnit_name() + "单元" + info.getHouse_num());
+        viewHolder.detailsTextView.setText(info.getCom_address());
+        viewHolder.clickLinearLayout.setOnClickListener(v -> {
+            if (getListener() != null) {
+                getListener().adapterClickListener(position, v);
+            }
+        });
     }
 
 
@@ -48,6 +64,7 @@ public class FollowupAgentSearchListAdapter extends UIBaseRecycleViewAdapter<Fol
         TextView phoneTextView;
         TextView locationTextView;
         TextView detailsTextView;
+        LinearLayout clickLinearLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,6 +75,7 @@ public class FollowupAgentSearchListAdapter extends UIBaseRecycleViewAdapter<Fol
             phoneTextView = itemView.findViewById(R.id.tv_fu_search_phone);
             locationTextView = itemView.findViewById(R.id.tv_fu_search_location);
             detailsTextView = itemView.findViewById(R.id.tv_fu_location_search_details);
+            clickLinearLayout = itemView.findViewById(R.id.ll_fu_search_click);
         }
     }
 }
