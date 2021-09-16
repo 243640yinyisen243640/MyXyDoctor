@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -103,11 +104,13 @@ public class UserMedicineChildListAdapter extends CommonAdapter<CommunityUseMedi
 
         thinkTimeStringBuilder.append("预计服用完成日期：");
         int start7 = thinkTimeStringBuilder.length();
-        thinkTimeStringBuilder.append(item.getStarttime());
+        thinkTimeStringBuilder.append(item.getEndtime());
         int end7 = thinkTimeStringBuilder.length();
         thinkTimeStringBuilder.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.community_content_black)), start7, end7, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         endTextView.setText(thinkTimeStringBuilder);
 
+        Log.i("yys", "time1===" + item.getEndtime());
+        Log.i("yys", "time==" + endTextView.getText());
         MyClickListener clickListener = new MyClickListener(position);
         editTextView.setOnClickListener(clickListener);
         finishTextView.setOnClickListener(clickListener);

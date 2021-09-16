@@ -97,7 +97,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
             intent.putExtra("houserid", house_id);
             intent.putExtra("houserid", house_id);
             intent.putExtra("buildid", build_id);
-            intent.putExtra("houseinfo", numid +"号楼"+ unitid + roomnum);
+            intent.putExtra("houseinfo", numid + "号楼" + unitid + roomnum);
             startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
         });
         initView();
@@ -109,6 +109,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
 
     private void initListener() {
         followTextView.setOnClickListener(this);
+        holdLinearLayout.setOnClickListener(this);
     }
 
 
@@ -127,7 +128,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         imgListView.setLayoutManager(layoutManager);
         StaggeredGridLayoutManager layoutManager1 = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         memberMyListView.setLayoutManager(layoutManager1);
-        memberMyListView.setNestedScrollingEnabled(false);
+//        memberMyListView.setNestedScrollingEnabled(false);
     }
 
     private void getDataInfo() {
@@ -201,7 +202,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
             } else {
                 releationTextView.setText("其他");
             }
-            ageTextView.setText(info.getMaster().getAge());
+            ageTextView.setText(info.getMaster().getAge()+"岁");
 
 
             if ("1".equals(info.getMaster().getDiabeteslei())) {
@@ -312,6 +313,12 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
                     followUser("1", info.getMaster().getUserid(), "1", 0);
                 }
                 break;
+            case R.id.ll_building_unit_hold:
+                Intent intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
+                intent.putExtra("userid", info.getMaster().getUserid());
+                intent.putExtra("username", info.getMaster().getNickname());
+                startActivity(intent);
+                break;
             default:
                 break;
         }
@@ -355,6 +362,12 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
                     } else {
                         followUser("1", info.getMembers().get(position).getUserid(), "2", position);
                     }
+                    break;
+                case R.id.ll_building_unit_click_item:
+                    Intent intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
+                    intent.putExtra("userid", info.getMembers().get(position).getUserid());
+                    intent.putExtra("username", info.getMembers().get(position).getNickname());
+                    startActivity(intent);
                     break;
 
 

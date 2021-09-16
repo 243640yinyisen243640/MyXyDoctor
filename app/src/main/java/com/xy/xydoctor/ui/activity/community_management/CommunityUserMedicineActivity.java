@@ -248,6 +248,7 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
 
                     Intent intent1 = new Intent(getPageContext(), CommunityMedicineAddActivity.class);
                     intent1.putExtra("pharmacy_id", mList.get(position).getPharmacys().get(index).getId());
+                    intent1.putExtra("userid", userid);
                     intent1.putExtra("type", "2");
                     startActivityForResult(intent1, REQUEST_CODE_FOR_REFRESH);
                     break;

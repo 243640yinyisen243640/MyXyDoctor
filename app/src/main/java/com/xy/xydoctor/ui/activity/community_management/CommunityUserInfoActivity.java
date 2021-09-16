@@ -119,8 +119,13 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
                 .statusBarColor(R.color.transparent)  //指定状态栏颜色,根据情况是否设置
                 .init();
         initListener();
-
         initValues();
+        getData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         getData();
     }
 

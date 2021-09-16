@@ -100,7 +100,7 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
             viewHolder.sexTextView.setText(R.string.base_female);
         }
 
-        viewHolder.ageTextView.setText(info.getAge());
+        viewHolder.ageTextView.setText(info.getAge()+"岁");
 
         if ("1".equals(info.getDiabeteslei())) {
             viewHolder.sugarTextView.setText(R.string.community_user_info_sugar_one);
@@ -141,7 +141,7 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
         if ("2".equals(info.getSugarEmpty())) {
             viewHolder.sugarLinearLayout.setVisibility(View.VISIBLE);
             SpannableStringBuilder sugarStringBuilder = new SpannableStringBuilder();
-            sugarStringBuilder.append(info.getSugar().getDatetime()+"   ");
+            sugarStringBuilder.append(info.getSugar().getDatetime() + "   ");
             int start = sugarStringBuilder.length();
             sugarStringBuilder.append(info.getSugar().getGlucosevalue());
             int end = sugarStringBuilder.length();
@@ -165,9 +165,9 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
         if ("2".equals(info.getBloodEmpty())) {
             viewHolder.timePressureTextView.setVisibility(View.VISIBLE);
             SpannableStringBuilder pressureStringBuilder = new SpannableStringBuilder();
-            pressureStringBuilder.append(info.getBlood().getDatetime()+"   ");
+            pressureStringBuilder.append(info.getBlood().getDatetime() + "   ");
             int start = pressureStringBuilder.length();
-            pressureStringBuilder.append(info.getBlood().getSystolic()).append("/").append(info.getBlood().getDiastole()+"  ");
+            pressureStringBuilder.append(info.getBlood().getSystolic()).append("/").append(info.getBlood().getDiastole() + "  ");
             int end = pressureStringBuilder.length();
             pressureStringBuilder.append(" mmHg");
             pressureStringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(), R.color.base_black)), start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
@@ -188,6 +188,11 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
 
 
         viewHolder.followTextView.setOnClickListener(v -> {
+            if (getListener() != null) {
+                getListener().adapterClickListener(position, v);
+            }
+        });
+        viewHolder.clickLinearLayout.setOnClickListener(v -> {
             if (getListener() != null) {
                 getListener().adapterClickListener(position, v);
             }
@@ -214,6 +219,7 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
         private TextView timeSugarTextView;
         private TextView unitTextView;
         private TextView timePressureTextView;
+        private LinearLayout clickLinearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -233,6 +239,7 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
             timeSugarTextView = itemView.findViewById(R.id.tv_building_unit_time_and_sugar_item);
             unitTextView = itemView.findViewById(R.id.tv_building_unit_unit_item);
             timePressureTextView = itemView.findViewById(R.id.tv_building_unit_time_and_pressure_item);
+            clickLinearLayout = itemView.findViewById(R.id.ll_building_unit_click_item);
         }
     }
 

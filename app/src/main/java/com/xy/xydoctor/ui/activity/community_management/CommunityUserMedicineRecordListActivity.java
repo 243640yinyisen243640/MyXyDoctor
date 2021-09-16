@@ -60,6 +60,7 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
         topViewManager().moreTextView().setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), CommunityMedicineAddActivity.class);
             intent.putExtra("userid", userid);
+            intent.putExtra("pharmacy_id", "0");
             intent.putExtra("type", "1");
             startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
         });
@@ -238,7 +239,8 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
                 case R.id.tv_use_medicine_child_edit_so:
                     Intent intent = new Intent(getPageContext(), CommunityMedicineAddActivity.class);
                     intent.putExtra("userid", userid);
-                    intent.putExtra("type", "1");
+                    intent.putExtra("pharmacy_id", mList.get(position).getId());
+                    intent.putExtra("type", "2");
                     startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
                     break;
                 default:

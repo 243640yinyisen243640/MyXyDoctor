@@ -215,7 +215,6 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                 releationShapeList.add(releation5);
                 FilterSugarPressureInfo releation6 = new FilterSugarPressureInfo("父母", "6");
                 releationShapeList.add(releation6);
-                releationShapeList.add(releation5);
                 FilterSugarPressureInfo releation7 = new FilterSugarPressureInfo("其他", "0");
                 releationShapeList.add(releation7);
                 getSugar(releationShapeList, "1");
@@ -474,6 +473,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                     .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
                     .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
                     .build();
+            Log.i("yys", "size==" + releationList.size());
             List<String> list = new ArrayList<>();
             for (int i = 0; i < releationList.size(); i++) {
                 String typeName = releationList.get(i).getDiseaseName();

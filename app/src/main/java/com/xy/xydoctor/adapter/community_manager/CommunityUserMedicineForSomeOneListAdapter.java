@@ -99,7 +99,7 @@ public class CommunityUserMedicineForSomeOneListAdapter extends UIBaseRecycleVie
 
         thinkTimeStringBuilder.append("预计服用完成日期：");
         int start7 = thinkTimeStringBuilder.length();
-        thinkTimeStringBuilder.append(item.getStarttime());
+        thinkTimeStringBuilder.append(item.getEndtime());
         int end7 = thinkTimeStringBuilder.length();
         thinkTimeStringBuilder.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.community_content_black)), start7, end7, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         viewHolder.endTimeTextView.setText(thinkTimeStringBuilder);
