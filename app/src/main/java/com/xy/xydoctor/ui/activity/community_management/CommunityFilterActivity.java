@@ -50,13 +50,18 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
     /**
      * 小区的id
      */
-    private String communityID;
+    private String communityID = "0";
 
     private List<FilterSugarPressureInfo> diseaseList;
     private List<FilterSugarPressureInfo> otherInfoList;
 
     private FilterDiseaseTypeAdapter diseaseTypeAdapter;
     private FilterDiseaseTypeAdapter otherTypeAdapter;
+
+    /**
+     * 空房间是否选中
+     */
+    private boolean isCancheck = true;
 
 
     /**
@@ -179,32 +184,40 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
     private void initListener() {
         //所有小区
         allCommunityTextView.setOnClickListener(this);
-        femaleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                maleCheckBox.setChecked(false);
-            } else {
-                maleCheckBox.setChecked(true);
-            }
-        });
-        maleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                femaleCheckBox.setChecked(false);
-            } else {
-                femaleCheckBox.setChecked(true);
-            }
-        });
-
+            femaleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (!isCancheck){
+                    return;
+                }
+                if (isChecked) {
+                    maleCheckBox.setChecked(false);
+                } else {
+                    maleCheckBox.setChecked(true);
+                }
+            });
+            maleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (!isCancheck){
+                    return;
+                }
+                if (isChecked) {
+                    femaleCheckBox.setChecked(false);
+                } else {
+                    femaleCheckBox.setChecked(true);
+                }
+            });
 
         buildingInformationCb.setOnCheckedChangeListener((buttonView, isChecked) -> {
-
+            isCancheck=false;
+            femaleCheckBox.setChecked(false);
+            maleCheckBox.setChecked(false);
+            isCancheck=true;
             if (isChecked) {
                 allCommunityTextView.setText("全部小区");
                 communityID = "0";
                 isClickable(false);
-
-
+                setTextColor(R.color.base_text_gray1, "1");
             } else {
                 isClickable(true);
+                setTextColor(R.color.black, "2");
             }
         });
         //重置
@@ -228,6 +241,36 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
         otherGridView.setEnabled(isClickable);
     }
 
+    private void setTextColor(int color, String type) {
+        allCommunityTextView.setTextColor(getResources().getColor(color));
+        maleCheckBox.setTextColor(getResources().getColor(color));
+        femaleCheckBox.setTextColor(getResources().getColor(color));
+        if ("1".equals(type)) {
+            for (int i = 0; i < diseaseList.size(); i++) {
+                diseaseList.get(i).setSelected(true);
+            }
+            diseaseTypeAdapter.notifyDataSetChanged();
+        } else {
+            for (int i = 0; i < diseaseList.size(); i++) {
+                diseaseList.get(i).setSelected(false);
+            }
+            diseaseTypeAdapter.notifyDataSetChanged();
+        }
+
+        if ("1".equals(type)) {
+            for (int i = 0; i < otherInfoList.size(); i++) {
+                otherInfoList.get(i).setSelected(true);
+            }
+            otherTypeAdapter.notifyDataSetChanged();
+        } else {
+            for (int i = 0; i < otherInfoList.size(); i++) {
+                otherInfoList.get(i).setSelected(false);
+            }
+            otherTypeAdapter.notifyDataSetChanged();
+        }
+
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -235,6 +278,10 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
                 chooseBuilding();
                 break;
             case R.id.tv_filter_reset:
+                isCancheck=false;
+                femaleCheckBox.setChecked(false);
+                maleCheckBox.setChecked(false);
+                isCancheck=true;
                 allCommunityTextView.setText("全部小区");
                 communityID = "0";
 
@@ -313,20 +360,27 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
             TipUtils.getInstance().dismissProgressDialog();
             if (200 == response.code) {
                 List<CommunityUseMedicineInfo> logisticsCompanyInfos = (List<CommunityUseMedicineInfo>) response.object;
-                if (logisticsCompanyInfos != null && logisticsCompanyInfos.size() > 0) {
+                List<CommunityUseMedicineInfo> infoList = new ArrayList<>();
+                CommunityUseMedicineInfo info = new CommunityUseMedicineInfo();
+                info.setId("0");
+                info.setCom_name("全部小区");
+                infoList.add(info);
+                infoList.addAll(logisticsCompanyInfos);
+                if (infoList != null && infoList.size() > 0) {
                     OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
-                        communityID = logisticsCompanyInfos.get(options1).getId();
-                        String s = logisticsCompanyInfos.get(options1).getCom_name();
+                        communityID = infoList.get(options1).getId();
+                        String s = infoList.get(options1).getCom_name();
                         allCommunityTextView.setText(s);
                     }).setLineSpacingMultiplier(2.5f)
-                            .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
+                            .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
                             .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
                             .build();
                     List<String> list = new ArrayList<>();
-                    for (int i = 0; i < logisticsCompanyInfos.size(); i++) {
-                        String typeName = logisticsCompanyInfos.get(i).getCom_name();
+                    for (int i = 0; i < infoList.size(); i++) {
+                        String typeName = infoList.get(i).getCom_name();
                         list.add(typeName);
                     }
+                    Log.i("yys", "size==" + list.size());
                     optionsPickerView.setPicker(list);
                     optionsPickerView.show();
                 }

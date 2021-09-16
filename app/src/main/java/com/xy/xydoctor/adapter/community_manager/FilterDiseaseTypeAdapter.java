@@ -45,9 +45,17 @@ public class FilterDiseaseTypeAdapter extends XYSoftBaseAdapter<FilterSugarPress
         holder.checkTextView.setText(typeInfo.getDiseaseName());
         if ("1".equals(type)) {
             if (typeInfo.isCheck()) {
+                holder.checkTextView.setTextColor(getContext().getResources().getColor(R.color.main_red));
                 holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.community_filter_choose));
             } else {
+                holder.checkTextView.setTextColor(getContext().getResources().getColor(R.color.black));
                 holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_background_5));
+            }
+
+            if (typeInfo.isSelected()) {
+                holder.checkTextView.setTextColor(getContext().getResources().getColor(R.color.base_text_gray1));
+            } else {
+                holder.checkTextView.setTextColor(getContext().getResources().getColor(R.color.black));
             }
         } else {
             if (typeInfo.isCheck()) {

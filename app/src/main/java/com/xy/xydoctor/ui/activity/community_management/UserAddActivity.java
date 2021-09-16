@@ -1,12 +1,14 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -121,7 +123,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
 
     private String houseInfo;
 
-    private String sex;
+    private String sex = "2";
 
     /**
      * 生日
@@ -145,7 +147,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
     /**
      * 糖尿病类型id
      */
-    private String diabeteslei;
+    private String diabeteslei = "0";
 
     /**
      * 血压等级
@@ -191,9 +193,11 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         Intent intent;
         switch (v.getId()) {
             case R.id.tv_user_add_sex:
+                setDissMiss();
                 chooseSexWindow();
                 break;
             case R.id.tv_user_add_born:
+                setDissMiss();
                 showTimeWindow();
                 break;
             case R.id.tv_user_add_master_relation:
@@ -354,7 +358,12 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
             return;
         }
 
-        addReq.setUserid(userid);
+        if (userid == null) {
+            addReq.setUserid("0");
+        } else {
+            addReq.setUserid(userid);
+        }
+
         addReq.setNickname(name);
         addReq.setTel(tel);
         addReq.setHouse_id(houserid);
@@ -364,7 +373,11 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         addReq.setHos_userid(hospitalid);
         addReq.setDep_userid(departmentid);
         addReq.setDoc_userid(doctorID);
-        addReq.setDiabeteslei(diabeteslei);
+        if (addReq.getDiabeteslei() == null) {
+            addReq.setDiabeteslei("0");
+        } else {
+            addReq.setDiabeteslei(diabeteslei);
+        }
         addReq.setHypertension(pressureTextView.isSelected() ? "1" : "2");
         if ("1".equals(addReq.getHypertension())) {
             addReq.setBloodLevel(bloodLevel);
@@ -719,6 +732,28 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                 .build();
         optionsPickerView.setPicker(sexList);
         optionsPickerView.show();
+    }
+
+    private void setDissMiss() {
+        View view = (this).getWindow().peekDecorView();
+        if (isSoftShowing()) {
+            if (view != null && view.getWindowToken() != null) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
+    }
+
+    private boolean isSoftShowing() {
+        //获取当屏幕内容的高度
+        int screenHeight = this.getWindow().getDecorView().getHeight();
+        //获取View可见区域的bottom
+        Rect rect = new Rect();
+        //DecorView即为activity的顶级view
+        this.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+        //考虑到虚拟导航栏的情况（虚拟导航栏情况下：screenHeight = rect.bottom + 虚拟导航栏高度）
+        //选取screenHeight*2/3进行判断
+        return screenHeight * 2 / 3 > rect.bottom;
     }
 
     @Override

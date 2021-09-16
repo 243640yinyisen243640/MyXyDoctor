@@ -64,14 +64,12 @@ public class CommunityEditBuildingActivity extends XYSoftUIBaseActivity {
     }
 
     private void getBuildingInfo() {
-        TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting);
         Call<String> requestCall = DataManager.getBuildingInfo(buildingID, (call, response) -> {
-            TipUtils.getInstance().dismissProgressDialog();
             if (response.code == 200) {
                 FollowListInfo info = (FollowListInfo) response.object;
                 numTextView.setText(info.getBuild_name());
                 highTextView.setText(info.getLayer());
-                unitTextView.setText(info.getUnit_name());
+                unitTextView.setText(info.getUnit_num());
                 adapter = new CommunityEditBuildingAdapter(getPageContext(), info.getBuild_data());
                 listView.setAdapter(adapter);
             }

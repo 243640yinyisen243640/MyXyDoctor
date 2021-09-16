@@ -113,6 +113,7 @@
     <color name="base_background">#F4F4F4</color>
     <color name="defaultGrayText">#9F9F9F</color>
     <color name="base_text_gray">#4A4A4A</color>
+    <color name="base_text_gray1">#A5A5A5</color>
     <color name="community_disease_type">#6B778D</color>
 
     <color name="community_home_index_follow">#347DFC</color>

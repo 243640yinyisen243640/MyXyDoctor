@@ -7,12 +7,21 @@ package com.xy.xydoctor.bean.community_manamer;
  */
 public class FilterSugarPressureInfo {
     private boolean isCheck;
+    private boolean isSelected;
     private String diseaseName;
 
-    private String checkID="-1";
+    private String checkID = "-1";
 
     private String sugarType;
     private String pressureType;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 
     public String getCheckID() {
         return checkID;

@@ -579,7 +579,7 @@ public class DataManager {
      */
     public static Call<String> addUser(UserAddReq addReq, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
 
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, SearchInfo.class, "/doctor/Community/searchTel", addReq.initAddParamMap(), successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, SearchInfo.class, "/doctor/Community/addCommunityUser", addReq.initAddParamMap(), successCallBack, failureCallBack);
     }
 
     /**
