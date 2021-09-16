@@ -316,6 +316,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                 }
                 break;
             case R.id.tv_add_user_submit:
+                addTextView.setClickable(false);
                 upLoadData();
                 break;
             default:
@@ -396,6 +397,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         addReq.setBlood_imei(pressureEditText.getText().toString().trim());
 
         Call<String> requestCall = DataManager.addUser(addReq, (call, response) -> {
+            addTextView.setClickable(true);
             if (response.code == 200) {
                 setResult(RESULT_OK);
                 finish();
