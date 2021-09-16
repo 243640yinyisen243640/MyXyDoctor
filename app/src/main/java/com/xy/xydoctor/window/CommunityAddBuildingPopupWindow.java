@@ -76,7 +76,7 @@ public class CommunityAddBuildingPopupWindow extends PopupWindow {
 
         saveTextView.setOnClickListener(v -> {
             for (int i = 0; i < list.size(); i++) {
-                if (TextUtils.isEmpty(list.get(i).getHousehold())){
+                if (TextUtils.isEmpty(list.get(i).getHousehold())) {
                     TipUtils.getInstance().showToast(context, R.string.plwase_input_every_unit);
                     return;
                 }
@@ -93,7 +93,7 @@ public class CommunityAddBuildingPopupWindow extends PopupWindow {
             View contentView = View.inflate(context, R.layout.include_add_building, null);
             EditText unitEditText = contentView.findViewById(R.id.et_add_building_unit_pop);
             TextView numTextView = contentView.findViewById(R.id.tv_add_building_num_pop);
-            String unit_name = NumberToChineseUtil.intToChinese(i) + "单元";
+            String unit_name = NumberToChineseUtil.intToChinese((i + 1)) + "单元";
             numTextView.setText(unit_name);
             addLiner.addView(contentView);
             list.get(i).setUnit_name(unit_name);
