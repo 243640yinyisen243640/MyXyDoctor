@@ -35,7 +35,7 @@
             android:textSize="14sp" />
 
         <TextView
-            style="@style/community_filter_title"
+            style="@style/community_filter_title1"
             android:text="@string/community_filter_building_infomation" />
 
         <CheckBox
@@ -45,7 +45,7 @@
             android:text="@string/community_empty_room" />
 
         <TextView
-            style="@style/community_filter_title"
+            style="@style/community_filter_title1"
             android:text="@string/base_sex" />
 
         <LinearLayout
@@ -68,7 +68,7 @@
         </LinearLayout>
 
         <TextView
-            style="@style/community_filter_title"
+            style="@style/community_filter_title1"
             android:text="@string/community_age_util" />
 
 
@@ -101,7 +101,7 @@
         </LinearLayout>
 
         <TextView
-            style="@style/community_filter_title"
+            style="@style/community_filter_title1"
             android:text="@string/community_type_of_disease" />
 
         <com.xy.xydoctor.customerView.NoConflictGridView
@@ -115,7 +115,7 @@
             android:verticalSpacing="10dp" />
 
         <TextView
-            style="@style/community_filter_title"
+            style="@style/community_filter_title1"
             android:text="@string/community_age_type_of_other" />
 
         <com.xy.xydoctor.customerView.NoConflictGridView

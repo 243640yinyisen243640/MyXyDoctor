@@ -15,6 +15,7 @@ import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordBloodSugarMainActivi
 import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordCheckListActivity;
 import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordFoodAndDrinkListActivity;
 import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordHeightAndWeightListActivity;
+import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordLiverListActivity;
 import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordPharmacyListActivity;
 import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordSaccharifyListActivity;
 import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordSportListActivity;
@@ -67,26 +68,30 @@ public class HealthRecordGvAdapter extends CommonAdapter {
                 tvText.setText("糖化记录");
                 break;
             case 6:
-                imgPic.setImageResource(R.drawable.health_record_height);
+                imgPic.setImageResource(R.drawable.health_record_check);
+                tvText.setText("检查记录");
+                break;
+            case 7:
+                imgPic.setImageResource(R.drawable.health_record_reduce_weight);
                 tvText.setText("BMI记录");
 
                 break;
-            case 7:
+            case 8:
                 imgPic.setImageResource(R.drawable.health_record_blood_oxygen);
                 tvText.setText("血氧记录");
                 break;
-            case 8:
+            case 9:
                 imgPic.setImageResource(R.drawable.health_record_reduce_weight);
-                tvText.setText("体重记录");
+                tvText.setText("肝病记录");
                 break;
 
-            case 9:
-                imgPic.setImageResource(R.drawable.temperature_for_record);
-                tvText.setText(context.getString(R.string.record_temperature));
-                break;
             case 10:
+                imgPic.setImageResource(R.drawable.temperature_for_record);
+                tvText.setText("体重记录");
+                break;
+            case 11:
                 imgPic.setImageResource(R.drawable.health_record_check);
-                tvText.setText("检查记录");
+                tvText.setText("体温记录");
                 break;
             default:
                 break;
@@ -117,24 +122,27 @@ public class HealthRecordGvAdapter extends CommonAdapter {
                         intent = new Intent(Utils.getApp(), HealthRecordSaccharifyListActivity.class);
                         break;
                     case 6:
-                        intent = new Intent(Utils.getApp(), HealthRecordHeightAndWeightListActivity.class);
+                        intent = new Intent(Utils.getApp(), HealthRecordCheckListActivity.class);
 
                         break;
                     case 7:
-                        intent = new Intent(Utils.getApp(), HealthRecordBloodOxygenListActivity.class);
+                        intent = new Intent(Utils.getApp(), HealthRecordHeightAndWeightListActivity.class);
 
                         break;
                     case 8:
-                        intent = new Intent(Utils.getApp(), HealthRecordWeightListActivity.class);
+                        intent = new Intent(Utils.getApp(), HealthRecordBloodOxygenListActivity.class);
 
                         break;
                     case 9:
-                        intent = new Intent(Utils.getApp(), HealthRecordTemperatureListActivity.class);
+                        intent = new Intent(Utils.getApp(), HealthRecordLiverListActivity.class);
 
                         break;
                     case 10:
-                        intent = new Intent(Utils.getApp(), HealthRecordCheckListActivity.class);
+                        intent = new Intent(Utils.getApp(), HealthRecordWeightListActivity.class);
 
+                        break;
+                    case 11:
+                        intent = new Intent(Utils.getApp(), HealthRecordTemperatureListActivity.class);
                         break;
 
                     default:

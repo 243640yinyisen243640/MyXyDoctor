@@ -241,22 +241,22 @@ public class CommunityMedicineAddActivity extends XYSoftUIBaseActivity implement
                 chooseAmountTextView.setText(s);
                 typeCheckId = diseaseTypeInfos.get(options1).getCheckID();
                 doseTextView.setText(s + "/次");
-//                if ("1".equals(typeCheckId)) {
-//                    chooseAmountTextView.setText("mg");
-//                    doseTextView.setText("mg/次");
-//                } else if ("2".equals(typeCheckId)) {
-//                    chooseAmountTextView.setText("g");
-//                    doseTextView.setText("g/次");
-//                } else if ("3".equals(typeCheckId)) {
-//                    chooseAmountTextView.setText("iu");
-//                    doseTextView.setText("iu/次");
-//                } else if ("4".equals(typeCheckId)) {
-//                    chooseAmountTextView.setText("ml");
-//                    doseTextView.setText("ml/次");
-//                } else {
-//                    chooseAmountTextView.setText("ug");
-//                    doseTextView.setText("ug/次");
-//                }
+                //                if ("1".equals(typeCheckId)) {
+                //                    chooseAmountTextView.setText("mg");
+                //                    doseTextView.setText("mg/次");
+                //                } else if ("2".equals(typeCheckId)) {
+                //                    chooseAmountTextView.setText("g");
+                //                    doseTextView.setText("g/次");
+                //                } else if ("3".equals(typeCheckId)) {
+                //                    chooseAmountTextView.setText("iu");
+                //                    doseTextView.setText("iu/次");
+                //                } else if ("4".equals(typeCheckId)) {
+                //                    chooseAmountTextView.setText("ml");
+                //                    doseTextView.setText("ml/次");
+                //                } else {
+                //                    chooseAmountTextView.setText("ug");
+                //                    doseTextView.setText("ug/次");
+                //                }
             } else {
                 timesTextView.setText(s);
                 timeTypeId = diseaseTypeInfos.get(options1).getCheckID();
@@ -284,6 +284,7 @@ public class CommunityMedicineAddActivity extends XYSoftUIBaseActivity implement
         TimePickerView timePickerView = new TimePickerBuilder(getPageContext(), (date, v) -> {
             String content = DataUtils.convertDateToString(date, DataFormatManager.TIME_FORMAT_Y_M_D);
             chooseTimeTextView.setText(content);
+            startTime = content;
         }).setDate(currentDate).setRangDate(startDate, endDate)
                 .setType(new boolean[]{true, true, true, false, false, false})
                 .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
