@@ -3,6 +3,7 @@ package com.xy.xydoctor.adapter.community_manager;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -42,6 +43,7 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
         viewHolder.setText(R.id.tv_data_abnormal_child_location, item.getBuild_name() + item.getUnit_name() + item.getHouse_num());
         LinearLayout clickLinearLayout = viewHolder.getView(R.id.ll_data_abnormal_child_click);
         TextView checkTextView = viewHolder.getView(R.id.tv_data_abnormal_child_check);
+        ImageView telImageView = viewHolder.getView(R.id.tv_data_abnormal_child_phone_img);
         TextView lightTextView = viewHolder.getView(R.id.tv_data_abnormal_child_high_or_low);
 
         if (item.isSelected()) {
@@ -63,11 +65,11 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
                 } else if ("2".equals(item.getList().get(0).getIshight())) {
                     lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_low, 0);
                 } else {
-                    lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0,R.drawable.sugar_or_pressure_normal, 0);
+                    lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_normal, 0);
                 }
                 lightTextView.setText("mmHg");
             } else {
-                viewHolder.setText(R.id.tv_data_abnormal_child_amonut,item.getList().get(0).getGlucosevalue()+"    mmol/L");
+                viewHolder.setText(R.id.tv_data_abnormal_child_amonut, item.getList().get(0).getGlucosevalue() + "    mmol/L");
                 if ("1".equals(item.getList().get(0).getIshight())) {
                     lightTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_hign, 0, 0, 0);
                 } else if ("2".equals(item.getList().get(0).getIshight())) {
@@ -78,7 +80,7 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
                 lightTextView.setText(item.getList().get(0).getCategoryname());
             }
 
-            Log.i("yys","getIshight=="+item.getList().get(0).getIshight());
+            Log.i("yys", "getIshight==" + item.getList().get(0).getIshight());
 
         } else {
             clickLinearLayout.setVisibility(View.GONE);
@@ -93,6 +95,7 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
         MyClickListener adapterItemClickListener = new MyClickListener(position);
         checkTextView.setOnClickListener(adapterItemClickListener);
         clickLinearLayout.setOnClickListener(adapterItemClickListener);
+        telImageView.setOnClickListener(adapterItemClickListener);
     }
 
     /**

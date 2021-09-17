@@ -78,6 +78,7 @@
                     android:id="@+id/tv_data_abnormal_child_phone_img"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:padding="15dp"
                     android:drawableLeft="@drawable/community_base_phone"
                     android:paddingLeft="15dp" />
 
