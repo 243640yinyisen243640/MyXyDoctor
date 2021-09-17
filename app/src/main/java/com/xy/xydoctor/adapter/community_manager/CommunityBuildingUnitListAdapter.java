@@ -100,7 +100,7 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
             viewHolder.sexTextView.setText(R.string.base_female);
         }
 
-        viewHolder.ageTextView.setText(info.getAge()+"岁");
+        viewHolder.ageTextView.setText(info.getAge() + "岁");
 
         if ("1".equals(info.getDiabeteslei())) {
             viewHolder.sugarTextView.setText(R.string.community_user_info_sugar_one);
@@ -120,9 +120,9 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
         if ("1".equals(info.getHypertension())) {
             viewHolder.pressureTextView.setVisibility(View.VISIBLE);
             if ("1".equals(info.getBloodLevel())) {
-                viewHolder.pressureTextView.setText("1级高血压");
+                viewHolder.pressureTextView.setText(getContext().getString(R.string.community_user_info_pressure_one));
             } else {
-                viewHolder.pressureTextView.setText("2级高血压");
+                viewHolder.pressureTextView.setText(getContext().getString(R.string.community_user_info_pressure_two));
             }
         } else {
             viewHolder.pressureTextView.setVisibility(View.GONE);

@@ -128,7 +128,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         imgListView.setLayoutManager(layoutManager);
         StaggeredGridLayoutManager layoutManager1 = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         memberMyListView.setLayoutManager(layoutManager1);
-//        memberMyListView.setNestedScrollingEnabled(false);
+        //        memberMyListView.setNestedScrollingEnabled(false);
     }
 
     private void getDataInfo() {
@@ -202,7 +202,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
             } else {
                 releationTextView.setText("其他");
             }
-            ageTextView.setText(info.getMaster().getAge()+"岁");
+            ageTextView.setText(info.getMaster().getAge() + "岁");
 
 
             if ("1".equals(info.getMaster().getDiabeteslei())) {
@@ -230,9 +230,9 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
             if ("1".equals(info.getMaster().getHypertension())) {
                 pressureTextView.setVisibility(View.VISIBLE);
                 if ("1".equals(info.getMaster().getBloodLevel())) {
-                    pressureTextView.setText("1级高血压");
+                    pressureTextView.setText(R.string.community_user_info_pressure_one);
                 } else {
-                    pressureTextView.setText("2级高血压");
+                    pressureTextView.setText(R.string.community_user_info_pressure_two);
                 }
             } else {
                 pressureTextView.setVisibility(View.GONE);

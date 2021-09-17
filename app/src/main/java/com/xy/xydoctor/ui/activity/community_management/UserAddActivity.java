@@ -278,13 +278,13 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                     sugarTextView.setSelected(false);
                 } else {
                     List<FilterSugarPressureInfo> sugarList = new ArrayList<>();
-                    FilterSugarPressureInfo info1 = new FilterSugarPressureInfo("I型糖尿病", "1");
+                    FilterSugarPressureInfo info1 = new FilterSugarPressureInfo(getString(R.string.community_user_info_sugar_one), "1");
                     sugarList.add(info1);
-                    FilterSugarPressureInfo info2 = new FilterSugarPressureInfo("II型糖尿病", "2");
+                    FilterSugarPressureInfo info2 = new FilterSugarPressureInfo(getString(R.string.community_user_info_sugar_two), "2");
                     sugarList.add(info2);
-                    FilterSugarPressureInfo info3 = new FilterSugarPressureInfo("妊娠糖尿病", "3");
+                    FilterSugarPressureInfo info3 = new FilterSugarPressureInfo(getString(R.string.community_user_info_sugar_three), "3");
                     sugarList.add(info3);
-                    FilterSugarPressureInfo info4 = new FilterSugarPressureInfo("其他", "4");
+                    FilterSugarPressureInfo info4 = new FilterSugarPressureInfo(getString(R.string.community_user_info_sugar_four), "4");
                     sugarList.add(info4);
                     //                    FilterSugarPressureInfo info5 = new FilterSugarPressureInfo("无", "0");
                     //                    sugarList.add(info5);
@@ -298,9 +298,9 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                     pressureTextView.setSelected(false);
                 } else {
                     List<FilterSugarPressureInfo> pressureList = new ArrayList<>();
-                    FilterSugarPressureInfo pressureinfo1 = new FilterSugarPressureInfo("I级高血压", "1");
+                    FilterSugarPressureInfo pressureinfo1 = new FilterSugarPressureInfo(getString(R.string.community_user_info_pressure_one), "1");
                     pressureList.add(pressureinfo1);
-                    FilterSugarPressureInfo pressureinfo2 = new FilterSugarPressureInfo("II级高血压", "2");
+                    FilterSugarPressureInfo pressureinfo2 = new FilterSugarPressureInfo(getString(R.string.community_user_info_pressure_two), "2");
                     pressureList.add(pressureinfo2);
 
                     getSugar(pressureList, "3");
@@ -401,7 +401,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                 setResult(RESULT_OK);
                 finish();
             } else {
-                TipUtils.getInstance().showToast(getPageContext(), response.code);
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (call, t) -> {
             addTextView.setClickable(true);
