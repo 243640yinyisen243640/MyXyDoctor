@@ -95,7 +95,7 @@ public class DataAbnormalPopup1 extends PopupWindow {
         // 设置SelectPicPopupWindow弹出窗体的宽
         this.setWidth(FrameLayout.LayoutParams.MATCH_PARENT);
         // 设置SelectPicPopupWindow弹出窗体的高
-//                this.setHeight(XyScreenUtils.dip2px(context, 350));
+        //                this.setHeight(XyScreenUtils.dip2px(context, 350));
         this.setHeight(FrameLayout.LayoutParams.WRAP_CONTENT);
 
 
@@ -263,32 +263,59 @@ public class DataAbnormalPopup1 extends PopupWindow {
             String styleName = "";
             String startSugar = "";
             String endSugar = "";
-            if (TextUtils.isEmpty(firstEditText.getText().toString().trim()) && TextUtils.isEmpty(secondEditText.getText().toString().trim())) {
+            if ("1".equals(type)) {
+
                 for (int i = 0; i < abnormalInfos.size(); i++) {
                     if (abnormalInfos.get(i).isCheck()) {
                         style = abnormalInfos.get(i).getCheckID();
                         styleName = abnormalInfos.get(i).getDiseaseName();
                     }
                 }
-            }
-            startSugar = firstEditText.getText().toString().trim();
-            endSugar = secondEditText.getText().toString().trim();
+                for (int i = 0; i < typeList.size(); i++) {
+                    if (typeList.get(i).isCheck()) {
+                        status = typeList.get(i).getCheckID();
+                        statusName = typeList.get(i).getDiseaseName();
+                    }
+                }
 
-            for (int i = 0; i < typeList.size(); i++) {
-                if (typeList.get(i).isCheck()) {
-                    status = typeList.get(i).getCheckID();
-                    statusName = typeList.get(i).getDiseaseName();
+                if ("-1".equals(style) ) {
+                    TipUtils.getInstance().showToast(context, R.string.please_choose_pressure);
+                    return;
+                }
+                if ("-1".equals(status)) {
+                    TipUtils.getInstance().showToast(context, R.string.please_choose_data_type);
+                    return;
+                }
+            } else {
+
+                if (TextUtils.isEmpty(firstEditText.getText().toString().trim()) && TextUtils.isEmpty(secondEditText.getText().toString().trim())) {
+                    for (int i = 0; i < abnormalInfos.size(); i++) {
+                        if (abnormalInfos.get(i).isCheck()) {
+                            style = abnormalInfos.get(i).getCheckID();
+                            styleName = abnormalInfos.get(i).getDiseaseName();
+                        }
+                    }
+                }
+                startSugar = firstEditText.getText().toString().trim();
+                endSugar = secondEditText.getText().toString().trim();
+
+                for (int i = 0; i < typeList.size(); i++) {
+                    if (typeList.get(i).isCheck()) {
+                        status = typeList.get(i).getCheckID();
+                        statusName = typeList.get(i).getDiseaseName();
+                    }
+                }
+
+                if ("-1".equals(style) && (TextUtils.isEmpty(startSugar) || TextUtils.isEmpty(endSugar))) {
+                    TipUtils.getInstance().showToast(context, R.string.please_choose_sugar);
+                    return;
+                }
+                if ("-1".equals(status)) {
+                    TipUtils.getInstance().showToast(context, R.string.please_choose_data_type);
+                    return;
                 }
             }
 
-            if ("-1".equals(style) && (TextUtils.isEmpty(startSugar) || TextUtils.isEmpty(endSugar))) {
-                TipUtils.getInstance().showToast(context, R.string.please_choose_sugar);
-                return;
-            }
-            if ("-1".equals(status)) {
-                TipUtils.getInstance().showToast(context, R.string.please_choose_data_type);
-                return;
-            }
             Log.i("yys", "status==" + status + "statusName" + "style==" + style + "styleName==" + styleName);
             iaCommunityFilterChoose.IAFollowUpChoose(starttime, endtime, style, styleName, startSugar, endSugar, status, statusName);
         });
@@ -346,17 +373,17 @@ public class DataAbnormalPopup1 extends PopupWindow {
                 .setType(new boolean[]{true, true, true, false, false, false})
                 .setSubmitColor(ContextCompat.getColor(context, R.color.main_red))
                 .setCancelColor(ContextCompat.getColor(context, R.color.black_text))
-                                .isDialog(true)
-//                .setDecorView(allLiner)
+                .isDialog(true)
+                //                .setDecorView(allLiner)
                 .build();
-                //设置dialog弹出位置
-                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM);
-                params.leftMargin = 0;
-                params.rightMargin = 0;
-                ViewGroup contentContainer = timePickerView.getDialogContainerLayout();
-                contentContainer.setLayoutParams(params);
-                timePickerView.getDialog().getWindow().setGravity(Gravity.BOTTOM);//可以改成Bottom
-                timePickerView.getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        //设置dialog弹出位置
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM);
+        params.leftMargin = 0;
+        params.rightMargin = 0;
+        ViewGroup contentContainer = timePickerView.getDialogContainerLayout();
+        contentContainer.setLayoutParams(params);
+        timePickerView.getDialog().getWindow().setGravity(Gravity.BOTTOM);//可以改成Bottom
+        timePickerView.getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         timePickerView.show();
 
     }
