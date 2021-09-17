@@ -72,7 +72,7 @@ public class CommunitySugarOrPressureListActivity extends XYSoftUIBaseActivity {
                 presentNestedSrcollView.setVisibility(View.VISIBLE);
                 stateTextView.setText(R.string.no_data);
             } else {
-                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);

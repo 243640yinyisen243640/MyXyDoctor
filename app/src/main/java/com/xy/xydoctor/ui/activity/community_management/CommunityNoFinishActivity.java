@@ -89,8 +89,8 @@ public class CommunityNoFinishActivity extends XYSoftUIBaseActivity implements V
                 }
                 break;
             case R.id.tv_no_finish_submit:
-                if ("0".equals(checkID)){
-                    TipUtils.getInstance().showToast(getPageContext(),R.string.plwase_choose_reason);
+                if ("0".equals(checkID)) {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.plwase_choose_reason);
                     return;
                 }
                 upLoadData();
@@ -106,7 +106,7 @@ public class CommunityNoFinishActivity extends XYSoftUIBaseActivity implements V
                 setResult(RESULT_OK);
                 finish();
             } else {
-                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);

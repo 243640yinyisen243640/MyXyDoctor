@@ -298,9 +298,9 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                     pressureTextView.setSelected(false);
                 } else {
                     List<FilterSugarPressureInfo> pressureList = new ArrayList<>();
-                    FilterSugarPressureInfo pressureinfo1 = new FilterSugarPressureInfo("一级高血压", "1");
+                    FilterSugarPressureInfo pressureinfo1 = new FilterSugarPressureInfo("I级高血压", "1");
                     pressureList.add(pressureinfo1);
-                    FilterSugarPressureInfo pressureinfo2 = new FilterSugarPressureInfo("二级高血压", "2");
+                    FilterSugarPressureInfo pressureinfo2 = new FilterSugarPressureInfo("II级高血压", "2");
                     pressureList.add(pressureinfo2);
 
                     getSugar(pressureList, "3");
@@ -401,9 +401,10 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                 setResult(RESULT_OK);
                 finish();
             } else {
-                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+                TipUtils.getInstance().showToast(getPageContext(), response.code);
             }
         }, (call, t) -> {
+            addTextView.setClickable(true);
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
         });
     }

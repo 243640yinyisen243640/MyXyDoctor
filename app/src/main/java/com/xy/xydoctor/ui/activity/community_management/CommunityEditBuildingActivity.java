@@ -56,7 +56,7 @@ public class CommunityEditBuildingActivity extends XYSoftUIBaseActivity {
                 setResult(RESULT_OK);
                 finish();
             } else {
-                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);

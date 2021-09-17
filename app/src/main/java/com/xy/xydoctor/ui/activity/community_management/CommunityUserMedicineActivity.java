@@ -293,6 +293,8 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
             if (response.code == 200) {
                 mPageIndex = 1;
                 onPageLoad();
+            } else {
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (Call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);

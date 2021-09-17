@@ -174,8 +174,8 @@
     <string name="community_user_info_sugar_four">其他</string>
     <string name="community_user_info_sugar_no">无</string>
     <string name="community_user_info_pressure_zero">高血压</string>
-    <string name="community_user_info_pressure_one">一级高血压</string>
-    <string name="community_user_info_pressure_two">二级高血压</string>
+    <string name="community_user_info_pressure_one">I级高血压</string>
+    <string name="community_user_info_pressure_two">II级高血压</string>
     <string name="community_times_di">第</string>
     <string name="community_follow_times">次随访</string>
     <string name="community_statics_all_times">随访总次数</string>

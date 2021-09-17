@@ -64,7 +64,7 @@ public class CommunityBuildingSettingActivity extends XYSoftUIBaseActivity {
                 listChildListInfos = (List<FollowListChildListInfo>) response.object;
                 bindData();
             } else {
-                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);

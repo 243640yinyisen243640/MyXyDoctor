@@ -141,9 +141,10 @@
                                 android:layout_marginTop="10dp"
                                 android:background="@drawable/shape_bg_white_main_90"
                                 android:paddingLeft="15dp"
-                                android:paddingTop="10dp"
+                                android:paddingTop="8dp"
                                 android:paddingRight="15dp"
-                                android:paddingBottom="10dp"
+                                android:paddingBottom="8dp"
+                                android:textSize="13sp"
                                 android:text="@string/user_info_device_manager"
                                 android:textColor="#FF564F" />
 
@@ -180,7 +181,7 @@
                             <TextView
                                 android:id="@+id/tv_user_info_blood_sugar_text"
                                 style="@style/user_info_blood_disease_num"
-                                android:text="2/4" />
+                                android:text="0/0" />
 
                         </LinearLayout>
 
@@ -198,7 +199,7 @@
                             <TextView
                                 android:id="@+id/tv_user_info_blood_pressure_text"
                                 style="@style/user_info_blood_disease_num"
-                                android:text="2/4" />
+                                android:text="0/0" />
 
                         </LinearLayout>
 
@@ -226,7 +227,7 @@
                             <TextView
                                 android:id="@+id/tv_user_info_blood_disease_follow_up"
                                 style="@style/user_info_blood_disease_num"
-                                android:text="2/4"
+                                android:text="0/0"
                                 android:textColor="#9B6739" />
 
                         </LinearLayout>
@@ -247,7 +248,7 @@
                             <TextView
                                 android:id="@+id/tv_user_info_blood_pressure_follow_up"
                                 style="@style/user_info_blood_disease_num"
-                                android:text="2/4"
+                                android:text="0/0"
                                 android:textColor="#9B6739" />
 
                         </LinearLayout>
