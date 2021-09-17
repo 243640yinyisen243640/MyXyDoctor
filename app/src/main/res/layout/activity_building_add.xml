@@ -26,7 +26,6 @@
             <EditText
                 android:id="@+id/et_building_num"
                 style="@style/user_add_right"
-                android:inputType="number"
                 android:hint="@string/please_add_building_num"
                 android:padding="15dp" />
 

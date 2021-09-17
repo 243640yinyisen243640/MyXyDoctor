@@ -261,7 +261,7 @@ public class CommunityDataStatisticsActivity extends XYSoftUIBaseActivity implem
         secondCpv.setRotation(-30 * 360 / 200 - 90);
         thirdCpv.setRotation(-20 * 360 / 200);
         time = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y);
-        timeTextView.setText(time);
+        timeTextView.setText(time + "年");
     }
 
     private View initView() {
@@ -308,7 +308,7 @@ public class CommunityDataStatisticsActivity extends XYSoftUIBaseActivity implem
         startDate.set(currentYear - 120, 0, 1, 0, 0);
         TimePickerView timePickerView = new TimePickerBuilder(getPageContext(), (date, v) -> {
             String content = DataUtils.convertDateToString(date, DataFormatManager.TIME_FORMAT_Y);
-            timeTextView.setText(content);
+            timeTextView.setText(content + "年");
             time = content;
             getData();
         }).setDate(currentDate).setRangDate(startDate, endDate)

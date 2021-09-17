@@ -22,6 +22,7 @@ public class CommunityDataStaticsInfo {
      * 合并
      */
     private String bothUsers;
+    private String bothUser;
     /**
      * 血糖达标
      */
@@ -80,6 +81,14 @@ public class CommunityDataStaticsInfo {
      * 血压全年
      */
     private String allBlood;
+
+    public String getBothUser() {
+        return bothUser;
+    }
+
+    public void setBothUser(String bothUser) {
+        this.bothUser = bothUser;
+    }
 
     public String getCommunityUser() {
         return communityUser;

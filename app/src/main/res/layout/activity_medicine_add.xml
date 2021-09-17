@@ -52,10 +52,10 @@
                 android:id="@+id/et_add_medicine_all_amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
                 android:layout_weight="1"
                 android:background="@null"
                 android:hint="@string/please_add_medicine_all_amount"
+                android:inputType="numberDecimal"
                 android:paddingTop="15dp"
                 android:textColor="@color/data_gray_light"
                 android:textSize="13sp" />
@@ -90,10 +90,10 @@
                 android:id="@+id/et_add_medicine_smoke_times"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
                 android:layout_weight="1"
                 android:background="@null"
                 android:hint="@string/please_add_medicine_smoke_times"
+                android:inputType="numberDecimal"
                 android:paddingTop="15dp"
                 android:textColor="@color/data_gray_light"
                 android:textSize="13sp" />
@@ -138,9 +138,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="numberDecimal"
                 android:background="@null"
                 android:hint="@string/please_add_medicine_dose"
+                android:inputType="numberDecimal"
                 android:paddingTop="15dp"
                 android:textColor="@color/data_gray_light"
                 android:textSize="13sp" />
@@ -150,7 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="/次"
+                android:text="mg/次"
                 android:textColor="#333333"
                 android:textSize="13sp" />
 
