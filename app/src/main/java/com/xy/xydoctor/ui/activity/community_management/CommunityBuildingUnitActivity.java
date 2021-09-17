@@ -222,9 +222,8 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
 
             } else if ("4".equals(info.getMaster().getDiabeteslei())) {
                 sugarTextView.setText(R.string.community_user_info_sugar_four);
-
+                sugarTextView.setVisibility(View.VISIBLE);
             } else {
-                sugarTextView.setText(R.string.community_user_info_sugar_no);
                 sugarTextView.setVisibility(View.GONE);
             }
             if ("1".equals(info.getMaster().getHypertension())) {

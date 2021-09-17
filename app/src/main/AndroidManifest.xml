@@ -252,6 +252,15 @@
         <!-- </provider> -->
         <!-- &lt;!&ndash; 融云配置 end &ndash;&gt; -->
         <!-- 阿里推送 Start -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <meta-data
             android:name="com.alibaba.app.appkey"
             android:value="30439011" /> <!-- 请填写你自己的- appKey -->
@@ -397,6 +406,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.community_management.PatientHealthArchiveActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".base.activity.WebViewActivity"
             android:screenOrientation="portrait" />
     </application>
 

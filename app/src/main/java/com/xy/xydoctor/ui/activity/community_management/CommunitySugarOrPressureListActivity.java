@@ -24,7 +24,7 @@ import java.util.List;
 import retrofit2.Call;
 
 /**
- * 类描述：血糖血压随访  1：血糖 2：血压
+ * 类描述：血糖血压随访  1：血糖 2：血压 血糖随访血压随访
  * 类传参：
  *
  * @author android.yys
@@ -116,10 +116,20 @@ public class CommunitySugarOrPressureListActivity extends XYSoftUIBaseActivity {
         public void adapterClickListener(int position, int index, View view) {
             switch (view.getId()) {
                 case R.id.ll_sugar_or_pressure_child_click:
-                    Intent intent = new Intent(getPageContext(), WebViewActivity.class);
-                    intent.putExtra("url", list.get(position).getList().get(index).getLink());
-                    intent.putExtra("id", list.get(position).getList().get(index).getId());
-                    startActivity(intent);
+                    if (!"待开启".equals(list.get(position).getList().get(index).getStatus())) {
+                        Intent intent = new Intent(getPageContext(), WebViewActivity.class);
+                        intent.putExtra("url", list.get(position).getList().get(index).getLink());
+                        intent.putExtra("id", list.get(position).getList().get(index).getId());
+                        intent.putExtra("status", list.get(position).getList().get(index).getId());
+                        if ("1".equals(type)) {
+                            intent.putExtra("title", getResources().getString(R.string.user_info_blood_sugar_follow_up));
+                        } else {
+                            intent.putExtra("title", getResources().getString(R.string.user_info_blood_pressure));
+                        }
+
+                        startActivity(intent);
+                    }
+
                     break;
                 default:
                     break;

@@ -104,18 +104,22 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
 
         if ("1".equals(info.getDiabeteslei())) {
             viewHolder.sugarTextView.setText(R.string.community_user_info_sugar_one);
+            viewHolder.sugarTextView.setVisibility(View.VISIBLE);
 
         } else if ("2".equals(info.getDiabeteslei())) {
             viewHolder.sugarTextView.setText(R.string.community_user_info_sugar_two);
+            viewHolder.sugarTextView.setVisibility(View.VISIBLE);
 
         } else if ("3".equals(info.getDiabeteslei())) {
             viewHolder.sugarTextView.setText(R.string.community_user_info_sugar_three);
+            viewHolder.sugarTextView.setVisibility(View.VISIBLE);
 
         } else if ("4".equals(info.getDiabeteslei())) {
             viewHolder.sugarTextView.setText(R.string.community_user_info_sugar_four);
+            viewHolder.sugarTextView.setVisibility(View.VISIBLE);
 
         } else {
-            viewHolder.sugarTextView.setText(R.string.community_user_info_sugar_no);
+            viewHolder.sugarTextView.setVisibility(View.GONE);
         }
         if ("1".equals(info.getHypertension())) {
             viewHolder.pressureTextView.setVisibility(View.VISIBLE);

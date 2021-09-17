@@ -46,7 +46,7 @@ public class UserMedicineChildListAdapter extends CommonAdapter<CommunityUseMedi
         TextView phoneTextView = viewHolder.getView(R.id.tv_user_child_medicine_phone);
 
         viewHolder.setText(R.id.tv_user_child_medicine_name, item.getNickname());
-        viewHolder.setText(R.id.tv_user_child_medicine_sex, item.getSex());
+        viewHolder.setText(R.id.tv_user_child_medicine_sex, item.getSex() + "岁");
         viewHolder.setText(R.id.tv_user_child_medicine_age, item.getAge());
         viewHolder.setText(R.id.tv_user_child_medicine_location, item.getHouse_info());
         viewHolder.setText(R.id.tv_use_medicine_child_name, item.getDrugname());

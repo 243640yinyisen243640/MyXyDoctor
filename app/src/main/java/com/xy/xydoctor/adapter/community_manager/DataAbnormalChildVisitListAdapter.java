@@ -3,7 +3,6 @@ package com.xy.xydoctor.adapter.community_manager;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -43,7 +42,7 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
         viewHolder.setText(R.id.tv_data_abnormal_child_location, item.getBuild_name() + item.getUnit_name() + item.getHouse_num());
         LinearLayout clickLinearLayout = viewHolder.getView(R.id.ll_data_abnormal_child_click);
         TextView checkTextView = viewHolder.getView(R.id.tv_data_abnormal_child_check);
-        ImageView telImageView = viewHolder.getView(R.id.tv_data_abnormal_child_phone_img);
+        TextView telImageView = viewHolder.getView(R.id.tv_data_abnormal_child_phone_img);
         TextView lightTextView = viewHolder.getView(R.id.tv_data_abnormal_child_high_or_low);
 
         if (item.isSelected()) {

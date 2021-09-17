@@ -151,14 +151,19 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
             sexAndAgeTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.base_community_female, 0, 0, 0);
         }
         if ("1".equals(userInfo.getDiabeteslei())) {
+            diseaseFirstTextView.setVisibility(View.VISIBLE);
             diseaseFirstTextView.setText(R.string.community_user_info_sugar_one);
         } else if ("2".equals(userInfo.getDiabeteslei())) {
+            diseaseFirstTextView.setVisibility(View.VISIBLE);
             diseaseFirstTextView.setText(R.string.community_user_info_sugar_two);
         } else if ("3".equals(userInfo.getDiabeteslei())) {
+            diseaseFirstTextView.setVisibility(View.VISIBLE);
             diseaseFirstTextView.setText(R.string.community_user_info_sugar_three);
         } else if ("4".equals(userInfo.getDiabeteslei())) {
+            diseaseFirstTextView.setVisibility(View.VISIBLE);
             diseaseFirstTextView.setText(R.string.community_user_info_sugar_four);
         } else {
+            diseaseFirstTextView.setVisibility(View.GONE);
             diseaseFirstTextView.setText(R.string.community_user_info_sugar_no);
         }
         if ("1".equals(userInfo.getBloodLevel())) {

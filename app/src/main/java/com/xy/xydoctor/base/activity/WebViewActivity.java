@@ -19,6 +19,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.blankj.utilcode.constant.PermissionConstants;
@@ -38,16 +39,32 @@ public class WebViewActivity extends XYSoftUIBaseActivity {
 
     private String url;
     private String id;
+    private String title;
+    private String status;
+
+    private String statusStr;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         url = getIntent().getStringExtra("url");
         id = getIntent().getStringExtra("id");
+        title = getIntent().getStringExtra("title");
+        status = getIntent().getStringExtra("status");
+        topViewManager().titleTextView().setText(title);
+        topViewManager().titleTextView().setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_red));
         View view = View.inflate(getPageContext(), R.layout.activty_webview, null);
         containerView().addView(view);
         webView = findViewById(R.id.wv_activity);
-        topViewManager().moreTextView().setText("确定");
+        if (!"已完成".equals(status)) {
+            statusStr = "1";
+            topViewManager().moreTextView().setVisibility(View.VISIBLE);
+            topViewManager().moreTextView().setText("确定");
+        } else {
+            statusStr = "0";
+            topViewManager().moreTextView().setVisibility(View.GONE);
+        }
+
         topViewManager().backTextView().setOnClickListener(v -> {
             webViewFinish();
         });
@@ -81,7 +98,7 @@ public class WebViewActivity extends XYSoftUIBaseActivity {
         //        webView.addJavascriptInterface(new JavascriptInterfaces(this), "javascriptInterface");
         //辅助WebView处理图片上传操作
         //        webView.loadUrl("http://d.xiyuns.cn/mobile/community/bloodsugar?id=1");
-        webView.loadUrl(url + "?id=" + id);
+        webView.loadUrl(url + "?status=" + statusStr);
     }
 
     @Override
@@ -147,7 +164,7 @@ public class WebViewActivity extends XYSoftUIBaseActivity {
         File fileUri = new File(Environment.getExternalStorageDirectory().getPath() + "/" + SystemClock.currentThreadTimeMillis() + ".jpg");
         imageUri = Uri.fromFile(fileUri);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            imageUri = FileProvider.getUriForFile(getPageContext(), getPackageName() + ".provider", fileUri);//通过FileProvider创建一个content类型的Uri
+            imageUri = FileProvider.getUriForFile(getPageContext(), getPackageName() + ".FileProvider", fileUri);//通过FileProvider创建一个content类型的Uri
         }
         PhotoUtils1.takePicture(WebViewActivity.this, imageUri, PHOTO_REQUEST);//拍照
         //        PhotoUtils.openPic(WebViewActivity.this,  PHOTO_REQUEST);//打开相册

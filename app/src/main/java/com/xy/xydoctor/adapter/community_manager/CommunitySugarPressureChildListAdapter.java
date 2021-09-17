@@ -47,33 +47,26 @@ public class CommunitySugarPressureChildListAdapter extends XYSoftBaseAdapter<Su
         holder.titleTextView.setText(getContext().getString(R.string.community_times_di) + NumberToChineseUtil.intToChinese(info.getTimes()) + getContext().getString(R.string.community_follow_times));
 
         holder.timeTextView.setText(info.getEndtime());
+        holder.stateTextView.setText(info.getStatus());
         //随访状态 0待开启（不可点击） 1待随访 2随访完成 3已过期 4关闭随访
-        if ("0".equals(info.getStatus())) {
-            holder.stateTextView.setText(getContext().getString(R.string.goods_add_spe_no_finish));
-
+        if ("待开启".equals(info.getStatus())) {
             setTextColor(R.color.data_gray_light, holder.titleTextView);
             setTextColor(R.color.data_gray_light, holder.timeTextView);
             setTextColor(R.color.data_gray_light, holder.stateTextView);
 
-        } else if ("1".equals(info.getStatus())) {
-            holder.stateTextView.setText(getContext().getString(R.string.community_wait_follow_up));
-
+        } else if ("待随访".equals(info.getStatus())) {
             setTextColor(R.color.community_content_black, holder.titleTextView);
             setTextColor(R.color.community_content_black, holder.timeTextView);
             setTextColor(R.color.community_content_black, holder.stateTextView);
-        } else if ("2".equals(info.getStatus())) {
-            holder.stateTextView.setText(getContext().getString(R.string.community_wait_follow_up_finish));
-
+        } else if ("随访完成".equals(info.getStatus())) {
             setTextColor(R.color.community_content_black, holder.titleTextView);
             setTextColor(R.color.community_content_black, holder.timeTextView);
             setTextColor(R.color.community_content_black, holder.stateTextView);
-        } else if ("3".equals(info.getStatus())) {
-            holder.stateTextView.setText(getContext().getString(R.string.community_wait_follow_up_over_time));
+        } else if ("已过期".equals(info.getStatus())) {
             setTextColor(R.color.community_content_black, holder.titleTextView);
             setTextColor(R.color.community_content_black, holder.timeTextView);
             setTextColor(R.color.community_content_black, holder.stateTextView);
         } else {
-            holder.stateTextView.setText(getContext().getString(R.string.community_wait_follow_up_close));
             setTextColor(R.color.community_content_black, holder.titleTextView);
             setTextColor(R.color.community_content_black, holder.timeTextView);
             setTextColor(R.color.community_content_black, holder.stateTextView);

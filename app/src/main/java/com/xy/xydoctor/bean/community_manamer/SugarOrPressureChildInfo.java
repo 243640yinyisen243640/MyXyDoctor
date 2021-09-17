@@ -27,6 +27,7 @@ public class SugarOrPressureChildInfo {
      * 随访网址
      */
     private String link;
+    private String type;
 
     public String getId() {
         return id;
