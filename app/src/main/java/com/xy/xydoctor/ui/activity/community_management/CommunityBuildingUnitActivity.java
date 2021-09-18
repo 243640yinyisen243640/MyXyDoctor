@@ -110,6 +110,8 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
     private void initListener() {
         followTextView.setOnClickListener(this);
         holdLinearLayout.setOnClickListener(this);
+        sugarTextView.setOnClickListener(this);
+        pressureTextView.setOnClickListener(this);
     }
 
 
@@ -303,6 +305,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.tv_building_unit_follow:
                 // 1是 2否
@@ -313,9 +316,21 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
                 }
                 break;
             case R.id.ll_building_unit_hold:
-                Intent intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
+                intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
                 intent.putExtra("userid", info.getMaster().getUserid());
                 intent.putExtra("username", info.getMaster().getNickname());
+                startActivity(intent);
+                break;
+            case R.id.tv_building_unit_sugar:
+                intent = new Intent(getPageContext(), CommunitySugarOrPressureListActivity.class);
+                intent.putExtra("type", "1");
+                intent.putExtra("userid", info.getMaster().getUserid());
+                startActivity(intent);
+                break;
+            case R.id.tv_building_unit_pressure:
+                intent = new Intent(getPageContext(), CommunitySugarOrPressureListActivity.class);
+                intent.putExtra("type", "2");
+                intent.putExtra("userid", info.getMaster().getUserid());
                 startActivity(intent);
                 break;
             default:
@@ -367,8 +382,21 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
                     intent.putExtra("userid", info.getMembers().get(position).getUserid());
                     intent.putExtra("username", info.getMembers().get(position).getNickname());
                     startActivity(intent);
-                    break;
 
+
+                    break;
+                case R.id.tv_building_unit_sugar_follow_item:
+                    intent = new Intent(getPageContext(), CommunitySugarOrPressureListActivity.class);
+                    intent.putExtra("type", "1");
+                    intent.putExtra("userid", info.getMembers().get(position).getUserid());
+                    startActivity(intent);
+                    break;
+                case R.id.tv_building_unit_pressure_follow_item:
+                    intent = new Intent(getPageContext(), CommunitySugarOrPressureListActivity.class);
+                    intent.putExtra("type", "2");
+                    intent.putExtra("userid", info.getMembers().get(position).getUserid());
+                    startActivity(intent);
+                    break;
 
                 default:
                     break;

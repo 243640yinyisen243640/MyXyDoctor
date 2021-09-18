@@ -104,15 +104,13 @@
         <TextView
             android:id="@+id/tv_fuc_child_sugar_follow"
             style="@style/follow_up_change_sugar_pressure"
-            android:drawableLeft="@drawable/follow_up_chage_sugar"
-            android:text="@string/app_name" />
+            android:drawableLeft="@drawable/follow_up_chage_sugar"/>
 
         <TextView
             android:id="@+id/tv_fuc_child_pressure_follow"
             style="@style/follow_up_change_sugar_pressure"
             android:layout_marginLeft="8dp"
-            android:drawableLeft="@drawable/follow_up_chage_pressure"
-            android:text="@string/app_name" />
+            android:drawableLeft="@drawable/follow_up_chage_pressure" />
 
         <View
             android:layout_width="0dp"
@@ -153,7 +151,6 @@
                 android:id="@+id/tv_fuc_child_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
                 android:textColor="@color/data_gray_light"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -163,7 +160,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/app_name"
             android:textColor="@color/base_text_gray"
             android:textSize="12sp" />
 

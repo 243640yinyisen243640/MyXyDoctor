@@ -143,11 +143,13 @@ public class CommunityFollowUpListFragment extends XYBaseFragment implements Tab
                 case R.id.tv_fuc_child_sugar_follow:
                     intent = new Intent(getPageContext(), CommunitySugarOrPressureListActivity.class);
                     intent.putExtra("type", "1");
+                    intent.putExtra("userid", allInfo.getList().get(position).getCommunityUser().get(index).getUserid());
                     startActivity(intent);
                     break;
                 case R.id.tv_fuc_child_pressure_follow:
                     intent = new Intent(getPageContext(), CommunitySugarOrPressureListActivity.class);
                     intent.putExtra("type", "2");
+                    intent.putExtra("userid", allInfo.getList().get(position).getCommunityUser().get(index).getUserid());
                     startActivity(intent);
                     break;
                 default:

@@ -144,9 +144,9 @@
                                 android:paddingTop="8dp"
                                 android:paddingRight="15dp"
                                 android:paddingBottom="8dp"
-                                android:textSize="13sp"
                                 android:text="@string/user_info_device_manager"
-                                android:textColor="#FF564F" />
+                                android:textColor="#FF564F"
+                                android:textSize="13sp" />
 
 
                         </LinearLayout>
@@ -163,11 +163,12 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:layout_marginStart="95dp"
+                        android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/ll_user_info_blood_sugar_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/shape_bg_white_yellow_5"
@@ -186,6 +187,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/ll_user_info_blood_pressure_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
@@ -213,6 +215,7 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/ll_user_info_blood_disease_follow_up"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/shape_bg_white_yellow_5"
@@ -233,6 +236,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/ll_user_info_blood_pressure_follow_up"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"

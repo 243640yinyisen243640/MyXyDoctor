@@ -201,6 +201,16 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
                 getListener().adapterClickListener(position, v);
             }
         });
+        viewHolder.sugarFollowTextView.setOnClickListener(v -> {
+            if (getListener() != null) {
+                getListener().adapterClickListener(position, v);
+            }
+        });
+        viewHolder.pressureFollowTextView.setOnClickListener(v -> {
+            if (getListener() != null) {
+                getListener().adapterClickListener(position, v);
+            }
+        });
 
     }
 

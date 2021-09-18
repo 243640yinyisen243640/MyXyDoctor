@@ -2,6 +2,7 @@ package com.xy.xydoctor.ui.activity.community_management;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -76,18 +77,22 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
      * 血糖测量
      */
     private TextView sugarTextTextView;
+    private LinearLayout sugarTextLinearLayout;
     /**
      * 血压测量
      */
     private TextView pressureTextTextView;
+    private LinearLayout pressureTextLinearLayout;
     /**
      * 血糖随访
      */
     private TextView sugarFollowView;
+    private LinearLayout sugarFollowLinearLayout;
     /**
      * 血压随访
      */
     private TextView pressureFollowTextView;
+    private LinearLayout pressureFollowLinearLayout;
 
     /**
      * 健康记录
@@ -172,10 +177,35 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
             diseaseSecondTextView.setText(R.string.community_user_info_pressure_two);
         }
 
-        sugarTextTextView.setText(userInfo.getSugarNum());
-        sugarFollowView.setText(userInfo.getSugarFlg());
-        pressureTextTextView.setText(userInfo.getBloodNum());
-        pressureFollowTextView.setText(userInfo.getBloodFlg());
+
+        if (TextUtils.isEmpty(userInfo.getSugarNum())){
+            sugarTextLinearLayout.setVisibility(View.GONE);
+        }else {
+            sugarTextLinearLayout.setVisibility(View.VISIBLE);
+            sugarTextTextView.setText(userInfo.getSugarNum());
+        }
+
+        if (TextUtils.isEmpty(userInfo.getSugarFlg())){
+         sugarFollowLinearLayout.setVisibility(View.GONE);
+        }else {
+            sugarFollowLinearLayout.setVisibility(View.VISIBLE);
+            sugarFollowView.setText(userInfo.getSugarFlg());
+        }
+
+        if (TextUtils.isEmpty(userInfo.getBloodNum())){
+            pressureTextLinearLayout.setVisibility(View.GONE);
+        }else {
+            pressureTextLinearLayout.setVisibility(View.VISIBLE);
+            pressureTextTextView.setText(userInfo.getBloodNum());
+        }
+
+        if (TextUtils.isEmpty(userInfo.getBloodFlg())){
+            pressureFollowLinearLayout.setVisibility(View.GONE);
+        }else {
+            pressureFollowLinearLayout.setVisibility(View.VISIBLE);
+            pressureFollowTextView.setText(userInfo.getBloodFlg());
+        }
+
 
         if ("1".equals(userInfo.getIsdeath())) {
             deadImageView.setVisibility(View.VISIBLE);
@@ -224,9 +254,13 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         diseaseSecondTextView = view.findViewById(R.id.tv_user_info_disease_second);
         deviceManagerTextView = view.findViewById(R.id.tv_user_info_device_manager);
         sugarTextTextView = view.findViewById(R.id.tv_user_info_blood_sugar_text);
+        sugarTextLinearLayout = view.findViewById(R.id.ll_user_info_blood_sugar_text);
         pressureTextTextView = view.findViewById(R.id.tv_user_info_blood_pressure_text);
+        pressureTextLinearLayout = view.findViewById(R.id.ll_user_info_blood_pressure_text);
         sugarFollowView = view.findViewById(R.id.tv_user_info_blood_disease_follow_up);
+        sugarFollowLinearLayout = view.findViewById(R.id.ll_user_info_blood_disease_follow_up);
         pressureFollowTextView = view.findViewById(R.id.tv_user_info_blood_pressure_follow_up);
+        pressureFollowLinearLayout = view.findViewById(R.id.ll_user_info_blood_pressure_follow_up);
         gvHealthRecord = view.findViewById(R.id.gv_user_info_health_record);
         gvManagementRecord = view.findViewById(R.id.gv_follow_up_management_health_record);
         medicanLinearLayout = view.findViewById(R.id.ll_user_info_user_medican);
