@@ -98,7 +98,7 @@ public class WebViewActivity extends XYSoftUIBaseActivity {
         //        webView.addJavascriptInterface(new JavascriptInterfaces(this), "javascriptInterface");
         //辅助WebView处理图片上传操作
         //        webView.loadUrl("http://d.xiyuns.cn/mobile/community/bloodsugar?id=1");
-        webView.loadUrl(url + "?status=" + statusStr);
+        webView.loadUrl(url);
     }
 
     @Override
