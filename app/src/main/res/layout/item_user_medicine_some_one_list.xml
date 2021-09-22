@@ -132,7 +132,7 @@
             android:layout_gravity="right"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:text="@string/user_medicine_edit_seheme" />
+            android:text="@string/user_medicine_remind_user" />
 
     </LinearLayout>
 

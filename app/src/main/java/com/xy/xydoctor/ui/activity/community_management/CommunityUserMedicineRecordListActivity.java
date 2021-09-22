@@ -237,11 +237,12 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
 
             switch (view.getId()) {
                 case R.id.tv_use_medicine_child_edit_so:
-                    Intent intent = new Intent(getPageContext(), CommunityMedicineAddActivity.class);
-                    intent.putExtra("userid", userid);
-                    intent.putExtra("pharmacy_id", mList.get(position).getId());
-                    intent.putExtra("type", "2");
-                    startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
+                    remindUser(position);
+                    //                    Intent intent = new Intent(getPageContext(), CommunityMedicineAddActivity.class);
+                    //                    intent.putExtra("userid", userid);
+                    //                    intent.putExtra("pharmacy_id", mList.get(position).getId());
+                    //                    intent.putExtra("type", "2");
+                    //                    startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
                     break;
                 default:
                     break;
@@ -259,6 +260,19 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
                     break;
             }
         }
+    }
+
+    /**
+     * 提醒用户
+     *
+     * @param position
+     */
+    private void remindUser(int position) {
+        Call<String> requestCall = DataManager.remindUser(mList.get(position).getId(), (call, response) -> {
+            TipUtils.getInstance().showToast(getPageContext(), response.msg);
+        }, (Call, t) -> {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        });
     }
 
     @Override

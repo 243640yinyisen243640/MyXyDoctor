@@ -309,12 +309,7 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
      */
     private void remindUser(int position, int index) {
         Call<String> requestCall = DataManager.remindUser(mList.get(position).getPharmacys().get(index).getId(), (call, response) -> {
-            if (response.code == 200) {
-                //                mPageIndex = 1;
-                //                onPageLoad();
-                //                mAdapter.returnAdapter().notifyDataSetChanged();
-                TipUtils.getInstance().showToast(getPageContext(), response.msg);
-            }
+            TipUtils.getInstance().showToast(getPageContext(), response.msg);
         }, (Call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
         });
