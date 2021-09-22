@@ -17,7 +17,7 @@ public class CommunityFilterInfo {
      */
     private String isempty;
     private String com_id = "0";
-    private String sex;
+    private String sex = "0";
     private String age_min;
     private String age_max;
     private String other;

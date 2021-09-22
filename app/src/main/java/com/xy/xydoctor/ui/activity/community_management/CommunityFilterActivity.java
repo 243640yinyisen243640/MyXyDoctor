@@ -183,32 +183,32 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
     private void initListener() {
         //所有小区
         allCommunityTextView.setOnClickListener(this);
-            femaleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (!isCancheck){
-                    return;
-                }
-                if (isChecked) {
-                    maleCheckBox.setChecked(false);
-                } else {
-                    maleCheckBox.setChecked(true);
-                }
-            });
-            maleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (!isCancheck){
-                    return;
-                }
-                if (isChecked) {
-                    femaleCheckBox.setChecked(false);
-                } else {
-                    femaleCheckBox.setChecked(true);
-                }
-            });
+        femaleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (!isCancheck) {
+                return;
+            }
+            if (isChecked) {
+                maleCheckBox.setChecked(false);
+            } else {
+                maleCheckBox.setChecked(true);
+            }
+        });
+        maleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (!isCancheck) {
+                return;
+            }
+            if (isChecked) {
+                femaleCheckBox.setChecked(false);
+            } else {
+                femaleCheckBox.setChecked(true);
+            }
+        });
 
         buildingInformationCb.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            isCancheck=false;
+            isCancheck = false;
             femaleCheckBox.setChecked(false);
             maleCheckBox.setChecked(false);
-            isCancheck=true;
+            isCancheck = true;
             if (isChecked) {
                 allCommunityTextView.setText("全部小区");
                 communityID = "0";
@@ -277,10 +277,10 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
                 chooseBuilding();
                 break;
             case R.id.tv_filter_reset:
-                isCancheck=false;
+                isCancheck = false;
                 femaleCheckBox.setChecked(false);
                 maleCheckBox.setChecked(false);
-                isCancheck=true;
+                isCancheck = true;
                 allCommunityTextView.setText("全部小区");
                 communityID = "0";
 
@@ -305,9 +305,13 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
                 CommunityFilterInfo info = new CommunityFilterInfo();
                 info.setCom_id(communityID);
                 info.setIsempty(buildingInformationCb.isChecked() ? "0" : "1");
-                if (femaleCheckBox.isChecked()) {
+                if (!femaleCheckBox.isChecked() && !(maleCheckBox.isChecked())) {
+                    info.setSex("0");
+
+                } else if (femaleCheckBox.isChecked()){
                     info.setSex("1");
-                } else {
+
+                }else {
                     info.setSex("2");
                 }
 
