@@ -125,8 +125,10 @@ public class CommunityBuildingUnitListAdapter extends UIBaseRecycleViewAdapter<S
             viewHolder.pressureTextView.setVisibility(View.VISIBLE);
             if ("1".equals(info.getBloodLevel())) {
                 viewHolder.pressureTextView.setText(getContext().getString(R.string.community_user_info_pressure_one));
+            } else if ("2".equals(info.getBloodLevel())) {
+                viewHolder.pressureTextView.setText(R.string.community_user_info_pressure_two);
             } else {
-                viewHolder.pressureTextView.setText(getContext().getString(R.string.community_user_info_pressure_two));
+                viewHolder.pressureTextView.setText(R.string.community_user_info_pressure_three);
             }
         } else {
             viewHolder.pressureTextView.setVisibility(View.GONE);

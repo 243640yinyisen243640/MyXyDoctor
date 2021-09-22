@@ -302,6 +302,8 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                     pressureList.add(pressureinfo1);
                     FilterSugarPressureInfo pressureinfo2 = new FilterSugarPressureInfo(getString(R.string.community_user_info_pressure_two), "2");
                     pressureList.add(pressureinfo2);
+                    FilterSugarPressureInfo pressureinfo3 = new FilterSugarPressureInfo(getString(R.string.community_user_info_pressure_three), "3");
+                    pressureList.add(pressureinfo3);
 
                     getSugar(pressureList, "3");
                 }
@@ -608,9 +610,13 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                         bloodLevel = "1";
                         pressureTextView.setText(R.string.community_user_info_pressure_one);
                         pressureTextView.setSelected(true);
-                    } else {
+                    } else if ("2".equals(searchInfo.getHypertension())){
                         bloodLevel = "2";
                         pressureTextView.setText(R.string.community_user_info_pressure_two);
+                        pressureTextView.setSelected(true);
+                    }else {
+                        bloodLevel = "3";
+                        pressureTextView.setText(R.string.community_user_info_pressure_three);
                         pressureTextView.setSelected(true);
                     }
 

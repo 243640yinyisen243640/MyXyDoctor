@@ -177,6 +177,7 @@
     <string name="community_user_info_pressure_zero">高血压</string>
     <string name="community_user_info_pressure_one">1级高血压</string>
     <string name="community_user_info_pressure_two">2级高血压</string>
+    <string name="community_user_info_pressure_three">3级高血压</string>
     <string name="community_times_di">第</string>
     <string name="community_follow_times">次随访</string>
     <string name="community_statics_all_times">随访总次数</string>

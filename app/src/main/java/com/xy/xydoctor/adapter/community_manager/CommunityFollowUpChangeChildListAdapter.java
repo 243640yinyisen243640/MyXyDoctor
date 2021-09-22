@@ -91,8 +91,10 @@ public class CommunityFollowUpChangeChildListAdapter extends XYSoftBaseAdapter<F
         }
         if ("1".equals(info.getBloodLevel())) {
             holder.pressureTextView.setText(R.string.community_user_info_pressure_one);
-        } else {
+        } else if ("2".equals(info.getBloodLevel())){
             holder.pressureTextView.setText(R.string.community_user_info_pressure_two);
+        }else {
+            holder.pressureTextView.setText(R.string.community_user_info_pressure_three);
         }
 
         holder.sugarFollowTextView.setText("血糖随访" + info.getSugar());

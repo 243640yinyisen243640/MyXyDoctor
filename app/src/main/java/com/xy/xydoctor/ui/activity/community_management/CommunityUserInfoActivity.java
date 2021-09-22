@@ -173,35 +173,37 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         }
         if ("1".equals(userInfo.getBloodLevel())) {
             diseaseSecondTextView.setText(R.string.community_user_info_pressure_one);
-        } else {
+        } else if ("2".equals(userInfo.getBloodLevel())) {
             diseaseSecondTextView.setText(R.string.community_user_info_pressure_two);
+        } else {
+            diseaseSecondTextView.setText(R.string.community_user_info_pressure_three);
         }
 
 
-        if (TextUtils.isEmpty(userInfo.getSugarNum())){
+        if (TextUtils.isEmpty(userInfo.getSugarNum())) {
             sugarTextLinearLayout.setVisibility(View.GONE);
-        }else {
+        } else {
             sugarTextLinearLayout.setVisibility(View.VISIBLE);
             sugarTextTextView.setText(userInfo.getSugarNum());
         }
 
-        if (TextUtils.isEmpty(userInfo.getSugarFlg())){
-         sugarFollowLinearLayout.setVisibility(View.GONE);
-        }else {
+        if (TextUtils.isEmpty(userInfo.getSugarFlg())) {
+            sugarFollowLinearLayout.setVisibility(View.GONE);
+        } else {
             sugarFollowLinearLayout.setVisibility(View.VISIBLE);
             sugarFollowView.setText(userInfo.getSugarFlg());
         }
 
-        if (TextUtils.isEmpty(userInfo.getBloodNum())){
+        if (TextUtils.isEmpty(userInfo.getBloodNum())) {
             pressureTextLinearLayout.setVisibility(View.GONE);
-        }else {
+        } else {
             pressureTextLinearLayout.setVisibility(View.VISIBLE);
             pressureTextTextView.setText(userInfo.getBloodNum());
         }
 
-        if (TextUtils.isEmpty(userInfo.getBloodFlg())){
+        if (TextUtils.isEmpty(userInfo.getBloodFlg())) {
             pressureFollowLinearLayout.setVisibility(View.GONE);
-        }else {
+        } else {
             pressureFollowLinearLayout.setVisibility(View.VISIBLE);
             pressureFollowTextView.setText(userInfo.getBloodFlg());
         }

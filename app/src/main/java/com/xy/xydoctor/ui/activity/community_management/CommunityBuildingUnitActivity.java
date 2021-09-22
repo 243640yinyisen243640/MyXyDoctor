@@ -232,8 +232,10 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
                 pressureTextView.setVisibility(View.VISIBLE);
                 if ("1".equals(info.getMaster().getBloodLevel())) {
                     pressureTextView.setText(R.string.community_user_info_pressure_one);
-                } else {
+                } else if ("2".equals(info.getMaster().getBloodLevel())) {
                     pressureTextView.setText(R.string.community_user_info_pressure_two);
+                } else {
+                    pressureTextView.setText(R.string.community_user_info_pressure_three);
                 }
             } else {
                 pressureTextView.setVisibility(View.GONE);
