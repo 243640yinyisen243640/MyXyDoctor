@@ -46,7 +46,7 @@ public class FollowupAgentSearchListAdapter extends UIBaseRecycleViewAdapter<Fol
         }
         viewHolder.ageTextView.setText(info.getAge() + "岁");
         viewHolder.phoneTextView.setText(info.getTel());
-        viewHolder.locationTextView.setText(info.getCom_name() + info.getBuild_name() + "号楼" + info.getUnit_name() + "单元" + info.getHouse_num());
+        viewHolder.locationTextView.setText(info.getCom_name() + info.getBuild_name() + info.getUnit_name() + info.getHouse_num());
         viewHolder.detailsTextView.setText(info.getCom_address());
         viewHolder.clickLinearLayout.setOnClickListener(v -> {
             if (getListener() != null) {

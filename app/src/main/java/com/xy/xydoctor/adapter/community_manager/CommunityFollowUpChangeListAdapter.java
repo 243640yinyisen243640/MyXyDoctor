@@ -46,7 +46,7 @@ public class CommunityFollowUpChangeListAdapter extends UIBaseRecycleViewAdapter
         ViewHolder viewHolder = (ViewHolder) holder;
         FollowListInfo info = getList().get(position);
 
-        viewHolder.nameTextView.setText(info.getBuild_name() + "号楼" + info.getUnit_name() + "单元");
+        viewHolder.nameTextView.setText(info.getBuild_name() + info.getUnit_name());
         CommunityFollowUpChangeChildListAdapter childListAdapter = new CommunityFollowUpChangeChildListAdapter(getContext(), info.getCommunityUser(), type, position, getListener());
         viewHolder.myListView.setAdapter(childListAdapter);
         viewHolder.clickLinearLayout.setOnClickListener(v -> {

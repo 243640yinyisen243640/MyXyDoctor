@@ -91,11 +91,11 @@ public class CommunityFilterListAdapter extends UIBaseRecycleViewAdapter<Communi
             viewHolder.sexTextView.setText(info.getSex());
             viewHolder.telTextView.setText(info.getTel());
             viewHolder.ageTextView.setText(info.getAge() + "岁");
-            viewHolder.locationTextView.setText(info.getCom_name() + info.getBuild_name() + "号楼" + info.getUnit_name() + "单元" + info.getHouse_num());
+            viewHolder.locationTextView.setText(info.getCom_name() + info.getBuild_name()  + info.getUnit_name()+ info.getHouse_num());
         } else {
             viewHolder.noFrameLayout.setVisibility(View.GONE);
             viewHolder.emptyTextView.setVisibility(View.VISIBLE);
-            viewHolder.emptyTextView.setText(info.getCom_name() + info.getBuild_name() + "号楼" + info.getUnit_name() + "单元" + info.getHouse_num());
+            viewHolder.emptyTextView.setText(info.getCom_name() + info.getBuild_name()+ info.getUnit_name() + info.getHouse_num());
         }
 
         CommunityFilterDeseaseImgAdapter imgAdapter = new CommunityFilterDeseaseImgAdapter(getContext(), info.getImgs(), new IAdapterViewClickListener() {

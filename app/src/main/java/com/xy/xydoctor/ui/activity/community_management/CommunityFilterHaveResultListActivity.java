@@ -353,7 +353,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                     intent = new Intent(getPageContext(), UserAddActivity.class);
                     intent.putExtra("buildid", mList.get(position).getBuild_id());
                     intent.putExtra("houserid", mList.get(position).getHouse_id());
-                    intent.putExtra("houseinfo", mList.get(position).getBuild_name() + "号楼" + mList.get(position).getUnit_name() + mList.get(position).getHouse_num());
+                    intent.putExtra("houseinfo", mList.get(position).getBuild_name()  + mList.get(position).getUnit_name() + mList.get(position).getHouse_num());
                     startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
                     break;
                 default:
