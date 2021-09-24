@@ -110,7 +110,7 @@ public class CommunityDataStatisticsActivity extends XYSoftUIBaseActivity implem
         setTextStyle1(getString(R.string.community_statics_all_rate), staticsInfo.getSugarRates(), R.color.base_black, allRateTextView);
         setTextStyle1(getString(R.string.community_statics_empty_rate), staticsInfo.getEmptyRates(), R.color.base_black, emptyRateTextView);
         setTextStyle1(getString(R.string.community_statics_unempty_rate), staticsInfo.getUnemptyRates(), R.color.base_black, unemptyRateTextView);
-        setTextStyle1(getString(R.string.community_statics_all_rate), staticsInfo.getAllBlood(), R.color.base_black, pressureRateTextView);
+        setTextStyle1(getString(R.string.community_statics_all_rate), staticsInfo.getBloodRates(), R.color.base_black, pressureRateTextView);
 
         firstCpv.setPercentage(TurnsUtils.getFloat(staticsInfo.getSugarRates(), 0));
         secondCpv.setPercentage(TurnsUtils.getFloat(staticsInfo.getEmptyRates(), 0));

@@ -22,8 +22,6 @@ import java.util.List;
  * Description: 异常提醒
  */
 public class DataAbnormalRemindAdapter extends UIBaseRecycleViewAdapter<SugarOrPressureInfo> {
-    private int pos = 0;
-
     private String type;
 
     public DataAbnormalRemindAdapter(Context mContext, List<SugarOrPressureInfo> mList, String type, IAdapterViewClickListener mListener) {
@@ -61,7 +59,7 @@ public class DataAbnormalRemindAdapter extends UIBaseRecycleViewAdapter<SugarOrP
         } else {
             holder.eatTextView.setVisibility(View.VISIBLE);
             //1偏高2低3正常
-            holder.amountTextView.setText(sugarOrPressureInfo.getSystolic() + "/" + sugarOrPressureInfo.getDiastole());
+            holder.amountTextView.setText(sugarOrPressureInfo.getGlucosevalue());
             if ("1".equals(sugarOrPressureInfo.getIshight())) {
                 holder.HighAndLowTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_hign, 0);
             } else if ("2".equals(sugarOrPressureInfo.getIshight())) {

@@ -169,7 +169,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="血糖达标率"
-                        android:textColor="@color/base_black"
+                        android:textColor="#858585"
                         android:textSize="14sp" />
 
                     <TextView
@@ -180,7 +180,7 @@
                         android:drawableLeft="@drawable/shape_bg_main_2"
                         android:drawablePadding="10dp"
                         android:text="@string/community_statics_all_rate"
-                        android:textColor="#333333"
+                        android:textColor="#858585"
                         android:textSize="14sp" />
 
                     <TextView
@@ -191,7 +191,7 @@
                         android:drawableLeft="@drawable/shape_bg_blue_2"
                         android:drawablePadding="10dp"
                         android:text="@string/community_statics_empty_rate"
-                        android:textColor="#333333"
+                        android:textColor="#858585"
                         android:textSize="14sp" />
 
                     <TextView
@@ -328,7 +328,7 @@
                     android:drawableLeft="@drawable/shape_bg_green_light_2"
                     android:drawablePadding="10dp"
                     android:text="@string/community_statics_all_rate"
-                    android:textColor="#333333"
+                    android:textColor="#858585"
                     android:textSize="14sp" />
 
                 <com.xy.xydoctor.customerView.CirclePercentView
