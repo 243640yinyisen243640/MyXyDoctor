@@ -591,6 +591,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
                     break;
                 case R.id.ll_data_abnormal_child_click:
                     Intent intent1 = new Intent(getPageContext(), DataAbnormalRemindListActivity.class);
+                    intent1.putExtra("type", type);
                     intent1.putExtra("sugarOrPressureList", (Serializable) mList.get(position).getCommunityUser().get(index).getList());
                     startActivity(intent1);
                     break;

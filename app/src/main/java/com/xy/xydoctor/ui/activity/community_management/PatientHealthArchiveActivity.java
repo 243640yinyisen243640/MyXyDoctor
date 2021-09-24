@@ -109,6 +109,7 @@ public class PatientHealthArchiveActivity extends BaseEventBusActivity implement
 
     private String userid;
     private String username;
+    private int isDead;
 
     @Override
     protected int getLayoutId() {
@@ -121,11 +122,14 @@ public class PatientHealthArchiveActivity extends BaseEventBusActivity implement
         getTvMore().setText("特殊操作");
         userid = getIntent().getStringExtra("userid");
         username = getIntent().getStringExtra("username");
+        isDead = getIntent().getIntExtra("isDead", 0);
 
         getTvMore().setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), SpecialOperateActivity.class);
+
             intent.putExtra("username", username);
             intent.putExtra("userid", userid);
+            intent.putExtra("isDead", isDead);
             startActivity(intent);
         });
         setTopInfo();

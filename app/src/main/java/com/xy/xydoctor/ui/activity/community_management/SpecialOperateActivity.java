@@ -28,6 +28,8 @@ public class SpecialOperateActivity extends XYSoftUIBaseActivity {
     private String userName;
     private String userid;
 
+    private int isDead;
+
     private CheckBox deleteCheckBox;
     private CheckBox dieCheckBox;
     private EditText reasonEditText;
@@ -40,6 +42,8 @@ public class SpecialOperateActivity extends XYSoftUIBaseActivity {
         super.onCreate(savedInstanceState);
         userName = getIntent().getStringExtra("username");
         userid = getIntent().getStringExtra("userid");
+        isDead = getIntent().getIntExtra("isDead", 0);
+        Log.i("yys","isDead"+isDead);
         Log.i("yys", "name==" + userName);
         topViewManager().titleTextView().setText(userName);
         containerView().addView(initView());
@@ -107,6 +111,11 @@ public class SpecialOperateActivity extends XYSoftUIBaseActivity {
         reasonEditText = view.findViewById(R.id.tv_et_community_so_reason);
         tipTextView = view.findViewById(R.id.tv_community_so_reason_tip);
         sureTextView = view.findViewById(R.id.tv_community_so_submit);
+        if (isDead == 1) {
+            dieCheckBox.setVisibility(View.GONE);
+        } else {
+            dieCheckBox.setVisibility(View.VISIBLE);
+        }
         return view;
     }
 }

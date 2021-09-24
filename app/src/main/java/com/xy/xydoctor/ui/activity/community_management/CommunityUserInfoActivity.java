@@ -15,6 +15,7 @@ import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.Utils;
 import com.gyf.immersionbar.ImmersionBar;
+import com.lyd.baselib.util.TurnsUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.HealthRecordGvAdapter1;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
@@ -115,6 +116,8 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
     private String userid;
     private String username;
 
+    private CommunityUserInfo userInfo;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,15 +142,15 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
     private void getData() {
         Call<String> requestCall = DataManager.getCommunityUserInfo(userid, (call, response) -> {
             if (response.code == 200) {
-                CommunityUserInfo userInfo = (CommunityUserInfo) response.object;
-                bindData(userInfo);
+                userInfo = (CommunityUserInfo) response.object;
+                bindData();
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
         });
     }
 
-    private void bindData(CommunityUserInfo userInfo) {
+    private void bindData() {
 
         LoadImgUtils.loadCircleImage(getPageContext(), R.drawable.default_img_head, userInfo.getPicture(), headImageView);
         nameTextView.setText(userInfo.getNickname());
@@ -312,6 +315,7 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
                 Intent intent1 = new Intent(getPageContext(), PatientHealthArchiveActivity.class);
                 intent1.putExtra("userid", userid);
                 intent1.putExtra("username", username);
+                intent1.putExtra("isDead", TurnsUtils.getInt(userInfo.getIsdeath(), 0));
                 startActivity(intent1);
                 break;
             case R.id.tv_user_info_sugar_follow:
