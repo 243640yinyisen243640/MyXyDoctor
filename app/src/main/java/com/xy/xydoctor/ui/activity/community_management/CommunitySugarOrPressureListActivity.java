@@ -31,7 +31,7 @@ import retrofit2.Call;
  * @date 2021/1/15
  */
 public class CommunitySugarOrPressureListActivity extends XYSoftUIBaseActivity {
-
+    private static final int REQUEST_CODE_FOR_REFRESH = 10;
     private RecyclerView mRecyclerView;
 
     private NestedScrollView presentNestedSrcollView;
@@ -104,6 +104,15 @@ public class CommunitySugarOrPressureListActivity extends XYSoftUIBaseActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_REFRESH) {
+                getData();
+            }
+        }
+    }
 
     private class OnItemClickListener implements IAdapterViewClickListener {
         @Override
@@ -127,7 +136,7 @@ public class CommunitySugarOrPressureListActivity extends XYSoftUIBaseActivity {
                             intent.putExtra("title", getResources().getString(R.string.user_info_blood_pressure));
                         }
 
-                        startActivity(intent);
+                        startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
                     }
 
                     break;

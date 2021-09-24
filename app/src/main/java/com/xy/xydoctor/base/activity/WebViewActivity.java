@@ -26,6 +26,7 @@ import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.xy.xydoctor.R;
+import com.xy.xydoctor.base.utils.JavascriptInterfaces;
 import com.xy.xydoctor.utils.PhotoUtils1;
 
 import java.io.File;
@@ -94,8 +95,8 @@ public class WebViewActivity extends XYSoftUIBaseActivity {
         settings.setSupportZoom(true);
         //辅助h5拍照、打开相册
         webView.setWebChromeClient(new MyChromeWebClient());
-        //h5调用Android
-        //        webView.addJavascriptInterface(new JavascriptInterfaces(this), "javascriptInterface");
+        //h5调用Android                                               这个也需要和后端保持一致   这个Android就是window.后面跟的那个
+        webView.addJavascriptInterface(new JavascriptInterfaces(this), "Android");
         //辅助WebView处理图片上传操作
         //        webView.loadUrl("http://d.xiyuns.cn/mobile/community/bloodsugar?id=1");
         webView.loadUrl(url);

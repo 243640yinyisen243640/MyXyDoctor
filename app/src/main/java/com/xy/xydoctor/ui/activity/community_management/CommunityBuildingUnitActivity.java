@@ -84,20 +84,18 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         house_name = getIntent().getStringExtra("house_name");
         build_id = getIntent().getStringExtra("build_id");
 
-        numid = getIntent().getStringExtra("numid");
-        unitid = getIntent().getStringExtra("unitid");
-        roomnum = getIntent().getStringExtra("roomnum");
+//        numid = getIntent().getStringExtra("numid");
+//        unitid = getIntent().getStringExtra("unitid");
+//        roomnum = getIntent().getStringExtra("roomnum");
 
         topViewManager().titleTextView().setText(house_name);
-        topViewManager().moreTextView().setText("添加成员");
-        topViewManager().moreTextView().setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_red));
+
 
         topViewManager().moreTextView().setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), UserAddActivity.class);
-            intent.putExtra("houserid", house_id);
-            intent.putExtra("houserid", house_id);
-            intent.putExtra("buildid", build_id);
-            intent.putExtra("houseinfo", numid + unitid + roomnum);
+            intent.putExtra("houserid", info.getMaster().getHouse_id());
+            intent.putExtra("buildid", info.getMaster().getBuild_id());
+            intent.putExtra("houseinfo", info.getMaster().getHouseinfo());
             startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
         });
         initView();
@@ -137,8 +135,16 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         Call<String> requestCall = DataManager.getFamilyInfo(house_id, (call, response) -> {
             if (response.code == 200) {
                 info = (FamilyAllInfo) response.object;
-                allLinearLayout.setVisibility(View.VISIBLE);
-                emptyLinearLayout.setVisibility(View.GONE);
+                topViewManager().moreTextView().setText("添加成员");
+                topViewManager().moreTextView().setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_red));
+                if (info.getMembers().size() > 0) {
+                    allLinearLayout.setVisibility(View.VISIBLE);
+                    emptyLinearLayout.setVisibility(View.GONE);
+                } else {
+                    allLinearLayout.setVisibility(View.GONE);
+                    emptyLinearLayout.setVisibility(View.VISIBLE);
+                }
+
                 bindData();
             } else {
                 allLinearLayout.setVisibility(View.GONE);
