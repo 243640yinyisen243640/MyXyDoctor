@@ -49,15 +49,15 @@ public class CommunityRoomAdapter extends XYSoftBaseAdapter<CommunityFilterInfo>
             holder.illImageView.setVisibility(View.VISIBLE);
         }
 
-        if ("1".equals(info.getIsempty())) {
+        if ("0".equals(info.getIsempty())) {
             holder.bgFramelayout.setBackgroundResource(R.drawable.shape_gray_hight);
         }
         if ("1".equals(info.getAbnormal())) {
-            holder.bgFramelayout.setBackgroundResource(R.drawable.shape_yellow);
+            holder.bgFramelayout.setBackgroundResource(R.drawable.shape_red);
         }
-        //        if ("1".equals(info.getIstodo())) {
-        //            holder.numTextView.setBackgroundResource(R.drawable.shape_gray_hight);
-        //        }
+        if ("1".equals(info.getIstodo())) {
+            holder.numTextView.setBackgroundResource(R.drawable.shape_yellow);
+        }
 
         return convertView;
     }

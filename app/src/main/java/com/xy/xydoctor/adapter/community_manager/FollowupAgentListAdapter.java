@@ -1,13 +1,10 @@
 package com.xy.xydoctor.adapter.community_manager;
 
 import android.content.Context;
-import android.graphics.Typeface;
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -69,7 +66,7 @@ public class FollowupAgentListAdapter extends BaseRecycleViewAdapter<FollowUpAge
         int end = spannableStringBuilder.length();
         spannableStringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(), color)), 0, start, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         spannableStringBuilder.setSpan(new AbsoluteSizeSpan(XyScreenUtils.sp2px(getContext(), size)), 0, start, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableStringBuilder.setSpan(new StyleSpan(Typeface.NORMAL), 0, start, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+//        spannableStringBuilder.setSpan(new StyleSpan(Typeface.NORMAL), 0, start, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
 
         textView.setText(spannableStringBuilder);
     }

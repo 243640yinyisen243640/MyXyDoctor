@@ -29,7 +29,7 @@ public class LoadImgUtils {
                 .load(imagePath)
                 .placeholder(defaultImageResourceId)
                 .error(defaultImageResourceId)
-               // .centerCrop()//那就是这行代码的问题，删了就好了，但是具体为啥我也不知道
+//                .centerCrop()//那就是这行代码的问题，删了就好了，但是具体为啥我也不知道
                 .into(imageView);
     }
 

@@ -10,11 +10,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
+import androidx.navigation.NavInflater;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
@@ -215,13 +216,19 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
         //是主任的话显示的是工作台，医生，我的
         //是医生的话显示的是工作台，患者，我的
         //是物业的话显示的是社区管理
+        int startDestinationID = R.id.navigation_home;//这个id你不是没换
+
         if (3 == type) {
+            startDestinationID = R.id.navigation_home;//这个id你不是没换
+            setTitleVisible();
             workItem.setVisible(true);
             patientItem.setVisible(false);
             doctorItem.setVisible(true);
             myItem.setVisible(true);
             managerItem.setVisible(true);
         } else if (4 == type) {
+            startDestinationID = R.id.navigation_home;//这个id你不是没换
+            setTitleVisible();
             if ("2".equals(isproperty)) {
                 workItem.setVisible(true);
                 patientItem.setVisible(true);
@@ -237,17 +244,18 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
             }
 
         } else {
+            startDestinationID = R.id.navigation_community_manager;//这个id你不是没换
+            FloatingView.get().remove();
+            hideTitleBar();
+            hideBack();
+            showLine();
             workItem.setVisible(false);
             patientItem.setVisible(false);
             doctorItem.setVisible(false);
             myItem.setVisible(false);
             managerItem.setVisible(true);
         }
-        showTitleBar();
-        hideBack();
-        showLine();
-        setTitle("工作台");
-        getTvMore().setVisibility(View.VISIBLE);
+
         getTvMore().setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getPageContext(), R.drawable.home_index_top_scan), null, null, null);
         getTvMore().setCompoundDrawablePadding(5);
         getTvMore().setOnClickListener(new View.OnClickListener() {
@@ -274,59 +282,68 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
         bnvMain.setItemIconTintList(null);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(bnvMain, navController);
-        bnvMain.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
-                switch (itemId) {
-                    case R.id.navigation_home:
-                        navController.navigate(R.id.navigation_home);
-                        showTitleBar();
-                        hideBack();
-                        showLine();
-                        setTitle("工作台");
-                        getTvMore().setVisibility(View.VISIBLE);
-                        break;
-                    case R.id.navigation_patient:
-                        navController.navigate(R.id.navigation_patient);
-                        showTitleBar();
-                        hideBack();
-                        showLine();
-                        setTitle("我的患者");
-                        getTvMore().setVisibility(View.GONE);
-                        break;
-                    case R.id.navigation_doctor:
-                        navController.navigate(R.id.navigation_doctor);
-                        showTitleBar();
-                        hideBack();
-                        showLine();
-                        setTitle("我的医生");
-                        getTvMore().setVisibility(View.GONE);
-                        break;
-                    case R.id.navigation_community_manager:
-                        navController.navigate(R.id.navigation_community_manager);
-                        hideTitleBar();
-                        hideBack();
-                        hideLine();
-                        setTitle("社区管理");
-                        getTvMore().setVisibility(View.GONE);
-                        break;
-                    // case R.id.navigation_home_sign:
-                    //     navController.navigate(R.id.navigation_home_sign);
-                    //     showTitleBar();
-                    //     hideBack();
-                    //     setTitle("家签");
-                    //     break;
-                    case R.id.navigation_user:
-                        navController.navigate(R.id.navigation_user);
-                        hideTitleBar();
-                        hideLine();
-                        getTvMore().setVisibility(View.GONE);
-                        break;
-                }
-                return false;
+        NavInflater navInflater = navController.getNavInflater();
+        NavGraph navGraph = navInflater.inflate(R.navigation.navigation_main_activity);
+        navGraph.setStartDestination(startDestinationID);
+        navController.setGraph(navGraph);
+        bnvMain.setOnNavigationItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            switch (itemId) {
+                case R.id.navigation_home:
+                    navController.navigate(R.id.navigation_home);
+                    showTitleBar();
+                    hideBack();
+                    showLine();
+                    setTitle("工作台");
+                    getTvMore().setVisibility(View.VISIBLE);
+                    break;
+                case R.id.navigation_patient:
+                    navController.navigate(R.id.navigation_patient);
+                    showTitleBar();
+                    hideBack();
+                    showLine();
+                    setTitle("我的患者");
+                    getTvMore().setVisibility(View.GONE);
+                    break;
+                case R.id.navigation_doctor:
+                    navController.navigate(R.id.navigation_doctor);
+                    showTitleBar();
+                    hideBack();
+                    showLine();
+                    setTitle("我的医生");
+                    getTvMore().setVisibility(View.GONE);
+                    break;
+                case R.id.navigation_community_manager:
+                    navController.navigate(R.id.navigation_community_manager);//掉这个方法应该也可以
+                    hideTitleBar();
+                    hideBack();
+                    hideLine();
+                    setTitle("社区管理");
+                    getTvMore().setVisibility(View.GONE);
+                    break;
+                // case R.id.navigation_home_sign:
+                //     navController.navigate(R.id.navigation_home_sign);
+                //     showTitleBar();
+                //     hideBack();
+                //     setTitle("家签");
+                //     break;
+                case R.id.navigation_user:
+                    navController.navigate(R.id.navigation_user);
+                    hideTitleBar();
+                    hideLine();
+                    getTvMore().setVisibility(View.GONE);
+                    break;
             }
+            return false;
         });
+    }
+
+    private void setTitleVisible() {
+        showTitleBar();
+        hideBack();
+        showLine();
+        setTitle("工作台");
+        getTvMore().setVisibility(View.VISIBLE);
     }
 
     private void initWindow(boolean isVisibility) {
@@ -678,7 +695,12 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
     @Override
     protected void onStart() {
         super.onStart();
-        FloatingView.get().attach(this);
+        int docType = SPStaticUtils.getInt("docType");
+        //type:3:主任  4:医生  10:物业
+        if (10 != docType) {
+            FloatingView.get().attach(this);
+        }
+
     }
 
     @Override

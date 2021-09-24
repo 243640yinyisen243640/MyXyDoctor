@@ -2,6 +2,7 @@ package com.xy.xydoctor.ui.activity.community_management;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,6 +45,8 @@ import rxhttp.wrapper.param.RxHttp;
  */
 public class SettingsPropertyActivity extends XYSoftUIBaseActivity implements View.OnClickListener, OnDownloadListener {
     private LinearLayout upLinearLayout;
+    private TextView outLoginTextView;
+    private TextView versionTextView;
 
     //更新进度
     private UpdatePopup updatePopup;
@@ -94,11 +97,16 @@ public class SettingsPropertyActivity extends XYSoftUIBaseActivity implements Vi
 
     private void initListener() {
         upLinearLayout.setOnClickListener(this);
+        outLoginTextView.setOnClickListener(this);
     }
 
     private View initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_community_setting, null);
         upLinearLayout = view.findViewById(R.id.ll_community_out_version);
+        outLoginTextView = view.findViewById(R.id.tv_community_out_login);
+        versionTextView = view.findViewById(R.id.tv_community_out_version);
+        String appVersionName = AppUtils.getAppVersionName();
+        versionTextView.setText("V" + appVersionName);
         return view;
     }
 
@@ -106,9 +114,11 @@ public class SettingsPropertyActivity extends XYSoftUIBaseActivity implements Vi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_community_out_version:
+                Log.i("yys","ll_community_out_version==");
                 toUpdate();
                 break;
             case R.id.tv_community_out_login:
+                Log.i("yys","tv_community_out_login==");
                 toDoExit();
                 break;
             //更新升级按钮

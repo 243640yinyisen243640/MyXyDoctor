@@ -60,7 +60,7 @@
             android:padding="10dp"
             android:text="@string/huahansoft_load_state_no_data"
             android:textColor="@color/gray_text"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
     </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

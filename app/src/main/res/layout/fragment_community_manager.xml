@@ -22,6 +22,14 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
+                <ImageView
+                    android:id="@+id/iv_community_set"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:src="@drawable/community_set"
+                    android:visibility="gone" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -168,8 +176,8 @@
             <TextView
                 android:id="@+id/tv_community_person_num"
                 style="@style/community_building_num"
-                android:gravity="left|center"
-                android:drawableLeft="@drawable/community_person_num"/>
+                android:drawableLeft="@drawable/community_person_num"
+                android:gravity="left|center" />
         </LinearLayout>
 
         <LinearLayout

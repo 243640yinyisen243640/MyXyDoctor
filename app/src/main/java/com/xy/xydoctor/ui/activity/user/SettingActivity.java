@@ -16,7 +16,6 @@ import com.azhon.appupdate.listener.OnDownloadListener;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.lyd.librongim.rongim.RongImUtils;
 import com.rxjava.rxlife.RxLife;
 import com.xy.xydoctor.R;
@@ -27,6 +26,7 @@ import com.xy.xydoctor.constant.ConstantParam;
 import com.xy.xydoctor.mvvm.LoginActivity;
 import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.ui.activity.mydevice.DeviceAddListActivity;
+import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.utils.UpdateUtils;
 import com.xy.xydoctor.view.NumberProgressBar;
 import com.xy.xydoctor.view.popup.UpdatePopup;
@@ -170,7 +170,7 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
         if (localVersion < netVersion) {
             toShowUpdateDialog(data);
         } else {
-            ToastUtils.showShort("当前版本已是最新版本");
+            TipUtils.getInstance().showToast(getPageContext(), "当前版本已是最新版本");
         }
     }
 

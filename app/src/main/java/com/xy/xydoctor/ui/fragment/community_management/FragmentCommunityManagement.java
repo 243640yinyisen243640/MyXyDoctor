@@ -5,7 +5,9 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,6 +27,7 @@ import com.xy.xydoctor.ui.activity.community_management.CommunityFollowStatistic
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentListActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentSearchListActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityUserMedicineActivity;
+import com.xy.xydoctor.ui.activity.community_management.SettingsPropertyActivity;
 import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.utils.XyScreenUtils;
 
@@ -39,6 +42,11 @@ import retrofit2.Call;
  */
 public class FragmentCommunityManagement extends BaseFragment {
 
+    /**
+     * 设置
+     */
+    @BindView(R.id.iv_community_set)
+    ImageView setImageView;
     /**
      * 筛选
      */
@@ -114,6 +122,7 @@ public class FragmentCommunityManagement extends BaseFragment {
     @BindView(R.id.tv_community_num_statistics)
     TextView numStatisticsTextView;
 
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_community_manager;
@@ -126,22 +135,30 @@ public class FragmentCommunityManagement extends BaseFragment {
                 .statusBarColor(R.color.transparent)  //指定状态栏颜色,根据情况是否设置
                 .init();
         initValues();
+
         getCommunityInfo();
+        getWaitingInfo();
 
     }
 
     private void initValues() {
+        String hospitalname = SPStaticUtils.getString("hospitalname");
+        locationTextView.setText(hospitalname);
+        //    // type:3:主任  4:医生  10:物业
         int type = SPStaticUtils.getInt("docType");
+        Log.i("yys", "type==" + type);
         if (10 == type) {
             followUpStatisticsTitleLinearLayout.setVisibility(View.GONE);
             followUpStatisticsContentLinearLayout.setVisibility(View.GONE);
             numStatisticsTitleTextView.setVisibility(View.GONE);
             numStatisticsContentLinearLayout.setVisibility(View.GONE);
+            setImageView.setVisibility(View.VISIBLE);
         } else {
             followUpStatisticsTitleLinearLayout.setVisibility(View.VISIBLE);
             followUpStatisticsContentLinearLayout.setVisibility(View.VISIBLE);
             numStatisticsTitleTextView.setVisibility(View.VISIBLE);
             numStatisticsContentLinearLayout.setVisibility(View.VISIBLE);
+            setImageView.setVisibility(View.GONE);
         }
     }
 
@@ -152,8 +169,10 @@ public class FragmentCommunityManagement extends BaseFragment {
     private void getCommunityInfo() {
         Call<String> requestCall = DataManager.getCommunityHomeData((call, response) -> {
             if (response.code == 200) {
-                CommunityManagerInfo managerInfo = (CommunityManagerInfo) response.object;
-                getWaitingInfo(managerInfo);
+                CommunityManagerInfo    managerInfo = (CommunityManagerInfo) response.object;
+                communityNumTextView.setText(managerInfo.getCommunityCount());
+                setTextStyle(getString(R.string.community_building_count), managerInfo.getBuildingCount(), R.color.community_home_index_gray, buildingNumTextView, 13);
+                setTextStyle(getString(R.string.community_person_count), managerInfo.getMemberCount(), R.color.community_home_index_gray, personNumTextView, 13);
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
@@ -161,17 +180,11 @@ public class FragmentCommunityManagement extends BaseFragment {
     }
 
 
-    private void getWaitingInfo(CommunityManagerInfo managerInfo) {
+    private void getWaitingInfo() {
         Call<String> requestCall = DataManager.getWaitingInfo((call, response) -> {
             if (response.code == 200) {
 
-                String hospitalname = SPStaticUtils.getString("hospitalname");
-                locationTextView.setText(hospitalname);
                 CommunityManagerInfo communityManagerInfo = (CommunityManagerInfo) response.object;
-                communityNumTextView.setText(managerInfo.getCommunityCount());
-                setTextStyle(getString(R.string.community_building_count), managerInfo.getBuildingCount(), R.color.community_home_index_gray, buildingNumTextView, 13);
-                setTextStyle(getString(R.string.community_person_count), managerInfo.getMemberCount(), R.color.community_home_index_gray, personNumTextView, 13);
-
 
                 setTextStyle(communityManagerInfo.getFollowCount(), getString(R.string.follow_up_agent_title), R.color.community_home_index_follow, toBeDoneNumTextView, 18);
                 setTextStyle(communityManagerInfo.getAbnormalCount(), getString(R.string.community_data_abnormal_title), R.color.main_red, abnormalDataTextView, 18);
@@ -201,7 +214,7 @@ public class FragmentCommunityManagement extends BaseFragment {
     }
 
 
-    @OnClick({R.id.tv_community_add_user, R.id.ll_community_filter_building_num, R.id.tv_community_follow_up_to_be_done, R.id.tv_community_search, R.id.tv_community_medication_reminder, R.id.tv_community_filter, R.id.tv_community_abnormal_data, R.id.tv_community_follow_up_statistics, R.id.tv_community_num_statistics})
+    @OnClick({R.id.tv_community_add_user, R.id.ll_community_filter_building_num, R.id.tv_community_follow_up_to_be_done, R.id.tv_community_search, R.id.tv_community_medication_reminder, R.id.tv_community_filter, R.id.tv_community_abnormal_data, R.id.tv_community_follow_up_statistics, R.id.tv_community_num_statistics, R.id.iv_community_set})
     public void onViewClicked(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -248,6 +261,10 @@ public class FragmentCommunityManagement extends BaseFragment {
                 break;
             case R.id.tv_community_num_statistics:
                 intent = new Intent(getPageContext(), CommunityDataStatisticsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.iv_community_set:
+                intent = new Intent(getPageContext(), SettingsPropertyActivity.class);
                 startActivity(intent);
                 break;
             default:

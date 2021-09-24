@@ -204,4 +204,5 @@
     <string name="community_have_follow">已关注</string>
     <string name="community_have_unfollow">重点关注</string>
     <string name="please_input_die_reason">请输入死亡原因</string>
+    <string name="huahansoft_load_state_no_data_filter">换个筛选条件试试吧~</string>
 </resources>

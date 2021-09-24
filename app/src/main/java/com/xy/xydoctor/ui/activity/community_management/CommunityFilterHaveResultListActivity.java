@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import com.xy.xydoctor.bean.community_manamer.CommunityFilterInfo;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.xy.xydoctor.utils.TipUtils;
+import com.xy.xydoctor.utils.XyScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -265,7 +267,15 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
         if (1 == mPageIndex) {
             if (200 != responseCode) {
                 if (30002 == responseCode) {
-                    stateTextView.setText(getString(R.string.huahansoft_load_state_no_data));
+                    SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
+                    stringBuilder.append(getString(R.string.huahansoft_load_state_no_data)+"\n\n");
+                    int start = stringBuilder.length();
+                    stringBuilder.append(getString(R.string.huahansoft_load_state_no_data_filter));
+
+                    stringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getPageContext(), R.color.base_black)), 0, start, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                    stringBuilder.setSpan(new AbsoluteSizeSpan(XyScreenUtils.sp2px(getPageContext(),16)), 0, start, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                    stateTextView.setText(stringBuilder);
                 } else {
                     stateTextView.setText(getString(R.string.network_error));
                 }
@@ -353,7 +363,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                     intent = new Intent(getPageContext(), UserAddActivity.class);
                     intent.putExtra("buildid", mList.get(position).getBuild_id());
                     intent.putExtra("houserid", mList.get(position).getHouse_id());
-                    intent.putExtra("houseinfo", mList.get(position).getBuild_name()  + mList.get(position).getUnit_name() + mList.get(position).getHouse_num());
+                    intent.putExtra("houseinfo", mList.get(position).getBuild_name() + mList.get(position).getUnit_name() + mList.get(position).getHouse_num());
                     startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
                     break;
                 default:
