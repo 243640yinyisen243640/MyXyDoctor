@@ -177,11 +177,17 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
             diseaseFirstTextView.setText(R.string.community_user_info_sugar_no);
         }
         if ("1".equals(userInfo.getBloodLevel())) {
+            diseaseSecondTextView.setVisibility(View.VISIBLE);
+
             diseaseSecondTextView.setText(R.string.community_user_info_pressure_one);
         } else if ("2".equals(userInfo.getBloodLevel())) {
+            diseaseSecondTextView.setVisibility(View.VISIBLE);
             diseaseSecondTextView.setText(R.string.community_user_info_pressure_two);
-        } else {
+        } else if("3".equals(userInfo.getBloodLevel())){
+            diseaseSecondTextView.setVisibility(View.VISIBLE);
             diseaseSecondTextView.setText(R.string.community_user_info_pressure_three);
+        }else {
+            diseaseSecondTextView.setVisibility(View.GONE);
         }
 
 
