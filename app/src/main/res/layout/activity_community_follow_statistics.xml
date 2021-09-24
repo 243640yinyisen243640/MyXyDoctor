@@ -91,7 +91,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/community_statics_all_num"
-                android:textColor="#FF854F"
+                android:textColor="#1479EE"
                 android:textSize="20sp" />
 
             <TextView
@@ -101,7 +101,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/community_statics_current_num"
-                android:textColor="#3D98DF"
+                android:textColor="#1FB5B7"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -121,7 +121,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/community_statics_all_times"
-                android:textColor="#9D9D9D"
+                android:textColor="#1A1A1A"
                 android:textSize="18sp" />
 
             <View
@@ -139,7 +139,7 @@
 
                 android:gravity="center"
                 android:text="@string/community_statics_finish_times"
-                android:textColor="#9D9D9D"
+                android:textColor="#1A1A1A"
                 android:textSize="18sp" />
 
             <View
@@ -156,7 +156,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/community_statics_no_times"
-                android:textColor="#9D9D9D"
+                android:textColor="#1A1A1A"
                 android:textSize="18sp" />
 
             <View
@@ -173,7 +173,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/community_statics_lost_times"
-                android:textColor="#9D9D9D"
+                android:textColor="#1A1A1A"
                 android:textSize="18sp" />
 
 
@@ -302,18 +302,28 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/shape_bg_white_5"
+            android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="失访原因统计"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <com.lyd.baselib.widget.view.MyListView
                 android:id="@+id/rv_fs_follow_rate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@null"
-                android:focusableInTouchMode="true"
                 android:dividerHeight="0dp"
-                android:focusable="false" />
+                android:focusable="false"
+                android:focusableInTouchMode="true" />
 
 
         </LinearLayout>

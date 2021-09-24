@@ -52,12 +52,45 @@ public class CommunityRoomAdapter extends XYSoftBaseAdapter<CommunityFilterInfo>
         if ("0".equals(info.getIsempty())) {
             holder.bgFramelayout.setBackgroundResource(R.drawable.shape_gray_hight);
         }
-        if ("1".equals(info.getAbnormal())) {
-            holder.bgFramelayout.setBackgroundResource(R.drawable.shape_red);
+        /**
+         *      * 有无异常
+         *      * 0：无
+         *      * 1：有
+         *      */
+
+        /**
+         * 是否有待办
+         * 0：无
+         * 1：有
+         */
+        switch (info.getAbnormal()) {
+            case "0":
+
+                if ("1".equals(info.getIstodo())) {
+                    holder.numTextView.setBackgroundResource(R.drawable.shape_yellow);
+                } else {
+                    holder.bgFramelayout.setBackgroundResource(R.drawable.shape_white_heavy);
+                }
+                break;
+            case "1":
+                if ("1".equals(info.getIstodo())) {
+                    holder.bgFramelayout.setBackgroundResource(R.drawable.shape_red);
+                } else {
+                    holder.numTextView.setBackgroundResource(R.drawable.shape_yellow);
+                }
+                break;
+            default:
+                break;
         }
-        if ("1".equals(info.getIstodo())) {
-            holder.numTextView.setBackgroundResource(R.drawable.shape_yellow);
-        }
+        //        if ("1".equals(info.getAbnormal())) {
+        //            holder.bgFramelayout.setBackgroundResource(R.drawable.shape_red);
+        //
+        //        } else {
+        //            if ("1".equals(info.getIstodo())) {
+        //                holder.numTextView.setBackgroundResource(R.drawable.shape_yellow);
+        //            }
+        //        }
+
 
         return convertView;
     }

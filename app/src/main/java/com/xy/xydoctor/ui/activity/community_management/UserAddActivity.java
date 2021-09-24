@@ -458,6 +458,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         if (releationList != null && releationList.size() > 0) {
             OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
                 if ("1".equals(type)) {
+
                     releationId = releationList.get(options1).getCheckID();
                     String s = releationList.get(options1).getDiseaseName();
                     relationTextView.setText(s);
@@ -467,6 +468,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                     String s = releationList.get(options1).getDiseaseName();
                     sugarTextView.setText(s);
                 } else {
+                    hypertension = "2";
                     bloodLevel = releationList.get(options1).getCheckID();
                     String s = releationList.get(options1).getDiseaseName();
                     pressureTextView.setText(s);

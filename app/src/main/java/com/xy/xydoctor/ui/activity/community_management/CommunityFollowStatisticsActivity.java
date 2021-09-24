@@ -107,10 +107,10 @@ public class CommunityFollowStatisticsActivity extends XYSoftUIBaseActivity impl
         setTextStyle(getString(R.string.community_statics_all_num), staticsInfo.getFollowUser(), R.color.community_content_black, followNumTextView, 13);
         setTextStyle(getString(R.string.community_statics_current_num), staticsInfo.getFollowingUser(), R.color.community_content_black, currentNumTextView, 13);
 
-        setTextStyle(getString(R.string.community_statics_all_times), staticsInfo.getFollowNum(), R.color.base_black, followAllTextView, 12);
-        setTextStyle(getString(R.string.community_statics_finish_times), staticsInfo.getFollowedNum(), R.color.base_black, finishFollowTextView, 12);
-        setTextStyle(getString(R.string.community_statics_no_times), staticsInfo.getUnfollowNum(), R.color.base_black, noFollowTextView, 12);
-        setTextStyle(getString(R.string.community_statics_lost_times), staticsInfo.getLostfollowNum(), R.color.base_black, lostFollowTextView, 12);
+        setTextStyle(getString(R.string.community_statics_all_times), staticsInfo.getFollowNum(), R.color.data_gray_light, followAllTextView, 12);
+        setTextStyle(getString(R.string.community_statics_finish_times), staticsInfo.getFollowedNum(), R.color.data_gray_light, finishFollowTextView, 12);
+        setTextStyle(getString(R.string.community_statics_no_times), staticsInfo.getUnfollowNum(), R.color.data_gray_light, noFollowTextView, 12);
+        setTextStyle(getString(R.string.community_statics_lost_times), staticsInfo.getLostfollowNum(), R.color.data_gray_light, lostFollowTextView, 12);
 
         setTextStyle1(getString(R.string.community_statics_patient_num), staticsInfo.getCommunityUserPre(), R.color.community_content_black, patientTextView);
         setTextStyle1(getString(R.string.community_statics_year_finish_num), staticsInfo.getFinished(), R.color.community_content_black, yearFinishTextView);
@@ -167,7 +167,7 @@ public class CommunityFollowStatisticsActivity extends XYSoftUIBaseActivity impl
 
     private void setTextStyle1(String content, String title, int color, TextView textView) {
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
-        spannableStringBuilder.append(content);
+        spannableStringBuilder.append(content).append("  ");
         int start = spannableStringBuilder.length();
 
         spannableStringBuilder.append(title).append("%");

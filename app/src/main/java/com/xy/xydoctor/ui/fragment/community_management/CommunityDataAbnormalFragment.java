@@ -199,7 +199,12 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
     @Override
     protected void onCreate() {
         topViewManager().topView().removeAllViews();
-        starttime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
+        //        Calendar ca = Calendar.getInstance();
+        //        ca.add(Calendar.MONTH, -1);
+        //
+        //        Date lastMonth = ca.getTime();
+        //        String s = DataUtils.convertDateToString(lastMonth, DataFormatManager.TIME_FORMAT_M);
+        starttime = DataUtils.getLastMonthTime();
         endtime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
         if (getArguments() != null) {
             type = getArguments().getString("type");

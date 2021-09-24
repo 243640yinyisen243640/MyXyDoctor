@@ -8,6 +8,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -127,9 +128,10 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
     private void initValues() {
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
         imgListView.setLayoutManager(layoutManager);
+
+
         StaggeredGridLayoutManager layoutManager1 = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         memberMyListView.setLayoutManager(layoutManager1);
-        //        memberMyListView.setNestedScrollingEnabled(false);
     }
 
     private void getDataInfo() {
@@ -137,13 +139,15 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
             if (response.code == 200) {
                 info = (FamilyAllInfo) response.object;
                 topViewManager().moreTextView().setVisibility(View.VISIBLE);
-                if (info.getMembers().size() > 0) {
-                    allLinearLayout.setVisibility(View.VISIBLE);
-                    emptyLinearLayout.setVisibility(View.GONE);
-                } else {
+
+                if (info.getMaster().getUserid() == null && info.getMembers().size() == 0) {
                     allLinearLayout.setVisibility(View.GONE);
                     emptyLinearLayout.setVisibility(View.VISIBLE);
+                } else {
+                    allLinearLayout.setVisibility(View.VISIBLE);
+                    emptyLinearLayout.setVisibility(View.GONE);
                 }
+
 
                 bindData();
             } else {
@@ -156,6 +160,8 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
     }
 
     private void bindData() {
+        StaggeredGridLayoutManager layoutManager1 = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        memberMyListView.setLayoutManager(layoutManager1);
         if (info.getMaster().getUserid() == null) {
             holdLinearLayout.setVisibility(View.GONE);
         } else {
@@ -306,6 +312,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
 
         }
 
+        Log.i("yys","===bindData");
         mAdapter = new CommunityBuildingUnitListAdapter(getPageContext(), info.getMembers(), new OnItemClickListener());
 
         memberMyListView.setAdapter(mAdapter);

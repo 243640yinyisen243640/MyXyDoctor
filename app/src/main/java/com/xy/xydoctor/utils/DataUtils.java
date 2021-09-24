@@ -3,6 +3,7 @@ package com.xy.xydoctor.utils;
 import android.annotation.SuppressLint;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -50,6 +51,7 @@ public class DataUtils {
         }
         return date;
     }
+
     /**
      * 把一个Date对象转换成相应格式的字符串
      *
@@ -62,4 +64,21 @@ public class DataUtils {
         SimpleDateFormat format = new SimpleDateFormat(outFormat);
         return format.format(date);
     }
+
+    public static String getLastMonthTime() {
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.add(Calendar.MONTH, -1);
+
+        int year = calendar.get(Calendar.YEAR);
+
+        int month = calendar.get(Calendar.MONTH) + 1;
+
+        int date = calendar.get(Calendar.DATE);
+
+
+        return year + "-" + (month < 10 ? "0" + month : month) + "-" + (date < 10 ? "0" + date : date);
+
+    }
+
 }
