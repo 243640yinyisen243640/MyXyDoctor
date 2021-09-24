@@ -97,10 +97,10 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
      * 健康记录
      */
     private NoConflictGridView gvHealthRecord;
-//    /**
-//     * 随访管理
-//     */
-//    private NoConflictGridView gvManagementRecord;
+    //    /**
+    //     * 随访管理
+    //     */
+    //    private NoConflictGridView gvManagementRecord;
 
     private TextView sugarTextView;
     private TextView pressureTextView;
@@ -133,7 +133,7 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
     @Override
     protected void onResume() {
         super.onResume();
-        //        getData();
+        getData();
     }
 
     private void getData() {
@@ -239,12 +239,12 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         HealthRecordGvAdapter1 adapter = new HealthRecordGvAdapter1(Utils.getApp(), R.layout.item_gv_health_record, list, userid);
         gvHealthRecord.setAdapter(adapter);
 
-//        ArrayList<String> managementList = new ArrayList<>();
-//        for (int i = 0; i < 2; i++) {
-//            managementList.add(i + "");
-//        }
-//        FollowManagementGvAdapter managementGvAdapter = new FollowManagementGvAdapter(Utils.getApp(), R.layout.item_gv_health_record, managementList, userid);
-//        gvManagementRecord.setAdapter(managementGvAdapter);
+        //        ArrayList<String> managementList = new ArrayList<>();
+        //        for (int i = 0; i < 2; i++) {
+        //            managementList.add(i + "");
+        //        }
+        //        FollowManagementGvAdapter managementGvAdapter = new FollowManagementGvAdapter(Utils.getApp(), R.layout.item_gv_health_record, managementList, userid);
+        //        gvManagementRecord.setAdapter(managementGvAdapter);
     }
 
 
@@ -270,7 +270,7 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         sugarTextView = view.findViewById(R.id.tv_user_info_sugar_follow);
         pressureTextView = view.findViewById(R.id.tv_user_info_pressure_follow);
         gvHealthRecord = view.findViewById(R.id.gv_user_info_health_record);
-//        gvManagementRecord = view.findViewById(R.id.gv_follow_up_management_health_record);
+        //        gvManagementRecord = view.findViewById(R.id.gv_follow_up_management_health_record);
         medicanLinearLayout = view.findViewById(R.id.ll_user_info_user_medican);
         textImageView = view.findViewById(R.id.iv_user_info_text);
         return view;
