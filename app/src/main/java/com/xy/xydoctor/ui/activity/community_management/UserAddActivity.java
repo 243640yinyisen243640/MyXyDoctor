@@ -400,6 +400,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         Call<String> requestCall = DataManager.addUser(addReq, (call, response) -> {
             addTextView.setClickable(true);
             if (response.code == 200) {
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
                 setResult(RESULT_OK);
                 finish();
             } else {
