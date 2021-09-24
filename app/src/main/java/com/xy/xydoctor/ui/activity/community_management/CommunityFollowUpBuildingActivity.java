@@ -98,7 +98,6 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
         type = getIntent().getStringExtra("type");
         comid = getIntent().getStringExtra("comid");
 
-
         if ("2".equals(type)) {
             topViewManager().titleTextView().setText(R.string.follow_up_agent_title);
             topViewManager().moreTextView().setText(R.string.fu_more_title_change_list);

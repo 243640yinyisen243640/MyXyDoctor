@@ -84,13 +84,14 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         house_name = getIntent().getStringExtra("house_name");
         build_id = getIntent().getStringExtra("build_id");
 
-//        numid = getIntent().getStringExtra("numid");
-//        unitid = getIntent().getStringExtra("unitid");
-//        roomnum = getIntent().getStringExtra("roomnum");
+        //        numid = getIntent().getStringExtra("numid");
+        //        unitid = getIntent().getStringExtra("unitid");
+        //        roomnum = getIntent().getStringExtra("roomnum");
 
         topViewManager().titleTextView().setText(house_name);
 
-
+        topViewManager().moreTextView().setText("添加成员");
+        topViewManager().moreTextView().setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_red));
         topViewManager().moreTextView().setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), UserAddActivity.class);
             intent.putExtra("houserid", info.getMaster().getHouse_id());
@@ -135,8 +136,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         Call<String> requestCall = DataManager.getFamilyInfo(house_id, (call, response) -> {
             if (response.code == 200) {
                 info = (FamilyAllInfo) response.object;
-                topViewManager().moreTextView().setText("添加成员");
-                topViewManager().moreTextView().setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_red));
+                topViewManager().moreTextView().setVisibility(View.VISIBLE);
                 if (info.getMembers().size() > 0) {
                     allLinearLayout.setVisibility(View.VISIBLE);
                     emptyLinearLayout.setVisibility(View.GONE);
@@ -156,7 +156,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
     }
 
     private void bindData() {
-        if (info.getMaster() == null) {
+        if (info.getMaster().getUserid() == null) {
             holdLinearLayout.setVisibility(View.GONE);
         } else {
             holdLinearLayout.setVisibility(View.VISIBLE);

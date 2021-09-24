@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.Utils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.ui.activity.community_management.CommunitySugarOrPressureListActivity;
 import com.zhy.adapter.abslistview.CommonAdapter;
@@ -48,16 +47,16 @@ public class FollowManagementGvAdapter extends CommonAdapter {
              */
             switch (position) {
                 case 0:
-                    intent = new Intent(Utils.getApp(), CommunitySugarOrPressureListActivity.class).putExtra("userid", userId).putExtra("type", "1");
+                    intent = new Intent(context, CommunitySugarOrPressureListActivity.class).putExtra("userid", userId).putExtra("type", "1");
                     break;
                 case 1:
-                    intent = new Intent(Utils.getApp(), CommunitySugarOrPressureListActivity.class).putExtra("userid", userId).putExtra("type", "2");
+                    intent = new Intent(context, CommunitySugarOrPressureListActivity.class).putExtra("userid", userId).putExtra("type", "2");
                     break;
                 default:
                     break;
             }
 
-            Utils.getApp().startActivity(intent);
+           context.startActivity(intent);
         });
     }
 }

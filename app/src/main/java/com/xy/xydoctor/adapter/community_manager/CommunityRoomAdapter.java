@@ -21,6 +21,7 @@ import java.util.List;
  * Description:
  */
 public class CommunityRoomAdapter extends XYSoftBaseAdapter<CommunityFilterInfo> {
+
     public CommunityRoomAdapter(Context context, List<CommunityFilterInfo> list) {
         super(context, list);
     }
@@ -34,7 +35,6 @@ public class CommunityRoomAdapter extends XYSoftBaseAdapter<CommunityFilterInfo>
             holder.illImageView = convertView.findViewById(R.id.iv_building_room_ill);
             holder.numTextView = convertView.findViewById(R.id.tv_building_room_num);
             holder.bgFramelayout = convertView.findViewById(R.id.fl_build_bg);
-
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

@@ -49,6 +49,7 @@ public class WebViewActivity extends XYSoftUIBaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         url = getIntent().getStringExtra("url");
+        Log.i("yys", "url==" + url);
         id = getIntent().getStringExtra("id");
         title = getIntent().getStringExtra("title");
         status = getIntent().getStringExtra("status");

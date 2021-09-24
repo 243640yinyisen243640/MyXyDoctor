@@ -56,6 +56,8 @@ public class CommunitySugarOrPressureListActivity extends XYSoftUIBaseActivity {
         getData();
     }
 
+
+
     private void getData() {
         String userid = getIntent().getStringExtra("userid");
         //1：血糖  2：血压

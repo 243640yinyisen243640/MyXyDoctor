@@ -330,6 +330,38 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_user_info_sugar_follow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/user_info_blood_sugar_follow_up"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:text="@string/user_info_blood_sugar_follow_up"
+                        android:textColor="#303030"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tv_user_info_pressure_follow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:drawableTop="@drawable/user_info_blood_pressure_follow_up"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:text="@string/user_info_blood_pressure"
+                        android:textColor="#303030"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
                 <com.xy.xydoctor.customerView.NoConflictGridView
                     android:id="@+id/gv_follow_up_management_health_record"
                     android:layout_width="match_parent"
@@ -338,7 +370,7 @@
                     android:numColumns="4"
                     android:paddingTop="@dimen/dp_10"
                     android:verticalSpacing="@dimen/dp_10"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
             </LinearLayout>
 
             <ImageView
@@ -347,6 +379,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="right"
+                android:layout_marginTop="40dp"
                 android:layout_marginBottom="@dimen/dp_40"
                 android:scaleType="centerCrop"
                 android:src="@drawable/online_test_add"
