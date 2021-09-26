@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.blankj.utilcode.constant.PermissionConstants;
-import com.blankj.utilcode.util.PermissionUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.Utils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.lyd.baselib.util.TurnsUtils;
@@ -22,7 +19,7 @@ import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.bean.community_manamer.CommunityUserInfo;
 import com.xy.xydoctor.customerView.NoConflictGridView;
 import com.xy.xydoctor.datamanager.DataManager;
-import com.xy.xydoctor.ui.activity.mydevice.ScanActivity;
+import com.xy.xydoctor.ui.activity.mydevice.MyDeviceListActivity;
 import com.xy.xydoctor.utils.LoadImgUtils;
 import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.view.popup.OnlineTestPopup;
@@ -183,10 +180,10 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         } else if ("2".equals(userInfo.getBloodLevel())) {
             diseaseSecondTextView.setVisibility(View.VISIBLE);
             diseaseSecondTextView.setText(R.string.community_user_info_pressure_two);
-        } else if("3".equals(userInfo.getBloodLevel())){
+        } else if ("3".equals(userInfo.getBloodLevel())) {
             diseaseSecondTextView.setVisibility(View.VISIBLE);
             diseaseSecondTextView.setText(R.string.community_user_info_pressure_three);
-        }else {
+        } else {
             diseaseSecondTextView.setVisibility(View.GONE);
         }
 
@@ -289,21 +286,25 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_user_info_device_manager:
-                PermissionUtils
-                        .permission(PermissionConstants.CAMERA)
-                        .callback(new PermissionUtils.SimpleCallback() {
-                            @Override
-                            public void onGranted() {
-                                Intent intent = new Intent(getPageContext(), ScanActivity.class);
-                                intent.putExtra("type", 4);
-                                startActivity(intent);
-                            }
+                //                PermissionUtils
+                //                        .permission(PermissionConstants.CAMERA)
+                //                        .callback(new PermissionUtils.SimpleCallback() {
+                //                            @Override
+                //                            public void onGranted() {
+                //                                Intent intent = new Intent(getPageContext(), MyDeviceListActivity.class);
+                ////                                intent.putExtra("type", 4);
+                //                                startActivity(intent);
+                //                            }
+                //
+                //                            @Override
+                //                            public void onDenied() {
+                //                                ToastUtils.showShort("请允许使用相机权限");
+                //                            }
+                //                        }).request();
 
-                            @Override
-                            public void onDenied() {
-                                ToastUtils.showShort("请允许使用相机权限");
-                            }
-                        }).request();
+                Intent intent2 = new Intent(getPageContext(), MyDeviceListActivity.class);
+                //                                intent.putExtra("type", 4);
+                startActivity(intent2);
                 break;
             case R.id.iv_user_info_back:
                 finish();

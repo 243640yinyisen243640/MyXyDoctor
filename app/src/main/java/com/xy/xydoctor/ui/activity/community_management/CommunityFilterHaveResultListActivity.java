@@ -16,6 +16,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.blankj.utilcode.util.SPStaticUtils;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -268,12 +269,12 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
             if (200 != responseCode) {
                 if (30002 == responseCode) {
                     SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
-                    stringBuilder.append(getString(R.string.huahansoft_load_state_no_data)+"\n\n");
+                    stringBuilder.append(getString(R.string.huahansoft_load_state_no_data) + "\n\n");
                     int start = stringBuilder.length();
                     stringBuilder.append(getString(R.string.huahansoft_load_state_no_data_filter));
 
                     stringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getPageContext(), R.color.base_black)), 0, start, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-                    stringBuilder.setSpan(new AbsoluteSizeSpan(XyScreenUtils.sp2px(getPageContext(),16)), 0, start, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    stringBuilder.setSpan(new AbsoluteSizeSpan(XyScreenUtils.sp2px(getPageContext(), 16)), 0, start, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
                     stateTextView.setText(stringBuilder);
                 } else {
@@ -354,10 +355,14 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
             //一级的点击事件
             switch (view.getId()) {
                 case R.id.ll_filter_click:
-                    intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
-                    intent.putExtra("userid", mList.get(position).getUserid());
-                    intent.putExtra("username", mList.get(position).getNickname());
-                    startActivity(intent);
+                    //3:主任  4:医生  10:物业
+                    int type = SPStaticUtils.getInt("docType");
+                    if (10 != type) {
+                        intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
+                        intent.putExtra("userid", mList.get(position).getUserid());
+                        intent.putExtra("username", mList.get(position).getNickname());
+                        startActivity(intent);
+                    }
                     break;
                 case R.id.tv_filter_empty:
                     intent = new Intent(getPageContext(), UserAddActivity.class);

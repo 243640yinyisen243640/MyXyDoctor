@@ -6,7 +6,6 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -60,7 +59,7 @@ public class CommunityFollowUpChangeChildListAdapter extends XYSoftBaseAdapter<F
         }
         FollowListChildListInfo info = getList().get(position);
 
-        Log.i("yys", "type===" + type);
+
         if ("3".equals(type)) {
             holder.noFinishTextView.setVisibility(View.GONE);
         } else {
@@ -79,14 +78,19 @@ public class CommunityFollowUpChangeChildListAdapter extends XYSoftBaseAdapter<F
         holder.phoneTextView.setText(info.getTel());
 
         if ("1".equals(info.getDiabeteslei())) {
+            holder.sugarTextView.setVisibility(View.VISIBLE);
             holder.sugarTextView.setText(R.string.community_user_info_sugar_one);
         } else if ("2".equals(info.getDiabeteslei())) {
+            holder.sugarTextView.setVisibility(View.VISIBLE);
             holder.sugarTextView.setText(R.string.community_user_info_sugar_two);
         } else if ("3".equals(info.getDiabeteslei())) {
+            holder.sugarTextView.setVisibility(View.VISIBLE);
             holder.sugarTextView.setText(R.string.community_user_info_sugar_three);
         } else if ("4".equals(info.getDiabeteslei())) {
+            holder.sugarTextView.setVisibility(View.VISIBLE);
             holder.sugarTextView.setText(R.string.community_user_info_sugar_four);
         } else {
+            holder.sugarTextView.setVisibility(View.GONE);
             holder.sugarTextView.setText(R.string.community_user_info_sugar_no);
         }
         if ("1".equals(info.getBloodLevel())) {

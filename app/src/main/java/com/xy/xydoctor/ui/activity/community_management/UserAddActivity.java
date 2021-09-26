@@ -223,6 +223,10 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                 getHospital("", "1");
                 break;
             case R.id.tv_user_add_department_choose:
+                if ("0".equals(hospitalid)){
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.user_add_hospital_choose);
+                    return;
+                }
                 getDepartment();
                 break;
             case R.id.tv_user_add_doctor_choose:
@@ -667,10 +671,10 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
                     } else {
                         importantCheckBox.setChecked(false);
                     }
-                    if (TextUtils.isEmpty(searchInfo.getSugar_imei())) {
+                    if (!TextUtils.isEmpty(searchInfo.getSugar_imei())) {
                         sugarEditText.setText(searchInfo.getSugar_imei());
                     }
-                    if (TextUtils.isEmpty(searchInfo.getBlood_imei())) {
+                    if (!TextUtils.isEmpty(searchInfo.getBlood_imei())) {
                         pressureEditText.setText(searchInfo.getSugar_imei());
                     }
 

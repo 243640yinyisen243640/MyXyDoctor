@@ -14,6 +14,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.blankj.utilcode.util.SPStaticUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -255,10 +256,15 @@ public class CommunityFollowupAgentSearchListActivity extends XYSoftUIBaseActivi
             //一级的点击事件
             switch (view.getId()) {
                 case R.id.ll_fu_search_click:
-                    intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
-                    intent.putExtra("userid", mList.get(position).getUserid());
-                    intent.putExtra("username", mList.get(position).getNickname());
-                    startActivity(intent);
+                    //3:主任  4:医生  10:物业
+                    int type = SPStaticUtils.getInt("docType");
+                    if (10 != type) {
+                        intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
+                        intent.putExtra("userid", mList.get(position).getUserid());
+                        intent.putExtra("username", mList.get(position).getNickname());
+                        startActivity(intent);
+                    }
+
                     break;
                 default:
                     break;

@@ -2,6 +2,7 @@ package com.xy.xydoctor.adapter.community_manager;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -52,6 +53,10 @@ public class CommunityRoomAdapter extends XYSoftBaseAdapter<CommunityFilterInfo>
         if ("0".equals(info.getIsempty())) {
             holder.bgFramelayout.setBackgroundResource(R.drawable.shape_gray_hight);
         }
+
+        Log.i("yys","empty"+info.getIsempty());
+        Log.i("yys","abnormal"+info.getIsempty());
+        Log.i("yys","isTodo"+info.getIstodo());
         /**
          *      * 有无异常
          *      * 0：无
@@ -67,7 +72,7 @@ public class CommunityRoomAdapter extends XYSoftBaseAdapter<CommunityFilterInfo>
             case "0":
 
                 if ("1".equals(info.getIstodo())) {
-                    holder.numTextView.setBackgroundResource(R.drawable.shape_yellow);
+                    holder.bgFramelayout.setBackgroundResource(R.drawable.shape_yellow);
                 } else {
                     holder.bgFramelayout.setBackgroundResource(R.drawable.shape_white_heavy);
                 }
@@ -76,7 +81,7 @@ public class CommunityRoomAdapter extends XYSoftBaseAdapter<CommunityFilterInfo>
                 if ("1".equals(info.getIstodo())) {
                     holder.bgFramelayout.setBackgroundResource(R.drawable.shape_red);
                 } else {
-                    holder.numTextView.setBackgroundResource(R.drawable.shape_yellow);
+                    holder.bgFramelayout.setBackgroundResource(R.drawable.shape_yellow);
                 }
                 break;
             default:

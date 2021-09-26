@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.blankj.utilcode.util.SPStaticUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.CommunityBuildingUnitListAdapter;
 import com.xy.xydoctor.adapter.community_manager.CommunityFilterDeseaseImgAdapter;
@@ -162,10 +163,13 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
     private void bindData() {
         StaggeredGridLayoutManager layoutManager1 = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         memberMyListView.setLayoutManager(layoutManager1);
+        Log.i("yys", "location==" + info.getMaster().getHouseinfo());
+
         if (info.getMaster().getUserid() == null) {
             holdLinearLayout.setVisibility(View.GONE);
         } else {
             holdLinearLayout.setVisibility(View.VISIBLE);
+            locationTextView.setText(info.getMaster().getHouseinfo());
             nameTextView.setText(info.getMaster().getNickname());
             if (info.getMaster().getImg() != null && info.getMaster().getImg().size() > 0) {
                 imgListView.setVisibility(View.VISIBLE);
@@ -184,8 +188,6 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
             } else {
                 imgListView.setVisibility(View.GONE);
             }
-
-            locationTextView.setText(info.getMaster().getHouseinfo());
             if ("1".equals(info.getMaster().getIscare())) {
                 followTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_impotant_follow, 0, 0, 0);
                 followTextView.setText(R.string.community_have_follow);
@@ -312,7 +314,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
 
         }
 
-        Log.i("yys","===bindData");
+
         mAdapter = new CommunityBuildingUnitListAdapter(getPageContext(), info.getMembers(), new OnItemClickListener());
 
         memberMyListView.setAdapter(mAdapter);
@@ -331,10 +333,15 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
                 }
                 break;
             case R.id.ll_building_unit_hold:
-                intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
-                intent.putExtra("userid", info.getMaster().getUserid());
-                intent.putExtra("username", info.getMaster().getNickname());
-                startActivity(intent);
+                //  3:主任  4:医生  10:物业
+                int type = SPStaticUtils.getInt("docType");
+                if (10 != type) {
+                    intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
+                    intent.putExtra("userid", info.getMaster().getUserid());
+                    intent.putExtra("username", info.getMaster().getNickname());
+                    startActivity(intent);
+                }
+
                 break;
             case R.id.tv_building_unit_sugar:
                 intent = new Intent(getPageContext(), CommunitySugarOrPressureListActivity.class);
@@ -383,7 +390,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
 
         @Override
         public void adapterClickListener(int position, View view) {
-
+            Intent intent;
             switch (view.getId()) {
                 case R.id.tv_building_unit_follow_item:
                     if ("1".equals(info.getMembers().get(position).getIscare())) {
@@ -393,10 +400,14 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
                     }
                     break;
                 case R.id.ll_building_unit_click_item:
-                    Intent intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
-                    intent.putExtra("userid", info.getMembers().get(position).getUserid());
-                    intent.putExtra("username", info.getMembers().get(position).getNickname());
-                    startActivity(intent);
+                    //3:主任  4:医生  10:物业
+                    int type = SPStaticUtils.getInt("docType");
+                    if (10 != type) {
+                        intent = new Intent(getPageContext(), CommunityUserInfoActivity.class);
+                        intent.putExtra("userid", info.getMembers().get(position).getUserid());
+                        intent.putExtra("username", info.getMembers().get(position).getNickname());
+                        startActivity(intent);
+                    }
 
 
                     break;
