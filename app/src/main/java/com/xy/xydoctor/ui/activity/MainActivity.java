@@ -216,18 +216,18 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
         //是主任的话显示的是工作台，医生，我的
         //是医生的话显示的是工作台，患者，我的
         //是物业的话显示的是社区管理
-        int startDestinationID = R.id.navigation_home;//这个id你不是没换
+        int startDestinationID = R.id.navigation_home;
 
         if (3 == type) {
-            startDestinationID = R.id.navigation_home;//这个id你不是没换
+            startDestinationID = R.id.navigation_home;
             setTitleVisible();
             workItem.setVisible(true);
             patientItem.setVisible(false);
             doctorItem.setVisible(true);
             myItem.setVisible(true);
-            managerItem.setVisible(true);
+            managerItem.setVisible(false);
         } else if (4 == type) {
-            startDestinationID = R.id.navigation_home;//这个id你不是没换
+            startDestinationID = R.id.navigation_home;
             setTitleVisible();
             if ("2".equals(isproperty)) {
                 workItem.setVisible(true);
