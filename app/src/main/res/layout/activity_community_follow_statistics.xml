@@ -208,7 +208,8 @@
                         android:layout_height="wrap_content"
                         android:text="血糖数据统计"
                         android:textColor="@color/base_black"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/tv_fs_follow_patient_num"
