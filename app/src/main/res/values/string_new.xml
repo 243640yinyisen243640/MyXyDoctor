@@ -127,7 +127,7 @@
     <string name="goods_add_spe">已完成</string>
     <string name="goods_add_spe_no_finish">未完成</string>
     <string name="follow_up_memo">备注</string>
-    <string name="no_finish_reason">原因</string>
+    <string name="no_finish_reason">原因：</string>
     <string name="no_finish_close_follow">关闭随访</string>
     <string name="community_add_buliding_set">楼栋设置</string>
     <string name="base_add">添加</string>

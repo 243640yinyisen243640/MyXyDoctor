@@ -74,7 +74,7 @@ public class CommunityFollowUpChangeChildListAdapter extends XYSoftBaseAdapter<F
         stringBuilder.setSpan(new AbsoluteSizeSpan(XyScreenUtils.sp2px(getContext(), 17)), 0, start, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         holder.NamelocationTextView.setText(stringBuilder);
         holder.sexTextView.setText(info.getSex());
-        holder.ageTextView.setText(info.getAge());
+        holder.ageTextView.setText(info.getAge()+"岁");
         holder.phoneTextView.setText(info.getTel());
 
         if ("1".equals(info.getDiabeteslei())) {
@@ -94,11 +94,16 @@ public class CommunityFollowUpChangeChildListAdapter extends XYSoftBaseAdapter<F
             holder.sugarTextView.setText(R.string.community_user_info_sugar_no);
         }
         if ("1".equals(info.getBloodLevel())) {
+            holder.pressureTextView.setVisibility(View.VISIBLE);
             holder.pressureTextView.setText(R.string.community_user_info_pressure_one);
-        } else if ("2".equals(info.getBloodLevel())){
+        } else if ("2".equals(info.getBloodLevel())) {
+            holder.pressureTextView.setVisibility(View.VISIBLE);
             holder.pressureTextView.setText(R.string.community_user_info_pressure_two);
-        }else {
+        } else if ("3".equals(info.getBloodLevel())) {
+            holder.pressureTextView.setVisibility(View.VISIBLE);
             holder.pressureTextView.setText(R.string.community_user_info_pressure_three);
+        } else {
+            holder.pressureTextView.setVisibility(View.GONE);
         }
 
         holder.sugarFollowTextView.setText("血糖随访" + info.getSugar());
@@ -107,6 +112,17 @@ public class CommunityFollowUpChangeChildListAdapter extends XYSoftBaseAdapter<F
         if ("2".equals(type)) {
             if (!TextUtils.isEmpty(info.getReason())) {
                 holder.memoLinearLayout.setVisibility(View.VISIBLE);
+                if ("1".equals(info.getReason())) {
+                    holder.memoTextView.setText("电话打不通");
+                }else if ("2".equals(info.getReason())){
+                    holder.memoTextView.setText("患者拒绝随访");
+                }else if ("3".equals(info.getReason())){
+                    holder.memoTextView.setText("拒接");
+                }else if ("4".equals(info.getReason())){
+                    holder.memoTextView.setText("患者个人检验数据不清楚");
+                }else {
+                    holder.memoTextView.setText("其他");
+                }
             }
         } else {
             holder.memoLinearLayout.setVisibility(View.GONE);

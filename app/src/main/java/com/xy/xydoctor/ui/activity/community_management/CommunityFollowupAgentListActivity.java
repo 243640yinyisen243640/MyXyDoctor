@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -98,6 +100,19 @@ public class CommunityFollowupAgentListActivity extends XYSoftUIBaseActivity {
             }
         });
 
+        searchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                        (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    //do something;
+                    mPageIndex = 1;
+                    onPageLoad();
+                    return true;
+                }
+                return false;
+            }
+        });
         //设置下拉刷新和上拉加载监听
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override

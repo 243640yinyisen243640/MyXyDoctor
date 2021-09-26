@@ -284,6 +284,8 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
 
     @Override
     public void onClick(View v) {
+        Intent intent;
+
         switch (v.getId()) {
             case R.id.tv_user_info_device_manager:
                 //                PermissionUtils
@@ -302,15 +304,15 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
                 //                            }
                 //                        }).request();
 
-                Intent intent2 = new Intent(getPageContext(), MyDeviceListActivity.class);
+                intent = new Intent(getPageContext(), MyDeviceListActivity.class);
                 //                                intent.putExtra("type", 4);
-                startActivity(intent2);
+                startActivity(intent);
                 break;
             case R.id.iv_user_info_back:
                 finish();
                 break;
             case R.id.ll_user_info_user_medican:
-                Intent intent = new Intent(getPageContext(), CommunityUserMedicineRecordListActivity.class);
+                intent = new Intent(getPageContext(), CommunityUserMedicineRecordListActivity.class);
                 intent.putExtra("userid", userid);
                 startActivity(intent);
                 break;
@@ -319,11 +321,11 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
                 onlineTestPopup.showPopupWindow(textImageView);
                 break;
             case R.id.ll_user_info_healthy:
-                Intent intent1 = new Intent(getPageContext(), PatientHealthArchiveActivity.class);
-                intent1.putExtra("userid", userid);
-                intent1.putExtra("username", username);
-                intent1.putExtra("isDead", TurnsUtils.getInt(userInfo.getIsdeath(), 0));
-                startActivity(intent1);
+                intent = new Intent(getPageContext(), PatientHealthArchiveActivity.class);
+                intent.putExtra("userid", userid);
+                intent.putExtra("username", username);
+                intent.putExtra("isDead", TurnsUtils.getInt(userInfo.getIsdeath(), 0));
+                startActivity(intent);
                 break;
             case R.id.tv_user_info_sugar_follow:
                 intent = new Intent(getPageContext(), CommunitySugarOrPressureListActivity.class).putExtra("userid", userid).putExtra("type", "1");

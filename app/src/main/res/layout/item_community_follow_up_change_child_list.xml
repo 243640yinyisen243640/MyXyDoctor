@@ -130,6 +130,7 @@
         android:id="@+id/ll_follow_memo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:background="@drawable/shape_bg_background_5"
         android:orientation="vertical"
         android:padding="10dp">
