@@ -6,6 +6,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -117,6 +118,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.i("yys","onCreate==");
         topViewManager().titleTextView().setText("筛选列表");
         topViewManager().moreTextView().setText(R.string.base_filter);
         topViewManager().moreTextView().setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.community_filter_red, 0);
@@ -174,6 +176,8 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
         mIsLoading = true;
         Call<String> requestCall = DataManager.getFilterList(isEmpty, com_id, sex, age_min, age_max, other, disease, mPageIndex + "",
                 (call, response) -> {
+                    StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+                    mRecyclerView.setLayoutManager(layoutManager);
                     mIsLoading = false;
                     if (1 != mPageIndex) {
                         mRefreshLayout.finishLoadMore();
@@ -200,12 +204,12 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                                 mList.clear();
                             }
                             mList.addAll(mTempList);
-                            if (mAdapter == null) {
+//                            if (mAdapter == null) {
                                 mAdapter = new CommunityFilterListAdapter(getPageContext(), mList, isEmpty, new OnItemClickListener());
                                 mRecyclerView.setAdapter(mAdapter);
-                            } else {
-                                mAdapter.notifyDataSetChanged();
-                            }
+//                            } else {
+//                                mAdapter.notifyDataSetChanged();
+//                            }
                         } else {
                             mList.addAll(mTempList);
                             mAdapter.notifyDataSetChanged();
@@ -391,16 +395,16 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                 if (data != null) {
                     String infoStr = data.getStringExtra("info");
                     CommunityFilterInfo info = new Gson().fromJson(infoStr, CommunityFilterInfo.class);
+
                     isEmpty = info.getIsempty();
                     com_id = info.getCom_id();
                     sex = info.getSex();
                     age_min = info.getAge_min();
                     age_max = info.getAge_max();
-                    if (filterInfo.getDiseaseTypeInfos() != null && filterInfo.getDiseaseTypeInfos().size() != 0) {
-
+                    if (info.getDiseaseTypeInfos() != null && info.getDiseaseTypeInfos().size() != 0) {
                         StringBuilder stringBuilderDisease = new StringBuilder();
-                        for (int i = 0; i < filterInfo.getDiseaseTypeInfos().size(); i++) {
-                            String userid = filterInfo.getDiseaseTypeInfos().get(i).getCheckID();
+                        for (int i = 0; i < info.getDiseaseTypeInfos().size(); i++) {
+                            String userid = info.getDiseaseTypeInfos().get(i).getCheckID();
                             stringBuilderDisease.append(userid);
                             stringBuilderDisease.append(",");
 
@@ -408,11 +412,10 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                         //截取最后,
                         disease = stringBuilderDisease.substring(0, stringBuilderDisease.length() - 1);
                     }
-
-                    if (filterInfo.getOtherList() != null && filterInfo.getOtherList().size() != 0) {
+                    if (info.getOtherList() != null && info.getOtherList().size() != 0) {
                         StringBuilder stringBuilderOther = new StringBuilder();
-                        for (int i = 0; i < filterInfo.getOtherList().size(); i++) {
-                            String userid = filterInfo.getOtherList().get(i).getCheckID();
+                        for (int i = 0; i < info.getOtherList().size(); i++) {
+                            String userid = info.getOtherList().get(i).getCheckID();
                             stringBuilderOther.append(userid);
                             stringBuilderOther.append(",");
 

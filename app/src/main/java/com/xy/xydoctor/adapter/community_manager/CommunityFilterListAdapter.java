@@ -58,8 +58,10 @@ public class CommunityFilterListAdapter extends UIBaseRecycleViewAdapter<Communi
         if ("1".equals(isEmpty)) {
             viewHolder.noFrameLayout.setVisibility(View.VISIBLE);
             viewHolder.emptyTextView.setVisibility(View.GONE);
+            viewHolder.typeFlexboxLayout.removeAllViews();
             if (info.getDiseases() != null && info.getDiseases().size() > 0) {
                 viewHolder.typeFlexboxLayout.setVisibility(View.VISIBLE);
+
                 int padding = XyScreenUtils.dip2px(getContext(), 5);
                 FlexboxLayout.LayoutParams flexLP = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, XyScreenUtils.dip2px(getContext(), 20));
                 flexLP.setMargins(0, padding * 2, padding * 2, 0);
@@ -91,11 +93,11 @@ public class CommunityFilterListAdapter extends UIBaseRecycleViewAdapter<Communi
             viewHolder.sexTextView.setText(info.getSex());
             viewHolder.telTextView.setText(info.getTel());
             viewHolder.ageTextView.setText(info.getAge() + "岁");
-            viewHolder.locationTextView.setText(info.getCom_name() + info.getBuild_name()  + info.getUnit_name()+ info.getHouse_num());
+            viewHolder.locationTextView.setText(info.getCom_name() + info.getBuild_name() + info.getUnit_name() + info.getHouse_num());
         } else {
             viewHolder.noFrameLayout.setVisibility(View.GONE);
             viewHolder.emptyTextView.setVisibility(View.VISIBLE);
-            viewHolder.emptyTextView.setText(info.getCom_name() + info.getBuild_name()+ info.getUnit_name() + info.getHouse_num());
+            viewHolder.emptyTextView.setText(info.getCom_name() + info.getBuild_name() + info.getUnit_name() + info.getHouse_num());
         }
 
         CommunityFilterDeseaseImgAdapter imgAdapter = new CommunityFilterDeseaseImgAdapter(getContext(), info.getImgs(), new IAdapterViewClickListener() {

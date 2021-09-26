@@ -242,9 +242,9 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
             if (response.code == 200) {
                 List<CommunityFilterInfo> roomList = (List<CommunityFilterInfo>) response.object;
                 int anInt = TurnsUtils.getInt(buildList.get(buildindex).getUnits().get(unitindex).getHousehold(), 0);
-                if (anInt < 4) {
-                    anInt = 4;
-                }
+//                if (anInt < 4) {
+//                    anInt = 4;
+//                }
                 if (anInt > 5) {
                     anInt = 5;
                 }

@@ -323,18 +323,17 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
                         diseaseTypeInfos.add(diseaseList.get(i));
                     }
                 }
-
                 info.setDiseaseTypeInfos(diseaseTypeInfos);
 
                 List<FilterSugarPressureInfo> otherList = new ArrayList<>();
 
-                for (int i = 0; i < otherList.size(); i++) {
-                    if (otherList.get(i).isCheck()) {
-                        otherList.add(otherList.get(i));
+                for (int i = 0; i < otherInfoList.size(); i++) {
+                    if (otherInfoList.get(i).isCheck()) {
+                        otherList.add(otherInfoList.get(i));
                     }
                 }
-
                 info.setOtherList(otherList);
+
                 if ("1".equals(type)) {
                     Intent intent = new Intent(getPageContext(), CommunityFilterHaveResultListActivity.class);
                     intent.putExtra("info", new Gson().toJson(info));
