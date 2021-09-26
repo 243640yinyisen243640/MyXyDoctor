@@ -63,17 +63,19 @@ public class CommunityMedicineAddActivity extends XYSoftUIBaseActivity implement
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         type = getIntent().getStringExtra("type");
-        topViewManager().titleTextView().setText(R.string.add_medicine_title);
+
         topViewManager().moreTextView().setText(R.string.base_save);
         topViewManager().moreTextView().setOnClickListener(v -> {
             loadData();
         });
         containerView().addView(initView());
         if ("2".equals(type)) {
+            topViewManager().titleTextView().setText(R.string.edit_medicine_title);
             pharmacy_id = getIntent().getStringExtra("pharmacy_id");
             nameEditText.setEnabled(false);
             getDataInfo();
         } else {
+            topViewManager().titleTextView().setText(R.string.add_medicine_title);
             nameEditText.setEnabled(true);
             userid = getIntent().getStringExtra("userid");
             startTime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);

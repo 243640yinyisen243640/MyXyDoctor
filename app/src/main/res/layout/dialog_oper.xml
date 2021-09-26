@@ -39,20 +39,6 @@
         android:layout_height="50dp">
 
         <TextView
-            android:id="@+id/tv_oper_cancel"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/cancel"
-            android:textSize="16sp" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/background" />
-
-        <TextView
             android:id="@+id/tv_oper_sure"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -61,5 +47,21 @@
             android:text="@string/sure"
             android:textColor="@color/main_green"
             android:textSize="16sp" />
+
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/background" />
+
+        <TextView
+            android:id="@+id/tv_oper_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textSize="16sp" />
+
     </LinearLayout>
 </LinearLayout>

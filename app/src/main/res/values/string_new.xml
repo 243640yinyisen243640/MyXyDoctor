@@ -143,6 +143,7 @@
     <string name="base_save">保存</string>
     <string name="add_medicine_name">药品名称</string>
     <string name="add_medicine_title">添加用药</string>
+    <string name="edit_medicine_title">编辑用药</string>
     <string name="add_medicine_smoke_times">服用次数</string>
     <string name="add_medicine_all_amount">药品总量</string>
     <string name="add_medicine_dose">用药剂量</string>
