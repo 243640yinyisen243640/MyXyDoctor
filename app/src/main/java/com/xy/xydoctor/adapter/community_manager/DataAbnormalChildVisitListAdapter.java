@@ -36,7 +36,6 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
 
     @Override
     protected void convert(ViewHolder viewHolder, DataAbnormalChildInfo item, int position) {
-
         viewHolder.setText(R.id.tv_data_abnormal_child_name, item.getNickname());
         viewHolder.setText(R.id.tv_data_abnormal_child_phone, item.getTel());
         viewHolder.setText(R.id.tv_data_abnormal_child_location, item.getBuild_name() + item.getUnit_name() + item.getHouse_num());
@@ -44,6 +43,8 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
         TextView checkTextView = viewHolder.getView(R.id.tv_data_abnormal_child_check);
         TextView telImageView = viewHolder.getView(R.id.tv_data_abnormal_child_phone_img);
         TextView lightTextView = viewHolder.getView(R.id.tv_data_abnormal_child_high_or_low);
+        TextView haveDealTextView = viewHolder.getView(R.id.tv_data_abnormal_child_have_deal);
+
 
         if (item.isSelected()) {
             checkTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_special_operate_check, 0, 0, 0);
@@ -54,10 +55,18 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
 
         if (item.getList() != null && item.getList().size() >= 1) {
             clickLinearLayout.setVisibility(View.VISIBLE);
+            haveDealTextView.setVisibility(View.VISIBLE);
             viewHolder.setText(R.id.tv_data_abnormal_child_time, item.getList().get(0).getDatetime());
-
+            Log.i("yys", "static==" + item.getList().get(0).getStatics());
+            if ("1".equals(item.getList().get(0).getStatics())) {
+                haveDealTextView.setText(context.getString(R.string.data_abnormal_filter_have_deal));
+            } else if ("2".equals(item.getList().get(0).getStatics())) {
+                haveDealTextView.setText(context.getString(R.string.data_abnormal_filter_no_deal));
+            } else {
+                haveDealTextView.setText(context.getString(R.string.data_abnormal_filter_no_deal));
+            }
             if ("1".equals(type)) {
-                viewHolder.setText(R.id.tv_data_abnormal_child_amonut, item.getList().get(0).getDiastole() + "/" + item.getList().get(0).getSystolic());
+                viewHolder.setText(R.id.tv_data_abnormal_child_amonut, item.getList().get(0).getSystolic() + "/" + item.getList().get(0).getDiastole());
                 //1偏高2低3正常
                 if ("1".equals(item.getList().get(0).getIshight())) {
                     lightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_hign, 0);
@@ -83,6 +92,7 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
 
         } else {
             clickLinearLayout.setVisibility(View.GONE);
+            haveDealTextView.setVisibility(View.GONE);
         }
 
         if (item.isCheck()) {

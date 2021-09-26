@@ -115,8 +115,8 @@ public class DataAbnormalPopup1 extends PopupWindow {
         starttime = DataUtils.getLastMonthTime();
         endtime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
 
-        startTextView.setText(starttime);
-        endTextView.setText(endtime);
+//        startTextView.setText(starttime);
+//        endTextView.setText(endtime);
 
         List<FilterSugarPressureInfo> abnormalInfos = new ArrayList<>();
         FilterSugarPressureInfo abnormalInfo1 = new FilterSugarPressureInfo(context.getString(R.string.data_abnormal_up), "1");

@@ -74,6 +74,8 @@ public class CommunityFollowUpListFragment extends XYBaseFragment implements Tab
         Call<String> requestCall = DataManager.getFollowList(type,comid, (call, response) -> {
             if (200 == response.code) {
                 allInfo = (FollowUpListAllInfo) response.object;
+                StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+                mRecyclerView.setLayoutManager(layoutManager);
                 bindData();
             } else {
                 TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);

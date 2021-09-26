@@ -1,7 +1,6 @@
 package com.xy.xydoctor.adapter.community_manager;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -45,11 +44,9 @@ public class DataAbnormalRemindAdapter extends UIBaseRecycleViewAdapter<SugarOrP
 
         holder.timeTextView.setText(sugarOrPressureInfo.getDatetime());
 
-        Log.i("yys", "type==" + type);
         if ("1".equals(type)) {
             //1偏高2低3正常
             holder.eatTextView.setVisibility(View.GONE);
-            Log.i("yys", "content=" + sugarOrPressureInfo.getSystolic() + "/" + sugarOrPressureInfo.getDiastole());
             holder.amountTextView.setText(sugarOrPressureInfo.getSystolic() + "/" + sugarOrPressureInfo.getDiastole());
             if ("1".equals(sugarOrPressureInfo.getIshight())) {
                 holder.HighAndLowTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sugar_or_pressure_hign, 0);

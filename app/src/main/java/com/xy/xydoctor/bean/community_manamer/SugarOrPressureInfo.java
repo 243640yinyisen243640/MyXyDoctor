@@ -45,7 +45,18 @@ public class SugarOrPressureInfo implements Serializable {
     private String year;
     private String link;
 
+    /**
+     * 处理是否 1是 2否
+     */
+    private String statics;
 
+    public String getStatics() {
+        return statics;
+    }
+
+    public void setStatics(String statics) {
+        this.statics = statics;
+    }
 
 
     private List<SugarOrPressureChildInfo> list;

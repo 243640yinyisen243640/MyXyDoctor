@@ -47,6 +47,7 @@ public class DataAbnormalChildInfo {
     private boolean isSelected;
 
 
+
     public boolean isSelected() {
         return isSelected;
     }

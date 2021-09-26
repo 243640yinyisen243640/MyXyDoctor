@@ -1,7 +1,6 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -49,9 +48,6 @@ public class DataAbnormalRemindListActivity extends XYSoftUIBaseActivity {
     private void initValues() {
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         rvRecyclerView.setLayoutManager(layoutManager);
-
-
-        Log.i("yys", "1type==" + type);
         adapter = new DataAbnormalRemindAdapter(getPageContext(), sugarOrPressureInfoList, type, new OnItemClickListener());
         rvRecyclerView.setAdapter(adapter);
     }
