@@ -244,9 +244,12 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
         allCommunityTextView.setTextColor(getResources().getColor(color));
         maleCheckBox.setTextColor(getResources().getColor(color));
         femaleCheckBox.setTextColor(getResources().getColor(color));
+        //type 1：空房间选中 2：空房间未选中
         if ("1".equals(type)) {
             for (int i = 0; i < diseaseList.size(); i++) {
                 diseaseList.get(i).setSelected(true);
+                diseaseList.get(i).setCheck(false);
+                diseaseList.get(i).setCheckID("0");
             }
             diseaseTypeAdapter.notifyDataSetChanged();
         } else {
@@ -259,6 +262,8 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
         if ("1".equals(type)) {
             for (int i = 0; i < otherInfoList.size(); i++) {
                 otherInfoList.get(i).setSelected(true);
+                otherInfoList.get(i).setCheck(false);
+                otherInfoList.get(i).setCheckID("0");
             }
             otherTypeAdapter.notifyDataSetChanged();
         } else {

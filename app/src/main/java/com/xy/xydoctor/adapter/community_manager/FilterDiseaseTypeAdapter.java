@@ -43,11 +43,7 @@ public class FilterDiseaseTypeAdapter extends XYSoftBaseAdapter<FilterSugarPress
         }
         FilterSugarPressureInfo typeInfo = getList().get(position);
         holder.checkTextView.setText(typeInfo.getDiseaseName());
-        if (typeInfo.isSelected()) {
-            holder.checkTextView.setTextColor(getContext().getResources().getColor(R.color.base_text_gray1));
-        } else {
-            holder.checkTextView.setTextColor(getContext().getResources().getColor(R.color.black));
-        }
+
         if ("1".equals(type)) {
             if (typeInfo.isCheck()) {
                 holder.checkTextView.setTextColor(getContext().getResources().getColor(R.color.main_red));
@@ -57,7 +53,11 @@ public class FilterDiseaseTypeAdapter extends XYSoftBaseAdapter<FilterSugarPress
                 holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_background_5));
             }
 
-
+            if (typeInfo.isSelected()) {
+                holder.checkTextView.setTextColor(getContext().getResources().getColor(R.color.base_text_gray1));
+            } else {
+                holder.checkTextView.setTextColor(getContext().getResources().getColor(R.color.black));
+            }
         } else {
             if (typeInfo.isCheck()) {
                 holder.checkTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_main_90));
