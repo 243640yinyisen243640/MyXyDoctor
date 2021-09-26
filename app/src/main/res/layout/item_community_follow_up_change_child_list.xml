@@ -60,12 +60,7 @@
                     android:id="@+id/tv_fuc_child_phone"
                     style="@style/follow_up_search_infomation" />
 
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="12dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/gray_light" />
+
             </LinearLayout>
         </LinearLayout>
 
