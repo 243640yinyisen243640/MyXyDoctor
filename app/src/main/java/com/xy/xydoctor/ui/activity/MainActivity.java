@@ -244,7 +244,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
             }
 
         } else {
-            startDestinationID = R.id.navigation_community_manager;//这个id你不是没换
+            startDestinationID = R.id.navigation_community_manager;
             FloatingView.get().remove();
             hideTitleBar();
             hideBack();

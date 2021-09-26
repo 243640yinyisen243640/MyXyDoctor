@@ -81,7 +81,7 @@ public class CommunityFollowStatisticsActivity extends XYSoftUIBaseActivity impl
         containerView().addView(initView());
         initListener();
         time = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y);
-        timeTextView.setText(time);
+        timeTextView.setText(time+"年");
         getData();
 
     }
