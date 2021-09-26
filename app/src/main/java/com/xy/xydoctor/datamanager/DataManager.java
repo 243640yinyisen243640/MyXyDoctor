@@ -425,14 +425,16 @@ public class DataManager {
     }
 
     /**
+     * @param com_id
      * @param status          1待随访 2失访 3已完成
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> getFollowList(String status, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getFollowList(String status,String com_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("status", status);
+        map.put("com_id", com_id);
         map.put("access_token", SPStaticUtils.getString("token"));
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, FollowUpListAllInfo.class, "/doctor/Community/followLists", map, successCallBack, failureCallBack);
     }

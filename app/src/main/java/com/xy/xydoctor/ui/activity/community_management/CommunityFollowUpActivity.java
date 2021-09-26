@@ -32,11 +32,16 @@ public class CommunityFollowUpActivity extends XYSoftUIBaseActivity implements V
     private List<Fragment> fragments;
 
     private int index = 0;
+    /**
+     * 小区id
+     */
+    private String comid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText(R.string.follow_up_agent_title);
+        comid= getIntent().getStringExtra("comid");
         containerView().addView(initView());
         initListener();
         initValues();
@@ -86,7 +91,7 @@ public class CommunityFollowUpActivity extends XYSoftUIBaseActivity implements V
     private void initValues() {
         fragments = new ArrayList<>();
         for (int i = 1; i < 4; i++) {
-            CommunityFollowUpListFragment talkFragment = CommunityFollowUpListFragment.newInstance(i + "");
+            CommunityFollowUpListFragment talkFragment = CommunityFollowUpListFragment.newInstance(i + "",comid);
             fragments.add(talkFragment);
         }
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), fragments));

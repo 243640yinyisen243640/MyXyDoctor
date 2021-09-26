@@ -45,9 +45,12 @@ public class CommunityFollowUpListFragment extends XYBaseFragment implements Tab
 
     private FollowUpListAllInfo allInfo;
 
-    public static CommunityFollowUpListFragment newInstance(String type) {
+    private String comid;
+
+    public static CommunityFollowUpListFragment newInstance(String type,String comid) {
         Bundle bundle = new Bundle();
         bundle.putString("type", type);
+        bundle.putString("comid", comid);
         CommunityFollowUpListFragment fragment = new CommunityFollowUpListFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -59,6 +62,7 @@ public class CommunityFollowUpListFragment extends XYBaseFragment implements Tab
         topViewManager().topView().removeAllViews();
         if (getArguments() != null) {
             type = getArguments().getString("type");
+            comid = getArguments().getString("comid");
         }
         initView();
         initValue();
@@ -67,7 +71,7 @@ public class CommunityFollowUpListFragment extends XYBaseFragment implements Tab
 
     private void getData() {
 
-        Call<String> requestCall = DataManager.getFollowList(type, (call, response) -> {
+        Call<String> requestCall = DataManager.getFollowList(type,comid, (call, response) -> {
             if (200 == response.code) {
                 allInfo = (FollowUpListAllInfo) response.object;
                 bindData();

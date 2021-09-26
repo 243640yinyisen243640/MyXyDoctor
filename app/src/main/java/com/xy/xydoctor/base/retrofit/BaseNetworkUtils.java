@@ -132,6 +132,11 @@ public class BaseNetworkUtils {
      */
     private static void processJsonParse(Call<String> call, String result, @JsonParseMode int parseMode, Class clazz, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack) throws Exception {
         HHSoftBaseResponse response = new HHSoftBaseResponse();
+
+        if(result != null && result.startsWith("\ufeff"))
+        {
+            result =  result.substring(1);
+        }
         JSONObject jsonObject = new JSONObject(result);
         response.code = jsonObject.optInt("code");
         response.msg = jsonObject.optString("msg");

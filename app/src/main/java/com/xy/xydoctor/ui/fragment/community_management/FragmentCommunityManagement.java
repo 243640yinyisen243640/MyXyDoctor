@@ -5,7 +5,6 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -146,7 +145,6 @@ public class FragmentCommunityManagement extends BaseFragment {
         locationTextView.setText(hospitalname);
         //    // type:3:主任  4:医生  10:物业
         int type = SPStaticUtils.getInt("docType");
-        Log.i("yys", "type==" + type);
         if (10 == type) {
             followUpStatisticsTitleLinearLayout.setVisibility(View.GONE);
             followUpStatisticsContentLinearLayout.setVisibility(View.GONE);

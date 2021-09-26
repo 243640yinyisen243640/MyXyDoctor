@@ -114,6 +114,7 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
             if ("2".equals(type)) {
                 //进入到待随访  失访  已完成的页面
                 Intent intent = new Intent(getPageContext(), CommunityFollowUpActivity.class);
+                intent.putExtra("comid", comid);
                 startActivity(intent);
 
             } else {
