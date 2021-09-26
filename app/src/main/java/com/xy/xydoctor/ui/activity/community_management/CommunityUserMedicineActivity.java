@@ -126,6 +126,8 @@ public class CommunityUserMedicineActivity extends XYSoftUIBaseActivity {
         mIsLoading = true;
         Call<String> requestCall = DataManager.useMedicineRemind(userid, mPageIndex + "",
                 (call, response) -> {
+                    StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+                    mRecyclerView.setLayoutManager(layoutManager);
                     mIsLoading = false;
                     if (1 != mPageIndex) {
                         mRefreshLayout.finishLoadMore();
