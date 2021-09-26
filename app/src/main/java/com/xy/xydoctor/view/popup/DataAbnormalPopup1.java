@@ -112,7 +112,7 @@ public class DataAbnormalPopup1 extends PopupWindow {
         //因为某些机型是虚拟按键的,所以要加上以下设置防止挡住按键.
         this.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-        starttime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
+        starttime = DataUtils.getLastMonthTime();
         endtime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
 
         startTextView.setText(starttime);
