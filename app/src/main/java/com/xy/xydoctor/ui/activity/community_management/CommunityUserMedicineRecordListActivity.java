@@ -281,5 +281,14 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
         });
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_REFRESH) {
+                mPageIndex = 1;
+                onPageLoad();
+            }
+        }
+    }
 }
