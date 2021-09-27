@@ -298,8 +298,9 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
 
                 break;
             case R.id.tv_filter_disease_presure:
-
                 if (pressureTextView.isSelected()) {
+                    bloodLevel = "0";
+                    hypertension = "1";
                     pressureTextView.setSelected(false);
                 } else {
                     List<FilterSugarPressureInfo> pressureList = new ArrayList<>();
