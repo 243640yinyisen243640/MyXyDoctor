@@ -264,6 +264,10 @@ public class DataAbnormalPopup1 extends PopupWindow {
             String styleName = "";
             String startSugar = "";
             String endSugar = "";
+            if (compareTwoTime(starttime, endtime)) {
+                TipUtils.getInstance().showToast(context, R.string.please_choose_time_at_month);
+                return;
+            }
             if ("1".equals(type)) {
 
                 for (int i = 0; i < abnormalInfos.size(); i++) {
@@ -307,10 +311,7 @@ public class DataAbnormalPopup1 extends PopupWindow {
                     }
                 }
 
-                if (!compareTwoTime(starttime, endtime)) {
-                    TipUtils.getInstance().showToast(context, R.string.please_choose_time_at_month);
-                    return;
-                }
+
 
                 if ("-1".equals(style) && (TextUtils.isEmpty(startSugar) || TextUtils.isEmpty(endSugar))) {
                     TipUtils.getInstance().showToast(context, R.string.please_choose_sugar);
