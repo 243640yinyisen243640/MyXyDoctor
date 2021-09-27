@@ -264,7 +264,7 @@ public class DataAbnormalPopup1 extends PopupWindow {
             String styleName = "";
             String startSugar = "";
             String endSugar = "";
-            if (compareTwoTime(starttime, endtime)) {
+            if (!compareTwoTime(starttime, endtime)) {
                 TipUtils.getInstance().showToast(context, R.string.please_choose_time_at_month);
                 return;
             }
@@ -384,7 +384,7 @@ public class DataAbnormalPopup1 extends PopupWindow {
      */
     public static boolean compareTwoTime(String starTime, String endString) {
         boolean isMoreThan = false;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DataFormatManager.TIME_FORMAT_Y_M_D);
         try {
             Date startData = dateFormat.parse(starTime);
             Date endData = dateFormat.parse(endString);
