@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.lyd.baselib.util.TurnsUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.DataAbnormalAdapter;
 import com.xy.xydoctor.base.utils.XYSoftDensityUtils;
@@ -115,8 +116,8 @@ public class DataAbnormalPopup1 extends PopupWindow {
         starttime = DataUtils.getLastMonthTime();
         endtime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
 
-//        startTextView.setText(starttime);
-//        endTextView.setText(endtime);
+        //        startTextView.setText(starttime);
+        //        endTextView.setText(endtime);
 
         List<FilterSugarPressureInfo> abnormalInfos = new ArrayList<>();
         FilterSugarPressureInfo abnormalInfo1 = new FilterSugarPressureInfo(context.getString(R.string.data_abnormal_up), "1");
@@ -278,7 +279,7 @@ public class DataAbnormalPopup1 extends PopupWindow {
                     }
                 }
 
-                if ("-1".equals(style) ) {
+                if ("-1".equals(style)) {
                     TipUtils.getInstance().showToast(context, R.string.please_choose_pressure);
                     return;
                 }
@@ -308,6 +309,10 @@ public class DataAbnormalPopup1 extends PopupWindow {
 
                 if ("-1".equals(style) && (TextUtils.isEmpty(startSugar) || TextUtils.isEmpty(endSugar))) {
                     TipUtils.getInstance().showToast(context, R.string.please_choose_sugar);
+                    return;
+                }
+                if (TurnsUtils.getInt(startSugar, 0) > TurnsUtils.getInt(endSugar, 0)) {
+                    TipUtils.getInstance().showToast(context, R.string.please_input_right_sugar);
                     return;
                 }
                 if ("-1".equals(status)) {
@@ -374,6 +379,7 @@ public class DataAbnormalPopup1 extends PopupWindow {
                 .setSubmitColor(ContextCompat.getColor(context, R.color.main_red))
                 .setCancelColor(ContextCompat.getColor(context, R.color.black_text))
                 .isDialog(true)
+
                 //                .setDecorView(allLiner)
                 .build();
         //设置dialog弹出位置

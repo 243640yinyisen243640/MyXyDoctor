@@ -123,7 +123,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
 
     private String houseInfo;
 
-    private String sex = "2";
+    private String sex = "0";
 
     /**
      * 生日
@@ -279,6 +279,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
             case R.id.cb_filter_disease_sugar:
 
                 if (sugarTextView.isSelected()) {
+                    diabeteslei = "0";
                     sugarTextView.setSelected(false);
                 } else {
                     List<FilterSugarPressureInfo> sugarList = new ArrayList<>();
@@ -344,6 +345,10 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         String tel = phoneEditText.getText().toString().trim();
         if (TextUtils.isEmpty(tel)) {
             TipUtils.getInstance().showToast(getPageContext(), R.string.user_add_please_input_phone);
+            return;
+        }
+        if ("0".equals(sex)) {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.user_add_please_choose_sex);
             return;
         }
 
@@ -739,7 +744,7 @@ public class UserAddActivity extends XYSoftUIBaseActivity implements View.OnClic
         sexList.add(getString(R.string.base_male));
         sexList.add(getString(R.string.base_female));
         OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
-            Log.i("yys", "option1==" + options1);
+
             sex = options1 + 1 + "";
             sexTextView.setText("1".equals(sex) ? "男" : "女");
         }).setLineSpacingMultiplier(2.5f)

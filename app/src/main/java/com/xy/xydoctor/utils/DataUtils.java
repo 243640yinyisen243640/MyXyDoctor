@@ -1,7 +1,9 @@
 package com.xy.xydoctor.utils;
 
 import android.annotation.SuppressLint;
+import android.text.format.Time;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -65,6 +67,11 @@ public class DataUtils {
         return format.format(date);
     }
 
+    /**
+     * 获取一个月前的时间
+     *
+     * @return
+     */
     public static String getLastMonthTime() {
         Calendar calendar = Calendar.getInstance();
 
@@ -80,5 +87,64 @@ public class DataUtils {
         return year + "-" + (month < 10 ? "0" + month : month) + "-" + (date < 10 ? "0" + date : date);
 
     }
+
+    public static boolean isCurrentInTimeScope(int beginHour, int beginMin, int endHour, int endMin, String time) {
+        boolean result = false;
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date nowDate = null;
+
+        try {
+            nowDate = df.parse(time);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+
+        }
+
+        Time now = new Time();
+
+        now.set(nowDate.getTime());
+
+        Time startTime = new Time();
+
+        startTime.set(nowDate.getTime());
+
+        startTime.year = beginHour;
+
+        startTime.month = beginMin;
+
+        Time endTime = new Time();
+
+        endTime.set(nowDate.getTime());
+
+        endTime.year = endHour;
+
+        endTime.month = endMin;
+
+        if (!startTime.before(endTime)) {
+            startTime.set(startTime.toMillis(true) - nowDate.getTime());
+
+            result = !now.before(startTime) && !now.after(endTime); // startTime <= now <= endTime
+
+            Time startTimeInThisDay = new Time();
+
+            startTimeInThisDay.set(startTime.toMillis(true) + nowDate.getTime());
+
+            if (!now.before(startTimeInThisDay)) {
+                result = true;
+
+            }
+
+        } else {
+            result = !now.before(startTime) && !now.after(endTime); // startTime <= now <= endTime
+
+        }
+
+        return result;
+
+    }
+
 
 }

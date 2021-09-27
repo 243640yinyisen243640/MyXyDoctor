@@ -80,8 +80,7 @@
                 <TextView
                     android:id="@+id/tv_user_add_sex"
                     style="@style/user_add_right_choose"
-                    android:text="@string/base_female"
-                    android:textColor="@color/base_black" />
+                    android:text="@string/please_choose" />
 
             </LinearLayout>
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -183,6 +184,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
         String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
 
         Call<String> requestCall = DataManager.loadCheckList(substring, type, (call, response) -> {
+            TipUtils.getInstance().showToast(getPageContext(), response.msg);
             if (response.code == 200) {
                 mPageIndex = 1;
                 onPageLoad();
@@ -199,11 +201,6 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
     @Override
     protected void onCreate() {
         topViewManager().topView().removeAllViews();
-        //        Calendar ca = Calendar.getInstance();
-        //        ca.add(Calendar.MONTH, -1);
-        //
-        //        Date lastMonth = ca.getTime();
-        //        String s = DataUtils.convertDateToString(lastMonth, DataFormatManager.TIME_FORMAT_M);
         starttime = DataUtils.getLastMonthTime();
         endtime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
         if (getArguments() != null) {
@@ -453,8 +450,8 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_data_abnormal_down:
-                showMenuWindow();
 
+                showMenuWindow();
                 break;
             default:
                 break;
@@ -476,6 +473,12 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
                     break;
             }
 
+        });
+        popu.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+
+            }
         });
         popu.setOnChooseOkListener(this);
         if (!popu.isShowing()) {

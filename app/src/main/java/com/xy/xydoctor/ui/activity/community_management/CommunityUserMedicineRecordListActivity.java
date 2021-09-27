@@ -50,6 +50,8 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
 
     private String userid;
 
+    private TextView recordTextView;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,12 +110,14 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
                         //如果是加载成功
                         mRefreshLayout.setVisibility(View.VISIBLE);
                         presentNestedSrcollView.setVisibility(View.GONE);
+                        recordTextView.setVisibility(View.VISIBLE);
                     } else if (30002 == response.code) {
                         mPageCount = 0;
                         if (1 == mPageIndex) {
                             //如果是没有数据
                             mRefreshLayout.setVisibility(View.GONE);
                             presentNestedSrcollView.setVisibility(View.VISIBLE);
+                            recordTextView.setVisibility(View.GONE);
 
                         } else {
                             TipUtils.getInstance().showToast(getPageContext(), R.string.huahansoft_load_state_no_more_data);
@@ -122,6 +126,7 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
                         mPageCount = 0;
                         if (1 == mPageIndex) {
                             mRefreshLayout.setVisibility(View.GONE);
+                            recordTextView.setVisibility(View.GONE);
                             presentNestedSrcollView.setVisibility(View.VISIBLE);
                         } else {
                             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
@@ -160,6 +165,7 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
     private void changeLoadUI(int responseCode) {
         presentNestedSrcollView.setVisibility(View.GONE);
         mRefreshLayout.setVisibility(View.VISIBLE);
+        recordTextView.setVisibility(View.VISIBLE);
         if (1 == mPageIndex) {
             if (200 != responseCode) {
                 if (30002 == responseCode) {
@@ -170,6 +176,7 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
                 stateTextView.setOnClickListener(view -> {
                     onPageLoad();
                 });
+                recordTextView.setVisibility(View.GONE);
                 mRefreshLayout.setVisibility(View.GONE);
                 presentNestedSrcollView.setVisibility(View.VISIBLE);
             }
@@ -182,6 +189,7 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
         mRecyclerView = getViewByID(view, R.id.rv_um_record);
         presentNestedSrcollView = getViewByID(view, R.id.nsv_um_record_nodate);
         stateTextView = getViewByID(view, R.id.tv_um_record_no_data);
+        recordTextView = getViewByID(view, R.id.tv_user_medicine_record);
         containerView().addView(view);
 
     }
@@ -240,11 +248,6 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
             switch (view.getId()) {
                 case R.id.tv_use_medicine_child_edit_so:
                     remindUser(position);
-                    //                    Intent intent = new Intent(getPageContext(), CommunityMedicineAddActivity.class);
-                    //                    intent.putExtra("userid", userid);
-                    //                    intent.putExtra("pharmacy_id", mList.get(position).getId());
-                    //                    intent.putExtra("type", "2");
-                    //                    startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
                     break;
                 default:
                     break;
@@ -277,14 +280,5 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
         });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_CODE_FOR_REFRESH) {
-                mPageIndex = 1;
-                onPageLoad();
-            }
-        }
-    }
+
 }
