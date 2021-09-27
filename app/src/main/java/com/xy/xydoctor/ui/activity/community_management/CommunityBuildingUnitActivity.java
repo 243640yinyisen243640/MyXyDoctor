@@ -61,6 +61,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
     private TextView unitTextView;
     private TextView timePressureTextView;
     private RecyclerView memberMyListView;
+    private LinearLayout memberLinearLayout;
 
     /**
      * 房间ID
@@ -184,6 +185,11 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
                 imgListView.setAdapter(imgAdapter);
             } else {
                 imgListView.setVisibility(View.GONE);
+            }
+            if (info.getMembers() == null || info.getMembers().size() == 0) {
+                memberLinearLayout.setVisibility(View.GONE);
+            }else {
+                memberLinearLayout.setVisibility(View.VISIBLE);
             }
             if ("1".equals(info.getMaster().getIscare())) {
                 followTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.community_impotant_follow, 0, 0, 0);
@@ -461,6 +467,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         unitTextView = view.findViewById(R.id.tv_building_unit_unit);
         timePressureTextView = view.findViewById(R.id.tv_building_unit_time_and_pressure);
         memberMyListView = view.findViewById(R.id.lv_building_unit_child);
+        memberLinearLayout = view.findViewById(R.id.ll_building_unit_member);
         containerView().addView(view);
 
     }

@@ -88,6 +88,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
      * 处理是否 0全部 1是 2否
      */
     private String status = "2";
+    private String statusName = "";
     /**
      * 开始时间
      */
@@ -249,7 +250,14 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
                     CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
                     if (200 == response.code) {
                         activity.topTextView().setVisibility(View.VISIBLE);
-                        activity.topTextView().setText("处理");
+                        if ("未处理".equals(secondTextView.getText().toString().trim())) {
+                            activity.topTextView().setVisibility(View.VISIBLE);
+                            activity.topTextView().setText("处理");
+                        } else {
+                            activity.topTextView().setVisibility(View.GONE);
+//                            activity.topTextView().setText("处理");
+                        }
+
                         mTempList = (List<DataAbnormalInfo>) response.object;
                         mPageCount = mTempList == null ? 0 : mTempList.size();
                         if (1 == mPageIndex) {
@@ -449,8 +457,8 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_data_abnormal_down:
-                CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
-                activity.topTextView().setVisibility(View.GONE);
+//                CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
+//                activity.topTextView().setVisibility(View.GONE);
                 showMenuWindow();
                 break;
             default:
@@ -474,10 +482,10 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
             }
 
         });
-        popu.setOnDismissListener(() -> {
-            CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
-            activity.topTextView().setVisibility(View.VISIBLE);
-        });
+//        popu.setOnDismissListener(() -> {
+//            CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
+//            activity.topTextView().setVisibility(View.VISIBLE);
+//        });
         popu.setOnChooseOkListener(this);
         if (!popu.isShowing()) {
             popu.showAsDropDown(showLinearLayout);
@@ -491,6 +499,7 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
         this.startSugar = startSugar;
         this.endSugar = endSugar;
         this.status = status;
+        this.statusName = statusName;
 
         Log.i("yys", "statusName==" + statusName + "styleName==" + styleName);
         secondTextView.setText(statusName);

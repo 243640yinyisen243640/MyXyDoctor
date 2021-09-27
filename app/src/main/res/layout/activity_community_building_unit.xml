@@ -201,6 +201,7 @@
 
 
             <LinearLayout
+                android:id="@+id/ll_building_unit_member"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

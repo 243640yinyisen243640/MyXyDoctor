@@ -75,6 +75,9 @@ public class CommunityFollowupAgentListActivity extends XYSoftUIBaseActivity {
             String commuinityName = SPStaticUtils.getString("hospitalname");
             topViewManager().titleTextView().setText(commuinityName);
         }
+        if ("3".equals(type)) {
+            type = "1";
+        }
         containerView().addView(initView());
         initValues();
         initListener();
@@ -195,7 +198,7 @@ public class CommunityFollowupAgentListActivity extends XYSoftUIBaseActivity {
                             }
                             mList.addAll(mTempList);
                             if (mAdapter == null) {
-                                mAdapter = new FollowupAgentListAdapter(getPageContext(), mList, new OnItemClickListener(),type);
+                                mAdapter = new FollowupAgentListAdapter(getPageContext(), mList, new OnItemClickListener(), type);
                                 mRecyclerView.setAdapter(mAdapter);
                             } else {
                                 mAdapter.notifyDataSetChanged();
