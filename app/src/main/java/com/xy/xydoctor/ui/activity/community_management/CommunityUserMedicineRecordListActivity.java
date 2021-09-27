@@ -155,6 +155,7 @@ public class CommunityUserMedicineRecordListActivity extends XYSoftUIBaseActivit
         if (1 == mPageIndex) {
 
             mRefreshLayout.setVisibility(View.GONE);
+            recordTextView.setVisibility(View.GONE);
             presentNestedSrcollView.setVisibility(View.VISIBLE);
         } else {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
