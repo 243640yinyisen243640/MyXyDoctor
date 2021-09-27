@@ -157,8 +157,10 @@
     <string name="follow_up_sugar_person_num">糖尿病人数</string>
     <string name="follow_up_pressure_person_num">高血压人数</string>
     <string name="follow_up_total_person_num">同时合并人数</string>
-    <string name="community_house_count">住户</string>
-    <string name="community_member_count">总人数</string>
+    <string name="community_house_count">待随访住户</string>
+    <string name="community_house_count_un_follow">住户</string>
+    <string name="community_member_count">待随访人数</string>
+    <string name="community_member_count_all">总人数</string>
     <string name="community_building_count">小区楼栋</string>
     <string name="community_person_count">小区用户</string>
     <string name="you_can_not_choose_person">你没有选择用户</string>

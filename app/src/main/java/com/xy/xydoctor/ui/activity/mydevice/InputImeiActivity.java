@@ -46,6 +46,8 @@ public class InputImeiActivity extends BaseActivity {
     @BindView(R.id.bt_sure)
     ColorButton btSure;
 
+    private String userid;
+
 
     @Override
     protected int getLayoutId() {
@@ -54,6 +56,7 @@ public class InputImeiActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        userid = getIntent().getStringExtra("userid");
         setIMEI();
         setType();
         setPosition();
@@ -175,6 +178,7 @@ public class InputImeiActivity extends BaseActivity {
             //执行
             HashMap map = new HashMap<>();
             map.put("imei", imei);
+            map.put("userid", userid);
             RxHttp.postForm(XyUrl.DEVICE_BIND_PATIENT)
                     .addAll(map)
                     .asResponse(String.class)
@@ -190,6 +194,7 @@ public class InputImeiActivity extends BaseActivity {
                         @Override
                         public void onError(ErrorInfo error) throws Exception {
 
+                            Log.i("yys","onError"+error.getErrorCode());
                         }
                     });
         }

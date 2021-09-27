@@ -195,7 +195,7 @@ public class CommunityFollowupAgentListActivity extends XYSoftUIBaseActivity {
                             }
                             mList.addAll(mTempList);
                             if (mAdapter == null) {
-                                mAdapter = new FollowupAgentListAdapter(getPageContext(), mList, new OnItemClickListener());
+                                mAdapter = new FollowupAgentListAdapter(getPageContext(), mList, new OnItemClickListener(),type);
                                 mRecyclerView.setAdapter(mAdapter);
                             } else {
                                 mAdapter.notifyDataSetChanged();

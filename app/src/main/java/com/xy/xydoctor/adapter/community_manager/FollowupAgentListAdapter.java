@@ -25,8 +25,12 @@ import java.util.List;
 
 public class FollowupAgentListAdapter extends BaseRecycleViewAdapter<FollowUpAgentListBean> {
 
-    public FollowupAgentListAdapter(Context mContext, List<FollowUpAgentListBean> mList, IAdapterViewClickListener mListener) {
+    //1:普通小区列表 2：待办小区列表 3:添加用户
+    private String type;
+
+    public FollowupAgentListAdapter(Context mContext, List<FollowUpAgentListBean> mList, IAdapterViewClickListener mListener, String type) {
         super(mContext, mList, mListener);
+        this.type = type;
     }
 
     @NonNull
@@ -44,10 +48,19 @@ public class FollowupAgentListAdapter extends BaseRecycleViewAdapter<FollowUpAge
         viewHolder.locationTextView.setText(info.getCom_address());
 
 
-        setTextStyle(info.getBuild_count(), getContext().getString(R.string.follow_up_agent_building_num), R.color.community_content_black, viewHolder.buildingNumTextView, 16);
-        setTextStyle(info.getUnity_count(), getContext().getString(R.string.follow_up_agent_unit_num), R.color.community_content_black, viewHolder.unitNumTextView, 16);
-        setTextStyle(info.getHouse_count(), getContext().getString(R.string.community_house_count), R.color.community_content_black, viewHolder.personNumTextView, 16);
-        setTextStyle(info.getMember_count(), getContext().getString(R.string.community_member_count), R.color.community_content_black, viewHolder.allPersonNumTextView, 16);
+        if ("2".equals(type)){
+            setTextStyle(info.getBuild_count(), getContext().getString(R.string.follow_up_agent_building_num), R.color.community_content_black, viewHolder.buildingNumTextView, 16);
+            setTextStyle(info.getUnity_count(), getContext().getString(R.string.follow_up_agent_unit_num), R.color.community_content_black, viewHolder.unitNumTextView, 16);
+            setTextStyle(info.getHouse_count(), getContext().getString(R.string.community_house_count), R.color.community_content_black, viewHolder.personNumTextView, 16);
+            setTextStyle(info.getMember_count(), getContext().getString(R.string.community_member_count), R.color.community_content_black, viewHolder.allPersonNumTextView, 16);
+
+        }else {
+            setTextStyle(info.getBuild_count(), getContext().getString(R.string.follow_up_agent_building_num), R.color.community_content_black, viewHolder.buildingNumTextView, 16);
+            setTextStyle(info.getUnity_count(), getContext().getString(R.string.follow_up_agent_unit_num), R.color.community_content_black, viewHolder.unitNumTextView, 16);
+            setTextStyle(info.getHouse_count(), getContext().getString(R.string.community_house_count_un_follow), R.color.community_content_black, viewHolder.personNumTextView, 16);
+            setTextStyle(info.getMember_count(), getContext().getString(R.string.community_member_count_all), R.color.community_content_black, viewHolder.allPersonNumTextView, 16);
+
+        }
 
         viewHolder.clickLinearLayout.setOnClickListener(v -> {
             if (getListener() != null) {
@@ -66,7 +79,7 @@ public class FollowupAgentListAdapter extends BaseRecycleViewAdapter<FollowUpAge
         int end = spannableStringBuilder.length();
         spannableStringBuilder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(), color)), 0, start, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         spannableStringBuilder.setSpan(new AbsoluteSizeSpan(XyScreenUtils.sp2px(getContext(), size)), 0, start, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        spannableStringBuilder.setSpan(new StyleSpan(Typeface.NORMAL), 0, start, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        //        spannableStringBuilder.setSpan(new StyleSpan(Typeface.NORMAL), 0, start, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
 
         textView.setText(spannableStringBuilder);
     }

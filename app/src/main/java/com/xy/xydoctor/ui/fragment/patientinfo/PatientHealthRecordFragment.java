@@ -75,6 +75,7 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
     TextView tvDeviceNumber;
     private String imei;
     private String guid;
+    private String userid;
 
     @Override
     protected int getLayoutId() {
@@ -83,7 +84,7 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
 
     @Override
     protected void init(View rootView) {
-        String userid = getArguments().getString("userid");
+        userid = getArguments().getString("userid");
         //设置11个记录
         setEightRecord(userid);
         //设置头部信息
@@ -232,6 +233,7 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
                             public void onGranted() {
                                 Intent intent = new Intent(getPageContext(), ScanActivity.class);
                                 intent.putExtra("type", 4);
+                                intent.putExtra("userid", userid);
                                 startActivity(intent);
                             }
 

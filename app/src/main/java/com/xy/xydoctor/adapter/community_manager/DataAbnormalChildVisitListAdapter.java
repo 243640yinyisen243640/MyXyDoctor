@@ -57,7 +57,6 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
             clickLinearLayout.setVisibility(View.VISIBLE);
             haveDealTextView.setVisibility(View.VISIBLE);
             viewHolder.setText(R.id.tv_data_abnormal_child_time, item.getList().get(0).getDatetime());
-            Log.i("yys", "static==" + item.getList().get(0).getStatics());
             if ("1".equals(item.getList().get(0).getStatics())) {
                 haveDealTextView.setText(context.getString(R.string.data_abnormal_filter_have_deal));
             } else if ("2".equals(item.getList().get(0).getStatics())) {
@@ -88,7 +87,7 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
                 lightTextView.setText(item.getList().get(0).getCategoryname());
             }
 
-            Log.i("yys", "getIshight==" + item.getList().get(0).getIshight());
+
 
         } else {
             clickLinearLayout.setVisibility(View.GONE);

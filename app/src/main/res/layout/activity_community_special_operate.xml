@@ -24,6 +24,7 @@
         <CheckBox
             android:id="@+id/cb_community_so_die"
             style="@style/community_special_operate"
+            android:layout_marginRight="10dp"
             android:drawableLeft="@drawable/community_special_operate_die"
             android:text="@string/community_special_operate_die" />
 

@@ -19,6 +19,8 @@ public class MyDeviceListActivity extends BaseActivity {
     @BindView(R.id.rv_device_list)
     RecyclerView rvDeviceList;
 
+    private String userid;
+
 
     @Override
     protected int getLayoutId() {
@@ -27,6 +29,7 @@ public class MyDeviceListActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        userid = getIntent().getStringExtra("userid");
         setTitle("选择设备");
         setRv();
     }
@@ -38,12 +41,12 @@ public class MyDeviceListActivity extends BaseActivity {
             String[] stringArray = Utils.getApp().getResources().getStringArray(R.array.my_device_list_name_new_add);
             List<String> list = Arrays.asList(stringArray);
             rvDeviceList.setLayoutManager(new LinearLayoutManager(getPageContext()));
-            rvDeviceList.setAdapter(new MyDeviceListAdapter(type, list));
+            rvDeviceList.setAdapter(new MyDeviceListAdapter(type, list,userid));
         }else{
             String[] stringArray = Utils.getApp().getResources().getStringArray(R.array.my_device_list_name);
             List<String> list = Arrays.asList(stringArray);
             rvDeviceList.setLayoutManager(new LinearLayoutManager(getPageContext()));
-            rvDeviceList.setAdapter(new MyDeviceListAdapter(type, list));
+            rvDeviceList.setAdapter(new MyDeviceListAdapter(type, list,userid));
         }
     }
 

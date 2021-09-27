@@ -53,6 +53,8 @@ public class ScanActivity extends BaseActivity implements ScanListener {
     @BindView(R.id.img_to_select_pic)
     ImageView imgToSelectPic;
 
+    private String userid;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_scan;
@@ -60,6 +62,7 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        userid = getIntent().getStringExtra("userid");
         initScan();
         initTitle();
         setFrom();
@@ -87,11 +90,13 @@ public class ScanActivity extends BaseActivity implements ScanListener {
                 if (type == 4) {
                     Intent intent = new Intent(getPageContext(), MyDeviceListActivity.class);
                     intent.putExtra("type", type);
+                    intent.putExtra("userid", userid);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(getPageContext(), InputImeiActivity.class);
                     intent.putExtra("imei", "");
                     intent.putExtra("type", type);
+                    intent.putExtra("userid", userid);
                     startActivity(intent);
                 }
             }

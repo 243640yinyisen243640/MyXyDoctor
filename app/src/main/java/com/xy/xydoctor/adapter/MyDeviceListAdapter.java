@@ -21,10 +21,12 @@ import java.util.List;
 
 public class MyDeviceListAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     private int type;
+    private String userid;
 
-    public MyDeviceListAdapter(int type, @Nullable List<String> data) {
+    public MyDeviceListAdapter(int type, @Nullable List<String> data,String userid) {
         super(R.layout.item_my_device_list, data);
         this.type = type;
+        this.userid = userid;
     }
 
 
@@ -48,6 +50,7 @@ public class MyDeviceListAdapter extends BaseQuickAdapter<String, BaseViewHolder
                     Intent intent = new Intent(Utils.getApp(), InputImeiActivity.class);
                     intent.putExtra("imei", "");
                     intent.putExtra("type", type);
+                    intent.putExtra("userid", userid);
                     intent.putExtra("position", layoutPosition);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Utils.getApp().startActivity(intent);
@@ -62,12 +65,14 @@ public class MyDeviceListAdapter extends BaseQuickAdapter<String, BaseViewHolder
                                         case 0:
                                             intent = new Intent(Utils.getApp(), ScanActivity.class);
                                             intent.putExtra("type", 2);
+                                            intent.putExtra("userid",userid);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                             Utils.getApp().startActivity(intent);
                                             break;
                                         case 1:
                                             intent = new Intent(Utils.getApp(), ScanActivity.class);
                                             intent.putExtra("type", 1);
+                                            intent.putExtra("userid",userid);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                             Utils.getApp().startActivity(intent);
                                             break;
