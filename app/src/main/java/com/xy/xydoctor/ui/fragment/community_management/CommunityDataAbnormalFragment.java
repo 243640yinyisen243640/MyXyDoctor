@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -450,7 +449,8 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_data_abnormal_down:
-
+                CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
+                activity.topTextView().setVisibility(View.GONE);
                 showMenuWindow();
                 break;
             default:
@@ -474,11 +474,9 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
             }
 
         });
-        popu.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-
-            }
+        popu.setOnDismissListener(() -> {
+            CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
+            activity.topTextView().setVisibility(View.VISIBLE);
         });
         popu.setOnChooseOkListener(this);
         if (!popu.isShowing()) {
