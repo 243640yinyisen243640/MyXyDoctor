@@ -50,13 +50,11 @@ public class CommunityRoomAdapter extends XYSoftBaseAdapter<CommunityFilterInfo>
             holder.illImageView.setVisibility(View.VISIBLE);
         }
 
-        if ("0".equals(info.getIsempty())) {
-            holder.bgFramelayout.setBackgroundResource(R.drawable.shape_gray_hight);
-        }
+        Log.i("yys","isempty"+info.getIsempty());
+        Log.i("yys","istodo"+info.getIstodo());
+        Log.i("yys","isabnormal"+info.getAbnormal());
 
-        Log.i("yys","empty"+info.getIsempty());
-        Log.i("yys","abnormal"+info.getIsempty());
-        Log.i("yys","isTodo"+info.getIstodo());
+
         /**
          *      * 有无异常
          *      * 0：无
@@ -74,8 +72,13 @@ public class CommunityRoomAdapter extends XYSoftBaseAdapter<CommunityFilterInfo>
                 if ("1".equals(info.getIstodo())) {
                     holder.bgFramelayout.setBackgroundResource(R.drawable.shape_yellow);
                 } else {
-                    holder.bgFramelayout.setBackgroundResource(R.drawable.shape_white_heavy);
+                    if ("0".equals(info.getIsempty())) {
+                        holder.bgFramelayout.setBackgroundResource(R.drawable.shape_gray_hight);
+                    }else {
+                        holder.bgFramelayout.setBackgroundResource(R.drawable.shape_white_heavy);
+                    }
                 }
+
                 break;
             case "1":
                 if ("1".equals(info.getIstodo())) {
@@ -83,19 +86,11 @@ public class CommunityRoomAdapter extends XYSoftBaseAdapter<CommunityFilterInfo>
                 } else {
                     holder.bgFramelayout.setBackgroundResource(R.drawable.shape_yellow);
                 }
+
                 break;
             default:
                 break;
         }
-        //        if ("1".equals(info.getAbnormal())) {
-        //            holder.bgFramelayout.setBackgroundResource(R.drawable.shape_red);
-        //
-        //        } else {
-        //            if ("1".equals(info.getIstodo())) {
-        //                holder.numTextView.setBackgroundResource(R.drawable.shape_yellow);
-        //            }
-        //        }
-
 
         return convertView;
     }

@@ -6,7 +6,6 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -117,8 +116,6 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Log.i("yys","onCreate==");
         topViewManager().titleTextView().setText("筛选列表");
         topViewManager().moreTextView().setText(R.string.base_filter);
         topViewManager().moreTextView().setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.community_filter_red, 0);
@@ -185,6 +182,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                         mRefreshLayout.finishRefresh();
                     }
                     if (200 == response.code) {
+                        haveResultTextView.setVisibility(View.VISIBLE);
                         resultResponseInfo = (CommunityFilterInfo) response.object;
                         SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
                         stringBuilder.append("已筛选");
@@ -217,12 +215,14 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                         //如果是加载成功
                         mRefreshLayout.setVisibility(View.VISIBLE);
                         presentNestedSrcollView.setVisibility(View.GONE);
+                        haveResultTextView.setVisibility(View.VISIBLE);
                     } else if (30002 == response.code) {
                         mPageCount = 0;
 
                         //如果是没有数据
                         mRefreshLayout.setVisibility(View.GONE);
                         presentNestedSrcollView.setVisibility(View.VISIBLE);
+                        haveResultTextView.setVisibility(View.GONE);
 
 
                     } else if (201 == response.code) {
@@ -233,6 +233,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                         if (1 == mPageIndex) {
                             mRefreshLayout.setVisibility(View.GONE);
                             presentNestedSrcollView.setVisibility(View.VISIBLE);
+                            haveResultTextView.setVisibility(View.GONE);
                         } else {
                             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
                         }
@@ -269,6 +270,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
     private void changeLoadUI(int responseCode) {
         presentNestedSrcollView.setVisibility(View.GONE);
         mRefreshLayout.setVisibility(View.VISIBLE);
+        haveResultTextView.setVisibility(View.VISIBLE);
         if (1 == mPageIndex) {
             if (200 != responseCode) {
                 if (30002 == responseCode) {
@@ -288,6 +290,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                     onPageLoad();
                 });
                 mRefreshLayout.setVisibility(View.GONE);
+                haveResultTextView.setVisibility(View.GONE);
                 presentNestedSrcollView.setVisibility(View.VISIBLE);
             }
         }

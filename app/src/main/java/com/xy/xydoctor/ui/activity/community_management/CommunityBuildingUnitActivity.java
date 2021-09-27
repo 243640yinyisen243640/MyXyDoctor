@@ -8,7 +8,6 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -163,8 +162,6 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
     private void bindData() {
         StaggeredGridLayoutManager layoutManager1 = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         memberMyListView.setLayoutManager(layoutManager1);
-        Log.i("yys", "location==" + info.getMaster().getHouseinfo());
-
         if (info.getMaster().getUserid() == null) {
             holdLinearLayout.setVisibility(View.GONE);
         } else {

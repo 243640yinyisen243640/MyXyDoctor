@@ -284,11 +284,20 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
         public void adapterClickListener(int position, View view) {
             switch (view.getId()) {
                 case R.id.ll_top_class:
-                    Log.i("yys", "1position==" + position);
                     buildindex = position;
                     unitindex = 0;
                     for (int i = 0; i < buildList.size(); i++) {
                         buildList.get(i).setCheck(false);
+                    }
+                    buildList.get(position).setCheck(true);
+                    topListAdapter.notifyDataSetChanged();
+                    if (buildList.get(buildindex).getUnits()==null){
+                        showRoomError();
+                        return;
+                    }
+                    if (buildList.get(buildindex).getUnits().size()==0){
+                        showRoomError();
+                        return;
                     }
                     for (int i = 0; i < buildList.get(buildindex).getUnits().size(); i++) {
                         if (i == 0) {
@@ -297,9 +306,9 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
                             buildList.get(buildindex).getUnits().get(i).setCheck(false);
                         }
                     }
-                    buildList.get(position).setCheck(true);
-                    topListAdapter.notifyDataSetChanged();
                     showUnitData();
+                    unityid = buildList.get(buildindex).getUnits().get(unitindex).getId();
+                    getRoomInfo();
                     break;
 
                 default:

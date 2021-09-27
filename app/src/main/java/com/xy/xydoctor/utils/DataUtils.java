@@ -1,6 +1,7 @@
 package com.xy.xydoctor.utils;
 
 import android.annotation.SuppressLint;
+import android.text.TextUtils;
 import android.text.format.Time;
 
 import java.text.ParseException;
@@ -146,5 +147,30 @@ public class DataUtils {
 
     }
 
+    public static String TIME_FORMAT3 = "yyyy-MM-dd";
+
+
+    public static boolean isTimeEqualAtMonth(String time1, String time2) {
+        boolean isEqual = false;
+        if (TextUtils.isEmpty(time1) || TextUtils.isEmpty(time2)) {
+            return isEqual;
+        }
+        String[] time1s = time1.split("-");
+        String[] time2s = time2.split("-");
+        if (time1s != null && time1s.length == 3 && time2s != null && time2s.length == 3) {
+            if (Integer.parseInt(time1s[0]) == Integer.parseInt(time2s[0]) && Integer.parseInt(time1s[1]) == Integer.parseInt(time2s[1])) {
+                isEqual = true;
+            }
+        }
+        return isEqual;
+    }
+
+
+//    public static boolean isInMonth() {
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTime(DataUtils.convertStringToDate("2021-09-27","yyyy-MM-dd"));
+//        //日期的所属月份
+//        int month = calendar.get(Calendar.MONTH) + 1;
+//    }
 
 }

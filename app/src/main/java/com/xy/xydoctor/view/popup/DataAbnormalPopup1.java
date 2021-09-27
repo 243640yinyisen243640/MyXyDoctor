@@ -307,6 +307,11 @@ public class DataAbnormalPopup1 extends PopupWindow {
                     }
                 }
 
+                if (!compareTwoTime(starttime, endtime)) {
+                    TipUtils.getInstance().showToast(context, R.string.please_choose_time_at_month);
+                    return;
+                }
+
                 if ("-1".equals(style) && (TextUtils.isEmpty(startSugar) || TextUtils.isEmpty(endSugar))) {
                     TipUtils.getInstance().showToast(context, R.string.please_choose_sugar);
                     return;
@@ -328,32 +333,6 @@ public class DataAbnormalPopup1 extends PopupWindow {
 
 
     /**
-     * 比较两个时间
-     *
-     * @param starTime  开始时间
-     * @param endString 结束时间
-     * @return 结束时间大于开始时间返回true，否则反之֮
-     */
-    public static boolean compareTwoTime(String starTime, String endString) {
-        boolean isMoreThan = false;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
-        try {
-            Date startData = dateFormat.parse(starTime);
-            Date endData = dateFormat.parse(endString);
-            long diff = endData.getTime() - startData.getTime();
-            if (diff >= 0) {
-                isMoreThan = true;
-            } else {
-                isMoreThan = false;
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return isMoreThan;
-
-    }
-
-    /**
      * 时间选择器
      *
      * @param type 开始时间  结束时间
@@ -363,7 +342,8 @@ public class DataAbnormalPopup1 extends PopupWindow {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
         int currentYear = currentDate.get(Calendar.YEAR);
-        startDate.set(currentYear - 120, 0, 1, 0, 0);
+        int currentMonth = currentDate.get(Calendar.MONDAY) - 1;
+        startDate.set(currentYear, currentMonth, 1, 0, 0);
         TimePickerView timePickerView = new TimePickerBuilder(context, (date, v) -> {
             String content = DataUtils.convertDateToString(date, DataFormatManager.TIME_FORMAT_Y_M_D);
             if (1 == type) {
@@ -393,6 +373,33 @@ public class DataAbnormalPopup1 extends PopupWindow {
         timePickerView.show();
 
     }
+
+    /**
+     * 比较两个时间
+     *
+     * @param starTime  开始时间
+     * @param endString 结束时间
+     * @return 结束时间大于开始时间返回true，否则反之֮
+     */
+    public static boolean compareTwoTime(String starTime, String endString) {
+        boolean isMoreThan = false;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+        try {
+            Date startData = dateFormat.parse(starTime);
+            Date endData = dateFormat.parse(endString);
+            long diff = endData.getTime() - startData.getTime();
+            if (diff >= 0) {
+                isMoreThan = true;
+            } else {
+                isMoreThan = false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return isMoreThan;
+
+    }
+
 
     @Override
     public void showAsDropDown(View parent) {//parent 你要把popUpWindow放在哪个控件下方
