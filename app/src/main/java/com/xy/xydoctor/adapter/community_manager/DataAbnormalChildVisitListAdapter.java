@@ -1,7 +1,6 @@
 package com.xy.xydoctor.adapter.community_manager;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,6 +43,7 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
         TextView telImageView = viewHolder.getView(R.id.tv_data_abnormal_child_phone_img);
         TextView lightTextView = viewHolder.getView(R.id.tv_data_abnormal_child_high_or_low);
         TextView haveDealTextView = viewHolder.getView(R.id.tv_data_abnormal_child_have_deal);
+        TextView unitTextView = viewHolder.getView(R.id.tv_data_abnormal_child_unit);
 
 
         if (item.isSelected()) {
@@ -64,7 +64,11 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
             } else {
                 haveDealTextView.setText(context.getString(R.string.data_abnormal_filter_no_deal));
             }
+            /**
+             * 1血压，2血糖
+             */
             if ("1".equals(type)) {
+                unitTextView.setVisibility(View.GONE);
                 viewHolder.setText(R.id.tv_data_abnormal_child_amonut, item.getList().get(0).getSystolic() + "/" + item.getList().get(0).getDiastole());
                 //1偏高2低3正常
                 if ("1".equals(item.getList().get(0).getIshight())) {
@@ -76,7 +80,9 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
                 }
                 lightTextView.setText("mmHg");
             } else {
-                viewHolder.setText(R.id.tv_data_abnormal_child_amonut, item.getList().get(0).getGlucosevalue() + "    mmol/L");
+                unitTextView.setVisibility(View.VISIBLE);
+                viewHolder.setText(R.id.tv_data_abnormal_child_amonut, item.getList().get(0).getGlucosevalue());
+                unitTextView.setText("mmol/L");
                 if ("1".equals(item.getList().get(0).getIshight())) {
                     lightTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sugar_or_pressure_hign, 0, 0, 0);
                 } else if ("2".equals(item.getList().get(0).getIshight())) {
@@ -86,7 +92,6 @@ public class DataAbnormalChildVisitListAdapter extends CommonAdapter<DataAbnorma
                 }
                 lightTextView.setText(item.getList().get(0).getCategoryname());
             }
-
 
 
         } else {

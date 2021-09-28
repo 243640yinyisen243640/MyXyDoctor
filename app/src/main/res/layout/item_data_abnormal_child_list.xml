@@ -125,6 +125,16 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_data_abnormal_child_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/app_name"
+                    android:textColor="@color/base_text_gray"
+                    android:textSize="13sp"
+                    android:visibility="gone" />
+
+                <TextView
                     android:id="@+id/tv_data_abnormal_child_high_or_low"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

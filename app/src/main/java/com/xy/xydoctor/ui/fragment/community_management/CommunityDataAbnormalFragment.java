@@ -255,7 +255,6 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
                             activity.topTextView().setText("处理");
                         } else {
                             activity.topTextView().setVisibility(View.GONE);
-//                            activity.topTextView().setText("处理");
                         }
 
                         mTempList = (List<DataAbnormalInfo>) response.object;
@@ -380,19 +379,6 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
         });
         mRefreshLayout.setEnableLoadMore(false);
         mRefreshLayout.setEnableRefresh(false);
-        //        mRefreshLayout.setEnableAutoLoadMore(true);
-        // mRefreshLayout.setEnableLoadMoreWhenContentNotFull(false);
-       /* mRefreshLayout.setScrollBoundaryDecider(new ScrollBoundaryDecider() {
-            @Override
-            public boolean canRefresh(View content) {
-                return false;
-            }
-
-            @Override
-            public boolean canLoadMore(View content) {
-                return mPageCount == mPageSize && !mIsLoading;
-            }
-        });*/
         mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
             mPageIndex++;
             onPageLoad();
