@@ -113,6 +113,8 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         holdLinearLayout.setOnClickListener(this);
         sugarTextView.setOnClickListener(this);
         pressureTextView.setOnClickListener(this);
+        pressureFollowTextView.setOnClickListener(this);
+        sugarFollowTextView.setOnClickListener(this);
     }
 
 
@@ -188,7 +190,7 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
             }
             if (info.getMembers() == null || info.getMembers().size() == 0) {
                 memberLinearLayout.setVisibility(View.GONE);
-            }else {
+            } else {
                 memberLinearLayout.setVisibility(View.VISIBLE);
             }
             if ("1".equals(info.getMaster().getIscare())) {
@@ -352,12 +354,19 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
                 intent.putExtra("userid", info.getMaster().getUserid());
                 startActivity(intent);
                 break;
-            case R.id.tv_building_unit_pressure:
+            case R.id.tv_building_unit_pressure_follow:
                 intent = new Intent(getPageContext(), CommunitySugarOrPressureListActivity.class);
                 intent.putExtra("type", "2");
                 intent.putExtra("userid", info.getMaster().getUserid());
                 startActivity(intent);
                 break;
+            case R.id.tv_building_unit_sugar_follow:
+                intent = new Intent(getPageContext(), CommunitySugarOrPressureListActivity.class);
+                intent.putExtra("type", "1");
+                intent.putExtra("userid", info.getMaster().getUserid());
+                startActivity(intent);
+                break;
+
             default:
                 break;
         }

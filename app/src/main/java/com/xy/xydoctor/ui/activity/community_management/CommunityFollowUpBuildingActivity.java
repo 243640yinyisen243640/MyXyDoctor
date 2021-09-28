@@ -185,7 +185,7 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
                     setTextStyle(info.getUnity_count(), getString(R.string.follow_up_agent_unit_num), R.color.community_content_black, unitNumTextView, 17);
                     setTextStyle(info.getHouse_count(), getString(R.string.follow_up_agent_households_num1), R.color.community_content_black, personNumTextView, 17);
 
-                    setTextStyle1(info.getMember_count(), getString(R.string.follow_up_agent_total_num), R.color.community_follow_blue, pressureTextView, 17);
+                    setTextStyle1(info.getMember_count(), getString(R.string.community_member_count), R.color.community_follow_blue, pressureTextView, 17);
                     setTextStyle1(info.getGxy_count(), getString(R.string.flb_high_pressure_num), R.color.main_red, sugarTextView, 17);
                     setTextStyle1(info.getDiabeteslei_count(), getString(R.string.follow_up_sugar_person_num), R.color.community_statics_orange, deseaseAllNumTextView, 17);
 

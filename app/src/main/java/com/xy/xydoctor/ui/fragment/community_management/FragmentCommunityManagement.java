@@ -19,7 +19,7 @@ import com.lyd.baselib.base.fragment.BaseFragment;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.bean.community_manamer.CommunityManagerInfo;
 import com.xy.xydoctor.datamanager.DataManager;
-import com.xy.xydoctor.ui.activity.community_management.CommunityDataAbnormalActivity;
+import com.xy.xydoctor.ui.activity.community_management.CommunityDataAbnormalActivity1;
 import com.xy.xydoctor.ui.activity.community_management.CommunityDataStatisticsActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFilterActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowStatisticsActivity;
@@ -245,7 +245,7 @@ public class FragmentCommunityManagement extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.tv_community_abnormal_data:
-                intent = new Intent(getPageContext(), CommunityDataAbnormalActivity.class);
+                intent = new Intent(getPageContext(), CommunityDataAbnormalActivity1.class);
                 startActivity(intent);
                 break;
             case R.id.tv_community_medication_reminder:

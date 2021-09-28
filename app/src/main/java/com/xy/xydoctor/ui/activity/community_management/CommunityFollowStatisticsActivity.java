@@ -105,7 +105,7 @@ public class CommunityFollowStatisticsActivity extends XYSoftUIBaseActivity impl
     private void bindData() {
         setTextStyle(getString(R.string.community_statics_person_num), staticsInfo.getCommunityUser(), R.color.community_content_black, allPersonTextView, 13);
         setTextStyle(getString(R.string.community_statics_all_num), staticsInfo.getFollowUser(), R.color.community_content_black, followNumTextView, 13);
-        setTextStyle(getString(R.string.community_statics_current_num), staticsInfo.getFollowingUser(), R.color.community_content_black, currentNumTextView, 13);
+        setTextStyle(getString(R.string.community_member_count), staticsInfo.getFollowingUser(), R.color.community_content_black, currentNumTextView, 13);
 
         setTextStyle(getString(R.string.community_statics_all_times), staticsInfo.getFollowNum(), R.color.data_gray_light, followAllTextView, 12);
         setTextStyle(getString(R.string.community_statics_finish_times), staticsInfo.getFollowedNum(), R.color.data_gray_light, finishFollowTextView, 12);
