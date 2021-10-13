@@ -215,5 +215,10 @@
 
     </LinearLayout>
 
+    <View
+        style="@style/line"
+        android:background="@color/base_background"
+        android:layout_height="2dp"/>
+
 
 </LinearLayout>

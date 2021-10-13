@@ -19,7 +19,7 @@ import com.zhy.adapter.abslistview.CommonAdapter;
 import java.util.List;
 
 /**
- * 描述: 数用药提醒
+ * 描述: 用药提醒
  * 作者: LYD
  * 创建日期: 2019/7/19 11:09
  */

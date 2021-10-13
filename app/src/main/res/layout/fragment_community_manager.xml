@@ -201,6 +201,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
             android:visibility="visible">
 
             <TextView
@@ -236,15 +237,20 @@
 
             <TextView
                 android:id="@+id/tv_community_follow_up_statistics"
-                style="@style/community_follow_up"
+                style="@style/community_wait_thind_num"
                 android:drawableTop="@drawable/follow_up_statistics"
                 android:text="@string/community_follow_up_statistics" />
 
             <TextView
                 android:id="@+id/tv_community_num_statistics"
-                style="@style/community_follow_up"
+                style="@style/community_wait_thind_num"
                 android:drawableTop="@drawable/num_statistics"
                 android:text="@string/community_statistics" />
+
+            <TextView
+                style="@style/community_wait_thind_num"
+                android:layout_marginEnd="10dp"
+                android:background="@null" />
 
 
         </LinearLayout>
