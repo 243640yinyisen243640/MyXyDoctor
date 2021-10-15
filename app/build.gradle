@@ -130,7 +130,7 @@ android {
         //annotationProcessor "com.ljx.rxhttp:rxhttp-compiler:$rxHttpVersion"
         kapt "com.ljx.rxhttp:rxhttp-compiler:$rxHttpVersion"
         //RxLife
-        implementation 'com.ljx.rxlife3:rxlife-rxjava:3.0.0'
+        implementation 'com.github.liujingxing.rxlife:rxlife-rxjava3:2.2.1'
         //RxHttp结束
 
         //必备工具类开始
@@ -161,7 +161,7 @@ android {
         //没有提示 end
 
         //蓝牙
-        implementation 'com.clj.fastble:FastBleLib:2.3.4'
+        implementation 'com.github.Jasonchenlijian:FastBle:2.4.0'
         //Zxing
         implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
         implementation 'me.devilsen:czxing:1.0.17'
@@ -210,7 +210,7 @@ android {
         //阿里推送 End
 
         api 'com.squareup.retrofit2:retrofit:2.9.0'
-        api 'pub.devrel:easypermissions:2.0.1'
+        api 'pub.devrel:easypermissions:3.0.0'
         implementation 'com.zhy:base-rvadapter:3.0.3'
 
         api 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
