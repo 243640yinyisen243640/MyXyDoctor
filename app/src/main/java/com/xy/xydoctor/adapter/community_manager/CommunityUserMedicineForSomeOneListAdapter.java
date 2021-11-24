@@ -97,7 +97,7 @@ public class CommunityUserMedicineForSomeOneListAdapter extends UIBaseRecycleVie
 
         SpannableStringBuilder thinkTimeStringBuilder = new SpannableStringBuilder();
 
-        thinkTimeStringBuilder.append("预计服用完成日期：");
+        thinkTimeStringBuilder.append("服用完成日期：");
         int start7 = thinkTimeStringBuilder.length();
         thinkTimeStringBuilder.append(item.getEndtime());
         int end7 = thinkTimeStringBuilder.length();

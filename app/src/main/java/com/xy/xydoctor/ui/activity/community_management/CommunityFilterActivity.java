@@ -210,8 +210,8 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
             maleCheckBox.setChecked(false);
             isCancheck = true;
             if (isChecked) {
-                allCommunityTextView.setText("全部小区");
-                communityID = "0";
+//                allCommunityTextView.setText("全部小区");
+//                communityID = "0";
                 isClickable(false);
                 setTextColor(R.color.base_text_gray1, "1");
             } else {
@@ -231,7 +231,7 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
      * @param isClickable
      */
     private void isClickable(boolean isClickable) {
-        allCommunityTextView.setClickable(isClickable);
+//        allCommunityTextView.setClickable(isClickable);
         maleCheckBox.setClickable(isClickable);
         femaleCheckBox.setClickable(isClickable);
         lowermostEditText.setEnabled(isClickable);
@@ -241,7 +241,7 @@ public class CommunityFilterActivity extends XYSoftUIBaseActivity implements Vie
     }
 
     private void setTextColor(int color, String type) {
-        allCommunityTextView.setTextColor(getResources().getColor(color));
+//        allCommunityTextView.setTextColor(getResources().getColor(color));
         maleCheckBox.setTextColor(getResources().getColor(color));
         femaleCheckBox.setTextColor(getResources().getColor(color));
         //type 1：空房间选中 2：空房间未选中
