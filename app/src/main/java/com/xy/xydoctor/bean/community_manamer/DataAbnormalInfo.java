@@ -31,6 +31,16 @@ public class DataAbnormalInfo {
      */
     private boolean isSelected;
 
+    private List<CommunityFilterChildInfo> members;
+
+    public List<CommunityFilterChildInfo> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<CommunityFilterChildInfo> members) {
+        this.members = members;
+    }
+
     public boolean isSelected() {
         return isSelected;
     }

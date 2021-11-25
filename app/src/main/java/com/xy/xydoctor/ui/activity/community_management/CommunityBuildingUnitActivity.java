@@ -95,10 +95,13 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         topViewManager().moreTextView().setText("添加成员");
         topViewManager().moreTextView().setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_red));
         topViewManager().moreTextView().setOnClickListener(v -> {
-            Intent intent = new Intent(getPageContext(), UserAddActivity.class);
+            Intent intent = new Intent(getPageContext(), UserAddSecondActivity.class);
             intent.putExtra("houserid", info.getMaster().getHouse_id());
             intent.putExtra("buildid", info.getMaster().getBuild_id());
-            intent.putExtra("houseinfo", info.getMaster().getHouseinfo());
+            intent.putExtra("comName", info.getMaster().getCom_name());
+            intent.putExtra("unitName", info.getMaster().getUnit_name());
+            intent.putExtra("buildName", info.getMaster().getBuild_name());
+            intent.putExtra("houseName", info.getMaster().getHousenum());
             startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
         });
         initView();

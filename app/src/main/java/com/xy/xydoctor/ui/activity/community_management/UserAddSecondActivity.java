@@ -26,6 +26,7 @@ import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
+import com.xy.xydoctor.bean.community_manamer.BuildInfo;
 import com.xy.xydoctor.bean.community_manamer.DepartmentInfo;
 import com.xy.xydoctor.bean.community_manamer.FilterSugarPressureInfo;
 import com.xy.xydoctor.bean.community_manamer.SearchInfo;
@@ -53,7 +54,10 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
     /**
      * 位置信息
      */
-    private TextView locationTextView;
+    private TextView communityNameTextView;
+    private TextView communityBuildNameTextView;
+    private TextView communityUnitNameTextView;
+    private TextView communityRoomNameTextView;
     /**
      * 姓名
      */
@@ -87,10 +91,10 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
      */
     private TextView doctorTextView;
 
-    private TextView sugarTextView, pressureTextView, overTextView;
+    private TextView sugarTextView, pressureTextView, headTextView;
 
-    private CheckBox headCheckBox, fattyCheckBox, heartCheckBox;
-    private CheckBox apartCheckBox, illCheckBox, mentalCheckBox, importantCheckBox;
+    private CheckBox heartCheckBox, spiritCheckBox, pregnantCheckBox, tuberculosisCheckBox;
+    private CheckBox apartCheckBox, illCheckBox, allowanceCheckBox, heavyCheckBox, specialCheckBox, epidemicCheckBox, importCheckBox;
     /**
      * 血糖仪输入
      */
@@ -121,7 +125,6 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
      */
     private String houserid;
 
-    private String houseInfo;
 
     private String sex = "0";
 
@@ -170,13 +173,32 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
 
     private UserAddReq addReq;
 
+    private boolean isNeedChoose;
+
+    /**
+     * 用来展示小区信息
+     */
+    private String comName;
+    private String unitName;
+    private String buildName;
+    private String houseName;
+
+    private String communityID = "0";
+    private String communityBuildID = "0";
+    private String communityUnitID = "0";
+    private String communityHouseID = "0";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        isNeedChoose = getIntent().getBooleanExtra("isNeedChoose", false);
         buildid = getIntent().getStringExtra("buildid");
         houserid = getIntent().getStringExtra("houserid");
-        houseInfo = getIntent().getStringExtra("houseinfo");
+        comName = getIntent().getStringExtra("comName");
+        unitName = getIntent().getStringExtra("unitName");
+        buildName = getIntent().getStringExtra("buildName");
+        houseName = getIntent().getStringExtra("houseName");
         topViewManager().titleTextView().setText(R.string.user_add_title);
         containerView().addView(initView());
         initValues();
@@ -184,7 +206,12 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
     }
 
     private void initValues() {
-        locationTextView.setText(houseInfo);
+        if (!isNeedChoose) {
+            communityNameTextView.setText(comName);
+            communityUnitNameTextView.setText(unitName);
+            communityBuildNameTextView.setText(buildName);
+            communityRoomNameTextView.setText(houseName);
+        }
     }
 
 
@@ -192,6 +219,34 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
+            case R.id.tv_user_add_community_name:
+                if (!isNeedChoose) {
+                    getCommunityInfo("", "1");
+                }
+                break;
+            case R.id.tv_user_add_community_build_name:
+                if ("0".equals(communityID)) {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.please_choose_community);
+                    return;
+                }
+                getCommunityInfo(communityID, "2");
+
+                break;
+            case R.id.tv_user_add_community_unit_name:
+                if ("0".equals(communityBuildID)) {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.please_choose_community_build);
+                    return;
+                }
+                getCommunityInfo(communityBuildID, "3");
+                break;
+            case R.id.tv_user_add_community_room_name:
+                if ("0".equals(communityUnitID)) {
+                    TipUtils.getInstance().showToast(getPageContext(), R.string.please_choose_community_unit);
+                    return;
+                }
+                getCommunityInfo(communityUnitID, "4");
+                break;
+
             case R.id.tv_user_add_sex:
                 setDissMiss();
                 chooseSexWindow();
@@ -223,7 +278,7 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
                 getHospital("", "1");
                 break;
             case R.id.tv_user_add_department_choose:
-                if ("0".equals(hospitalid)){
+                if ("0".equals(hospitalid)) {
                     TipUtils.getInstance().showToast(getPageContext(), R.string.user_add_hospital_choose);
                     return;
                 }
@@ -291,8 +346,6 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
                     sugarList.add(info3);
                     FilterSugarPressureInfo info4 = new FilterSugarPressureInfo(getString(R.string.community_user_info_sugar_four), "4");
                     sugarList.add(info4);
-                    //                    FilterSugarPressureInfo info5 = new FilterSugarPressureInfo("无", "0");
-                    //                    sugarList.add(info5);
                     getSugar(sugarList, "2");
                 }
 
@@ -316,15 +369,8 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
 
 
                 break;
-            case R.id.tv_filter_disease_over_weight:
-                if (overTextView.isSelected()) {
-                    overTextView.setSelected(false);
-                } else {
-                    overTextView.setSelected(true);
-                }
-                break;
+
             case R.id.tv_add_user_submit:
-//                addTextView.setClickable(false);
                 upLoadData();
                 break;
             default:
@@ -333,10 +379,68 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
     }
 
     /**
+     * @param id   小区/楼栋/单元id，type != 1时,此字段必传，
+     * @param type 1：查询小区2：查询楼栋3：查询单元 4：查询房间
+     */
+    private void getCommunityInfo(String id, String type) {
+        TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
+        Call<String> requestCall = DataManager.getCommunityInfo(id, type, (call, response) -> {
+            TipUtils.getInstance().dismissProgressDialog();
+            if (200 == response.code) {
+                List<BuildInfo> logisticsCompanyInfos = (List<BuildInfo>) response.object;
+                if (logisticsCompanyInfos != null && logisticsCompanyInfos.size() > 0) {
+                    OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
+                        if ("1".equals(type)) {
+                            communityID = logisticsCompanyInfos.get(options1).getId();
+                        } else if ("2".equals(type)) {
+                            communityBuildID = logisticsCompanyInfos.get(options1).getId();
+                        } else if ("3".equals(type)) {
+                            communityUnitID = logisticsCompanyInfos.get(options1).getId();
+                        } else {
+                            communityHouseID = logisticsCompanyInfos.get(options1).getId();
+                        }
+
+                        String s = logisticsCompanyInfos.get(options1).getName();
+                        if ("1".equals(type)) {
+                            communityNameTextView.setText(s);
+                        } else if ("2".equals(type)) {
+                            communityBuildNameTextView.setText(s);
+                        } else if ("3".equals(type)) {
+                            communityUnitNameTextView.setText(s);
+                        } else {
+                            communityRoomNameTextView.setText(s);
+                        }
+                    }).setLineSpacingMultiplier(2.5f)
+                            .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
+                            .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
+                            .build();
+                    List<String> list = new ArrayList<>();
+                    for (int i = 0; i < logisticsCompanyInfos.size(); i++) {
+                        String typeName = logisticsCompanyInfos.get(i).getName();
+                        list.add(typeName);
+                    }
+                    optionsPickerView.setPicker(list);
+                    optionsPickerView.show();
+                }
+            } else {
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, throwable) -> {
+            TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.network_error);
+        });
+
+    }
+
+
+    /**
      * 上传数据
      */
     private void upLoadData() {
         addReq = new UserAddReq();
+        if ("0".equals(communityHouseID)) {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.please_choose_community_house);
+            return;
+        }
 
         String name = nameEditText.getText().toString().trim();
         if (TextUtils.isEmpty(name)) {
@@ -378,7 +482,12 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
 
         addReq.setNickname(name);
         addReq.setTel(tel);
-        addReq.setHouse_id(houserid);
+        if (isNeedChoose) {
+            addReq.setHouse_id(communityHouseID);
+        } else {
+            addReq.setHouse_id(houserid);
+        }
+
         addReq.setSex(sex);
         addReq.setBirthtime(born);
         addReq.setRelation(releationId);
@@ -397,18 +506,16 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
             addReq.setBloodLevel("0");
         }
 
-        addReq.setStroke(headCheckBox.isChecked() ? "1" : "2");
-        addReq.setFat(overTextView.isSelected() ? "1" : "2");
-        addReq.setFattyliver(fattyCheckBox.isChecked() ? "1" : "2");
+        addReq.setStroke(headTextView.isSelected() ? "1" : "2");
         addReq.setCoronary(heartCheckBox.isChecked() ? "1" : "2");
+        addReq.setMental_illness(spiritCheckBox.isChecked() ? "1" : "2");
+
+
         addReq.setParty_member(apartCheckBox.isChecked() ? "1" : "2");
-        addReq.setMental_illness(mentalCheckBox.isChecked() ? "1" : "2");
         addReq.setDisability(illCheckBox.isChecked() ? "1" : "2");
-        addReq.setIscare(importantCheckBox.isChecked() ? "1" : "2");
         addReq.setSugar_imei(sugarEditText.getText().toString().trim());
         addReq.setBlood_imei(pressureEditText.getText().toString().trim());
         Call<String> requestCall = DataManager.addUser(addReq, (call, response) -> {
-//            addTextView.setClickable(true);
             if (response.code == 200) {
                 TipUtils.getInstance().showToast(getPageContext(), response.msg);
                 setResult(RESULT_OK);
@@ -428,7 +535,6 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
      */
     private void getDoctor() {
         Call<String> requestCall = DataManager.getDoctorList(departmentid, buildid, (call, response) -> {
-            Log.i("yys", "departmentid==" + departmentid);
             if (200 == response.code) {
                 SearchInfo searchInfo = (SearchInfo) response.object;
                 List<DepartmentInfo> logisticsCompanyInfos = searchInfo.getDoc_list();
@@ -490,7 +596,6 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
                     .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_text))
                     .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_red))
                     .build();
-            Log.i("yys", "size==" + releationList.size());
             List<String> list = new ArrayList<>();
             for (int i = 0; i < releationList.size(); i++) {
                 String typeName = releationList.get(i).getDiseaseName();
@@ -623,36 +728,26 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
                         bloodLevel = "1";
                         pressureTextView.setText(R.string.community_user_info_pressure_one);
                         pressureTextView.setSelected(true);
-                    } else if ("2".equals(searchInfo.getHypertension())){
+                    } else if ("2".equals(searchInfo.getHypertension())) {
                         bloodLevel = "2";
                         pressureTextView.setText(R.string.community_user_info_pressure_two);
                         pressureTextView.setSelected(true);
-                    }else {
+                    } else {
                         bloodLevel = "3";
                         pressureTextView.setText(R.string.community_user_info_pressure_three);
                         pressureTextView.setSelected(true);
                     }
 
-                    if ("1".equals(searchInfo.getFat())) {
-                        overTextView.setSelected(true);
-                    } else {
-                        overTextView.setSelected(false);
-                    }
 
-                    if ("1".equals(searchInfo.getStroke())) {
-                        headCheckBox.setChecked(true);
-                    } else {
-                        headCheckBox.setChecked(false);
-                    }
-                    if ("1".equals(searchInfo.getFattyliver())) {
-                        fattyCheckBox.setChecked(true);
-                    } else {
-                        fattyCheckBox.setChecked(false);
-                    }
                     if ("1".equals(searchInfo.getCoronary())) {
                         heartCheckBox.setChecked(true);
                     } else {
                         heartCheckBox.setChecked(false);
+                    }
+                    if ("1".equals(searchInfo.getMental_illness())) {
+                        spiritCheckBox.setChecked(true);
+                    } else {
+                        spiritCheckBox.setChecked(false);
                     }
 
                     if ("1".equals(searchInfo.getParty_member())) {
@@ -667,16 +762,7 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
                         illCheckBox.setChecked(false);
                     }
 
-                    if ("1".equals(searchInfo.getMental_illness())) {
-                        mentalCheckBox.setChecked(true);
-                    } else {
-                        mentalCheckBox.setChecked(false);
-                    }
-                    if ("1".equals(searchInfo.getIscare())) {
-                        importantCheckBox.setChecked(true);
-                    } else {
-                        importantCheckBox.setChecked(false);
-                    }
+
                     if (!TextUtils.isEmpty(searchInfo.getSugar_imei())) {
                         sugarEditText.setText(searchInfo.getSugar_imei());
                     }
@@ -797,17 +883,21 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
     }
 
     private void initListener() {
+        communityNameTextView.setOnClickListener(this);
+        communityBuildNameTextView.setOnClickListener(this);
+        communityUnitNameTextView.setOnClickListener(this);
+        communityRoomNameTextView.setOnClickListener(this);
         sexTextView.setOnClickListener(this);
         bornTextView.setOnClickListener(this);
         relationTextView.setOnClickListener(this);
         hospitalTextView.setOnClickListener(this);
         departmentTextView.setOnClickListener(this);
         doctorTextView.setOnClickListener(this);
+        headTextView.setOnClickListener(this);
         sugarImageView.setOnClickListener(this);
         pressureImageView.setOnClickListener(this);
         pressureTextView.setOnClickListener(this);
         sugarTextView.setOnClickListener(this);
-        overTextView.setOnClickListener(this);
         addTextView.setOnClickListener(this);
 
 
@@ -828,8 +918,11 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
     }
 
     private View initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_user_add, null);
-        locationTextView = view.findViewById(R.id.tv_user_add_location);
+        View view = View.inflate(getPageContext(), R.layout.activity_user_add_second, null);
+        communityNameTextView = view.findViewById(R.id.tv_user_add_community_name);
+        communityBuildNameTextView = view.findViewById(R.id.tv_user_add_community_build_name);
+        communityUnitNameTextView = view.findViewById(R.id.tv_user_add_community_unit_name);
+        communityRoomNameTextView = view.findViewById(R.id.tv_user_add_community_room_name);
         nameEditText = view.findViewById(R.id.et_user_add_name);
         phoneEditText = view.findViewById(R.id.et_user_add_phone);
         sexTextView = view.findViewById(R.id.tv_user_add_sex);
@@ -842,14 +935,19 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
 
         sugarTextView = view.findViewById(R.id.cb_filter_disease_sugar);
         pressureTextView = view.findViewById(R.id.tv_filter_disease_presure);
-        overTextView = view.findViewById(R.id.tv_filter_disease_over_weight);
-        headCheckBox = view.findViewById(R.id.cb_filter_disease_head);
-        fattyCheckBox = view.findViewById(R.id.cb_filter_disease_fatty);
+        headTextView = view.findViewById(R.id.tv_filter_disease_head);
         heartCheckBox = view.findViewById(R.id.cb_filter_disease_heart);
+        spiritCheckBox = view.findViewById(R.id.cb_filter_disease_mental_illness);
+        pregnantCheckBox = view.findViewById(R.id.cb_filter_disease_pregnant);
+        tuberculosisCheckBox = view.findViewById(R.id.cb_filter_disease_tuberculosis);
+
         apartCheckBox = view.findViewById(R.id.cb_filter_disease_apart);
         illCheckBox = view.findViewById(R.id.cb_filter_disease_ill);
-        mentalCheckBox = view.findViewById(R.id.cb_filter_disease_mental);
-        importantCheckBox = view.findViewById(R.id.cb_filter_disease_important);
+        allowanceCheckBox = view.findViewById(R.id.cb_filter_disease_subsistence_allowance);
+        heavyCheckBox = view.findViewById(R.id.cb_filter_disease_heavy_ill);
+        specialCheckBox = view.findViewById(R.id.cb_filter_disease_special_family);
+        epidemicCheckBox = view.findViewById(R.id.cb_filter_disease_control_epidemic);
+        importCheckBox = view.findViewById(R.id.cb_filter_disease_import);
         sugarEditText = view.findViewById(R.id.et_user_add_device_sugar);
         sugarImageView = view.findViewById(R.id.iv_user_add_device_sugar);
         pressureEditText = view.findViewById(R.id.et_user_add_device_pressure);

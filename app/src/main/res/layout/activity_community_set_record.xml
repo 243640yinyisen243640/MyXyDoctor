@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/user_record_bg_top"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iv_record_static_finish"
+                    style="@style/hh_wr_wr"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:padding="@dimen/dp_12"
+                    android:src="@drawable/img_base_back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/community_set_record_title"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_mc_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/shape_bg_main_white_90"
+                android:drawableRight="@drawable/base_arrow_down_white"
+                android:drawablePadding="40dp"
+                android:gravity="center"
+                android:paddingLeft="12dp"
+                android:paddingTop="8dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-60dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/shape_bg_white_5"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/shape_bg_base_main_rectangle"
+                android:drawablePadding="10dp"
+                android:paddingStart="10dp"
+                android:text="@string/community_my_set_record"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <View
+                style="@style/line"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/user_record_my_community"
+                android:drawablePadding="5dp"
+                android:paddingStart="10dp"
+                android:text="@string/community_my_community"
+                android:textColor="@color/base_black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/ll_record_my_community_click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_mr_mc_family"
+                    style="@style/record_community_num"
+                    android:text="@string/app_name" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="30dp" />
+
+                <TextView
+                    android:id="@+id/tv_mr_mc_people"
+                    style="@style/record_community_num"
+                    android:text="@string/app_name" />
+
+
+            </LinearLayout>
+
+            <View
+                style="@style/line"
+                android:layout_marginTop="18dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/user_record_other_community"
+                android:drawablePadding="5dp"
+                android:paddingStart="10dp"
+                android:text="@string/community_other_community"
+                android:textColor="@color/base_black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/ll_record_other_community_click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_mr_oc_family"
+                    style="@style/record_community_num"
+                    android:text="@string/app_name" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="30dp" />
+
+                <TextView
+                    android:id="@+id/tv_mr_oc_people"
+                    style="@style/record_community_num"
+                    android:text="@string/app_name" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_record_other_click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/shape_bg_white_5"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/shape_bg_base_main_rectangle"
+                android:drawablePadding="10dp"
+                android:paddingStart="10dp"
+                android:text="@string/community_other_set_record"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <View
+                style="@style/line"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/user_record_my_community"
+                android:drawablePadding="5dp"
+                android:paddingStart="10dp"
+                android:text="@string/community_my_community"
+                android:textColor="@color/base_black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/ll_record_or_community_click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_or_mc_family"
+                    style="@style/record_community_num"
+                    android:text="@string/app_name" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="30dp" />
+
+                <TextView
+                    android:id="@+id/tv_or_mc_people"
+                    style="@style/record_community_num"
+                    android:text="@string/app_name" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

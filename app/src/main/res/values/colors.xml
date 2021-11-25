@@ -130,4 +130,5 @@
     <color name="community_statics_barchart_pressure_green">#2FE081</color>
     <color name="community_statics_orange">#FF854F</color>
     <color name="community_follow_blue">#3D98DF</color>
+    <color name="community_red_title">#FF564F</color>
 </resources>

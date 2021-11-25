@@ -70,6 +70,18 @@ public class CommunityFilterChildInfo {
     private String unit_id;
     private String house_id;
     private String com_id;
+    /**
+     * 建档人
+     */
+    private String create_user;
+
+    public String getCreate_user() {
+        return create_user;
+    }
+
+    public void setCreate_user(String create_user) {
+        this.create_user = create_user;
+    }
 
     public String getBuild_id() {
         return build_id;

@@ -350,6 +350,10 @@
         <activity
             android:name=".ui.activity.community_management.UserAddActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.community_management.UserAddSecondActivity"
+            android:screenOrientation="portrait" />
         <!--数据异常提醒-->
         <activity
             android:name=".ui.activity.community_management.DataAbnormalRemindListActivity"
@@ -410,8 +414,16 @@
         <activity
             android:name=".base.activity.WebViewActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.community_management.CommunityDataAbnormalActivity1"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.community_management.CommunityDataAbnormalActivity1"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.community_management.CommunityUserDateiListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.community_management.CommunitySetRecordActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

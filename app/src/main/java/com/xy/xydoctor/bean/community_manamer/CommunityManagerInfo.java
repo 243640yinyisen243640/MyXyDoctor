@@ -31,6 +31,10 @@ public class CommunityManagerInfo {
      * 用药提醒数量
      */
     private String reminderCount;
+    /**
+     * 待导入居民
+     */
+    private String importCount;
 
     public String getFollowCount() {
         return followCount;
@@ -78,5 +82,13 @@ public class CommunityManagerInfo {
 
     public void setMemberCount(String memberCount) {
         this.memberCount = memberCount;
+    }
+
+    public String getImportCount() {
+        return importCount;
+    }
+
+    public void setImportCount(String importCount) {
+        this.importCount = importCount;
     }
 }

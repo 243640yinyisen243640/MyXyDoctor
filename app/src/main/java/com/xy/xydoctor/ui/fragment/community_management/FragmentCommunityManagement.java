@@ -25,6 +25,7 @@ import com.xy.xydoctor.ui.activity.community_management.CommunityFilterActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowStatisticsActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentListActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentSearchListActivity;
+import com.xy.xydoctor.ui.activity.community_management.CommunitySetRecordActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityUserMedicineActivity;
 import com.xy.xydoctor.ui.activity.community_management.SettingsPropertyActivity;
 import com.xy.xydoctor.utils.TipUtils;
@@ -102,6 +103,8 @@ public class FragmentCommunityManagement extends BaseFragment {
      */
     @BindView(R.id.tv_community_medication_reminder)
     TextView medicationReminderTextView;
+    @BindView(R.id.tv_community_follow_up_wait_fall_in)
+    TextView waitImportTextView;
     /**
      * 随访统计
      */
@@ -116,6 +119,11 @@ public class FragmentCommunityManagement extends BaseFragment {
      */
     @BindView(R.id.tv_community_wait_things_statics_title)
     TextView numStatisticsTitleTextView;
+    /**
+     * 档案记录
+     */
+    @BindView(R.id.tv_community_set_record)
+    TextView setRecordTitleTextView;
     @BindView(R.id.community_wait_things_statics_content)
     LinearLayout numStatisticsContentLinearLayout;
     @BindView(R.id.tv_community_num_statistics)
@@ -167,7 +175,7 @@ public class FragmentCommunityManagement extends BaseFragment {
     private void getCommunityInfo() {
         Call<String> requestCall = DataManager.getCommunityHomeData((call, response) -> {
             if (response.code == 200) {
-                CommunityManagerInfo    managerInfo = (CommunityManagerInfo) response.object;
+                CommunityManagerInfo managerInfo = (CommunityManagerInfo) response.object;
                 communityNumTextView.setText(managerInfo.getCommunityCount());
                 setTextStyle(getString(R.string.community_building_count), managerInfo.getBuildingCount(), R.color.community_home_index_gray, buildingNumTextView, 13);
                 setTextStyle(getString(R.string.community_person_count), managerInfo.getMemberCount(), R.color.community_home_index_gray, personNumTextView, 13);
@@ -187,6 +195,7 @@ public class FragmentCommunityManagement extends BaseFragment {
                 setTextStyle(communityManagerInfo.getFollowCount(), getString(R.string.follow_up_agent_title), R.color.community_home_index_follow, toBeDoneNumTextView, 18);
                 setTextStyle(communityManagerInfo.getAbnormalCount(), getString(R.string.community_data_abnormal_title), R.color.main_red, abnormalDataTextView, 18);
                 setTextStyle(communityManagerInfo.getReminderCount(), getString(R.string.user_info_medicine_remind), R.color.community_home_index_medicine, medicationReminderTextView, 18);
+                setTextStyle(communityManagerInfo.getImportCount(), getString(R.string.follow_up_agent_import), R.color.community_home_index_medicine, waitImportTextView, 18);
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
@@ -212,7 +221,7 @@ public class FragmentCommunityManagement extends BaseFragment {
     }
 
 
-    @OnClick({R.id.tv_community_add_user, R.id.ll_community_filter_building_num, R.id.tv_community_follow_up_to_be_done, R.id.tv_community_search, R.id.tv_community_medication_reminder, R.id.tv_community_filter, R.id.tv_community_abnormal_data, R.id.tv_community_follow_up_statistics, R.id.tv_community_num_statistics, R.id.iv_community_set})
+    @OnClick({R.id.tv_community_add_user, R.id.ll_community_filter_building_num, R.id.tv_community_follow_up_to_be_done, R.id.tv_community_search, R.id.tv_community_medication_reminder, R.id.tv_community_follow_up_wait_fall_in, R.id.tv_community_filter, R.id.tv_community_abnormal_data, R.id.tv_community_follow_up_statistics, R.id.tv_community_num_statistics, R.id.iv_community_set, R.id.tv_community_set_record})
     public void onViewClicked(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -253,12 +262,23 @@ public class FragmentCommunityManagement extends BaseFragment {
                 intent.putExtra("userid", "0");
                 startActivity(intent);
                 break;
+            case R.id.tv_community_follow_up_wait_fall_in:
+                //待导入居民
+                intent = new Intent(getPageContext(), CommunityUserMedicineActivity.class);
+                intent.putExtra("userid", "0");
+                startActivity(intent);
+                break;
             case R.id.tv_community_follow_up_statistics:
                 intent = new Intent(getPageContext(), CommunityFollowStatisticsActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_community_num_statistics:
                 intent = new Intent(getPageContext(), CommunityDataStatisticsActivity.class);
+                startActivity(intent);
+                break;
+            //档案记录
+            case R.id.tv_community_set_record:
+                intent = new Intent(getPageContext(), CommunitySetRecordActivity.class);
                 startActivity(intent);
                 break;
             case R.id.iv_community_set:

@@ -6,6 +6,7 @@ import com.lyd.librongim.myrongim.GroupUserBeanPatient;
 import com.xy.xydoctor.base.retrofit.BaseNetworkUtils;
 import com.xy.xydoctor.base.retrofit.HHSoftBaseResponse;
 import com.xy.xydoctor.bean.UpdateBean;
+import com.xy.xydoctor.bean.community_manamer.BuildInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityDataStaticsInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityFilterInfo;
 import com.xy.xydoctor.bean.community_manamer.CommunityManagerInfo;
@@ -22,6 +23,7 @@ import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
 import com.xy.xydoctor.bean.community_manamer.FollowUpListAllInfo;
 import com.xy.xydoctor.bean.community_manamer.SearchInfo;
 import com.xy.xydoctor.bean.community_manamer.SugarOrPressureInfo;
+import com.xy.xydoctor.bean.community_manamer.UserRecordDataInfo;
 import com.xy.xydoctor.constant.ConstantParam;
 import com.xy.xydoctor.param.UserAddReq;
 
@@ -431,7 +433,7 @@ public class DataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> getFollowList(String status,String com_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getFollowList(String status, String com_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("status", status);
         map.put("com_id", com_id);
@@ -687,5 +689,57 @@ public class DataManager {
         map.put("reason", reason);
         map.put("access_token", SPStaticUtils.getString("token"));
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/doctor/Community/editUser", map, successCallBack, failureCallBack);
+    }
+
+
+    /**
+     * @param id              小区/楼栋/单元id，
+     *                        type != 1时,此字段必传，
+     * @param type            1：查询小区2：查询楼栋3：查询单元 4：查询房间
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getCommunityInfo(String id, String type, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", id);
+        map.put("type", type);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, BuildInfo.class, "/doctor/community/communityAllList", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param datetime
+     * @param page
+     * @param type            查询类型
+     *                        1:我的建档数据-我的小区
+     *                        2：我的建档数据-其他小区
+     *                        3：他人建档-我的小区
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getuserDateiData(String datetime, String page, String type, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("datetime", datetime);
+        map.put("page", page);
+        map.put("type", type);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, DataAbnormalInfo.class, "/doctor/community/recordLists", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 建档数据
+     *
+     * @param datetime
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getRecordData(String datetime, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("datetime", datetime);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, UserRecordDataInfo.class, "/doctor/community/recordStatistic", map, successCallBack, failureCallBack);
     }
 }

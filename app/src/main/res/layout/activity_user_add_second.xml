@@ -17,17 +17,81 @@
             android:background="@drawable/shape_bg_white_5"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_user_add_location"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/community_location"
-                android:drawablePadding="5dp"
-                android:padding="10dp"
-                android:textColor="#858585"
-                android:textSize="12sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_community_name" />
+
+                <TextView
+                    android:id="@+id/tv_user_add_community_name"
+                    style="@style/user_add_right_choose"
+                    android:text="@string/please_choose" />
+
+            </LinearLayout>
 
             <View style="@style/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_community_build_name" />
+
+                <TextView
+                    android:id="@+id/tv_user_add_community_build_name"
+                    style="@style/user_add_right_choose"
+                    android:text="@string/please_choose" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_community_unit_name" />
+
+                <TextView
+                    android:id="@+id/tv_user_add_community_unit_name"
+                    style="@style/user_add_right_choose"
+                    android:text="@string/please_choose" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_community_room_name" />
+
+                <TextView
+                    android:id="@+id/tv_user_add_community_room_name"
+                    style="@style/user_add_right_choose"
+                    android:text="@string/please_choose" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,6 +122,28 @@
 
                 <EditText
                     android:id="@+id/et_user_add_phone"
+                    style="@style/user_add_right"
+                    android:hint="@string/user_add_please_input_phone"
+                    android:imeOptions="actionSearch"
+                    android:inputType="phone"
+                    android:lines="1" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:drawableRight="@null"
+                    android:text="@string/user_add_id_num" />
+
+                <EditText
+                    android:id="@+id/et_user_add_id_number"
                     style="@style/user_add_right"
                     android:hint="@string/user_add_please_input_phone"
                     android:imeOptions="actionSearch"
@@ -192,19 +278,19 @@
                 <TextView
                     android:id="@+id/cb_filter_disease_sugar"
                     style="@style/user_add_type"
-                    android:text="糖尿病" />
+                    android:text=" 糖尿病  " />
 
                 <TextView
                     android:id="@+id/tv_filter_disease_presure"
                     style="@style/user_add_type"
                     android:layout_marginLeft="3dp"
-                    android:text="高血压" />
+                    android:text=" 高血压  " />
 
                 <TextView
-                    android:id="@+id/tv_filter_disease_over_weight"
+                    android:id="@+id/tv_filter_disease_head"
                     style="@style/user_add_type"
                     android:layout_marginLeft="3dp"
-                    android:text="超重/肥胖" />
+                    android:text=" 脑卒中  " />
 
             </LinearLayout>
 
@@ -217,22 +303,49 @@
                 android:paddingRight="10dp">
 
                 <CheckBox
-                    android:id="@+id/cb_filter_disease_head"
-                    style="@style/user_add_type"
-                    android:text="脑卒中" />
-
-                <CheckBox
-                    android:id="@+id/cb_filter_disease_fatty"
-                    style="@style/user_add_type"
-                    android:layout_marginLeft="3dp"
-                    android:text="脂肪肝" />
-
-                <CheckBox
                     android:id="@+id/cb_filter_disease_heart"
                     style="@style/user_add_type"
-                    android:layout_marginLeft="3dp"
-                    android:text="冠心病" />
+                    android:text=" 冠心病  " />
 
+                <CheckBox
+                    android:id="@+id/cb_filter_disease_mental_illness"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="精神疾病" />
+
+                <CheckBox
+                    android:id="@+id/cb_filter_disease_pregnant"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="      孕     " />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <CheckBox
+                    android:id="@+id/cb_filter_disease_tuberculosis"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="   结核   " />
+
+                <CheckBox
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="   结核   "
+                    android:visibility="invisible" />
+
+                <CheckBox
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="   结核   "
+                    android:visibility="invisible" />
             </LinearLayout>
 
 
@@ -253,19 +366,19 @@
                 <CheckBox
                     android:id="@+id/cb_filter_disease_apart"
                     style="@style/user_add_type"
-                    android:text="党员" />
+                    android:text="   党员   " />
 
                 <CheckBox
                     android:id="@+id/cb_filter_disease_ill"
                     style="@style/user_add_type"
                     android:layout_marginLeft="3dp"
-                    android:text="残疾人" />
+                    android:text="残疾人   " />
 
                 <CheckBox
-                    android:id="@+id/cb_filter_disease_mental"
+                    android:id="@+id/cb_filter_disease_subsistence_allowance"
                     style="@style/user_add_type"
                     android:layout_marginLeft="3dp"
-                    android:text="精神疾病" />
+                    android:text="   低保   " />
 
             </LinearLayout>
 
@@ -278,33 +391,46 @@
                 android:paddingRight="10dp">
 
                 <CheckBox
-                    android:id="@+id/cb_filter_disease_important"
+                    android:id="@+id/cb_filter_disease_heavy_ill"
+                    style="@style/user_add_type"
+                    android:text="   重慢病" />
+
+                <CheckBox
+                    android:id="@+id/cb_filter_disease_special_family"
+                    style="@style/user_add_type"
+                    android:text="特殊家庭"
+                    android:layout_marginLeft="3dp"/>
+
+                <CheckBox
+                    android:id="@+id/cb_filter_disease_control_epidemic"
+                    style="@style/user_add_type"
+                    android:text="防疫防控"
+                    android:layout_marginLeft="3dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <CheckBox
+                    android:id="@+id/cb_filter_disease_import"
                     style="@style/user_add_type"
                     android:text="重点关注" />
 
                 <CheckBox
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="@string/app_name"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    style="@style/user_add_type"
+                    android:text="特殊家庭"
+                    android:visibility="invisible"/>
 
                 <CheckBox
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="@string/app_name"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    style="@style/user_add_type"
+                    android:text="防疫防控"
+                    android:visibility="invisible" />
 
             </LinearLayout>
 

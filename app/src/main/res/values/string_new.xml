@@ -68,6 +68,7 @@
     <string name="user_info_blood_sugar">血糖测量 </string>
     <string name="user_info_blood_sugar_follow_up">血糖随访 </string>
     <string name="follow_up_agent_title">随访待办</string>
+    <string name="follow_up_agent_import">待导入居民</string>
     <string name="follow_up_agent_building_num">楼栋数</string>
     <string name="follow_up_agent_unit_num">单元数</string>
     <string name="follow_up_agent_households_num">随访住户</string>
@@ -90,13 +91,19 @@
     <string name="data_abnormal_filter_have_deal">已处理</string>
     <string name="community_follow_up_statistics">随访统计</string>
     <string name="community_statistics">数据统计</string>
+    <string name="community_record_statistics">建档统计</string>
     <string name="please_input_building_name_to_search">输入小区名称进行搜索</string>
     <string name="please_input_building_name_to_search_user">输入姓名或手机号进行搜索</string>
     <string name="base_check_all">全选</string>
     <string name="base_deal">处理</string>
     <string name="data_abnormal_remind">异常提醒</string>
     <string name="user_add_name">姓名</string>
+    <string name="user_add_community_name">小区名称</string>
+    <string name="user_add_community_build_name">楼栋号</string>
+    <string name="user_add_community_unit_name">单元号</string>
+    <string name="user_add_community_room_name">房间号</string>
     <string name="user_add_phone">手机号</string>
+    <string name="user_add_id_num">身份证号</string>
     <string name="user_add_sex">性别</string>
     <string name="user_add_born_time">出生日期</string>
     <string name="user_add_master_relation">与户主关系</string>
@@ -210,4 +217,15 @@
     <string name="community_have_unfollow">重点关注</string>
     <string name="please_input_die_reason">请输入死亡原因</string>
     <string name="huahansoft_load_state_no_data_filter">换个筛选条件试试吧~</string>
+    <string name="please_choose_community">请选择小区</string>
+    <string name="please_choose_community_build">请选择楼栋</string>
+    <string name="please_choose_community_unit">请选择单元</string>
+    <string name="please_choose_community_house">请选择房间</string>
+    <string name="community_my_set_record">我的建档数据</string>
+    <string name="community_other_set_record">其他建档数据</string>
+    <string name="community_my_community">我的小区</string>
+    <string name="community_other_community">其他小区</string>
+    <string name="community_set_record_title">建档统计</string>
+    <string name="community_set_record_family">家庭</string>
+    <string name="community_set_record_people">居民</string>
 </resources>

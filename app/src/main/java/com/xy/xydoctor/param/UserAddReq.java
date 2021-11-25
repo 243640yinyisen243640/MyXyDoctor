@@ -94,6 +94,15 @@ public class UserAddReq {
      */
     private String mental_illness = "2";
     /**
+     * 孕1是 2否
+     */
+    private String pregnant;
+    /**
+     * 结核：1是 2否
+     */
+    private String tuberculosis;
+
+    /**
      * 是否残疾  1是 2否
      */
     private String disability = "2";

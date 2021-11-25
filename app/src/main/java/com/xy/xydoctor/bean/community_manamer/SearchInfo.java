@@ -1,5 +1,6 @@
 package com.xy.xydoctor.bean.community_manamer;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * Date: 2021/9/10 9:37
  * Description:
  */
-public class SearchInfo {
+public class SearchInfo implements Serializable {
     /**
      *
      */
@@ -164,6 +165,55 @@ public class SearchInfo {
      * 户主关系 1 户主 2配偶 3子女 4儿媳 5女婿 6父母 0其他
      */
     private String relation;
+
+    /**
+     * 小区的名字
+     */
+    private String com_name;
+    /**
+     * 单元的名字
+     */
+    private String unit_name;
+    /**
+     * 楼号的名字
+     */
+    private String build_name;
+    /**
+     * 房间的名字
+     */
+    private String housenum;
+
+    public String getCom_name() {
+        return com_name;
+    }
+
+    public void setCom_name(String com_name) {
+        this.com_name = com_name;
+    }
+
+    public String getUnit_name() {
+        return unit_name;
+    }
+
+    public void setUnit_name(String unit_name) {
+        this.unit_name = unit_name;
+    }
+
+    public String getBuild_name() {
+        return build_name;
+    }
+
+    public void setBuild_name(String build_name) {
+        this.build_name = build_name;
+    }
+
+    public String getHousenum() {
+        return housenum;
+    }
+
+    public void setHousenum(String housenum) {
+        this.housenum = housenum;
+    }
 
     private List<DepartmentInfo> doc_list;
 
