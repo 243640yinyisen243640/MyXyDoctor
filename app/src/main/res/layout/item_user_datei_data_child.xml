@@ -18,9 +18,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|right"
-            android:src="@drawable/user_info_have_dead" />
+            android:src="@drawable/user_info_have_dead"
+            android:visibility="gone"/>
 
         <LinearLayout
+            android:id="@+id/ll_datei_child_click"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

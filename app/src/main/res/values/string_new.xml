@@ -228,4 +228,6 @@
     <string name="community_set_record_title">建档统计</string>
     <string name="community_set_record_family">家庭</string>
     <string name="community_set_record_people">居民</string>
+    <string name="community_set_record_look">查看慢病档案</string>
+    <string name="community_record_title">社区档案</string>
 </resources>

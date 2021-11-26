@@ -1,5 +1,6 @@
 package com.xy.xydoctor.ui.activity.community_management;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -61,6 +62,12 @@ public class CommunityUserDateiListActivity extends XYSoftUIBaseActivity {
         onPageLoad();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onPageLoad();
+    }
+
     private View initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_user_medicine, null);
         mRefreshLayout = getViewByID(view, R.id.refreshLayout_data_remind);
@@ -98,7 +105,7 @@ public class CommunityUserDateiListActivity extends XYSoftUIBaseActivity {
             }
         });
         mRefreshLayout.setEnableLoadMore(false);
-        mRefreshLayout.setEnableRefresh(true);
+        mRefreshLayout.setEnableRefresh(false);
         mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
             mPageIndex++;
             onPageLoad();
@@ -216,16 +223,21 @@ public class CommunityUserDateiListActivity extends XYSoftUIBaseActivity {
         @Override
         public void adapterClickListener(int position, View view) {
 
-            switch (view.getId()) {
-
-                default:
-                    break;
-            }
         }
 
         @Override
         public void adapterClickListener(int position, int index, View view) {
-
+            switch (view.getId()) {
+                case R.id.ll_datei_child_click:
+                    Intent intent = new Intent(getPageContext(), UserRecordActivity.class);
+                    intent.putExtra("userid", mList.get(position).getMembers().get(index).getUserid());
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
+            }
         }
     }
+
+
 }

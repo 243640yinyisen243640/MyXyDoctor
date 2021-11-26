@@ -1,15 +1,16 @@
 package com.xy.xydoctor.adapter.community_manager;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.adapter.XYSoftBaseAdapter;
 import com.xy.xydoctor.bean.community_manamer.CommunityFilterChildInfo;
+import com.xy.xydoctor.imp.IAdapterViewClickListener;
 
 import java.util.List;
 
@@ -19,9 +20,13 @@ import java.util.List;
  * Description: 楼栋设置
  */
 public class UserDateiDataChildListAdapter extends XYSoftBaseAdapter<CommunityFilterChildInfo> {
+    private IAdapterViewClickListener clickListener;
+    private int parPosition;
 
-    public UserDateiDataChildListAdapter(Context context, List<CommunityFilterChildInfo> list) {
+    public UserDateiDataChildListAdapter(Context context, List<CommunityFilterChildInfo> list, int parPosition, IAdapterViewClickListener clickListener) {
         super(context, list);
+        this.clickListener = clickListener;
+        this.parPosition = parPosition;
     }
 
     @Override
@@ -31,6 +36,7 @@ public class UserDateiDataChildListAdapter extends XYSoftBaseAdapter<CommunityFi
             holder = new ViewHolder();
             convertView = View.inflate(getContext(), R.layout.item_user_datei_data_child, null);
             holder.nameTextView = convertView.findViewById(R.id.tv_user_child_datei_name);
+            holder.clickFrameLayout = convertView.findViewById(R.id.ll_datei_child_click);
             holder.sexTextView = convertView.findViewById(R.id.tv_user_child_datei_sex);
             holder.ageTextView = convertView.findViewById(R.id.tv_user_child_datei_age);
             holder.phoneTextView = convertView.findViewById(R.id.tv_user_child_datei_phone);
@@ -45,14 +51,14 @@ public class UserDateiDataChildListAdapter extends XYSoftBaseAdapter<CommunityFi
 
         holder.nameTextView.setText(info.getNickname());
         if ("1".equals(info.getSex())) {
-            holder.sexTextView.setText(getContext().getString(R.string.base_female));
-        } else {
             holder.sexTextView.setText(getContext().getString(R.string.base_male));
+        } else {
+            holder.sexTextView.setText(getContext().getString(R.string.base_female));
         }
 
-        if ("1".equals(info.getIsdeath())){
-           holder.deadImageView.setVisibility(View.VISIBLE);
-        }else {
+        if ("1".equals(info.getIsdeath())) {
+            holder.deadImageView.setVisibility(View.VISIBLE);
+        } else {
             holder.deadImageView.setVisibility(View.GONE);
 
         }
@@ -60,14 +66,16 @@ public class UserDateiDataChildListAdapter extends XYSoftBaseAdapter<CommunityFi
         holder.ageTextView.setText(info.getAge() + "岁");
         holder.phoneTextView.setText(info.getTel());
         holder.locationTextView.setText(info.getBuild_name() + info.getUnit_name() + info.getHouse_num());
-        Log.i("yys", "create_user==" + info.getCreate_user());
         holder.recordNameTextView.setText("建档人  ：" + info.getCreate_user());
+        MyClickListener clickListener = new MyClickListener(position);
 
+        holder.clickFrameLayout.setOnClickListener(clickListener);
 
         return convertView;
     }
 
     private class ViewHolder {
+        LinearLayout clickFrameLayout;
         TextView nameTextView;
         TextView sexTextView;
         TextView ageTextView;
@@ -76,4 +84,21 @@ public class UserDateiDataChildListAdapter extends XYSoftBaseAdapter<CommunityFi
         TextView recordNameTextView;
         ImageView deadImageView;
     }
+
+    private class MyClickListener implements View.OnClickListener {
+
+        private int childPosi;
+
+        public MyClickListener(int childPosi) {
+            this.childPosi = childPosi;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (clickListener != null) {
+                clickListener.adapterClickListener(parPosition, childPosi, v);
+            }
+        }
+    }
+
 }

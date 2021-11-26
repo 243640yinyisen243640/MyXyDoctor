@@ -3,6 +3,7 @@ package com.xy.xydoctor.adapter.community_manager;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,13 +39,21 @@ public class UserDateiDataListAdapter extends UIBaseRecycleViewAdapter<DataAbnor
         ViewHolder viewHolder = (ViewHolder) holder;
         DataAbnormalInfo info = getList().get(position);
         viewHolder.locationTextView.setText(info.getCom_name());
-        UserDateiDataChildListAdapter adapter = new UserDateiDataChildListAdapter(getContext(), info.getMembers());
+        UserDateiDataChildListAdapter adapter = new UserDateiDataChildListAdapter(getContext(), info.getMembers(), position, getListener());
         viewHolder.myListView.setAdapter(adapter);
+
+        viewHolder.clickLinearLayout.setOnClickListener(v -> {
+            if (getListener() != null) {
+                getListener().adapterClickListener(position, v);
+            }
+        });
+
 
     }
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout clickLinearLayout;
         TextView locationTextView;
         NoConflictListView myListView;
 
@@ -52,6 +61,7 @@ public class UserDateiDataListAdapter extends UIBaseRecycleViewAdapter<DataAbnor
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             locationTextView = itemView.findViewById(R.id.tv_datei_location);
+            clickLinearLayout = itemView.findViewById(R.id.ll_datei_click);
             myListView = itemView.findViewById(R.id.ls_datei_location);
 
         }

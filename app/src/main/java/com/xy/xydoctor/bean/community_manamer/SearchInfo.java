@@ -18,6 +18,14 @@ public class SearchInfo implements Serializable {
      */
     private String nickname;
     /**
+     * 手机号
+     */
+    private String tel;
+    /**
+     * 身份证
+     */
+    private String idcard;
+    /**
      *
      */
     private String sex;
@@ -103,9 +111,34 @@ public class SearchInfo implements Serializable {
      */
     private String disability;
     /**
+     * 低保
+     */
+    private String dibao;
+    /**
+     * 重慢病
+     */
+    private String scd;
+    /**
+     * 特殊家庭
+     */
+    private String special_family;
+    /**
+     * 疫情防控
+     */
+    private String epidemic;
+    /**
      * 精神病 1是 2否
      */
     private String mental_illness;
+
+    /**
+     * 怀孕
+     */
+    private String pregnant;
+    /**
+     * 结核
+     */
+    private String tuberculosis;
 
     /**
      * 关注 1是 2否
@@ -182,6 +215,86 @@ public class SearchInfo implements Serializable {
      * 房间的名字
      */
     private String housenum;
+    /**
+     * 房间号
+     */
+    private String house_num;
+    /**
+     * 是否死亡
+     */
+    private String isdeath;
+
+    public String getIsdeath() {
+        return isdeath;
+    }
+
+    public void setIsdeath(String isdeath) {
+        this.isdeath = isdeath;
+    }
+
+    public String getEpidemic() {
+        return epidemic;
+    }
+
+    public void setEpidemic(String epidemic) {
+        this.epidemic = epidemic;
+    }
+
+    public String getSpecial_family() {
+        return special_family;
+    }
+
+    public void setSpecial_family(String special_family) {
+        this.special_family = special_family;
+    }
+
+    public String getScd() {
+        return scd;
+    }
+
+    public void setScd(String scd) {
+        this.scd = scd;
+    }
+
+    public String getDibao() {
+        return dibao;
+    }
+
+    public void setDibao(String dibao) {
+        this.dibao = dibao;
+    }
+
+    public String getTuberculosis() {
+        return tuberculosis;
+    }
+
+    public void setTuberculosis(String tuberculosis) {
+        this.tuberculosis = tuberculosis;
+    }
+
+    public String getPregnant() {
+        return pregnant;
+    }
+
+    public void setPregnant(String pregnant) {
+        this.pregnant = pregnant;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getHouse_num() {
+        return house_num;
+    }
+
+    public void setHouse_num(String house_num) {
+        this.house_num = house_num;
+    }
 
     public String getCom_name() {
         return com_name;
@@ -584,5 +697,13 @@ public class SearchInfo implements Serializable {
 
     public void setHosInfo(DepartmentInfo hosInfo) {
         this.hosInfo = hosInfo;
+    }
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
     }
 }

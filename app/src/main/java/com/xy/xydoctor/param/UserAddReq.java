@@ -66,7 +66,7 @@ public class UserAddReq {
      */
     private String hypertension = "2";
     /**
-     * 血压水平 1一级 2二级
+     * 血压水平 1一级 2二级 3三级
      */
     private String bloodLevel = "1";
     /**
@@ -96,11 +96,27 @@ public class UserAddReq {
     /**
      * 孕1是 2否
      */
-    private String pregnant;
+    private String pregnant="2";
     /**
      * 结核：1是 2否
      */
-    private String tuberculosis;
+    private String tuberculosis="2";
+    /**
+     * 低保
+     */
+    private String dibao="2";
+    /**
+     * 重慢病
+     */
+    private String scd="2";
+    /**
+     * 特殊家庭
+     */
+    private String special_family="2";
+    /**
+     * 疫情防控
+     */
+    private String epidemic="2";
 
     /**
      * 是否残疾  1是 2否
@@ -119,6 +135,14 @@ public class UserAddReq {
      */
     private String blood_imei = "";
 
+
+    public String getEpidemic() {
+        return epidemic;
+    }
+
+    public void setEpidemic(String epidemic) {
+        this.epidemic = epidemic;
+    }
 
     public String getHouse_id() {
         return house_id;
@@ -304,19 +328,56 @@ public class UserAddReq {
         this.blood_imei = blood_imei;
     }
 
+    public String getTuberculosis() {
+        return tuberculosis;
+    }
+
+    public void setTuberculosis(String tuberculosis) {
+        this.tuberculosis = tuberculosis;
+    }
+
+    public String getDibao() {
+        return dibao;
+    }
+
+    public void setDibao(String dibao) {
+        this.dibao = dibao;
+    }
+
+    public String getPregnant() {
+        return pregnant;
+    }
+
+    public void setPregnant(String pregnant) {
+        this.pregnant = pregnant;
+    }
+
+
+    public String getScd() {
+        return scd;
+    }
+
+    public void setScd(String scd) {
+        this.scd = scd;
+    }
+
+    public String getSpecial_family() {
+        return special_family;
+    }
+
+    public void setSpecial_family(String special_family) {
+        this.special_family = special_family;
+    }
+
     public Map<String, String> initAddParamMap() {
         Map<String, String> map = new HashMap<>();
         map.put("access_token", SPStaticUtils.getString("token"));
-        map.put("house_id", house_id);
         map.put("userid", userid);
         map.put("nickname", nickname);
         map.put("tel", tel);
         map.put("sex", sex);
         map.put("birthtime", birthtime);
         map.put("relation", relation);
-        map.put("hos_userid", hos_userid);
-        map.put("dep_userid", dep_userid);
-        map.put("doc_userid", doc_userid);
         map.put("diabeteslei", diabeteslei);
         map.put("hypertension", hypertension);
         map.put("bloodLevel", bloodLevel);
@@ -328,6 +389,16 @@ public class UserAddReq {
         map.put("mental_illness", mental_illness);
         map.put("disability", disability);
         map.put("iscare", iscare);
+        map.put("pregnant", pregnant);
+        map.put("tuberculosis", tuberculosis);
+        map.put("dibao", dibao);
+        map.put("scd", scd);
+        map.put("special_family", special_family);
+        map.put("epidemic", epidemic);
+        map.put("house_id", house_id);
+        map.put("hos_userid", hos_userid);
+        map.put("dep_userid", dep_userid);
+        map.put("doc_userid", doc_userid);
         map.put("sugar_imei", sugar_imei);
         map.put("blood_imei", blood_imei);
 

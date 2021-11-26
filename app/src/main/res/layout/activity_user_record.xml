@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_record_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/shape_bg_white_5"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_community_name" />
+
+                <TextView
+                    android:id="@+id/tv_user_record_community_name"
+                    style="@style/user_add_right_choose"
+                    android:drawableRight="@null" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_community_build_name" />
+
+                <TextView
+                    android:id="@+id/tv_user_record_build_name"
+                    style="@style/user_add_right_choose"
+                    android:drawableRight="@null" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_community_unit_name" />
+
+                <TextView
+                    android:id="@+id/tv_user_record_unit_name"
+                    style="@style/user_add_right_choose"
+                    android:drawableRight="@null" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_community_room_name" />
+
+                <TextView
+                    android:id="@+id/tv_user_record_room_name"
+                    style="@style/user_add_right_choose"
+                    android:drawableRight="@null" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_name" />
+
+                <TextView
+                    android:id="@+id/tv_record_user_name"
+                    style="@style/user_add_right_choose" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_phone" />
+
+                <TextView
+                    android:id="@+id/tv_record_user_phone"
+                    style="@style/user_add_right_choose" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:drawableRight="@null"
+                    android:text="@string/user_add_id_num" />
+
+                <TextView
+                    android:id="@+id/tv_record_user_id_number"
+                    style="@style/user_add_right_choose"
+                    android:drawableRight="@null" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_sex" />
+
+                <TextView
+                    android:id="@+id/tv_record_user_sex"
+                    style="@style/user_add_right_choose" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_born_time" />
+
+                <TextView
+                    android:id="@+id/tv_record_user_born"
+                    style="@style/user_add_right_choose" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_master_relation" />
+
+                <TextView
+                    android:id="@+id/tv_record_user_master_relation"
+                    style="@style/user_add_right_choose" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_hospital_choose" />
+
+                <TextView
+                    android:id="@+id/tv_record_user_hospital_choose"
+                    style="@style/user_add_right_choose"
+                    android:drawableRight="@null" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_department_choose" />
+
+                <TextView
+                    android:id="@+id/tv_record_user_department_choose"
+                    style="@style/user_add_right_choose"
+                    android:drawableRight="@null" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="@string/user_add_doctor_choose" />
+
+                <TextView
+                    android:id="@+id/tv_record_user_doctor_choose"
+                    style="@style/user_add_right_choose"
+                    android:drawableRight="@null" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <TextView
+                style="@style/community_filter_title"
+                android:padding="15dp"
+                android:text="@string/community_type_of_disease"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/tv_record_user_disease_sugar"
+                    style="@style/user_add_type"
+                    android:text=" 糖尿病  " />
+
+                <TextView
+                    android:id="@+id/tv_record_user_disease_presure"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text=" 高血压  " />
+
+                <TextView
+                    android:id="@+id/tv_record_user_disease_head"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text=" 脑卒中  " />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/cb_record_disease_heart"
+                    style="@style/user_add_type"
+                    android:text=" 冠心病  " />
+
+                <TextView
+                    android:id="@+id/cb_record_disease_mental_illness"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="精神疾病" />
+
+                <TextView
+                    android:id="@+id/cb_record_disease_pregnant"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="      孕     " />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/cb_filter_record_tuberculosis"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="   结核   " />
+
+                <TextView
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="   结核   "
+                    android:visibility="invisible" />
+
+                <TextView
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="   结核   "
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+
+            <TextView
+                style="@style/community_filter_title"
+                android:padding="15dp"
+                android:text="@string/user_add_special_info"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/cb_record_disease_apart"
+                    style="@style/user_add_type"
+                    android:text="   党员   " />
+
+                <TextView
+                    android:id="@+id/cb_record_disease_ill"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="残疾人   " />
+
+                <TextView
+                    android:id="@+id/cb_record_disease_subsistence_allowance"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="   低保   " />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/cb_record_disease_heavy_ill"
+                    style="@style/user_add_type"
+                    android:text="   重慢病" />
+
+                <TextView
+                    android:id="@+id/cb_record_disease_special_family"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="特殊家庭" />
+
+                <TextView
+                    android:id="@+id/cb_record_disease_control_epidemic"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="防疫防控" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/cb_record_disease_import"
+                    style="@style/user_add_type"
+                    android:text="重点关注" />
+
+                <TextView
+                    style="@style/user_add_type"
+                    android:text="特殊家庭"
+                    android:visibility="invisible" />
+
+                <TextView
+                    style="@style/user_add_type"
+                    android:text="防疫防控"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_record_user_look"
+            style="@style/community_button_choice"
+            android:text="@string/community_set_record_look" />
+    </LinearLayout>
+
+
+</ScrollView>
