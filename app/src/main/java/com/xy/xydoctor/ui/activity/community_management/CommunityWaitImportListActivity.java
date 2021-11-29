@@ -228,7 +228,7 @@ public class CommunityWaitImportListActivity extends XYSoftUIBaseActivity {
                         Intent intent = new Intent(getPageContext(), UserAddFirstActivity.class);
                         intent.putExtra("importInfo", mList.get(position));
                         intent.putExtra("type", "2");
-                        startActivity(intent);
+                        startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
                     } else {
                         Intent intent = new Intent();
                         intent.putExtra("importInfo", mList.get(position));
@@ -248,5 +248,15 @@ public class CommunityWaitImportListActivity extends XYSoftUIBaseActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_REFRESH) {
+                mPageIndex = 1;
+                onPageLoad();
+            }
+        }
+    }
 
 }
