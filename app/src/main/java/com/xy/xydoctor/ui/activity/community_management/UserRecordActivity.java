@@ -22,7 +22,7 @@ import com.xy.xydoctor.bean.community_manamer.FilterSugarPressureInfo;
 import com.xy.xydoctor.bean.community_manamer.SearchInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.datamanager.DataManager;
-import com.xy.xydoctor.param.UserAddReq;
+import com.xy.xydoctor.param.UserRecordReq;
 import com.xy.xydoctor.utils.DataUtils;
 import com.xy.xydoctor.utils.DialogUtils;
 import com.xy.xydoctor.utils.TipUtils;
@@ -93,7 +93,7 @@ public class UserRecordActivity extends XYSoftUIBaseActivity implements View.OnC
     private String userid;
 
     private SearchInfo info;
-    private UserAddReq addReq = new UserAddReq();
+    private UserRecordReq addReq = new UserRecordReq();
 
 
     @Override

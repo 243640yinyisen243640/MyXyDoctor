@@ -26,6 +26,7 @@ import com.xy.xydoctor.bean.community_manamer.SugarOrPressureInfo;
 import com.xy.xydoctor.bean.community_manamer.UserRecordDataInfo;
 import com.xy.xydoctor.constant.ConstantParam;
 import com.xy.xydoctor.param.UserAddReq;
+import com.xy.xydoctor.param.UserRecordReq;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -766,7 +767,7 @@ public class DataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> addRecord(UserAddReq addReq, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> addRecord(UserRecordReq addReq, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
 
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/doctor/Community/saveMemberConInfo", addReq.initAddParamMap(), successCallBack, failureCallBack);
     }
