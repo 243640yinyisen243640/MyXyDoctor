@@ -28,6 +28,7 @@ public class UserAddReq {
      *
      */
     private String tel = "";
+    private String idcard = "";
     /**
      *
      */
@@ -369,12 +370,22 @@ public class UserAddReq {
         this.special_family = special_family;
     }
 
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
+    }
+
     public Map<String, String> initAddParamMap() {
         Map<String, String> map = new HashMap<>();
         map.put("access_token", SPStaticUtils.getString("token"));
         map.put("userid", userid);
         map.put("nickname", nickname);
         map.put("tel", tel);
+        map.put("idcard", idcard);
         map.put("sex", sex);
         map.put("birthtime", birthtime);
         map.put("relation", relation);

@@ -85,11 +85,6 @@ public class CommunityBuildingUnitActivity extends XYSoftUIBaseActivity implemen
         house_id = getIntent().getStringExtra("house_id");
         house_name = getIntent().getStringExtra("house_name");
         build_id = getIntent().getStringExtra("build_id");
-
-        //        numid = getIntent().getStringExtra("numid");
-        //        unitid = getIntent().getStringExtra("unitid");
-        //        roomnum = getIntent().getStringExtra("roomnum");
-
         topViewManager().titleTextView().setText(house_name);
 
         topViewManager().moreTextView().setText("添加成员");

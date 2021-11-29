@@ -540,8 +540,8 @@ public class DataManager {
     /**
      * 获取医生列表
      *
-     * @param dep_userid
-     * @param build_id
+     * @param dep_userid  dep_userid
+     * @param build_id  build_id
      * @param successCallBack
      * @param failureCallBack
      * @return
@@ -705,7 +705,7 @@ public class DataManager {
         map.put("id", id);
         map.put("type", type);
         map.put("access_token", SPStaticUtils.getString("token"));
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, BuildInfo.class, "/doctor/community/communityAllList", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, BuildInfo.class, "/doctor/community/communityAllList", map, successCallBack, failureCallBack);
     }
 
     /**
@@ -746,6 +746,7 @@ public class DataManager {
 
     /**
      * 获取档案数据
+     *
      * @param userid
      * @param successCallBack
      * @param failureCallBack
@@ -758,8 +759,32 @@ public class DataManager {
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, SearchInfo.class, "/doctor/community/getMemberComInfo", map, successCallBack, failureCallBack);
     }
 
+    /**
+     * 添加记录
+     * @param addReq
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
     public static Call<String> addRecord(UserAddReq addReq, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
 
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "/doctor/Community/saveMemberConInfo", addReq.initAddParamMap(), successCallBack, failureCallBack);
     }
+
+
+    /**
+     * 获取待导入居民的数据
+     *
+     * @param page
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getWaitImportData(String page, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("page", page);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, SearchInfo.class, "/doctor/community/getImportLists", map, successCallBack, failureCallBack);
+    }
+
 }

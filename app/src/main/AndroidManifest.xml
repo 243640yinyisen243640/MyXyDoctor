@@ -346,14 +346,8 @@
         <activity
             android:name=".ui.activity.community_management.CommunityFollowUpBuildingActivity"
             android:screenOrientation="portrait" />
-        <!--添加用户-->
-        <activity
-            android:name=".ui.activity.community_management.UserAddActivity"
-            android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".ui.activity.community_management.UserAddSecondActivity"
-            android:screenOrientation="portrait" />
+
         <!--数据异常提醒-->
         <activity
             android:name=".ui.activity.community_management.DataAbnormalRemindListActivity"
@@ -417,15 +411,29 @@
         <activity
             android:name=".ui.activity.community_management.CommunityDataAbnormalActivity1"
             android:screenOrientation="portrait" />
-
+        <!--建档数据-->
         <activity
             android:name=".ui.activity.community_management.CommunityUserDateiListActivity"
             android:screenOrientation="portrait" />
+        <!--档案记录-->
         <activity
             android:name=".ui.activity.community_management.CommunitySetRecordActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.community_management.UserRecordActivity"
-            android:screenOrientation="portrait"/>
+        <!--个人档案-->
+        <activity
+            android:name=".ui.activity.community_management.UserRecordActivity"
+            android:screenOrientation="portrait" />
+        <!--待导入居民列表-->
+        <activity
+            android:name=".ui.activity.community_management.CommunityWaitImportListActivity"
+            android:screenOrientation="portrait" />
+        <!--添加用户-->
+        <activity
+            android:name=".ui.activity.community_management.UserAddFirstActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.community_management.UserAddSecondActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

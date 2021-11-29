@@ -202,12 +202,12 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                                 mList.clear();
                             }
                             mList.addAll(mTempList);
-//                            if (mAdapter == null) {
-                                mAdapter = new CommunityFilterListAdapter(getPageContext(), mList, isEmpty, new OnItemClickListener());
-                                mRecyclerView.setAdapter(mAdapter);
-//                            } else {
-//                                mAdapter.notifyDataSetChanged();
-//                            }
+                            //                            if (mAdapter == null) {
+                            mAdapter = new CommunityFilterListAdapter(getPageContext(), mList, isEmpty, new OnItemClickListener());
+                            mRecyclerView.setAdapter(mAdapter);
+                            //                            } else {
+                            //                                mAdapter.notifyDataSetChanged();
+                            //                            }
                         } else {
                             mList.addAll(mTempList);
                             mAdapter.notifyDataSetChanged();
@@ -372,10 +372,13 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
                     }
                     break;
                 case R.id.tv_filter_empty:
-                    intent = new Intent(getPageContext(), UserAddActivity.class);
-                    intent.putExtra("buildid", mList.get(position).getBuild_id());
+                    intent = new Intent(getPageContext(), UserAddSecondActivity.class);
                     intent.putExtra("houserid", mList.get(position).getHouse_id());
-                    intent.putExtra("houseinfo", mList.get(position).getBuild_name() + mList.get(position).getUnit_name() + mList.get(position).getHouse_num());
+                    intent.putExtra("buildid", mList.get(position).getBuild_id());
+                    intent.putExtra("comName", mList.get(position).getCom_name());
+                    intent.putExtra("unitName", mList.get(position).getUnit_name());
+                    intent.putExtra("buildName", mList.get(position).getBuild_name());
+                    intent.putExtra("houseName", mList.get(position).getHouse_num());
                     startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
                     break;
                 default:

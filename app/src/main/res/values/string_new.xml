@@ -104,6 +104,7 @@
     <string name="user_add_community_room_name">房间号</string>
     <string name="user_add_phone">手机号</string>
     <string name="user_add_id_num">身份证号</string>
+    <string name="please_input_user_add_id_num">请输入身份证号</string>
     <string name="user_add_sex">性别</string>
     <string name="user_add_born_time">出生日期</string>
     <string name="user_add_master_relation">与户主关系</string>
@@ -113,7 +114,7 @@
     <string name="user_add_department_choose_or_doctor">选择科室或医生</string>
     <string name="user_add_doctor_choose">选择医生</string>
     <string name="please_choose">请选择</string>
-    <string name="user_add_title">添加成员</string>
+    <string name="user_add_title">添加居民</string>
     <string name="user_add_bind_device">绑定设备</string>
     <string name="user_add_special_info">特殊信息</string>
     <string name="user_add_device_sugar">血糖仪</string>

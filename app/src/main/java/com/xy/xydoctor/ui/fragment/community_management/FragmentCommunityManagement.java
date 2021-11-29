@@ -27,7 +27,9 @@ import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentLi
 import com.xy.xydoctor.ui.activity.community_management.CommunityFollowupAgentSearchListActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunitySetRecordActivity;
 import com.xy.xydoctor.ui.activity.community_management.CommunityUserMedicineActivity;
+import com.xy.xydoctor.ui.activity.community_management.CommunityWaitImportListActivity;
 import com.xy.xydoctor.ui.activity.community_management.SettingsPropertyActivity;
+import com.xy.xydoctor.ui.activity.community_management.UserAddFirstActivity;
 import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.utils.XyScreenUtils;
 
@@ -226,8 +228,8 @@ public class FragmentCommunityManagement extends BaseFragment {
         Intent intent = null;
         switch (view.getId()) {
             case R.id.tv_community_add_user:
-                intent = new Intent(getPageContext(), CommunityFollowupAgentListActivity.class);
-                intent.putExtra("type", "3");
+                intent = new Intent(getPageContext(), UserAddFirstActivity.class);
+                intent.putExtra("type", "1");
                 startActivity(intent);
                 break;
             case R.id.ll_community_filter_building_num:
@@ -264,8 +266,8 @@ public class FragmentCommunityManagement extends BaseFragment {
                 break;
             case R.id.tv_community_follow_up_wait_fall_in:
                 //待导入居民
-                intent = new Intent(getPageContext(), CommunityUserMedicineActivity.class);
-                intent.putExtra("userid", "0");
+                intent = new Intent(getPageContext(), CommunityWaitImportListActivity.class);
+                intent.putExtra("type", "1");
                 startActivity(intent);
                 break;
             case R.id.tv_community_follow_up_statistics:

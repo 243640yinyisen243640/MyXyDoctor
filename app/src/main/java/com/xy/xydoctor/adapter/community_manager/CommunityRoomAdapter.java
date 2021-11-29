@@ -50,11 +50,6 @@ public class CommunityRoomAdapter extends XYSoftBaseAdapter<CommunityFilterInfo>
             holder.illImageView.setVisibility(View.VISIBLE);
         }
 
-        Log.i("yys","isempty"+info.getIsempty());
-        Log.i("yys","istodo"+info.getIstodo());
-        Log.i("yys","isabnormal"+info.getAbnormal());
-
-
         /**
          *      * 有无异常
          *      * 0：无

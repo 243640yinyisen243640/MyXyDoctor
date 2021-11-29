@@ -223,6 +223,18 @@ public class SearchInfo implements Serializable {
      * 是否死亡
      */
     private String isdeath;
+    /**
+     * 位置信息
+     */
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getIsdeath() {
         return isdeath;

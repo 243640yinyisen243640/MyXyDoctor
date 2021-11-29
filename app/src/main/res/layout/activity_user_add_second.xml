@@ -103,7 +103,7 @@
                     android:text="@string/user_add_name" />
 
                 <EditText
-                    android:id="@+id/et_user_add_name"
+                    android:id="@+id/et_community_user_add_name"
                     style="@style/user_add_right"
                     android:hint="@string/user_add_please_input_name" />
 
@@ -121,7 +121,7 @@
                     android:text="@string/user_add_phone" />
 
                 <EditText
-                    android:id="@+id/et_user_add_phone"
+                    android:id="@+id/et_community_user_add_phone"
                     style="@style/user_add_right"
                     android:hint="@string/user_add_please_input_phone"
                     android:imeOptions="actionSearch"
@@ -143,12 +143,9 @@
                     android:text="@string/user_add_id_num" />
 
                 <EditText
-                    android:id="@+id/et_user_add_id_number"
+                    android:id="@+id/et_community_user_add_id_number"
                     style="@style/user_add_right"
-                    android:hint="@string/user_add_please_input_phone"
-                    android:imeOptions="actionSearch"
-                    android:inputType="phone"
-                    android:lines="1" />
+                    android:hint="@string/please_input_user_add_id_num" />
 
             </LinearLayout>
 
@@ -164,7 +161,7 @@
                     android:text="@string/user_add_sex" />
 
                 <TextView
-                    android:id="@+id/tv_user_add_sex"
+                    android:id="@+id/tv_community_user_add_sex"
                     style="@style/user_add_right_choose"
                     android:text="@string/please_choose" />
 
@@ -182,7 +179,7 @@
                     android:text="@string/user_add_born_time" />
 
                 <TextView
-                    android:id="@+id/tv_user_add_born"
+                    android:id="@+id/tv_community_user_add_born"
                     style="@style/user_add_right_choose"
                     android:text="@string/please_choose" />
 
@@ -200,7 +197,7 @@
                     android:text="@string/user_add_master_relation" />
 
                 <TextView
-                    android:id="@+id/tv_user_add_master_relation"
+                    android:id="@+id/tv_community_user_add_master_relation"
                     style="@style/user_add_right_choose"
                     android:text="@string/please_choose" />
 
@@ -218,7 +215,7 @@
                     android:text="@string/user_add_hospital_choose" />
 
                 <TextView
-                    android:id="@+id/tv_user_add_hospital_choose"
+                    android:id="@+id/tv_community_user_add_hospital_choose"
                     style="@style/user_add_right_choose"
                     android:text="@string/please_choose" />
 
@@ -236,7 +233,7 @@
                     android:text="@string/user_add_department_choose" />
 
                 <TextView
-                    android:id="@+id/tv_user_add_department_choose"
+                    android:id="@+id/tv_community_user_add_department_choose"
                     style="@style/user_add_right_choose"
                     android:text="@string/please_choose" />
 
@@ -254,7 +251,7 @@
                     android:text="@string/user_add_doctor_choose" />
 
                 <TextView
-                    android:id="@+id/tv_user_add_doctor_choose"
+                    android:id="@+id/tv_community_user_add_doctor_choose"
                     style="@style/user_add_right_choose"
                     android:text="@string/please_choose" />
 
@@ -276,18 +273,18 @@
                 android:paddingRight="10dp">
 
                 <TextView
-                    android:id="@+id/cb_filter_disease_sugar"
+                    android:id="@+id/cb_community_disease_sugar"
                     style="@style/user_add_type"
                     android:text=" 糖尿病  " />
 
                 <TextView
-                    android:id="@+id/tv_filter_disease_presure"
+                    android:id="@+id/tv_community_disease_presure"
                     style="@style/user_add_type"
                     android:layout_marginLeft="3dp"
                     android:text=" 高血压  " />
 
                 <TextView
-                    android:id="@+id/tv_filter_disease_head"
+                    android:id="@+id/tv_community_disease_head"
                     style="@style/user_add_type"
                     android:layout_marginLeft="3dp"
                     android:text=" 脑卒中  " />
@@ -303,18 +300,18 @@
                 android:paddingRight="10dp">
 
                 <CheckBox
-                    android:id="@+id/cb_filter_disease_heart"
+                    android:id="@+id/cb_community_disease_heart"
                     style="@style/user_add_type"
                     android:text=" 冠心病  " />
 
                 <CheckBox
-                    android:id="@+id/cb_filter_disease_mental_illness"
+                    android:id="@+id/cb_community_disease_mental_illness"
                     style="@style/user_add_type"
                     android:layout_marginLeft="3dp"
                     android:text="精神疾病" />
 
                 <CheckBox
-                    android:id="@+id/cb_filter_disease_pregnant"
+                    android:id="@+id/cb_community_disease_pregnant"
                     style="@style/user_add_type"
                     android:layout_marginLeft="3dp"
                     android:text="      孕     " />
@@ -330,7 +327,7 @@
                 android:paddingRight="10dp">
 
                 <CheckBox
-                    android:id="@+id/cb_filter_disease_tuberculosis"
+                    android:id="@+id/cb_community_disease_tuberculosis"
                     style="@style/user_add_type"
                     android:layout_marginLeft="3dp"
                     android:text="   结核   " />
@@ -364,18 +361,18 @@
                 android:paddingRight="10dp">
 
                 <CheckBox
-                    android:id="@+id/cb_filter_disease_apart"
+                    android:id="@+id/cb_community_disease_apart"
                     style="@style/user_add_type"
                     android:text="   党员   " />
 
                 <CheckBox
-                    android:id="@+id/cb_filter_disease_ill"
+                    android:id="@+id/cb_community_disease_ill"
                     style="@style/user_add_type"
                     android:layout_marginLeft="3dp"
                     android:text="残疾人   " />
 
                 <CheckBox
-                    android:id="@+id/cb_filter_disease_subsistence_allowance"
+                    android:id="@+id/cb_community_disease_subsistence_allowance"
                     style="@style/user_add_type"
                     android:layout_marginLeft="3dp"
                     android:text="   低保   " />
@@ -391,18 +388,18 @@
                 android:paddingRight="10dp">
 
                 <CheckBox
-                    android:id="@+id/cb_filter_disease_heavy_ill"
+                    android:id="@+id/cb_community_disease_heavy_ill"
                     style="@style/user_add_type"
                     android:text="   重慢病" />
 
                 <CheckBox
-                    android:id="@+id/cb_filter_disease_special_family"
+                    android:id="@+id/cb_community_disease_special_family"
                     style="@style/user_add_type"
                     android:text="特殊家庭"
                     android:layout_marginLeft="3dp"/>
 
                 <CheckBox
-                    android:id="@+id/cb_filter_disease_control_epidemic"
+                    android:id="@+id/cb_community_disease_control_epidemic"
                     style="@style/user_add_type"
                     android:text="防疫防控"
                     android:layout_marginLeft="3dp" />
@@ -418,7 +415,7 @@
                 android:paddingRight="10dp">
 
                 <CheckBox
-                    android:id="@+id/cb_filter_disease_import"
+                    android:id="@+id/cb_community_disease_import"
                     style="@style/user_add_type"
                     android:text="重点关注" />
 
@@ -464,7 +461,7 @@
                     android:text="@string/user_add_device_sugar" />
 
                 <EditText
-                    android:id="@+id/et_user_add_device_sugar"
+                    android:id="@+id/et_community_user_add_device_sugar"
                     android:layout_width="0dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="10dp"
@@ -472,7 +469,7 @@
                     android:background="@drawable/shape_bg_white_black" />
 
                 <ImageView
-                    android:id="@+id/iv_user_add_device_sugar"
+                    android:id="@+id/ivb_community_add_device_sugar"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingLeft="10dp"
@@ -493,7 +490,7 @@
                     android:text="@string/user_add_device_pressure" />
 
                 <EditText
-                    android:id="@+id/et_user_add_device_pressure"
+                    android:id="@+id/et_community_user_add_device_pressure"
                     android:layout_width="0dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="10dp"
@@ -501,7 +498,7 @@
                     android:background="@drawable/shape_bg_white_black" />
 
                 <ImageView
-                    android:id="@+id/iv_user_add_device_pressure"
+                    android:id="@+id/iv_community_user_add_device_pressure"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingLeft="10dp"
@@ -512,7 +509,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_add_user_submit"
+            android:id="@+id/tvb_community_add_user_submit"
             style="@style/community_button_choice"
             android:text="@string/base_add" />
     </LinearLayout>

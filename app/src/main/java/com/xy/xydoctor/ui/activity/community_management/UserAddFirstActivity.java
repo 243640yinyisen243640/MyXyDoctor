@@ -46,9 +46,9 @@ import retrofit2.Call;
  * Author: LYD
  * Date: 2021/8/21 17:32
  * Description:添加用户
- * 传参
+ * 传参 type  1:社区首页进入   2：待导入居民列表进入
  */
-public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
+public class UserAddFirstActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
 
     private static final int REQUEST_CODE_FOR_IME_CODE = 10;
     private static final int REQUEST_CODE_FOR_CHOOSE = 11;
@@ -184,39 +184,46 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
      */
     private String communityHouseID = "0";
 
-    private String buildid = "0";
-    private String comName = "";
-    private String unitName = "";
-    private String buildName = "";
-    private String houseName = "";
+
+    private String type;
+
+    private SearchInfo dataInfo = new SearchInfo();
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText(R.string.user_add_title);
-        communityHouseID = getIntent().getStringExtra("houserid");
-        buildid = getIntent().getStringExtra("buildid");
-        comName = getIntent().getStringExtra("comName");
-        unitName = getIntent().getStringExtra("unitName");
-        buildName = getIntent().getStringExtra("buildName");
-        houseName = getIntent().getStringExtra("houseName");
-        topViewManager().moreTextView().setText("选择");
-        topViewManager().moreTextView().setOnClickListener(v -> {
-            Intent intent = new Intent(getPageContext(), CommunityWaitImportListActivity.class);
-            intent.putExtra("type", "2");
-            startActivityForResult(intent, REQUEST_CODE_FOR_CHOOSE);
-        });
+        type = getIntent().getStringExtra("type");
+        //1：社区首页   2：待导入居民列表
+        if ("1".equals(type)) {
+            topViewManager().moreTextView().setText("选择");
+            topViewManager().moreTextView().setOnClickListener(v -> {
+                Intent intent = new Intent(getPageContext(), CommunityWaitImportListActivity.class);
+                intent.putExtra("type", "2");
+                startActivityForResult(intent, REQUEST_CODE_FOR_CHOOSE);
+            });
+        }else {
+            dataInfo = (SearchInfo) getIntent().getSerializableExtra("importInfo");
+        }
         containerView().addView(initView());
         initListener();
         initValues();
     }
 
     private void initValues() {
-        communityNameTextView.setText(comName);
-        communityBuildNameTextView.setText(buildName);
-        communityUnitNameTextView.setText(unitName);
-        communityRoomNameTextView.setText(houseName);
+        userid = dataInfo.getUserid();
+        nameEditText.setText(dataInfo.getNickname());
+        phoneEditText.setText(dataInfo.getTel());
+        idNumEditText.setText(dataInfo.getIdcard());
+        sex = dataInfo.getSex();
+        if ("1".equals(dataInfo.getSex())) {
+            sexTextView.setText(R.string.base_male);
+        } else {
+            sexTextView.setText(R.string.base_female);
+        }
+        born = dataInfo.getBirthtime();
+        bornTextView.setText(dataInfo.getBirthtime());
     }
 
 
@@ -549,7 +556,7 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
      * 获取医生列表
      */
     private void getDoctor() {
-        Call<String> requestCall = DataManager.getDoctorList(departmentid, buildid, (call, response) -> {
+        Call<String> requestCall = DataManager.getDoctorList(departmentid, "0", (call, response) -> {
             if (200 == response.code) {
                 SearchInfo searchInfo = (SearchInfo) response.object;
                 List<DepartmentInfo> logisticsCompanyInfos = searchInfo.getDoc_list();
@@ -626,7 +633,7 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
      */
     private void getDepartment() {
         TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
-        Call<String> requestCall = DataManager.getDepartmentList(buildid, hospitalid, (call, response) -> {
+        Call<String> requestCall = DataManager.getDepartmentList("0", hospitalid, (call, response) -> {
             TipUtils.getInstance().dismissProgressDialog();
             if (200 == response.code) {
                 List<DepartmentInfo> logisticsCompanyInfos = (List<DepartmentInfo>) response.object;
@@ -661,7 +668,7 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
      * @param type 1：选择主要是获取医院的id 2：是根据手机号去搜索
      */
     private void getHospital(String tel, String type) {
-        Call<String> requestCall = DataManager.getHospitalList(tel, buildid, (call, response) -> {
+        Call<String> requestCall = DataManager.getHospitalList(tel, "0", (call, response) -> {
             if ("1".equals(type)) {
                 if (30004 == response.code) {
                     SearchInfo searchInfo = (SearchInfo) response.object;
@@ -914,10 +921,10 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
     }
 
     private void initListener() {
-        //        communityNameTextView.setOnClickListener(this);
-        //        communityBuildNameTextView.setOnClickListener(this);
-        //        communityUnitNameTextView.setOnClickListener(this);
-        //        communityRoomNameTextView.setOnClickListener(this);
+        communityNameTextView.setOnClickListener(this);
+        communityBuildNameTextView.setOnClickListener(this);
+        communityUnitNameTextView.setOnClickListener(this);
+        communityRoomNameTextView.setOnClickListener(this);
         sexTextView.setOnClickListener(this);
         bornTextView.setOnClickListener(this);
         relationTextView.setOnClickListener(this);
@@ -937,6 +944,7 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                         (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    //do something;
                     getHospital(phoneEditText.getText().toString().trim(), "2");
                     return true;
                 }
