@@ -11,6 +11,7 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -92,6 +93,11 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
 
     private FollowUpAgentListBean info;
 
+    private ImageView finishImageView;
+    private TextView titleTextView;
+    private TextView addTextView;
+    private TextView tipTextView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,9 +109,10 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
             topViewManager().moreTextView().setText(R.string.fu_more_title_change_list);
             topViewManager().moreTextView().setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_red));
         } else {
+            topViewManager().topView().removeAllViews();
+            topViewManager().topView().addView(initTopView());
             String title = getIntent().getStringExtra("buildingName");
-            topViewManager().titleTextView().setText(title);
-            topViewManager().moreTextView().setCompoundDrawablesWithIntrinsicBounds(R.drawable.fub_top_add, 0, 0, 0);
+            titleTextView.setText(title);
         }
 
 
@@ -117,11 +124,6 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
                 intent.putExtra("comid", comid);
                 startActivity(intent);
 
-            } else {
-                //添加楼栋
-                Intent intent = new Intent(getPageContext(), CommunityBuildingSettingActivity.class);
-                intent.putExtra("comid", comid);
-                startActivityForResult(intent, REQUEST_CODE_FOR_ADD_BUILDING);
             }
 
         });
@@ -130,6 +132,18 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
         initListener();
         getCommunityInfo();
         getBuildingUnitInfo();
+    }
+
+    private View initTopView() {
+        View view = View.inflate(getPageContext(), R.layout.include_community_follow_top, null);
+        finishImageView = view.findViewById(R.id.iv_community_follow_back);
+        titleTextView = view.findViewById(R.id.tv_community_follow_title);
+        addTextView = view.findViewById(R.id.tv_community_follow_add);
+        tipTextView = view.findViewById(R.id.tv_community_follow_tips);
+        finishImageView.setOnClickListener(this);
+        tipTextView.setOnClickListener(this);
+        addTextView.setOnClickListener(this);
+        return view;
     }
 
     private void initListener() {
@@ -243,9 +257,9 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
             if (response.code == 200) {
                 List<CommunityFilterInfo> roomList = (List<CommunityFilterInfo>) response.object;
                 int anInt = TurnsUtils.getInt(buildList.get(buildindex).getUnits().get(unitindex).getHousehold(), 0);
-//                if (anInt < 4) {
-//                    anInt = 4;
-//                }
+                //                if (anInt < 4) {
+                //                    anInt = 4;
+                //                }
                 if (anInt > 5) {
                     anInt = 5;
                 }
@@ -291,11 +305,11 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
                     }
                     buildList.get(position).setCheck(true);
                     topListAdapter.notifyDataSetChanged();
-                    if (buildList.get(buildindex).getUnits()==null){
+                    if (buildList.get(buildindex).getUnits() == null) {
                         showRoomError();
                         return;
                     }
-                    if (buildList.get(buildindex).getUnits().size()==0){
+                    if (buildList.get(buildindex).getUnits().size() == 0) {
                         showRoomError();
                         return;
                     }
@@ -424,10 +438,24 @@ public class CommunityFollowUpBuildingActivity extends XYSoftUIBaseActivity impl
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.tv_follow_up_agent_user:
-                Intent intent = new Intent(getPageContext(), CommunityFollowupAgentSearchListActivity.class);
+                intent = new Intent(getPageContext(), CommunityFollowupAgentSearchListActivity.class);
                 intent.putExtra("comid", comid);
+                startActivity(intent);
+                break;
+            case R.id.iv_community_follow_back:
+                finish();
+                break;
+            case R.id.tv_community_follow_add:
+                //添加楼栋
+                intent = new Intent(getPageContext(), CommunityBuildingSettingActivity.class);
+                intent.putExtra("comid", comid);
+                startActivityForResult(intent, REQUEST_CODE_FOR_ADD_BUILDING);
+                break;
+            case R.id.tv_community_follow_tips:
+                intent = new Intent(getPageContext(), CommunityDiseaseTipsActivity.class);
                 startActivity(intent);
                 break;
             default:

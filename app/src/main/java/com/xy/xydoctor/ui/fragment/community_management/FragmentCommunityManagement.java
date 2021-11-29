@@ -161,12 +161,14 @@ public class FragmentCommunityManagement extends BaseFragment {
             numStatisticsTitleTextView.setVisibility(View.GONE);
             numStatisticsContentLinearLayout.setVisibility(View.GONE);
             setImageView.setVisibility(View.VISIBLE);
+            addUserTextView.setVisibility(View.GONE);
         } else {
             followUpStatisticsTitleLinearLayout.setVisibility(View.VISIBLE);
             followUpStatisticsContentLinearLayout.setVisibility(View.VISIBLE);
             numStatisticsTitleTextView.setVisibility(View.VISIBLE);
             numStatisticsContentLinearLayout.setVisibility(View.VISIBLE);
             setImageView.setVisibility(View.GONE);
+            addUserTextView.setVisibility(View.VISIBLE);
         }
     }
 

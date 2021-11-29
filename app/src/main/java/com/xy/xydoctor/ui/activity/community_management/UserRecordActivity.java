@@ -666,7 +666,9 @@ public class UserRecordActivity extends XYSoftUIBaseActivity implements View.OnC
 
 
             case R.id.tv_record_user_look:
-
+                intent = new Intent(getPageContext(), CommunityHeavyRecordActivity.class);
+                intent.putExtra("userid", userid);
+                startActivity(intent);
                 break;
             default:
                 break;

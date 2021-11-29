@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/hh_fi_fi"
+    android:background="@color/background">
+
+    <!--底层-->
+    <LinearLayout
+        style="@style/hh_fi_wr"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+
+        <!--列表-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_health_archive"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </LinearLayout>
+
+</FrameLayout>
+
