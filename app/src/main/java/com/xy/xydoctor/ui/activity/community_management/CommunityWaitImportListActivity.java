@@ -55,7 +55,7 @@ public class CommunityWaitImportListActivity extends XYSoftUIBaseActivity {
         super.onCreate(savedInstanceState);
         datatime = getIntent().getStringExtra("datatime");
         type = getIntent().getStringExtra("type");
-        topViewManager().titleTextView().setText("我的建档数据");
+        topViewManager().titleTextView().setText("待导入居民 ");
         containerView().addView(initView());
         initValue();
         initLinstener();

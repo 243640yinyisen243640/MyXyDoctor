@@ -811,15 +811,17 @@ public class UserAddFirstActivity extends XYSoftUIBaseActivity implements View.O
                     sugarEditText.setText(searchInfo.getSugar_imei());
                     pressureEditText.setText(searchInfo.getBlood_imei());
                 } else if (30004 == response.code) {
+
                     SearchInfo searchInfo = (SearchInfo) response.object;
                     hospitalid = searchInfo.getHospital().getHosp_userid();
+                    Log.i("yys","hospitalid=="+hospitalid);
                     hospitalTextView.setText(searchInfo.getHospital().getHosp_name());
                 }
 
 
             }
         }, (call, throwable) -> {
-            TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.network_error);
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
         });
 
     }
