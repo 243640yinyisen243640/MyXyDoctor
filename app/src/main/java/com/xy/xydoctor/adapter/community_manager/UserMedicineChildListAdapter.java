@@ -109,8 +109,6 @@ public class UserMedicineChildListAdapter extends CommonAdapter<CommunityUseMedi
         thinkTimeStringBuilder.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.community_content_black)), start7, end7, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         endTextView.setText(thinkTimeStringBuilder);
 
-        Log.i("yys", "time1===" + item.getEndtime());
-        Log.i("yys", "time==" + endTextView.getText());
         MyClickListener clickListener = new MyClickListener(position);
         editTextView.setOnClickListener(clickListener);
         finishTextView.setOnClickListener(clickListener);

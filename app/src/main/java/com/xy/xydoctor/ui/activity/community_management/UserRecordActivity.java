@@ -3,6 +3,7 @@ package com.xy.xydoctor.ui.activity.community_management;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
@@ -91,6 +92,8 @@ public class UserRecordActivity extends XYSoftUIBaseActivity implements View.OnC
     private TextView addTextView;
 
     private String userid;
+    private String username;
+    private String isDead;
 
     private SearchInfo info;
     private UserRecordReq addReq = new UserRecordReq();
@@ -104,6 +107,8 @@ public class UserRecordActivity extends XYSoftUIBaseActivity implements View.OnC
         containerView().addView(initView());
         initListener();
         userid = getIntent().getStringExtra("userid");
+        username = getIntent().getStringExtra("username");
+        isDead = getIntent().getStringExtra("isDead");
         getData();
     }
 
@@ -322,10 +327,11 @@ public class UserRecordActivity extends XYSoftUIBaseActivity implements View.OnC
      * @param value
      */
     private void editInfo(String type, String value, String hypertension) {
-
         setReqData(type, value, false, hypertension);
+        Log.i("yys", "1epidemic=======" + addReq.getEpidemic());
         Call<String> requestCall = DataManager.addRecord(addReq, (call, response) -> {
             TipUtils.getInstance().showToast(getPageContext(), response.msg);
+            Log.i("yys", "1type==" + type + "1values==" + value);
             if (response.code == 200) {
                 setReqData(type, value, true, hypertension);
             }
@@ -335,6 +341,7 @@ public class UserRecordActivity extends XYSoftUIBaseActivity implements View.OnC
     }
 
     private void setReqData(String type, String value, boolean isSetText, String hypertension) {
+        Log.i("yys", "2type===" + type + "2values==" + value);
         switch (type) {
             case "1":
                 if (isSetText) {
@@ -480,7 +487,8 @@ public class UserRecordActivity extends XYSoftUIBaseActivity implements View.OnC
                 }
                 addReq.setSpecial_family(value);
                 break;
-            case "18 ":
+            case "18":
+                Log.i("yys", "3type==" + type + "3value" + value);
                 if (isSetText) {
                     if ("1".equals(value)) {
                         setCheckData(true, epidemicTextView);
@@ -650,6 +658,8 @@ public class UserRecordActivity extends XYSoftUIBaseActivity implements View.OnC
                 }
                 break;
             case R.id.cb_record_disease_control_epidemic:
+                Log.i("yys", "epidemic===" + addReq.getEpidemic());
+                Log.i("yys", "epidemic===" + info.getEpidemic());
                 if ("1".equals(addReq.getEpidemic())) {
                     editInfo("18", "2", "2");
                 } else {

@@ -321,7 +321,7 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
                 onlineTestPopup.showPopupWindow(textImageView);
                 break;
             case R.id.ll_user_info_healthy:
-                intent = new Intent(getPageContext(), PatientHealthArchiveActivity.class);
+                intent = new Intent(getPageContext(), UserRecordActivity.class);
                 intent.putExtra("userid", userid);
                 intent.putExtra("username", username);
                 intent.putExtra("isDead", TurnsUtils.getInt(userInfo.getIsdeath(), 0));
