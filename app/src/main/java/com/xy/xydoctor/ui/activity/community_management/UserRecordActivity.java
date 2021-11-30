@@ -328,10 +328,8 @@ public class UserRecordActivity extends XYSoftUIBaseActivity implements View.OnC
      */
     private void editInfo(String type, String value, String hypertension) {
         setReqData(type, value, false, hypertension);
-        Log.i("yys", "1epidemic=======" + addReq.getEpidemic());
         Call<String> requestCall = DataManager.addRecord(addReq, (call, response) -> {
             TipUtils.getInstance().showToast(getPageContext(), response.msg);
-            Log.i("yys", "1type==" + type + "1values==" + value);
             if (response.code == 200) {
                 setReqData(type, value, true, hypertension);
             }
@@ -341,7 +339,6 @@ public class UserRecordActivity extends XYSoftUIBaseActivity implements View.OnC
     }
 
     private void setReqData(String type, String value, boolean isSetText, String hypertension) {
-        Log.i("yys", "2type===" + type + "2values==" + value);
         switch (type) {
             case "1":
                 if (isSetText) {
@@ -488,7 +485,6 @@ public class UserRecordActivity extends XYSoftUIBaseActivity implements View.OnC
                 addReq.setSpecial_family(value);
                 break;
             case "18":
-                Log.i("yys", "3type==" + type + "3value" + value);
                 if (isSetText) {
                     if ("1".equals(value)) {
                         setCheckData(true, epidemicTextView);
@@ -658,8 +654,6 @@ public class UserRecordActivity extends XYSoftUIBaseActivity implements View.OnC
                 }
                 break;
             case R.id.cb_record_disease_control_epidemic:
-                Log.i("yys", "epidemic===" + addReq.getEpidemic());
-                Log.i("yys", "epidemic===" + info.getEpidemic());
                 if ("1".equals(addReq.getEpidemic())) {
                     editInfo("18", "2", "2");
                 } else {
