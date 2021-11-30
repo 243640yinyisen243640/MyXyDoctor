@@ -433,7 +433,7 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
                 TipUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (call, throwable) -> {
-            TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.network_error);
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
         });
 
     }
@@ -460,10 +460,7 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
         }
 
         String idNum = idNumEditText.getText().toString().trim();
-        if (TextUtils.isEmpty(idNum)) {
-            TipUtils.getInstance().showToast(getPageContext(), R.string.please_input_user_add_id_num);
-            return;
-        }
+
         if ("0".equals(sex)) {
             TipUtils.getInstance().showToast(getPageContext(), R.string.user_add_please_choose_sex);
             return;
@@ -574,7 +571,7 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
                 TipUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (call, throwable) -> {
-            TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.network_error);
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
         });
 
     }
@@ -651,7 +648,7 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
                 TipUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (call, throwable) -> {
-            TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.network_error);
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
         });
 
     }
@@ -670,7 +667,7 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
                     hospitalTextView.setText(searchInfo.getHospital().getHosp_name());
                 } else if (200 == response.code) {
                     SearchInfo searchInfo = (SearchInfo) response.object;
-                    hospitalid = searchInfo.getHosInfo().getHosp_userid();
+                    hospitalid = searchInfo.getHosInfo().getHos_userid();
                     hospitalTextView.setText(searchInfo.getHosInfo().getHosp_name());
                 }
 
@@ -805,14 +802,14 @@ public class UserAddSecondActivity extends XYSoftUIBaseActivity implements View.
                     pressureEditText.setText(searchInfo.getBlood_imei());
                 } else if (30004 == response.code) {
                     SearchInfo searchInfo = (SearchInfo) response.object;
-                    hospitalid = searchInfo.getHospital().getHosp_userid();
+                    hospitalid = searchInfo.getHospital().getHos_userid();
                     hospitalTextView.setText(searchInfo.getHospital().getHosp_name());
                 }
 
 
             }
         }, (call, throwable) -> {
-            TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.network_error);
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
         });
 
     }

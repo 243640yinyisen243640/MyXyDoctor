@@ -401,7 +401,7 @@
                 <CheckBox
                     android:id="@+id/cb_community_disease_control_epidemic"
                     style="@style/user_add_type"
-                    android:text="防疫防控"
+                    android:text="疫情防控"
                     android:layout_marginLeft="3dp" />
 
             </LinearLayout>

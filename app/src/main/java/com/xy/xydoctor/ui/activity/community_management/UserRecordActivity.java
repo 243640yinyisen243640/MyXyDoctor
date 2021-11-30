@@ -715,7 +715,7 @@ public class UserRecordActivity extends XYSoftUIBaseActivity implements View.OnC
                 TipUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (call, throwable) -> {
-            TipUtils.getInstance().showProgressDialog(getPageContext(), R.string.network_error);
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
         });
 
     }
