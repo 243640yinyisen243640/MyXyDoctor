@@ -152,7 +152,7 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
         LoadImgUtils.loadCircleImage(getPageContext(), R.drawable.default_img_head, userInfo.getPicture(), headImageView);
         nameTextView.setText(userInfo.getNickname());
         sexAndAgeTextView.setText(userInfo.getAge() + "岁");
-        if ("1".equals(userInfo.getSex())) {
+        if ("男".equals(userInfo.getSex())) {
             sexAndAgeTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.base_community_male, 0, 0, 0);
         } else {
             sexAndAgeTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.base_community_female, 0, 0, 0);
