@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.ValueCallback;
@@ -28,6 +29,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.utils.JavascriptInterfaces;
 import com.xy.xydoctor.utils.PhotoUtils1;
+import com.xy.xydoctor.window.CommunityChoosePopupWindow;
 
 import java.io.File;
 
@@ -44,6 +46,8 @@ public class WebViewActivity extends XYSoftUIBaseActivity {
     private String status;
 
     private String statusStr;
+
+    private CommunityChoosePopupWindow choosePopupWindow;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -133,31 +137,64 @@ public class WebViewActivity extends XYSoftUIBaseActivity {
         // For Android 5.0+
         public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
             Log.i("xie", "onShowFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture)");
+
             mUploadCallbackAboveL = filePathCallback;
-            PermissionUtils
-                    .permission(PermissionConstants.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_EXTERNAL_STORAGE)
-                    .callback(new PermissionUtils.SimpleCallback() {
-                        @Override
-                        public void onGranted() {
-                            takePhoto();
-                        }
 
-                        @Override
-                        public void onDenied() {
-                            ToastUtils.showShort("请允许使用相机权限");
-                        }
-                    }).request();
 
-            //            RxPermissions rxPermissions = new RxPermissions(WebViewActivity.this);
-            //            rxPermissions.request(Manifest.permission.CAMERA,
-            //                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            //                    Manifest.permission.READ_EXTERNAL_STORAGE)
-            //                    .subscribe(aBoolean -> {
-            //                        if (aBoolean) {
-            //
-            //                        }
-            //                    });
+            if (choosePopupWindow != null && choosePopupWindow.isShowing()) {
+                choosePopupWindow.dismiss();
+            }
+
+            if (choosePopupWindow==null){
+                choosePopupWindow = new CommunityChoosePopupWindow(getPageContext(), object -> {
+
+                    int position = (int) object;
+                    switch (position) {
+                        case 0:
+                            mUploadCallbackAboveL.onReceiveValue(null);
+                            mUploadCallbackAboveL = null;
+                            break;
+                        case 1:
+                            PermissionUtils
+                                    .permission(PermissionConstants.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                            Manifest.permission.READ_EXTERNAL_STORAGE)
+                                    .callback(new PermissionUtils.SimpleCallback() {
+                                        @Override
+                                        public void onGranted() {
+                                            takePhoto();
+                                        }
+
+                                        @Override
+                                        public void onDenied() {
+                                            ToastUtils.showShort("请允许使用相机权限");
+                                        }
+                                    }).request();
+                            break;
+                        case 2:
+                            PermissionUtils
+                                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                            Manifest.permission.READ_EXTERNAL_STORAGE)
+                                    .callback(new PermissionUtils.SimpleCallback() {
+                                        @Override
+                                        public void onGranted() {
+                                            album();
+                                        }
+
+                                        @Override
+                                        public void onDenied() {
+                                            ToastUtils.showShort("请允许使用相机权限");
+                                        }
+                                    }).request();
+                            break;
+                        default:
+                            break;
+                    }
+                });
+            }
+
+            choosePopupWindow.showAtLocation(containerView(), Gravity.BOTTOM, 0, 0);
+
+
             return true;
         }
     }
@@ -169,7 +206,15 @@ public class WebViewActivity extends XYSoftUIBaseActivity {
             imageUri = FileProvider.getUriForFile(getPageContext(), getPackageName() + ".FileProvider", fileUri);//通过FileProvider创建一个content类型的Uri
         }
         PhotoUtils1.takePicture(WebViewActivity.this, imageUri, PHOTO_REQUEST);//拍照
-        //        PhotoUtils.openPic(WebViewActivity.this,  PHOTO_REQUEST);//打开相册
+    }
+
+    private void album() {
+        File fileUri = new File(Environment.getExternalStorageDirectory().getPath() + "/" + SystemClock.currentThreadTimeMillis() + ".jpg");
+        imageUri = Uri.fromFile(fileUri);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            imageUri = FileProvider.getUriForFile(getPageContext(), getPackageName() + ".FileProvider", fileUri);//通过FileProvider创建一个content类型的Uri
+        }
+        PhotoUtils1.openPic(WebViewActivity.this, PHOTO_REQUEST);//打开相册
     }
 
     @Override
@@ -184,6 +229,8 @@ public class WebViewActivity extends XYSoftUIBaseActivity {
                 mUploadMessage.onReceiveValue(result);
                 mUploadMessage = null;
             }
+        } else {
+
         }
     }
 
