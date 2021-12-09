@@ -10,12 +10,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tv_user_add_location_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_bg_white_5"
+            android:drawableLeft="@drawable/community_location"
+            android:drawablePadding="10dp"
+            android:gravity="center|left"
+            android:padding="10dp"
+            android:textColor="@color/base_black"
+            android:textSize="13sp"
+            android:visibility="gone">
+
+        </TextView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/shape_bg_white_5"
             android:orientation="vertical">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -395,14 +414,14 @@
                 <CheckBox
                     android:id="@+id/cb_community_disease_special_family"
                     style="@style/user_add_type"
-                    android:text="特殊家庭"
-                    android:layout_marginLeft="3dp"/>
+                    android:layout_marginLeft="3dp"
+                    android:text="特殊家庭" />
 
                 <CheckBox
                     android:id="@+id/cb_community_disease_control_epidemic"
                     style="@style/user_add_type"
-                    android:text="疫情防控"
-                    android:layout_marginLeft="3dp" />
+                    android:layout_marginLeft="3dp"
+                    android:text="疫情防控" />
 
             </LinearLayout>
 
@@ -422,7 +441,7 @@
                 <CheckBox
                     style="@style/user_add_type"
                     android:text="特殊家庭"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
 
                 <CheckBox
                     style="@style/user_add_type"

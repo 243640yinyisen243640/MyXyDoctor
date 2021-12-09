@@ -47,11 +47,14 @@ import retrofit2.Call;
  * Date: 2021/8/21 17:32
  * Description:添加用户
  * 传参 type  1:社区首页进入   2：待导入居民列表进入
+ * 传参 locationName  小区位置
  */
 public class UserAddFirstActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
 
     private static final int REQUEST_CODE_FOR_IME_CODE = 10;
     private static final int REQUEST_CODE_FOR_CHOOSE = 11;
+    private TextView communityLocationTextView;
+
     /**
      * 位置信息
      */
@@ -186,6 +189,10 @@ public class UserAddFirstActivity extends XYSoftUIBaseActivity implements View.O
 
 
     private String type;
+    /**
+     * 小区位置，从上个页面传入，只有在type是2的时候
+     */
+    private String locationName;
 
     private SearchInfo dataInfo = new SearchInfo();
 
@@ -195,18 +202,23 @@ public class UserAddFirstActivity extends XYSoftUIBaseActivity implements View.O
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText(R.string.user_add_title);
         type = getIntent().getStringExtra("type");
+        containerView().addView(initView());
+
         //1：社区首页   2：待导入居民列表
         if ("1".equals(type)) {
+            communityLocationTextView.setVisibility(View.GONE);
             topViewManager().moreTextView().setText("选择");
             topViewManager().moreTextView().setOnClickListener(v -> {
                 Intent intent = new Intent(getPageContext(), CommunityWaitImportListActivity.class);
                 intent.putExtra("type", "2");
                 startActivityForResult(intent, REQUEST_CODE_FOR_CHOOSE);
             });
-        }else {
+        } else {
             dataInfo = (SearchInfo) getIntent().getSerializableExtra("importInfo");
+            locationName = getIntent().getStringExtra("locationName");
+            communityLocationTextView.setVisibility(View.VISIBLE);
+            communityLocationTextView.setText(locationName);
         }
-        containerView().addView(initView());
         initListener();
         initValues();
     }
@@ -811,7 +823,7 @@ public class UserAddFirstActivity extends XYSoftUIBaseActivity implements View.O
 
                     SearchInfo searchInfo = (SearchInfo) response.object;
                     hospitalid = searchInfo.getHospital().getHos_userid();
-                    Log.i("yys","hospitalid=="+hospitalid);
+                    Log.i("yys", "hospitalid==" + hospitalid);
                     hospitalTextView.setText(searchInfo.getHospital().getHosp_name());
                 }
 
@@ -956,6 +968,7 @@ public class UserAddFirstActivity extends XYSoftUIBaseActivity implements View.O
 
     private View initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_user_add_second, null);
+        communityLocationTextView = view.findViewById(R.id.tv_user_add_location_name);
         communityNameTextView = view.findViewById(R.id.tv_user_add_community_name);
         communityBuildNameTextView = view.findViewById(R.id.tv_user_add_community_build_name);
         communityUnitNameTextView = view.findViewById(R.id.tv_user_add_community_unit_name);

@@ -228,6 +228,7 @@ public class CommunityWaitImportListActivity extends XYSoftUIBaseActivity {
                         Intent intent = new Intent(getPageContext(), UserAddFirstActivity.class);
                         intent.putExtra("importInfo", mList.get(position));
                         intent.putExtra("type", "2");
+                        intent.putExtra("locationName", mList.get(position).getAddress());
                         startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
                     } else {
                         Intent intent = new Intent();
