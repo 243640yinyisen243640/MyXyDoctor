@@ -913,6 +913,9 @@ public class UserAddFirstActivity extends XYSoftUIBaseActivity implements View.O
             } else if (requestCode == REQUEST_CODE_FOR_CHOOSE) {
                 if (data != null) {
                     SearchInfo info = (SearchInfo) data.getSerializableExtra("importInfo");
+                    String locationName = data.getStringExtra("locationName");
+                    communityLocationTextView.setVisibility(View.VISIBLE);
+                    communityLocationTextView.setText(locationName);
                     userid = info.getUserid();
                     nameEditText.setText(info.getNickname());
                     phoneEditText.setText(info.getTel());

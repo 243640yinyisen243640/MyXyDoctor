@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -78,19 +78,20 @@ public class CommunityWaitImportListActivity extends XYSoftUIBaseActivity {
     }
 
     private void initValue() {
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getPageContext());
         mRecyclerView.setLayoutManager(layoutManager);
         //解决底部滚动到顶部时，顶部item上方偶尔会出现一大片间隔的问题
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                int[] first = new int[2];
-                layoutManager.findFirstCompletelyVisibleItemPositions(first);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && (first[0] == 1 || first[1] == 1)) {
-                    layoutManager.invalidateSpanAssignments();
-                }
-            }
-        });
+//        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                Log.i("yys", "onScrollStateChanged: ");
+//                int[] first = new int[2];
+//                layoutManager.findFirstCompletelyVisibleItemPositions(first);
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE && (first[0] == 1 || first[1] == 1)) {
+//                    layoutManager.invalidateSpanAssignments();
+//                }
+//            }
+//        });
     }
 
     private void initLinstener() {
@@ -119,8 +120,8 @@ public class CommunityWaitImportListActivity extends XYSoftUIBaseActivity {
         mIsLoading = true;
         Call<String> requestCall = DataManager.getWaitImportData(mPageIndex + "",
                 (call, response) -> {
-                    StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
-                    mRecyclerView.setLayoutManager(layoutManager);
+//                    StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+//                    mRecyclerView.setLayoutManager(layoutManager);
                     mIsLoading = false;
                     if (1 != mPageIndex) {
                         mRefreshLayout.finishLoadMore();
@@ -157,6 +158,15 @@ public class CommunityWaitImportListActivity extends XYSoftUIBaseActivity {
                             mRefreshLayout.setVisibility(View.GONE);
                             presentNestedSrcollView.setVisibility(View.VISIBLE);
 
+                        } else {
+                            TipUtils.getInstance().showToast(getPageContext(), R.string.huahansoft_load_state_no_more_data);
+                        }
+                    } else if (201 == response.code) {
+                        mPageCount = 0;
+                        if (1 == mPageIndex) {
+                            //如果是没有数据
+                            mRefreshLayout.setVisibility(View.GONE);
+                            presentNestedSrcollView.setVisibility(View.VISIBLE);
                         } else {
                             TipUtils.getInstance().showToast(getPageContext(), R.string.huahansoft_load_state_no_more_data);
                         }
@@ -233,6 +243,7 @@ public class CommunityWaitImportListActivity extends XYSoftUIBaseActivity {
                     } else {
                         Intent intent = new Intent();
                         intent.putExtra("importInfo", mList.get(position));
+                        intent.putExtra("locationName", mList.get(position).getAddress());
                         setResult(RESULT_OK, intent);
                         finish();
                     }

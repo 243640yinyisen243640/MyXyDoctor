@@ -206,6 +206,8 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
         if (getArguments() != null) {
             type = getArguments().getString("type");
 
+            Log.i("yys", "onCreate: =="+type);
+            //  1血压2血糖
             if ("1".equals(type)) {
                 type = "2";
             } else {
@@ -443,8 +445,8 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_data_abnormal_down:
-//                CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
-//                activity.topTextView().setVisibility(View.GONE);
+                //                CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
+                //                activity.topTextView().setVisibility(View.GONE);
                 showMenuWindow();
                 break;
             default:
@@ -468,10 +470,10 @@ public class CommunityDataAbnormalFragment extends XYBaseFragment implements Vie
             }
 
         });
-//        popu.setOnDismissListener(() -> {
-//            CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
-//            activity.topTextView().setVisibility(View.VISIBLE);
-//        });
+        //        popu.setOnDismissListener(() -> {
+        //            CommunityDataAbnormalActivity activity = (CommunityDataAbnormalActivity) getActivity();
+        //            activity.topTextView().setVisibility(View.VISIBLE);
+        //        });
         popu.setOnChooseOkListener(this);
         if (!popu.isShowing()) {
             popu.showAsDropDown(showLinearLayout);

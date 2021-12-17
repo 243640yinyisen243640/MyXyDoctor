@@ -415,6 +415,10 @@ public class CommunityDataAbnormalFragment1 extends XYBaseFragment {
         mAdapter.notifyDataSetChanged();
     }
 
+    public List<DataAbnormalInfo> getList(){
+        return mList;
+    }
+
     public void setDataRefresh() {
         mPageIndex = 1;
         checkView.setVisibility(View.GONE);

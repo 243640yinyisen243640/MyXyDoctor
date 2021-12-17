@@ -1,6 +1,7 @@
 package com.xy.xydoctor.adapter.community_manager;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -29,7 +30,8 @@ public class UserWaitImportListAdapter extends UIBaseRecycleViewAdapter<SearchIn
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(getContext(), R.layout.item_user_wait_import_data, null);
+//        View view = View.inflate(getContext(), R.layout.item_user_wait_import_data, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_user_wait_import_data, parent,false);
         return new ViewHolder(view);
     }
 

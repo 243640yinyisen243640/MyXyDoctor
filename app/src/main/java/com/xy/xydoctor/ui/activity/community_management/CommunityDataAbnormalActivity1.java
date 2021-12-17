@@ -19,6 +19,7 @@ import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.imp.IACommunityFilterChoose;
 import com.xy.xydoctor.ui.fragment.community_management.CommunityDataAbnormalFragment1;
 import com.xy.xydoctor.utils.DataUtils;
+import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.view.popup.DataAbnormalPopup1;
 
 import java.util.ArrayList;
@@ -90,6 +91,10 @@ public class CommunityDataAbnormalActivity1 extends XYSoftUIBaseActivity impleme
         topViewManager().moreTextView().setOnClickListener(v -> {
             CommunityDataAbnormalFragment1 fragment = (CommunityDataAbnormalFragment1) fragments.get(index);
             if (topViewManager().moreTextView().getText().equals("处理")) {
+                if (fragment.getList() == null || fragment.getList().size() == 0){
+                    TipUtils.getInstance().showToast(getPageContext(),"没有数据可以选择");
+                    return;
+                }
                 topViewManager().moreTextView().setText(R.string.cancel);
                 //头部的按钮是处理 ，处理-确定
 
@@ -130,6 +135,7 @@ public class CommunityDataAbnormalActivity1 extends XYSoftUIBaseActivity impleme
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         viewPager.clearOnPageChangeListeners();
         topViewManager().moreTextView().setText("处理");
+        index = radioGroup.indexOfChild(radioGroup.findViewById(checkedId));
         CommunityDataAbnormalFragment1 fragment = (CommunityDataAbnormalFragment1) fragments.get(index);
         String type;
         if (index == 0) {
@@ -138,10 +144,8 @@ public class CommunityDataAbnormalActivity1 extends XYSoftUIBaseActivity impleme
             type = "1";
         }
         fragment.refreshData(style, startSugar, endSugar, status, starttime, endtime,type);
-        index = radioGroup.indexOfChild(radioGroup.findViewById(checkedId));
         viewPager.setCurrentItem(radioGroup.indexOfChild(radioGroup.findViewById(checkedId)));
         viewPager.addOnPageChangeListener(this);
-
         //切换设置数据
         if (TextUtils.equals(aaaList.get(index).getStatusName(),"未处理")){
             topViewManager().moreTextView().setVisibility(View.VISIBLE);
@@ -184,9 +188,9 @@ public class CommunityDataAbnormalActivity1 extends XYSoftUIBaseActivity impleme
         fragments = new ArrayList<>();
         for (int i = 1; i < 3; i++) {
             CommunityDataAbnormalFragment1 talkFragment = CommunityDataAbnormalFragment1.newInstance(i + "");
-            Bundle bundle = new Bundle();
-            bundle.putString("type", i + "");
-            talkFragment.setArguments(bundle);
+//            Bundle bundle = new Bundle();
+//            bundle.putString("type", i + "");
+//            talkFragment.setArguments(bundle);
             fragments.add(talkFragment);
         }
 
