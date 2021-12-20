@@ -13,8 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
@@ -147,19 +147,23 @@ public class CommunityFollowupAgentListActivity extends XYSoftUIBaseActivity {
     }
 
     private void initValues() {
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getPageContext());
         mRecyclerView.setLayoutManager(layoutManager);
-        //解决底部滚动到顶部时，顶部item上方偶尔会出现一大片间隔的问题
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                int[] first = new int[2];
-                layoutManager.findFirstCompletelyVisibleItemPositions(first);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && (first[0] == 1 || first[1] == 1)) {
-                    layoutManager.invalidateSpanAssignments();
-                }
-            }
-        });
+
+
+//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+//        mRecyclerView.setLayoutManager(layoutManager);
+//        //解决底部滚动到顶部时，顶部item上方偶尔会出现一大片间隔的问题
+//        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                int[] first = new int[2];
+//                layoutManager.findFirstCompletelyVisibleItemPositions(first);
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE && (first[0] == 1 || first[1] == 1)) {
+//                    layoutManager.invalidateSpanAssignments();
+//                }
+//            }
+//        });
     }
 
     private View initView() {

@@ -5,6 +5,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -36,8 +37,9 @@ public class FollowupAgentListAdapter extends BaseRecycleViewAdapter<FollowUpAge
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(getContext(), R.layout.adapter_follow_up_agent, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.adapter_follow_up_agent, parent, false);
         return new ViewHolder(view);
+
     }
 
     @Override
@@ -48,13 +50,13 @@ public class FollowupAgentListAdapter extends BaseRecycleViewAdapter<FollowUpAge
         viewHolder.locationTextView.setText(info.getCom_address());
 
 
-        if ("2".equals(type)){
+        if ("2".equals(type)) {
             setTextStyle(info.getBuild_count(), getContext().getString(R.string.follow_up_agent_building_num), R.color.community_content_black, viewHolder.buildingNumTextView, 16);
             setTextStyle(info.getUnity_count(), getContext().getString(R.string.follow_up_agent_unit_num), R.color.community_content_black, viewHolder.unitNumTextView, 16);
             setTextStyle(info.getHouse_count(), getContext().getString(R.string.community_house_count), R.color.community_content_black, viewHolder.personNumTextView, 16);
             setTextStyle(info.getMember_count(), getContext().getString(R.string.community_member_count), R.color.community_content_black, viewHolder.allPersonNumTextView, 16);
 
-        }else {
+        } else {
             setTextStyle(info.getBuild_count(), getContext().getString(R.string.follow_up_agent_building_num), R.color.community_content_black, viewHolder.buildingNumTextView, 16);
             setTextStyle(info.getUnity_count(), getContext().getString(R.string.follow_up_agent_unit_num), R.color.community_content_black, viewHolder.unitNumTextView, 16);
             setTextStyle(info.getHouse_count(), getContext().getString(R.string.community_house_count_un_follow), R.color.community_content_black, viewHolder.personNumTextView, 16);

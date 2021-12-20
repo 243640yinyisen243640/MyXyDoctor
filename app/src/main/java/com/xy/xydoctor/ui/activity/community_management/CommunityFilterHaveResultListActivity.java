@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.blankj.utilcode.util.SPStaticUtils;
 import com.google.gson.Gson;
@@ -173,7 +173,7 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
         mIsLoading = true;
         Call<String> requestCall = DataManager.getFilterList(isEmpty, com_id, sex, age_min, age_max, other, disease, mPageIndex + "",
                 (call, response) -> {
-                    StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(getPageContext());
                     mRecyclerView.setLayoutManager(layoutManager);
                     mIsLoading = false;
                     if (1 != mPageIndex) {
@@ -308,19 +308,24 @@ public class CommunityFilterHaveResultListActivity extends XYSoftUIBaseActivity 
     }
 
     private void initValue() {
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getPageContext());
         mRecyclerView.setLayoutManager(layoutManager);
-        //解决底部滚动到顶部时，顶部item上方偶尔会出现一大片间隔的问题
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                int[] first = new int[2];
-                layoutManager.findFirstCompletelyVisibleItemPositions(first);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && (first[0] == 1 || first[1] == 1)) {
-                    layoutManager.invalidateSpanAssignments();
-                }
-            }
-        });
+
+
+
+//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+//        mRecyclerView.setLayoutManager(layoutManager);
+//        //解决底部滚动到顶部时，顶部item上方偶尔会出现一大片间隔的问题
+//        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                int[] first = new int[2];
+//                layoutManager.findFirstCompletelyVisibleItemPositions(first);
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE && (first[0] == 1 || first[1] == 1)) {
+//                    layoutManager.invalidateSpanAssignments();
+//                }
+//            }
+//        });
     }
 
     private void initLinstener() {
