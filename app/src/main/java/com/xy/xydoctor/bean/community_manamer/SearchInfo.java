@@ -16,27 +16,27 @@ public class SearchInfo implements Serializable {
     /**
      *
      */
-    private String nickname;
+    private String nickname="";
     /**
      * 手机号
      */
-    private String tel;
+    private String tel="";
     /**
      * 身份证
      */
-    private String idcard;
+    private String idcard="";
     /**
      *
      */
-    private String sex;
+    private String sex = "0";
     /**
      *
      */
-    private String age;
+    private String age="";
     /**
      *
      */
-    private String birthtime;
+    private String birthtime="";
     /**
      * 糖尿病类型
      */

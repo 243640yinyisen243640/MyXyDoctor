@@ -32,7 +32,7 @@ public class UserAddReq {
     /**
      *
      */
-    private String sex = "2";
+    private String sex = "0";
     /**
      *
      */

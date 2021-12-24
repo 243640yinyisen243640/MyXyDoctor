@@ -218,9 +218,10 @@ public class UserAddFirstActivity extends XYSoftUIBaseActivity implements View.O
             locationName = getIntent().getStringExtra("locationName");
             communityLocationTextView.setVisibility(View.VISIBLE);
             communityLocationTextView.setText(locationName);
+            initValues();
+
         }
         initListener();
-        initValues();
     }
 
     private void initValues() {
