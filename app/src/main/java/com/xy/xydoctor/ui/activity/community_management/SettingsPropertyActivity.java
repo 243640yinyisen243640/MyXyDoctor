@@ -25,8 +25,10 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.bean.UpdateBean;
 import com.xy.xydoctor.constant.ConstantParam;
+import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.mvvm.LoginActivity;
 import com.xy.xydoctor.net.XyUrl;
+import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.utils.UpdateUtils;
 import com.xy.xydoctor.view.NumberProgressBar;
 import com.xy.xydoctor.view.popup.UpdatePopup;
@@ -36,6 +38,7 @@ import java.io.File;
 import java.util.HashMap;
 
 import io.reactivex.rxjava3.functions.Consumer;
+import retrofit2.Call;
 import rxhttp.wrapper.param.RxHttp;
 
 /**
@@ -114,11 +117,12 @@ public class SettingsPropertyActivity extends XYSoftUIBaseActivity implements Vi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_community_out_version:
-                Log.i("yys","ll_community_out_version==");
-                toUpdate();
+                Log.i("yys", "ll_community_out_version==");
+                //                toUpdate();
+                toUpDataNew();
                 break;
             case R.id.tv_community_out_login:
-                Log.i("yys","tv_community_out_login==");
+                Log.i("yys", "tv_community_out_login==");
                 toDoExit();
                 break;
             //更新升级按钮
@@ -178,6 +182,19 @@ public class SettingsPropertyActivity extends XYSoftUIBaseActivity implements Vi
                 });
     }
 
+    private void toUpDataNew() {
+        String token = SPStaticUtils.getString("token");
+        Call<String> requestCall = DataManager.getUpData(token, (call, response) -> {
+            if (response.code == 200) {
+                UpdateBean updateBean = (UpdateBean) response.object;
+                toShowUpdateDialog(updateBean);
+            } else {
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, t) -> {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        });
+    }
 
     /**
      * 本地判断更新

@@ -18,7 +18,6 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.customerView.LoadingCircleView;
 
 
-
 public class TipUtils {
     //定义了唯一的实例对象;//增加volatile关键字，确保实例化instance时，编译成汇编指令的执行顺序
     private volatile static TipUtils mInstance;
@@ -73,6 +72,7 @@ public class TipUtils {
             mToastContentTextView.setTextColor(Color.WHITE);
             mToastContentTextView.setBackgroundResource(R.drawable.shape_toast_custom_bg);
             mToast.setDuration(Toast.LENGTH_SHORT);
+//            mToast.setGravity(Gravity.CENTER, 0, 0);
             mToast.setView(mToastContentTextView);
         }
         mToast.cancel();

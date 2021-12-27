@@ -23,6 +23,7 @@ import com.xy.xydoctor.base.activity.BaseActivity;
 import com.xy.xydoctor.base.activity.BaseWebViewActivity;
 import com.xy.xydoctor.bean.UpdateBean;
 import com.xy.xydoctor.constant.ConstantParam;
+import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.mvvm.LoginActivity;
 import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.ui.activity.mydevice.DeviceAddListActivity;
@@ -38,6 +39,7 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.rxjava3.functions.Consumer;
+import retrofit2.Call;
 import rxhttp.wrapper.param.RxHttp;
 
 public class SettingActivity extends BaseActivity implements OnDownloadListener, View.OnClickListener {
@@ -126,7 +128,8 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
                 startActivity(new Intent(getPageContext(), SetPwdActivity.class));
                 break;
             case R.id.ll_update:
-                toUpdate();
+                //                toUpdate();
+                toUpDataNew();
                 break;
             case R.id.tv_user_agreement:
                 intent = new Intent(getPageContext(), BaseWebViewActivity.class);
@@ -175,6 +178,21 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
     }
 
 
+    private void toUpDataNew() {
+        String token = SPStaticUtils.getString("token");
+        Call<String> requestCall = DataManager.getUpData(token, (call, response) -> {
+            if (response.code == 200) {
+                UpdateBean updateBean = (UpdateBean) response.object;
+                toShowUpdateDialog(updateBean);
+            } else {
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, t) -> {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        });
+    }
+
+
     /**
      * 显示发现新版本Dialog
      *
@@ -204,9 +222,6 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
      */
     private void toExit() {
         toDoExit();
-        //        DialogUtils.getInstance().showDialog(getPageContext(), "提示", "确定要退出登录?", true, () -> {
-        //            toDoExit();
-        //        });
     }
 
 
