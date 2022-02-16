@@ -53,7 +53,7 @@ android {
         }
         buildTypes {
             //环境 以及融云环境
-            def environment_debug = true
+            def environment_debug = false
             def environment_release = true
             //默认构建类型
             debug {
@@ -132,6 +132,13 @@ android {
         //RxLife
         implementation 'com.github.liujingxing.rxlife:rxlife-rxjava3:2.2.1'
         //RxHttp结束
+
+//        //融云IM开始
+//        def rongImVersion = "4.0.3.14"
+//        implementation "cn.rongcloud.sdk:im_kit:$rongImVersion"
+//        //im_kit必须依赖im_lib，所以需要加入对应依赖
+//        implementation "cn.rongcloud.sdk:im_lib:$rongImVersion"
+//        //融云IM结束
 
         //必备工具类开始
         //黄油刀
