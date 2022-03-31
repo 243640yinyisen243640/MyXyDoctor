@@ -18,8 +18,7 @@
             app:qmui_border_width="0dp"
             app:qmui_is_circle="true"
             android:layout_marginRight="@dimen/dp_10"
-            android:scaleType="centerCrop"
-            android:src="@drawable/patient_count_main_default_head" />
+            android:scaleType="centerCrop" />
 
 
         <RelativeLayout
@@ -29,8 +28,7 @@
             <TextView
                 android:id="@+id/tv_name"
                 style="@style/text_black_14_f_w"
-                android:layout_weight="0.8"
-                android:text="姓名" />
+                android:layout_weight="0.8"/>
 
             <TextView
                 android:id="@+id/tv_tel"
@@ -38,8 +36,7 @@
                 android:layout_alignParentRight="true"
                 android:drawableRight="@drawable/patient_count_main_phone_call"
                 android:drawablePadding="@dimen/dp_10"
-                android:gravity="center_vertical"
-                android:text="15965364536" />
+                android:gravity="center_vertical"/>
 
 
         </RelativeLayout>

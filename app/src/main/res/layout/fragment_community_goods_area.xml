@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <RadioGroup
+        android:id="@+id/rg_community_goods"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/patient_count_bg"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            style="@style/community_rb_bottom"
+            android:background="@drawable/selector_patient_count"
+            android:checked="true"
+            android:text="血糖" />
+
+        <RadioButton
+            style="@style/community_rb_bottom"
+            android:background="@drawable/selector_patient_count_right"
+            android:text="血压" />
+
+
+    </RadioGroup>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_community_goods"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

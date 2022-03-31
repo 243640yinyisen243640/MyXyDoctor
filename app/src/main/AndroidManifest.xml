@@ -87,6 +87,7 @@
         <activity android:name=".ui.activity.mydevice.DeviceAddListActivity" />
         <activity android:name=".ui.activity.homesign.MyQRCodeActivity" />
         <activity android:name=".ui.activity.patient.PatientCountMainActivity" />
+        <activity android:name=".ui.activity.patient.PatientCountMain1Activity" />
         <activity android:name=".ui.activity.patient.PatientAddTodayListActivity" />
         <activity android:name=".ui.activity.followupvisit.FollowUpVisitListActivity" />
         <activity

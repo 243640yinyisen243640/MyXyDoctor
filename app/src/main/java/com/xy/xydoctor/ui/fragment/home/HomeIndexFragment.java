@@ -50,7 +50,7 @@ import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.ui.activity.director.DoctorListActivity;
 import com.xy.xydoctor.ui.activity.patient.PatientAddTodayListActivity;
-import com.xy.xydoctor.ui.activity.patient.PatientCountMainActivity;
+import com.xy.xydoctor.ui.activity.patient.PatientCountMain1Activity;
 import com.xy.xydoctor.ui.activity.todo.ToDoListActivity;
 import com.xy.xydoctor.utils.BadgeUtils;
 import com.xy.xydoctor.utils.PickerUtils;
@@ -385,7 +385,7 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
             case R.id.bar_chart:
             case R.id.img_bar_chart:
                 //患者情况统计
-                intent = new Intent(getPageContext(), PatientCountMainActivity.class);
+                intent = new Intent(getPageContext(), PatientCountMain1Activity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_start_time:

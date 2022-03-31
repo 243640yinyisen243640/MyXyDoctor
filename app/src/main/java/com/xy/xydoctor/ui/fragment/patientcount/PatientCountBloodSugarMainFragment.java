@@ -1,6 +1,7 @@
 package com.xy.xydoctor.ui.fragment.patientcount;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -110,6 +111,7 @@ public class PatientCountBloodSugarMainFragment extends BaseFragment {
      * @param endSugar
      */
     private void getList(String style, String beginTime, String endTime, String beginSugar, String endSugar) {
+        Log.i("yys","style==="+style);
         HashMap<String, Object> map = new HashMap<>();
         //默认血糖
         //map.put("type", "2");
