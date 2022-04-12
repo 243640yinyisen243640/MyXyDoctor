@@ -23,6 +23,7 @@ import com.lyd.baselib.base.fragment.BaseFragment;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 import com.rxjava.rxlife.RxLife;
 import com.xy.xydoctor.R;
+import com.xy.xydoctor.base.activity.BaseWebViewActivity;
 import com.xy.xydoctor.bean.DoctorInfoBean;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
@@ -68,6 +69,8 @@ public class HomeUserFragment extends BaseFragment implements SimpleImmersionOwn
     ImageView imgSetting;
     @BindView(R.id.ll_qrcode)
     LinearLayout llQrcode;
+    @BindView(R.id.tv_user_chronic_disease_manager)
+    TextView diseaseManagerTextView;
     private SimpleImmersionProxy mSimpleImmersionProxy = new SimpleImmersionProxy(this);
 
     @Override
@@ -126,7 +129,7 @@ public class HomeUserFragment extends BaseFragment implements SimpleImmersionOwn
     }
 
 
-    @OnClick({R.id.img_head, R.id.img_setting, R.id.rl_personal_excel, R.id.ll_personal_desc, R.id.rl_qrcode})
+    @OnClick({R.id.img_head, R.id.img_setting, R.id.rl_personal_excel, R.id.ll_personal_desc, R.id.rl_qrcode, R.id.tv_user_chronic_disease_manager})
     public void onViewClicked(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -151,6 +154,15 @@ public class HomeUserFragment extends BaseFragment implements SimpleImmersionOwn
                 break;
             case R.id.rl_qrcode:
                 startActivity(new Intent(getPageContext(), MyQRCodeActivity.class));
+                break;
+            case R.id.tv_user_chronic_disease_manager:
+                //http://doch5.xiyuns.cn/doctorIndex?token=3641b52b51c56d82dfceb89e8652de3d
+                intent = new Intent(getPageContext(), BaseWebViewActivity.class);
+                intent.putExtra("title", "慢病管理");
+                intent.putExtra("url", "http://doch5.xiyuns.cn/doctorIndex?token=" + SPStaticUtils.getString("token"));
+                startActivity(intent);
+                break;
+            default:
                 break;
         }
     }
