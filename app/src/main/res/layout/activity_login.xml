@@ -9,7 +9,7 @@
             type="com.xy.xydoctor.mvvm.LoginViewModel" />
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/login_bg"
@@ -29,9 +29,9 @@
 
             <LinearLayout
                 style="@style/hh_fi_wr"
-                android:layout_marginLeft="@dimen/dp_40"
+                android:layout_marginLeft="35dp"
                 android:layout_marginTop="55dp"
-                android:layout_marginRight="@dimen/dp_40"
+                android:layout_marginRight="35dp"
                 android:gravity="center">
 
                 <ImageView
@@ -54,9 +54,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_40"
+                android:layout_marginLeft="35dp"
                 android:layout_marginTop="@dimen/dp_15"
-                android:layout_marginRight="@dimen/dp_40"
+                android:layout_marginRight="35dp"
                 android:gravity="center">
 
                 <ImageView
@@ -77,6 +77,12 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tv_login_agreement"
+                style="@style/login_check_style"
+                android:layout_marginLeft="35dp"
+                android:text="@string/login_agreement" />
+
             <com.wei.android.lib.colorview.view.ColorButton
                 android:id="@+id/bt_login"
                 style="@style/text_white_16_f_w"
@@ -91,31 +97,5 @@
         </LinearLayout>
 
 
-        <RelativeLayout
-            android:id="@+id/rl_service_agreement"
-            style="@style/hh_fi_wr"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/dp_20">
-
-
-            <LinearLayout
-                style="@style/hh_wr_wr"
-                android:layout_centerInParent="true"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/text_gray_12_w_w"
-                    android:text="登录即代表您已同意" />
-
-                <TextView
-                    style="@style/text_gray_12_w_w"
-                    android:text="《慧健康用户服务协议》"
-                    android:textColor="@color/main_red" />
-            </LinearLayout>
-
-
-        </RelativeLayout>
-
-
-    </RelativeLayout>
+    </LinearLayout>
 </layout>

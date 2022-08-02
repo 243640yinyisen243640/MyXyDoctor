@@ -111,13 +111,17 @@ public class App extends BaseApplication implements RongImInterface.Conversation
     @Override
     public void onCreate() {
         super.onCreate();
-        initRxHttp();
-        initJPush();
-        initImPush();
-        initIm();
-        initBle();
-        initBugly();
-        initAliPush();
+        String isAgree = SPStaticUtils.getString("is_agree");
+        if ("1".equals(isAgree)) {
+            initRxHttp();
+            //        initJPush();
+            //        initImPush();
+            initIm();
+            initBle();
+            //        initBugly();
+            initAliPush();
+        }
+
     }
 
     /**
@@ -397,6 +401,7 @@ public class App extends BaseApplication implements RongImInterface.Conversation
             getResources();
         super.onConfigurationChanged(newConfig);
     }
+
     @Override
     public Resources getResources() {
         Resources res = super.getResources();
