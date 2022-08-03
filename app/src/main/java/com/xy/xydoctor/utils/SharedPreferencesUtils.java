@@ -9,6 +9,11 @@ import com.xy.xydoctor.constant.ConstantParam;
 import java.util.Map;
 
 public class SharedPreferencesUtils {
+
+    /**
+     * 是否同意了隐私政策
+     */
+    public static String IS_AGREE_PRIVACY_PROTECT = "is_agree_privacy_protect";
     /**
      * 获取SharedPreferences
      *

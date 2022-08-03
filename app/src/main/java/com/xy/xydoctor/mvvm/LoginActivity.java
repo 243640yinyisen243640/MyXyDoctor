@@ -13,10 +13,10 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.Observer;
 
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.activity.BaseWebViewActivity;
@@ -38,6 +38,7 @@ public class LoginActivity extends BaseMVVMActivity<LoginViewModel, ActivityLogi
         bindingView.btLogin.setOnClickListener(this);
         bindingView.tvLoginAgreement.setOnClickListener(this);
     }
+
     /**
      * 设置监听
      */
@@ -104,21 +105,21 @@ public class LoginActivity extends BaseMVVMActivity<LoginViewModel, ActivityLogi
     }
 
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_login:
                 //LiveData观察ViewModel中的数据变化
-                viewModel.login().observe(LoginActivity.this, new Observer<Boolean>() {
-                    @Override
-                    public void onChanged(Boolean aBoolean) {
-                        //收到回调以后
-                        if (aBoolean != null && aBoolean) {
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        } else {
-                            KeyboardUtils.hideSoftInput(LoginActivity.this);
-                        }
+                viewModel.login().observe(LoginActivity.this, aBoolean -> {
+                    //收到回调以后
+                    if (!bindingView.tvLoginAgreement.isSelected()) {
+                        ToastUtils.showShort("请先勾选协议");
+                        return;
+                    }
+                    if (aBoolean != null && aBoolean) {
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    } else {
+                        KeyboardUtils.hideSoftInput(LoginActivity.this);
                     }
                 });
                 break;

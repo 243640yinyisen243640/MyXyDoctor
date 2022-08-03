@@ -11,7 +11,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.CountDownTimer;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -60,9 +60,6 @@ import com.xy.xydoctor.ui.activity.patient.PatientInfoActivity;
 import com.xy.xydoctor.utils.SharedPreferencesUtils;
 import com.xy.xydoctor.utils.XyScreenUtils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import io.reactivex.rxjava3.functions.Consumer;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.model.UIConversation;
@@ -79,7 +76,7 @@ import rxhttp.wrapper.param.RxHttp;
  * 作者: LYD
  * 创建日期: 2019/4/4 14:34
  */
-public class SplashActivity extends AppCompatActivity implements RongImInterface.ConnectionStatusListener,RongImInterface.ConversationClickListener,RongImInterface.ConversationListBehaviorListener{
+public class SplashActivity extends AppCompatActivity implements RongImInterface.ConnectionStatusListener, RongImInterface.ConversationClickListener, RongImInterface.ConversationListBehaviorListener {
     /**
      * 是否同意隐私政策，1是，0或空为否
      */
@@ -95,6 +92,12 @@ public class SplashActivity extends AppCompatActivity implements RongImInterface
 
     private String userId;
 
+    private long countDownTime = 3000;//单位毫秒
+    /**
+     * 倒计时
+     */
+    private CountDownTimer timer;
+
 
     private static final String TAG = "SplashActivity";
 
@@ -104,15 +107,13 @@ public class SplashActivity extends AppCompatActivity implements RongImInterface
         context = this;
 
         setContentView(R.layout.activity_splash);
-        initValues();
+        //        initValues();
         setSplash();
     }
 
     private void initValues() {
-        Map<String, String> map = new HashMap<>();
-        map.put(ConstantParam.IS_AGREE_PRIVACY_PROTECT, "0");
-        SharedPreferencesUtils.getInfo(getPageContext(), map);
-        isAgreePricacyProtect = map.get(ConstantParam.IS_AGREE_PRIVACY_PROTECT);
+        SPStaticUtils.put(SharedPreferencesUtils.IS_AGREE_PRIVACY_PROTECT, "0");
+        isAgreePricacyProtect = SPStaticUtils.getString(SharedPreferencesUtils.IS_AGREE_PRIVACY_PROTECT);
     }
 
     private Context getPageContext() {
@@ -120,16 +121,44 @@ public class SplashActivity extends AppCompatActivity implements RongImInterface
     }
 
 
+    //    /**
+    //     * 设置启动页
+    //     */
+    //    private void setSplash() {
+    //        new Handler().postDelayed(new Runnable() {
+    //            @Override
+    //            public void run() {
+    //                if ("1".equals(SharedPreferencesUtils.IS_AGREE_PRIVACY_PROTECT)) {
+    //                    String token = SPStaticUtils.getString("token");
+    //                    String isproperty = SPStaticUtils.getString("isproperty");
+    //                    if (TextUtils.isEmpty(token) || TextUtils.isEmpty(isproperty)) {
+    //                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+    //                    } else {
+    //                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+    //                    }
+    //                    finish();
+    //                } else {
+    //                    showPrivacyProtectDialog();
+    //                }
+    //
+    //            }
+    //        }, 1000);
+    //    }
+
+
     /**
      * 设置启动页
      */
     private void setSplash() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (!"1".equals(isAgreePricacyProtect)) {
-                    showPrivacyProtectDialog();
-                } else {
+        if ("1".equals(SPStaticUtils.getString("is_agree"))) {
+            timer = new CountDownTimer(countDownTime, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                @Override
+                public void onFinish() {
                     String token = SPStaticUtils.getString("token");
                     String isproperty = SPStaticUtils.getString("isproperty");
                     if (TextUtils.isEmpty(token) || TextUtils.isEmpty(isproperty)) {
@@ -139,9 +168,11 @@ public class SplashActivity extends AppCompatActivity implements RongImInterface
                     }
                     finish();
                 }
-
-            }
-        }, 1000);
+            };
+            timer.start();
+        } else {
+            showPrivacyProtectDialog();
+        }
     }
 
 
@@ -411,7 +442,6 @@ public class SplashActivity extends AppCompatActivity implements RongImInterface
                 });
         return false;
     }
-
 
 
     /**
