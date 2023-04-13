@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -23,7 +24,6 @@ import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.YAxis;
-import com.gyf.immersionbar.ImmersionBar;
 import com.gyf.immersionbar.components.SimpleImmersionOwner;
 import com.gyf.immersionbar.components.SimpleImmersionProxy;
 import com.horen.chart.barchart.BarChartHelper;
@@ -34,6 +34,7 @@ import com.imuxuan.floatingview.MagnetViewListener;
 import com.lyd.baselib.base.fragment.BaseEventBusFragment;
 import com.lyd.baselib.util.eventbus.BindEventBus;
 import com.lyd.baselib.util.eventbus.EventMessage;
+import com.maning.imagebrowserlibrary.utils.immersionbar.ImmersionBar;
 import com.rxjava.rxlife.RxLife;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -203,7 +204,7 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
                         setBarChart(data.getHztj());
                         //设置红点
                         unReadCount = data.getMsgnum();
-                        setRedPoint(unReadCount);
+                        setRedPoint(0, unReadCount);
                         setReachTheStandRate(data.getSugars());
                     }
                 }, new OnError() {
@@ -268,13 +269,16 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
     /**
      * 设置红点
      *
-     * @param msgnum
+     * @param msgnum, 接口消息
+     * @param unreadNum 融云消息
      */
-    private void setRedPoint(int msgnum) {
-        int imUnReadMsgCount = SPStaticUtils.getInt("imUnReadMsgCount");
-        int totalUnReadCount = msgnum + imUnReadMsgCount;
+    private void setRedPoint(int unreadNum, int msgnum) {
+        //        int imUnReadMsgCount = SPStaticUtils.getInt("imUnReadMsgCount");
+        //        int rongYunUnreadNum = SPStaticUtils.getInt("rongYunUnreadNum");
+        int totalUnReadCount = msgnum + unreadNum;
         FloatingMagnetView view = FloatingView.get().getView();
         ColorTextView tvRedPoint = view.findViewById(R.id.tv_red_point);
+        Log.i("yys", "totalUnReadCount===" + totalUnReadCount);
         if (totalUnReadCount > 0) {
             BadgeUtils.setHuaWei(totalUnReadCount);
             BadgeUtils.setVivo(totalUnReadCount);
@@ -470,7 +474,8 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
                 getIndex(beginTime, endTime);
                 break;
             case ConstantParam.EventCode.IM_UNREAD_MSG_COUNT:
-                setRedPoint(unReadCount);
+                Log.i("yys", "IM_UNREAD_MSG_COUNT" + event.getData());
+                setRedPoint(Integer.parseInt(String.valueOf(event.getData())),0);
                 break;
         }
     }

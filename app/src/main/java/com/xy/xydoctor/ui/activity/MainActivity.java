@@ -38,7 +38,6 @@ import com.lyd.baselib.util.eventbus.EventMessage;
 import com.lyd.baselib.util.notification.NotificationUtils;
 import com.lyd.baselib.util.sp.SPUtils;
 import com.lyd.librongim.myrongim.GroupUserBean;
-import com.lyd.librongim.rongim.RongImInterface;
 import com.lyd.librongim.rongim.RongImUtils;
 import com.rxjava.rxlife.RxLife;
 import com.xy.xydoctor.BuildConfig;
@@ -106,6 +105,8 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
     private File updateApk;
     private static final int GET_UPDATE_DATA = 10012;
 
+    private int rongYunUnreadNum = 0;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -131,12 +132,6 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
         //getIsFamily();
     }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        checkNotifySettings();
-    }
 
     /**
      * 检查通知权限
@@ -385,6 +380,7 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
      * 获取融云未读消息
      */
     private void getImUnReadMsgCount() {
+        Log.i(TAG, "getImUnReadMsgCount");
         final Conversation.ConversationType[] conversationTypes = {Conversation.ConversationType.PRIVATE};
         RongIM.getInstance().addUnReadMessageCountChangedObserver(this, conversationTypes);
     }
@@ -470,48 +466,125 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
                         SPStaticUtils.put("loginImToken", imToken);
                         RongImUtils.logout();
                         //连接融云服务器
-                        RongImUtils.connect(imToken, new RongImInterface.ConnectCallback() {
-                            @Override
-                            public void onSuccess() {
-                                //获取会话列表
-                                RongIMClient.getInstance().getConversationList(new RongIMClient.ResultCallback<List<Conversation>>() {
-                                    @Override
-                                    public void onSuccess(List<Conversation> conversations) {
-                                        if (conversations != null && conversations.size() > 0) {
-                                            for (int i = 0; i < conversations.size(); i++) {
-                                                Conversation conversation = conversations.get(i);
-                                                long sentTime = conversation.getSentTime();
-                                                String targetId = conversation.getTargetId();
-                                                int unreadMessageCount = conversation.getUnreadMessageCount();
-                                                Log.e(TAG, "时间==" + sentTime);
-                                                Log.e(TAG, "发送者Id==" + targetId);
-                                                Log.e(TAG, "未读消息数量==" + unreadMessageCount);
-                                                MessageContent messageContent = conversation.getLatestMessage();
-                                                if (messageContent instanceof TextMessage) {
-                                                    //文本消息
-                                                    TextMessage textMessage = (TextMessage) messageContent;
-                                                    String str = textMessage.getContent();
-                                                    Log.e(TAG, "最后一条消息内容==" + str);
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onError(RongIMClient.ErrorCode errorCode) {
-                                    }
-                                }, Conversation.ConversationType.PRIVATE);
-                            }
+                        RongImUtils.connect(imToken, () -> {
+                            getAllUnreadNum();
+                            //获取会话列表
+                            //                            RongIMClient.getInstance().getConversationList(new RongIMClient.ResultCallback<List<Conversation>>() {
+                            //                                @Override
+                            //                                public void onSuccess(List<Conversation> conversations) {
+                            //                                    if (conversations != null && conversations.size() > 0) {
+                            //                                        for (int i = 0; i < conversations.size(); i++) {
+                            //                                            Conversation conversation = conversations.get(i);
+                            //                                            long sentTime = conversation.getSentTime();
+                            //                                            String targetId = conversation.getTargetId();
+                            //                                            int unreadMessageCount = conversation.getUnreadMessageCount();
+                            //                                            //                                            rongYunUnreadNum = conversation.getUnreadMessageCount();
+                            //                                            //                                            SPStaticUtils.put("rongYunUnreadNum", rongYunUnreadNum);
+                            //                                            getAllUnreadNum();
+                            //                                            Log.e(TAG, "时间==" + sentTime);
+                            //                                            Log.e(TAG, "发送者Id==" + targetId);
+                            //                                            Log.e(TAG, "未读消息数量==" + unreadMessageCount);
+                            //                                            MessageContent messageContent = conversation.getLatestMessage();
+                            //                                            if (messageContent instanceof TextMessage) {
+                            //                                                //文本消息
+                            //                                                TextMessage textMessage = (TextMessage) messageContent;
+                            //                                                String str = textMessage.getContent();
+                            //                                                Log.e(TAG, "最后一条消息内容==" + str);
+                            //                                            }
+                            //                                        }
+                            //                                    }
+                            //                                }
+                            //
+                            //                                @Override
+                            //                                public void onError(RongIMClient.ErrorCode errorCode) {
+                            //                                }
+                            //                            }, Conversation.ConversationType.PRIVATE);
                         });
                     }
-                }, new OnError() {
-                    @Override
-                    public void onError(ErrorInfo error) throws Exception {
+                }, (OnError) error -> {
 
-                    }
                 });
     }
 
+    private void getconversitionUnreadNum() {
+        RongIMClient.getInstance().getConversationList(new RongIMClient.ResultCallback<List<Conversation>>() {
+            @Override
+            public void onSuccess(List<Conversation> conversations) {
+                if (conversations != null && conversations.size() > 0) {
+                    for (int i = 0; i < conversations.size(); i++) {
+                        Conversation conversation = conversations.get(i);
+                        long sentTime = conversation.getSentTime();
+                        String targetId = conversation.getTargetId();
+                        int unreadMessageCount = conversation.getUnreadMessageCount();
+                        //                                            rongYunUnreadNum = conversation.getUnreadMessageCount();
+//                        SPStaticUtils.put("rongYunUnreadNum", rongYunUnreadNum);
+                        //                        getAllUnreadNum();
+                        EventBusUtils.post(new EventMessage(ConstantParam.EventCode.IM_UNREAD_MSG_COUNT, unreadMessageCount));
+                        Log.e(TAG, "时间==" + sentTime);
+                        Log.e(TAG, "发送者Id==" + targetId);
+                        Log.e(TAG, "未读消息数量==" + unreadMessageCount);
+                        MessageContent messageContent = conversation.getLatestMessage();
+                        if (messageContent instanceof TextMessage) {
+                            //文本消息
+                            TextMessage textMessage = (TextMessage) messageContent;
+                            String str = textMessage.getContent();
+                            Log.e(TAG, "最后一条消息内容==" + str);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+            }
+        }, Conversation.ConversationType.PRIVATE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getAllUnreadNum();
+        checkNotifySettings();
+    }
+
+    /**
+     * 获取总的未读消息
+     */
+    private void getAllUnreadNum() {
+        if (RongIMClient.getInstance().getCurrentConnectionStatus() == RongIMClient.ConnectionStatusListener.ConnectionStatus.CONNECTED
+        ||RongIMClient.getInstance().getCurrentConnectionStatus() == RongIMClient.ConnectionStatusListener.ConnectionStatus.CONNECTING) {
+            RongIMClient.getInstance().getTotalUnreadCount(new RongIMClient.ResultCallback<Integer>() {
+                @Override
+                public void onSuccess(Integer integer) {
+                    rongYunUnreadNum = integer;
+                    Log.i("yys", "integer==" + integer);
+                    //                    SPStaticUtils.put("rongYunUnreadNum", integer);
+                    EventBusUtils.post(new EventMessage(ConstantParam.EventCode.IM_UNREAD_MSG_COUNT, integer));
+                }
+
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+
+                }
+            });
+        }
+
+    }
+
+    /**
+     * 未读消息数量监听
+     *
+     * @param count
+     */
+    @Override
+    public void onCountChanged(int count) {
+        //        int allUnreadNum = count + rongYunUnreadNum;
+        //        Log.i(TAG, "count===" + allUnreadNum);
+//        getconversitionUnreadNum();
+        //        SPStaticUtils.put("imUnReadMsgCount", allUnreadNum);
+        //        //        SPStaticUtils.put("imUnReadMsgCount", count);
+        //        EventBusUtils.post(new EventMessage(ConstantParam.EventCode.IM_UNREAD_MSG_COUNT));
+    }
 
     /**
      * 退出
@@ -554,18 +627,6 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
         super.onDestroy();
     }
 
-
-    /**
-     * 未读消息数量监听
-     *
-     * @param count
-     */
-    @Override
-    public void onCountChanged(int count) {
-        Log.e(TAG, "count: " + count);
-        SPStaticUtils.put("imUnReadMsgCount", count);
-        EventBusUtils.post(new EventMessage(ConstantParam.EventCode.IM_UNREAD_MSG_COUNT));
-    }
 
     @Override
     public void onClick(View v) {
@@ -720,4 +781,6 @@ public class MainActivity extends BaseEventBusActivity implements IUnReadMessage
 
         });
     }
+
+
 }

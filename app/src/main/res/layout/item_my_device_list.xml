@@ -13,13 +13,14 @@
 
     <LinearLayout
         style="@style/hh_fi_wr"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/dp_10">
 
 
         <ImageView
             android:id="@+id/img_device"
-            android:layout_width="80dp"
+            android:layout_width="53dp"
             android:layout_height="80dp"
             android:scaleType="centerCrop"
             android:src="@drawable/device_list_vivachek" />

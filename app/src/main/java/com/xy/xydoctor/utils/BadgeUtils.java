@@ -1,11 +1,15 @@
 package com.xy.xydoctor.utils;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.Utils;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * 描述:  角标工具类
@@ -47,6 +51,17 @@ public class BadgeUtils {
             //8.0以上为隐藏api
             //intent.addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
             Utils.getApp().sendBroadcast(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void setBadgeNumber(Notification notification, int number) {
+        try {
+            Field field = notification.getClass().getDeclaredField("extraNotification");
+            Object extraNotification = field.get(notification);
+            Method method = extraNotification.getClass().getDeclaredMethod("setMessageCount", int.class);
+            method.invoke(extraNotification, number);
         } catch (Exception e) {
             e.printStackTrace();
         }
