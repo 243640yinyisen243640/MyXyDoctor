@@ -34,7 +34,6 @@ import me.devilsen.czxing.util.BarCodeUtil;
 import me.devilsen.czxing.view.ScanBoxView;
 import me.devilsen.czxing.view.ScanListener;
 import me.devilsen.czxing.view.ScanView;
-import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
@@ -42,6 +41,8 @@ import top.zibin.luban.OnCompressListener;
  * 描述: 扫一扫 页面
  * 作者: LYD
  * 创建日期: 2019/3/22 15:39
+ * param type   3：微测一诺 4：小糖医 5：血压计  6舒可唯
+ * isSelf 是否给自己添加设备  1:绑定设备 血糖仪绑定  2：绑定设备 血压计绑定 3：患者详情绑定血糖仪和血压计
  */
 public class ScanActivity extends BaseActivity implements ScanListener {
     private static final int CODE_SELECT_IMAGE = 10010;
@@ -55,6 +56,9 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 
     private String userid;
 
+    private int type;
+    private int isSelf;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_scan;
@@ -63,13 +67,14 @@ public class ScanActivity extends BaseActivity implements ScanListener {
     @Override
     protected void init(Bundle savedInstanceState) {
         userid = getIntent().getStringExtra("userid");
+        type = getIntent().getIntExtra("type", 0);
+        isSelf = getIntent().getIntExtra("isSelf", 0);
         initScan();
         initTitle();
-        setFrom();
+        //        setFrom();
     }
 
     private void setFrom() {
-        int type = getIntent().getIntExtra("type", 0);
         if (4 == type) {
             imgToSelectPic.setVisibility(View.VISIBLE);
         } else {
@@ -83,23 +88,25 @@ public class ScanActivity extends BaseActivity implements ScanListener {
         getTvMore().setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
         getTvMore().setPadding(10, 5, 10, 5);
         getTvMore().setText("手动绑定");
-        getTvMore().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int type = getIntent().getIntExtra("type", -1);
-                if (type == 4) {
-                    Intent intent = new Intent(getPageContext(), MyDeviceListActivity.class);
-                    intent.putExtra("type", type);
-                    intent.putExtra("userid", userid);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(getPageContext(), InputImeiActivity.class);
-                    intent.putExtra("imei", "");
-                    intent.putExtra("type", type);
-                    intent.putExtra("userid", userid);
-                    startActivity(intent);
-                }
-            }
+        getTvMore().setOnClickListener(v -> {
+            Intent intent = new Intent(getPageContext(), InputImeiActivity.class);
+            intent.putExtra("imei", "");
+            intent.putExtra("type", type);
+            intent.putExtra("isSelf", isSelf);
+            intent.putExtra("userid", userid);
+            startActivity(intent);
+            //                if (type == 4) {
+            //                    Intent intent = new Intent(getPageContext(), MyDeviceListActivity.class);
+            //                    intent.putExtra("type", type);
+            //                    intent.putExtra("userid", userid);
+            //                    startActivity(intent);
+            //                } else {
+            //                    Intent intent = new Intent(getPageContext(), InputImeiActivity.class);
+            //                    intent.putExtra("imei", "");
+            //                    intent.putExtra("type", type);
+            //                    intent.putExtra("userid", userid);
+            //                    startActivity(intent);
+            //                }
         });
     }
 
@@ -158,7 +165,6 @@ public class ScanActivity extends BaseActivity implements ScanListener {
         if (TextUtils.isEmpty(resultText)) {
             return;
         }
-        int type = getIntent().getIntExtra("type", -1);
         if (resultText.contains("IMEI=")) {
             String startText = resultText.substring(0, resultText.indexOf("IMEI="));
             resultText = resultText.substring(startText.length() + 5);
@@ -166,6 +172,7 @@ public class ScanActivity extends BaseActivity implements ScanListener {
         Intent intent = new Intent(getPageContext(), InputImeiActivity.class);
         intent.putExtra("imei", resultText);
         intent.putExtra("type", type);
+        intent.putExtra("isSelf", isSelf);
         startActivity(intent);
     }
 
@@ -213,12 +220,7 @@ public class ScanActivity extends BaseActivity implements ScanListener {
                                 .load(path)
                                 .ignoreBy(100)
                                 .setTargetDir("")
-                                .filter(new CompressionPredicate() {
-                                    @Override
-                                    public boolean apply(String path) {
-                                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-                                    }
-                                })
+                                .filter(path1 -> !(TextUtils.isEmpty(path1) || path1.toLowerCase().endsWith(".gif")))
                                 .setCompressListener(new OnCompressListener() {
                                     @Override
                                     public void onStart() {
@@ -226,28 +228,26 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 
                                     @Override
                                     public void onSuccess(File file) {
-                                        new Thread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                final String[] resultText = {MyZXingUtils.syncDecodeQRCode(file.getPath())};
-                                                runOnUiThread(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        if (TextUtils.isEmpty(resultText[0])) {
-                                                            ToastUtils.showShort("未发现二维码");
-                                                        } else {
-                                                            if (resultText[0].contains("IMEI=")) {
-                                                                String startText = resultText[0].substring(0, resultText[0].indexOf("IMEI="));
-                                                                resultText[0] = resultText[0].substring(startText.length() + 5);
-                                                            }
-                                                            Intent intent = new Intent(getPageContext(), InputImeiActivity.class);
-                                                            intent.putExtra("imei", resultText[0]);
-                                                            intent.putExtra("type", 4);
-                                                            startActivity(intent);
+                                        new Thread(() -> {
+                                            final String[] resultText = {MyZXingUtils.syncDecodeQRCode(file.getPath())};
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    if (TextUtils.isEmpty(resultText[0])) {
+                                                        ToastUtils.showShort("未发现二维码");
+                                                    } else {
+                                                        if (resultText[0].contains("IMEI=")) {
+                                                            String startText = resultText[0].substring(0, resultText[0].indexOf("IMEI="));
+                                                            resultText[0] = resultText[0].substring(startText.length() + 5);
                                                         }
+                                                        Intent intent = new Intent(getPageContext(), InputImeiActivity.class);
+                                                        intent.putExtra("imei", resultText[0]);
+                                                        intent.putExtra("type", type);
+                                                        intent.putExtra("isSelf", isSelf);
+                                                        startActivity(intent);
                                                     }
-                                                });
-                                            }
+                                                }
+                                            });
                                         }).start();
                                     }
 

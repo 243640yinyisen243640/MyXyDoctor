@@ -34,6 +34,9 @@ import rxhttp.wrapper.param.RxHttp;
  * 描述: 手动输入设备号 页面
  * 作者: LYD
  * 创建日期: 2019/3/22 15:48
+ * param type  3：微测一诺 4：小糖医 5：血压计  6舒可唯
+ * <p>
+ * isSelf 是否给自己添加设备  1:绑定设备 血糖仪绑定  2：绑定设备 血压计绑定 3：患者详情绑定血糖仪和血压计
  */
 public class InputImeiActivity extends BaseActivity {
     private static final String TAG = "InputImeiActivity";
@@ -47,6 +50,8 @@ public class InputImeiActivity extends BaseActivity {
     ColorButton btSure;
 
     private String userid;
+    private int type;
+    private int isSelf;
 
 
     @Override
@@ -57,9 +62,12 @@ public class InputImeiActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         userid = getIntent().getStringExtra("userid");
+        type = getIntent().getIntExtra("type", 0);
+        isSelf = getIntent().getIntExtra("isSelf", 0);
+        Log.i("yys", "isSelf===" + isSelf);
         setIMEI();
         setType();
-        setPosition();
+        //        setPosition();
     }
 
 
@@ -70,32 +78,34 @@ public class InputImeiActivity extends BaseActivity {
     }
 
     private void setType() {
-        int type = getIntent().getIntExtra("type", -1);
+        //1：添加设备 的绑定血糖仪   2：绑定的患者详情扫一扫和社区  3：微测一诺 4：小糖医 5：血压计  6舒可唯
+        Log.i("yys", "type===" + type);
         switch (type) {
-            case 1:
-                setTitle("手动输入IMEI号");
-                imgBg.setImageResource(R.drawable.imei_bg);
-                tvHint.setText("请确定您输入正确的IMEI号码");
-                etImei.setHint("请输入IMEI号码");
-                break;
-            case 2:
+            case 3:
                 setTitle("手动输入SN号");
                 imgBg.setImageResource(R.drawable.sn_bg);
                 tvHint.setText("请确定您输入正确的SN号码");
                 etImei.setHint("请输入SN号码");
                 break;
-            case 3:
+            case 4:
+                setTitle("手动输入IMEI号");
+                imgBg.setImageResource(R.drawable.imei_bg);
+                tvHint.setText("请确定您输入正确的IMEI号码");
+                etImei.setHint("请输入IMEI号码");
+                break;
+            case 5:
                 setTitle("手动输入SN号");
                 imgBg.setImageResource(R.drawable.bp_sn_bg);
                 tvHint.setText("请确定您输入正确的SN号码");
                 etImei.setHint("请输入SN号码");
                 break;
-            //直接扫码进来
-            case 4:
-                setTitle("绑定设备号");
-                imgBg.setImageResource(R.drawable.default_scan_bg);
-                tvHint.setText("请确定您输入正确的设备号");
-                etImei.setHint("请输入设备号");
+            case 6:
+                setTitle("手动输入SN号");
+                imgBg.setImageResource(R.drawable.bg_shukewei);
+                tvHint.setText("请确定您输入正确的SN号码");
+                etImei.setHint("请输入SN号码");
+                break;
+            default:
                 break;
         }
     }
@@ -122,17 +132,26 @@ public class InputImeiActivity extends BaseActivity {
                 tvHint.setText("请确定您输入正确的SN号码");
                 etImei.setHint("请输入SN号码");
                 break;
+            case 3:
+                setTitle("手动输入SN号");
+                imgBg.setImageResource(R.drawable.bg_shukewei);
+                tvHint.setText("请确定您输入正确的SN号码");
+                etImei.setHint("请输入SN号码");
+                break;
+            default:
+                break;
         }
     }
 
     private void toBind() {
+        //是否给自己添加设备  1:绑定设备 血糖仪绑定  2：绑定设备 血压计绑定 3：患者详情绑定血糖仪和血压计
         String imei = etImei.getText().toString().trim();
         if (TextUtils.isEmpty(imei)) {
             ToastUtils.showShort("请输入设备号");
             return;
         }
-        int type = getIntent().getIntExtra("type", -1);
-        if (1 == type || 2 == type) {
+        //1：添加设备 的绑定血糖仪   2：绑定的患者详情扫一扫和社区  3：微测一诺 4：小糖医 5：血压计  6舒可唯
+        if (1 == isSelf) {
             //执行
             HashMap map = new HashMap<>();
             map.put("imei", imei);
@@ -147,13 +166,10 @@ public class InputImeiActivity extends BaseActivity {
                             SPStaticUtils.put("imei", imei);
                             ActivityUtils.finishToActivity(MainActivity.class, false);//false 不包括结束这个
                         }
-                    }, new OnError() {
-                        @Override
-                        public void onError(ErrorInfo error) throws Exception {
+                    }, (OnError) error -> {
 
-                        }
                     });
-        } else if (3 == type) {
+        } else if (2 == isSelf) {
             //执行
             HashMap map = new HashMap<>();
             map.put("snnum", imei);
@@ -174,7 +190,7 @@ public class InputImeiActivity extends BaseActivity {
 
                         }
                     });
-        } else if (4 == type) {
+        } else {
             //执行
             HashMap map = new HashMap<>();
             map.put("imei", imei);
@@ -194,15 +210,88 @@ public class InputImeiActivity extends BaseActivity {
                         @Override
                         public void onError(ErrorInfo error) throws Exception {
 
-                            Log.i("yys","onError"+error.getErrorCode());
+                            Log.i("yys", "onError" + error.getErrorCode());
                         }
                     });
         }
+
+
     }
 
 
     @OnClick(R.id.bt_sure)
     public void onViewClicked() {
         toBind();
+    }
+
+
+    private void before() {
+
+        if (1 == type || 2 == type || 5 == type) {
+            //执行
+            HashMap map = new HashMap<>();
+            //            map.put("imei", imei);
+            RxHttp.postForm(XyUrl.DEVICE_BIND)
+                    .addAll(map)
+                    .asResponse(String.class)
+                    .to(RxLife.toMain(this))
+                    .subscribe(new Consumer<String>() {
+                        @Override
+                        public void accept(String s) throws Exception {
+                            ToastUtils.showShort("获取成功");
+                            //                            SPStaticUtils.put("imei", imei);
+                            ActivityUtils.finishToActivity(MainActivity.class, false);//false 不包括结束这个
+                        }
+                    }, new OnError() {
+                        @Override
+                        public void onError(ErrorInfo error) throws Exception {
+
+                        }
+                    });
+        } else if (3 == type) {
+            //执行
+            HashMap map = new HashMap<>();
+            //            map.put("snnum", imei);
+            RxHttp.postForm(XyUrl.SN_BIND)
+                    .addAll(map)
+                    .asResponse(String.class)
+                    .to(RxLife.toMain(this))
+                    .subscribe(new Consumer<String>() {
+                        @Override
+                        public void accept(String s) throws Exception {
+                            ToastUtils.showShort("获取成功");
+                            //                            SPStaticUtils.put("snnum", imei);
+                            ActivityUtils.finishToActivity(MainActivity.class, false);//false 不包括结束这个
+                        }
+                    }, new OnError() {
+                        @Override
+                        public void onError(ErrorInfo error) throws Exception {
+
+                        }
+                    });
+        } else if (4 == type) {
+            //执行
+            HashMap map = new HashMap<>();
+            //            map.put("imei", imei);
+            map.put("userid", userid);
+            RxHttp.postForm(XyUrl.DEVICE_BIND_PATIENT)
+                    .addAll(map)
+                    .asResponse(String.class)
+                    .to(RxLife.toMain(this))
+                    .subscribe(new Consumer<String>() {
+                        @Override
+                        public void accept(String s) throws Exception {
+                            ToastUtils.showShort("获取成功");
+                            EventBusUtils.post(new EventMessage(ConstantParam.EventCode.PATIENT_INFO_DEVICE_BIND));
+                            ActivityUtils.finishToActivity(PatientInfoActivity.class, false);//false 不包括结束这个
+                        }
+                    }, new OnError() {
+                        @Override
+                        public void onError(ErrorInfo error) throws Exception {
+
+                            Log.i("yys", "onError" + error.getErrorCode());
+                        }
+                    });
+        }
     }
 }

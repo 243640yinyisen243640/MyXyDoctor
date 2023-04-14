@@ -42,7 +42,8 @@ public class DeviceAddActivity extends BaseActivity {
                     @Override
                     public void onGranted() {
                         Intent intent = new Intent(getPageContext(), ScanActivity.class);
-                        intent.putExtra("type", 3);
+                        intent.putExtra("type", 5);
+                        intent.putExtra("isSelf", 2);
                         startActivity(intent);
                     }
 

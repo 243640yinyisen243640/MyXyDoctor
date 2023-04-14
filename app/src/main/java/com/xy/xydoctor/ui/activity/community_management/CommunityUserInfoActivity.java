@@ -305,7 +305,7 @@ public class CommunityUserInfoActivity extends XYSoftUIBaseActivity implements V
                 //                        }).request();
 
                 intent = new Intent(getPageContext(), MyDeviceListActivity.class);
-                intent.putExtra("type", 4);
+                intent.putExtra("isSelf", 3);
                 startActivity(intent);
                 break;
             case R.id.iv_user_info_back:

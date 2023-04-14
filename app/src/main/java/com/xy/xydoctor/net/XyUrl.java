@@ -76,15 +76,15 @@ public class XyUrl {
     //创建随访
     public final static String FOLLOW_UP_VISIT_CREATE = "/doctor/Followmgt/addFollow";
     //个人中心我的设备 开始
-    //绑定设备
+    //绑定设备 医用血糖仪绑定
     public final static String DEVICE_BIND = "/doctor/Docinfo/bindSugarm";
-    //绑定设备
+    //绑定设备 医用血压计绑定
     public final static String SN_BIND = "/doctor/Docinfo/bindsnnum";
     //解锁设备
     public final static String DEVICE_UN_BIND = "/doctor/Docinfo/unbindSugarm";
     //解锁设备
     public final static String SN_UN_BIND = "/doctor/Docinfo/unbindsnnum";
-    //绑定设备
+    //绑定设备 用户血压血糖设备绑定
     public final static String DEVICE_BIND_PATIENT = "/port/Equipment/bindPequipment";
     //解锁设备
     public final static String DEVICE_UN_BIND_PATIENT = "/port/Equipment/unbindPequipment";

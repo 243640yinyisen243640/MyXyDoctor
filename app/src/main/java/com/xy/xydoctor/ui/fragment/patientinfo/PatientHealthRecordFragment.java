@@ -29,7 +29,7 @@ import com.xy.xydoctor.constant.ConstantParam;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
-import com.xy.xydoctor.ui.activity.mydevice.ScanActivity;
+import com.xy.xydoctor.ui.activity.mydevice.MyDeviceListActivity;
 import com.xy.xydoctor.utils.DialogUtils;
 
 import java.util.ArrayList;
@@ -231,9 +231,13 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
                         .callback(new PermissionUtils.SimpleCallback() {
                             @Override
                             public void onGranted() {
-                                Intent intent = new Intent(getPageContext(), ScanActivity.class);
-                                intent.putExtra("type", 4);
-                                intent.putExtra("userid", userid);
+                                //                                Intent intent = new Intent(getPageContext(), ScanActivity.class);
+                                //                                intent.putExtra("type", 4);
+                                //                                intent.putExtra("userid", userid);
+                                //                                startActivity(intent);
+                                //听IOS说直接进入到选择设备的页面
+                                Intent intent = new Intent(getPageContext(), MyDeviceListActivity.class);
+                                intent.putExtra("isSelf", 3);
                                 startActivity(intent);
                             }
 
