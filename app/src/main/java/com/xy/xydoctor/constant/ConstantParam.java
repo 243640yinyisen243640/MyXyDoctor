@@ -83,6 +83,8 @@ public interface ConstantParam {
         public static final int BLOOD_PRESSURE_ADD_LOW = 1013;
         //手动添加血压 时间
         public static final int BLOOD_PRESSURE_ADD_TIME = 1014;
+        //添加心率
+        public static final int BLOOD_PRESSURE_ADD_BMI = 1050;
         //随访创建完成
         public static final int FOLLOW_UP_VISIT_SUBMIT = 1015;
         //随访填写总结完成

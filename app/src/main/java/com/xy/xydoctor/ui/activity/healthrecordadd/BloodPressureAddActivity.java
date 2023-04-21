@@ -60,7 +60,7 @@ public class BloodPressureAddActivity extends BaseEventBusActivity {
     private String high = "120";
     private String low = "80";
     private String time;
-
+    private String bmi = "80";
 
     @Override
     protected int getLayoutId() {
@@ -140,7 +140,7 @@ public class BloodPressureAddActivity extends BaseEventBusActivity {
         map.put("uid", getIntent().getStringExtra("userId"));
         map.put("systolic", high);//收缩
         map.put("diastole", low);//舒张
-        map.put("heartrate", "");
+        map.put("heartrate", bmi);//心率
         map.put("datetime", time);
         map.put("type", "2");
         RxHttp.postForm(XyUrl.ADD_BLOOD)
@@ -171,9 +171,14 @@ public class BloodPressureAddActivity extends BaseEventBusActivity {
             case ConstantParam.EventCode.BLOOD_PRESSURE_ADD_LOW:
                 low = event.getMsg();
                 break;
+            case ConstantParam.EventCode.BLOOD_PRESSURE_ADD_BMI:
+                bmi = event.getMsg();
+                break;
             case ConstantParam.EventCode.BLOOD_PRESSURE_ADD_TIME:
                 String selectTime = event.getMsg();
                 time = selectTime;
+                break;
+            default:
                 break;
         }
     }
