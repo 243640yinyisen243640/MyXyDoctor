@@ -87,18 +87,18 @@ public class BloodPressureAddManualFragment extends BaseFragment {
             }
         });
 
-        rulerViewLowBmi.setOnChooseResulterListener(new RulerView.OnChooseResulterListener() {
-            @Override
-            public void onEndResult(String result) {
-
-            }
-
-            @Override
-            public void onScrollResult(String result) {
-                bmiDataTextView.setText(floatStringToIntString(result));
-                EventBusUtils.post(new EventMessage<>(ConstantParam.EventCode.BLOOD_PRESSURE_ADD_BMI, result));
-            }
-        });
+//        rulerViewLowBmi.setOnChooseResulterListener(new RulerView.OnChooseResulterListener() {
+//            @Override
+//            public void onEndResult(String result) {
+//
+//            }
+//
+//            @Override
+//            public void onScrollResult(String result) {
+//                bmiDataTextView.setText(floatStringToIntString(result));
+//                EventBusUtils.post(new EventMessage<>(ConstantParam.EventCode.BLOOD_PRESSURE_ADD_BMI, result));
+//            }
+//        });
     }
 
 

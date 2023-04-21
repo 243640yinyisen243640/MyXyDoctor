@@ -151,7 +151,7 @@
         android:layout_marginTop="@dimen/dp_10"
         android:background="@color/white"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"
