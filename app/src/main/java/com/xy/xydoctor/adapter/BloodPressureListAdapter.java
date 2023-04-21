@@ -1,5 +1,6 @@
 package com.xy.xydoctor.adapter;
 
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,9 @@ public class BloodPressureListAdapter extends BaseQuickAdapter<BloodPressureBean
         String datetime = item.getDatetime();
         helper.setText(R.id.tv_time, datetime);
         String value = item.getSystolic() + "/" + item.getDiastole();
+        Log.i("yys", "heatRate==" + item.getHeartrate());
+        String heartRate = item.getHeartrate() + "";
+        helper.setText(R.id.tv_value_heart, heartRate);
         //1偏高  2偏低  3正常
         int ishight = item.getIshight();
         TextView tvValue = helper.getView(R.id.tv_value);
@@ -41,10 +45,10 @@ public class BloodPressureListAdapter extends BaseQuickAdapter<BloodPressureBean
         //1自动  2手动
         int type = item.getType();
         if (1 == type) {
-            helper.setText(R.id.tv_type, "自动上传");
+            helper.setText(R.id.tv_type, "自动");
             helper.setImageResource(R.id.img_type, R.drawable.doctor_bp_auto_upload);
         } else {
-            helper.setText(R.id.tv_type, "手动上传");
+            helper.setText(R.id.tv_type, "手动");
             helper.setImageResource(R.id.img_type, R.drawable.doctor_bp_manual_upload);
         }
     }
