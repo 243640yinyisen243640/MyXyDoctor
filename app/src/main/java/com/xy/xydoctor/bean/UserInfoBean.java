@@ -26,6 +26,10 @@ public class UserInfoBean {
     private String diabetesleitime;
     private String height;
     private String weight;
+    /**
+     * 血压计的设备号
+     */
+    private String snnum;
 
     public int getUserid() {
         return userid;
@@ -114,5 +118,13 @@ public class UserInfoBean {
 
     public void setWeight(String weight) {
         this.weight = weight;
+    }
+
+    public String getSnnum() {
+        return snnum;
+    }
+
+    public void setSnnum(String snnum) {
+        this.snnum = snnum;
     }
 }

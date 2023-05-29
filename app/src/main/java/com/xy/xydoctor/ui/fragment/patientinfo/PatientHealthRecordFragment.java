@@ -14,7 +14,6 @@ import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
 import com.lyd.baselib.base.fragment.BaseEventBusFragment;
 import com.lyd.baselib.util.eventbus.BindEventBus;
-import com.lyd.baselib.util.eventbus.EventMessage;
 import com.lyd.baselib.widget.view.MyGridView;
 import com.lyd.baselib.widget.view.MyListView;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
@@ -25,7 +24,6 @@ import com.xy.xydoctor.adapter.HealthRecordGvAdapter;
 import com.xy.xydoctor.adapter.PatientInfoBottomTopThreeAdapter;
 import com.xy.xydoctor.bean.PersonalRecordBean;
 import com.xy.xydoctor.bean.UserInfoBean;
-import com.xy.xydoctor.constant.ConstantParam;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
@@ -76,6 +74,10 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
     private String imei;
     private String guid;
     private String userid;
+    /**
+     * 血压计的设备号
+     */
+    private String suNum = "";
 
     @Override
     protected int getLayoutId() {
@@ -86,19 +88,23 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
     protected void init(View rootView) {
         userid = getArguments().getString("userid");
         //设置11个记录
-        setEightRecord(userid);
+        setEightRecord();
         //设置头部信息
-        setTopInfo(userid);
-        setBottomEightRecord(userid);
+        setTopInfo();
+        setBottomEightRecord();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setTopInfo();
+    }
 
     /**
      * 设置八个记录以下
      *
-     * @param userid
      */
-    private void setBottomEightRecord(String userid) {
+    private void setBottomEightRecord() {
         ArrayList<String> list = new ArrayList<>();
         list.add(userid);
         list.add(userid);
@@ -110,9 +116,8 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
     /**
      * 设置八个记录
      *
-     * @param userid
      */
-    private void setEightRecord(String userid) {
+    private void setEightRecord() {
         ArrayList<String> list = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             list.add(i + "");
@@ -125,9 +130,8 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
     /**
      * 设置头部信息
      *
-     * @param userid
      */
-    private void setTopInfo(String userid) {
+    private void setTopInfo() {
         //1糖尿病 2 肝病
         String archivestyle = getArguments().getString("archivestyle");
         if ("1".equals(archivestyle)) {
@@ -147,7 +151,7 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
                         List<UserInfoBean> data = myTreatPlanBeans;
                         UserInfoBean user = data.get(0);
                         guid = user.getUserId();
-
+                        suNum = user.getSnnum();
                         if (1 == user.getSex()) {
                             Glide.with(Utils.getApp()).load(user.getPicture()).error(R.drawable.head_man).placeholder(R.drawable.head_man).into(imgHead);
                             imgSex.setImageResource(R.drawable.male);
@@ -209,8 +213,8 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
                             imgDeviceScan.setVisibility(View.VISIBLE);
                             llDeviceUnbind.setVisibility(View.GONE);
                         } else {
-                            imgDeviceScan.setVisibility(View.GONE);
-                            llDeviceUnbind.setVisibility(View.VISIBLE);
+                            imgDeviceScan.setVisibility(View.VISIBLE);
+                            llDeviceUnbind.setVisibility(View.GONE);
                             tvDeviceNumber.setText("设备号:" + imei);
                         }
                     }
@@ -231,14 +235,12 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
                         .callback(new PermissionUtils.SimpleCallback() {
                             @Override
                             public void onGranted() {
-                                //                                Intent intent = new Intent(getPageContext(), ScanActivity.class);
-                                //                                intent.putExtra("type", 4);
-                                //                                intent.putExtra("userid", userid);
-                                //                                startActivity(intent);
-                                //听IOS说直接进入到选择设备的页面
+
                                 Intent intent = new Intent(getPageContext(), MyDeviceListActivity.class);
                                 intent.putExtra("isSelf", 3);
+                                intent.putExtra("imei", suNum);
                                 startActivity(intent);
+
                             }
 
                             @Override
@@ -275,8 +277,7 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
                     @Override
                     public void accept(String s) throws Exception {
                         ToastUtils.showShort("获取成功");
-                        String userid = getArguments().getString("userid");
-                        setTopInfo(userid);
+                        setTopInfo();
                     }
                 }, new OnError() {
                     @Override
@@ -286,14 +287,5 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
                 });
     }
 
-    @Override
-    protected void receiveEvent(EventMessage event) {
-        super.receiveEvent(event);
-        switch (event.getCode()) {
-            case ConstantParam.EventCode.PATIENT_INFO_DEVICE_BIND:
-                String userid = getArguments().getString("userid");
-                setTopInfo(userid);
-                break;
-        }
-    }
+
 }

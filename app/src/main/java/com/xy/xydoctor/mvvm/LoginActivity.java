@@ -75,7 +75,7 @@ public class LoginActivity extends BaseMVVMActivity<LoginViewModel, ActivityLogi
             public void onClick(@NonNull View view) {
                 Intent intent = new Intent(getPageContext(), BaseWebViewActivity.class);
                 intent.putExtra("title", "隐私政策");
-                intent.putExtra("url", "http://chronics.xiyuns.cn/index/caseapp");
+                intent.putExtra("url", "http://chronics.xiyuns.cn/index/casedoc");
                 startActivity(intent);
             }
 

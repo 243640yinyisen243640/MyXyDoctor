@@ -34,12 +34,12 @@ public class BloodPressureAddManualFragment extends BaseFragment {
     @BindView(R.id.ruler_view_low)
     RulerView rulerViewLow;
 
-    @BindView(R.id.ruler_view_low_bmi)
-    RulerView rulerViewLowBmi;
-    @BindView(R.id.tv_low_bmi)
-    TextView bmiDataTextView;
-    @BindView(R.id.ll_bmi_record)
-    LinearLayout bmiDataLinearLayout;
+//    @BindView(R.id.ruler_view_low_bmi)
+//    RulerView rulerViewLowBmi;
+//    @BindView(R.id.tv_low_bmi)
+//    TextView bmiDataTextView;
+//    @BindView(R.id.ll_bmi_record)
+//    LinearLayout bmiDataLinearLayout;
 
     @BindView(R.id.ll_select_time)
     LinearLayout llSelectTime;

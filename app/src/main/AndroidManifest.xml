@@ -176,6 +176,9 @@
             android:name=".ui.activity.mydevice.InputImeiActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
+            android:name=".ui.activity.mydevice.InputImeiDetailsActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
             android:name=".ui.activity.healthrecordadd.BloodSugarAddActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" /> <!-- 底部按钮随键盘弹起而弹起 Start -->
         <activity android:name=".ui.activity.patientadd.PatientAddSearchActivity" />
