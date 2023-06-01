@@ -3,6 +3,7 @@ package com.xy.xydoctor.ui.activity.mydevice;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -27,6 +28,7 @@ import butterknife.BindView;
  * 类名：
  * 传参：
  * isSelf  是否给自己添加设备  1:绑定设备 血糖仪绑定  2：绑定设备 血压计绑定 3：患者详情绑定血糖仪和血压计
+ * suNum  血压设备号   imei血糖设备号
  * 描述: 我的设备列表
  * 作者: beauty
  * 创建日期: 2023/4/13 16:12
@@ -49,6 +51,10 @@ public class MyDeviceListActivity extends BaseActivity {
      * 血压设备设备号
      */
     private String suNum;
+    /**
+     * 血糖设备设备号
+     */
+    private String imei;
 
 
     @Override
@@ -59,7 +65,8 @@ public class MyDeviceListActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         userid = getIntent().getStringExtra("userid");
-        suNum = getIntent().getStringExtra("imei");
+        imei = getIntent().getStringExtra("imei");
+        suNum = getIntent().getStringExtra("suNum");
         isSelf = getIntent().getIntExtra("isSelf", 0);
         setTitle("选择设备");
         setRv();
@@ -140,22 +147,43 @@ public class MyDeviceListActivity extends BaseActivity {
                             Intent intent;
                             switch (position) {
                                 case 0:
-                                    intent = new Intent(getPageContext(), ScanActivity.class);
-                                    intent.putExtra("type", 3);
-                                    intent.putExtra("isSelf", 3);
-                                    intent.putExtra("userid", userid);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
+                                    Log.i("yys","imei==="+imei);
+                                    if (TextUtils.isEmpty(imei)) {
+                                        intent = new Intent(getPageContext(), ScanActivity.class);
+                                        intent.putExtra("type", 3);
+                                        intent.putExtra("isSelf", 3);
+                                        intent.putExtra("userid", userid);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    } else {
+                                        intent = new Intent(getPageContext(), InputImeiDetailsActivity.class);
+                                        intent.putExtra("suNum", suNum);
+                                        intent.putExtra("imei", imei);
+                                        intent.putExtra("type", "1");
+                                        startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
+                                    }
+
                                     break;
                                 case 1:
-                                    intent = new Intent(getPageContext(), ScanActivity.class);
-                                    intent.putExtra("type", 4);
-                                    intent.putExtra("isSelf", 3);
-                                    intent.putExtra("userid", userid);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
+                                    Log.i("yys","1imei==="+imei);
+                                    if (TextUtils.isEmpty(imei)) {
+                                        intent = new Intent(getPageContext(), ScanActivity.class);
+                                        intent.putExtra("type", 4);
+                                        intent.putExtra("isSelf", 3);
+                                        intent.putExtra("userid", userid);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    } else {
+                                        intent = new Intent(getPageContext(), InputImeiDetailsActivity.class);
+                                        intent.putExtra("suNum", suNum);
+                                        intent.putExtra("imei", imei);
+                                        intent.putExtra("type", "1");
+                                        startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
+                                    }
+
                                     break;
                                 case 2:
+
                                     if (TextUtils.isEmpty(suNum)) {
                                         intent = new Intent(getPageContext(), ScanActivity.class);
                                         intent.putExtra("type", 5);
@@ -165,18 +193,29 @@ public class MyDeviceListActivity extends BaseActivity {
                                         startActivity(intent);
                                     } else {
                                         intent = new Intent(getPageContext(), InputImeiDetailsActivity.class);
-                                        intent.putExtra("imei", suNum);
+                                        intent.putExtra("suNum", suNum);
+                                        intent.putExtra("imei", imei);
+                                        intent.putExtra("type", "2");
                                         startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
                                     }
 
                                     break;
                                 case 3:
-                                    intent = new Intent(getPageContext(), ScanActivity.class);
-                                    intent.putExtra("type", 6);
-                                    intent.putExtra("isSelf", 3);
-                                    intent.putExtra("userid", userid);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
+                                    Log.i("yys","3imei==="+imei);
+                                    if (TextUtils.isEmpty(imei)) {
+                                        intent = new Intent(getPageContext(), ScanActivity.class);
+                                        intent.putExtra("type", 6);
+                                        intent.putExtra("isSelf", 3);
+                                        intent.putExtra("userid", userid);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    } else {
+                                        intent = new Intent(getPageContext(), InputImeiDetailsActivity.class);
+                                        intent.putExtra("suNum", suNum);
+                                        intent.putExtra("imei", imei);
+                                        intent.putExtra("type", "1");
+                                        startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
+                                    }
                                     break;
                                 default:
                                     break;
@@ -197,7 +236,17 @@ public class MyDeviceListActivity extends BaseActivity {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case REQUEST_CODE_FOR_REFRESH:
-                    suNum = "";
+                    if (data != null) {
+                        String type = data.getStringExtra("type");
+                        Log.i("yys","type==="+type);
+
+                        if ("1".equals(type)) {
+                            imei = "";
+                        } else {
+                            suNum = "";
+                        }
+                    }
+
                     break;
                 default:
                     break;

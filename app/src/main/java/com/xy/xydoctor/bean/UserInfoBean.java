@@ -30,6 +30,10 @@ public class UserInfoBean {
      * 血压计的设备号
      */
     private String snnum;
+    /**
+     * 血糖计的设备号
+     */
+    private String imei;
 
     public int getUserid() {
         return userid;
@@ -126,5 +130,13 @@ public class UserInfoBean {
 
     public void setSnnum(String snnum) {
         this.snnum = snnum;
+    }
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
     }
 }

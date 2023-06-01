@@ -98,6 +98,7 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
     public void onResume() {
         super.onResume();
         setTopInfo();
+
     }
 
     /**
@@ -152,6 +153,7 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
                         UserInfoBean user = data.get(0);
                         guid = user.getUserId();
                         suNum = user.getSnnum();
+                        imei = user.getImei();
                         if (1 == user.getSex()) {
                             Glide.with(Utils.getApp()).load(user.getPicture()).error(R.drawable.head_man).placeholder(R.drawable.head_man).into(imgHead);
                             imgSex.setImageResource(R.drawable.male);
@@ -238,7 +240,8 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
 
                                 Intent intent = new Intent(getPageContext(), MyDeviceListActivity.class);
                                 intent.putExtra("isSelf", 3);
-                                intent.putExtra("imei", suNum);
+                                intent.putExtra("suNum", suNum);
+                                intent.putExtra("imei", imei);
                                 startActivity(intent);
 
                             }

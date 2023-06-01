@@ -1,5 +1,6 @@
 package com.xy.xydoctor.ui.activity.mydevice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,9 +37,17 @@ public class InputImeiDetailsActivity extends BaseActivity {
 
     private String userid;
     /**
-     * 设备号
+     * 血糖设备号
      */
-    private String imei;
+    private String imei="";
+    /**
+     * 血压设备号
+     */
+    private String suNum="";
+    /**
+     * 1:血糖  2血压
+     */
+    private String type;
 
 
     @Override
@@ -50,6 +59,8 @@ public class InputImeiDetailsActivity extends BaseActivity {
     protected void init(Bundle savedInstanceState) {
         userid = getIntent().getStringExtra("userid");
         imei = getIntent().getStringExtra("imei");
+        suNum = getIntent().getStringExtra("suNum");
+        type = getIntent().getStringExtra("type");
         setIMEI();
         setTitle("设备详情");
         imgBg.setImageResource(R.drawable.bp_sn_bg);
@@ -58,8 +69,14 @@ public class InputImeiDetailsActivity extends BaseActivity {
 
 
     private void setIMEI() {
-        etImei.setText(imei);
-        etImei.setSelection(imei.length());
+        if ("1".equals(type)) {
+            etImei.setText(imei);
+            etImei.setSelection(imei.length());
+        } else {
+            etImei.setText(suNum);
+            etImei.setSelection(suNum.length());
+        }
+
         etImei.setEnabled(false);
     }
 
@@ -71,7 +88,12 @@ public class InputImeiDetailsActivity extends BaseActivity {
 
     private void toDoUnbind() {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("imei", imei);
+        if ("1".equals(type)) {
+            map.put("imei", imei);
+        } else {
+            map.put("sunum", suNum);
+        }
+
         RxHttp.postForm(XyUrl.DEVICE_UN_BIND_PATIENT)
                 .addAll(map)
                 .asResponse(String.class)
@@ -80,7 +102,9 @@ public class InputImeiDetailsActivity extends BaseActivity {
                     @Override
                     public void accept(String s) throws Exception {
                         ToastUtils.showShort("成功");
-                        setResult(RESULT_OK);
+                        Intent intent = new Intent();
+                        intent.putExtra("type", type);
+                        setResult(RESULT_OK,intent);
                         finish();
                     }
                 }, new OnError() {
