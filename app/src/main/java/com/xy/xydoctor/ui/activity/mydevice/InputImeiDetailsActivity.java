@@ -63,7 +63,7 @@ public class InputImeiDetailsActivity extends BaseActivity {
         type = getIntent().getStringExtra("type");
         setIMEI();
         setTitle("设备详情");
-        imgBg.setImageResource(R.drawable.bp_sn_bg);
+
         btSure.setText("解除绑定");
     }
 
@@ -91,7 +91,7 @@ public class InputImeiDetailsActivity extends BaseActivity {
         if ("1".equals(type)) {
             map.put("imei", imei);
         } else {
-            map.put("sunum", suNum);
+            map.put("imei", suNum);
         }
 
         RxHttp.postForm(XyUrl.DEVICE_UN_BIND_PATIENT)
