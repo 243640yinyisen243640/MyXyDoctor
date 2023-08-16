@@ -16,8 +16,8 @@ import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.ui.activity.MainActivity;
-import com.xy.xydoctor.ui.activity.followupvisit.FollowUpVisitBloodPressureSubmitActivity;
-import com.xy.xydoctor.ui.activity.followupvisit.FollowUpVisitBloodSugarSubmitActivity;
+import com.xy.xydoctor.ui.activity.followupvisit.FollowUpVisitBloodPressureSubmit2Activity;
+import com.xy.xydoctor.ui.activity.followupvisit.FollowUpVisitBloodSugarSubmit2Activity;
 import com.xy.xydoctor.ui.activity.followupvisit.FollowUpVisitHepatopathySubmitActivity;
 import com.xy.xydoctor.ui.activity.todo.ApplyToHospitalDetailActivity;
 import com.xy.xydoctor.ui.activity.todo.NewPatientListActivity;
@@ -79,12 +79,12 @@ public class MyMessageReceiver extends MessageReceiver {
                 break;
             //血糖随访
             case "4":
-                intent = new Intent(Utils.getApp(), FollowUpVisitBloodSugarSubmitActivity.class);
+                intent = new Intent(Utils.getApp(), FollowUpVisitBloodSugarSubmit2Activity.class);
                 intent.putExtra("id", pushBean.getId());
                 break;
             //血压随访
             case "5":
-                intent = new Intent(Utils.getApp(), FollowUpVisitBloodPressureSubmitActivity.class);
+                intent = new Intent(Utils.getApp(), FollowUpVisitBloodPressureSubmit2Activity.class);
                 intent.putExtra("id", pushBean.getId());
                 break;
             //肝病随访

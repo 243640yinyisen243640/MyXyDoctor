@@ -1286,12 +1286,19 @@ public class FollowUpVisitBloodSugarSubmit2Activity extends BaseHandlerActivity 
      */
     private void toDoSubmitSuggest() {
         String question = etSummaryMainQuestion.getText().toString().trim();
+        if (TextUtils.isEmpty(question)) {
+            ToastUtils.showShort("请输入患者目前存在的主要问题");
+            return;
+        }
         String mainPurpose = etSummaryMainPurpose.getText().toString().trim();
+        if (TextUtils.isEmpty(mainPurpose)) {
+            ToastUtils.showShort("请输入预期到达目标");
+            return;
+        }
         String id = getIntent().getStringExtra("id");
         HashMap<String, Object> map = new HashMap<>();
         map.put("vid", id);
         map.put("paquest", question);
-        Log.i("yys", "question==" + question);
         map.put("measures", "");
         map.put("target", mainPurpose);
         RxHttp.postForm(XyUrl.FOLLOW_UP_VISIT_SUMMARY_ADD)

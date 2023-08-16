@@ -22,6 +22,7 @@ import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.lyd.baselib.util.TurnsUtils;
 import com.lyd.baselib.util.eventbus.EventBusUtils;
 import com.lyd.baselib.util.eventbus.EventMessage;
@@ -860,7 +861,15 @@ public class FollowUpVisitBloodPressureSubmit2Activity extends BaseHideLineActiv
      */
     private void toDoSubmit() {
         String question = etSummaryMainQuestion.getText().toString().trim();
+        if (TextUtils.isEmpty(question)) {
+            ToastUtils.showShort("请输入患者目前存在的主要问题");
+            return;
+        }
         String mainPurpose = etSummaryMainPurpose.getText().toString().trim();
+        if (TextUtils.isEmpty(mainPurpose)) {
+            ToastUtils.showShort("请输入预期到达目标");
+            return;
+        }
 
         String id = getIntent().getStringExtra("id");
         HashMap<String, Object> map = new HashMap<>();

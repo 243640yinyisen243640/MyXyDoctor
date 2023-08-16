@@ -83,7 +83,7 @@
 
             <!--总结-->
             <include
-                layout="@layout/include_follow_up_visit_summary"
+                layout="@layout/include_follow_up_visit_summary_hepatopathy"
                 android:visibility="gone">
 
             </include>

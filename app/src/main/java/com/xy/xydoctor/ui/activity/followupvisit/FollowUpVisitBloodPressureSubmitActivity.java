@@ -503,10 +503,10 @@ public class FollowUpVisitBloodPressureSubmitActivity extends BaseHideLineActivi
             return;
         }
         String improveMeasure = etSummaryImproveMeasure.getText().toString().trim();
-        if (TextUtils.isEmpty(improveMeasure)) {
-            ToastUtils.showShort("请输入主要改进措施");
-            return;
-        }
+//        if (TextUtils.isEmpty(improveMeasure)) {
+//            ToastUtils.showShort("请输入主要改进措施");
+//            return;
+//        }
         String mainPurpose = etSummaryMainPurpose.getText().toString().trim();
         if (TextUtils.isEmpty(mainPurpose)) {
             ToastUtils.showShort("请输入预期到达目标");

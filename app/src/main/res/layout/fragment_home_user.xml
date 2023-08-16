@@ -244,6 +244,7 @@
                 android:drawableRight="@drawable/right_arrow"
                 android:padding="15dp"
                 android:text="慢病管理"
+                android:visibility="gone"
                 android:textColor="@color/black_text"
                 android:textSize="14sp" />
 

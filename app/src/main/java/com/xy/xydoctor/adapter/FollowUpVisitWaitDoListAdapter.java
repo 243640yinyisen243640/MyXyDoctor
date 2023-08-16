@@ -10,8 +10,8 @@ import com.bumptech.glide.Glide;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.bean.FollowUpVisitWaitDoListBean;
-import com.xy.xydoctor.ui.activity.followupvisit.FollowUpVisitBloodPressureSubmitActivity;
-import com.xy.xydoctor.ui.activity.followupvisit.FollowUpVisitBloodSugarSubmitActivity;
+import com.xy.xydoctor.ui.activity.followupvisit.FollowUpVisitBloodPressureSubmit2Activity;
+import com.xy.xydoctor.ui.activity.followupvisit.FollowUpVisitBloodSugarSubmit2Activity;
 import com.xy.xydoctor.ui.activity.followupvisit.FollowUpVisitHepatopathySubmitActivity;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
@@ -52,13 +52,13 @@ public class FollowUpVisitWaitDoListAdapter extends CommonAdapter<FollowUpVisitW
             public void onClick(View v) {
                 //1血糖 2血压
                 if ("1".equals(type)) {
-                    Intent intent = new Intent(Utils.getApp(), FollowUpVisitBloodSugarSubmitActivity.class);
+                    Intent intent = new Intent(Utils.getApp(), FollowUpVisitBloodSugarSubmit2Activity.class);
                     intent.putExtra("id", id + "");
                     intent.putExtra("status", status + "");
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Utils.getApp().startActivity(intent);
                 } else if ("2".equals(type)) {
-                    Intent intent = new Intent(Utils.getApp(), FollowUpVisitBloodPressureSubmitActivity.class);
+                    Intent intent = new Intent(Utils.getApp(), FollowUpVisitBloodPressureSubmit2Activity.class);
                     intent.putExtra("id", id + "");
                     intent.putExtra("status", status + "");
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

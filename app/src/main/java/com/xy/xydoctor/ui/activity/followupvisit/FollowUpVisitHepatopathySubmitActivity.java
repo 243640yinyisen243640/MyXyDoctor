@@ -2,6 +2,7 @@ package com.xy.xydoctor.ui.activity.followupvisit;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -122,6 +123,7 @@ public class FollowUpVisitHepatopathySubmitActivity extends BaseActivity {
             return;
         }
         String improveMeasure = etSummaryImproveMeasure.getText().toString().trim();
+        Log.i("yys","improveMeasure==="+improveMeasure);
         if (TextUtils.isEmpty(improveMeasure)) {
             ToastUtils.showShort("请输入主要改进措施");
             return;
