@@ -70,6 +70,13 @@
             android:drawableRight="@drawable/arrow_setting"
             android:padding="18dp"
             android:text="用户服务协议" />
+        <View style="@style/line" />
+        <TextView
+            android:id="@+id/tv_user_privacy"
+            style="@style/text_black_16_f_w"
+            android:drawableRight="@drawable/arrow_setting"
+            android:padding="18dp"
+            android:text="隐私政策" />
 
         <View style="@style/line" />
 

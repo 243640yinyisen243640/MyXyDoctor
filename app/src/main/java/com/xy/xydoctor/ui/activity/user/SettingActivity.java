@@ -54,6 +54,9 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
     LinearLayout llUpdate;
     @BindView(R.id.tv_user_agreement)
     TextView tvUserAgreement;
+    @BindView(R.id.tv_user_privacy)
+    TextView tvUserPrivacy;
+
 
 
     //更新进度
@@ -112,7 +115,7 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
         ivUpdateClose.setOnClickListener(this);
     }
 
-    @OnClick({R.id.tv_question_feed_back, R.id.tv_device_add, R.id.tv_change_pwd, R.id.ll_update, R.id.tv_user_agreement, R.id.bt_exit})
+    @OnClick({R.id.tv_question_feed_back, R.id.tv_device_add, R.id.tv_change_pwd, R.id.ll_update, R.id.tv_user_agreement,R.id.tv_user_privacy, R.id.bt_exit})
     public void onViewClicked(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -135,6 +138,12 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
                 intent = new Intent(getPageContext(), BaseWebViewActivity.class);
                 intent.putExtra("title", "用户服务协议");
                 intent.putExtra("url", "file:///android_asset/user_protocol.html");
+                startActivity(intent);
+                break;
+            case R.id.tv_user_privacy:
+                intent = new Intent(getPageContext(), BaseWebViewActivity.class);
+                intent.putExtra("title", "隐私政策");
+                intent.putExtra("url", "http://chronics.xiyuns.cn/index/casedoc");
                 startActivity(intent);
                 break;
             case R.id.bt_exit:
