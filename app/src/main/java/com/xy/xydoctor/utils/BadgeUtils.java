@@ -17,6 +17,11 @@ import java.lang.reflect.Method;
  * 创建日期: 2020/12/15 11:02
  */
 public class BadgeUtils {
+    public static void cancelBadge() {
+        setHuaWei(0);
+        setVivo(0);
+    }
+
 
     /**
      * 设置华为角标

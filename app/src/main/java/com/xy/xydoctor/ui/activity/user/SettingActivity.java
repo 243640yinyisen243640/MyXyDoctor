@@ -27,6 +27,7 @@ import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.mvvm.LoginActivity;
 import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.ui.activity.mydevice.DeviceAddListActivity;
+import com.xy.xydoctor.utils.BadgeUtils;
 import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.utils.UpdateUtils;
 import com.xy.xydoctor.view.NumberProgressBar;
@@ -265,6 +266,7 @@ public class SettingActivity extends BaseActivity implements OnDownloadListener,
                     }
                 });
                 SPStaticUtils.clear();
+                BadgeUtils.cancelBadge();
                 ActivityUtils.finishAllActivities();
                 startActivity(new Intent(getPageContext(), LoginActivity.class));
             }

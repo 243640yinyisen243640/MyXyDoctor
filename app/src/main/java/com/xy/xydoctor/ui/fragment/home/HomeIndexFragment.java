@@ -289,6 +289,7 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
                 tvRedPoint.setText(totalUnReadCount + "");
             }
         } else {
+            BadgeUtils.cancelBadge();
             tvRedPoint.setVisibility(View.GONE);
         }
     }
