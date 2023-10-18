@@ -55,6 +55,8 @@
         <activity android:name=".ui.activity.user.SettingActivity" />
         <activity android:name=".ui.activity.healthrecord.HealthRecordBloodOxygenListActivity" />
         <activity android:name=".ui.activity.healthrecord.HealthRecordWeightListActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordInjectioneListActivity" />
+        <activity android:name=".ui.activity.healthrecord.HealthRecordInjectioneInfoActivity" />
         <activity android:name=".ui.activity.healthrecord.HealthRecordLiverListActivity" />
         <activity android:name=".ui.activity.director_patienteducation.PatientEductionDirectorActivity" />
         <activity android:name=".ui.activity.director_massmsg.SelectPeopleListDirectorActivity" />
@@ -89,6 +91,7 @@
         <activity android:name=".ui.activity.patient.PatientCountMainActivity" />
         <activity android:name=".ui.activity.patient.PatientCountMain1Activity" />
         <activity android:name=".ui.activity.patient.PatientAddTodayListActivity" />
+        <activity android:name=".ui.activity.patient.PatientAddTodayInjectionActivity" />
         <activity android:name=".ui.activity.followupvisit.FollowUpVisitListActivity" />
         <activity
             android:name=".ui.activity.followupvisit.FollowUpVisitBloodPressureSubmitActivity"

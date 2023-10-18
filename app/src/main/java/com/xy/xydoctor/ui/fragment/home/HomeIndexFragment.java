@@ -50,6 +50,7 @@ import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.ui.activity.director.DoctorListActivity;
+import com.xy.xydoctor.ui.activity.patient.PatientAddTodayInjectionActivity;
 import com.xy.xydoctor.ui.activity.patient.PatientAddTodayListActivity;
 import com.xy.xydoctor.ui.activity.patient.PatientCountMain1Activity;
 import com.xy.xydoctor.ui.activity.todo.ToDoListActivity;
@@ -95,6 +96,9 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
     //当日新增统计
     @BindView(R.id.tv_today_add_total)
     TextView tvTodayAddTotal;
+    //当日新增注射
+    @BindView(R.id.tv_today_add_injection)
+    TextView tvTodayAddInjection;
     //患者情况统计
     @BindView(R.id.bar_chart)
     BarChart barChart;
@@ -383,7 +387,7 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
     }
 
 
-    @OnClick({R.id.bar_chart, R.id.img_bar_chart, R.id.tv_start_time, R.id.tv_end_time, R.id.ll_patient_add_today})
+    @OnClick({R.id.bar_chart, R.id.img_bar_chart, R.id.tv_start_time, R.id.tv_end_time, R.id.ll_patient_add_today,R.id.ll_patient_add_injection})
     public void onViewClicked(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -413,6 +417,13 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
             case R.id.ll_patient_add_today:
                 intent = new Intent(getPageContext(), PatientAddTodayListActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.ll_patient_add_injection:
+                intent = new Intent(getPageContext(), PatientAddTodayInjectionActivity.class);
+                startActivity(intent);
+                break;
+
+            default:
                 break;
         }
     }

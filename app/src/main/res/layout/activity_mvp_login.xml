@@ -18,7 +18,7 @@
         style="@style/text_black_14_w_w"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/dp_20"
-        android:text="慧健康(医生端)"
+        android:text="慧健康(专业版)"
         android:textColor="@color/main_red"
         android:textSize="26sp" />
 

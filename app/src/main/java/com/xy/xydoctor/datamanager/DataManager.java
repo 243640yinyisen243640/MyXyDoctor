@@ -788,4 +788,19 @@ public class DataManager {
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, SearchInfo.class, "/doctor/community/getImportLists", map, successCallBack, failureCallBack);
     }
 
+
+    public static Call<String> getInjectionBaseInfo(String userid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userid", userid);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, SearchInfo.class, "/getUserInsuliInfo", map, successCallBack, failureCallBack);
+    }
+
+    public static Call<String> getInjectionList(String userid, String beginTime,BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userid", "725277");
+        map.put("access_token", SPStaticUtils.getString("token"));
+        map.put("begin_time", beginTime);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, SearchInfo.class, "/getInsulinList", map, successCallBack, failureCallBack);
+    }
 }
