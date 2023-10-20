@@ -21,6 +21,10 @@ import com.xy.xydoctor.bean.community_manamer.FollowListChildListInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowListInfo;
 import com.xy.xydoctor.bean.community_manamer.FollowUpAgentListBean;
 import com.xy.xydoctor.bean.community_manamer.FollowUpListAllInfo;
+import com.xy.xydoctor.bean.community_manamer.InjectionBaseData;
+import com.xy.xydoctor.bean.community_manamer.InjectionDataDetail;
+import com.xy.xydoctor.bean.community_manamer.InjectionDataListInfo;
+import com.xy.xydoctor.bean.community_manamer.InjectionHistoryInfo;
 import com.xy.xydoctor.bean.community_manamer.SearchInfo;
 import com.xy.xydoctor.bean.community_manamer.SugarOrPressureInfo;
 import com.xy.xydoctor.bean.community_manamer.UserRecordDataInfo;
@@ -541,8 +545,8 @@ public class DataManager {
     /**
      * 获取医生列表
      *
-     * @param dep_userid  dep_userid
-     * @param build_id  build_id
+     * @param dep_userid      dep_userid
+     * @param build_id        build_id
      * @param successCallBack
      * @param failureCallBack
      * @return
@@ -762,6 +766,7 @@ public class DataManager {
 
     /**
      * 添加记录
+     *
      * @param addReq
      * @param successCallBack
      * @param failureCallBack
@@ -793,14 +798,31 @@ public class DataManager {
         Map<String, String> map = new HashMap<>();
         map.put("userid", userid);
         map.put("access_token", SPStaticUtils.getString("token"));
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, SearchInfo.class, "/getUserInsuliInfo", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, InjectionBaseData.class, "/getUserInsuliInfo", map, successCallBack, failureCallBack);
     }
 
-    public static Call<String> getInjectionList(String userid, String beginTime,BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getInjectionList(String userid, String beginTime, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
-        map.put("userid", "725277");
+        map.put("userid", userid);
         map.put("access_token", SPStaticUtils.getString("token"));
         map.put("begin_time", beginTime);
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, SearchInfo.class, "/getInsulinList", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, InjectionDataListInfo.class, "/getInsulinList", map, successCallBack, failureCallBack);
+    }
+
+    public static Call<String> getInjectionDetail(String userid, String action_time, String isuse, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userid", userid);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        map.put("action_time", action_time);
+        map.put("isuse", isuse);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, InjectionDataDetail.class, "/getPlanDetail", map, successCallBack, failureCallBack);
+    }
+
+    public static Call<String> getInjectionHistoryList(String userid, int page, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userid", userid);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        map.put("page", page + "");
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, InjectionHistoryInfo.class, "/getPlanList", map, successCallBack, failureCallBack);
     }
 }

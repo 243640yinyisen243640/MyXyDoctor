@@ -6,12 +6,12 @@ package com.xy.xydoctor.bean.community_manamer;
  * Description:
  */
 public class InjectionBaseData {
-    private String value;
-    private String ishight;
-    private String times;
-    private String isshot;
-    private String isshot_num;
-    private String all_times;
+    private int value;
+    private int ishight;
+    private int times;
+    private int isshot;
+    private int isshot_num;
+    private int all_times;
     private String drug_name;
     private String action_year;
     private String action_time;
@@ -31,51 +31,51 @@ public class InjectionBaseData {
                 '}';
     }
 
-    public String getValue() {
+    public int getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(int value) {
         this.value = value;
     }
 
-    public String getIshight() {
+    public int getIshight() {
         return ishight;
     }
 
-    public void setIshight(String ishight) {
+    public void setIshight(int ishight) {
         this.ishight = ishight;
     }
 
-    public String getTimes() {
+    public int getTimes() {
         return times;
     }
 
-    public void setTimes(String times) {
+    public void setTimes(int times) {
         this.times = times;
     }
 
-    public String getIsshot() {
+    public int getIsshot() {
         return isshot;
     }
 
-    public void setIsshot(String isshot) {
+    public void setIsshot(int isshot) {
         this.isshot = isshot;
     }
 
-    public String getIsshot_num() {
+    public int getIsshot_num() {
         return isshot_num;
     }
 
-    public void setIsshot_num(String isshot_num) {
+    public void setIsshot_num(int isshot_num) {
         this.isshot_num = isshot_num;
     }
 
-    public String getAll_times() {
+    public int getAll_times() {
         return all_times;
     }
 
-    public void setAll_times(String all_times) {
+    public void setAll_times(int all_times) {
         this.all_times = all_times;
     }
 

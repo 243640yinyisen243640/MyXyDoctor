@@ -4,17 +4,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.InjectionAdapter;
 import com.xy.xydoctor.base.adapter.TabFragmentAdapter;
 import com.xy.xydoctor.base.fragment.XYBaseFragment;
+import com.xy.xydoctor.bean.community_manamer.InjectionDataListInfo;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.utils.DataUtils;
 import com.xy.xydoctor.utils.TipUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import retrofit2.Call;
 
@@ -31,6 +35,7 @@ public class PatientInfoInjectionFragment extends XYBaseFragment implements TabF
     private String userId;
     private String beginTime;
     private InjectionAdapter adapter;
+    private List<InjectionDataListInfo> listInfos = new ArrayList<>();
 
     public static PatientInfoInjectionFragment newInstance(String userid) {
         Bundle bundle = new Bundle();
@@ -45,16 +50,20 @@ public class PatientInfoInjectionFragment extends XYBaseFragment implements TabF
     protected void onCreate() {
         topViewManager().topView().removeAllViews();
         userId = getArguments().getString("userid");
-        beginTime = DataUtils.convertDateToString(new Date(System.currentTimeMillis()),"YYYY-MM");
         initView();
+        beginTime = DataUtils.convertDateToString(new Date(System.currentTimeMillis()), "YYYY-MM");
+        adapter = new InjectionAdapter(getPageContext(), listInfos);
+        rvInjection.setLayoutManager(new LinearLayoutManager(getPageContext()));
+        rvInjection.setAdapter(adapter);
         getData();
     }
 
     private void getData() {
-        Call<String> requestCall = DataManager.getInjectionList(userId,beginTime, (call, response) -> {
+        Call<String> requestCall = DataManager.getInjectionList(userId, beginTime, (call, response) -> {
             if (200 == response.code) {
-
-
+                listInfos.clear();
+                listInfos.addAll((List<InjectionDataListInfo>) response.object);
+                adapter.notifyDataSetChanged();
             } else {
                 TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
             }
@@ -69,10 +78,10 @@ public class PatientInfoInjectionFragment extends XYBaseFragment implements TabF
         tvChange = view.findViewById(R.id.tv_injection_change);
         tvChange.setOnClickListener(v -> {
             //选择时间
-
-
+            beginTime = "10-19";
+            getData();
         });
-        rvInjection= view.findViewById(R.id.rv_injection);
+        rvInjection = view.findViewById(R.id.rv_injection);
         containerView().addView(view);
 
     }

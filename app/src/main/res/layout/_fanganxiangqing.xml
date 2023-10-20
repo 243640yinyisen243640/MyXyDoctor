@@ -34,6 +34,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tv_injection_detail_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -78,6 +79,7 @@
 
 
             <TextView
+                android:id="@+id/tv_injection_detail_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
@@ -113,6 +115,7 @@
 
 
             <TextView
+                android:id="@+id/tv_injection_detail_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
@@ -131,9 +134,11 @@
             android:background="#F0F0F0"
             android:layout_marginBottom="15dp"/>
 
-        <include layout="@layout/_item_fanganxiangqing"/>
-        <include layout="@layout/_item_fanganxiangqing"/>
-        <include layout="@layout/_item_fanganxiangqing"/>
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/rv_injection_detail"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+
 
 
 

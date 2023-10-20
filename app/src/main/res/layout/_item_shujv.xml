@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_injection_item_bg"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginTop="5dp"
@@ -19,6 +20,7 @@
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/tv_injection_item_day"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -37,6 +39,7 @@
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/tv_item_injection_one"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/_4"
@@ -46,9 +49,11 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/tv_item_injection_state_one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:textColor="@color/white"
                 android:background="@drawable/_6"
                 android:paddingStart="4dp"
                 android:paddingTop="2dp"
@@ -56,6 +61,13 @@
                 android:paddingBottom="2dp"
                 android:text="偏高"
                 android:textSize="11sp" />
+
+            <ImageView
+                android:id="@+id/tv_item_injection_multiple_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:src="@drawable/arrow_down" />
 
         </FrameLayout>
 
@@ -68,6 +80,7 @@
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/tv_item_injection_two"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/_5"
@@ -77,6 +90,47 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/tv_item_injection_state_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@drawable/_7"
+                android:textColor="@color/white"
+                android:paddingStart="4dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="4dp"
+                android:paddingBottom="2dp"
+                android:text="偏低"
+                android:textSize="11sp" />
+
+            <ImageView
+                android:id="@+id/tv_item_injection_multiple_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:src="@drawable/arrow_down" />
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2.5dp"
+            android:layout_marginEnd="2.5dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_item_injection_three"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/_5"
+                android:gravity="center"
+                android:text="10"
+                android:textColor="#D68A2C"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_item_injection_state_three"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -84,9 +138,16 @@
                 android:paddingStart="4dp"
                 android:paddingTop="2dp"
                 android:paddingEnd="4dp"
+                android:textColor="@color/white"
                 android:paddingBottom="2dp"
                 android:text="偏低"
                 android:textSize="11sp" />
+            <ImageView
+                android:id="@+id/tv_item_injection_multiple_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:src="@drawable/arrow_down" />
         </FrameLayout>
 
 
@@ -98,30 +159,35 @@
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/tv_item_injection_four"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/_5"
                 android:gravity="center"
-                android:text="15"
+                android:text="10"
                 android:textColor="#D68A2C"
                 android:textSize="15sp" />
-        </FrameLayout>
-
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="2.5dp"
-            android:layout_marginEnd="2.5dp"
-            android:layout_weight="1">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="/"
-                android:textColor="#333333"
-                android:textSize="15sp" />
+                android:id="@+id/tv_item_injection_state_four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@drawable/_7"
+                android:paddingStart="4dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="4dp"
+                android:textColor="@color/white"
+                android:paddingBottom="2dp"
+                android:text="偏低"
+                android:textSize="11sp" />
+
+            <ImageView
+                android:id="@+id/tv_item_injection_multiple_four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:src="@drawable/arrow_down" />
         </FrameLayout>
 
     </LinearLayout>

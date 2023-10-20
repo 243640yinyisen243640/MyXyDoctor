@@ -19,6 +19,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_injection_begin_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -30,11 +31,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="\"
+                android:text="\\"
                 android:textColor="#333333"
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/tv_injection_end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -52,26 +54,40 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <View
-                android:layout_width="1dp"
+            <LinearLayout
+                android:layout_width="20dp"
                 android:layout_height="0dp"
-                android:visibility="invisible"
                 android:layout_weight="1"
-                android:background="#000000" />
+                android:gravity="center"
+                android:orientation="vertical">
+                <View
+                    android:id="@+id/v_injection_line_top"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible"
+                    android:background="#000000" />
+            </LinearLayout>
 
             <ImageView
+                android:id="@+id/iv_injection_icon"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
                 android:src="#000000" />
-
-            <View
-                android:layout_width="1dp"
+            <LinearLayout
+                android:layout_width="20dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+            <View
+                android:id="@+id/v_injection_line_bottom"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
                 android:background="#000000" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -83,6 +99,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_injection_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="优思灵R"
@@ -92,6 +109,7 @@
                 android:textColor="#333333"/>
 
             <TextView
+                android:id="@+id/tv_injection_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10"
@@ -102,6 +120,7 @@
                 android:textColor="#FF564F"/>
 
             <TextView
+                android:id="@+id/tv_injection_times"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="第一针(单位)"

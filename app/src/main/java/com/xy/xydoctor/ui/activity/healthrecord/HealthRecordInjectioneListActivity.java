@@ -1,7 +1,6 @@
 package com.xy.xydoctor.ui.activity.healthrecord;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,6 +40,8 @@ public class HealthRecordInjectioneListActivity extends XYSoftUIBaseActivity imp
     private ViewPager viewPager;
     private List<Fragment> fragments;
     private String userId;
+    private InjectionBaseData injectionBaseData;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class HealthRecordInjectioneListActivity extends XYSoftUIBaseActivity imp
         topViewManager().titleTextView().setText("注射数据");
         containerView().addView(initView());
         userId = getIntent().getStringExtra("userid");
+        userId = "129199";
         initListener();
         initValues();
         getData();
@@ -99,7 +101,7 @@ public class HealthRecordInjectioneListActivity extends XYSoftUIBaseActivity imp
             case R.id.ll_injection_programme:
                 llPlan.setBackground(getResources().getDrawable(R.color.transparent));
                 llProgramme.setBackground(getResources().getDrawable(R.drawable._2));
-                viewPager.setCurrentItem(0);
+                viewPager.setCurrentItem(1);
                 break;
             default:
                 break;
@@ -109,11 +111,26 @@ public class HealthRecordInjectioneListActivity extends XYSoftUIBaseActivity imp
     private void getData() {
         DataManager.getInjectionBaseInfo(userId, (call, response) -> {
             if (response.code == 200) {
-                InjectionBaseData injectionBaseData = (InjectionBaseData) response.object;
-                Log.i("yys", "injectionBaseData=="+injectionBaseData.toString());
+                injectionBaseData = (InjectionBaseData) response.object;
+                setData();
+//                PatientInfoCurrentFragment fragment = (PatientInfoCurrentFragment) getSupportFragmentManager().getFragments().get(1).getChildFragmentManager().getFragments().get(0);
+//                fragment.getData(injectionBaseData.getAction_year()+"/"+injectionBaseData.getAction_time());
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
         });
+    }
+    private void setData() {
+        tvNum.setText(injectionBaseData.getValue()+"");
+        if (injectionBaseData.getIsshot() == 0){
+            tvState.setText("待注射");
+        }else{
+            tvState.setText("已注射");
+        }
+        tvRank.setText("第" + injectionBaseData.getTimes() + "针");
+        tvCompany.setText(injectionBaseData.getDrug_name());
+        tvPlanNum.setText(injectionBaseData.getIsshot_num() + "/" + injectionBaseData.getAll_times());
+        tvTimeYear.setText(injectionBaseData.getAction_year());
+        tvTimeMonth.setText(injectionBaseData.getAction_time());
     }
 }
