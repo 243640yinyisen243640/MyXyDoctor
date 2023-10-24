@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
-                android:src="@drawable/arrow_down" />
+                android:src="@drawable/injection_bottom_tran" />
 
         </FrameLayout>
 
@@ -108,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
-                android:src="@drawable/arrow_down" />
+                android:src="@drawable/injection_bottom_tran" />
         </FrameLayout>
 
 
@@ -147,7 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
-                android:src="@drawable/arrow_down" />
+                android:src="@drawable/injection_bottom_tran" />
         </FrameLayout>
 
 
@@ -187,7 +187,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
-                android:src="@drawable/arrow_down" />
+                android:src="@drawable/injection_bottom_tran" />
         </FrameLayout>
 
     </LinearLayout>

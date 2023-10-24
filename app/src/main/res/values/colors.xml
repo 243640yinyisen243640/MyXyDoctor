@@ -94,6 +94,7 @@
     <color name="reach_the_stand_rate_three">#FF894F</color>
     <color name="home_index_user_count">#4FAAFF</color>
     <color name="home_index_user_count_add">#E8B110</color>
+    <color name="home_index_user_count_injection">#F95353</color>
 
 
     <color name="patient_add_today_gray">#FF894F</color>

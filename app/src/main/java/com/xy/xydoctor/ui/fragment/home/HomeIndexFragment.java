@@ -204,6 +204,8 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
                         //当日新增总人数
                         int todayTotal = data.getXztj().getTotal();
                         setTodayCount(todayTotal);
+                        int injectionNum = data.getYdshbtj();
+                        setInjectionCount(injectionNum);
                         //设置患者情况统计
                         setBarChart(data.getHztj());
                         //设置红点
@@ -383,6 +385,16 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
                 .append(todayTotal + "").setForegroundColor(ColorUtils.getColor(R.color.home_index_user_count_add))
                 .appendSpace(15, Color.TRANSPARENT)
                 .append("人").setForegroundColor(ColorUtils.getColor(R.color.black_text))
+                .create();
+    }
+
+    private void setInjectionCount(int injectionNum) {
+        SpanUtils.with(tvTodayAddInjection)
+                .append("新增设备").setForegroundColor(ColorUtils.getColor(R.color.black_text))
+                .appendSpace(15, Color.TRANSPARENT)
+                .append(injectionNum + "").setForegroundColor(ColorUtils.getColor(R.color.home_index_user_count_injection))
+                .appendSpace(15, Color.TRANSPARENT)
+                .append("台").setForegroundColor(ColorUtils.getColor(R.color.black_text))
                 .create();
     }
 

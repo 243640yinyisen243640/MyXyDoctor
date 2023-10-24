@@ -20,6 +20,15 @@ public class IndexBean {
     private SugarBean sugars;
     private int msgnum;
     private String articleurl;
+    private int ydshbtj;
+
+    public int getYdshbtj() {
+        return ydshbtj;
+    }
+
+    public void setYdshbtj(int ydshbtj) {
+        this.ydshbtj = ydshbtj;
+    }
 
     public SugarBean getSugars() {
         return sugars;

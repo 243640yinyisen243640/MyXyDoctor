@@ -64,6 +64,8 @@
                     android:background="@drawable/_10"
                     android:padding="6dp"
                     android:text="手动添加"
+                    android:drawablePadding="3.5dp"
+                    android:drawableLeft="@drawable/injection_add_with_hand"
                     android:textColor="#2378C3"
                     android:textSize="13sp" />
 

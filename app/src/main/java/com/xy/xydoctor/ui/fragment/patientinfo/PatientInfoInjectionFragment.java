@@ -12,6 +12,7 @@ import com.xy.xydoctor.adapter.InjectionAdapter;
 import com.xy.xydoctor.base.adapter.TabFragmentAdapter;
 import com.xy.xydoctor.base.fragment.XYBaseFragment;
 import com.xy.xydoctor.bean.community_manamer.InjectionDataListInfo;
+import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.utils.DataUtils;
 import com.xy.xydoctor.utils.TipUtils;
@@ -78,7 +79,7 @@ public class PatientInfoInjectionFragment extends XYBaseFragment implements TabF
         tvChange = view.findViewById(R.id.tv_injection_change);
         tvChange.setOnClickListener(v -> {
             //选择时间
-            beginTime = "10-19";
+            beginTime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M);
             getData();
         });
         rvInjection = view.findViewById(R.id.rv_injection);
