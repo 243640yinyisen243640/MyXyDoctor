@@ -51,7 +51,6 @@ public class HealthRecordInjectioneListActivity extends XYSoftUIBaseActivity imp
         userId = getIntent().getStringExtra("userid");
         userId = "129199";
         initListener();
-        initValues();
         getData();
     }
 
@@ -108,23 +107,27 @@ public class HealthRecordInjectioneListActivity extends XYSoftUIBaseActivity imp
         }
     }
 
+    public String getTime() {
+        return injectionBaseData.getAction_year() + "/" + injectionBaseData.getAction_time();
+    }
+
     private void getData() {
         DataManager.getInjectionBaseInfo(userId, (call, response) -> {
             if (response.code == 200) {
                 injectionBaseData = (InjectionBaseData) response.object;
                 setData();
-//                PatientInfoCurrentFragment fragment = (PatientInfoCurrentFragment) getSupportFragmentManager().getFragments().get(1).getChildFragmentManager().getFragments().get(0);
-//                fragment.getData(injectionBaseData.getAction_year()+"/"+injectionBaseData.getAction_time());
+                initValues();
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
         });
     }
+
     private void setData() {
-        tvNum.setText(injectionBaseData.getValue()+"");
-        if (injectionBaseData.getIsshot() == 0){
+        tvNum.setText(injectionBaseData.getValue() + "");
+        if (injectionBaseData.getIsshot() == 0) {
             tvState.setText("待注射");
-        }else{
+        } else {
             tvState.setText("已注射");
         }
         tvRank.setText("第" + injectionBaseData.getTimes() + "针");

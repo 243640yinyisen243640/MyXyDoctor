@@ -17,7 +17,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="38dp"
-            android:src="#000000" />
+            android:src="@drawable/program_details_top" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -57,10 +57,10 @@ public class InjectionHistoryAdapter extends RecyclerView.Adapter<InjectionHisto
         });
         if (position == 0) {
             holder.llTopLine.setVisibility(View.GONE);
-            holder.ivTop.setVisibility(View.VISIBLE);
+            holder.llIconTop.setVisibility(View.VISIBLE);
         } else {
             holder.llTopLine.setVisibility(View.VISIBLE);
-            holder.ivTop.setVisibility(View.GONE);
+            holder.llIconTop.setVisibility(View.GONE);
         }
         if (position == listInfos.size() - 1) {
             holder.llBottomLine.setVisibility(View.INVISIBLE);
@@ -76,7 +76,7 @@ public class InjectionHistoryAdapter extends RecyclerView.Adapter<InjectionHisto
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout llTopLine;
-        ImageView ivTop;
+        LinearLayout llIconTop;
         LinearLayout llBottomLine;
         TextView tvTime;
         TextView tvName;
@@ -87,8 +87,7 @@ public class InjectionHistoryAdapter extends RecyclerView.Adapter<InjectionHisto
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             llTopLine = itemView.findViewById(R.id.ll_history_line_top);
-            ivTop = itemView.findViewById(R.id.iv_history_top);
-
+            llIconTop = itemView.findViewById(R.id.ll_history_icon_top);
             llBottomLine = itemView.findViewById(R.id.ll_history_line_bottom);
             tvTime = itemView.findViewById(R.id.tv_history_time);
             tvName = itemView.findViewById(R.id.tv_history_name);

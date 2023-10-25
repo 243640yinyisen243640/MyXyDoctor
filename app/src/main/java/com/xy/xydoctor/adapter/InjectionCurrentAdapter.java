@@ -42,25 +42,25 @@ public class InjectionCurrentAdapter extends RecyclerView.Adapter<InjectionCurre
         holder.tvStartTime.setText(listInfos.get(position).getBegin());
         holder.tvEndTime.setText(listInfos.get(position).getEnd());
         holder.tvName.setText(listInfos.get(position).getDrug_name());
-        holder.tvValue.setText(listInfos.get(position).getValue()+"");
-        holder.tvTimes.setText(listInfos.get(position).getTimes()+"(单位)");
+        holder.tvValue.setText(listInfos.get(position).getValue() + "");
+        holder.tvTimes.setText(listInfos.get(position).getTimes() + "(单位)");
         if (listInfos.size() == 1) {
             holder.ivIcon.setVisibility(View.VISIBLE);
             holder.vLineTop.setVisibility(View.INVISIBLE);
-            //            holder.ivIcon.setImageResource();
+            holder.ivIcon.setImageResource(R.drawable.program_sun);
             holder.vLineBottom.setVisibility(View.INVISIBLE);
         } else {
-            if (position==0){
+            if (position == 0) {
                 holder.ivIcon.setVisibility(View.VISIBLE);
                 holder.vLineTop.setVisibility(View.INVISIBLE);
-                //            holder.ivIcon.setImageResource();
+                holder.ivIcon.setImageResource(R.drawable.program_sun);
                 holder.vLineBottom.setVisibility(View.VISIBLE);
-            }else if (position == listInfos.size()-1){
+            } else if (position == listInfos.size() - 1) {
                 holder.vLineTop.setVisibility(View.VISIBLE);
                 holder.ivIcon.setVisibility(View.VISIBLE);
-                //            holder.ivIcon.setImageResource();
+                holder.ivIcon.setImageResource(R.drawable.program_moon);
                 holder.vLineBottom.setVisibility(View.INVISIBLE);
-            }else {
+            } else {
                 holder.vLineTop.setVisibility(View.VISIBLE);
                 holder.ivIcon.setVisibility(View.GONE);
                 holder.vLineBottom.setVisibility(View.VISIBLE);

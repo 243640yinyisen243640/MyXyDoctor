@@ -13,10 +13,8 @@ import com.xy.xydoctor.base.adapter.TabFragmentAdapter;
 import com.xy.xydoctor.base.fragment.XYBaseFragment;
 import com.xy.xydoctor.bean.community_manamer.InjectionDataDetail;
 import com.xy.xydoctor.datamanager.DataManager;
-import com.xy.xydoctor.utils.DataUtils;
+import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordInjectioneListActivity;
 import com.xy.xydoctor.utils.TipUtils;
-
-import java.util.Date;
 
 import retrofit2.Call;
 
@@ -51,8 +49,7 @@ public class PatientInfoCurrentFragment extends XYBaseFragment implements TabFra
 
     public void getData() {
         String userId = getArguments().getString("userId");
-       String action_time = DataUtils.convertDateToString(new Date(System.currentTimeMillis()), "YYYY/MM/dd");
-       action_time = "2023/10/18";
+        String action_time = ((HealthRecordInjectioneListActivity) getActivity()).getTime();
         Call<String> requestCall = DataManager.getInjectionDetail(userId, action_time, "1", (call, response) -> {
             if (200 == response.code) {
                 dataDetail = (InjectionDataDetail) response.object;
@@ -69,7 +66,7 @@ public class PatientInfoCurrentFragment extends XYBaseFragment implements TabFra
         tvName.setText(dataDetail.getPlan_name());
         tvTime.setText(dataDetail.getAction_time() + "执行");
         recyclerView.setLayoutManager(new LinearLayoutManager(getPageContext()));
-        adapter = new InjectionCurrentAdapter(getPageContext(),dataDetail.getDetail());
+        adapter = new InjectionCurrentAdapter(getPageContext(), dataDetail.getDetail());
         recyclerView.setAdapter(adapter);
     }
 

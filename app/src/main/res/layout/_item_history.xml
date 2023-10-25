@@ -21,6 +21,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <View
@@ -29,18 +30,25 @@
                     android:background="#FFAAA7" />
 
             </LinearLayout>
-            <ImageView
-                android:id="@+id/iv_history_top"
+
+            <LinearLayout
+                android:id="@+id/ll_history_icon_top"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:visibility="gone"
-                android:src="@drawable/arrow_up_icon" />
+                android:gravity="bottom"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/program_arrow_top_red" />
+
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="15dp"
-                android:src="@drawable/login_pwd" />
+                android:src="@drawable/program_history_circle" />
 
             <LinearLayout
                 android:id="@+id/ll_history_line_bottom"
@@ -103,7 +111,7 @@
                     <ImageView
                         android:layout_width="12dp"
                         android:layout_height="12dp"
-                        android:src="@drawable/login_pwd" />
+                        android:src="@drawable/program_total_logo" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -151,7 +159,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="end"
-                android:src="@drawable/login_pwd" />
+                android:src="@drawable/program_current_top" />
 
         </FrameLayout>
 
