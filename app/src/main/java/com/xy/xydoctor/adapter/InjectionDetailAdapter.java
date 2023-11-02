@@ -40,7 +40,8 @@ public class InjectionDetailAdapter extends RecyclerView.Adapter<InjectionDetail
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvValue.setText(listInfos.get(position).getValue());
         String isAuto = listInfos.get(position).getType();
-        holder. tvIsAutomatic.setText(isAuto.equals("1")?"自动添加":"手动添加");
+        holder.tvIsAutomatic.setText(isAuto.equals("1") ? "自动添加" : "手动添加");
+        holder.tvIsAutomatic.setCompoundDrawablesWithIntrinsicBounds(isAuto.equals("1") ? R.drawable.injection_add_with_auto : R.drawable.injection_add_with_hand, 0, 0, 0);
         holder.tvDate.setText(listInfos.get(position).getDate());
         holder.tvTime.setText(listInfos.get(position).getTime());
     }

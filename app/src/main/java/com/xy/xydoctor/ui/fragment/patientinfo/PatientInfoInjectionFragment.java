@@ -15,6 +15,7 @@ import com.xy.xydoctor.bean.community_manamer.InjectionDataListInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.utils.DataUtils;
+import com.xy.xydoctor.utils.PickerUtils;
 import com.xy.xydoctor.utils.TipUtils;
 
 import java.util.ArrayList;
@@ -78,14 +79,25 @@ public class PatientInfoInjectionFragment extends XYBaseFragment implements TabF
         View view = View.inflate(getPageContext(), R.layout._fragment_injection_list, null);
         tvChange = view.findViewById(R.id.tv_injection_change);
         tvChange.setOnClickListener(v -> {
-            //选择时间
-            beginTime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M);
-            getData();
+
+
+
+            PickerUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, false, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M, new PickerUtils.TimePickerCallBack() {
+                @Override
+                public void execEvent(String content) {
+                    //选择时间
+                    beginTime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M);
+                    getData();
+                }
+            });
+
         });
         rvInjection = view.findViewById(R.id.rv_injection);
         containerView().addView(view);
 
     }
+
+
 
 
 }

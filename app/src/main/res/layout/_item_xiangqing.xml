@@ -62,10 +62,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/_10"
+                    android:drawableLeft="@drawable/injection_add_with_hand"
+                    android:drawablePadding="3.5dp"
                     android:padding="6dp"
                     android:text="手动添加"
-                    android:drawablePadding="3.5dp"
-                    android:drawableLeft="@drawable/injection_add_with_hand"
                     android:textColor="#2378C3"
                     android:textSize="13sp" />
 
@@ -84,12 +84,11 @@
                 android:id="@+id/tv_detail_item_time"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textColor="#9D9D9D"
-                android:textSize="15sp"
-                android:gravity="bottom"
                 android:layout_marginBottom="8dp"
-                android:text="16:22"/>
-
+                android:gravity="bottom"
+                android:text="16:22"
+                android:textColor="#9D9D9D"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
