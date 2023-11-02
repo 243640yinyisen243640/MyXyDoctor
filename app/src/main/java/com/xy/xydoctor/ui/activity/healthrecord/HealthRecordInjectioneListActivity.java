@@ -49,7 +49,6 @@ public class HealthRecordInjectioneListActivity extends XYSoftUIBaseActivity imp
         topViewManager().titleTextView().setText("注射数据");
         containerView().addView(initView());
         userId = getIntent().getStringExtra("userid");
-        userId = "129199";
         initListener();
         getData();
     }
