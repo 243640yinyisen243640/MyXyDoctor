@@ -17,6 +17,7 @@ import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.xy.xydoctor.R;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -170,6 +171,36 @@ public class PickerUtils {
                 .build();
         timePickerView.show();
     }
+
+
+    public static void showTimeWindow(Context context, boolean[] booleans, String dataManager,String currentTime,
+                                      final PickerUtils.TimePickerCallBack callBack) {
+        Calendar calendar = Calendar.getInstance();
+        try {
+            calendar.setTime(new SimpleDateFormat(dataManager).parse(currentTime));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar currentDate = Calendar.getInstance();
+        Calendar startDate = Calendar.getInstance();
+        Calendar endDate = Calendar.getInstance();
+        int currentYear = currentDate.get(Calendar.YEAR);
+        startDate.set(currentYear - 120, 0, 1, 0, 0);
+
+        TimePickerView timePickerView = new TimePickerBuilder(context, (date, v) -> {
+            String content = DataUtils.convertDateToString(date, dataManager);
+            callBack.execEvent(content);
+        })
+                .setDate(calendar)
+                .setRangDate(startDate, endDate)
+                .setType(booleans)
+                .setSubmitColor(ContextCompat.getColor(context, R.color.main_green))
+                .setCancelColor(ContextCompat.getColor(context, R.color.black_text))
+                .build();
+        timePickerView.show();
+    }
+
 
     public interface TimePickerCallBack {
         void execEvent(String content);

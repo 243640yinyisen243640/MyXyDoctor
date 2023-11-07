@@ -82,10 +82,9 @@ public class PatientInfoInjectionFragment extends XYBaseFragment implements TabF
         tvChange.setOnClickListener(v -> {
 
 
-            PickerUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, false, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M, new PickerUtils.TimePickerCallBack() {
+            PickerUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, false, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M,beginTime, new PickerUtils.TimePickerCallBack() {
                 @Override
                 public void execEvent(String content) {
-                    //选择时间
                     beginTime = content;
                     getData();
                 }
