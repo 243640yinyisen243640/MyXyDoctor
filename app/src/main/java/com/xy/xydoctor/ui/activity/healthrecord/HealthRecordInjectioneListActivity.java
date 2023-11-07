@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.ViewPagerAdapter;
@@ -17,6 +16,7 @@ import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.ui.fragment.patientinfo.PatientInfoInjectionFragment;
 import com.xy.xydoctor.ui.fragment.patientinfo.PatientInfoProgrammeFragment;
 import com.xy.xydoctor.utils.TipUtils;
+import com.xy.xydoctor.view.CustomViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ public class HealthRecordInjectioneListActivity extends XYSoftUIBaseActivity imp
     private TextView tvPlanNum;
     private TextView tvTimeYear;
     private TextView tvTimeMonth;
-    private ViewPager viewPager;
+    private CustomViewPager viewPager;
     private List<Fragment> fragments;
     private String userId;
     private InjectionBaseData injectionBaseData;
@@ -97,9 +97,12 @@ public class HealthRecordInjectioneListActivity extends XYSoftUIBaseActivity imp
                 viewPager.setCurrentItem(0);
                 break;
             case R.id.ll_injection_programme:
-                llPlan.setBackground(getResources().getDrawable(R.color.transparent));
-                llProgramme.setBackground(getResources().getDrawable(R.drawable._2));
-                viewPager.setCurrentItem(1);
+                if (!"暂无".equals(injectionBaseData.getAction_time())){
+                    llPlan.setBackground(getResources().getDrawable(R.color.transparent));
+                    llProgramme.setBackground(getResources().getDrawable(R.drawable._2));
+                    viewPager.setCurrentItem(1);
+                }
+
                 break;
             default:
                 break;

@@ -5,12 +5,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.ViewPagerAdapter;
 import com.xy.xydoctor.base.adapter.TabFragmentAdapter;
 import com.xy.xydoctor.base.fragment.XYBaseFragment;
+import com.xy.xydoctor.view.CustomViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class PatientInfoProgrammeFragment extends XYBaseFragment implements TabFragmentAdapter.RefeshFragment {
     private TextView tvTitle;
-    private ViewPager viewPager;
+    private CustomViewPager viewPager;
     private List<Fragment> fragments;
     private String userId;
 

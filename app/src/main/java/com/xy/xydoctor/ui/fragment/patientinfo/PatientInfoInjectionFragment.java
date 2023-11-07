@@ -1,6 +1,7 @@
 package com.xy.xydoctor.ui.fragment.patientinfo;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -61,13 +62,13 @@ public class PatientInfoInjectionFragment extends XYBaseFragment implements TabF
     }
 
     private void getData() {
+        Log.i("yys", "beginTime==" + beginTime);
         Call<String> requestCall = DataManager.getInjectionList(userId, beginTime, (call, response) -> {
+            TipUtils.getInstance().showToast(getPageContext(), response.msg);
             if (200 == response.code) {
                 listInfos.clear();
                 listInfos.addAll((List<InjectionDataListInfo>) response.object);
                 adapter.notifyDataSetChanged();
-            } else {
-                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
@@ -81,12 +82,11 @@ public class PatientInfoInjectionFragment extends XYBaseFragment implements TabF
         tvChange.setOnClickListener(v -> {
 
 
-
             PickerUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, false, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M, new PickerUtils.TimePickerCallBack() {
                 @Override
                 public void execEvent(String content) {
                     //选择时间
-                    beginTime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M);
+                    beginTime = content;
                     getData();
                 }
             });
@@ -96,8 +96,6 @@ public class PatientInfoInjectionFragment extends XYBaseFragment implements TabF
         containerView().addView(view);
 
     }
-
-
 
 
 }

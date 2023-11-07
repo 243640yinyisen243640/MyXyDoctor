@@ -51,11 +51,10 @@ public class PatientInfoCurrentFragment extends XYBaseFragment implements TabFra
         String userId = getArguments().getString("userId");
         String action_time = ((HealthRecordInjectioneListActivity) getActivity()).getTime();
         Call<String> requestCall = DataManager.getInjectionDetail(userId, action_time, "1", (call, response) -> {
+            TipUtils.getInstance().showToast(getPageContext(), response.msg);
             if (200 == response.code) {
                 dataDetail = (InjectionDataDetail) response.object;
                 setData();
-            } else {
-                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);

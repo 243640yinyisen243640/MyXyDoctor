@@ -45,11 +45,10 @@ public class HealthRecordInjectioneDetailActivity extends XYSoftUIBaseActivity {
         String action_time = getIntent().getStringExtra("action_time");
         String isuse = getIntent().getStringExtra("isuse");
         Call<String> requestCall = DataManager.getInjectionDetail(userId, action_time, isuse, (call, response) -> {
+            TipUtils.getInstance().showToast(getPageContext(),response.msg);
             if (200 == response.code) {
                 dataDetail = (InjectionDataDetail) response.object;
                 setData();
-            } else {
-                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);

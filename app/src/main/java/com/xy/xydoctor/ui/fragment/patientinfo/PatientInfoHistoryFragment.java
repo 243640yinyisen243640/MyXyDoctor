@@ -58,6 +58,7 @@ public class PatientInfoHistoryFragment extends XYBaseFragment implements TabFra
 
     private void getData() {
         Call<String> requestCall = DataManager.getInjectionHistoryList(userId, page, (call, response) -> {
+            TipUtils.getInstance().showToast(getPageContext(), response.msg);
             if (200 == response.code) {
                 if (page == 1) {
                     infoList.clear();
@@ -70,8 +71,6 @@ public class PatientInfoHistoryFragment extends XYBaseFragment implements TabFra
                 }
                 infoList.addAll(infoListTemp);
                 adapter.notifyDataSetChanged();
-            } else {
-                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
             }
         }, (call, t) -> {
             TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
