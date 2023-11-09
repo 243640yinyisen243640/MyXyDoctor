@@ -81,6 +81,7 @@ public class BaseWebViewActivity extends BaseActivity {
      */
     private void loadUrl() {
         String url = getIntent().getStringExtra("url");
+        Log.i("yys","url==="+url);
         initWebView(url);
     }
 

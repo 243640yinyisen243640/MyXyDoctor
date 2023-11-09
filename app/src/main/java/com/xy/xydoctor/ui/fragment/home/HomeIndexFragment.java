@@ -42,6 +42,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wei.android.lib.colorview.view.ColorTextView;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.ReachTheStandRateAdapter;
+import com.xy.xydoctor.base.activity.BaseWebViewActivity;
 import com.xy.xydoctor.bean.IndexBean;
 import com.xy.xydoctor.bean.ReachTheStandRateBean;
 import com.xy.xydoctor.bean.TestBarData;
@@ -50,7 +51,6 @@ import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.ui.activity.director.DoctorListActivity;
-import com.xy.xydoctor.ui.activity.patient.PatientAddTodayInjectionActivity;
 import com.xy.xydoctor.ui.activity.patient.PatientAddTodayListActivity;
 import com.xy.xydoctor.ui.activity.patient.PatientCountMain1Activity;
 import com.xy.xydoctor.ui.activity.todo.ToDoListActivity;
@@ -431,7 +431,12 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
                 startActivity(intent);
                 break;
             case R.id.ll_patient_add_injection:
-                intent = new Intent(getPageContext(), PatientAddTodayInjectionActivity.class);
+//                intent = new Intent(getPageContext(), PatientAddTodayInjectionActivity.class);
+//                startActivity(intent);
+                String token = SPStaticUtils.getString("token");
+                intent = new Intent(getPageContext(), BaseWebViewActivity.class);
+                intent.putExtra("title", "无针注射统计");
+                intent.putExtra("url", "http://web.xiyuns.cn/pages/injectionStats/injectionStats?access_token="+token);
                 startActivity(intent);
                 break;
 

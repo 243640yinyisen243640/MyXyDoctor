@@ -6,9 +6,9 @@ package com.xy.xydoctor.bean.community_manamer;
  * Description:
  */
 public class InjectionBaseData {
-    private int value;
+    private String value;
     private int ishight;
-    private int times;
+    private String times;
     private int isshot;
     private int isshot_num;
     private int all_times;
@@ -31,11 +31,11 @@ public class InjectionBaseData {
                 '}';
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
@@ -47,11 +47,11 @@ public class InjectionBaseData {
         this.ishight = ishight;
     }
 
-    public int getTimes() {
+    public String getTimes() {
         return times;
     }
 
-    public void setTimes(int times) {
+    public void setTimes(String times) {
         this.times = times;
     }
 
