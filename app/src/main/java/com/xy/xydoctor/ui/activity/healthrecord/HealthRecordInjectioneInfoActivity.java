@@ -51,13 +51,16 @@ public class HealthRecordInjectioneInfoActivity extends XYSoftUIBaseActivity {
         //1偏高 2偏低 3正常
         String isHeightData;
         if (ishight.equals("1")){
-            isHeightData = "剂量过高";
+            tvIsHeight.setBackground(getResources().getDrawable(R.drawable.jiliang_2_red));
+            tvIsHeight.setText("剂量偏高");
         }else if (ishight.equals("2")){
-            isHeightData = "剂量偏低";
+            tvIsHeight.setBackground(getResources().getDrawable(R.drawable.jiliang_2_yellow));
+            tvIsHeight.setText("剂量偏低");
         }else {
-            isHeightData = "剂量正常";
+            tvIsHeight.setBackground(getResources().getDrawable(R.drawable.jiliang_2_green));
+            tvIsHeight.setText("剂量达标");
         }
-        tvIsHeight.setText(isHeightData);
+//        tvIsHeight.setText(isHeightData);
         adapter=new InjectionDetailAdapter(getPageContext(),info.getDataList());
         recyclerView.setLayoutManager(new LinearLayoutManager(getPageContext()));
         recyclerView.setAdapter(adapter);

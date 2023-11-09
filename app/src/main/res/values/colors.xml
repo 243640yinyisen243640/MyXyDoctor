@@ -132,4 +132,8 @@
     <color name="community_statics_orange">#FF854F</color>
     <color name="community_follow_blue">#3D98DF</color>
     <color name="community_red_title">#FF564F</color>
+
+    <color name="injection_red">#BE3721</color>
+    <color name="injection_yellow">#D68A2C</color>
+    <color name="injection_green_1">#00C27F</color>
 </resources>

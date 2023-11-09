@@ -130,7 +130,23 @@ public class HealthRecordInjectioneListActivity extends XYSoftUIBaseActivity imp
         if (injectionBaseData.getIsshot() == 0) {
             tvState.setText("待注射");
         } else {
-            tvState.setText("已注射");
+//            tvState.setText("已注射");
+            if (injectionBaseData.getIshight() == 1) {
+                tvNum.setTextColor(getResources().getColor(R.color.injection_red));
+                tvState.setBackground(getResources().getDrawable(R.drawable.shape_bg_red_tran_2));
+                tvState.setText("偏高");
+                tvState.setTextColor(getResources().getColor(R.color.injection_red));
+            } else if (injectionBaseData.getIshight() == 2) {
+                tvNum.setTextColor(getResources().getColor(R.color.injection_yellow));
+                tvState.setBackground(getResources().getDrawable(R.drawable.shape_bg_yellow_tran_2));
+                tvState.setText("偏低");
+                tvState.setTextColor(getResources().getColor(R.color.injection_yellow));
+            } else {
+                tvNum.setTextColor(getResources().getColor(R.color.injection_green_1));
+                tvState.setBackground(getResources().getDrawable(R.drawable.shape_bg_green_tran_2));
+                tvState.setText("达标");
+                tvState.setTextColor(getResources().getColor(R.color.injection_green_1));
+            }
         }
         tvRank.setText("第" + injectionBaseData.getTimes() + "针");
         tvCompany.setText(injectionBaseData.getDrug_name());
