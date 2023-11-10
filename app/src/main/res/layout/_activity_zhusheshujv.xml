@@ -45,7 +45,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="#FF564F"
-                        android:padding="2dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
                         android:text="待注射"
                         android:textColor="#FFFFFF"
                         android:textSize="12sp" />
