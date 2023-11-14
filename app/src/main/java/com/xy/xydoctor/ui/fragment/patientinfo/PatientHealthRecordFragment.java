@@ -216,7 +216,7 @@ public class PatientHealthRecordFragment extends BaseEventBusFragment {
                             llDeviceUnbind.setVisibility(View.GONE);
                         } else {
                             imgDeviceScan.setVisibility(View.VISIBLE);
-                            llDeviceUnbind.setVisibility(View.GONE);
+                            llDeviceUnbind.setVisibility(View.VISIBLE);
                             tvDeviceNumber.setText("设备号:" + imei);
                         }
                     }
