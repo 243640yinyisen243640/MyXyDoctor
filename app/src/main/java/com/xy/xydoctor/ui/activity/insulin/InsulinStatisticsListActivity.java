@@ -28,6 +28,7 @@ public class InsulinStatisticsListActivity extends XYSoftUIBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        topViewManager().titleTextView().setText("当前佩戴人数");
         containerView().addView(initView());
         initValues();
     }
@@ -61,9 +62,9 @@ public class InsulinStatisticsListActivity extends XYSoftUIBaseActivity {
     }
 
     private View initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_insulin_statistics, null);
-        tvNoData = view.findViewById(R.id.rv_insulin_statistics_list_only);
-        rvStatistics = view.findViewById(R.id.tv_insulin_statistics_list_only_no);
+        View view = View.inflate(getPageContext(), R.layout.activity_insulin_statistics_list, null);
+        tvNoData = view.findViewById(R.id.tv_insulin_statistics_list_only_no);
+        rvStatistics = view.findViewById(R.id.rv_insulin_statistics_list_only);
         return view;
     }
 }
