@@ -32,7 +32,7 @@ public class InsulinStatisticsActivity extends XYSoftUIBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        topViewManager().titleTextView().setText("胰岛素泵统计");
+        topViewManager().topView().removeAllViews();
         containerView().addView(initView());
         initValues();
     }
