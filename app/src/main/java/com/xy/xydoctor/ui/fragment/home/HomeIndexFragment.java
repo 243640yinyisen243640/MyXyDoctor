@@ -51,6 +51,7 @@ import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.ui.activity.director.DoctorListActivity;
+import com.xy.xydoctor.ui.activity.insulin.InsulinStatisticsActivity;
 import com.xy.xydoctor.ui.activity.patient.PatientAddTodayListActivity;
 import com.xy.xydoctor.ui.activity.patient.PatientCountMain1Activity;
 import com.xy.xydoctor.ui.activity.todo.ToDoListActivity;
@@ -99,6 +100,9 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
     //当日新增注射
     @BindView(R.id.tv_today_add_injection)
     TextView tvTodayAddInjection;
+    //胰岛素
+    @BindView(R.id.tv_today_add_insulin)
+    TextView tvTodayInsulin;
     //患者情况统计
     @BindView(R.id.bar_chart)
     BarChart barChart;
@@ -206,6 +210,7 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
                         setTodayCount(todayTotal);
                         int injectionNum = data.getYdshbtj();
                         setInjectionCount(injectionNum);
+                        setInsulinCount(injectionNum);
                         //设置患者情况统计
                         setBarChart(data.getHztj());
                         //设置红点
@@ -275,7 +280,7 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
     /**
      * 设置红点
      *
-     * @param msgnum, 接口消息
+     * @param msgnum,   接口消息
      * @param unreadNum 融云消息
      */
     private void setRedPoint(int unreadNum, int msgnum) {
@@ -398,8 +403,18 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
                 .create();
     }
 
+    private void setInsulinCount(int injectionNum) {
+        SpanUtils.with(tvTodayInsulin)
+                .append("新增设备").setForegroundColor(ColorUtils.getColor(R.color.black_text))
+                .appendSpace(15, Color.TRANSPARENT)
+                .append(injectionNum + "").setForegroundColor(ColorUtils.getColor(R.color.home_index_user_count_injection))
+                .appendSpace(15, Color.TRANSPARENT)
+                .append("台").setForegroundColor(ColorUtils.getColor(R.color.black_text))
+                .create();
+    }
 
-    @OnClick({R.id.bar_chart, R.id.img_bar_chart, R.id.tv_start_time, R.id.tv_end_time, R.id.ll_patient_add_today,R.id.ll_patient_add_injection})
+
+    @OnClick({R.id.bar_chart, R.id.img_bar_chart, R.id.tv_start_time, R.id.tv_end_time, R.id.ll_patient_add_today, R.id.ll_patient_add_injection, R.id.ll_patient_add_insulin})
     public void onViewClicked(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -431,12 +446,16 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
                 startActivity(intent);
                 break;
             case R.id.ll_patient_add_injection:
-//                intent = new Intent(getPageContext(), PatientAddTodayInjectionActivity.class);
-//                startActivity(intent);
+                //                intent = new Intent(getPageContext(), PatientAddTodayInjectionActivity.class);
+                //                startActivity(intent);
                 String token = SPStaticUtils.getString("token");
                 intent = new Intent(getPageContext(), BaseWebViewActivity.class);
                 intent.putExtra("title", "无针注射统计");
-                intent.putExtra("url", "http://web.xiyuns.cn/pages/injectionStats/injectionStats?access_token="+token);
+                intent.putExtra("url", "http://web.xiyuns.cn/pages/injectionStats/injectionStats?access_token=" + token);
+                startActivity(intent);
+                break;
+            case R.id.ll_patient_add_insulin:
+                intent = new Intent(getPageContext(), InsulinStatisticsActivity.class);
                 startActivity(intent);
                 break;
 
@@ -504,7 +523,7 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
                 break;
             case ConstantParam.EventCode.IM_UNREAD_MSG_COUNT:
                 Log.i("yys", "IM_UNREAD_MSG_COUNT" + event.getData());
-                setRedPoint(Integer.parseInt(String.valueOf(event.getData())),0);
+                setRedPoint(Integer.parseInt(String.valueOf(event.getData())), 0);
                 break;
         }
     }

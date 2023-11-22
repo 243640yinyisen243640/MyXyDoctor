@@ -202,6 +202,33 @@
 
             </LinearLayout>
 
+            <!--胰岛注射-->
+            <LinearLayout
+                android:id="@+id/ll_patient_add_insulin"
+                style="@style/hh_fi_wr"
+                android:layout_marginTop="@dimen/dp_15"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_14">
+
+
+                <TextView
+                    style="@style/text_black_16_w_w"
+                    android:drawableLeft="@drawable/today_add_insulin"
+                    android:drawablePadding="5dp"
+                    android:text="胰岛素泵统计" />
+
+                <TextView
+                    android:id="@+id/tv_today_add_insulin"
+                    style="@style/text_black_14_f_w"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:drawableRight="@drawable/home_index_right_arrow"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:text="新增设备 5 台" />
+
+
+            </LinearLayout>
+
             <!--患者情况统计-->
             <LinearLayout
                 style="@style/hh_fi_wr"

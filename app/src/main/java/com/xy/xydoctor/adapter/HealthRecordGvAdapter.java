@@ -22,6 +22,7 @@ import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordSaccharifyListActivi
 import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordSportListActivity;
 import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordTemperatureListActivity;
 import com.xy.xydoctor.ui.activity.healthrecord.HealthRecordWeightListActivity;
+import com.xy.xydoctor.ui.activity.insulin.InsulinInfusionRecordListActivity;
 import com.xy.xydoctor.ui.activity.patient.PatientInfoActivity;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
@@ -98,6 +99,10 @@ public class HealthRecordGvAdapter extends CommonAdapter {
                 imgPic.setImageResource(R.drawable.healthy_record_injection);
                 tvText.setText("注射数据");
                 break;
+            case 13:
+                imgPic.setImageResource(R.drawable.healthy_record_insulin);
+                tvText.setText("泵注射数据");
+                break;
             default:
                 break;
         }
@@ -151,6 +156,9 @@ public class HealthRecordGvAdapter extends CommonAdapter {
                         break;
                     case 12:
                         intent = new Intent(Utils.getApp(), HealthRecordInjectioneListActivity.class);
+                        break;
+                    case 13:
+                        intent = new Intent(Utils.getApp(), InsulinInfusionRecordListActivity.class);
                         break;
 
                     default:
