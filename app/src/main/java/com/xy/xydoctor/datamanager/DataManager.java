@@ -858,10 +858,18 @@ public class DataManager {
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, InsulinDeviceInfo.class, "/geteqinfo", map, successCallBack, failureCallBack);
     }
 
-    public static Call<String> usereqstastic( int page, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    /**
+     * @param page
+     * @param type            1当日 2全部
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> usereqstastic(int page, String type, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
-        map.put("page", page+"");
+        map.put("page", page + "");
         map.put("access_token", SPStaticUtils.getString("token"));
+        map.put("type", type);
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, InsulinAllInfo.class, "/usereqstastic", map, successCallBack, failureCallBack);
     }
 }

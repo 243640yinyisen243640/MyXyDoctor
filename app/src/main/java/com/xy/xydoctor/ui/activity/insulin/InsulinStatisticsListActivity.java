@@ -51,7 +51,7 @@ public class InsulinStatisticsListActivity extends XYSoftUIBaseActivity {
     }
 
     private void getData() {
-        Call<String> requestCall = DataManager.usereqstastic(page, (call, response) -> {
+        Call<String> requestCall = DataManager.usereqstastic(page, "2", (call, response) -> {
             TipUtils.getInstance().showToast(getPageContext(), response.msg);
             if (200 == response.code) {
                 allInfo = (InsulinAllInfo) response.object;
