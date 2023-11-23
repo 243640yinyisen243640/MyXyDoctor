@@ -90,13 +90,18 @@
             android:textColor="@color/base_black"
             android:textSize="17sp"
             android:textStyle="bold" />
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/srl_insulin_statistics"
+            style="@style/hh_fi_fi"
+            android:visibility="gone">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_insulin_statistics_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:overScrollMode="never"
-            android:visibility="gone" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_insulin_statistics_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 
         <TextView
             android:id="@+id/_insulin_statistics_list_no"
@@ -105,7 +110,7 @@
             android:drawableTop="@drawable/insulin_statistics_no_data"
             android:drawablePadding="15dp"
             android:gravity="center"
-            android:text="暂无新增"
+            android:text="暂无数据"
             android:paddingBottom="50dp"
             android:paddingTop="50dp"
             android:textColor="@color/green_text_666"

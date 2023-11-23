@@ -5,9 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.bean.InsulinBaseInfo;
+import com.xy.xydoctor.bean.insulin.InsulinDeviceInfo;
 
 import java.util.List;
 
@@ -20,9 +21,9 @@ import java.util.List;
  */
 public class InsulinInfusionRecordAdapter extends BaseAdapter {
     private Context context;
-    private List<InsulinBaseInfo> list;
+    private List<InsulinDeviceInfo> list;
 
-    public InsulinInfusionRecordAdapter(Context context, List<InsulinBaseInfo> list) {
+    public InsulinInfusionRecordAdapter(Context context, List<InsulinDeviceInfo> list) {
         this.context = context;
         this.list = list;
     }
@@ -46,7 +47,10 @@ public class InsulinInfusionRecordAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         //        if (convertView == null) {
         convertView = LayoutInflater.from(context).inflate(R.layout.item_insulin_infusion_record, parent, false);
-
+        TextView tvTime = convertView.findViewById(R.id.tv_insulin_infusion_record_time);
+        TextView tvValues = convertView.findViewById(R.id.tv_insulin_infusion_record_values);
+        tvTime.setText(list.get(position).getDatetime());
+        tvValues.setText(list.get(position).getValue()+"U");
 
         //        }
         return convertView;

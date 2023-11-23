@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.adapter.UIBaseRecycleViewAdapter;
-import com.xy.xydoctor.bean.community_manamer.SugarOrPressureInfo;
+import com.xy.xydoctor.bean.insulin.InsulinDeviceInfo;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 
 import java.util.List;
@@ -22,8 +22,8 @@ import java.util.List;
  * 作者: LYD
  * 创建日期: 2019/7/19 11:09
  */
-public class InsulinStatisticsAdapter extends UIBaseRecycleViewAdapter<SugarOrPressureInfo> {
-    public InsulinStatisticsAdapter(Context mContext, List<SugarOrPressureInfo> mList, IAdapterViewClickListener mListener) {
+public class InsulinStatisticsAdapter extends UIBaseRecycleViewAdapter<InsulinDeviceInfo> {
+    public InsulinStatisticsAdapter(Context mContext, List<InsulinDeviceInfo> mList, IAdapterViewClickListener mListener) {
         super(mContext, mList, mListener);
     }
 
@@ -40,7 +40,7 @@ public class InsulinStatisticsAdapter extends UIBaseRecycleViewAdapter<SugarOrPr
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
-        SugarOrPressureInfo info = getList().get(position);
+        InsulinDeviceInfo info = getList().get(position);
 
 
         viewHolder.clickLinearLayout.setOnClickListener(v -> {

@@ -28,6 +28,8 @@ import com.xy.xydoctor.bean.community_manamer.InjectionHistoryInfo;
 import com.xy.xydoctor.bean.community_manamer.SearchInfo;
 import com.xy.xydoctor.bean.community_manamer.SugarOrPressureInfo;
 import com.xy.xydoctor.bean.community_manamer.UserRecordDataInfo;
+import com.xy.xydoctor.bean.insulin.InsulinAllInfo;
+import com.xy.xydoctor.bean.insulin.InsulinDeviceInfo;
 import com.xy.xydoctor.constant.ConstantParam;
 import com.xy.xydoctor.param.UserAddReq;
 import com.xy.xydoctor.param.UserRecordReq;
@@ -824,5 +826,42 @@ public class DataManager {
         map.put("access_token", SPStaticUtils.getString("token"));
         map.put("page", page + "");
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, InjectionHistoryInfo.class, "/getPlanList", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param userid
+     * @param type
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> geteqinsulins(String userid, String type, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userid", userid);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        map.put("type", type);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, InsulinDeviceInfo.class, "/geteqinsulins", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 患者基础数据
+     *
+     * @param userid
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> geteqinfo(String userid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userid", userid);
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, InsulinDeviceInfo.class, "/geteqinfo", map, successCallBack, failureCallBack);
+    }
+
+    public static Call<String> usereqstastic( int page, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("page", page+"");
+        map.put("access_token", SPStaticUtils.getString("token"));
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, InsulinAllInfo.class, "/usereqstastic", map, successCallBack, failureCallBack);
     }
 }

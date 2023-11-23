@@ -7,11 +7,15 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.SPStaticUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.insulin.InsulinInfusionRecordAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
+import com.xy.xydoctor.bean.insulin.InsulinDeviceInfo;
+import com.xy.xydoctor.datamanager.DataManager;
+import com.xy.xydoctor.utils.TipUtils;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者: beauty
@@ -19,7 +23,7 @@ import java.util.ArrayList;
  * 传参:
  * 描述:泵输注数据
  */
-public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity {
+public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
 
     private TextView tvNum;
     private TextView tvTime;
@@ -32,6 +36,11 @@ public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity {
     private TextView tvBaseRate;
     private TextView tvWarning;
     private ListView lvDataInfo;
+    private TextView tvNoData;
+
+    private String type = "1";
+
+    private InsulinDeviceInfo deviceInfo;
 
 
     @Override
@@ -39,12 +48,58 @@ public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("泵输注数据");
         containerView().addView(initView());
-        initValues();
+        initListner();
+        getDataInfo();
     }
 
-    private void initValues() {
-        InsulinInfusionRecordAdapter deviceListAdapter = new InsulinInfusionRecordAdapter(getPageContext(), new ArrayList<>());
-        lvDataInfo.setAdapter(deviceListAdapter);
+    private void getDataInfo() {
+        String token = SPStaticUtils.getString("token");
+        String userid = getIntent().getStringExtra("userid");
+        DataManager.geteqinfo(userid, (call, response) -> {
+            if (response.code == 200) {
+                deviceInfo = (InsulinDeviceInfo) response.object;
+                setData();
+                getData();
+            }
+        }, (call, t) -> {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        });
+    }
+
+    private void setData() {
+        tvNum.setText(deviceInfo.getEq_code());
+        if (!"暂无".equals(deviceInfo.getEq_code())) {
+            tvMode.setText("1".equals(deviceInfo.getModel()) ? "基础模式1" : "基础模式2");
+            tvRate.setText("当前基础率" + deviceInfo.getBase_rate());
+            tvInjction.setText("已输注" + deviceInfo.getValue());
+            tvTime.setText(deviceInfo.getUpdatetime());
+        } else {
+            tvMode.setText("暂无");
+            tvRate.setText("暂无");
+            tvInjction.setText("暂无");
+            tvTime.setText("最近同步时间：" + deviceInfo.getUpdatetime());
+        }
+    }
+
+    private void getData() {
+        String userid = getIntent().getStringExtra("userid");
+        DataManager.geteqinsulins(type, userid, (call, response) -> {
+            if (response.code == 200) {
+                lvDataInfo.setVisibility(View.VISIBLE);
+                tvNoData.setVisibility(View.GONE);
+                List<InsulinDeviceInfo> list = (List<InsulinDeviceInfo>) response.object;
+                InsulinInfusionRecordAdapter deviceListAdapter = new InsulinInfusionRecordAdapter(getPageContext(), list);
+                lvDataInfo.setAdapter(deviceListAdapter);
+            } else if (response.code == 30002) {
+                lvDataInfo.setVisibility(View.GONE);
+                tvNoData.setVisibility(View.VISIBLE);
+
+            }
+
+
+        }, (call, t) -> {
+            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+        });
     }
 
 
@@ -57,14 +112,60 @@ public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity {
         tvRate = view.findViewById(R.id.tv_main_insulin_rate);
         tvInjction = view.findViewById(R.id.tv_main_insulin_injction);
 
+        tvDayAll = view.findViewById(R.id.tv_infusion_info_day_all);
         tvInfoBig = view.findViewById(R.id.tv_infusion_info_big);
         tvBaseRate = view.findViewById(R.id.tv_infusion_info_base_rate);
         tvWarning = view.findViewById(R.id.tv_infusion_info_warning);
+        tvNoData = view.findViewById(R.id.tv_insulin_base_info_no_data);
         lvDataInfo = view.findViewById(R.id.lv_insulin_base_info_list);
-
-
         return view;
     }
 
+    private void initListner() {
 
+        tvDayAll.setOnClickListener(this);
+        tvInfoBig.setOnClickListener(this);
+        tvBaseRate.setOnClickListener(this);
+        tvWarning.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_infusion_info_day_all:
+                setBg(tvDayAll, tvInfoBig, tvBaseRate, tvWarning);
+                type = "1";
+                getData();
+                break;
+            case R.id.tv_infusion_info_big:
+                setBg(tvInfoBig, tvDayAll, tvBaseRate, tvWarning);
+                type = "2";
+                getData();
+                break;
+            case R.id.tv_infusion_info_base_rate:
+                setBg(tvBaseRate, tvInfoBig, tvDayAll, tvWarning);
+                type = "3";
+                getData();
+                break;
+            case R.id.tv_infusion_info_warning:
+                setBg(tvWarning, tvInfoBig, tvBaseRate, tvDayAll);
+                type = "4";
+                getData();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void setBg(TextView tvCheck, TextView tvUncheck1, TextView tvUncheck2, TextView tvUncheck3) {
+        tvCheck.setBackground(getResources().getDrawable(R.drawable.shape_bg_main_90));
+        tvCheck.setTextColor(getResources().getColor(R.color.white));
+        tvUncheck1.setBackground(null);
+        tvUncheck1.setTextColor(getResources().getColor(R.color.green_text_666));
+        tvUncheck2.setBackground(null);
+        tvUncheck2.setTextColor(getResources().getColor(R.color.green_text_666));
+        tvUncheck3.setBackground(null);
+        tvUncheck3.setTextColor(getResources().getColor(R.color.green_text_666));
+
+    }
 }

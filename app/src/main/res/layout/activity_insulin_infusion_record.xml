@@ -53,9 +53,8 @@
 
                 <TextView
                     android:id="@+id/tv_main_insulin_mode"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:drawableLeft="@drawable/main_insulin_base_mode"
                     android:drawablePadding="3dp"
                     android:text="基础模式1"
@@ -64,22 +63,22 @@
 
                 <TextView
                     android:id="@+id/tv_main_insulin_rate"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:drawableLeft="@drawable/main_insulin_base_rate"
                     android:drawablePadding="3dp"
+                    android:layout_marginStart="11dp"
                     android:text="当前基础率0.40"
                     android:textColor="@color/black_text"
                     android:textSize="11sp" />
 
                 <TextView
                     android:id="@+id/tv_main_insulin_injction"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:drawableLeft="@drawable/main_insulin_injction"
                     android:drawablePadding="3dp"
+                    android:layout_marginStart="11dp"
                     android:text="已输注0.10"
                     android:textColor="@color/black_text"
                     android:textSize="11sp" />
@@ -199,6 +198,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_insulin_base_info_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:drawableTop="@drawable/insulin_statistics_no_data"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:paddingBottom="50dp"
+        android:text="暂无数据"
+        android:textColor="@color/green_text_666"
+        android:textSize="14sp"
+        android:visibility="gone"/>
 
 
 </LinearLayout>
