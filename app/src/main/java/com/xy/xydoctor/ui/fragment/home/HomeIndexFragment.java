@@ -210,7 +210,8 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
                         setTodayCount(todayTotal);
                         int injectionNum = data.getYdshbtj();
                         setInjectionCount(injectionNum);
-                        setInsulinCount(injectionNum);
+                        int ydsbtj = data.getYdsbtj();
+                        setInsulinCount(ydsbtj);
                         //设置患者情况统计
                         setBarChart(data.getHztj());
                         //设置红点

@@ -19,8 +19,24 @@ public class IndexBean {
     private HztjmBean hztjm;
     private SugarBean sugars;
     private int msgnum;
+
     private String articleurl;
+    /**
+     * 快舒尔注射
+     */
     private int ydshbtj;
+    /**
+     * 胰岛注射设备
+     */
+    private int ydsbtj;
+
+    public int getYdsbtj() {
+        return ydsbtj;
+    }
+
+    public void setYdsbtj(int ydsbtj) {
+        this.ydsbtj = ydsbtj;
+    }
 
     public int getYdshbtj() {
         return ydshbtj;
