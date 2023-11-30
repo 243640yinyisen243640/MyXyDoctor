@@ -24,7 +24,6 @@
             android:id="@+id/tv_insulin_infusion_record_values"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5.40U"
             android:textColor="@color/black_text"
             android:textSize="14sp" />
     </LinearLayout>

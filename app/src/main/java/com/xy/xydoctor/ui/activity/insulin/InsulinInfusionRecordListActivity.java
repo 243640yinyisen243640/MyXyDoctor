@@ -83,12 +83,12 @@ public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity impl
 
     private void getData() {
         String userid = getIntent().getStringExtra("userid");
-        DataManager.geteqinsulins(type, userid, (call, response) -> {
+        DataManager.geteqinsulins(userid, type, (call, response) -> {
             if (response.code == 200) {
                 lvDataInfo.setVisibility(View.VISIBLE);
                 tvNoData.setVisibility(View.GONE);
                 List<InsulinDeviceInfo> list = (List<InsulinDeviceInfo>) response.object;
-                InsulinInfusionRecordAdapter deviceListAdapter = new InsulinInfusionRecordAdapter(getPageContext(), list);
+                InsulinInfusionRecordAdapter deviceListAdapter = new InsulinInfusionRecordAdapter(getPageContext(), list,type);
                 lvDataInfo.setAdapter(deviceListAdapter);
             } else if (response.code == 30002) {
                 lvDataInfo.setVisibility(View.GONE);

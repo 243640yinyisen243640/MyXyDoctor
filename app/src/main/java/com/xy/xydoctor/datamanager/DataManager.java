@@ -840,7 +840,7 @@ public class DataManager {
         map.put("userid", userid);
         map.put("access_token", SPStaticUtils.getString("token"));
         map.put("type", type);
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, InsulinDeviceInfo.class, "/geteqinsulins", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, InsulinDeviceInfo.class, "/getusereqinsulins", map, successCallBack, failureCallBack);
     }
 
     /**
@@ -855,7 +855,7 @@ public class DataManager {
         Map<String, String> map = new HashMap<>();
         map.put("userid", userid);
         map.put("access_token", SPStaticUtils.getString("token"));
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, InsulinDeviceInfo.class, "/geteqinfo", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, InsulinDeviceInfo.class, "/getusereqinfo", map, successCallBack, failureCallBack);
     }
 
     /**

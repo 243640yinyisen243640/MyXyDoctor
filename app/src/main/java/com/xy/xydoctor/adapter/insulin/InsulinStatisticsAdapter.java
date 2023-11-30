@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.base.adapter.UIBaseRecycleViewAdapter;
-import com.xy.xydoctor.bean.insulin.InsulinDeviceInfo;
+import com.xy.xydoctor.bean.insulin.InsulinPersonInfo;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
+import com.xy.xydoctor.utils.LoadImgUtils;
 
 import java.util.List;
 
@@ -22,8 +23,8 @@ import java.util.List;
  * 作者: LYD
  * 创建日期: 2019/7/19 11:09
  */
-public class InsulinStatisticsAdapter extends UIBaseRecycleViewAdapter<InsulinDeviceInfo> {
-    public InsulinStatisticsAdapter(Context mContext, List<InsulinDeviceInfo> mList, IAdapterViewClickListener mListener) {
+public class InsulinStatisticsAdapter extends UIBaseRecycleViewAdapter<InsulinPersonInfo> {
+    public InsulinStatisticsAdapter(Context mContext, List<InsulinPersonInfo> mList, IAdapterViewClickListener mListener) {
         super(mContext, mList, mListener);
     }
 
@@ -40,9 +41,14 @@ public class InsulinStatisticsAdapter extends UIBaseRecycleViewAdapter<InsulinDe
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
-        InsulinDeviceInfo info = getList().get(position);
+        InsulinPersonInfo info = getList().get(position);
 
 
+        LoadImgUtils.loadImage(getContext(), R.drawable.head_default, info.getPicture(), viewHolder.ivHead);
+        viewHolder.tvName.setText(info.getUsername());
+        viewHolder.tvName.setText(info.getUsername());
+        viewHolder.tvPone.setText(info.getTel());
+        viewHolder.tvNum.setText(info.getEq_code());
         viewHolder.clickLinearLayout.setOnClickListener(v -> {
             if (getListener() != null) {
                 getListener().adapterClickListener(position, v);
@@ -65,7 +71,8 @@ public class InsulinStatisticsAdapter extends UIBaseRecycleViewAdapter<InsulinDe
             tvPone = itemView.findViewById(R.id.tv_insulin_statistics_phone);
             tvNum = itemView.findViewById(R.id.tv_insulin_statistics_num);
             clickLinearLayout = itemView.findViewById(R.id.ll_insulin_statistics_click);
-
+            RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            clickLinearLayout.setLayoutParams(layoutParams);
         }
     }
 

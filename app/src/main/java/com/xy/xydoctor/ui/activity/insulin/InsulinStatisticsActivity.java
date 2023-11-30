@@ -16,7 +16,7 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.insulin.InsulinStatisticsAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.bean.insulin.InsulinAllInfo;
-import com.xy.xydoctor.bean.insulin.InsulinDeviceInfo;
+import com.xy.xydoctor.bean.insulin.InsulinPersonInfo;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.xy.xydoctor.utils.StatusBarUtils;
@@ -40,8 +40,8 @@ public class InsulinStatisticsActivity extends XYSoftUIBaseActivity {
     private RecyclerView rvStatistics;
     private SmartRefreshLayout smartRefreshLayout;
     private InsulinStatisticsAdapter adapter;
-    private List<InsulinDeviceInfo> infoList = new ArrayList<>();
-    private List<InsulinDeviceInfo> infoListTemp = new ArrayList<>();
+    private List<InsulinPersonInfo> infoList = new ArrayList<>();
+    private List<InsulinPersonInfo> infoListTemp = new ArrayList<>();
     private int page = 1;
 
     private InsulinAllInfo allInfo;
@@ -108,7 +108,9 @@ public class InsulinStatisticsActivity extends XYSoftUIBaseActivity {
             public void adapterClickListener(int position, View view) {
                 switch (view.getId()) {
                     case R.id.ll_insulin_statistics_click:
-                        startActivity(new Intent(getPageContext(), InsulinInfusionRecordListActivity.class));
+                       Intent intent = new Intent(getPageContext(),InsulinInfusionRecordListActivity.class);
+                        intent.putExtra("userid", infoList.get(position).getUserid());
+                       startActivity(intent);
                         break;
                     default:
                         break;

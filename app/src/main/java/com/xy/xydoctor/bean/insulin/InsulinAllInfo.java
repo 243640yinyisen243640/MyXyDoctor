@@ -11,13 +11,13 @@ import java.util.List;
 public class InsulinAllInfo {
     private String total;
 
-    private List<InsulinDeviceInfo> list;
+    private List<InsulinPersonInfo> list;
 
-    public List<InsulinDeviceInfo> getList() {
+    public List<InsulinPersonInfo> getList() {
         return list;
     }
 
-    public void setList(List<InsulinDeviceInfo> list) {
+    public void setList(List<InsulinPersonInfo> list) {
         this.list = list;
     }
 
