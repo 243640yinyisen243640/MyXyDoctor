@@ -61,6 +61,7 @@ public class InsulinStatisticsActivity extends XYSoftUIBaseActivity {
             TipUtils.getInstance().showToast(getPageContext(), response.msg);
             if (200 == response.code) {
                 allInfo = (InsulinAllInfo) response.object;
+                tvNum.setText(allInfo.getTotal());
                 if (allInfo.getList() != null && allInfo.getList().size() > 0) {
                     smartRefreshLayout.setVisibility(View.VISIBLE);
                     tvNoData.setVisibility(View.GONE);
@@ -68,7 +69,7 @@ public class InsulinStatisticsActivity extends XYSoftUIBaseActivity {
                         infoList.clear();
                     }
 
-                    tvNum.setText(allInfo.getTotal());
+
                     infoListTemp = allInfo.getList();
                     if (infoListTemp.size() < 10) {
                         smartRefreshLayout.finishLoadMoreWithNoMoreData();

@@ -63,7 +63,6 @@
                 android:paddingTop="23dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="23dp"
-                android:text="1200"
                 android:textColor="#FF564F"
                 android:textSize="16sp"
                 android:textStyle="bold" />
