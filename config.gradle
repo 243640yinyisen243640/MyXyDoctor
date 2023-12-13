@@ -5,7 +5,7 @@ ext.versions = [
         'compileSdk' : 29,
 
 
-        'targetSdk'  : 29,
+        'targetSdk'  : 30,
 
         'versionCode': 48,
 

@@ -1,5 +1,6 @@
 package com.xy.xydoctor.ui.activity.insulin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -26,6 +27,7 @@ import java.util.List;
 public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
 
     private TextView tvNum;
+    private TextView tvPlan;
     private TextView tvTime;
     private TextView tvMode;
     private TextView tvRate;
@@ -88,7 +90,7 @@ public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity impl
                 lvDataInfo.setVisibility(View.VISIBLE);
                 tvNoData.setVisibility(View.GONE);
                 List<InsulinDeviceInfo> list = (List<InsulinDeviceInfo>) response.object;
-                InsulinInfusionRecordAdapter deviceListAdapter = new InsulinInfusionRecordAdapter(getPageContext(), list,type);
+                InsulinInfusionRecordAdapter deviceListAdapter = new InsulinInfusionRecordAdapter(getPageContext(), list, type);
                 lvDataInfo.setAdapter(deviceListAdapter);
             } else if (response.code == 30002) {
                 lvDataInfo.setVisibility(View.GONE);
@@ -107,6 +109,7 @@ public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity impl
         View view = View.inflate(getPageContext(), R.layout.activity_insulin_infusion_record, null);
 
         tvNum = view.findViewById(R.id.tv_infusion_info_num);
+        tvPlan = view.findViewById(R.id.tv_main_insulin_infusion_plan);
         tvTime = view.findViewById(R.id.tv_main_insulin_time);
         tvMode = view.findViewById(R.id.tv_main_insulin_mode);
         tvRate = view.findViewById(R.id.tv_main_insulin_rate);
@@ -127,11 +130,16 @@ public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity impl
         tvInfoBig.setOnClickListener(this);
         tvBaseRate.setOnClickListener(this);
         tvWarning.setOnClickListener(this);
+        tvPlan.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.tv_main_insulin_infusion_plan:
+                Intent intent = new Intent(getPageContext(),InsulinInfusionPlanListActivity.class);
+                startActivity(intent);
+                break;
             case R.id.tv_infusion_info_day_all:
                 setBg(tvDayAll, tvInfoBig, tvBaseRate, tvWarning);
                 type = "1";

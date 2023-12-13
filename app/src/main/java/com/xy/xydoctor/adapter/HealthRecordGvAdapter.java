@@ -101,7 +101,7 @@ public class HealthRecordGvAdapter extends CommonAdapter {
                 break;
             case 13:
                 imgPic.setImageResource(R.drawable.healthy_record_insulin);
-                tvText.setText("泵注射数据");
+                tvText.setText("泵输注数据");
                 break;
             default:
                 break;

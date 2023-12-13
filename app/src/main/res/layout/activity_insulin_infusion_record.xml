@@ -28,13 +28,38 @@
             android:paddingEnd="15dp"
             android:paddingBottom="17dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="基本信息"
-                android:textColor="#333333"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="基本信息"
+                    android:textColor="#333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/tv_main_insulin_infusion_plan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_bg_main_90"
+                    android:drawableRight="@drawable/rc_rt_location_arrow"
+                    android:drawablePadding="6dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="8dp"
+                    android:text="输注方案"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/tv_main_insulin_time"
@@ -65,9 +90,9 @@
                     android:id="@+id/tv_main_insulin_rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
                     android:drawableLeft="@drawable/main_insulin_base_rate"
                     android:drawablePadding="3dp"
-                    android:layout_marginStart="11dp"
                     android:text="当前基础率0.40"
                     android:textColor="@color/black_text"
                     android:textSize="11sp" />
@@ -76,9 +101,9 @@
                     android:id="@+id/tv_main_insulin_injction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
                     android:drawableLeft="@drawable/main_insulin_injction"
                     android:drawablePadding="3dp"
-                    android:layout_marginStart="11dp"
                     android:text="已输注0.10"
                     android:textColor="@color/black_text"
                     android:textSize="11sp" />
@@ -211,7 +236,7 @@
         android:text="暂无数据"
         android:textColor="@color/green_text_666"
         android:textSize="14sp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 
 </LinearLayout>
