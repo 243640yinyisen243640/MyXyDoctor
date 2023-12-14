@@ -56,6 +56,8 @@ public class InsulinInfusionPlanListActivity extends XYSoftUIBaseActivity implem
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("输注方案");
+        topViewManager().titleTextView().setText("新增方案");
+        topViewManager().titleTextView().setOnClickListener(v -> {});
         containerView().addView(initView());
         initListner();
         initReFresh();

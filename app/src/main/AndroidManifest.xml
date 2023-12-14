@@ -452,16 +452,24 @@
 
         <!--胰岛素注射-->
 
-        <activity android:name=".ui.activity.insulin.InsulinStatisticsActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.insulin.InsulinStatisticsActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.activity.insulin.InsulinStatisticsListActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.insulin.InsulinStatisticsListActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.insulin.InsulinInfusionRecordListActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.insulin.InsulinInfusionPlanListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.insulin.InsulinPlanDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.insulin.InsulinPlanAddActivity"
             android:screenOrientation="portrait" />
     </application>
 
