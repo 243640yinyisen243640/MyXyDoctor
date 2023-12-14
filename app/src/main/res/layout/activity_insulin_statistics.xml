@@ -37,38 +37,78 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/shape_bg_white_10"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:drawablePadding="7dp"
-                android:gravity="center"
-                android:text="当前佩戴人数"
-                android:textColor="@color/base_black"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/tv_insulin_statistics_with_num"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableRight="@drawable/right_arrow"
-                android:drawablePadding="12dp"
-                android:gravity="right"
-                android:paddingTop="23dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="23dp"
-                android:textColor="#FF564F"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="7dp"
+                    android:gravity="center"
+                    android:text="当前佩戴人数"
+                    android:textColor="@color/base_black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_insulin_statistics_with_num"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/right_arrow"
+                    android:drawablePadding="12dp"
+                    android:gravity="right"
+                    android:paddingTop="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="23dp"
+                    android:textColor="#FF564F"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="7dp"
+                    android:gravity="center"
+                    android:text="当前下发方案次数"
+                    android:textColor="@color/base_black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_insulin_statistics_plan_num"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/right_arrow"
+                    android:drawablePadding="12dp"
+                    android:gravity="right"
+                    android:paddingTop="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="23dp"
+                    android:textColor="#FF564F"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
         </LinearLayout>
+
 
     </LinearLayout>
 
@@ -89,6 +129,7 @@
             android:textColor="@color/base_black"
             android:textSize="17sp"
             android:textStyle="bold" />
+
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/srl_insulin_statistics"
             style="@style/hh_fi_fi"
@@ -109,9 +150,9 @@
             android:drawableTop="@drawable/insulin_statistics_no_data"
             android:drawablePadding="15dp"
             android:gravity="center"
-            android:text="暂无数据"
-            android:paddingBottom="50dp"
             android:paddingTop="50dp"
+            android:paddingBottom="50dp"
+            android:text="暂无数据"
             android:textColor="@color/green_text_666"
             android:textSize="16sp" />
     </LinearLayout>

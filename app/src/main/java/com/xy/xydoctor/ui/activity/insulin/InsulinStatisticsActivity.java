@@ -36,6 +36,7 @@ import retrofit2.Call;
 public class InsulinStatisticsActivity extends XYSoftUIBaseActivity {
     private ImageView ivBack;
     private TextView tvNum;
+    private TextView tvPlanNum;
     private TextView tvNoData;
     private RecyclerView rvStatistics;
     private SmartRefreshLayout smartRefreshLayout;
@@ -57,7 +58,7 @@ public class InsulinStatisticsActivity extends XYSoftUIBaseActivity {
     }
 
     private void getData() {
-        Call<String> requestCall = DataManager.usereqstastic(page,"1", (call, response) -> {
+        Call<String> requestCall = DataManager.usereqstastic(page, "1", (call, response) -> {
             TipUtils.getInstance().showToast(getPageContext(), response.msg);
             if (200 == response.code) {
                 allInfo = (InsulinAllInfo) response.object;
@@ -97,10 +98,15 @@ public class InsulinStatisticsActivity extends XYSoftUIBaseActivity {
             finish();
         });
         tvNum = view.findViewById(R.id.tv_insulin_statistics_with_num);
+        tvPlanNum = view.findViewById(R.id.tv_insulin_statistics_plan_num);
         rvStatistics = view.findViewById(R.id.rv_insulin_statistics_list);
         smartRefreshLayout = view.findViewById(R.id.srl_insulin_statistics);
         tvNoData = view.findViewById(R.id._insulin_statistics_list_no);
         tvNum.setOnClickListener(v -> {
+            Intent intent = new Intent(getPageContext(), InsulinStatisticsListActivity.class);
+            startActivity(intent);
+        });
+        tvPlanNum.setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), InsulinStatisticsListActivity.class);
             startActivity(intent);
         });
@@ -109,9 +115,9 @@ public class InsulinStatisticsActivity extends XYSoftUIBaseActivity {
             public void adapterClickListener(int position, View view) {
                 switch (view.getId()) {
                     case R.id.ll_insulin_statistics_click:
-                       Intent intent = new Intent(getPageContext(),InsulinInfusionRecordListActivity.class);
+                        Intent intent = new Intent(getPageContext(), InsulinInfusionRecordListActivity.class);
                         intent.putExtra("userid", infoList.get(position).getUserid());
-                       startActivity(intent);
+                        startActivity(intent);
                         break;
                     default:
                         break;
