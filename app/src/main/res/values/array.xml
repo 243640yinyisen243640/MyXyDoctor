@@ -529,4 +529,9 @@
         <item>未测</item>
         <item>自定义</item>
     </array>
+
+    <array name="insulin_state_choose">
+        <item>已接受</item>
+        <item>已拒绝</item>
+    </array>
 </resources>
