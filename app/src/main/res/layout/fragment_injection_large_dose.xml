@@ -187,7 +187,7 @@
             android:id="@+id/tv_insulin_large_dose_sure"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_bg_main_green_90"
+            android:background="@drawable/shape_bg_main_90"
             android:gravity="center"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"

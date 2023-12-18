@@ -2,6 +2,7 @@ package com.xy.xydoctor.ui.activity.patienteducation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -138,6 +139,7 @@ public class PatientEducationArticleListActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_submit:
+                Log.i("yys", "selectPosition==" + selectPosition);
                 if (-1 == selectPosition) {
                     ToastUtils.showShort("请先选择患教文章");
                     return;
