@@ -144,13 +144,19 @@ public class PatientEducationArticleListActivity extends BaseActivity {
                     ToastUtils.showShort("请先选择患教文章");
                     return;
                 }
+                Log.i("yys", "selectPosition==" + selectPosition);
+                Log.i("yys", "articleList==" + list.size());
                 Intent intent = new Intent();
                 intent.putExtra("articleList", (Serializable) list);
                 intent.putExtra("selectPosition", selectPosition);
                 setResult(RESULT_OK, intent);
                 finish();
                 break;
+
+            default:
+                break;
         }
+
     }
 
 
