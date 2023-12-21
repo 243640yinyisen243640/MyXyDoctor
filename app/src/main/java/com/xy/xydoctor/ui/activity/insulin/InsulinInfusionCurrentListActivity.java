@@ -19,8 +19,6 @@ import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.insulin.InsulinInfusionPlanAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
@@ -70,11 +68,20 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
      */
     private String type = "1";
 
+    private String startTime;
+    private String endTime;
+    /**
+     * 1接收 2拒绝
+     */
+    private String confirm = "2";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("当前下发方案次数");
         containerView().addView(initView());
+        startTime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
+        endTime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
         initListner();
         initReFresh();
         getData();
@@ -84,12 +91,9 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
         //下拉刷新
         smartRefreshLayout.setEnableRefresh(false);
         //上拉加载
-        smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(RefreshLayout refreshLayout) {
-                page++;
-                getData();
-            }
+        smartRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            page++;
+            getData();
         });
     }
 
@@ -103,24 +107,33 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
 
 
     private void getData() {
-        Call<String> requestCall = DataManager.getInjectionHistoryList("", 1, (call, response) -> {
+        Call<String> requestCall = DataManager.usereqplansta(page, type, startTime, endTime, confirm, (call, response) -> {
             if (200 == response.code) {
                 if (page == 1) {
                     infoList.clear();
                 }
                 infoListTemp = (List<PlanInfo>) response.object;
                 if (infoListTemp != null && infoListTemp.size() > 0) {
+                    smartRefreshLayout.setVisibility(View.VISIBLE);
                     if (infoListTemp.size() < 10) {
+                        llLast.setVisibility(View.VISIBLE);
+                        tvNoData.setVisibility(View.GONE);
                         smartRefreshLayout.finishLoadMoreWithNoMoreData();
                     } else {
                         smartRefreshLayout.finishLoadMore();
                     }
                     infoList.addAll(infoListTemp);
                     adapter.notifyDataSetChanged();
+                } else {
+                    smartRefreshLayout.setVisibility(View.GONE);
+                    tvNoData.setVisibility(View.VISIBLE);
+                    llLast.setVisibility(View.GONE);
                 }
 
-            } else {
-                ToastUtils.showShort("网络连接不可用，请稍后重试！");
+            } else if (30002 == response.code) {
+                smartRefreshLayout.setVisibility(View.GONE);
+                tvNoData.setVisibility(View.VISIBLE);
+                llLast.setVisibility(View.GONE);
             }
         }, (call, t) -> {
             ToastUtils.showShort("网络连接不可用，请稍后重试！");
@@ -129,7 +142,7 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
 
 
     private View initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_insulin_infusion_plan, null);
+        View view = View.inflate(getPageContext(), R.layout.activity_insulin_infusion_current, null);
 
         tvLargeDose = view.findViewById(R.id.tv_infusion_current_large_dose);
         tvBasalRate = view.findViewById(R.id.tv_infusion_current_basal_rate);
@@ -165,9 +178,13 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_infusion_current_large_dose:
+                type = "1";
+                getData();
                 setBg(tvLargeDose, tvBasalRate);
                 break;
             case R.id.tv_infusion_current_basal_rate:
+                type = "2";
+                getData();
                 setBg(tvBasalRate, tvLargeDose);
                 break;
             case R.id.ll_data_infusion_current_start_time:
@@ -189,7 +206,6 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
         List<String> listStr = Arrays.asList(sexStr);
         PickerUtils.showOptionPosition(getPageContext(), (content, position) -> {
             tvstate.setText(content);
-            //保存style
         }, listStr);
     }
 
@@ -203,15 +219,18 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
         int currentYear = currentDate.get(Calendar.YEAR);
-        int currentMonth = currentDate.get(Calendar.MONDAY) - 1;
-        startDate.set(currentYear, currentMonth, 1, 0, 0);
+        startDate.set(currentYear - 120, 0, 1, 0, 0);
         TimePickerView timePickerView = new TimePickerBuilder(getPageContext(), (date, v) -> {
             String content = DataUtils.convertDateToString(date, DataFormatManager.TIME_FORMAT_Y_M_D);
             if (1 == type) {
+                startTime = content;
                 tvStartTime.setText(content);
-
             } else {
-                tvEndTime.setText(content);
+                if (compareTwoTime(startTime, content)) {
+                    endTime = content;
+                    tvEndTime.setText(content);
+                    getData();
+                }
 
             }
 

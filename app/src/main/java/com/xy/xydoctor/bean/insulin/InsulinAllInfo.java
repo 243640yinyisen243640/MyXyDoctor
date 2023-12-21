@@ -10,8 +10,17 @@ import java.util.List;
  */
 public class InsulinAllInfo {
     private String total;
+    private String plan_num;
 
     private List<InsulinPersonInfo> list;
+
+    public String getPlan_num() {
+        return plan_num;
+    }
+
+    public void setPlan_num(String plan_num) {
+        this.plan_num = plan_num;
+    }
 
     public List<InsulinPersonInfo> getList() {
         return list;

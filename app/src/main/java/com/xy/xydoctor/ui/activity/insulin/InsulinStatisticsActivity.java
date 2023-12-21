@@ -63,6 +63,7 @@ public class InsulinStatisticsActivity extends XYSoftUIBaseActivity {
             if (200 == response.code) {
                 allInfo = (InsulinAllInfo) response.object;
                 tvNum.setText(allInfo.getTotal());
+                tvPlanNum.setText(allInfo.getPlan_num());
                 if (allInfo.getList() != null && allInfo.getList().size() > 0) {
                     smartRefreshLayout.setVisibility(View.VISIBLE);
                     tvNoData.setVisibility(View.GONE);
@@ -107,7 +108,7 @@ public class InsulinStatisticsActivity extends XYSoftUIBaseActivity {
             startActivity(intent);
         });
         tvPlanNum.setOnClickListener(v -> {
-            Intent intent = new Intent(getPageContext(), InsulinStatisticsListActivity.class);
+            Intent intent = new Intent(getPageContext(), InsulinInfusionCurrentListActivity.class);
             startActivity(intent);
         });
         adapter = new InsulinStatisticsAdapter(getPageContext(), infoList, new IAdapterViewClickListener() {

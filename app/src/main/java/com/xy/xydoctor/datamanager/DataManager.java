@@ -925,5 +925,26 @@ public class DataManager {
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, PlanAllBaseInfo.class, "/getusereqplandetail", map, successCallBack, failureCallBack);
     }
 
+    /**
+     *
+     * @param page
+     * @param type
+     * @param begin_time
+     * @param end_time
+     * @param confirm 1接收 2拒绝
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> usereqplansta(int page, String type, String begin_time,String end_time,String confirm, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("page", page + "");
+        map.put("access_token", SPStaticUtils.getString("token"));
+        map.put("type", type);
+        map.put("begin_time", begin_time);
+        map.put("end_time", end_time);
+        map.put("confirm", confirm);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, InsulinAllInfo.class, "/usereqplansta", map, successCallBack, failureCallBack);
+    }
 
 }
