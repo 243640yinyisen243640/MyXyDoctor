@@ -42,6 +42,7 @@
         <item>新的患者</item>
         <item>住院申请</item>
         <item>随访待办</item>
+        <item>方案提醒</item>
     </array>
 
     <array name="apply_to_hospital">
@@ -255,6 +256,7 @@
         <item>@drawable/to_do_center</item>
         <item>@drawable/to_do_bottom</item>
         <item>@drawable/to_do_top_bottom_bottom</item>
+        <item>@drawable/doctor_to_do_insulin</item>
     </integer-array>
 
 

@@ -44,11 +44,13 @@ public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity impl
 
     private InsulinDeviceInfo deviceInfo;
 
+    private String userid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("泵输注数据");
+        userid = getIntent().getStringExtra("userid");
         containerView().addView(initView());
         initListner();
         getDataInfo();
@@ -56,7 +58,7 @@ public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity impl
 
     private void getDataInfo() {
         String token = SPStaticUtils.getString("token");
-        String userid = getIntent().getStringExtra("userid");
+
         DataManager.geteqinfo(userid, (call, response) -> {
             if (response.code == 200) {
                 deviceInfo = (InsulinDeviceInfo) response.object;
@@ -74,7 +76,7 @@ public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity impl
             tvMode.setText("1".equals(deviceInfo.getModel()) ? "基础模式1" : "基础模式2");
             tvRate.setText("当前基础率" + deviceInfo.getBase_rate());
             tvInjction.setText("已输注" + deviceInfo.getValue());
-            tvTime.setText(deviceInfo.getUpdatetime());
+            tvTime.setText("最近同步时间："+deviceInfo.getUpdatetime());
         } else {
             tvMode.setText("暂无");
             tvRate.setText("暂无");
@@ -84,7 +86,7 @@ public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity impl
     }
 
     private void getData() {
-        String userid = getIntent().getStringExtra("userid");
+
         DataManager.geteqinsulins(userid, type, (call, response) -> {
             if (response.code == 200) {
                 lvDataInfo.setVisibility(View.VISIBLE);
@@ -137,7 +139,8 @@ public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity impl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_main_insulin_infusion_plan:
-                Intent intent = new Intent(getPageContext(),InsulinInfusionPlanListActivity.class);
+                Intent intent = new Intent(getPageContext(), InsulinInfusionPlanListActivity.class);
+                intent.putExtra("userid", userid);
                 startActivity(intent);
                 break;
             case R.id.tv_infusion_info_day_all:

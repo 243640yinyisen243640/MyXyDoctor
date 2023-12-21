@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,11 +22,11 @@ import java.util.List;
  * 传参:
  * 描述:
  */
-public class BaseRateDetailsAdapter extends RecyclerView.Adapter<BaseRateDetailsAdapter.ViewHolder> {
+public class BaseRateDetailsAddAdapter extends RecyclerView.Adapter<BaseRateDetailsAddAdapter.ViewHolder> {
     private Context context;
     private List<PlanInfo> listInfos;
 
-    public BaseRateDetailsAdapter(Context context, List<PlanInfo> listInfos) {
+    public BaseRateDetailsAddAdapter(Context context, List<PlanInfo> listInfos) {
         this.context = context;
         this.listInfos = listInfos;
     }
@@ -33,15 +34,15 @@ public class BaseRateDetailsAdapter extends RecyclerView.Adapter<BaseRateDetails
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_base_rate_details, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_base_rate_details_add, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvStarTime.setText(listInfos.get(position).getBegin());
-        holder.tvEndTime.setText(listInfos.get(position).getEnd());
-        holder.tvRate.setText(listInfos.get(position).getValue());
+        holder.tvStarTime.setText(listInfos.get(position).getAddtime());
+        holder.tvStarTime.setText(listInfos.get(position).getAddtime());
+        holder.tvStarTime.setText(listInfos.get(position).getAddtime());
     }
 
 
@@ -53,13 +54,13 @@ public class BaseRateDetailsAdapter extends RecyclerView.Adapter<BaseRateDetails
     protected class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvStarTime;
         TextView tvEndTime;
-        TextView tvRate;
+        EditText etRate;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvStarTime = itemView.findViewById(R.id.tv_infusion_base_rate_star_time_item);
-            tvEndTime = itemView.findViewById(R.id.tv_infusion_base_rate_end_time_item);
-            tvRate = itemView.findViewById(R.id.tv_infusion_base_rate_rate_item);
+            tvStarTime = itemView.findViewById(R.id.tv_infusion_base_rate_star_time_item_add);
+            tvEndTime = itemView.findViewById(R.id.tv_infusion_base_rate_end_time_item_add);
+            etRate = itemView.findViewById(R.id.et_plan_add_base_rate_hour_add);
         }
     }
 }

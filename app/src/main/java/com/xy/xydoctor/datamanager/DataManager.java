@@ -887,11 +887,12 @@ public class DataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> getusereqplan(String token, String type, String page, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getusereqplan(String token, String type, String page,String userid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("access_token", token);
         map.put("type", type);
         map.put("page", page);
+        map.put("userid", userid);
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, PlanInfo.class, "/usereqplan", map, successCallBack, failureCallBack);
     }
 
@@ -904,10 +905,11 @@ public class DataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> getusereqplandetail(String token, String plan_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getusereqplandetail(String token, String plan_id,String userid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("access_token", token);
         map.put("plan_id", plan_id);
+        map.put("userid", userid);
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, PlanAllInfo.class, "/usereqplandetail", map, successCallBack, failureCallBack);
     }
 
@@ -918,11 +920,12 @@ public class DataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> getusereqplandetailBase(String token, String plan_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getusereqplandetailBase(String token, String plan_id,String userid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("access_token", token);
         map.put("plan_id", plan_id);
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, PlanAllBaseInfo.class, "/getusereqplandetail", map, successCallBack, failureCallBack);
+        map.put("userid", userid);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, PlanAllBaseInfo.class, "/usereqplandetail", map, successCallBack, failureCallBack);
     }
 
     /**

@@ -2,7 +2,6 @@ package com.xy.xydoctor.ui.activity.insulin;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +34,7 @@ public class InsulinDetailsBaseRateActivity extends XYSoftUIBaseActivity {
     private List<PlanInfo> listInfos = new ArrayList<>();
 
     private String plan_id;
+    private String userid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class InsulinDetailsBaseRateActivity extends XYSoftUIBaseActivity {
         String time = getIntent().getStringExtra("time");
         topViewManager().titleTextView().setText(time);
         plan_id = getIntent().getStringExtra("plan_id");
+        userid = getIntent().getStringExtra("userid");
 
         initView();
         adapter = new BaseRateDetailsAdapter(getPageContext(), listInfos);
@@ -52,7 +53,7 @@ public class InsulinDetailsBaseRateActivity extends XYSoftUIBaseActivity {
 
     private void getData() {
         String token = SPStaticUtils.getString("token");
-        Call<String> requestCall = DataManager.getusereqplandetailBase(token, plan_id, (call, response) -> {
+        Call<String> requestCall = DataManager.getusereqplandetailBase(token, plan_id, userid, (call, response) -> {
             if (200 == response.code) {
                 PlanAllBaseInfo allBaseInfo = (PlanAllBaseInfo) response.object;
 
@@ -60,10 +61,10 @@ public class InsulinDetailsBaseRateActivity extends XYSoftUIBaseActivity {
                 listInfos.addAll(allBaseInfo.getData());
                 adapter.notifyDataSetChanged();
             } else {
-                TipUtils.getInstance().showToast(getPageContext(),response.msg);
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (call, t) -> {
-            TipUtils.getInstance().showToast(getPageContext(),"网络连接不可用，请稍后重试！");
+            TipUtils.getInstance().showToast(getPageContext(), "网络连接不可用，请稍后重试！");
         });
     }
 
@@ -75,7 +76,6 @@ public class InsulinDetailsBaseRateActivity extends XYSoftUIBaseActivity {
         containerView().addView(view);
 
     }
-
 
 
 }

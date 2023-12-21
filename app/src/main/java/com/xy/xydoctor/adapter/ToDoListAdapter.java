@@ -85,6 +85,20 @@ public class ToDoListAdapter extends CommonAdapter<ToDoListBean> {
                         tvDesc.setText("暂无随访待办");
                     }
                     break;
+                case 3:
+                    if (follow > 0) {
+                        tvRedPoint.setVisibility(View.VISIBLE);
+                        tvRedPoint.setText(isAbove99(follow) + "");
+                        String admittedToHospital = String.format(Utils.getApp().getString(R.string.to_do_list_follow_up_visit_wait_do), followname);
+                        tvDesc.setText(admittedToHospital);
+                    } else {
+                        tvRedPoint.setVisibility(View.GONE);
+                        tvDesc.setText("暂无随访待办");
+                    }
+                    break;
+
+                default:
+                    break;
             }
             viewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -103,7 +117,7 @@ public class ToDoListAdapter extends CommonAdapter<ToDoListBean> {
                     }
                     intent.putExtra("userid", userId);
                     intent.putExtra("type", type);
-//                    intent.putExtra("docid",)
+                    //                    intent.putExtra("docid",)
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Utils.getApp().startActivity(intent);
                 }

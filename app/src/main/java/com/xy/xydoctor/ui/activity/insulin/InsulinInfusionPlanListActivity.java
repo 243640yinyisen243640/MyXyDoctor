@@ -52,18 +52,23 @@ public class InsulinInfusionPlanListActivity extends XYSoftUIBaseActivity implem
      * 1大剂量 2基础率
      */
     private String type = "1";
+    private String userid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("输注方案");
+        topViewManager().moreTextView().setText("新增方案");
+        topViewManager().moreTextView().setOnClickListener(v -> {
+            Intent intent = new Intent(getPageContext(), InsulinPlanAddActivity.class);
+            startActivity(intent);
+        });
+        userid = getIntent().getStringExtra("userid");
         containerView().addView(initView());
         initListner();
         initReFresh();
         getData();
     }
-
-
 
 
     private void initReFresh() {
@@ -87,7 +92,8 @@ public class InsulinInfusionPlanListActivity extends XYSoftUIBaseActivity implem
 
     private void getData() {
         String token = SPStaticUtils.getString("token");
-        Call<String> requestCall = DataManager.getusereqplan(token, type, page + "", (call, response) -> {
+
+        Call<String> requestCall = DataManager.getusereqplan(token, type, page + "", userid, (call, response) -> {
             if (200 == response.code) {
                 if (page == 1) {
                     infoList.clear();
@@ -116,7 +122,7 @@ public class InsulinInfusionPlanListActivity extends XYSoftUIBaseActivity implem
                 llLast.setVisibility(View.GONE);
             }
         }, (call, t) -> {
-            TipUtils.getInstance().showToast(getPageContext(),"网络连接不可用，请稍后重试！");
+            TipUtils.getInstance().showToast(getPageContext(), "网络连接不可用，请稍后重试！");
         });
     }
 
@@ -143,11 +149,13 @@ public class InsulinInfusionPlanListActivity extends XYSoftUIBaseActivity implem
                             Intent intent = new Intent(getPageContext(), InsulinDetailsLargeDoseActivity.class);
                             intent.putExtra("time", infoList.get(position).getAddtime());
                             intent.putExtra("plan_id", infoList.get(position).getPlan_id());
+                            intent.putExtra("userid", userid);
                             startActivity(intent);
                         } else {
                             Intent intent = new Intent(getPageContext(), InsulinDetailsBaseRateActivity.class);
                             intent.putExtra("time", infoList.get(position).getAddtime());
                             intent.putExtra("plan_id", infoList.get(position).getPlan_id());
+                            intent.putExtra("userid", userid);
                             startActivity(intent);
                         }
 

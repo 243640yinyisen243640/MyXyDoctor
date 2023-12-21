@@ -43,7 +43,8 @@ public class InsulinDetailsLargeDoseActivity extends XYSoftUIBaseActivity {
 
     private void getData() {
         String token = SPStaticUtils.getString("token");
-        Call<String> requestCall = DataManager.getusereqplandetail(token, plan_id, (call, response) -> {
+        String userid = getIntent().getStringExtra("userid");
+        Call<String> requestCall = DataManager.getusereqplandetail(token, plan_id, userid, (call, response) -> {
             if (200 == response.code) {
                 PlanAllInfo allInfo = (PlanAllInfo) response.object;
 
@@ -52,10 +53,10 @@ public class InsulinDetailsLargeDoseActivity extends XYSoftUIBaseActivity {
                 tvDinner.setText(allInfo.getData().getBig3());
                 tvMore.setText(allInfo.getData().getBig4());
             } else {
-                TipUtils.getInstance().showToast(getPageContext(),response.msg);
+                TipUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (call, t) -> {
-            TipUtils.getInstance().showToast(getPageContext(),"网络连接不可用，请稍后重试！");
+            TipUtils.getInstance().showToast(getPageContext(), "网络连接不可用，请稍后重试！");
         });
     }
 
@@ -66,7 +67,6 @@ public class InsulinDetailsLargeDoseActivity extends XYSoftUIBaseActivity {
         tvLunnch = view.findViewById(R.id.tv_insulin_large_dose_lunnch);
         tvDinner = view.findViewById(R.id.tv_insulin_large_dose_dinner);
         tvMore = view.findViewById(R.id.tv_insulin_large_dose_more);
-
         containerView().addView(view);
 
     }

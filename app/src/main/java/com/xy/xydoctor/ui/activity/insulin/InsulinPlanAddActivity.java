@@ -3,7 +3,6 @@ package com.xy.xydoctor.ui.activity.insulin;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -11,11 +10,8 @@ import androidx.fragment.app.Fragment;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.community_manager.ViewPagerAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
-import com.xy.xydoctor.bean.community_manamer.InjectionBaseData;
-import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.ui.fragment.insulin.InsulinBaseRateAddFragment;
 import com.xy.xydoctor.ui.fragment.insulin.InsulinLargeDoseAddFragment;
-import com.xy.xydoctor.utils.TipUtils;
 import com.xy.xydoctor.view.CustomViewPager;
 
 import java.util.ArrayList;
@@ -30,10 +26,8 @@ import java.util.List;
 public class InsulinPlanAddActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
     private LinearLayout tvLargeDose;
     private LinearLayout tvBasalRate;
-    private TextView tvRateNum;
     private CustomViewPager viewPager;
     private List<Fragment> fragments;
-    private InjectionBaseData injectionBaseData;
 
 
     @Override
@@ -42,8 +36,8 @@ public class InsulinPlanAddActivity extends XYSoftUIBaseActivity implements View
         String time = getIntent().getStringExtra("time");
         topViewManager().titleTextView().setText(time);
         containerView().addView(initView());
+        initValues();
         initListener();
-        getData();
     }
 
     private void initListener() {
@@ -89,17 +83,7 @@ public class InsulinPlanAddActivity extends XYSoftUIBaseActivity implements View
     }
 
 
-    private void getData() {
-        DataManager.getInjectionBaseInfo("", (call, response) -> {
-            if (response.code == 200) {
-                injectionBaseData = (InjectionBaseData) response.object;
-                setData();
-                initValues();
-            }
-        }, (call, t) -> {
-            TipUtils.getInstance().showToast(getPageContext(), R.string.please_input_die_reason);
-        });
-    }
+
 
     private void setData() {
 

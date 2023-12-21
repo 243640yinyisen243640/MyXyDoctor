@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lyd.baselib.util.eventbus.EventBusUtils;
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.adapter.insulin.BaseRateDetailsAdapter;
+import com.xy.xydoctor.adapter.insulin.BaseRateDetailsAddAdapter;
 import com.xy.xydoctor.base.adapter.TabFragmentAdapter;
 import com.xy.xydoctor.base.fragment.XYBaseFragment;
 import com.xy.xydoctor.bean.insulin.PlanInfo;
@@ -34,7 +34,7 @@ public class InsulinBaseRateAddFragment extends XYBaseFragment implements TabFra
     private TextView tvRate;
     private RecyclerView LvList;
     private TextView tvSure;
-    private BaseRateDetailsAdapter adapter;
+    private BaseRateDetailsAddAdapter adapter;
     private List<PlanInfo> listInfos = new ArrayList<>();
 
     public static InsulinBaseRateAddFragment newInstance() {
@@ -49,7 +49,7 @@ public class InsulinBaseRateAddFragment extends XYBaseFragment implements TabFra
     protected void onCreate() {
         topViewManager().topView().removeAllViews();
         initView();
-        adapter = new BaseRateDetailsAdapter(getPageContext(), listInfos);
+        adapter = new BaseRateDetailsAddAdapter(getPageContext(), listInfos);
         LvList.setLayoutManager(new LinearLayoutManager(getPageContext()));
         LvList.setAdapter(adapter);
         EventBusUtils.register(this);
