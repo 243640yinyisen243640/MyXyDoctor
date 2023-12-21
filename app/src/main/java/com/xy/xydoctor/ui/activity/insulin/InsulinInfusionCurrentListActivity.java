@@ -24,9 +24,10 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.insulin.InsulinInfusionPlanAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
-import com.xy.xydoctor.bean.insulin.InsulinDeviceInfo;
+import com.xy.xydoctor.bean.insulin.PlanInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.datamanager.DataManager;
+import com.xy.xydoctor.imp.IAdapterViewClickListener;
 import com.xy.xydoctor.utils.DataUtils;
 import com.xy.xydoctor.utils.PickerUtils;
 
@@ -50,8 +51,8 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
     private RecyclerView recyclerView;
     private SmartRefreshLayout smartRefreshLayout;
     private InsulinInfusionPlanAdapter adapter;
-    private List<InsulinDeviceInfo> infoList = new ArrayList<>();
-    private List<InsulinDeviceInfo> infoListTemp = new ArrayList<>();
+    private List<PlanInfo> infoList = new ArrayList<>();
+    private List<PlanInfo> infoListTemp = new ArrayList<>();
     private int page = 1;
 
     private TextView tvLargeDose;
@@ -107,7 +108,7 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
                 if (page == 1) {
                     infoList.clear();
                 }
-                infoListTemp = (List<InsulinDeviceInfo>) response.object;
+                infoListTemp = (List<PlanInfo>) response.object;
                 if (infoListTemp != null && infoListTemp.size() > 0) {
                     if (infoListTemp.size() < 10) {
                         smartRefreshLayout.finishLoadMoreWithNoMoreData();
@@ -143,7 +144,17 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
         recyclerView = view.findViewById(R.id.rv_infusion_current);
         llLast = view.findViewById(R.id.ll_insulin_infusion_current_last);
         tvNoData = view.findViewById(R.id.tv_insulin_current_no_data);
-        adapter = new InsulinInfusionPlanAdapter(getPageContext(), infoList, type);
+        adapter = new InsulinInfusionPlanAdapter(getPageContext(), infoList, type, new IAdapterViewClickListener() {
+            @Override
+            public void adapterClickListener(int position, View view) {
+
+            }
+
+            @Override
+            public void adapterClickListener(int position, int index, View view) {
+
+            }
+        });
         recyclerView.setLayoutManager(new LinearLayoutManager(getPageContext()));
         recyclerView.setAdapter(adapter);
         return view;

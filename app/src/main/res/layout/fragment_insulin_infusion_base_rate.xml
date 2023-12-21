@@ -49,32 +49,12 @@
 
 
     </LinearLayout>
-
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_base_rate_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_base_rate_detail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="60dp"
-            android:overScrollMode="never" />
-
-        <TextView
-            android:id="@+id/tv_insulin_base_rate_sure"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@drawable/shape_bg_main_90"
-            android:gravity="center"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:text="接受此方案"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:overScrollMode="never" />
 
 
 </LinearLayout>

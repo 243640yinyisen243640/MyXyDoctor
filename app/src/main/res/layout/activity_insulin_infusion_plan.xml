@@ -46,7 +46,6 @@
                 android:id="@+id/tv_infusion_basal_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableBottom="@drawable/shape_red_30_3_2"
                 android:drawablePadding="12dp"
                 android:gravity="center"
                 android:paddingTop="15dp"

@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.bean.insulin.InsulinDeviceInfo;
+import com.xy.xydoctor.bean.insulin.PlanInfo;
 
 import java.util.List;
 
@@ -24,9 +24,9 @@ import java.util.List;
  */
 public class BaseRateDetailsAdapter extends RecyclerView.Adapter<BaseRateDetailsAdapter.ViewHolder> {
     private Context context;
-    private List<InsulinDeviceInfo> listInfos;
+    private List<PlanInfo> listInfos;
 
-    public BaseRateDetailsAdapter(Context context, List<InsulinDeviceInfo> listInfos) {
+    public BaseRateDetailsAdapter(Context context, List<PlanInfo> listInfos) {
         this.context = context;
         this.listInfos = listInfos;
     }
@@ -40,9 +40,9 @@ public class BaseRateDetailsAdapter extends RecyclerView.Adapter<BaseRateDetails
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvStarTime.setText(listInfos.get(position).getDatetime() + "");
-        holder.tvStarTime.setText(listInfos.get(position).getDatetime() + "");
-        holder.tvStarTime.setText(listInfos.get(position).getDatetime() + "");
+        holder.tvStarTime.setText(listInfos.get(position).getAddtime());
+        holder.tvStarTime.setText(listInfos.get(position).getAddtime());
+        holder.tvStarTime.setText(listInfos.get(position).getAddtime());
     }
 
 

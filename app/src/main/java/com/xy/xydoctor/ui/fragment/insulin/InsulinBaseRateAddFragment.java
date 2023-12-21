@@ -12,7 +12,7 @@ import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.insulin.BaseRateDetailsAdapter;
 import com.xy.xydoctor.base.adapter.TabFragmentAdapter;
 import com.xy.xydoctor.base.fragment.XYBaseFragment;
-import com.xy.xydoctor.bean.insulin.InsulinDeviceInfo;
+import com.xy.xydoctor.bean.insulin.PlanInfo;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.utils.TipUtils;
 
@@ -35,7 +35,7 @@ public class InsulinBaseRateAddFragment extends XYBaseFragment implements TabFra
     private RecyclerView LvList;
     private TextView tvSure;
     private BaseRateDetailsAdapter adapter;
-    private List<InsulinDeviceInfo> listInfos = new ArrayList<>();
+    private List<PlanInfo> listInfos = new ArrayList<>();
 
     public static InsulinBaseRateAddFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -61,7 +61,7 @@ public class InsulinBaseRateAddFragment extends XYBaseFragment implements TabFra
         Call<String> requestCall = DataManager.getInjectionList("", "", (call, response) -> {
             if (200 == response.code) {
                 listInfos.clear();
-                listInfos.addAll((List<InsulinDeviceInfo>) response.object);
+                listInfos.addAll((List<PlanInfo>) response.object);
                 adapter.notifyDataSetChanged();
             } else {
                 TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);

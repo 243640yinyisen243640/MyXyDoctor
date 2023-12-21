@@ -30,6 +30,9 @@ import com.xy.xydoctor.bean.community_manamer.SugarOrPressureInfo;
 import com.xy.xydoctor.bean.community_manamer.UserRecordDataInfo;
 import com.xy.xydoctor.bean.insulin.InsulinAllInfo;
 import com.xy.xydoctor.bean.insulin.InsulinDeviceInfo;
+import com.xy.xydoctor.bean.insulin.PlanAllBaseInfo;
+import com.xy.xydoctor.bean.insulin.PlanAllInfo;
+import com.xy.xydoctor.bean.insulin.PlanInfo;
 import com.xy.xydoctor.constant.ConstantParam;
 import com.xy.xydoctor.param.UserAddReq;
 import com.xy.xydoctor.param.UserRecordReq;
@@ -872,4 +875,55 @@ public class DataManager {
         map.put("type", type);
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, InsulinAllInfo.class, "/usereqstastic", map, successCallBack, failureCallBack);
     }
+
+
+    /**
+     * 方案列表
+     *
+     * @param token
+     * @param type            1大剂量 2基础率
+     * @param page
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getusereqplan(String token, String type, String page, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("access_token", token);
+        map.put("type", type);
+        map.put("page", page);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, PlanInfo.class, "/usereqplan", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 方案详情
+     *
+     * @param token
+     * @param plan_id
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getusereqplandetail(String token, String plan_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("access_token", token);
+        map.put("plan_id", plan_id);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, PlanAllInfo.class, "/usereqplandetail", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param token
+     * @param plan_id
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getusereqplandetailBase(String token, String plan_id, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("access_token", token);
+        map.put("plan_id", plan_id);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, PlanAllBaseInfo.class, "/getusereqplandetail", map, successCallBack, failureCallBack);
+    }
+
+
 }

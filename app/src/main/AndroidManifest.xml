@@ -466,13 +466,16 @@
             android:name=".ui.activity.insulin.InsulinInfusionPlanListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.insulin.InsulinPlanDetailsActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.activity.insulin.InsulinPlanAddActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.insulin.InsulinInfusionCurrentListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.insulin.InsulinDetailsLargeDoseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.insulin.InsulinDetailsBaseRateActivity"
             android:screenOrientation="portrait" />
     </application>
 

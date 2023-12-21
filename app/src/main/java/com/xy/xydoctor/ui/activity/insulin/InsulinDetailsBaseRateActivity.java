@@ -1,17 +1,18 @@
-package com.xy.xydoctor.ui.fragment.insulin;
+package com.xy.xydoctor.ui.activity.insulin;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lyd.baselib.util.eventbus.EventBusUtils;
+import com.blankj.utilcode.util.SPStaticUtils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.adapter.insulin.BaseRateDetailsAdapter;
-import com.xy.xydoctor.base.adapter.TabFragmentAdapter;
-import com.xy.xydoctor.base.fragment.XYBaseFragment;
+import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
+import com.xy.xydoctor.bean.insulin.PlanAllBaseInfo;
 import com.xy.xydoctor.bean.insulin.PlanInfo;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.utils.TipUtils;
@@ -28,60 +29,53 @@ import retrofit2.Call;
  * @author android.yys
  * @date 2021/1/15
  */
-public class InsulinBaseRateFragment extends XYBaseFragment implements TabFragmentAdapter.RefeshFragment {
-    private TextView tvStarTime;
-    private TextView tvEndTime;
-    private TextView tvRate;
+public class InsulinDetailsBaseRateActivity extends XYSoftUIBaseActivity {
     private RecyclerView LvList;
-    private TextView tvSure;
     private BaseRateDetailsAdapter adapter;
     private List<PlanInfo> listInfos = new ArrayList<>();
 
-    public static InsulinBaseRateFragment newInstance() {
-        Bundle bundle = new Bundle();
-        InsulinBaseRateFragment fragment = new InsulinBaseRateFragment();
-        fragment.setArguments(bundle);
-        return fragment;
-    }
-
+    private String plan_id;
 
     @Override
-    protected void onCreate() {
-        topViewManager().topView().removeAllViews();
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        String time = getIntent().getStringExtra("time");
+        topViewManager().titleTextView().setText(time);
+        plan_id = getIntent().getStringExtra("plan_id");
+
         initView();
         adapter = new BaseRateDetailsAdapter(getPageContext(), listInfos);
         LvList.setLayoutManager(new LinearLayoutManager(getPageContext()));
         LvList.setAdapter(adapter);
-        EventBusUtils.register(this);
         getData();
     }
 
     private void getData() {
-
-        Call<String> requestCall = DataManager.getInjectionList("", "", (call, response) -> {
+        String token = SPStaticUtils.getString("token");
+        Call<String> requestCall = DataManager.getusereqplandetailBase(token, plan_id, (call, response) -> {
             if (200 == response.code) {
+                PlanAllBaseInfo allBaseInfo = (PlanAllBaseInfo) response.object;
+
                 listInfos.clear();
-                listInfos.addAll((List<PlanInfo>) response.object);
+                listInfos.addAll(allBaseInfo.getData());
                 adapter.notifyDataSetChanged();
             } else {
-                TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+                TipUtils.getInstance().showToast(getPageContext(),response.msg);
             }
         }, (call, t) -> {
-            TipUtils.getInstance().showToast(getPageContext(), R.string.network_error);
+            TipUtils.getInstance().showToast(getPageContext(),"网络连接不可用，请稍后重试！");
         });
     }
 
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.fragment_insulin_infusion_base_rate, null);
-        tvStarTime = view.findViewById(R.id.tv_infusion_base_rate_star_time);
-        tvEndTime = view.findViewById(R.id.tv_infusion_base_rate_end_time);
-        tvRate = view.findViewById(R.id.tv_infusion_base_rate_rate);
         LvList = view.findViewById(R.id.rv_base_rate_detail);
-        tvSure = view.findViewById(R.id.tv_insulin_base_rate_sure);
+
         containerView().addView(view);
 
     }
+
 
 
 }
