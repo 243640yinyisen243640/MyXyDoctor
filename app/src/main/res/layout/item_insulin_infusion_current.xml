@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_insulin_add_device_click"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_insulin_infusion_plan_click"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/iv_insulin_infusion_current_head"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/defalut_head_imge" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_insulin_infusion_current_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="马晓华"
+                android:textColor="@color/base_black"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_insulin_infusion_current_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:includeFontPadding="false"
+                android:text="2022-02-12 15:12"
+                android:textColor="#9D9D9D"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_insulin_infusion_current_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/insulin_current_tel"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="136826263535"
+            android:textColor="#333333"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/line_grey_1"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp" />
+
+
+</LinearLayout>

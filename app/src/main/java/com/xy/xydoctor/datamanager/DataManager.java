@@ -946,7 +946,7 @@ public class DataManager {
         map.put("begin_time", begin_time);
         map.put("end_time", end_time);
         map.put("confirm", confirm);
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, InsulinAllInfo.class, "/usereqplansta", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_ARRAY, PlanInfo.class, "/usereqplansta", map, successCallBack, failureCallBack);
     }
 
     /**

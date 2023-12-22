@@ -3,6 +3,7 @@ package com.xy.xydoctor.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import com.blankj.utilcode.util.Utils;
 import com.xy.xydoctor.R;
 import com.xy.xydoctor.bean.ToDoListBean;
 import com.xy.xydoctor.ui.activity.followupvisit.FollowUpVisitWaitDoListActivity;
+import com.xy.xydoctor.ui.activity.insulin.InsulinInfusionCurrentListActivity;
 import com.xy.xydoctor.ui.activity.todo.ApplyToHospitalListActivity;
 import com.xy.xydoctor.ui.activity.todo.NewPatientListActivity;
 import com.xy.xydoctor.ui.activity.todo.SystemMsgListActivity;
@@ -21,15 +23,18 @@ import java.util.List;
 public class ToDoListAdapter extends CommonAdapter<ToDoListBean> {
     private String type;
     private int userId;
+    private List<ToDoListBean> datas;
 
     public ToDoListAdapter(Context context, int layoutId, List<ToDoListBean> datas, String type, int userId) {
         super(context, layoutId, datas);
         this.type = type;
         this.userId = userId;
+        this.datas = datas;
     }
 
     @Override
     protected void convert(ViewHolder viewHolder, ToDoListBean item, int position) {
+        Log.i("yys", "datas.size==" + datas.size());
         //系统消息数量
         int xtxx = item.getXtxx();
         //新的患者数量
@@ -44,6 +49,11 @@ public class ToDoListAdapter extends CommonAdapter<ToDoListBean> {
         int follow = item.getFollow();
         //最新随访者名字
         String followname = item.getFollowname();
+
+
+        int eqInsulins = Integer.parseInt(item.getEqInsulins());
+        //最新接收的名字
+        String equserName = item.getEquser_name();
         TextView tvRedPoint = viewHolder.getView(R.id.tv_red_point);
         TextView tvDesc = viewHolder.getView(R.id.tv_desc);
         if ("homeSign".equals(type)) {
@@ -86,14 +96,14 @@ public class ToDoListAdapter extends CommonAdapter<ToDoListBean> {
                     }
                     break;
                 case 3:
-                    if (follow > 0) {
+                    if (eqInsulins > 0) {
                         tvRedPoint.setVisibility(View.VISIBLE);
-                        tvRedPoint.setText(isAbove99(follow) + "");
-                        String admittedToHospital = String.format(Utils.getApp().getString(R.string.to_do_list_follow_up_visit_wait_do), followname);
-                        tvDesc.setText(admittedToHospital);
+                        tvRedPoint.setText(isAbove99(eqInsulins) + "");
+                        //                        String admittedToHospital = String.format(Utils.getApp().getString(R.string.to_do_list_follow_up_visit_wait_do), followname);
+                        tvDesc.setText(equserName);
                     } else {
                         tvRedPoint.setVisibility(View.GONE);
-                        tvDesc.setText("暂无随访待办");
+                        tvDesc.setText("暂无最新通知");
                     }
                     break;
 
@@ -113,6 +123,11 @@ public class ToDoListAdapter extends CommonAdapter<ToDoListBean> {
                             break;
                         case 2:
                             intent = new Intent(Utils.getApp(), FollowUpVisitWaitDoListActivity.class);
+                            break;
+                        case 3:
+                            intent = new Intent(Utils.getApp(), InsulinInfusionCurrentListActivity.class);
+                            break;
+                        default:
                             break;
                     }
                     intent.putExtra("userid", userId);
@@ -171,6 +186,19 @@ public class ToDoListAdapter extends CommonAdapter<ToDoListBean> {
                         tvDesc.setText("暂无随访待办");
                     }
                     break;
+                case 4:
+                    if (eqInsulins > 0) {
+                        tvRedPoint.setVisibility(View.VISIBLE);
+                        tvRedPoint.setText(isAbove99(eqInsulins) + "");
+                        //                        String admittedToHospital = String.format(Utils.getApp().getString(R.string.to_do_list_follow_up_visit_wait_do), followname);
+                        tvDesc.setText(equserName);
+                    } else {
+                        tvRedPoint.setVisibility(View.GONE);
+                        tvDesc.setText("暂无最新通知");
+                    }
+                    break;
+                default:
+                    break;
             }
             viewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -188,6 +216,11 @@ public class ToDoListAdapter extends CommonAdapter<ToDoListBean> {
                             break;
                         case 3:
                             intent = new Intent(Utils.getApp(), FollowUpVisitWaitDoListActivity.class);
+                            break;
+                        case 4:
+                            intent = new Intent(Utils.getApp(), InsulinInfusionCurrentListActivity.class);
+                            break;
+                        default:
                             break;
                     }
                     intent.putExtra("userid", userId);

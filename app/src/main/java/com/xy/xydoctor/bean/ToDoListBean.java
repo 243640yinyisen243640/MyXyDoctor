@@ -19,6 +19,30 @@ public class ToDoListBean {
 
     private int follow;
     private String followname;
+    /**
+     * 数量
+     */
+    private String eqInsulins;
+    /**
+     * 标题名称
+     */
+    private String equser_name;
+
+    public String getEqInsulins() {
+        return eqInsulins;
+    }
+
+    public void setEqInsulins(String eqInsulins) {
+        this.eqInsulins = eqInsulins;
+    }
+
+    public String getEquser_name() {
+        return equser_name;
+    }
+
+    public void setEquser_name(String equser_name) {
+        this.equser_name = equser_name;
+    }
 
     public int getFollow() {
         return follow;

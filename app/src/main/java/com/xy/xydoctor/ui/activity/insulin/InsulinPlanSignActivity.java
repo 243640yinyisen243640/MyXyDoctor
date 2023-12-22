@@ -85,6 +85,7 @@ public class InsulinPlanSignActivity extends XYSoftUIBaseActivity {
         DataManager.useraddeqplan(type, path, data, userid, (call, response) -> {
             if (response.code == 200) {
                 delFile(path);
+                finish();
             }
             TipUtils.getInstance().showToast(getPageContext(), response.msg);
         }, (call, t) -> {

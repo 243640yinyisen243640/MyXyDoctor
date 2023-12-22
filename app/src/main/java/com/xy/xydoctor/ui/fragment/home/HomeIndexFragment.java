@@ -278,6 +278,12 @@ public class HomeIndexFragment extends BaseEventBusFragment implements SimpleImm
                 .create();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getIndex(beginTime, endTime);
+    }
+
     /**
      * 设置红点
      *

@@ -87,6 +87,12 @@ public class InsulinInfusionPlanListActivity extends XYSoftUIBaseActivity implem
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
+    }
+
     private void initListner() {
         llLargeDose.setOnClickListener(this);
         llBasalRate.setOnClickListener(this);

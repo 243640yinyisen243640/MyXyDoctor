@@ -2,6 +2,7 @@ package com.xy.xydoctor.ui.activity.insulin;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xy.xydoctor.R;
-import com.xy.xydoctor.adapter.insulin.InsulinInfusionPlanAdapter;
+import com.xy.xydoctor.adapter.insulin.InsulinInfusionCurrentAdapter;
 import com.xy.xydoctor.base.activity.XYSoftUIBaseActivity;
 import com.xy.xydoctor.bean.insulin.PlanInfo;
 import com.xy.xydoctor.constant.DataFormatManager;
@@ -48,7 +50,7 @@ import retrofit2.Call;
 public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity implements View.OnClickListener {
     private RecyclerView recyclerView;
     private SmartRefreshLayout smartRefreshLayout;
-    private InsulinInfusionPlanAdapter adapter;
+    private InsulinInfusionCurrentAdapter adapter;
     private List<PlanInfo> infoList = new ArrayList<>();
     private List<PlanInfo> infoListTemp = new ArrayList<>();
     private int page = 1;
@@ -61,7 +63,6 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
     private LinearLayout llEndTime;
     private TextView tvEndTime;
     private TextView tvstate;
-    private LinearLayout llLast;
     private TextView tvNoData;
     /**
      * 1大剂量 2基础率
@@ -73,7 +74,7 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
     /**
      * 1接收 2拒绝
      */
-    private String confirm = "2";
+    private String confirm = "1";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,15 +109,16 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
 
     private void getData() {
         Call<String> requestCall = DataManager.usereqplansta(page, type, startTime, endTime, confirm, (call, response) -> {
+            Log.i("yys", "code===" + response.code);
             if (200 == response.code) {
                 if (page == 1) {
                     infoList.clear();
                 }
                 infoListTemp = (List<PlanInfo>) response.object;
+                Log.i("yys", "infoListTemp.size===" + infoListTemp.size());
                 if (infoListTemp != null && infoListTemp.size() > 0) {
                     smartRefreshLayout.setVisibility(View.VISIBLE);
                     if (infoListTemp.size() < 10) {
-                        llLast.setVisibility(View.VISIBLE);
                         tvNoData.setVisibility(View.GONE);
                         smartRefreshLayout.finishLoadMoreWithNoMoreData();
                     } else {
@@ -127,13 +129,11 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
                 } else {
                     smartRefreshLayout.setVisibility(View.GONE);
                     tvNoData.setVisibility(View.VISIBLE);
-                    llLast.setVisibility(View.GONE);
                 }
 
             } else if (30002 == response.code) {
                 smartRefreshLayout.setVisibility(View.GONE);
                 tvNoData.setVisibility(View.VISIBLE);
-                llLast.setVisibility(View.GONE);
             }
         }, (call, t) -> {
             ToastUtils.showShort("网络连接不可用，请稍后重试！");
@@ -155,12 +155,17 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
 
         smartRefreshLayout = view.findViewById(R.id.srl_infusion_current);
         recyclerView = view.findViewById(R.id.rv_infusion_current);
-        llLast = view.findViewById(R.id.ll_insulin_infusion_current_last);
         tvNoData = view.findViewById(R.id.tv_insulin_current_no_data);
-        adapter = new InsulinInfusionPlanAdapter(getPageContext(), infoList, type, new IAdapterViewClickListener() {
+        adapter = new InsulinInfusionCurrentAdapter(getPageContext(), infoList, type, new IAdapterViewClickListener() {
             @Override
-            public void adapterClickListener(int position, View view) {
-
+            public void adapterClickListener(int position, View view1) {
+                switch (view1.getId()) {
+                    case R.id.tv_insulin_infusion_current_phone:
+                        PhoneUtils.dial(infoList.get(position).getTel());
+                        break;
+                    default:
+                        break;
+                }
             }
 
             @Override
@@ -206,6 +211,8 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
         List<String> listStr = Arrays.asList(sexStr);
         PickerUtils.showOptionPosition(getPageContext(), (content, position) -> {
             tvstate.setText(content);
+            confirm = position + 1 + "";
+            getData();
         }, listStr);
     }
 

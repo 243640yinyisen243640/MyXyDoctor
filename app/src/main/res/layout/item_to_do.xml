@@ -54,6 +54,8 @@
                 android:id="@+id/tv_desc"
                 style="@style/text_gray_14_f_w"
                 android:layout_marginTop="@dimen/dp_6"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:text="最新系统通知消息内容" />
 
         </LinearLayout>

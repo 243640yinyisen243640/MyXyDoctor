@@ -40,6 +40,33 @@ public class PlanInfo {
     private String big4;
     private String begin;
     private String end;
+    private String picture;
+    private String nickname;
+    private String tel;
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
 
     public String getBig1() {
         return big1;

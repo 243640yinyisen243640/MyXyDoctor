@@ -105,6 +105,7 @@ public class InsulinBaseRateAddFragment extends XYBaseFragment implements TabFra
                 intent.putExtra("type", "2");
                 intent.putExtra("userid", userid);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
     }

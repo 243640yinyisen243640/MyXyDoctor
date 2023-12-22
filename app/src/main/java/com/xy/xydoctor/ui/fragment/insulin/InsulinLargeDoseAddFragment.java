@@ -70,6 +70,7 @@ public class InsulinLargeDoseAddFragment extends XYBaseFragment implements TabFr
             intent.putExtra("type", "1");
             intent.putExtra("userid", userid);
             startActivity(intent);
+            getActivity().finish();
         });
         containerView().addView(view);
     }
@@ -78,10 +79,10 @@ public class InsulinLargeDoseAddFragment extends XYBaseFragment implements TabFr
     private String getSendData() {
         StringBuilder builder = new StringBuilder();
         builder.append("{");
-        builder.append("big1\":").append("\"").append(etBreakFast.getText().toString().trim()).append("\"").append(",");
-        builder.append("big2\":").append("\"").append(etLunnch.getText().toString().trim()).append("\"").append(",");
-        builder.append("big3\":").append("\"").append(etDinner.getText().toString().trim()).append("\"").append(",");
-        builder.append("big4\":").append("\"").append(etMore.getText().toString().trim()).append("\"");
+        builder.append("\"big1\":").append("\"").append(etBreakFast.getText().toString().trim()).append("\"").append(",");
+        builder.append("\"big2\":").append("\"").append(etLunnch.getText().toString().trim()).append("\"").append(",");
+        builder.append("\"big3\":").append("\"").append(etDinner.getText().toString().trim()).append("\"").append(",");
+        builder.append("\"big4\":").append("\"").append(etMore.getText().toString().trim()).append("\"");
         builder.append("}");
         return builder.toString();
     }

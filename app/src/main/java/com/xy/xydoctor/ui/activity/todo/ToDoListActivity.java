@@ -79,6 +79,12 @@ public class ToDoListActivity extends BaseEventBusActivity {
         return fragment;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getToDoList();
+    }
+
     /**
      * 获取待办事项列表
      */
@@ -104,7 +110,7 @@ public class ToDoListActivity extends BaseEventBusActivity {
                         if ("homeSign".equals(type)) {
                             count = 3;
                         } else {
-                            count = 4;
+                            count = 5;
                         }
                         for (int i = 0; i < count; i++) {
                             list.add(data);

@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#F4F4F4"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <TextView
@@ -48,6 +49,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -107,58 +109,44 @@
         android:layout_height="1dp"
         android:background="#F4F4F4" />
 
-    <TextView
-        android:id="@+id/tv_data_infusion_current_state"
-        style="@style/data_abnormal_choose_time"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:drawablePadding="30dp"
-        android:text="未接受"
-        android:textColor="#242424" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <TextView
+            android:id="@+id/tv_data_infusion_current_state"
+            style="@style/data_abnormal_choose_time"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:drawablePadding="30dp"
+            android:text="已接受"
+            android:textColor="#242424" />
+
+    </LinearLayout>
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="#F4F4F4" />
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/srl_infusion_current"
-        style="@style/hh_fi_fi"
-        android:visibility="gone">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_infusion_current"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
 
     <LinearLayout
-        android:id="@+id/ll_insulin_infusion_current_last"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:visibility="visible">
+        android:background="@color/white">
 
-        <View
-            android:layout_width="15dp"
-            android:layout_height="1dp"
-            android:background="#F0F0F0" />
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/srl_infusion_current"
+            style="@style/hh_fi_fi"
+            android:visibility="gone">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="已经到底啦"
-            android:textColor="@color/green_text_666"
-            android:textSize="14sp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_infusion_current"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-        <View
-            android:layout_width="15dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:background="#F0F0F0" />
     </LinearLayout>
 
 
@@ -173,7 +161,8 @@
         android:paddingBottom="50dp"
         android:text="暂无数据"
         android:textColor="@color/green_text_666"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:visibility="gone" />
 
 
 </LinearLayout>
