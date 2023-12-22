@@ -5,19 +5,25 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="200dp"
+        android:background="@color/white"
+        android:padding="15dp">
+
 
         <com.xy.xydoctor.view.LinePathView
+            android:id="@+id/lpv_plan_add_sign"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="100dp" />
+            android:background="@drawable/doctor_sign_bg" />
 
         <TextView
+            android:id="@+id/lpv_plan_add_sign_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginRight="15dp"
-            android:layout_marginBottom="115dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/shape_bg_white_black_90"
             android:drawableLeft="@drawable/insulin_doctor_signeraser"
             android:drawablePadding="5dp"
@@ -39,7 +45,7 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/tv_plan_add_sure"
+            android:id="@+id/lpv_plan_add_sign_sure"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"

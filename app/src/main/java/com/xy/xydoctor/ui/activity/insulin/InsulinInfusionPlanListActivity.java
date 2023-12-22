@@ -59,11 +59,14 @@ public class InsulinInfusionPlanListActivity extends XYSoftUIBaseActivity implem
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("输注方案");
         topViewManager().moreTextView().setText("新增方案");
+        userid = getIntent().getStringExtra("userid");
         topViewManager().moreTextView().setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), InsulinPlanAddActivity.class);
+            intent.putExtra("userid", userid);
+            intent.putExtra("type", type);
             startActivity(intent);
         });
-        userid = getIntent().getStringExtra("userid");
+
         containerView().addView(initView());
         initListner();
         initReFresh();

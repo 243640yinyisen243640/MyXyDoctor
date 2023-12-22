@@ -86,7 +86,6 @@ public class InsulinInfusionRecordListActivity extends XYSoftUIBaseActivity impl
     }
 
     private void getData() {
-
         DataManager.geteqinsulins(userid, type, (call, response) -> {
             if (response.code == 200) {
                 lvDataInfo.setVisibility(View.VISIBLE);

@@ -324,7 +324,7 @@ public class HHSoftNetReqUtils {
             return this;
         }
 
-        public Builder fileMap(LinkedHashMap<String, String> fileMap) {
+        public Builder fileMap(Map<String, String> fileMap) {
             if (fileMap != null && fileMap.size() > 0) {
                 this.fileMap = fileMap;
             }

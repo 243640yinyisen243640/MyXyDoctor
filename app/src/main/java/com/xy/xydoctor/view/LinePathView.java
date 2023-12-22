@@ -240,6 +240,14 @@ public class LinePathView extends View {
         setDrawingCacheEnabled(false);
         return bitmap;
     }
+    public Bitmap getBitMap1(View view)
+    {
+        Bitmap bmp = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(bmp);
+        c.drawColor(Color.WHITE);
+        view.draw(c);
+        return bmp;
+    }
 
     /**
      * 逐行扫描 清楚边界空白。

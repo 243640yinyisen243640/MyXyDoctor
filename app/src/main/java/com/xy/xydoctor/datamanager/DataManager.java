@@ -887,7 +887,7 @@ public class DataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> getusereqplan(String token, String type, String page,String userid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getusereqplan(String token, String type, String page, String userid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("access_token", token);
         map.put("type", type);
@@ -905,7 +905,7 @@ public class DataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> getusereqplandetail(String token, String plan_id,String userid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getusereqplandetail(String token, String plan_id, String userid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("access_token", token);
         map.put("plan_id", plan_id);
@@ -920,7 +920,7 @@ public class DataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> getusereqplandetailBase(String token, String plan_id,String userid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getusereqplandetailBase(String token, String plan_id, String userid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("access_token", token);
         map.put("plan_id", plan_id);
@@ -929,17 +929,16 @@ public class DataManager {
     }
 
     /**
-     *
      * @param page
      * @param type
      * @param begin_time
      * @param end_time
-     * @param confirm 1接收 2拒绝
+     * @param confirm         1接收 2拒绝
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> usereqplansta(int page, String type, String begin_time,String end_time,String confirm, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> usereqplansta(int page, String type, String begin_time, String end_time, String confirm, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("page", page + "");
         map.put("access_token", SPStaticUtils.getString("token"));
@@ -948,6 +947,28 @@ public class DataManager {
         map.put("end_time", end_time);
         map.put("confirm", confirm);
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, InsulinAllInfo.class, "/usereqplansta", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 1大剂量 2基础率
+     *
+     * @param type
+     * @param pic
+     * @param data
+     * @param userid
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> useraddeqplan(String type, String pic, String data, String userid, BiConsumer<Call<String>, HHSoftBaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("access_token", SPStaticUtils.getString("token"));
+        map.put("type", type);
+        map.put("data", data);
+        map.put("userid", userid);
+        Map<String, String> fileMap = new HashMap<>();
+        fileMap.put("pic", pic);
+        return BaseNetworkUtils.uploadImgRequest(false, BaseNetworkUtils.JSON_OBJECT, InsulinAllInfo.class, "/useraddeqplan", map, fileMap, successCallBack, failureCallBack);
     }
 
 }
