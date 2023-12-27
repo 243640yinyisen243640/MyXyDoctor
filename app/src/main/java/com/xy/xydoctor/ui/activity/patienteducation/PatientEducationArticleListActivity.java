@@ -53,6 +53,9 @@ public class PatientEducationArticleListActivity extends BaseActivity {
     TextView tvSubmit;
 
 
+    private String type = "";
+
+
     private int pageIndex = 1;//当前获取的是第几页的数据
     private List<PatientEducationArticleListBean.DataBean> list = new ArrayList<>();//ListView显示的数据
     private List<PatientEducationArticleListBean.DataBean> tempList;//用于临时保存ListView显示的数据
@@ -139,18 +142,23 @@ public class PatientEducationArticleListActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_submit:
-                Log.i("yys", "selectPosition==" + selectPosition);
                 if (-1 == selectPosition) {
                     ToastUtils.showShort("请先选择患教文章");
                     return;
                 }
-                Log.i("yys", "selectPosition==" + selectPosition);
-                Log.i("yys", "articleList==" + list.size());
-                Intent intent = new Intent();
-                intent.putExtra("articleList", (Serializable) list);
-                intent.putExtra("selectPosition", selectPosition);
-                setResult(RESULT_OK, intent);
-                finish();
+                if ("1".equals(type)) {
+                    Intent intent = new Intent();
+                    intent.putExtra("articleList", (Serializable) list);
+                    intent.putExtra("selectPosition", selectPosition);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent();
+                    intent.putExtra("articleList", list.get(selectPosition));
+                    intent.putExtra("selectPosition", list.get(selectPosition).getId());
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
                 break;
 
             default:
@@ -167,6 +175,7 @@ public class PatientEducationArticleListActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        type = getIntent().getStringExtra("type");
         initTitle();
         getArticleList();
         initRefresh();

@@ -197,6 +197,7 @@ public class PatientEductionDirectorActivity extends BaseEventBusActivity {
                 break;
             case R.id.rl_patient_education_article:
                 Intent intent = new Intent(getPageContext(), PatientEducationArticleListActivity.class);
+                intent.putExtra("type", "2");
                 startActivityForResult(intent, SELECT_ARTICLE);
                 break;
             case R.id.rl_patient_education_article_have_select:
@@ -305,10 +306,11 @@ public class PatientEductionDirectorActivity extends BaseEventBusActivity {
                     elArticle.setExpanded(true);
                     //ArrayList<String> articleSelect = data.getStringArrayListExtra("articleSelect");
                     int selectPosition = data.getIntExtra("selectPosition", 0);
-                    ArrayList<PatientEducationArticleListBean.DataBean> articleList =
-                            (ArrayList<PatientEducationArticleListBean.DataBean>) data.getSerializableExtra("articleList");
-                    PatientEducationArticleListBean.DataBean dataBean = articleList.get(selectPosition);
-                    articleSelectList.add(dataBean);
+                    //                    ArrayList<PatientEducationArticleListBean.DataBean> articleList =
+                    //                            (ArrayList<PatientEducationArticleListBean.DataBean>) data.getSerializableExtra("articleList");
+                    PatientEducationArticleListBean.DataBean articleList = (PatientEducationArticleListBean.DataBean) data.getSerializableExtra("articleList");
+                    //                    PatientEducationArticleListBean.DataBean dataBean = articleList.get(selectPosition);
+                    articleSelectList.add(articleList);
                     lvArticleList.setAdapter(new PatientEducationArticleLvAdapter(getPageContext(), R.layout.item_patient_education_article, articleSelectList));
                     break;
                 default:

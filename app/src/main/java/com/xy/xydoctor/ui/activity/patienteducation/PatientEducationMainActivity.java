@@ -193,6 +193,7 @@ public class PatientEducationMainActivity extends BaseActivity {
                 break;
             case R.id.rl_patient_education_article:
                 Intent intent = new Intent(getPageContext(), PatientEducationArticleListActivity.class);
+                intent.putExtra("type", "1");
                 startActivityForResult(intent, SELECT_ARTICLE);
                 break;
             case R.id.rl_patient_education_article_have_select:
