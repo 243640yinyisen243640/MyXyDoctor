@@ -30,6 +30,12 @@
     <!--vivo角标-->
     <uses-permission android:name="com.vivo.notification.permission.BADGE_ICON" />
 
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+
 
     <application
         android:name=".App"

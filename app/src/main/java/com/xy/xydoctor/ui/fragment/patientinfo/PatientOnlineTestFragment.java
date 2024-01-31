@@ -6,8 +6,10 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
+import android.bluetooth.BluetoothProfile;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -55,13 +57,16 @@ import com.xy.xydoctor.bean.GetOnlineBloodBean;
 import com.xy.xydoctor.bean.OnlineTestGetBloodSugar;
 import com.xy.xydoctor.bean.UserInfoBean;
 import com.xy.xydoctor.constant.ConstantParam;
+import com.xy.xydoctor.constant.DataFormatManager;
 import com.xy.xydoctor.datamanager.DataManager;
 import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.utils.DataConvert;
+import com.xy.xydoctor.utils.DataUtils;
 import com.xy.xydoctor.utils.NumberUtils;
 import com.xy.xydoctor.utils.StringToHexUtils;
+import com.xy.xydoctor.utils.mytools;
 import com.xy.xydoctor.utils.progress.BleDialogUtils;
 
 import java.util.ArrayList;
@@ -83,7 +88,7 @@ import rxhttp.wrapper.param.RxHttp;
  * 创建日期: 2019/7/12 15:44
  */
 public class PatientOnlineTestFragment extends BaseFragment implements ExchangeInterface, BleStatusBroadcastReceiver.BleStatusChangeListener {
-    private static final String TAG = "xxx";
+    private static final String TAG = "yys";
     private static final int OPEN_BLE = 10086;
     @BindView(R.id.ll_online_test_empty)
     LinearLayout llOnlineTestEmpty;
@@ -144,6 +149,10 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
     TextView tvDiastolicPressure;
     @BindView(R.id.img_blood_pressure_diastolic_pressure)
     ImageView imgDiastolicPressure;
+    @BindView(R.id.tv_blood_pressure_heartrate)
+    TextView tvHeartrate;
+    @BindView(R.id.img_blood_pressure_heartrate)
+    ImageView imgHeartrate;
     //应用层回复血压计已经连接
     String bCommand1 = "04B0A054";
     //应用层要求血压计开始测量
@@ -197,6 +206,16 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
     @BindView(R.id.tv_temperature_text_result)
     TextView temperatureTextView;
 
+    //血压计
+    private String BloodDeviceName = "BP";
+    //服务id
+    private String bloodServiceUUID = "0000fff0-0000-1000-8000-00805f9b34fb";
+    //通知id
+    private String bloodNotifyUUID = "0000fff1-0000-1000-8000-00805f9b34fb";
+    private String bloodWriteUUID = "0000fff2-0000-1000-8000-00805f9b34fb";
+    public static final String CONNECT_ORDER = "cc80020301010001";
+    public static final String START_MEASURE = "cc80020301020002";
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_patient_online_test;
@@ -218,7 +237,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
         BleScanRuleConfig scanRuleConfig =
                 new BleScanRuleConfig.Builder()
                         //只扫描指定广播名的设备，可选
-                        .setDeviceName(true, eDeviceName, bDeviceBName)
+                        .setDeviceName(true, eDeviceName, bDeviceBName, BloodDeviceName)
                         //连接时的autoConnect参数，可选，默认false
                         .setAutoConnect(false)
                         //扫描超时时间，可选，默认10秒
@@ -282,29 +301,51 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
         bleDialogUtils = new BleDialogUtils();
     }
 
-
+    /**
+     * 点击事件
+     */
     @OnClick(R.id.tv_get_data)
     public void onViewClicked() {
+
         //PatientOnlineTestFragmentPermissionsDispatcher.obtainAccessFineLocationWithPermissionCheck(this);
+
         requestLocation();
     }
 
     private void requestLocation() {
-        PermissionUtils
-                .permission(PermissionConstants.LOCATION)
-                .callback(new PermissionUtils.SimpleCallback() {
-                    @Override
-                    public void onGranted() {
-                        isConnectSuccess = false;
-                        getSugarData();
-                    }
+        if (Build.VERSION.SDK_INT > 30) {
+            PermissionUtils
+                    .permission(PermissionConstants.LOCATION, "android.permission.BLUETOOTH_SCAN", "android.permission.BLUETOOTH_ADVERTISE", "android.permission.BLUETOOTH_CONNECT")
+                    .callback(new PermissionUtils.SimpleCallback() {
+                        @Override
+                        public void onGranted() {
+                            isConnectSuccess = false;
+                            getSugarData();
+                        }
 
-                    @Override
-                    public void onDenied() {
-                        ToastUtils.showShort(R.string.please_open_gps);
-                        Log.e(TAG, "accessFineLocationDenied");
-                    }
-                }).request();
+                        @Override
+                        public void onDenied() {
+                            ToastUtils.showShort("当前手机扫描蓝牙需要打开权限");
+                            Log.e(TAG, "accessFineLocationDenied");
+                        }
+                    }).request();
+        } else {
+            PermissionUtils
+                    .permission(PermissionConstants.LOCATION)
+                    .callback(new PermissionUtils.SimpleCallback() {
+                        @Override
+                        public void onGranted() {
+                            isConnectSuccess = false;
+                            getSugarData();
+                        }
+
+                        @Override
+                        public void onDenied() {
+                            ToastUtils.showShort(R.string.please_open_gps);
+                            Log.e(TAG, "accessFineLocationDenied");
+                        }
+                    }).request();
+        }
     }
 
     /**
@@ -347,6 +388,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
                 }, new OnError() {
                     @Override
                     public void onError(ErrorInfo error) throws Exception {
+                        //从这里开始写咱们的，上面的东西不管他，让他调，
                         BleStart();
                     }
                 });
@@ -359,6 +401,13 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
     private void BleStart() {
         boolean bleState = BleUtils.getBleState();
         if (bleState) {
+            if (mbleDevice != null) {
+                int connectState = BleManager.getInstance().getConnectState(mbleDevice);
+                if (BluetoothProfile.STATE_CONNECTED == connectState) {
+                    dialogConnectSuccess();
+                    return;
+                }
+            }
             dialogStartConnect();
             startScanBpAndAio();
             dialogPostDelay();
@@ -414,6 +463,8 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
         }, overTime);
     }
 
+    private BleDevice mbleDevice;
+
     /**
      * 温度计扫描连接
      */
@@ -450,6 +501,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
 
             @Override
             public void onConnectSuccess(BleDevice bleDevice, BluetoothGatt gatt, int status) {
+                mbleDevice = bleDevice;
                 String name = bleDevice.getName();
                 Log.e(TAG, "连接成功的设备名称==" + name);
                 Log.i("yys", "mac===" + bleDevice.getMac());
@@ -517,7 +569,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
                 }
 
                 openBleNotify(bleDevice, name);
-                Log.i("yys","=====");
+                Log.i("yys", "=====");
                 dialogConnectSuccess();
             }
 
@@ -542,7 +594,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
         String userid = getArguments().getString("userid");
         String docId = SPStaticUtils.getString("docId");
         String token = SPStaticUtils.getString("token");
-        Call<String> requestCall = DataManager.saveDataTemperature(token, userid, temperature, "", docId,"1", (call, response) -> {
+        Call<String> requestCall = DataManager.saveDataTemperature(token, userid, temperature, "", docId, "1", (call, response) -> {
             if (response.code == 200) {
                 dialogDismiss();
                 //显示隐藏
@@ -632,10 +684,181 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
                             });
                         }
                     });
+        } else if (name.contains(BloodDeviceName)) {
+            uuidService = bloodServiceUUID;
+            uuidNotify = bloodNotifyUUID;
+            getBloodNotify(bleDevice, uuidService, uuidNotify, name);
         }
-
     }
 
+    private void getBloodNotify(BleDevice bleDevice, String uuidService, String uuidNotify, String name) {
+        Log.i(TAG, "getBloodNotify: ");
+        BleManager.getInstance().notify(
+                bleDevice, uuidService, uuidNotify,
+                new BleNotifyCallback() {
+                    @Override
+                    public void onNotifySuccess() {
+                        isConnectSuccess = true;
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.e(TAG, "开启蓝牙通知:" + "onNotifySuccess");
+                                getHandler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        connectTwo(bleDevice);
+                                    }
+                                }, 2_000);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onNotifyFailure(final BleException exception) {
+
+                    }
+
+                    @Override
+                    public void onCharacteristicChanged(final byte[] result) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                String data = com.xy.xydoctor.utils.HexUtil.bytesToHexString(result);
+                                Log.e(TAG, "data==" + data);
+                                if (TextUtils.equals(data, "aa80020301010001")) {
+                                    //开始测量
+                                    //                                    start(bleDevice);
+                                } else if (data.contains("aa80020f0106")) {
+                                    getResult(data);
+                                } else if (data.contains("aa8002030107")) { //测量失败
+                                    dialogDismiss();
+                                    ToastUtils.showShort("测量错误");
+                                }
+                            }
+                        });
+                    }
+                });
+    }
+
+    //测量结果
+    private void getResult(String bloodData) {
+        dialogDismiss();
+        String hightPress = mytools.deal16to10(bloodData.substring(28, 30));//收缩压
+        String lowPress = mytools.deal16to10(bloodData.substring(32, 34));//舒张压
+        String pulse = mytools.deal16to10(bloodData.substring(36, 38));//脉搏
+        Log.i("yys", "hightPress==" + hightPress + "==lowPress==" + lowPress + "==pulse==" + pulse);
+        String checkTime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D_H_M);
+
+        //自己设置数据吧
+        uploadBloodPressureForNew(hightPress, lowPress, pulse, checkTime);
+    }
+
+    /**
+     * 上传血压
+     *
+     * @param high
+     * @param low
+     * @param checkTime
+     */
+    private void uploadBloodPressureForNew(String high, String low, String heartrate, String checkTime) {
+        String userid = getArguments().getString("userid");
+        //        SPStaticUtils.put("checkTime", checkTime);
+        HashMap map = new HashMap<>();
+        map.put("uid", userid);
+        map.put("systolic", high);//收缩
+        map.put("diastole", low);//舒张
+        map.put("heartrate", heartrate);//心率
+        map.put("datetime", checkTime);
+        map.put("type", "1");
+        RxHttp.postForm(XyUrl.ADD_BLOOD)
+                .addAll(map)
+                .asResponse(String.class)
+                .to(RxLife.toMain(this))
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        llBloodPressure.setVisibility(View.VISIBLE);
+                        llOnlineTestEmpty.setVisibility(View.GONE);
+
+                        //设置数据
+                        if (!TextUtils.isEmpty(high) && !TextUtils.isEmpty(low)) {
+                            tvSystolicPressure.setText(high + "mmHg");
+                            tvDiastolicPressure.setText(low + "mmHg");
+                            double highSystolic = TurnsUtils.getDouble(high, 0);
+                            double lowDiastole = TurnsUtils.getDouble(low, 0);
+                            double heartrateD = TurnsUtils.getDouble(heartrate, 0);
+                            //收缩压90~140
+                            if (highSystolic > 140) {
+                                imgSystolicPressure.setImageResource(R.drawable.online_test_blood_pressure_high);
+                            } else if (lowDiastole > 90) {
+                                imgSystolicPressure.setImageResource(R.drawable.online_test_blood_pressure_common);
+                            } else {
+                                imgSystolicPressure.setImageResource(R.drawable.online_test_blood_pressure_low);
+                            }
+                            //舒张压60~90
+                            if (lowDiastole > 90) {
+                                imgDiastolicPressure.setImageResource(R.drawable.online_test_blood_pressure_high);
+                            } else if (lowDiastole > 60) {
+                                imgDiastolicPressure.setImageResource(R.drawable.online_test_blood_pressure_common);
+                            } else {
+                                imgDiastolicPressure.setImageResource(R.drawable.online_test_blood_pressure_low);
+                            }
+                            tvCheckTime.setText("最新检测时间:" + checkTime);
+                            if (heartrateD > 100) {
+                                imgHeartrate.setImageResource(R.drawable.online_test_blood_pressure_high);
+                            } else if (heartrateD > 60) {
+                                imgHeartrate.setImageResource(R.drawable.online_test_blood_pressure_common);
+                            } else {
+                                imgHeartrate.setImageResource(R.drawable.online_test_blood_pressure_low);
+                            }
+                            tvHeartrate.setText(heartrate);
+                        }
+
+                        ToastUtils.showShort(R.string.ble_data_upload_success);
+
+                    }
+                }, new OnError() {
+                    @Override
+                    public void onError(ErrorInfo error) throws Exception {
+
+                    }
+                });
+    }
+
+    private void connectTwo(BleDevice bleDevice) {
+        BleManager.getInstance().write(
+                bleDevice, bloodServiceUUID, bloodWriteUUID,
+                HexUtil.hexStringToBytes(CONNECT_ORDER),
+                new BleWriteCallback() {
+                    @Override
+                    public void onWriteSuccess(final int current, final int total, final byte[] justWrite) {
+                        Log.i(TAG, "onWriteSuccess: ");
+                    }
+
+                    @Override
+                    public void onWriteFailure(final BleException exception) {
+                        Log.i(TAG, "onWriteFailure: ");
+                    }
+
+                    });
+    }
+
+    private void start(BleDevice bleDevice) {
+        BleManager.getInstance().write(
+                bleDevice, bloodServiceUUID, bloodWriteUUID,
+                HexUtil.hexStringToBytes(START_MEASURE),
+                new BleWriteCallback() {
+                    @Override
+                    public void onWriteSuccess(final int current, final int total, final byte[] justWrite) {
+
+                    }
+
+                    @Override
+                    public void onWriteFailure(final BleException exception) {
+
+                    }
+                });
+    }
 
     private void getNotify(BleDevice bleDevice, String uuidService, String uuidNotify, String name) {
         BleManager.getInstance().notify(
@@ -1170,7 +1393,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
         if (6 == i || 3 == i) {
 
         } else if (4 == i) {
-            Log.i("yys","===i=="+i);
+            Log.i("yys", "===i==" + i);
             dialogConnectSuccess();
         } else if (16 == i) {
             isConnectSuccess = true;
@@ -1233,7 +1456,6 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
 
     /**
      * 血糖
-     *
      *
      * @param gluData
      */

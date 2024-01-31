@@ -536,6 +536,6 @@
 
     <array name="insulin_state_choose">
         <item>已接受</item>
-        <item>已拒绝</item>
+        <item>未接受</item>
     </array>
 </resources>

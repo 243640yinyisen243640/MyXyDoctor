@@ -83,6 +83,8 @@ public class InsulinInfusionCurrentListActivity extends XYSoftUIBaseActivity imp
         containerView().addView(initView());
         startTime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
         endTime = DataUtils.currentDateString(DataFormatManager.TIME_FORMAT_Y_M_D);
+        tvStartTime.setText(startTime);
+        tvEndTime.setText(endTime);
         initListner();
         initReFresh();
         getData();

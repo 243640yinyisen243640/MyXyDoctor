@@ -85,6 +85,40 @@
             android:scaleType="centerCrop"
             android:src="@drawable/online_test_blood_pressure_high" />
 
+        <View
+            style="@style/line"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"></View>
+
+
+        <LinearLayout style="@style/hh_fi_wr">
+
+            <TextView
+                style="@style/text_black_14_w_w"
+                android:drawableLeft="@drawable/online_test_blood_pressure_diastolic_pressure"
+                android:drawablePadding="@dimen/dp_5"
+                android:text="心率" />
+
+            <TextView
+                android:id="@+id/tv_blood_pressure_heartrate"
+                style="@style/text_black_14_w_w"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:textColor="#9A42B4"
+                tools:text="15次/分" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/img_blood_pressure_heartrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_10"
+            android:scaleType="centerCrop"
+            android:src="@drawable/online_test_blood_pressure_high" />
+
     </LinearLayout>
 
 </com.lihang.ShadowLayout>
