@@ -811,7 +811,7 @@ public class PatientOnlineTestFragment extends BaseFragment implements ExchangeI
                             } else {
                                 imgHeartrate.setImageResource(R.drawable.online_test_blood_pressure_low);
                             }
-                            tvHeartrate.setText(heartrate);
+                            tvHeartrate.setText(heartrate+"次/分");
                         }
 
                         ToastUtils.showShort(R.string.ble_data_upload_success);
