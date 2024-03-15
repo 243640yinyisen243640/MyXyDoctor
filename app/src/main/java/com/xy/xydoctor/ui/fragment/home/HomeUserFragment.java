@@ -29,6 +29,7 @@ import com.xy.xydoctor.net.ErrorInfo;
 import com.xy.xydoctor.net.OnError;
 import com.xy.xydoctor.net.XyUrl;
 import com.xy.xydoctor.ui.activity.homesign.MyQRCodeActivity;
+import com.xy.xydoctor.ui.activity.todo.ToDoListSecondActivity;
 import com.xy.xydoctor.ui.activity.user.SettingActivity;
 import com.xy.xydoctor.utils.DialogUtils;
 
@@ -71,6 +72,8 @@ public class HomeUserFragment extends BaseFragment implements SimpleImmersionOwn
     LinearLayout llQrcode;
     @BindView(R.id.tv_user_chronic_disease_manager)
     TextView diseaseManagerTextView;
+    @BindView(R.id.tv_user_conversation)
+    TextView conversationTextView;
     private SimpleImmersionProxy mSimpleImmersionProxy = new SimpleImmersionProxy(this);
 
     @Override
@@ -129,7 +132,7 @@ public class HomeUserFragment extends BaseFragment implements SimpleImmersionOwn
     }
 
 
-    @OnClick({R.id.img_head, R.id.img_setting, R.id.rl_personal_excel, R.id.ll_personal_desc, R.id.rl_qrcode, R.id.tv_user_chronic_disease_manager})
+    @OnClick({R.id.img_head, R.id.img_setting, R.id.rl_personal_excel, R.id.ll_personal_desc, R.id.rl_qrcode, R.id.tv_user_chronic_disease_manager,R.id.tv_user_conversation})
     public void onViewClicked(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -160,6 +163,10 @@ public class HomeUserFragment extends BaseFragment implements SimpleImmersionOwn
                 intent = new Intent(getPageContext(), BaseWebViewActivity.class);
                 intent.putExtra("title", "慢病管理");
                 intent.putExtra("url", "http://doch5.xiyuns.cn/doctorIndex?token=" + SPStaticUtils.getString("token"));
+                startActivity(intent);
+                break;
+            case R.id.tv_user_conversation:
+                intent = new Intent(getPageContext(), ToDoListSecondActivity.class);
                 startActivity(intent);
                 break;
             default:
