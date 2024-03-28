@@ -248,16 +248,7 @@
                 android:textColor="@color/black_text"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/tv_user_conversation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/right_arrow"
-                android:padding="15dp"
-                android:text="客服会话"
-                android:visibility="gone"
-                android:textColor="@color/black_text"
-                android:textSize="14sp" />
+
 
         </LinearLayout>
 

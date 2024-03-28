@@ -131,7 +131,6 @@
         <activity android:name=".ui.activity.todo.NewPatientListActivity" />
         <activity android:name=".ui.activity.todo.SystemMsgListActivity" />
         <activity android:name=".ui.activity.todo.ToDoListActivity" />
-        <activity android:name=".ui.activity.todo.ToDoListSecondActivity" />
         <activity android:name=".ui.activity.healthrecordadd.PharmacyAddActivity" />
         <activity
             android:name=".ui.activity.user.SplashActivity"

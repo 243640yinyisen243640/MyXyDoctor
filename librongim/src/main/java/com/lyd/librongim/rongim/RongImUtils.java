@@ -3,7 +3,6 @@ package com.lyd.librongim.rongim;
 
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 
 import com.blankj.utilcode.util.Utils;
 import com.lyd.librongim.myrongim.ConstantParam;
@@ -73,7 +72,6 @@ public class RongImUtils {
      * @param list 所有用户信息
      */
     public static void setCurrentUserInfo(final List<GroupUserBean> list, GroupUserBean bean) {
-        Log.i("yys", "setCurrentUserInfo");
         list.add(bean);
         RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
             @Override
